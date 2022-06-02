@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Christopher Okhravi, Ph.D." />
+  <title>The Object Oriented Way</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">The Object Oriented Way</h1>
+<p class="author">Christopher Okhravi, Ph.D.</p>
+<p class="date">DRAFT</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#preface" id="toc-preface">Preface</a>
+<ul>
+<li><a href="#welcome" id="toc-welcome">Welcome</a></li>
+<li><a href="#preconditions"
+id="toc-preconditions">Preconditions</a></li>
+<li><a href="#postconditions"
+id="toc-postconditions">Postconditions</a></li>
+<li><a href="#structure" id="toc-structure">Structure</a></li>
+<li><a href="#free-book" id="toc-free-book">Free book</a></li>
+<li><a href="#technicalities"
+id="toc-technicalities">Technicalities</a></li>
+<li><a href="#why-oop" id="toc-why-oop">Why OOP?</a></li>
+</ul></li>
+<li><a href="#procedural-programming"
+id="toc-procedural-programming">Procedural programming</a>
+<ul>
+<li><a href="#computation" id="toc-computation">Computation</a></li>
+<li><a href="#syntax" id="toc-syntax">Syntax</a></li>
+<li><a href="#semantics" id="toc-semantics">Semantics</a></li>
+<li><a href="#compilation" id="toc-compilation">Compilation</a></li>
+<li><a href="#evaluation" id="toc-evaluation">Evaluation</a></li>
+<li><a href="#comments" id="toc-comments">Comments</a></li>
+<li><a href="#values" id="toc-values">Values</a></li>
+<li><a href="#data-types" id="toc-data-types">Data types</a></li>
+<li><a href="#type-inference" id="toc-type-inference">Type
+inference</a></li>
+<li><a href="#variables" id="toc-variables">Variables</a></li>
+<li><a href="#statements" id="toc-statements">Statements</a></li>
+<li><a href="#operators-and-expressions"
+id="toc-operators-and-expressions">Operators and Expressions</a></li>
+<li><a href="#type-conversions" id="toc-type-conversions">Type
+conversions</a></li>
+<li><a href="#arrays" id="toc-arrays">Arrays</a></li>
+<li><a href="#syntactic-sugar" id="toc-syntactic-sugar">Syntactic
+sugar</a></li>
+<li><a href="#indentation" id="toc-indentation">Indentation</a></li>
+<li><a href="#selection" id="toc-selection">Selection</a></li>
+<li><a href="#iteration" id="toc-iteration">Iteration</a></li>
+<li><a href="#constants" id="toc-constants">Constants</a></li>
+<li><a href="#mutability" id="toc-mutability">Mutability</a></li>
+<li><a href="#value-and-reference-semantics"
+id="toc-value-and-reference-semantics">Value and reference
+semantics</a></li>
+<li><a href="#static-methods-procedures"
+id="toc-static-methods-procedures">Static methods (procedures)</a></li>
+<li><a href="#overloading" id="toc-overloading">Overloading</a></li>
+<li><a href="#recursion" id="toc-recursion">Recursion</a></li>
+<li><a href="#namespaces-scope-and-dot-notation"
+id="toc-namespaces-scope-and-dot-notation">Namespaces, scope and dot
+notation</a></li>
+<li><a href="#exceptions-part-1" id="toc-exceptions-part-1">Exceptions
+(part 1)</a></li>
+<li><a href="#stack-traces" id="toc-stack-traces">Stack traces</a></li>
+</ul></li>
+<li><a href="#object-oriented-programming"
+id="toc-object-oriented-programming">Object oriented programming</a>
+<ul>
+<li><a href="#classes-and-objects" id="toc-classes-and-objects">Classes
+and objects</a></li>
+<li><a href="#constructors" id="toc-constructors">Constructors</a></li>
+<li><a href="#instance-methods" id="toc-instance-methods">Instance
+methods</a></li>
+<li><a href="#access-modifiers-basic."
+id="toc-access-modifiers-basic.">Access modifiers (basic).</a></li>
+<li><a href="#properties" id="toc-properties">Properties</a></li>
+<li><a href="#object-composition-through-instantiation."
+id="toc-object-composition-through-instantiation.">Object composition
+(through instantiation).</a></li>
+<li><a href="#object-composition-through-injection."
+id="toc-object-composition-through-injection.">Object composition
+(through injection).</a></li>
+<li><a href="#interfaces" id="toc-interfaces">Interfaces</a></li>
+<li><a href="#inheritance" id="toc-inheritance">Inheritance</a></li>
+<li><a href="#overriding" id="toc-overriding">Overriding</a></li>
+<li><a href="#hiding" id="toc-hiding">Hiding</a></li>
+<li><a href="#access-modifiers-advanced"
+id="toc-access-modifiers-advanced">Access modifiers (advanced)</a></li>
+<li><a href="#type-conversions-of-objects"
+id="toc-type-conversions-of-objects">Type conversions (of
+objects)</a></li>
+<li><a href="#exceptions-part-2-custom-exceptions"
+id="toc-exceptions-part-2-custom-exceptions">Exceptions (part 2) /
+Custom exceptions</a></li>
+<li><a href="#static" id="toc-static">Static</a></li>
+<li><a href="#prototypes" id="toc-prototypes">Prototypes</a></li>
+<li><a href="#object-composition-injection-part-2"
+id="toc-object-composition-injection-part-2">Object composition
+(injection part 2)</a></li>
+<li><a href="#base-class-library" id="toc-base-class-library">Base class
+library</a></li>
+<li><a href="#structure-types-struct"
+id="toc-structure-types-struct">Structure types (struct)</a></li>
+<li><a href="#generics-parametric-polymorphism"
+id="toc-generics-parametric-polymorphism">Generics (parametric
+polymorphism)</a></li>
+<li><a href="#variance" id="toc-variance">Variance</a></li>
+</ul></li>
+<li><a href="#object-oriented-design-and-beyond"
+id="toc-object-oriented-design-and-beyond">Object oriented design and
+beyond</a>
+<ul>
+<li><a href="#maintainability"
+id="toc-maintainability">Maintainability</a></li>
+<li><a href="#code-smells-and-anti-patterns"
+id="toc-code-smells-and-anti-patterns">Code smells and
+anti-patterns</a></li>
+<li><a href="#coupling" id="toc-coupling">Coupling</a></li>
+<li><a href="#cohesion" id="toc-cohesion">Cohesion</a></li>
+<li><a href="#refactoring" id="toc-refactoring">Refactoring</a></li>
+<li><a href="#design-principles" id="toc-design-principles">Design
+principles</a></li>
+<li><a href="#single-responsibility-principle-srp"
+id="toc-single-responsibility-principle-srp">Single responsibility
+principle (SRP)</a></li>
+<li><a href="#interface-segregation-principle-isp"
+id="toc-interface-segregation-principle-isp">Interface segregation
+principle (ISP)</a></li>
+<li><a href="#making-impossible-states-impossible-type-safety"
+id="toc-making-impossible-states-impossible-type-safety">Making
+impossible states impossible / Type safety</a></li>
+<li><a href="#liskov-substitution-principle-lsp"
+id="toc-liskov-substitution-principle-lsp">Liskov substitution principle
+(LSP)</a></li>
+<li><a href="#open-closed-principle-ocp"
+id="toc-open-closed-principle-ocp">Open-closed principle (OCP)</a></li>
+<li><a href="#dependency-inversion-principle-dip"
+id="toc-dependency-inversion-principle-dip">Dependency inversion
+principle (DIP)</a></li>
+<li><a href="#composition-over-inheritance"
+id="toc-composition-over-inheritance">Composition over
+inheritance</a></li>
+<li><a href="#design-patterns" id="toc-design-patterns">Design
+patterns</a></li>
+<li><a href="#strategy-pattern" id="toc-strategy-pattern">Strategy
+pattern</a></li>
+<li><a href="#delegates" id="toc-delegates">Delegates</a></li>
+<li><a href="#bridge-pattern" id="toc-bridge-pattern">Bridge
+pattern</a></li>
+<li><a href="#lambdas" id="toc-lambdas">Lambdas</a></li>
+<li><a href="#abstract-factory-pattern"
+id="toc-abstract-factory-pattern">Abstract factory pattern</a></li>
+<li><a href="#iterator-pattern" id="toc-iterator-pattern">Iterator
+pattern</a></li>
+<li><a href="#enumerators" id="toc-enumerators">Enumerators</a></li>
+<li><a href="#indexers" id="toc-indexers">Indexers</a></li>
+<li><a href="#linq" id="toc-linq">LINQ</a></li>
+<li><a href="#observer-pattern" id="toc-observer-pattern">Observer
+pattern</a></li>
+<li><a href="#events" id="toc-events">Events</a></li>
+<li><a href="#visitor-pattern" id="toc-visitor-pattern">Visitor
+pattern</a></li>
+<li><a href="#pattern-matching" id="toc-pattern-matching">Pattern
+matching</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="preface">Preface</h1>
+<p>This is a preface where I test some of the syntax.</p>
+<p>This is a reference to the <a href="#syntax">Syntax</a> chapter.</p>
+<blockquote>
+<p><strong><em>REMEMBER:</em></strong> This is a callout based on a
+blockquote.</p>
+</blockquote>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode csharp"><code class="sourceCode cs"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TestClass</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">static</span> <span class="dt">void</span> <span class="fu">Main</span><span class="op">(</span><span class="dt">string</span><span class="op">[]</span> args<span class="op">)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Display the number of command line arguments.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        Console<span class="op">.</span><span class="fu">WriteLine</span><span class="op">(</span>args<span class="op">.</span><span class="fu">Length</span><span class="op">);</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>The above is a code example with syntax highlighting for C#.</p>
+<h2 id="welcome">Welcome</h2>
+<ul>
+<li>Welcome to the magical world of programming. Down the rabbit hole we
+go.</li>
+</ul>
+<h2 id="preconditions">Preconditions</h2>
+<h2 id="postconditions">Postconditions</h2>
+<h2 id="structure">Structure</h2>
+<ul>
+<li>Chapters</li>
+<li>Exercises / Tutorials
+<ul>
+<li>Separate workbook?</li>
+</ul></li>
+<li>Questions
+<ul>
+<li>Exam-like questions.</li>
+</ul></li>
+</ul>
+<h2 id="free-book">Free book</h2>
+<ul>
+<li>Why?</li>
+<li>Affiliate links.</li>
+<li>Accepting donations.</li>
+<li>Version number</li>
+</ul>
+<h2 id="technicalities">Technicalities</h2>
+<ul>
+<li>Uses C# .NET6
+<ul>
+<li>Project template has changed. Code will not work in .NET 5.</li>
+</ul></li>
+</ul>
+<h2 id="why-oop">Why OOP?</h2>
+<p>Why I hope that OO dies in favor of FP and how I hope that this book
+helps. / Isn’t OOP dead?</p>
+<h1 id="procedural-programming">Procedural programming</h1>
+<h2 id="computation">Computation</h2>
+<ul>
+<li>Paradigms (imperative =&gt; procedural / oo, declarative =&gt;
+functional / logic)</li>
+<li>Brief history of computing
+<ul>
+<li>Memory, disk, processor</li>
+</ul></li>
+</ul>
+<h2 id="syntax">Syntax</h2>
+<ul>
+<li>Grammars (beyond scope).</li>
+<li>Övningsuppgifter på detta längre fram när vi har mer kunskap.</li>
+<li>Syntax error</li>
+</ul>
+<h2 id="semantics">Semantics</h2>
+<ul>
+<li>Writing the wrong program.</li>
+<li>User requirements is the hard part. Link to maintainability
+chapter.</li>
+<li>“Colorless green ideas sleep furiously”</li>
+<li>Övningsuppgifter på detta längre fram när vi har mer kunskap.</li>
+<li>Semantic error.</li>
+</ul>
+<h2 id="compilation">Compilation</h2>
+<ul>
+<li>Also: interpretation.</li>
+<li>Compilation error.</li>
+<li>Övningsuppgifter på detta längre fram när vi har mer kunskap.</li>
+<li>Design principle: Prefer compile time errors over runtime
+errors.</li>
+</ul>
+<h2 id="evaluation">Evaluation</h2>
+<ul>
+<li>Example: Printing “hello world”.</li>
+<li>Use .NET6 template so we don’t need to care about all the static
+nonsense.</li>
+<li>Runtime error.</li>
+<li>Övningsuppgifter på detta längre fram när vi har mer kunskap.</li>
+</ul>
+<h2 id="comments">Comments</h2>
+<ul>
+<li>Also: executable comments. Generating e.g. comments.</li>
+<li>Brain teaser: Is the code right, and the code wrong, or the comment
+right and the code wrong.</li>
+</ul>
+<h2 id="values">Values</h2>
+<ul>
+<li>Discuss how “hello world” is a value.</li>
+<li>Exemplify how “3” is another value.</li>
+<li>Literals.</li>
+<li>Booleans, strings, numbers, characters.</li>
+<li>Suggest that there’s more complexity (value vs reference) but that
+we’ll return to this.</li>
+<li>Null
+<ul>
+<li>The absence of a value.</li>
+<li>Billion dollar mistake.</li>
+</ul></li>
+</ul>
+<h2 id="data-types">Data types</h2>
+<ul>
+<li>Discuss how “hello world” is a string and how the method WriteLine
+is expecting a string.</li>
+<li>The GetType() method.</li>
+<li>Type safety and Type errors</li>
+<li>Later we will talk about making impossible states impossible.</li>
+</ul>
+<h2 id="type-inference">Type inference</h2>
+<h2 id="variables">Variables</h2>
+<ul>
+<li>Put “hello world” in a variable and read it from the user.</li>
+<li>Declaration, assignment, initialisation</li>
+<li>Assignment is right-associative.</li>
+<li>Declaration without assignment leads to null.</li>
+</ul>
+<h2 id="statements">Statements</h2>
+<ul>
+<li>Declaration statements</li>
+<li>Assignment statements
+<ul>
+<li>What is this? Can only find single instance in documentation.</li>
+<li>https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/statements</li>
+<li>Expression statements <span class="math inline">&gt;</span>
+Assignment statements</li>
+<li>Expression statements
+<ul>
+<li>https://www.codeproject.com/Questions/5318889/Is-the-following-code-an-expression-statement</li>
+<li>https://stackoverflow.com/questions/3807192/why-do-assignment-statements-return-a-value</li>
+<li>Difference between expression and expression statement is the
+semicolon. I.e. a standalone expression is a statement expression.</li>
+</ul></li>
+</ul></li>
+<li>Selection statements</li>
+<li>Iteration statements</li>
+<li>Mention that there are more types such as
+<ul>
+<li>Jump statements</li>
+<li>Await and yield</li>
+</ul></li>
+</ul>
+<h2 id="operators-and-expressions">Operators and Expressions</h2>
+<ul>
+<li>Arithmetic</li>
+<li>Concatenation</li>
+<li>Equality
+<ul>
+<li>Value equality vs Reference equality</li>
+</ul></li>
+<li>Order</li>
+</ul>
+<h2 id="type-conversions">Type conversions</h2>
+<ul>
+<li>https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/types/casting-and-type-conversions</li>
+<li>Implicit conversions</li>
+<li>Explicit conversions (casts)</li>
+<li>User-defined conversions</li>
+</ul>
+<h2 id="arrays">Arrays</h2>
+<ul>
+<li>Highlight the problems that we will solve later.</li>
+<li>Accessing individual elements vs iterating. Lead into iteration
+chapter.</li>
+<li>Bracket notation.</li>
+<li>Will look at lists later.</li>
+</ul>
+<h2 id="syntactic-sugar">Syntactic sugar</h2>
+<ul>
+<li>Expression-bodied members</li>
+</ul>
+<h2 id="indentation">Indentation</h2>
+<ul>
+<li>Significant in some languages.</li>
+<li>Prepare for coming chapters.</li>
+</ul>
+<h2 id="selection">Selection</h2>
+<ul>
+<li>if / else / else-if</li>
+<li>switch case</li>
+</ul>
+<h2 id="iteration">Iteration</h2>
+<ul>
+<li>while</li>
+<li>for</li>
+<li>foreach
+<ul>
+<li>Also works with IEnumerable but we’ll talk about this later.</li>
+</ul></li>
+<li>Infinite loop. Will talk about stack overflow later.</li>
+</ul>
+<h2 id="constants">Constants</h2>
+<ul>
+<li>Even if you cannot re-assign to a variable, the variable could be
+mutable.</li>
+</ul>
+<h2 id="mutability">Mutability</h2>
+<ul>
+<li>Example: Arrays are mutable.</li>
+</ul>
+<h2 id="value-and-reference-semantics">Value and reference
+semantics</h2>
+<ul>
+<li>Implications for equivalence, mutability, and copying (passing and
+changing).</li>
+<li>Reference types that behave like value types</li>
+<li>Example: Arrays are passed by reference and are mutable.</li>
+</ul>
+<h2 id="static-methods-procedures">Static methods (procedures)</h2>
+<ul>
+<li>Subroutine on Wikipedia</li>
+<li>Static methods in C#</li>
+<li>Method signature, Parameters/arguments, Return type</li>
+<li>Verbs or implicit verbs where Name would usually get or set
+name.</li>
+<li>Void (a return type)</li>
+</ul>
+<h2 id="overloading">Overloading</h2>
+<h2 id="recursion">Recursion</h2>
+<ul>
+<li>A procedure may call itself (more advanced later?).</li>
+<li>Base case, recursive case.</li>
+</ul>
+<h2 id="namespaces-scope-and-dot-notation">Namespaces, scope and dot
+notation</h2>
+<ul>
+<li>What you can call &amp; What you can declare (available /
+occupied).</li>
+<li>The “using” keyword.</li>
+<li>Example: Console.WriteLine lives inside of System. Only possible if
+importing System or explicitly referring to it.</li>
+<li>Use terminology from docs. Show that you can access a named scope
+with dot-notation.
+(https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/basic-concepts)</li>
+<li>Explicit vs implicit access. Resolving ambiguity by explicitly
+stating (even your own) namespace.</li>
+<li>Note: Dot notation is also used for accessing members of a class but
+we’ll come back to this.</li>
+</ul>
+<h2 id="exceptions-part-1">Exceptions (part 1)</h2>
+<ul>
+<li>Unrecoverable states.</li>
+<li>Try / catch.</li>
+<li>Examples: IndexOutOfRange, DivideByZero, StackOverflow.</li>
+</ul>
+<h2 id="stack-traces">Stack traces</h2>
+<ul>
+<li>Reading errors.</li>
+</ul>
+<h1 id="object-oriented-programming">Object oriented programming</h1>
+<h2 id="classes-and-objects">Classes and objects</h2>
+<ul>
+<li>Equivalence (i.e. two structurally equivalent objects are not
+necessarily the same).</li>
+<li>Public instance variables (objects can hold state).</li>
+<li>UML class diagrams (start early and introduce piece by piece</li>
+<li>Usually nouns. Methods are usually verbs.</li>
+</ul>
+<h2 id="constructors">Constructors</h2>
+<ul>
+<li>Constructor overloading.</li>
+<li>Use it to set defaults.</li>
+<li>this keyword.</li>
+</ul>
+<h2 id="instance-methods">Instance methods</h2>
+<ul>
+<li>Overloading</li>
+<li>Signatures.</li>
+<li>Void is a return type.</li>
+<li>Recursion.</li>
+<li>Late binding, Dynamic binding? Michaelis (2020)</li>
+<li>Usually verbs. Or implied verbs as discussed in procedures.</li>
+</ul>
+<h2 id="access-modifiers-basic.">Access modifiers (basic).</h2>
+<ul>
+<li>Public / private (beware of the same-class caveat with
+private).</li>
+<li>Principle: Encapsulation / Information hiding (coupling, hide what
+changes)
+<ul>
+<li><a
+href="https://stackoverflow.com/questions/13913174/what-are-the-differences-between-information-hiding-and-encapsulation"
+class="uri">https://stackoverflow.com/questions/13913174/what-are-the-differences-between-information-hiding-and-encapsulation</a></li>
+</ul></li>
+<li>Principle: The state space of a type should equal the state space of
+whatever domain concept it is modeling.</li>
+<li>Modifiers for variables, methods and classes</li>
+</ul>
+<h2 id="properties">Properties</h2>
+<ul>
+<li>Specific to some languages.</li>
+<li>Synonyms: Getters / Setters, Accessors, Mutators.</li>
+<li>Uniform access principle (use Robert Martin as source?)</li>
+</ul>
+<h2 id="object-composition-through-instantiation.">Object composition
+(through instantiation).</h2>
+<h2 id="object-composition-through-injection.">Object composition
+(through injection).</h2>
+<ul>
+<li>Inject through constructor or through instance method.</li>
+<li>Principle: Inversion of control (dependency injection).</li>
+<li>Will talk about injection with abstraction later.</li>
+</ul>
+<h2 id="interfaces">Interfaces</h2>
+<ul>
+<li>Subtype polymorphism</li>
+<li>UML class diagram notation.</li>
+<li>Använd exempel med skruvar och muttrar. Givet en mutterdimension
+finns det flera skruvar som passar. Ytterligare ett exempel är
+skruvhuvuden. Huvudet förblir detsamma vilket betyder att samma
+skruvmejsel kan användas. Kanske är det ett bättre exempel eftersom
+dessa skruvar kan användas på olika sätt och till olika effekt. Tänk
+t.ex. skruva in i en mutter (ej vass) vs skruva in i en vägg
+(vass).</li>
+<li>Design principle: Replace conditional with polymorphism</li>
+</ul>
+<h2 id="inheritance">Inheritance</h2>
+<ul>
+<li>Including abstract classes.</li>
+<li>UML class diagram notation.</li>
+<li>White-box reuse (as opposed to black-box which is composition)
+(Gamma et al)</li>
+<li>Object type (lowercase is an alias for the same as the
+uppercase)</li>
+</ul>
+<h2 id="overriding">Overriding</h2>
+<h2 id="hiding">Hiding</h2>
+<ul>
+<li>Not overriding (“new” modifier)</li>
+<li>Called shadowing?</li>
+</ul>
+<h2 id="access-modifiers-advanced">Access modifiers (advanced)</h2>
+<ul>
+<li>Protected</li>
+</ul>
+<h2 id="type-conversions-of-objects">Type conversions (of objects)</h2>
+<ul>
+<li>https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/types/casting-and-type-conversions</li>
+<li>Implicit conversions</li>
+<li>Explicit conversions (casts)</li>
+<li>User-defined conversions</li>
+</ul>
+<h2 id="exceptions-part-2-custom-exceptions">Exceptions (part 2) /
+Custom exceptions</h2>
+<ul>
+<li>All exceptions derive from System.Exception.</li>
+<li>Custom exceptions.</li>
+</ul>
+<h2 id="static">Static</h2>
+<ul>
+<li>Classes and methods</li>
+</ul>
+<h2 id="prototypes">Prototypes</h2>
+<ul>
+<li>Prototype-based OO languages.</li>
+<li>Allude to the fact that there’s something called Prototype Design
+pattern.</li>
+</ul>
+<h2 id="object-composition-injection-part-2">Object composition
+(injection part 2)</h2>
+<ul>
+<li>Principle: Depend on abstractions not on concretions.</li>
+<li>In procedural programming abstract modules depend on concrete
+modules, but in object oriented programming abstract modules can depend
+on abstract modules.</li>
+</ul>
+<h2 id="base-class-library">Base class library</h2>
+<ul>
+<li>.NET Base class library.</li>
+<li>Other languages have other base libraries.</li>
+</ul>
+<h2 id="structure-types-struct">Structure types (struct)</h2>
+<h2 id="generics-parametric-polymorphism">Generics (parametric
+polymorphism)</h2>
+<ul>
+<li>Type constructor</li>
+<li>Type parameter</li>
+<li>Type constraints</li>
+</ul>
+<h2 id="variance">Variance</h2>
+<ul>
+<li>Invariance, Covariance, Contravariance</li>
+</ul>
+<h1 id="object-oriented-design-and-beyond">Object oriented design and
+beyond</h1>
+<h2 id="maintainability">Maintainability</h2>
+<ul>
+<li>ISO definition.</li>
+<li>User requirements is the hard part.</li>
+<li>Being able to change your program.</li>
+</ul>
+<h2 id="code-smells-and-anti-patterns">Code smells and
+anti-patterns</h2>
+<ul>
+<li>Spaghetti code</li>
+<li>Functional decomposition</li>
+<li>The blob / God class</li>
+</ul>
+<h2 id="coupling">Coupling</h2>
+<ul>
+<li>https://learning.oreilly.com/library/view/code-complete-second/0735619670/ch05s03.html#kinds_of_coupling</li>
+</ul>
+<h2 id="cohesion">Cohesion</h2>
+<ul>
+<li>What do we want instead of coupling?</li>
+</ul>
+<h2 id="refactoring">Refactoring</h2>
+<ul>
+<li>Definition from Fowler.</li>
+</ul>
+<h2 id="design-principles">Design principles</h2>
+<h2 id="single-responsibility-principle-srp">Single responsibility
+principle (SRP)</h2>
+<h2 id="interface-segregation-principle-isp">Interface segregation
+principle (ISP)</h2>
+<h2 id="making-impossible-states-impossible-type-safety">Making
+impossible states impossible / Type safety</h2>
+<ul>
+<li>Domain modeling (there’s no objective right or wrong, there’s just
+your domain)</li>
+<li>Types over checks. (What’s the term I discussed with rtfeldman on
+twitter?)</li>
+</ul>
+<h2 id="liskov-substitution-principle-lsp">Liskov substitution principle
+(LSP)</h2>
+<h2 id="open-closed-principle-ocp">Open-closed principle (OCP)</h2>
+<h2 id="dependency-inversion-principle-dip">Dependency inversion
+principle (DIP)</h2>
+<ul>
+<li>Do we need to talk about this again since DI was already handled in
+Part 2?</li>
+</ul>
+<h2 id="composition-over-inheritance">Composition over inheritance</h2>
+<ul>
+<li>White-box/black-box reuse. Breaking encapsulation / information
+hiding (cuz protected, see Gamma et al, 1994, kap 1).</li>
+<li>Re-use implementation horizontally (strategy pattern video, sandi
+metz?).</li>
+<li>En student skrev om Kentaur (halv människa halvt djur) som exempel
+på horisontell delning av kod. Bra exempel. Använd själv Mermaid som
+exempel för att inte sno dennes exempel rakt av.</li>
+<li>Changing behaviour at runtime vs compile time.</li>
+<li>Exercises:
+<ul>
+<li>Draw two class diagram in UML that show how a solution that uses
+inheritance might be refactored into one that uses composition?</li>
+</ul></li>
+</ul>
+<h2 id="design-patterns">Design patterns</h2>
+<h2 id="strategy-pattern">Strategy pattern</h2>
+<h2 id="delegates">Delegates</h2>
+<h2 id="bridge-pattern">Bridge pattern</h2>
+<p>Strategy pattern as it should be used.</p>
+<h2 id="lambdas">Lambdas</h2>
+<ul>
+<li>Statement lambdas</li>
+<li>Expression lambdas</li>
+</ul>
+<h2 id="abstract-factory-pattern">Abstract factory pattern</h2>
+<h2 id="iterator-pattern">Iterator pattern</h2>
+<h2 id="enumerators">Enumerators</h2>
+<ul>
+<li>Yield keyword</li>
+<li>IEnumerable</li>
+<li>IEnumerator</li>
+</ul>
+<h2 id="indexers">Indexers</h2>
+<p>Remove this chapter?</p>
+<h2 id="linq">LINQ</h2>
+<ul>
+<li>Standard query operators
+(https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/standard-query-operators-overview)</li>
+<li>Relate to: Relational alegbra. Functional programming and strategy
+pattern.</li>
+</ul>
+<h2 id="observer-pattern">Observer pattern</h2>
+<h2 id="events">Events</h2>
+<h2 id="visitor-pattern">Visitor pattern</h2>
+<h2 id="pattern-matching">Pattern matching</h2>
+</body>
+</html>
