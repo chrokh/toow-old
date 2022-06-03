@@ -55,33 +55,205 @@ The above is a code example with syntax highlighting for C#.
 ## Why OOP?
 Why I hope that OO dies in favor of FP and how I hope that this book helps. / Isn’t OOP dead? 
 
+Fundamentals
+============
 
+## Sets
+- Sets and members.
+- Subsets
 
-Procedural programming
-======================
+## Functions
+- Domain
+- Co-domain
+- Image
 
 ## Computation
 - Paradigms (imperative => procedural / oo, declarative => functional / logic)
 - Brief history of computing
   - Memory, disk, processor
 
+## Source code
+
+
+## Markup
+
+
 ## Syntax
-- Grammars (beyond scope).
-- Övningsuppgifter på detta längre fram när vi har mer kunskap.
-- Syntax error
+
+Before we can learn how to express our thoughts in any programming language we must learn to distinguish between syntax and semantics.
+We must learn to distinguish between how to express a sentence in a language (i.e., syntax) and what that sentence means (i.e., semantics).
+By understanding syntactic and semantic validity, we will also learn to distinguish between syntactic and semantic errors.
+
+> **DEFINITION:**
+The syntax of a language defines how symbols can be combined to form valid statements or expressions in the language.
+
+Syntax defines the *structure* of sentences but does not concern itself with meaning. 
+As we shall see in the chapter on [Semantics](#semantics), all *syntactically* valid sentances are not necessarily also *semantically* valid sentences.
+Just because some sentence is expressed on the correct form doesn't guarantee that it is meaningful.
+Hence the separation between the words syntax and semantics.
+
+<!--
+Theoreticians have studied syntax in many ways.
+In computing we tend to talk about generative grammar, an idea proposed by Noam Chomsky.
+See e.g. [Chomsky (1957)](#ref_chomsky_1957_syntactic).
+
+The syntax of a given language is defined by what we refer to as a grammar.
+-->
+
+Consider the following three sentences.
+Which of these sentences are syntactically invalid given the rules of English?
+
+* I am here.
+* Here am I.
+* I here am.
+
+The last sentence is grammatically incorrect and hence syntactically incorrect.
+The issue is not that the sentence in question does not have meaning (meaning that it is semantically incorrect or meaningless).
+The issue is that it cannot possibly have meaning in the language since it is not a member of it.
+In a sense you can think of the sentence as being "unreadable".
+
+Think of a language as a (possibly infinite set) of members where each member corresponds to a valid sentence in the language.
+The sentence "I here am" is not a member of this set and does thus not constitute a valid sentence in the language English.
+
+![Syntactically incorrect combinations of symbols are not members of the language.](../assets/syntax/syntactic-error.png)
+
+As we've already mentioned however, syntax doesn't just deal with words, but with symbols.
+Again, let us use the English language as an example and look at a few sentences.
+
+* Am I here?
+* ¿Am I here?
+
+In the example above, the second sentence is syntactically invalid.
+However, if we consider the Spanish language, the prepended upside down question mark would be expected and the latter of the two examples would be syntactically correct.
+
+* Estoy aquí?
+* ¿Estoy aquí?
+
+Let's talk about C# instead.
+While we will discuss [operators, expressions](#operators-and-expressions), and [statements](#statements) in much more detail later let us look at a few trivial examples that ought to make sense to you irrespectively of your level of previous mathematical knowledge.
+
+If we are looking to add the two numbers 1 and 2, then we must (as in the example below) state the first number followed by the operator and then the second number.
+This is known as infix notation, and the addition operator (`+`) is thus an infix operator.
+
+```csharp
+1 + 2    // Syntactically valid expression in C#.
+```
+
+If we instead tried to use what is known as prefix notation and first stated the addition operator followed by the first number and then the second number we would have an example of a syntactically invalid expression in C#.
+
+```csharp
++ 1 2    // Syntactically invalid in C#.
+```
+
+Syntactic errors are known as syntax errors.
+When we find ourselves looking at a program that "doesn't work", we must ask ourselves whether we mean that the program exhibits syntactic errors (also known as syntax errors), semantic errors, or combinations of the two.
+
+When dealing with [compiled languages](#compilation) syntax errors are brought to our attention, by the compiler, at, what is known as, compile-time.
+When dealing with [interpreted languages](#interpretation) syntax errors are only brought to our attention, by the interpreter, at, what is known as, runtime.
+Don't worry, we'll talk more about compilation and interpretation soon.
+
+<!--
+- *Grammars (beyond scope).*
+- *Övningsuppgifter på detta längre fram när vi har mer kunskap.*
+- *Syntax error*
+-->
+
+### Questions ✏
+1. What is syntax?
+2. Give three different examples of syntax errors in a natural language.
+2. Give three different examples of syntax errors in C#.
+
 
 ## Semantics
-- Writing the wrong program.
-- User requirements is the hard part. Link to maintainability chapter.
-- "Colorless green ideas sleep furiously"
-- Övningsuppgifter på detta längre fram när vi har mer kunskap.
-- Semantic error.
+
+If syntax errors are errors of "form" then semantic errors are errors of "content".
+If we don't say what we mean to say then we are making semantic errors.
+
+The perhaps most famous example of semantic meaninglessness is found in the following passage from [Chomsky (1957)](#ref_chomsky_1957_syntactic).
+
+> Colorless green ideas sleep furiously.\
+> Furiously sleep ideas green colorless.
+
+With this, Chomsky attempts to show, as have we, that while both sentences are nonsensical, only the latter is grammatically incorrect.
+While the first sentence is grammatically correct it is nonsensical without poetic interpretation.
+
+Let us instead talk about programs.
+
+Say that I'm writing a program and that I have a variable (again, we'll talk about what [variables](#variables) are later) containing the fraction `0.4`.
+Now let's say that I forget that this represents a fraction and instead assume that it contains a percentage and print it with an appended percentage sign.
+
+```csharp
+double fraction = 0.4;
+Console.WriteLine($"{fraction}%");
+```
+
+This program would print `0.4%` even though I was intending to print `40%`.
+This is a semantic error.
+It is an error of *meaning*.
+It is the wrong program.
+
+> Computers do exactly what we tell them to do, not what we intend for them to do.
+
+Some [compilers](#compilation) (we'll talk more about what these are later) can warn you when you're about to make what appears to be common semantic errors.  Semantic errors cannot be discovered automatically
+Automatically detecting all semantic errors in an application is however impossible in theory since semantic errors are inherently subjective.
+It all comes down to what you were intending to do.
+Unless your intention is specified somehow then the computer cannot possibly know what your intentions are.
+
+We'll talk a lot more about [requirements](#requirements) and about [maintainability](#maintainability) later but suffice to say for now that figuring out *what to do* is usually a lot harder than *actually doing it*.
+
+> Understanding what program we should write is usually a lot harder than actually writing that program.
+
+<!--
+Assume that I am intending to write a program that first asks you for your name and then prints it along with a greeting.
+While we have yet to talk about actual C# syntax and semantics in detail, the program might look something like this in C#:
+
+```csharp
+Console.WriteLine("Please type your name and then hit ENTER.");
+string name = Console.ReadLine();
+Console.WriteLine($"Hello, {0}.");
+```
+
+Running the program might look something like this:
+
+```bash
+> Please type your name and then hit ENTER.
+Chris
+> Hello, Chris.
+```
+
+Let's however assume that I accidentally write the following program
+
+```csharp
+Console.WriteLine("Please type your name and then hit ENTER.");
+string name = Console.ReadLine();
+Console.WriteLine($"Hello.");
+```
+
+Which instead behaves like this:
+
+```bash
+> Please type your name and then hit ENTER.
+Chris
+> Hello.
+```
+
+This was not the program I was intending to write, and I have thus managed to make a semantic error.
+-->
+
+### Questions ✏
+
+1. TODO
+2. TODO
+3. TODO
+
 
 ## Compilation
-- Also: interpretation.
 - Compilation error.
 - Övningsuppgifter på detta längre fram när vi har mer kunskap.
 - Design principle: Prefer compile time errors over runtime errors.
+
+## Interpretation
+- Compile time error
 
 ## Evaluation
 - Example: Printing “hello world”.
@@ -110,6 +282,10 @@ Procedural programming
 - Later we will talk about making impossible states impossible.
 
 ## Type inference
+
+
+Procedural programming
+======================
 
 ## Variables
 - Put “hello world” in a variable and read it from the user.
@@ -313,6 +489,9 @@ Object oriented programming
 Object oriented design and beyond
 =================================
 
+## Requirements
+- Are vague and in flux.
+
 ## Maintainability
 - ISO definition. 
 - User requirements is the hard part.
@@ -393,4 +572,10 @@ Remove this chapter?
 ## Visitor pattern
 
 ## Pattern matching
+
+
+# References
+* <a name="ref_chomsky_1957_syntactic"/>Chomsky, Noam (1957). Syntactic Structures. The Hague: Mouton. p. 15.
+
+
 

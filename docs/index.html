@@ -243,19 +243,28 @@ id="toc-postconditions">Postconditions</a></li>
 id="toc-technicalities">Technicalities</a></li>
 <li><a href="#why-oop" id="toc-why-oop">Why OOP?</a></li>
 </ul></li>
-<li><a href="#procedural-programming"
-id="toc-procedural-programming">Procedural programming</a>
+<li><a href="#fundamentals" id="toc-fundamentals">Fundamentals</a>
 <ul>
+<li><a href="#sets" id="toc-sets">Sets</a></li>
+<li><a href="#functions" id="toc-functions">Functions</a></li>
 <li><a href="#computation" id="toc-computation">Computation</a></li>
+<li><a href="#source-code" id="toc-source-code">Source code</a></li>
+<li><a href="#markup" id="toc-markup">Markup</a></li>
 <li><a href="#syntax" id="toc-syntax">Syntax</a></li>
 <li><a href="#semantics" id="toc-semantics">Semantics</a></li>
 <li><a href="#compilation" id="toc-compilation">Compilation</a></li>
+<li><a href="#interpretation"
+id="toc-interpretation">Interpretation</a></li>
 <li><a href="#evaluation" id="toc-evaluation">Evaluation</a></li>
 <li><a href="#comments" id="toc-comments">Comments</a></li>
 <li><a href="#values" id="toc-values">Values</a></li>
 <li><a href="#data-types" id="toc-data-types">Data types</a></li>
 <li><a href="#type-inference" id="toc-type-inference">Type
 inference</a></li>
+</ul></li>
+<li><a href="#procedural-programming"
+id="toc-procedural-programming">Procedural programming</a>
+<ul>
 <li><a href="#variables" id="toc-variables">Variables</a></li>
 <li><a href="#statements" id="toc-statements">Statements</a></li>
 <li><a href="#operators-and-expressions"
@@ -331,6 +340,7 @@ polymorphism)</a></li>
 id="toc-object-oriented-design-and-beyond">Object oriented design and
 beyond</a>
 <ul>
+<li><a href="#requirements" id="toc-requirements">Requirements</a></li>
 <li><a href="#maintainability"
 id="toc-maintainability">Maintainability</a></li>
 <li><a href="#code-smells-and-anti-patterns"
@@ -384,6 +394,7 @@ pattern</a></li>
 <li><a href="#pattern-matching" id="toc-pattern-matching">Pattern
 matching</a></li>
 </ul></li>
+<li><a href="#references" id="toc-references">References</a></li>
 </ul>
 </nav>
 <h1 id="preface">Preface</h1>
@@ -439,7 +450,18 @@ go.</li>
 <h2 id="why-oop">Why OOP?</h2>
 <p>Why I hope that OO dies in favor of FP and how I hope that this book
 helps. / Isn’t OOP dead?</p>
-<h1 id="procedural-programming">Procedural programming</h1>
+<h1 id="fundamentals">Fundamentals</h1>
+<h2 id="sets">Sets</h2>
+<ul>
+<li>Sets and members.</li>
+<li>Subsets</li>
+</ul>
+<h2 id="functions">Functions</h2>
+<ul>
+<li>Domain</li>
+<li>Co-domain</li>
+<li>Image</li>
+</ul>
 <h2 id="computation">Computation</h2>
 <ul>
 <li>Paradigms (imperative =&gt; procedural / oo, declarative =&gt;
@@ -449,28 +471,211 @@ functional / logic)</li>
 <li>Memory, disk, processor</li>
 </ul></li>
 </ul>
+<h2 id="source-code">Source code</h2>
+<h2 id="markup">Markup</h2>
 <h2 id="syntax">Syntax</h2>
+<p>Before we can learn how to express our thoughts in any programming
+language we must learn to distinguish between syntax and semantics. We
+must learn to distinguish between how to express a sentence in a
+language (i.e., syntax) and what that sentence means (i.e., semantics).
+By understanding syntactic and semantic validity, we will also learn to
+distinguish between syntactic and semantic errors.</p>
+<blockquote>
+<p><strong>DEFINITION:</strong> The syntax of a language defines how
+symbols can be combined to form valid statements or expressions in the
+language.</p>
+</blockquote>
+<p>Syntax defines the <em>structure</em> of sentences but does not
+concern itself with meaning. As we shall see in the chapter on <a
+href="#semantics">Semantics</a>, all <em>syntactically</em> valid
+sentances are not necessarily also <em>semantically</em> valid
+sentences. Just because some sentence is expressed on the correct form
+doesn’t guarantee that it is meaningful. Hence the separation between
+the words syntax and semantics.</p>
+<!--
+Theoreticians have studied syntax in many ways.
+In computing we tend to talk about generative grammar, an idea proposed by Noam Chomsky.
+See e.g. [Chomsky (1957)](#ref_chomsky_1957_syntactic).
+
+The syntax of a given language is defined by what we refer to as a grammar.
+-->
+<p>Consider the following three sentences. Which of these sentences are
+syntactically invalid given the rules of English?</p>
 <ul>
-<li>Grammars (beyond scope).</li>
-<li>Övningsuppgifter på detta längre fram när vi har mer kunskap.</li>
-<li>Syntax error</li>
+<li>I am here.</li>
+<li>Here am I.</li>
+<li>I here am.</li>
 </ul>
+<p>The last sentence is grammatically incorrect and hence syntactically
+incorrect. The issue is not that the sentence in question does not have
+meaning (meaning that it is semantically incorrect or meaningless). The
+issue is that it cannot possibly have meaning in the language since it
+is not a member of it. In a sense you can think of the sentence as being
+“unreadable”.</p>
+<p>Think of a language as a (possibly infinite set) of members where
+each member corresponds to a valid sentence in the language. The
+sentence “I here am” is not a member of this set and does thus not
+constitute a valid sentence in the language English.</p>
+<figure>
+<img src="../assets/syntax/syntactic-error.png"
+alt="Syntactically incorrect combinations of symbols are not members of the language." />
+<figcaption aria-hidden="true">Syntactically incorrect combinations of
+symbols are not members of the language.</figcaption>
+</figure>
+<p>As we’ve already mentioned however, syntax doesn’t just deal with
+words, but with symbols. Again, let us use the English language as an
+example and look at a few sentences.</p>
+<ul>
+<li>Am I here?</li>
+<li>¿Am I here?</li>
+</ul>
+<p>In the example above, the second sentence is syntactically invalid.
+However, if we consider the Spanish language, the prepended upside down
+question mark would be expected and the latter of the two examples would
+be syntactically correct.</p>
+<ul>
+<li>Estoy aquí?</li>
+<li>¿Estoy aquí?</li>
+</ul>
+<p>Let’s talk about C# instead. While we will discuss <a
+href="#operators-and-expressions">operators, expressions</a>, and <a
+href="#statements">statements</a> in much more detail later let us look
+at a few trivial examples that ought to make sense to you irrespectively
+of your level of previous mathematical knowledge.</p>
+<p>If we are looking to add the two numbers 1 and 2, then we must (as in
+the example below) state the first number followed by the operator and
+then the second number. This is known as infix notation, and the
+addition operator (<code>+</code>) is thus an infix operator.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode csharp"><code class="sourceCode cs"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="op">+</span> <span class="dv">2</span>    <span class="co">// Syntactically valid expression in C#.</span></span></code></pre></div>
+<p>If we instead tried to use what is known as prefix notation and first
+stated the addition operator followed by the first number and then the
+second number we would have an example of a syntactically invalid
+expression in C#.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode csharp"><code class="sourceCode cs"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> <span class="dv">1</span> <span class="dv">2</span>    <span class="co">// Syntactically invalid in C#.</span></span></code></pre></div>
+<p>Syntactic errors are known as syntax errors. When we find ourselves
+looking at a program that “doesn’t work”, we must ask ourselves whether
+we mean that the program exhibits syntactic errors (also known as syntax
+errors), semantic errors, or combinations of the two.</p>
+<p>When dealing with <a href="#compilation">compiled languages</a>
+syntax errors are brought to our attention, by the compiler, at, what is
+known as, compile-time. When dealing with <a
+href="#interpretation">interpreted languages</a> syntax errors are only
+brought to our attention, by the interpreter, at, what is known as,
+runtime. Don’t worry, we’ll talk more about compilation and
+interpretation soon.</p>
+<!--
+- *Grammars (beyond scope).*
+- *Övningsuppgifter på detta längre fram när vi har mer kunskap.*
+- *Syntax error*
+-->
+<h3 id="questions">Questions ✏</h3>
+<ol type="1">
+<li>What is syntax?</li>
+<li>Give three different examples of syntax errors in a natural
+language.</li>
+<li>Give three different examples of syntax errors in C#.</li>
+</ol>
 <h2 id="semantics">Semantics</h2>
-<ul>
-<li>Writing the wrong program.</li>
-<li>User requirements is the hard part. Link to maintainability
-chapter.</li>
-<li>“Colorless green ideas sleep furiously”</li>
-<li>Övningsuppgifter på detta längre fram när vi har mer kunskap.</li>
-<li>Semantic error.</li>
-</ul>
+<p>If syntax errors are errors of “form” then semantic errors are errors
+of “content”. If we don’t say what we mean to say then we are making
+semantic errors.</p>
+<p>The perhaps most famous example of semantic meaninglessness is found
+in the following passage from <a
+href="#ref_chomsky_1957_syntactic">Chomsky (1957)</a>.</p>
+<blockquote>
+<p>Colorless green ideas sleep furiously.<br />
+Furiously sleep ideas green colorless.</p>
+</blockquote>
+<p>With this, Chomsky attempts to show, as have we, that while both
+sentences are nonsensical, only the latter is grammatically incorrect.
+While the first sentence is grammatically correct it is nonsensical
+without poetic interpretation.</p>
+<p>Let us instead talk about programs.</p>
+<p>Say that I’m writing a program and that I have a variable (again,
+we’ll talk about what <a href="#variables">variables</a> are later)
+containing the fraction <code>0.4</code>. Now let’s say that I forget
+that this represents a fraction and instead assume that it contains a
+percentage and print it with an appended percentage sign.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode csharp"><code class="sourceCode cs"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> fraction <span class="op">=</span> <span class="fl">0.4</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>Console<span class="op">.</span><span class="fu">WriteLine</span><span class="op">(</span>$<span class="st">&quot;{fraction}%&quot;</span><span class="op">);</span></span></code></pre></div>
+<p>This program would print <code>0.4%</code> even though I was
+intending to print <code>40%</code>. This is a semantic error. It is an
+error of <em>meaning</em>. It is the wrong program.</p>
+<blockquote>
+<p>Computers do exactly what we tell them to do, not what we intend for
+them to do.</p>
+</blockquote>
+<p>Some <a href="#compilation">compilers</a> (we’ll talk more about what
+these are later) can warn you when you’re about to make what appears to
+be common semantic errors. Semantic errors cannot be discovered
+automatically Automatically detecting all semantic errors in an
+application is however impossible in theory since semantic errors are
+inherently subjective. It all comes down to what you were intending to
+do. Unless your intention is specified somehow then the computer cannot
+possibly know what your intentions are.</p>
+<p>We’ll talk a lot more about <a href="#requirements">requirements</a>
+and about <a href="#maintainability">maintainability</a> later but
+suffice to say for now that figuring out <em>what to do</em> is usually
+a lot harder than <em>actually doing it</em>.</p>
+<blockquote>
+<p>Understanding what program we should write is usually a lot harder
+than actually writing that program.</p>
+</blockquote>
+<!--
+Assume that I am intending to write a program that first asks you for your name and then prints it along with a greeting.
+While we have yet to talk about actual C# syntax and semantics in detail, the program might look something like this in C#:
+
+```csharp
+Console.WriteLine("Please type your name and then hit ENTER.");
+string name = Console.ReadLine();
+Console.WriteLine($"Hello, {0}.");
+```
+
+Running the program might look something like this:
+
+```bash
+> Please type your name and then hit ENTER.
+Chris
+> Hello, Chris.
+```
+
+Let's however assume that I accidentally write the following program
+
+```csharp
+Console.WriteLine("Please type your name and then hit ENTER.");
+string name = Console.ReadLine();
+Console.WriteLine($"Hello.");
+```
+
+Which instead behaves like this:
+
+```bash
+> Please type your name and then hit ENTER.
+Chris
+> Hello.
+```
+
+This was not the program I was intending to write, and I have thus managed to make a semantic error.
+-->
+<h3 id="questions-1">Questions ✏</h3>
+<ol type="1">
+<li>TODO</li>
+<li>TODO</li>
+<li>TODO</li>
+</ol>
 <h2 id="compilation">Compilation</h2>
 <ul>
-<li>Also: interpretation.</li>
 <li>Compilation error.</li>
 <li>Övningsuppgifter på detta längre fram när vi har mer kunskap.</li>
 <li>Design principle: Prefer compile time errors over runtime
 errors.</li>
+</ul>
+<h2 id="interpretation">Interpretation</h2>
+<ul>
+<li>Compile time error</li>
 </ul>
 <h2 id="evaluation">Evaluation</h2>
 <ul>
@@ -509,6 +714,7 @@ is expecting a string.</li>
 <li>Later we will talk about making impossible states impossible.</li>
 </ul>
 <h2 id="type-inference">Type inference</h2>
+<h1 id="procedural-programming">Procedural programming</h1>
 <h2 id="variables">Variables</h2>
 <ul>
 <li>Put “hello world” in a variable and read it from the user.</li>
@@ -784,6 +990,10 @@ polymorphism)</h2>
 </ul>
 <h1 id="object-oriented-design-and-beyond">Object oriented design and
 beyond</h1>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Are vague and in flux.</li>
+</ul>
 <h2 id="maintainability">Maintainability</h2>
 <ul>
 <li>ISO definition.</li>
@@ -878,5 +1088,10 @@ pattern.</li>
 <h2 id="events">Events</h2>
 <h2 id="visitor-pattern">Visitor pattern</h2>
 <h2 id="pattern-matching">Pattern matching</h2>
+<h1 id="references">References</h1>
+<ul>
+<li><a name="ref_chomsky_1957_syntactic"/>Chomsky, Noam (1957).
+Syntactic Structures. The Hague: Mouton. p. 15.</li>
+</ul>
 </body>
 </html>
