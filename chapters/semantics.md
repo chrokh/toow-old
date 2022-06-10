@@ -54,7 +54,7 @@ Computers do exactly what we tell them to do. They cannot (yet) read our minds.
 We'll talk a lot more about requirements [{numref}`Chapter %s<chp:requirements>`] and maintainability [{numref}`Chapter %s<chp:maintainability>`] later but suffice to say for now that figuring out *what to do* is usually a lot harder than *actually doing it*.
 The former is mostly a business problem while the latter a technical one.
 
-```{hint}
+```{tip}
 Understanding what program we should write is usually a lot harder than actually writing that program.
 ```
 
