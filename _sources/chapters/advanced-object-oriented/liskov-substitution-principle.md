@@ -1,0 +1,4 @@
+# Liskov substitution principle
+
+LSP.
+

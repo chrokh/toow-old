@@ -1,0 +1,4 @@
+# Interface segregation principle
+
+ISP.
+

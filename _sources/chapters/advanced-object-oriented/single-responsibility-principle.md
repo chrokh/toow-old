@@ -1,0 +1,4 @@
+# Single responsibility principle
+
+SRP.
+
