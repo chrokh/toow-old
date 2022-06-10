@@ -29,6 +29,19 @@ It is an error of *meaning*.
 It is the wrong program.
 There's nothing objectively wrong with the program, it's just the wrong program.
 
+```{exercise}
+Can a sentence/statement be both syntactically and semantically incorrect at the same time?
+How or why not?
+```
+
+Let's think of it in terms of set theory.
+Without considering any particular language, the set of possible sentences is infinite.
+Let us now consider a particular language and call it $L$.
+Some senteces are syntactically valid given the grammar rules of $L$ and are hence members of the set $L$.
+However, not all members of $L$ are semantically meaningful.
+We might call these objectively semantically incorrect members of $L$.
+Further, if we assume that we have some intent of expressing some particular idea, call it $I$, then then not all members $L$ are semantically correct expressions of the idea $I$.
+
 Some compilers [{numref}`Chapter %s<chp:compilation>`] can warn you when you're about to make what appears to be common semantic errors.  Semantic errors cannot be discovered automatically
 Automatically detecting all semantic errors in an application is however impossible in theory since semantic errors are inherently subjective.
 It all comes down to what you were intending to do.
