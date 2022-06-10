@@ -1,3 +1,5 @@
 Book on object oriented programming.
 
-Compile using Make.
+- Built using jupyter-book.
+- Compile through Make.
+- See requirements.txt.

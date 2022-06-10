@@ -1,0 +1,4 @@
+# Open-closed principle
+
+OCP.
+
