@@ -40,7 +40,7 @@ In a sense you can think of the sentence as being "unreadable".
 Think of a language as a (possibly infinite set) of members where each member corresponds to a valid sentence in the language.
 The sentence "I here am" is not a member of this set and does thus not constitute a valid sentence in the language English.
 
-```{figure} ../../images/syntax-error.png
+```{figure} ../images/syntax-error.png
 ---
 name: syntax-error
 ---
