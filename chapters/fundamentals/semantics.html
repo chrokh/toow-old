@@ -709,22 +709,20 @@ title="Open an issue"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="semantics">
-<h1><span class="section-number">10. </span>Semantics<a class="headerlink" href="#semantics" title="Permalink to this headline">#</a></h1>
+<span id="chp-semantics"></span><h1><span class="section-number">10. </span>Semantics<a class="headerlink" href="#semantics" title="Permalink to this headline">#</a></h1>
 <p>If syntax errors are errors of “form” then semantic errors are errors of “content”.
 If we don’t say what we mean to say then we are making semantic errors.</p>
-<p>The perhaps most famous example of semantic meaninglessness is found in the following passage from <a class="reference external" href="#ref_chomsky_1957_syntactic">Chomsky (1957)</a>.</p>
-<ul class="simple">
-<li><p><a name="ref_chomsky_1957_syntactic"/>Chomsky, Noam (1957). Syntactic Structures. The Hague: Mouton. p. 15.</p></li>
-</ul>
+<p>The perhaps most famous example of semantic meaninglessness is found in the following passage by <span id="id1">Chomsky [<a class="reference internal" href="../epilogue/bibliography.html#id2" title="N. Chomsky. Syntactic structures. The Hague, 1957.">1957</a>]</span>:</p>
 <blockquote>
 <div><p>Colorless green ideas sleep furiously.<br />
 Furiously sleep ideas green colorless.</p>
 </div></blockquote>
-<p>With this, Chomsky attempts to show, as have we, that while both sentences are nonsensical, only the latter is grammatically incorrect.
+<p>With this, Chomsky attempts to show that even though both sentences are nonsensical only the latter is grammatically incorrect.
 While the first sentence is grammatically correct it is nonsensical without poetic interpretation.</p>
 <p>Let us instead talk about programs.
-Say that I’m writing a program and that I have a variable (again, we’ll talk about what <a class="reference external" href="#variables">variables</a> are later) containing the fraction <code class="docutils literal notranslate"><span class="pre">0.4</span></code>.
-Now let’s say that I forget that this represents a fraction and instead assume that it contains a percentage and print it with an appended percentage sign.</p>
+Say that I’m writing a program and that I have a variable containing the fraction <code class="docutils literal notranslate"><span class="pre">0.4</span></code>.
+We’ll describe what variables are soon [<a class="reference internal" href="variables.html#chp-variables"><span class="std std-numref">Chapter 16</span></a>] but bear with me for a moment.</p>
+<p>Now let’s say that I forget that this represents a fraction and instead assume that it contains a percentage and print it with an appended percentage sign.</p>
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="n">fraction</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">;</span><span class="w"></span>
 <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{fraction}%&quot;</span><span class="p">);</span><span class="w"></span>
 </pre></div>
@@ -732,16 +730,18 @@ Now let’s say that I forget that this represents a fraction and instead assume
 <p>This program would print <code class="docutils literal notranslate"><span class="pre">0.4%</span></code> even though I was intending to print <code class="docutils literal notranslate"><span class="pre">40%</span></code>.
 This is a semantic error.
 It is an error of <em>meaning</em>.
-It is the wrong program.</p>
-<div class="admonition caution">
-<p class="admonition-title">Caution</p>
-<p>Computers do exactly what we tell them to do, not what we intend for them to do.</p>
-</div>
-<p>Some <a class="reference external" href="#compilation">compilers</a> (we’ll talk more about what these are later) can warn you when you’re about to make what appears to be common semantic errors.  Semantic errors cannot be discovered automatically
+It is the wrong program.
+There’s nothing objectively wrong with the program, it’s just the wrong program.</p>
+<p>Some compilers [<a class="reference internal" href="compilation.html#chp-compilation"><span class="std std-numref">Chapter 5</span></a>] can warn you when you’re about to make what appears to be common semantic errors.  Semantic errors cannot be discovered automatically
 Automatically detecting all semantic errors in an application is however impossible in theory since semantic errors are inherently subjective.
 It all comes down to what you were intending to do.
 Unless your intention is specified somehow then the computer cannot possibly know what your intentions are.</p>
-<p>We’ll talk a lot more about <a class="reference external" href="#requirements">requirements</a> and about <a class="reference external" href="#maintainability">maintainability</a> later but suffice to say for now that figuring out <em>what to do</em> is usually a lot harder than <em>actually doing it</em>.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Computers do exactly what we tell them to do. They cannot (yet) read our minds.</p>
+</div>
+<p>We’ll talk a lot more about requirements [<a class="reference internal" href="../advanced-object-oriented/requirements.html#chp-requirements"><span class="std std-numref">Chapter 57</span></a>] and maintainability [<a class="reference internal" href="../advanced-object-oriented/maintainability.html#chp-maintainability"><span class="std std-numref">Chapter 58</span></a>] later but suffice to say for now that figuring out <em>what to do</em> is usually a lot harder than <em>actually doing it</em>.
+The former is mostly a business problem while the latter a technical one.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>Understanding what program we should write is usually a lot harder than actually writing that program.</p>

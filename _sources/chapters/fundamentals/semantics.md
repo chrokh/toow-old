@@ -1,20 +1,21 @@
+(chp:semantics)=
 # Semantics
 
 If syntax errors are errors of "form" then semantic errors are errors of "content".
 If we don't say what we mean to say then we are making semantic errors.
 
-The perhaps most famous example of semantic meaninglessness is found in the following passage from [Chomsky (1957)](#ref_chomsky_1957_syntactic).
-
-* <a name="ref_chomsky_1957_syntactic"/>Chomsky, Noam (1957). Syntactic Structures. The Hague: Mouton. p. 15.
+The perhaps most famous example of semantic meaninglessness is found in the following passage by {cite:t}`chomsky1957`:
 
 > Colorless green ideas sleep furiously.\
 > Furiously sleep ideas green colorless.
 
-With this, Chomsky attempts to show, as have we, that while both sentences are nonsensical, only the latter is grammatically incorrect.
+With this, Chomsky attempts to show that even though both sentences are nonsensical only the latter is grammatically incorrect.
 While the first sentence is grammatically correct it is nonsensical without poetic interpretation.
 
 Let us instead talk about programs.
-Say that I'm writing a program and that I have a variable (again, we'll talk about what [variables](#variables) are later) containing the fraction `0.4`.
+Say that I'm writing a program and that I have a variable containing the fraction `0.4`.
+We'll describe what variables are soon [{numref}`Chapter %s<chp:variables>`] but bear with me for a moment.
+
 Now let's say that I forget that this represents a fraction and instead assume that it contains a percentage and print it with an appended percentage sign.
 
 ```csharp
@@ -26,17 +27,19 @@ This program would print `0.4%` even though I was intending to print `40%`.
 This is a semantic error.
 It is an error of *meaning*.
 It is the wrong program.
+There's nothing objectively wrong with the program, it's just the wrong program.
 
-```{caution}
-Computers do exactly what we tell them to do, not what we intend for them to do.
-```
-
-Some [compilers](#compilation) (we'll talk more about what these are later) can warn you when you're about to make what appears to be common semantic errors.  Semantic errors cannot be discovered automatically
+Some compilers [{numref}`Chapter %s<chp:compilation>`] can warn you when you're about to make what appears to be common semantic errors.  Semantic errors cannot be discovered automatically
 Automatically detecting all semantic errors in an application is however impossible in theory since semantic errors are inherently subjective.
 It all comes down to what you were intending to do.
 Unless your intention is specified somehow then the computer cannot possibly know what your intentions are.
 
-We'll talk a lot more about [requirements](#requirements) and about [maintainability](#maintainability) later but suffice to say for now that figuring out *what to do* is usually a lot harder than *actually doing it*.
+```{caution}
+Computers do exactly what we tell them to do. They cannot (yet) read our minds.
+```
+
+We'll talk a lot more about requirements [{numref}`Chapter %s<chp:requirements>`] and maintainability [{numref}`Chapter %s<chp:maintainability>`] later but suffice to say for now that figuring out *what to do* is usually a lot harder than *actually doing it*.
+The former is mostly a business problem while the latter a technical one.
 
 ```{hint}
 Understanding what program we should write is usually a lot harder than actually writing that program.
