@@ -1,4 +1,4 @@
-# Namespaces, scope and dot notation
+# Namespaces
 - What you can call \& What you can declare (available / occupied).
 - The “using” keyword.
 - Example: Console.WriteLine lives inside of System. Only possible if importing System or explicitly referring to it.
