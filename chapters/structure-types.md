@@ -1,3 +1,4 @@
 # Structure types
-Struct.
+
+- `struct`.
 

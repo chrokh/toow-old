@@ -1,3 +1,4 @@
+(interfaces)=
 # Interfaces
 - Subtype polymorphism
 - UML class diagram notation.

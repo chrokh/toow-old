@@ -1,4 +1,4 @@
-(chp:operators)=
+(operators)=
 # Operators
 - Arithmetic
 - Concatenation

@@ -1,4 +1,4 @@
-(chp:semantics)=
+(semantics)=
 # Semantics
 
 If syntax errors are errors of "form" then semantic errors are errors of "content".
@@ -14,7 +14,7 @@ While the first sentence is grammatically correct it is nonsensical without poet
 
 Let us instead talk about programs.
 Say that I'm writing a program and that I have a variable containing the fraction `0.4`.
-We'll describe what variables are soon [{numref}`Chapter %s<chp:variables>`] but bear with me for a moment.
+We'll describe what variables are soon [{numref}`Chapter %s<variables>`] but bear with me for a moment.
 
 Now let's say that I forget that this represents a fraction and instead assume that it contains a percentage and print it with an appended percentage sign.
 
@@ -42,7 +42,7 @@ However, not all members of $L$ are semantically meaningful.
 We might call these objectively semantically incorrect members of $L$.
 Further, if we assume that we have some intent of expressing some particular idea, call it $I$, then then not all members $L$ are semantically correct expressions of the idea $I$.
 
-Some compilers [{numref}`Chapter %s<chp:compilation>`] can warn you when you're about to make what appears to be common semantic errors.  Semantic errors cannot be discovered automatically
+Some compilers [{numref}`Chapter %s<compilation>`] can warn you when you're about to make what appears to be common semantic errors.  Semantic errors cannot be discovered automatically
 Automatically detecting all semantic errors in an application is however impossible in theory since semantic errors are inherently subjective.
 It all comes down to what you were intending to do.
 Unless your intention is specified somehow then the computer cannot possibly know what your intentions are.
@@ -51,7 +51,7 @@ Unless your intention is specified somehow then the computer cannot possibly kno
 Computers do exactly what we tell them to do. They cannot (yet) read our minds.
 ```
 
-We'll talk a lot more about requirements [{numref}`Chapter %s<chp:requirements>`] and maintainability [{numref}`Chapter %s<chp:maintainability>`] later but suffice to say for now that figuring out *what to do* is usually a lot harder than *actually doing it*.
+We'll talk a lot more about requirements [{numref}`Chapter %s<requirements>`] and maintainability [{numref}`Chapter %s<maintainability>`] later but suffice to say for now that figuring out *what to do* is usually a lot harder than *actually doing it*.
 The former is mostly a business problem while the latter a technical one.
 
 ```{tip}

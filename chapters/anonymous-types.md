@@ -1,0 +1,2 @@
+(anonymous-types)=
+# Anonymous types
