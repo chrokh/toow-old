@@ -1,3 +1,4 @@
+(types-over-tests)=
 # Types over tests
 
 > Make impossible states impossible.

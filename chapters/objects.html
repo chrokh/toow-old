@@ -1,0 +1,1128 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>43. Objects &#8212; The Object Oriented Way</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="44. Classes" href="classes.html" />
+    <link rel="prev" title="42. Pillars" href="pillars.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/cover.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">The Object Oriented Way</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search" aria-label="Search" autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Preface
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="welcome.html">
+   Welcome
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="preconditions.html">
+   Preconditions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="postconditions.html">
+   Postconditions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="structure.html">
+   Structure
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="free.html">
+   Free book
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="technicalities.html">
+   Technicalities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="why-oop.html">
+   Why OOP?
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Fundamentals
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="sets.html">
+   1. Sets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="functions.html">
+   2. Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="algorithms.html">
+   3. Algorithms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="computation.html">
+   4. Computation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="compilation.html">
+   5. Compilation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="interpretation.html">
+   6. Interpretation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="source-code.html">
+   7. Source code
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markup.html">
+   8. Markup
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="syntax.html">
+   9. Syntax
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="semantics.html">
+   10. Semantics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="evaluation.html">
+   11. Evaluation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="comments.html">
+   12. Comments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="values.html">
+   13. Values
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="data-types.html">
+   14. Data types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="type-inference.html">
+   15. Type inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="variables.html">
+   16. Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="paradigms.html">
+   17. Paradigms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="business-logic.html">
+   18. Business logic
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Procedural programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="statements.html">
+   19. Statements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="expressions.html">
+   20. Expressions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="operators.html">
+   21. Operators
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="type-conversions.html">
+   22. Type conversions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arrays.html">
+   23. Arrays
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="syntactic-sugar.html">
+   24. Syntactic sugar
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="indentation.html">
+   25. Indentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="selection.html">
+   26. Selection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="iteration.html">
+   27. Iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="constants.html">
+   28. Constants
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mutability.html">
+   29. Mutability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="value-and-reference-semantics.html">
+   30. Value and reference semantics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simple-types.html">
+   31. Simple types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="static-methods.html">
+   32. Static methods (procedures)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="purity.html">
+   33. Purity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="data-structures.html">
+   34. Data structures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="composition.html">
+   35. Composition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="overloading.html">
+   36. Overloading
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="recursion.html">
+   37. Recursion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="scope.html">
+   38. Scope
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="namespaces.html">
+   39. Namespaces
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="basic-exceptions.html">
+   40. Exceptions (part 1)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="stack-traces.html">
+   41. Stack traces
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Object oriented programming
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pillars.html">
+   42. Pillars
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   43. Objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classes.html">
+   44. Classes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="fields.html">
+   45. Fields
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="constructors.html">
+   46. Constructors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="instance-methods.html">
+   47. Instance methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="basic-access-modifiers.html">
+   48. Access modifiers (basic).
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="properties.html">
+   49. Properties
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="object-composition-1.html">
+   50. Direct object composition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="object-composition-2.html">
+   51. Indirect object composition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="immutable-objects.html">
+   52. Immutable objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="interfaces.html">
+   53. Interfaces
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inheritance.html">
+   54. Inheritance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="overriding.html">
+   55. Overriding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hiding.html">
+   56. Hiding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="advanced-access-modifiers.html">
+   57. Access modifiers (advanced)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="object-type-conversions.html">
+   58. Type conversions (of objects)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="advanced-exceptions.html">
+   59. Advanced exceptions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="static.html">
+   60. Static
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="prototypes.html">
+   61. Prototypes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="object-composition-3.html">
+   62. Abstract indirect object composition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="base-class-library.html">
+   63. Base class library
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="boxing.html">
+   64. Boxing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="structure-types.html">
+   65. Structure types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="generics.html">
+   66. Generics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="variance.html">
+   67. Variance
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Advanced object oriented programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="requirements.html">
+   68. Requirements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="maintainability.html">
+   69. Maintainability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="code-smells.html">
+   70. Code smells and anti-patterns
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="coupling.html">
+   71. Coupling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cohesion.html">
+   72. Cohesion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="refactoring.html">
+   73. Refactoring
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="design-principles.html">
+   74. Design principles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="single-responsibility-principle.html">
+   75. Single responsibility principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="interface-segregation-principle.html">
+   76. Interface segregation principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="types-over-tests.html">
+   77. Types over tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="liskov-substitution-principle.html">
+   78. Liskov substitution principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="open-closed-principle.html">
+   79. Open-closed principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dependency-inversion-principle.html">
+   80. Dependency inversion principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="composition-over-inheritance.html">
+   81. Composition over inheritance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="design-patterns.html">
+   82. Design patterns
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="strategy-pattern.html">
+   83. Strategy pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="delegates.html">
+   84. Delegates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bridge-pattern.html">
+   85. Bridge pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lambdas.html">
+   86. Lambdas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="abstract-factory-pattern.html">
+   87. Abstract factory pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="iterator-pattern.html">
+   88. Iterator pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="enumerators.html">
+   89. Enumerators
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="indexers.html">
+   90. Indexers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linq.html">
+   91. LINQ
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="observer-pattern.html">
+   92. Observer pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="events.html">
+   93. Events
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="visitor-pattern.html">
+   94. Visitor pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pattern-matching.html">
+   95. Pattern matching
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="bibliography.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/chrokh/the-oo-way/issues/new?title=Issue%20on%20page%20%2Fchapters/objects.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#todo">
+   43.1. TODO
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Objects</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#todo">
+   43.1. TODO
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="objects">
+<span id="id1"></span><h1><span class="section-number">43. </span>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">#</a></h1>
+<p>Let us now explore the idea of objects.
+In the next chapter we will talk about classes [<a class="reference internal" href="classes.html#classes"><span class="std std-numref">Chapter 44</span></a>] but let’s now focus strictly on objects.</p>
+<p>In procedural programming, the building block is the procedure.
+In object oriented programming, the building block is the object.
+Recall what we discussed in the chapter on composition [<a class="reference internal" href="composition.html#composition"><span class="std std-numref">Chapter 35</span></a>].
+Here’s the parallel.
+In procedural programming, we solve complex problems by composing simple procedures.
+In object oriented programming, we solve complex problems by composing simple objects.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The fundamental building block in object oriented programming is the object.</p>
+</div>
+<p>So what is an object?
+Think of it this way.
+An object is a (possibly) stateful agent that you can interact with by sending messages and receiving responses.
+Another way of saying this is that an object is a bunch of methods (known as instance methods [<a class="reference internal" href="instance-methods.html#instance-methods"><span class="std std-numref">Chapter 47</span></a>]) that operate on some encapsulated state (known as instance fields [<a class="reference internal" href="fields.html#fields"><span class="std std-numref">Chapter 45</span></a>]).
+Note how we use the word “encapsulated” [<a class="reference internal" href="pillars.html#pillars"><span class="std std-numref">Chapter 42</span></a>].</p>
+<p>A message is sent from a sender to a receiver.
+We commonly think of the message as having a name (i.e., the name of the method) and possibly some payload (i.e., the arguments of the method).
+The receiving object may choose to provide a response to the message.
+An object’s ability to respond to messages is implemented through what is known as instance methods [<a class="reference internal" href="instance-methods.html#instance-methods"><span class="std std-numref">Chapter 47</span></a>] which we will talk a lot more about later.</p>
+<figure class="align-default" id="message-passing">
+<a class="reference internal image-reference" href="../_images/message-passing.png"><img alt="../_images/message-passing.png" src="../_images/message-passing.png" style="width: 66%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 43.1 </span><span class="caption-text">Objects can send messages to other objects as well as reply to messages sent to them.</span><a class="headerlink" href="#message-passing" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Let’s look at an example.
+Assume that you are an object in an application and that you’ve declared that you’re capable of sending responses the messages asking you for what your current mood is.
+If I ask you what your mood is while you’re hanging out with your friends you might reply that you’re <em>happy</em>.
+But if I ask you what your mood is while you’re reading this book you might reply that you’re <em>confused</em>.
+It’s contextual.
+Your mood depends on the state that you are currently in.</p>
+<p>More generally, since objects might be stateful we cannot guarantee that the same message always will result in the same response.
+Instead, it depends on the state of the object.
+The statefulness of objects mean that we cannot guarantee that messages are pure, or referentially transparent [<a class="reference internal" href="purity.html#purity"><span class="std std-numref">Chapter 33</span></a>].</p>
+<div class="exercise admonition" id="chapters/objects-exercise-0">
+
+<p class="admonition-title"><span class="caption-number">Exercise 43.1 </span></p>
+<section id="exercise-content">
+<p>What does it mean that an object is <em>stateful</em>?</p>
+</section>
+</div>
+<p>Note that the any or all of the arguments (meaning the input) as well as the response (meaning the output) might be objects.
+In fact, in a <em>purely</em> object oriented language (such as Smalltalk) any arguments and any responses <strong>must</strong> be objects.
+This gets slightly technical so let’s postpone this discussion to the end of the chapter.</p>
+<div class="exercise admonition" id="chapters/objects-exercise-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 43.2 </span></p>
+<section id="exercise-content">
+<p>What is <em>message passing</em>?</p>
+</section>
+</div>
+<p>The notion of hiding state in an object is known as <em>encapsulation</em> or <em>information hiding</em>.
+Both of these concepts we’ve looked at briefly when discussing attempts at defining “pillars” [<a class="reference internal" href="pillars.html#pillars"><span class="std std-numref">Chapter 42</span></a>] of object oriented programming.
+But what is encapsulation?
+What do we mean when we say that objects encapsulate state?
+Objects mix methods and data in order to hide the data that belongs to a particular object so that other objects cannot accidentally change it.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The terms <em>encapsulation</em> and <em>information hiding</em> are often considered synonymous and then refer to the idea of hiding implementation details that are likely to change.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>If you are interested in learning more about the different definitions of <em>encapsulation</em> and <em>information hiding</em> I highly recomend reading this short answer on <a class="reference external" href="https://stackoverflow.com/a/39499367">Stack Overflow</a>.</p>
+</div>
+<p>Time for an example.
+Let’s say that we’re building a game where two players are controlling their own characters on a two dimensional grid.
+This means that each player probably has at least two values associated with it at any given point in time: An <span class="math notranslate nohighlight">\(x\)</span> and a <span class="math notranslate nohighlight">\(y\)</span> coordinate.</p>
+<p>If we were to solve this in a naive procedural style then we might declare four variables that correspond to the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> coordinates of both players.
+We would then define eight move methods that allow us to move both players north, east, south, and west.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Player1</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">player1X</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">player1Y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// Player 2</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">player2X</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">player2Y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// Player 1 move commands</span>
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer1East</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">player1X</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer1West</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">player1X</span><span class="w"> </span><span class="p">-=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer1North</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">player1Y</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer1South</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">player1Y</span><span class="w"> </span><span class="p">-=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="c1">// Player 2 move commands</span>
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer2East</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">player2X</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer2West</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">player2X</span><span class="w"> </span><span class="p">-=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer2North</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">player2Y</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer2South</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">player2Y</span><span class="w"> </span><span class="p">-=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This solution is of course both cumbersome to maintain and very prone to error.
+We’ve duplicated the business logic of what it means to move north, east, south, since we need to define it for both players.
+There are of course many ways of addressing these concerns while still solving the problem in a procedural style.
+One way would be to stick all the player positions in arrays where the indices determine which player we are talking about.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">xPositions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="m">2</span><span class="p">];</span><span class="w"></span>
+<span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">yPositions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="m">2</span><span class="p">];</span><span class="w"></span>
+
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayerEast</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">player</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">xPositions</span><span class="p">[</span><span class="n">player</span><span class="p">]</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayerWest</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">player</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">xPositions</span><span class="p">[</span><span class="n">player</span><span class="p">]</span><span class="w"> </span><span class="p">-=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayerNorth</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">player</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">yPositions</span><span class="p">[</span><span class="n">player</span><span class="p">]</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayerSouth</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">player</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">yPositions</span><span class="p">[</span><span class="n">player</span><span class="p">]</span><span class="w"> </span><span class="p">-=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>While this solves the problem we loose type safety and expose ourselves to potential runtime errors.
+What happens if we mistakenly pass the number <code class="docutils literal notranslate"><span class="pre">1</span></code> to a move method, as in <code class="docutils literal notranslate"><span class="pre">MovePlayerEast(1)</span></code>?
+That’s right, instead of getting an error at compile time, we get an <code class="docutils literal notranslate"><span class="pre">IndexOutOfRangeException</span></code> when actually running the program.
+Later [<a class="reference internal" href="types-over-tests.html#types-over-tests"><span class="std std-numref">Chapter 77</span></a>] we will talk more about the importance of using types to discover errors at runtime.</p>
+<p>Hopefully you are starting to see that what we need here is something a bit more powerful than procedures.
+We need more powerful data structures [<a class="reference internal" href="data-structures.html#data-structures"><span class="std std-numref">Chapter 34</span></a>].
+We need a better abstraction of what we’re trying to model.</p>
+<p>C# does however not allow us to construct custom data structures that aren’t also essentially objects.
+So for the sake of not having to introduce an entirely new language into this book we’re going to pretend that languages that existed before the advent of object oriented programming didn’t grant us encapsulated custom data structures.
+As we learned in the chapter on pillars [<a class="reference internal" href="pillars.html#pillars"><span class="std std-numref">Chapter 42</span></a>], this is certainly <em>not true</em>.
+Non-object oriented languages did indeed provide mechanisms for encapsulation and as such it would be possible to solve the issues outlined even in some languages that we might want to categorize as procedural.</p>
+<p>So, let’s get back to object oriented programming.
+We’ll talk about classes [<a class="reference internal" href="classes.html#classes"><span class="std std-numref">Chapter 44</span></a>] later but allow me to give you a quick taste of what an object oriented solution might look like.
+If we were to model players in a class based object oriented language then that class might have a constructor that takes two arguments, and have two instance variables. These two arguments and instance variables are used to encapsulate the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> coordinates.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Player</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Player</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">initialX</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">initialY</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">initialX</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">initialY</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MoveEast</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MoveWest</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="p">-=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MoveNorth</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MoveSouth</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="p">-=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>We would interact with the player class by sending move messages to the player.
+Given the class we’ve designed, and assuming that we have an object of type <code class="docutils literal notranslate"><span class="pre">Player</span></code> in the variable <code class="docutils literal notranslate"><span class="pre">player1</span></code> then we could say <code class="docutils literal notranslate"><span class="pre">player1.MoveEast()</span></code> to invite the player to move east.</p>
+<p>Instead of reaching into the players to directly manipulate their positions we would likely introduce instance methods so that we could say something like <code class="docutils literal notranslate"><span class="pre">player1.MoveEast()</span></code>.</p>
+<p>What do we gain from this? Well, suddenly it’s a lot harder to accidentally update the position of one player when we actually were intending to update the position of the other.</p>
+<p>Authors like Robert C. Martin argues (see for example <span id="id2">Martin [<a class="reference internal" href="bibliography.html#id3" title="R.C. Martin. Clean Architecture: A Craftsman's Guide to Software Structure and Design. Robert C. Martin Series. Pearson Education, 2017. ISBN 9780134494326. URL: http://amazon.christopherokhravi.com?id=0134494164.">2017</a>]</span>) that the mixing of methods and data isn’t unique to object oriented programming.
+Instead, he proposes that the defining feature of object oriented languages is that they make subtype polymorphism safe and readily available.
+We will learn a lot more about subtype polymorphism [<a class="reference internal" href="interfaces.html#interfaces"><span class="std std-numref">Chapter 53</span></a>] later.</p>
+<div class="exercise admonition" id="chapters/objects-exercise-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 43.3 </span></p>
+<section id="exercise-content">
+<p>What is <em>encapsulation</em>?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/objects-exercise-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 43.4 </span></p>
+<section id="exercise-content">
+<p>What is <em>information hiding</em>?</p>
+</section>
+</div>
+<p>In some languages, such as JavaScript, an arguably simpler structure than that of objects is what’s known as closures.
+We say that a closure closes over some state.</p>
+<hr class="docutils" />
+<p>So what about this notion of “purely” object oriented languages that we left unanswered?
+When saying that a language such as Smalltalk is a “purely” object oriented language we don’t mean pure in the sense of referential transparency as we discussed in <a class="reference internal" href="purity.html#purity"><span class="std std-numref">Chapter 33</span></a>.
+We mean “pure” in the sense that, in the language, everything (or almost everything) is an object.
+While we tend to use the word “everything” when talking about how purely object oriented a language is it would be more accurate to say something like all values that you can construct and reference using variables.
+We haven’t talked about inheritance [<a class="reference internal" href="inheritance.html#inheritance"><span class="std std-numref">Chapter 54</span></a>] and interfaces [<a class="reference internal" href="interfaces.html#interfaces"><span class="std std-numref">Chapter 53</span></a>] yet but another way of saying this is that all types derive from Object.
+These statements are however only almost entirely true.</p>
+<p>C# is not a purely object object oriented language.
+When discussing paradigms [<a class="reference internal" href="paradigms.html#paradigms"><span class="std std-numref">Chapter 17</span></a>] we established that C#, like many other contemporary programming languages, is a multi-paradigm language.
+C# contains ideas from procedural, object oriented, as well as functional programming.</p>
+<p>Remember the built-in value types [<a class="reference internal" href="simple-types.html#simple-types"><span class="std std-numref">Chapter 31</span></a>], also known as the simple types?
+In Java these are known as primitive types and they are not objects, but in C# they actually are.
+So if simple types are objects, then these are not the problem.</p>
+<p>The non-object types are:</p>
+<ol class="simple">
+<li><p>Pointers.</p></li>
+<li><p>Interfaces.</p></li>
+<li><p>Open type parameters.</p></li>
+</ol>
+<p>You could argue that pointers are an archaic remnant of the procedural days.
+As such, we won’t talk about them here.</p>
+<p>Interfaces [<a class="reference internal" href="interfaces.html#interfaces"><span class="std std-numref">Chapter 53</span></a>] however are key to object oriented programming since they (as well as inheritance [<a class="reference internal" href="inheritance.html#inheritance"><span class="std std-numref">Chapter 54</span></a>]) enable what is known as subtype polymorphism.
+We’ll talk much more about this later.
+Suffice to say however that while interfaces themselves are not objects, any object that implements an interface must (tautologically) be an object because only objects can implement interfaces.</p>
+<p>The same line of reasoning follows with open type parameters.
+Any open type parameter will eventually be replaced by a concrete type that is an object.
+Open type parameters will be discussed in much more detail when we talk about generic programming [<a class="reference internal" href="generics.html#generics"><span class="std std-numref">Chapter 66</span></a>].</p>
+<p>So, it would be more correct to follow the assertion of Eric Lippert who states that:
+“Every non-pointer type is <em>convertible</em> to object.”</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>“Every non-pointer type is <em>convertible</em> to object.”</p>
+<p>[TODO: <a class="reference external" href="https://docs.microsoft.com/en-gb/archive/blogs/ericlippert/not-everything-derives-from-object">https://docs.microsoft.com/en-gb/archive/blogs/ericlippert/not-everything-derives-from-object</a>]</p>
+</div>
+<p>We should however also mention that while an object of a child type can be implicitly converted to its parent class, when value types, such as the simple types like <code class="docutils literal notranslate"><span class="pre">int</span></code>, are converted to objects this causes what is known as [<a class="reference internal" href="value-and-reference-semantics.html#value-and-reference-semantics"><span class="std std-numref">Chapter 30</span></a>].</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Using a value type where an object is expected causes boxing [<a class="reference internal" href="boxing.html#boxing"><span class="std std-numref">Chapter 64</span></a>].</p>
+</div>
+<div class="exercise admonition" id="chapters/objects-exercise-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 43.5 </span></p>
+<section id="exercise-content">
+<p>What three types or kinds of types, in C#, are not objects?</p>
+</section>
+</div>
+<section id="todo">
+<h2><span class="section-number">43.1. </span>TODO<a class="headerlink" href="#todo" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Equivalence (i.e. two structurally equivalent objects are not necessarily the same).</p>
+<ul>
+<li><p>Relate to value type and reference types semantics chapter.</p></li>
+</ul>
+</li>
+<li><p>Talk about closures?</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="pillars.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">42. </span>Pillars</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="classes.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">44. </span>Classes</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Christopher Okhravi<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

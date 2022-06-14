@@ -1,3 +1,4 @@
+(instance-methods)=
 # Instance methods
 - Overloading
 - Signatures.
