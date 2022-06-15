@@ -159,14 +159,13 @@ So when we think of data types as sets then the subsets help us reason about sub
 Before we leave sets I want to share one final thing and that is the idea of the Cartesian product.
 Let's say that I've managed to define a set of all legal given names and all legal last names.
 Let's call them $\mathit{GivenNames}$ and $\mathit{LastNames}$ respectively.
-Let's then say that I then define a set that contains all combinations of given and last names.
+Let's then say that I then define a set that contains all combinations of given and last names as ordered pairs.
 
 $$
 \mathit{Names} = \mathit{GivenNames} \times \mathit{LastNames}
 $$
 
-It might help to know that the reason we use a symbol looking like the letter X ($\times$) to denote the Cartesian product is that the number of elements in the resulting set is equal to the product of the number of elements in the two constituent sets.
-Assuming that no elements are found in both sets.
+It might help to know that the reason we use a symbol looking like the letter X ($\times$) to denote the Cartesian product is that the number of elements in the resulting set is equal to the product of the number of elements in the two constituent sets if no elements are found in both sets.
 %Mathematically we would express the relationship like this:
 %$$
 %|\mathit{Names}| = |\mathit{GivenNames}| * |\mathit{LastNames}|
@@ -174,17 +173,17 @@ Assuming that no elements are found in both sets.
 
 If you happen to be familiar with the set operation called union ($\cup$) from before, it is important to understand that a Cartesian product is not the same as a union.
 A union between two sets yields a new set containing all the elements of the first set as well as all the elements of the last set.
-However, a Cartesian product between two sets however yields a new set that contains sets of all the combinations between the two sets.
+However, a Cartesian product between two sets however yields a new set that contains all combinations of pairs between the two sets.
 
-Consider the following two sets.
-The set $\mathit{Letters}$ contains the elements $A$, and $B$.
-The set $\mathit{Numbers}$ contains the elements $1$, $2$, and $3$.
+Consider the following two sets:
 
 $$
 \mathit{Letters} = \{ A, B \}\\
 \mathit{Numbers} = \{ 1, 2, 3 \}\\
 $$
 
+The set $\mathit{Letters}$ contains the elements $A$, and $B$.
+The set $\mathit{Numbers}$ contains the elements $1$, $2$, and $3$.
 If we take the union of these two sets we end up with a new set that contains all the elements of the first set as well as all the elements of the second set.
 
 $$
@@ -203,4 +202,7 @@ $$
 \{ B, 3 \},
 \}
 $$
+
+Why is it important to understand Cartesian products?
+Because it helps us reason about functions [{numref}`Chapter %s<functions>`] that take multiple parameters.
 
