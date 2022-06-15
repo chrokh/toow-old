@@ -51,6 +51,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3. Algorithms" href="algorithms.html" />
@@ -774,14 +776,144 @@ title="Open an issue"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="functions">
-<h1><span class="section-number">2. </span>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">#</a></h1>
-<ul class="simple">
-<li><p>Domain</p></li>
-<li><p>Co-domain</p></li>
-<li><p>Image</p></li>
-<li><p>Arity</p></li>
-<li><p>Allude to purity</p></li>
-</ul>
+<span id="id1"></span><h1><span class="section-number">2. </span>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">#</a></h1>
+<p>Why oh why do we have to talk about mathematical functions?
+Don’t worry, I’ve hated math too and this is not going to get very complicated.
+It is my belief that understanding sets and understanding functions makes us better programmers because we realize the importance of carefully designing the types of both our objects and methods.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this book we will refrain from using the word “function” when discussing procedural or object oriented programming. Instead we will be using the words “procedure” in the former case and “method” in the latter.
+The reason for this is that procedures and methods tend to be impure [<a class="reference internal" href="purity.html#purity"><span class="std std-numref">Chapter 33</span></a>], but more on this later.</p>
+</div>
+<p>Functions map input to output.
+Given some input argument or arguments, you get some specific output.
+So a function is essentially a relation between an input set and an output set with the added caveat that any one input can only ever map to a single output.</p>
+<p>Let’s take an example.
+Consider the following set of ordered pairs:</p>
+<div class="math notranslate nohighlight">
+\[
+\{ (\mathit{True}, \mathit{False}), (\mathit{False}, \mathit{True}) \}
+\]</div>
+<p>The set contains two pairs.
+One combines <span class="math notranslate nohighlight">\(\mathit{True}\)</span> with <span class="math notranslate nohighlight">\(\mathit{False}\)</span>, and the other <span class="math notranslate nohighlight">\(\mathit{False}\)</span> with <span class="math notranslate nohighlight">\(\mathit{True}\)</span>.
+Does this model a function?
+Yes.
+What could we call this function?
+Well, how about <span class="math notranslate nohighlight">\(\mathit{not}\)</span>?
+If you haven’t studied logic this name might not make sense, but this function essentially flips a boolean.
+True becomes false and false becomes true.</p>
+<p>On the type level we would define the function by saying that it is a mapping from the set of <span class="math notranslate nohighlight">\(\mathit{Boolean}\)</span> to the set of <span class="math notranslate nohighlight">\(\mathit{Boolean}\)</span>.
+You put a boolean in, you get a boolean out.
+The function doesn’t map to values from a different set, it just gives you a different value from the same set than the one you gave it.</p>
+<div class="math notranslate nohighlight">
+\[
+\mathit{not} : \mathit{Boolean} \rightarrow \mathit{Boolean}
+\]</div>
+<p>To define the implementation of the function in mathematics we can use a piecewise definition to say that <span class="math notranslate nohighlight">\(\mathit{False}\)</span> is returned when <span class="math notranslate nohighlight">\(\mathit{True}\)</span> is given, and <span class="math notranslate nohighlight">\(\mathit{True}\)</span> is returned when <span class="math notranslate nohighlight">\(\mathit{False}\)</span> is given.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathit{not}(x) = 
+    \begin{cases}
+        \mathit{False}, &amp; \text{if } x = \mathit{True}\\
+        \mathit{True},  &amp; \text{if } x = \mathit{False}\\
+    \end{cases}
+\end{split}\]</div>
+<div class="exercise admonition" id="ex:define-function">
+
+<p class="admonition-title"><span class="caption-number">Exercise 2.1 </span></p>
+<section id="exercise-content">
+<p>Define the type and the implementation of a function that takes booleans and returns integers using notation appropriate in set theory.</p>
+</section>
+</div>
+<p>This function can be visualized by drawing the input and output sets as two ovals, where each oval contains the members of their respective sets.
+In this case, the input set happens to be the same as the output set so the members are the same.
+We then draw arrows to show which input elements map to which output elements.
+See <a class="reference internal" href="#fig-function-not"><span class="std std-numref">Fig. 2.1</span></a>.</p>
+<figure class="align-default" id="fig-function-not">
+<img alt="../_images/function-not.jpg" src="../_images/function-not.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">Visualization of a function that negates a boolean.</span><a class="headerlink" href="#fig-function-not" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Let’s now introduce some additional terminology.
+The set on the left, meaning the input-set, is called the domain.
+The set on the right, meaning the output-set, is called the codomain.
+The members of the codomain that the function actually maps to is called the image (or the range).</p>
+<div class="exercise admonition" id="chapters/functions-exercise-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 2.2 </span></p>
+<section id="exercise-content">
+<p>Define the terms domain, codomain, and image.</p>
+</section>
+</div>
+<p>In <a class="reference internal" href="#fig-function-not"><span class="std std-numref">Fig. 2.1</span></a> the domain is the set <span class="math notranslate nohighlight">\(\textit{Boolean}\)</span> on the left.
+The codomain is the set <span class="math notranslate nohighlight">\(\textit{Boolean}\)</span> on the right.
+Finally, the image is also the full set <span class="math notranslate nohighlight">\(\textit{Boolean}\)</span> on the right.
+Which means that the image, in this case, is an improper subset of the codomain.</p>
+<p>However, the image can be a proper subset of the codomain which means that it isn’t equal to the codomain.
+Notice how the element <span class="math notranslate nohighlight">\(3\)</span> isn’t part of the image but is part of the codomain in <a class="reference internal" href="#fig-function"><span class="std std-numref">Fig. 2.2</span></a>.
+This means that it is impossible to produce the element <span class="math notranslate nohighlight">\(3\)</span> when calling this function, no matter which input you run it with.</p>
+<figure class="align-default" id="fig-function">
+<img alt="../_images/function.jpg" src="../_images/function.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 2.2 </span><span class="caption-text">Illustration of the domain, codomain, and image/range of some function.</span><a class="headerlink" href="#fig-function" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="exercise admonition" id="chapters/functions-exercise-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 2.3 </span></p>
+<section id="exercise-content">
+<p>What does it say about a function if the image is not equal to the codomain?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/functions-exercise-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 2.4 </span></p>
+<section id="exercise-content">
+<p>Draw the function that you defined in <a class="reference internal" href="#ex:define-function"><span class="std std-numref">Exercise 2.1</span></a> using visual notation appropriate in set theory.</p>
+</section>
+</div>
+<p>There is however one more interesting thing we have to note about <a class="reference internal" href="#fig-function"><span class="std std-numref">Fig. 2.2</span></a>.
+Notice how the element <span class="math notranslate nohighlight">\(D\)</span> in the domain, meaning the input-set, isn’t mapped to any element in the codomain, meaning the output-set.
+This means that the function is a <em>partial</em> function as opposed to a <em>total</em> function.
+A total function must define a mapping for all elements in the domain.</p>
+<p>The totality of functions is hugely important for programmers.
+If we define a procedure or method that can be modeled as a partial function then that means that our procedure or method throws an exception [<a class="reference internal" href="basic-exceptions.html#exceptions"><span class="std std-numref">Chapter 40</span></a>].
+We haven’t talked about exceptions yet, so if you aren’t familiar with them from before then I cannot blame you for saying “so what, what’s so bad about exceptions?”.
+In short, exceptions are locally unrecoverable states.
+Meaning that when an exception is thrown in a procedure or method, it is because this procedure or method cannot possible determine how the program is to be saved from whatever problem just occurred.
+This is not good.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Partial functions correspond to procedures or methods that throw exceptions.
+Always ask yourself whether you can rewrite your code so that your functions are total.</p>
+</div>
+<div class="exercise admonition" id="chapters/functions-exercise-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 2.5 </span></p>
+<section id="exercise-content">
+<p>What is a partial function and why is it problematic?</p>
+</section>
+</div>
+<p>Before we close this chapter on functions there’s one more thing we need to talk about: arity.
+The arity of a function refers to how many arguments it takes.
+Up to this point we’ve only talked about <em>unary</em> functions.
+Nullary functions take 0 arguments,
+unary functions take 1 argument,
+binary functions take 2 arguments,
+and ternary functions take 3 arguments.
+Of course functions, procedures, and methods can take more arguments but these are the arities that we have really common names for.</p>
+<p>Say that we have a binary function that takes two integers, performs addition, and returns an integer.</p>
+<div class="math notranslate nohighlight">
+\[
+\mathit{add}(x, y) = x + y
+\]</div>
+<p>Mathematically we would say that <span class="math notranslate nohighlight">\(\mathit{add}\)</span> is a function that maps from the Cartesian product of integers and integers (<span class="math notranslate nohighlight">\(\mathbb{Z} \times \mathbb{Z}\)</span>) to integers (<span class="math notranslate nohighlight">\(\mathbb{Z}\)</span>).
+This is the type of the function.</p>
+<div class="math notranslate nohighlight">
+\[
+\mathit{add} : (\mathbb{Z} \times \mathbb{Z}) \rightarrow \mathbb{Z}
+\]</div>
 </section>
 
     <script type="text/x-thebe-config">
