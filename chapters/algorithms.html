@@ -51,6 +51,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="4. Computation" href="computation.html" />
@@ -566,98 +568,108 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="deep-classes.html">
+   79. Deep classes
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="types-over-tests.html">
-   79. Types over tests
+   80. Types over tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="define-errors-out-of-existence.html">
+   81. Define errors out of existence
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="liskov-substitution-principle.html">
-   80. Liskov substitution principle
+   82. Liskov substitution principle
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="open-closed-principle.html">
-   81. Open-closed principle
+   83. Open-closed principle
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dependency-inversion-principle.html">
-   82. Dependency inversion principle
+   84. Dependency inversion principle
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="composition-over-inheritance.html">
-   83. Composition over inheritance
+   85. Composition over inheritance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="design-patterns.html">
-   84. Design patterns
+   86. Design patterns
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="strategy-pattern.html">
-   85. Strategy pattern
+   87. Strategy pattern
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="delegates.html">
-   86. Delegates
+   88. Delegates
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bridge-pattern.html">
-   87. Bridge pattern
+   89. Bridge pattern
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lambdas.html">
-   88. Lambdas
+   90. Lambdas
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="abstract-factory-pattern.html">
-   89. Abstract factory pattern
+   91. Abstract factory pattern
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="iterator-pattern.html">
-   90. Iterator pattern
+   92. Iterator pattern
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="enumerators.html">
-   91. Enumerators
+   93. Enumerators
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="indexers.html">
-   92. Indexers
+   94. Indexers
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linq.html">
-   93. LINQ
+   95. LINQ
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="observer-pattern.html">
-   94. Observer pattern
+   96. Observer pattern
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="events.html">
-   95. Events
+   97. Events
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="visitor-pattern.html">
-   96. Visitor pattern
+   98. Visitor pattern
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="pattern-matching.html">
-   97. Pattern matching
+   99. Pattern matching
   </a>
  </li>
 </ul>
@@ -749,12 +761,46 @@ title="Open an issue"
   </span>
 
 </a>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#river-crossing">
+   3.1. River crossing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#towers-of-hanoi">
+   3.2. Towers of Hanoi
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sorting-and-searching">
+   3.3. Sorting and searching
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -766,6 +812,29 @@ title="Open an issue"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#river-crossing">
+   3.1. River crossing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#towers-of-hanoi">
+   3.2. Towers of Hanoi
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sorting-and-searching">
+   3.3. Sorting and searching
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -774,10 +843,155 @@ title="Open an issue"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="algorithms">
-<h1><span class="section-number">3. </span>Algorithms<a class="headerlink" href="#algorithms" title="Permalink to this headline">#</a></h1>
-<ul class="simple">
-<li><p>Analog/historic explanation.</p></li>
-</ul>
+<span id="id1"></span><h1><span class="section-number">3. </span>Algorithms<a class="headerlink" href="#algorithms" title="Permalink to this headline">#</a></h1>
+<p>Algorithms rule our world.
+It doesn’t matter if you’re a programmer, mathematician or not, you will eventually or have already come into contact with the word algorithm.</p>
+<p>We use algorithms for suggesting similar products to customers, picking stocks, computing credit scores, controlling traffic lights, biometric authentication, providing search results, prioritizing job applications, pricing strategy, double entry bookkeeping, and the list just keeps going.
+In anything that resembles a computer, we find algorithms.
+It almost doesn’t matter anymore what your business is, there is always room for improvement using algorithms.</p>
+<p>Algorithms existed long before computers, as we know them, entered the scene.
+Evidence of the usage of algorithms have been found dating as far back as 2500 BC <span id="id2">[<a class="reference internal" href="bibliography.html#id4" title="Ref. TODO."><em>ref</em>, TODO</a>]</span>.
+The word algorithm stems from the Persian polymath Muḥammad ibn Mūsā al-Khwārizmī <span id="id3">[<a class="reference internal" href="bibliography.html#id4" title="Ref. TODO."><em>ref</em>, TODO</a>]</span>.</p>
+<p>Formal definitions in computer science aside, we can think of an algorithm as a finite sequence of precise instructions.
+As we shall discuss in the next chapter on computation [<a class="reference internal" href="computation.html#computation"><span class="std std-numref">Chapter 4</span></a>], executing the steps of an algorithm is to compute.
+Any sufficiently formalized procedure or recipe can be considered an algorithm.
+Consider for example, the follow recipe for making pancake batter:</p>
+<div class="admonition-pancake-batter-algorithm admonition">
+<p class="admonition-title">Pancake batter algorithm</p>
+<ol class="simple">
+<li><p>Retrieve a bowl.</p></li>
+<li><p>Add 1/2 dl of flour to the bowl.</p></li>
+<li><p>Add 1/2 tsp of salt.</p></li>
+<li><p>Mix the contents of the bowl.</p></li>
+<li><p>Add 3 dl of milk into the bowl.</p></li>
+<li><p>Mix the contents of the bowl.</p></li>
+<li><p>Add 3 dl of milk into the bowl.</p></li>
+<li><p>Mix the contents of the bowl.</p></li>
+<li><p>Add 3 eggs to the bowl.</p></li>
+<li><p>Mix the contents of the bowl.</p></li>
+</ol>
+</div>
+<div class="exercise admonition" id="chapters/algorithms-exercise-0">
+
+<p class="admonition-title"><span class="caption-number">Exercise 3.1 </span></p>
+<section id="exercise-content">
+<p>What is an algorithm?</p>
+</section>
+</div>
+<p>Arguably the recipe above is not expressed in enough detail for most machines to be able to carry out the instructions.
+But if the machine in question is a human, then this algorithm is certainly expressed in a sufficient level of detail.
+Most of us have no problem following the recipe above.</p>
+<section id="river-crossing">
+<h2><span class="section-number">3.1. </span>River crossing<a class="headerlink" href="#river-crossing" title="Permalink to this headline">#</a></h2>
+<p>But let’s look at some more serious algorithms.
+Most people have heard a river crossing puzzle in one form or another.
+Let’s take the very old puzzle involving a wolf, a sheep, and a cabbage.</p>
+<figure class="align-default" id="fig-river-crossing">
+<img alt="images/river-crossing.jpg" src="images/river-crossing.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">Illustration of the river crossing puzzle involving a wolf, a sheep, and a cabbage.</span><a class="headerlink" href="#fig-river-crossing" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Here’s how the story goes.
+You find yourself on the bank on one side of a river, wanting to cross to the other.
+You have a boat, a wolf, a sheep, and a cabbage.
+You want to use the boat to transport all these things across the river to the other side.
+The problem is that you can only carry one thing with you on the boat at any given time.
+Worse, if you ever leave the sheep alone with the cabbage then the sheep will eat the cabbage.
+And if you ever leave the wolf alone with the sheep, then the wolf will eat the sheep.
+How can you pass to the other side?</p>
+<div class="dropdown tip admonition">
+<p class="admonition-title">Solution</p>
+<ol class="simple">
+<li><p>Bring the sheep to the other side.</p></li>
+<li><p>Go back with an empty boat.</p></li>
+<li><p>Bring the cabbage to the other side.</p></li>
+<li><p>Go back with the sheep in the boat.</p></li>
+<li><p>Bring the wolf to the other side.</p></li>
+<li><p>Go back with an empty boat.</p></li>
+<li><p>Bring the sheep to the other side.</p></li>
+</ol>
+</div>
+<div class="exercise admonition" id="chapters/algorithms-exercise-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 3.2 </span></p>
+<section id="exercise-content">
+<p>The river crossing puzzle that involves a wolf, a sheep, and a cabbage has two solutions.
+We’ve seen one solution already.
+Find the other solution, and write it down as an algorithm.</p>
+</section>
+</div>
+<p>It is important to realize that multiple algorithms can be the solution for a given problem.
+How to determine which algorithm is the better algorithm is a different question.
+If you choose to study the field of algorithms you will learn to determine not only the correctness of an algorithm but also its complexity.
+Correctness is commonly asserted through testing or formal verification.
+Complexity is commonly measured using something known as Big O notation for two dimensions: space and time.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The same problem can often be solved with multiple different algorithms.</p>
+</div>
+<p>In this book we are not concerned with neither space nor time complexity and will therefore not discuss Big O notation.
+In this book we are concerned with the <em>maintainability</em> of an algorithm.
+Meaning, how should we write our algorithms so that we can stay in business.</p>
+</section>
+<section id="towers-of-hanoi">
+<h2><span class="section-number">3.2. </span>Towers of Hanoi<a class="headerlink" href="#towers-of-hanoi" title="Permalink to this headline">#</a></h2>
+<figure class="align-default" id="fig-towers-of-hanoi">
+<img alt="images/towers-of-hanoi.jpg" src="images/towers-of-hanoi.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.2 </span><span class="caption-text">Illustration of The Towers of Hanoi.</span><a class="headerlink" href="#fig-towers-of-hanoi" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Let’s take one more example.
+This is a puzzle known as (among other names) the Towers of Hanoi.
+In this puzzle we have three rods or poles and some number of disks.
+Each disk has a different diameter but they can all be slid onto the rods through a hole in the middle of each disk.
+See <a class="reference internal" href="#fig-towers-of-hanoi"><span class="std std-numref">Fig. 3.2</span></a> for an illustration.</p>
+<p>At the start of the puzzle all disks are stacked on the first rod in order of decreasing size, meaning that the largest disk is in the bottom, and the smallest disk in the top.
+The goal is to move all disks to the last rod.
+The rules are simple:</p>
+<ol class="simple">
+<li><p>Only a single disk may be moved at a time.</p></li>
+<li><p>Only the top disk of any stack may be moved.</p></li>
+<li><p>A disk may only be placed on an empty rod or on top of a disk that is larger than it.</p></li>
+</ol>
+<p>Another name for the puzzle is The Tower of Brahma.
+This name is often accompanied by a legend which states that there are three posts with 64 golden disks in a temple.
+Since the beginning, Priests are moving the disks according to the rules and when the puzzle is completed, the world will end.</p>
+<p>The Towers of Hanoi puzzle can be solved in <span class="math notranslate nohighlight">\(2^n-1\)</span> moves, where n is the number of disks.
+Can you write an algorithm for solving the puzzle if we have three disks?</p>
+<div class="info dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Assuming that the we have three disks then we can solve the puzzle by performing the following moves:</p>
+<ol class="simple">
+<li><p>Move disk from rod 1 to rod 3.</p></li>
+<li><p>Move disk from rod 1 to rod 2.</p></li>
+<li><p>Move disk from rod 3 to rod 2.</p></li>
+<li><p>Move disk from rod 1 to rod 3.</p></li>
+<li><p>Move disk from rod 2 to rod 1.</p></li>
+<li><p>Move disk from rod 2 to rod 3.</p></li>
+<li><p>Move disk from rod 1 to rod 3.</p></li>
+</ol>
+</div>
+<p>The solutions that we have provided to the two puzzles in this chapter are both very specific to the parameters that we’ve predefined.
+This brings up an important question.
+Is it possible to define a more general algorithm that is capable of handling multiple different input parameters?</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Generalizing a solution by introducing parameters is known as <em>parameterization</em> [<a class="reference internal" href="static-methods.html#static-methods"><span class="std std-numref">Chapter 32</span></a>] and we will talk about this more later.</p>
+</div>
+<div class="exercise admonition" id="chapters/algorithms-exercise-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 3.3 </span></p>
+<section id="exercise-content">
+<p>Come up with an algorithm for a problem of your choice.</p>
+</section>
+</div>
+</section>
+<section id="sorting-and-searching">
+<h2><span class="section-number">3.3. </span>Sorting and searching<a class="headerlink" href="#sorting-and-searching" title="Permalink to this headline">#</a></h2>
+<p>TODO.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
