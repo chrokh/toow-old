@@ -173,10 +173,35 @@ Down the rabbit hole we go.
 
 ## Overview
 
-How is this book structured?
+How is the book structured?
+This book is meant to be read linearly.
+Start from the first chapter and keep reading.
+I have spent an enormous amount of time trying to figure out how one can learn object oriented programming, step by step, without having to jump back and forth.
 
-- Chapters
-- Exercises / Tutorials
-    - Separate workbook?
-- Questions
-    - Exam-like questions.
+Unlike many other technical books I have chosen to keep the table of contents flat.
+This means that there is a huge number of chapters but it also means that finding what you are looking for should be much easier.
+I have tried my best to make every important concept a top-level chapter.
+
+Every chapter contains exam-like exercises that range from questions of theoretical definitions, to mini-essays, to practical programming exercises.
+The exercises look like this:
+
+```{exercise}
+Can you find the next exercise in the book?
+```
+
+The book is divided into the following five major parts.
+
+- {doc}`Part I: Fundamentals<sets>`\
+In this part we lay the foundation necessary to talk about object oriented programming. We talk about sets, functions, computation, data types, paradigms, and so forth.
+- {doc}`Part II: Procedural programming<statements>`\
+To understand object oriented programming we must first understand procedural programming. Here we talk about statements, expressions, selection, iteration, arrays, procedures, recursion, and so forth.
+- {doc}`Part III: Object oriented programming<pillars>`\
+This part is the heart of the book. This is where we learn the core ideas of object oriented programming.
+- {doc}`Part IV: Object oriented design<requirements>`\
+In this part, we move from programming to design. We look at the forest instead of the trees and start thinking about how to provide value using our newfound programming skills.
+- {doc}`Part V: Advanced object oriented programming<design-patterns>`\
+In this last part of the book we explore more advanced object oriented ideas and also ideas from other paradigms that have been adopted in the object oriented paradigm.
+
+I hope you are ready, let's get started.
+
+% TODO: What about tutorials / labs?

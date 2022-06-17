@@ -1,2 +1,3 @@
+(design-patterns)=
 # Design patterns
 
