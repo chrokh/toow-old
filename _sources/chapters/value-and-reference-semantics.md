@@ -1,5 +1,7 @@
 (value-and-reference-semantics)=
 # Value and reference semantics
+
+- Perhaps use type hierarchy fig from: https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/types/
 - Implications for equivalence, mutability, and copying (passing and changing).
 - Reference types that behave like value types
 - Example: Arrays are passed by reference and are mutable.

@@ -1,3 +1,4 @@
+(lambdas)=
 # Lambdas
 
 - Statement lambdas
