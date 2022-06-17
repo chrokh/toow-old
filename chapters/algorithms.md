@@ -30,13 +30,13 @@ Consider for example, the follow recipe for making pancake batter:
 10. Mix the contents of the bowl.
 ```
 
-```{exercise}
-What is an algorithm?
-```
-
 Arguably the recipe above is not expressed in enough detail for most machines to be able to carry out the instructions.
 But if the machine in question is a human, then this algorithm is certainly expressed in a sufficient level of detail.
 Most of us have no problem following the recipe above.
+
+```{exercise}
+What is an algorithm?
+```
 
 
 ## River crossing
@@ -94,17 +94,17 @@ Meaning, how should we write our algorithms so that we can stay in business.
 
 ## Towers of Hanoi
 
-```{figure} ../images/towers-of-hanoi.jpg
-:name: fig:towers-of-hanoi
-
-Illustration of The Towers of Hanoi.
-```
-
 Let's take one more example.
 This is a puzzle known as (among other names) the Towers of Hanoi.
 In this puzzle we have three rods or poles and some number of disks.
 Each disk has a different diameter but they can all be slid onto the rods through a hole in the middle of each disk.
 See {numref}`fig:towers-of-hanoi` for an illustration.
+
+```{figure} ../images/towers-of-hanoi.jpg
+:name: fig:towers-of-hanoi
+
+Illustration of The Towers of Hanoi.
+```
 
 At the start of the puzzle all disks are stacked on the first rod in order of decreasing size, meaning that the largest disk is in the bottom, and the smallest disk in the top.
 The goal is to move all disks to the last rod.
@@ -115,8 +115,8 @@ The rules are simple:
 3. A disk may only be placed on an empty rod or on top of a disk that is larger than it.
 
 Another name for the puzzle is The Tower of Brahma.
-This name is often accompanied by a legend which states that there are three posts with 64 golden disks in a temple.
-Since the beginning, Priests are moving the disks according to the rules and when the puzzle is completed, the world will end.
+This name is often accompanied by a story of a legend saying that there is a temple with a large room hosting three posts with 64 golden disks.
+Priests are moving the disks according to the rules and when the puzzle is complete, the prophecy states that world will end.
 
 The Towers of Hanoi puzzle can be solved in $2^n-1$ moves, where n is the number of disks.
 Can you write an algorithm for solving the puzzle if we have three disks?
