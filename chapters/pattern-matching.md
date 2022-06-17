@@ -1,2 +1,3 @@
+(pattern-matching)=
 # Pattern matching
 
