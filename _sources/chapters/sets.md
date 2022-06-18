@@ -1,9 +1,11 @@
+(sets)=
 # Sets
 
 Programmers are modellers.
 We write programs consisting of business objects[^business-objects] [{numref}`Chapter %s<business-objects>`]
-and business rules [{numref}`Chapter %s<business-logic>`] that are valuable to whoever is paying our salary.
-Set theory helps us define effective types for both objects and methods.
+and business rules [{numref}`Chapter %s<business-logic>`].
+These objects and rules must be valuable to whoever is paying our salary.
+Set theory helps us define effective types for both objects and rules.
 Effective in the sense that they only allow the states and behavior that we want.
 Which in turn means that we need fewer tests and suffer fewer bugs.
 We'll talk more about this in future sections [{numref}`Chapter %s<types-over-tests>`] but at this point I hope that you will trust me when I say that great programmers understand that data types can usefully be thought of as sets.
@@ -21,6 +23,7 @@ We simply need to understand:
 1. Sets.
 2. Members.
 3. Subsets.
+4. Cartesian products.
 
 So what is a set?
 A set is a collection of elements, which we will refer to as members.
@@ -28,11 +31,15 @@ A set can be empty and it can be infinite.
 A set can contain other sets.
 All elements in a set must be unique.
 
-In terms of notation, the empty set is usually denoted by the letter O or the number 0 crossed with a diagonal slash ($\varnothing$) and we would define it like this:
+In terms of notation, the empty set is usually denoted by the letter O or the number 0 crossed with a diagonal slash ($\varnothing$).
+A set is then defined as a comma-separated list of elements enclosed by two curly braces.
+In case of the empty set, we just have two curly braces.
 
 $$
 \varnothing = \{ \}
 $$
+
+## Members
 
 Let's take an example.
 If I make a statement like: "I am a human".
@@ -61,7 +68,8 @@ I don't know whether this is true or not.
 My current set is insufficient when it comes to categorizing this statement.
 We need something like ternary logic, also known as three-valued logic.
 I need to be able to express the fact that I don't know whether the statement is true or false.
-So let's design a set for that.
+This is sometimes called a trilean.
+So let's design a set that also contains the element $\mathit{Unknown}$.
 
 $$
 \mathit{Trilean} = \{ \mathit{True}, \mathit{False}, \mathit{Unknown} \}
@@ -114,6 +122,13 @@ $$
 \mathit{Unknown} \not\in \mathit{Boolean}
 $$
 
+```{exercise}
+:label: ex:set-members
+Define a set that captures the different states of a traffic light.
+```
+
+
+## Diagrams
 
 Sets can also be visualized.
 You've probably come across Venn or Euler diagrams already, and if you understand Venn and Euler diagrams, you understand sets.
@@ -127,6 +142,12 @@ Any point outside the circle is not a member of the set.
 
 Visualization of sets and members.
 ```
+
+```{exercise}
+Draw a Venn diagram of the set that you came up with in {numref}`ex:set-members`.
+```
+
+## Subsets
 
 So what is this idea of subsets?
 If all elements of a set are also members of another set, then the first set is a subset of the second.
@@ -151,10 +172,18 @@ Visualization of a proper subset relation between the set of all cats and the se
 Also note that no dogs are cats.
 ```
 
+```{exercise}
+:label: ex:subsets
+How can a set capturing the states of a two-light traffic light be considered a subset of a set capturing that of a three-light traffic light?
+```
+
 Why do we need to understand subset relations as object oriented programmers?
 Because the, arguably, most important pillar [{numref}`Chapter %s<pillars>`] of object oriented programming is subtype polymorphism [{numref}`Chapter %s<subtype-polymorphism>`].
 Subtype polymorphism is also known as inclusion polymorphism and the set theoretic idea of subsets is also known as inclusion.
 So when we think of data types as sets then the subsets help us reason about subtype polymorphism.
+
+
+## Cartesian products
 
 Before we leave sets I want to share one final thing and that is the idea of the Cartesian product.
 Let's say that I've managed to define a set of all legal given names and all legal last names.
@@ -203,6 +232,10 @@ $$
 ( B, 3 )\  
 \}
 $$
+
+```{exercise}
+What is the Cartesian product of the two traffic light sets that you defined in {numref}`ex:subsets`?
+```
 
 Why is it important to understand Cartesian products?
 Because it helps us reason about functions [{numref}`Chapter %s<functions>`] that take multiple parameters.

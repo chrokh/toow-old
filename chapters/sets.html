@@ -56,7 +56,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2. Functions" href="functions.html" />
-    <link rel="prev" title="Overview" href="overview.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -109,23 +109,6 @@ const thebe_selector_output = ".output, .cell_output"
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Preface
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="introduction.html">
-   Introduction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="overview.html">
-   Overview
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Fundamentals
  </span>
@@ -498,7 +481,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Advanced object oriented programming
+  Object oriented design
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -582,6 +565,13 @@ const thebe_selector_output = ".output, .cell_output"
    86. Composition over inheritance
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Advanced object oriented programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="design-patterns.html">
    87. Design patterns
@@ -741,12 +731,51 @@ title="Open an issue"
   </span>
 
 </a>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#members">
+   1.1. Members
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diagrams">
+   1.2. Diagrams
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#subsets">
+   1.3. Subsets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cartesian-products">
+   1.4. Cartesian products
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -758,6 +787,34 @@ title="Open an issue"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#members">
+   1.1. Members
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diagrams">
+   1.2. Diagrams
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#subsets">
+   1.3. Subsets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cartesian-products">
+   1.4. Cartesian products
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -766,11 +823,12 @@ title="Open an issue"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="sets">
-<h1><span class="section-number">1. </span>Sets<a class="headerlink" href="#sets" title="Permalink to this headline">#</a></h1>
+<span id="id1"></span><h1><span class="section-number">1. </span>Sets<a class="headerlink" href="#sets" title="Permalink to this headline">#</a></h1>
 <p>Programmers are modellers.
-We write programs consisting of business objects<a class="footnote-reference brackets" href="#business-objects" id="id1">1</a> [<a class="reference internal" href="business-objects.html#business-objects"><span class="std std-numref">Chapter 70</span></a>]
-and business rules [<a class="reference internal" href="business-logic.html#business-logic"><span class="std std-numref">Chapter 18</span></a>] that are valuable to whoever is paying our salary.
-Set theory helps us define effective types for both objects and methods.
+We write programs consisting of business objects<a class="footnote-reference brackets" href="#business-objects" id="id2">1</a> [<a class="reference internal" href="business-objects.html#business-objects"><span class="std std-numref">Chapter 70</span></a>]
+and business rules [<a class="reference internal" href="business-logic.html#business-logic"><span class="std std-numref">Chapter 18</span></a>].
+These objects and rules must be valuable to whoever is paying our salary.
+Set theory helps us define effective types for both objects and rules.
 Effective in the sense that they only allow the states and behavior that we want.
 Which in turn means that we need fewer tests and suffer fewer bugs.
 We’ll talk more about this in future sections [<a class="reference internal" href="types-over-tests.html#types-over-tests"><span class="std std-numref">Chapter 81</span></a>] but at this point I hope that you will trust me when I say that great programmers understand that data types can usefully be thought of as sets.</p>
@@ -785,17 +843,22 @@ We simply need to understand:</p>
 <li><p>Sets.</p></li>
 <li><p>Members.</p></li>
 <li><p>Subsets.</p></li>
+<li><p>Cartesian products.</p></li>
 </ol>
 <p>So what is a set?
 A set is a collection of elements, which we will refer to as members.
 A set can be empty and it can be infinite.
 A set can contain other sets.
 All elements in a set must be unique.</p>
-<p>In terms of notation, the empty set is usually denoted by the letter O or the number 0 crossed with a diagonal slash (<span class="math notranslate nohighlight">\(\varnothing\)</span>) and we would define it like this:</p>
+<p>In terms of notation, the empty set is usually denoted by the letter O or the number 0 crossed with a diagonal slash (<span class="math notranslate nohighlight">\(\varnothing\)</span>).
+A set is then defined as a comma-separated list of elements enclosed by two curly braces.
+In case of the empty set, we just have two curly braces.</p>
 <div class="math notranslate nohighlight">
 \[
 \varnothing = \{ \}
 \]</div>
+<section id="members">
+<h2><span class="section-number">1.1. </span>Members<a class="headerlink" href="#members" title="Permalink to this headline">#</a></h2>
 <p>Let’s take an example.
 If I make a statement like: “I am a human”.
 In the field of logic this is known as a predicate.
@@ -821,7 +884,8 @@ I don’t know whether this is true or not.
 My current set is insufficient when it comes to categorizing this statement.
 We need something like ternary logic, also known as three-valued logic.
 I need to be able to express the fact that I don’t know whether the statement is true or false.
-So let’s design a set for that.</p>
+This is sometimes called a trilean.
+So let’s design a set that also contains the element <span class="math notranslate nohighlight">\(\mathit{Unknown}\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[
 \mathit{Trilean} = \{ \mathit{True}, \mathit{False}, \mathit{Unknown} \}
@@ -867,6 +931,16 @@ The element <span class="math notranslate nohighlight">\(\mathit{Unknown}\)</spa
 \[
 \mathit{Unknown} \not\in \mathit{Boolean}
 \]</div>
+<div class="exercise admonition" id="ex:set-members">
+
+<p class="admonition-title"><span class="caption-number">Exercise 1.1 </span></p>
+<section id="exercise-content">
+<p>Define a set that captures the different states of a traffic light.</p>
+</section>
+</div>
+</section>
+<section id="diagrams">
+<h2><span class="section-number">1.2. </span>Diagrams<a class="headerlink" href="#diagrams" title="Permalink to this headline">#</a></h2>
 <p>Sets can also be visualized.
 You’ve probably come across Venn or Euler diagrams already, and if you understand Venn and Euler diagrams, you understand sets.
 To visualize a set we draw a circle and put a label next to it.
@@ -879,6 +953,16 @@ Any point outside the circle is not a member of the set.</p>
 <p><span class="caption-number">Fig. 1.1 </span><span class="caption-text">Visualization of sets and members.</span><a class="headerlink" href="#fig-set-members" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
+<div class="exercise admonition" id="chapters/sets-exercise-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 1.2 </span></p>
+<section id="exercise-content">
+<p>Draw a Venn diagram of the set that you came up with in <a class="reference internal" href="#ex:set-members"><span class="std std-numref">Exercise 1.1</span></a>.</p>
+</section>
+</div>
+</section>
+<section id="subsets">
+<h2><span class="section-number">1.3. </span>Subsets<a class="headerlink" href="#subsets" title="Permalink to this headline">#</a></h2>
 <p>So what is this idea of subsets?
 If all elements of a set are also members of another set, then the first set is a subset of the second.
 If the two sets are different, which means that some of the elements of the second set are not in the first, then the first set is known as a <em>proper</em> subset.
@@ -900,10 +984,20 @@ It is a <em>proper</em> subset since there exists some animals that are not cats
 Also note that no dogs are cats.</span><a class="headerlink" href="#fig-subsets" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
+<div class="exercise admonition" id="ex:subsets">
+
+<p class="admonition-title"><span class="caption-number">Exercise 1.3 </span></p>
+<section id="exercise-content">
+<p>How can a set capturing the states of a two-light traffic light be considered a subset of a set capturing that of a three-light traffic light?</p>
+</section>
+</div>
 <p>Why do we need to understand subset relations as object oriented programmers?
 Because the, arguably, most important pillar [<a class="reference internal" href="pillars.html#pillars"><span class="std std-numref">Chapter 43</span></a>] of object oriented programming is subtype polymorphism [<a class="reference internal" href="subtype-polymorphism.html#subtype-polymorphism"><span class="std std-numref">Chapter 55</span></a>].
 Subtype polymorphism is also known as inclusion polymorphism and the set theoretic idea of subsets is also known as inclusion.
 So when we think of data types as sets then the subsets help us reason about subtype polymorphism.</p>
+</section>
+<section id="cartesian-products">
+<h2><span class="section-number">1.4. </span>Cartesian products<a class="headerlink" href="#cartesian-products" title="Permalink to this headline">#</a></h2>
 <p>Before we leave sets I want to share one final thing and that is the idea of the Cartesian product.
 Let’s say that I’ve managed to define a set of all legal given names and all legal last names.
 Let’s call them <span class="math notranslate nohighlight">\(\mathit{GivenNames}\)</span> and <span class="math notranslate nohighlight">\(\mathit{LastNames}\)</span> respectively.
@@ -942,14 +1036,22 @@ If we take the union of these two sets we end up with a new set that contains al
 ( B, 3 )\  
 \}
 \]</div>
+<div class="exercise admonition" id="chapters/sets-exercise-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 1.4 </span></p>
+<section id="exercise-content">
+<p>What is the Cartesian product of the two traffic light sets that you defined in <a class="reference internal" href="#ex:subsets"><span class="std std-numref">Exercise 1.3</span></a>?</p>
+</section>
+</div>
 <p>Why is it important to understand Cartesian products?
 Because it helps us reason about functions [<a class="reference internal" href="functions.html#functions"><span class="std std-numref">Chapter 2</span></a>] that take multiple parameters.</p>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
-<dt class="label" id="business-objects"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dt class="label" id="business-objects"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
 <dd><p>TODO: Perhaps this is a poor term to use.</p>
 </dd>
 </dl>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -979,11 +1081,11 @@ Because it helps us reason about functions [<a class="reference internal" href="
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="overview.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="introduction.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Overview</p>
+            <p class="prev-next-title">Introduction</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="functions.html" title="next page">
