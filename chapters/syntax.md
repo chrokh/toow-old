@@ -1,3 +1,4 @@
+(syntax)=
 # Syntax
 
 Before we can learn how to express our thoughts in any programming language we must learn to distinguish between syntax and semantics.
