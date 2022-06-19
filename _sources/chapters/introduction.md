@@ -132,7 +132,7 @@ If you are interested in the history of C#, what it looked like in the beginning
 
 If you are new to programming I would recommend that you either use Visual Studio or Visual Studio Code.
 If you have been programming before and already have a favourite text editor such as Sublime Text, Atom, Vim, or Emacs then I highly recommend that you stick to that editor and simply compile and run your files using the `dotnet` binary.
-We will talk more about the compilation [{numref}`Chapter %s<compilation>`] and evaluation [{numref}`Chapter %s<evaluation>`] later.
+We will talk more about the compilation [{numref}`Chapter %s<compilation>`] and execution [{numref}`Chapter %s<execution>`] later.
 
 All programs that we write in this book are, what is known as, console applications.
 Meaning that they run inside a Command Line Interpretor (CLI) such as `bash` or `zsh` on OS X, or `cmd.exe` on Windows.
