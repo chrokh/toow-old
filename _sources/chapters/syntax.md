@@ -1,8 +1,19 @@
 (syntax)=
 # Syntax
 
-Before we can learn how to express our thoughts in any programming language we must learn to distinguish between syntax and semantics.
-We must learn to distinguish between how to express a sentence in a language (i.e., syntax) and what that sentence means (i.e., semantics).
+Code is nothing more than text written in a programming language.
+All programming languages have syntax and semantics.
+In this chapter we are discussing syntax, and in the {numref}`Chapter %s<semantics>` we are discussing semantics.
+
+A program is a bunch of code written in some programming language.
+We refer to files that contain code as "source files" and we sometimes call code "source code".
+
+There's nothing magical about source files.
+They are just plain old text files with contents that (hopefully) adhere to the syntax and semantics of the language that we aimed to express the files in.
+
+What is syntax and how is it different from semantics?
+The syntax of a language determines whether a given sentence is valid or not, while semantics determines what that sentence means.
+
 By understanding syntactic and semantic validity, we will also learn to distinguish between syntactic and semantic errors.
 
 ```{important}

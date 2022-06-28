@@ -1,3 +1,4 @@
+(design-principles)=
 # Design principles
 
 - SOLID.

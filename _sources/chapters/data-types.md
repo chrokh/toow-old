@@ -1,3 +1,4 @@
+(data-types)=
 # Data types
 - Discuss how “hello world” is a string and how the method WriteLine is expecting a string.
 - The GetType() method.
