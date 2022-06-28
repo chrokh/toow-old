@@ -5,6 +5,7 @@
 This chapter is a work in progress.
 ```
 
+- Running an executable.
 - "Running" is synonymous with "executing".
 - `dotnet run`
 - Example:

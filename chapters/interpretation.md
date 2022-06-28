@@ -8,7 +8,7 @@ This chapter is a work in progress.
 - Contrast to compilation [{numref}`Chapter %s<compilation>`].
 - Still needs to produce code for the layers below.
 - Compilation errors are instead discovered at runtime.
-- Regular runtime errors can still happen. See [{numref}`Chapter %s<execution>].
+- Regular runtime errors can still happen. See [{numref}`Chapter %s<execution>`].
 - Examples of languages
   - Python
   - Ruby
@@ -16,7 +16,7 @@ This chapter is a work in progress.
 
 
 ```{figure} ../images/interpretation.svg
-:name: compilation
+:name: fig:interpretation
 An interpreter interprets code written in one language and translates it to another and executes it on the fly.
 ```
 
