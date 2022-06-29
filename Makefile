@@ -1,7 +1,7 @@
 all: clean html
 
 html:
-	 jb build . && cp index.html _build/html/chapters/index.html
+	 jb build .
 
 clean:
 	jb clean . --all
