@@ -3,13 +3,13 @@
 
 Code is nothing more than text written in a programming language.
 All programming languages have syntax and semantics.
-In this chapter we are discussing syntax, and in the {numref}`Chapter %s<semantics>` we are discussing semantics.
+In this chapter we are discussing syntax, and later we will discuss semantics [{numref}`Chapter %s<semantics>`].
 
-A program is a bunch of code written in some programming language.
-We refer to files that contain code as "source files" and we sometimes call code "source code".
+%A program is a bunch of code written in some programming language.
+%We refer to files that contain code as "source files" and we sometimes call code "source code".
 
-There's nothing magical about source files.
-They are just plain old text files with contents that (hopefully) adhere to the syntax and semantics of the language that we aimed to express the files in.
+There's nothing magical about files containing code.
+They are just plain old text files with contents that (hopefully) adhere to the *syntax* and *semantics* of the language that we aimed to express the files in.
 
 What is syntax and how is it different from semantics?
 The syntax of a language determines whether a given sentence is valid or not, while semantics determines what that sentence means.
@@ -95,7 +95,7 @@ Syntactic errors are known as syntax errors.
 When we find ourselves looking at a program that "doesn't work", we must ask ourselves whether we mean that the program exhibits syntax errors (also known as syntax errors), semantic errors, or combinations of the two.
 
 When dealing with compiled languages [{numref}`Chapter %s<compilation>`] syntax errors are brought to our attention, by the compiler, at, what is known as, compile-time.
-When dealing with interpreted languages  [{numref}`Chapter %s<interpretation>`] syntax errors are only brought to our attention, by the interpreter, at, what is known as, runtime.
+When dealing with interpreted languages  [{numref}`Chapter %s<interpretation>`] syntax errors are only brought to our attention, by the interpreter, at, what is known as, run-time.
 This essentially means that in compiled languages we get to know about syntax errors without having to run the program.
 
 <!--

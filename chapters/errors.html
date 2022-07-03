@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Record types &#8212; The Object Oriented Way</title>
+    <title>11. Errors &#8212; The Object Oriented Way</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -53,6 +53,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="12. Comments" href="comments.html" />
+    <link rel="prev" title="10. Interpretation" href="interpretation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -109,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
   Fundamentals
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="sets.html">
    1. 🟢 Sets
@@ -160,8 +162,8 @@ const thebe_selector_output = ".output, .cell_output"
    10. 🟢 Interpretation
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="errors.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    11. 🟠 Errors
   </a>
  </li>
@@ -734,7 +736,7 @@ title="Fullscreen mode"
   </span>
 
 </button>
-<a href="https://github.com/chrokh/the-oo-way/issues/new?title=Issue%20on%20page%20%2Fchapters/record-types.html&body=Your%20issue%20content%20here."
+<a href="https://github.com/chrokh/the-oo-way/issues/new?title=Issue%20on%20page%20%2Fchapters/errors.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="bottom"
@@ -747,23 +749,70 @@ title="Open an issue"
   </span>
 
 </a>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prefer-compile-time-errors">
+   11.1. Prefer compile-time errors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unavoidable-run-time-errors">
+   11.2. Unavoidable run-time errors
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Record types</h1>
+                <h1>Errors</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prefer-compile-time-errors">
+   11.1. Prefer compile-time errors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unavoidable-run-time-errors">
+   11.2. Unavoidable run-time errors
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -771,8 +820,104 @@ title="Open an issue"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="record-types">
-<span id="id1"></span><h1>Record types<a class="headerlink" href="#record-types" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="errors">
+<span id="id1"></span><h1><span class="section-number">11. </span>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">#</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This chapter is a work in progress.</p>
+</div>
+<p>As we have seen, there are plenty of mistakes that we can make that cause our programs to fail to compile or even crash at run-time.
+There are also plenty of ways (and as always, some disagreements on how) to categorize errors but I am quite fond of using a four-by-four based on concepts we’ve already covered.
+Let’s call it “the error quadrant diagram”.
+See <a class="reference internal" href="#fig-errors"><span class="std std-numref">Fig. 11.1</span></a>.</p>
+<figure class="align-default" id="fig-errors">
+<img alt="images/errors.svg" src="images/errors.svg" /><figcaption>
+<p><span class="caption-number">Fig. 11.1 </span><span class="caption-text">The error quadrants classifies errors in the two dimensions “when” and “what”.</span><a class="headerlink" href="#fig-errors" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Let’s quickly recap the types of errors that we’ve talked about and put it into context of the error quadrant diagram.</p>
+<p>In one dimension we’ve got the notion of time.
+When did the error occur?
+Did the error occur at <em>compile-time</em> [<a class="reference internal" href="compilation.html#compilation"><span class="std std-numref">Chapter 8</span></a>] or at <em>run-time</em> [<a class="reference internal" href="execution.html#execution"><span class="std std-numref">Chapter 9</span></a>]?
+In other words, did it occur when we compiled the program or when we tried to run it?</p>
+<p>In the other dimension we’re asking what type of error it is.
+Is it a <em>syntax error</em> [<a class="reference internal" href="syntax.html#syntax"><span class="std std-numref">Chapter 6</span></a>] or a <em>semantic error</em> [<a class="reference internal" href="semantics.html#semantics"><span class="std std-numref">Chapter 7</span></a>]?
+In other words, is it a grammatical error or an error of meaning?
+Is it an error in form or in content?</p>
+<p>In a later chapter we will discuss the notion of data types [<a class="reference internal" href="data-types.html#data-types"><span class="std std-numref">Chapter 14</span></a>] but I want you to make a mental note of the fact that type errors can be considered a specific type of semantic errors.
+Whether they are discovered at compile-time or run-time depends on whether we’re dealing with a statically typed or a dynamically typed language.
+Or in other words, whether <em>type checking</em> is performed during compile-time or run-time.
+We will discuss type errors in more detail later but I still wanted to mention it here since it is a <em>very</em> important topic.</p>
+<p>Checking for errors at compile-time without running the program is known as “static code analysis” or “static testing”.
+Checking for errors at run-time, meaning while running the program, is sometimes known as “dynamic code analysis” or “dynamic testing”.</p>
+<div class="exercise admonition" id="chapters/errors-exercise-0">
+
+<p class="admonition-title"><span class="caption-number">Exercise 11.1 </span></p>
+<section id="exercise-content">
+<p>In this book we classfied errors using a quadrant diagram.</p>
+<ol class="simple">
+<li><p>Draw the error quadrant diagram.</p></li>
+<li><p>Explain each quadrant.</p></li>
+<li><p>Give an example of an error in each quadrant.</p></li>
+</ol>
+</section>
+</div>
+<p>A <em>syntax error</em> means that we’ve expressed something that is <em>grammatically</em> incorrect in the language.
+Syntax errors can be discovered at compile-time if we’re dealing with a <em>compiled</em> language.
+If however, we are dealing with an <em>interpreted</em> language then the syntax error would not be discovered until the interpreter attempts to execute the faulty line.</p>
+<p>A <em>semantic error</em> means that we’ve expressed something which doesn’t make sense (such as dividing by zero or referring to some other module that doesn’t exist).
+If we’re dealing with a <em>complied</em> language then we say that it’s a “static semantic error” or a compile-time semantic error.
+We say that it’s a “static” semantic error since it’s discoverable at compile-time as opposed to at run-time.
+More about the difference between compile-time and run-time errors in a moment.</p>
+<p>A <em>type error</em> means that we’ve expressed something where the <em>types</em> don’t line up, such as attempting to use a letter in arithmetic addition.
+All type errors ought to be considered semantic errors, but I have chosen to list them separately here due to their importance.</p>
+<section id="prefer-compile-time-errors">
+<h2><span class="section-number">11.1. </span>Prefer compile-time errors<a class="headerlink" href="#prefer-compile-time-errors" title="Permalink to this headline">#</a></h2>
+<p>The sooner we can discover a mistake, the easier it will be to fix it.
+So tautologically we conclude that compile-time errors should be favored over run-time errors.
+Indeed we might even call this a “design principle”.
+We’ll talk about what design principles [<a class="reference internal" href="design-principles.html#design-principles"><span class="std std-numref">Chapter 81</span></a>] are later.
+But for now, you can think of design principles as ideas that aim to improve the maintainability of code.</p>
+<div class="tip admonition">
+<p class="admonition-title">Design principle</p>
+<p>Prefer compile-time errors over run-time errors.</p>
+</div>
+<p>Saying that compile-time errors are preferable over run-time errors solely for the fact that they appear earlier would however be to miss the mark completely.
+The key thing to realize is that if you can move a run-time error to compile-time that means that you’re guaranteeing that this error doesn’t ever happen when your program is running.</p>
+<p>I realize that we haven’t talked about enough concepts for this argument to fully fly yet, so we’ll return to it when discussing the design principle “types over tests” [<a class="reference internal" href="types-over-tests.html#types-over-tests"><span class="std std-numref">Chapter 85</span></a>].
+The key point is simply that instead of designing programs that might crash at run-time, we should design programs that cannot even be compiled if they run the risk of crashing at run-time.</p>
+<p>Said differently, a program that contains potential run-time errors must be meticulously searched for all possible places in which it can crash so that a crash can be prevented and even then, there are no guarantees.
+Contrast this to a program that contains compile-time errors.
+This program cannot even be created let alone ran.</p>
+<div class="exercise admonition" id="chapters/errors-exercise-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 11.2 </span></p>
+<section id="exercise-content">
+<p>Why should we prefer compile-time errors over run-time errors?</p>
+</section>
+</div>
+<!-- TODO: Add some kind of analog example here. -->
+</section>
+<section id="unavoidable-run-time-errors">
+<h2><span class="section-number">11.2. </span>Unavoidable run-time errors<a class="headerlink" href="#unavoidable-run-time-errors" title="Permalink to this headline">#</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This section is a work in progress.</p>
+</div>
+<ul class="simple">
+<li><p>StackOverflow.</p></li>
+<li><p>OutOfMemoryException.</p></li>
+<li><p>No internet connection.</p></li>
+<li><p>Web request timeout.</p></li>
+</ul>
+<div class="exercise admonition" id="chapters/errors-exercise-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 11.3 </span></p>
+<section id="exercise-content">
+<p>Is it possible to write programs so that run-time errors cannot happen? Why or why not?</p>
+</section>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -802,6 +947,20 @@ title="Open an issue"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="interpretation.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">10. </span>Interpretation</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="comments.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Comments</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>

@@ -1,6 +1,10 @@
 (algorithms)=
 # Algorithms
 
+```{warning}
+This chapter is a work in progress.
+```
+
 Algorithms rule our world.
 It doesn't matter if you're a programmer, mathematician or not, you will eventually or have already come into contact with the word algorithm.
 
@@ -210,6 +214,10 @@ Come up with an algorithm for a problem of your choice.
 ```
 
 ## Sorting and searching
+
+```{warning}
+This section is a work in progress.
+```
 
 TODO.
 

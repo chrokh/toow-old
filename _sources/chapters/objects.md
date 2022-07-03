@@ -140,10 +140,10 @@ void MovePlayerSouth (int player) {
 }
 ```
 
-While this solves the problem we loose type safety and expose ourselves to potential runtime errors.
+While this solves the problem we loose type safety and expose ourselves to potential run-time errors.
 What happens if we mistakenly pass the number `1` to a move method, as in `MovePlayerEast(1)`?
 That's right, instead of getting an error at compile time, we get an `IndexOutOfRangeException` when actually running the program.
-Later [{numref}`Chapter %s<types-over-tests>`] we will talk more about the importance of using types to discover errors at runtime.
+Later [{numref}`Chapter %s<types-over-tests>`] we will talk more about the importance of using types to discover errors at run-time.
 
 Hopefully you are starting to see that what we need here is something a bit more powerful than procedures.
 We need more powerful data structures [{numref}`Chapter %s<data-structures>`].
