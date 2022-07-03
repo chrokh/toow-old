@@ -1,10 +1,6 @@
 (compilation)=
 # Compilation
 
-```{warning}
-This chapter is a work in progress.
-```
-
 A compiler is a program that translates code written in a source language to code written in a target language.
 It is essentially a one-way translator.
 In other words, a compiler translates text written in some syntax to text written in some other syntax.
@@ -24,10 +20,13 @@ Interpreters and compilers can be built for any language.
 A language is simply a language.
 In practice, however, most languages are associated with either a compiler or interpreted.
 This is why we in everyday language tend to refer to a language as being either compiled or interpreted.
-C#, the language used in this book, is usually compiled.
 
 ```{exercise}
 What is a compiler?
+```
+
+```{exercise}
+What does it mean when we say that no **language**, in theory, is *either* compiled or interpreted?
 ```
 
 ```{exercise}
@@ -50,31 +49,39 @@ As application level developers we don't have to worry about machine code.
 Instead we write our programs in high-level languages and use compilers or interpreters to convert our programs to machine code in order to allow them to be executed on actual machines.
 
 When we write code in these high-level languages we are writing what is known as "source code".
+Files containing source code are known as "source files".
 Compilers are then used to convert the source code to machine code.
 Source code is human readable and machine code is machine readable.
 
-```{figure} ../images/intermediate-language.svg
-:name: fig:intermediate-language
-Source code -> Intermediate language -> Machine code
+You might hear that C# is a compiled language.
+However that is not entirely true.
+It's not as simple as pushing high-level C# code into a compiler and getting binary machine code out.
+When you compile a C# program you don't actually get a binary machine code file, you get code expressed in what's known as an "intermediate language" which, given the existence of .NET's Common Language Runtime (CLR) can be turned into machine code upon execution.
+In the case of the .NET compiler this intermediate language is known as the Common Intermediate Language (CIL).
+
+```{figure} ../images/net-compilation.svg
+:name: fig:source-code-byte-code-machine-code
+Illustration of how .NET programs are converted to and executed as machine code.
 ```
 
-There's a lot more to compilation than what we've covered here.
-What's worst is that we're pretending that it's a simple as pushing high-level code such as C# into a compiler and getting binary machine code out.
-In reality it isn't this simple.
-As en example, when you compile a C# program you don't actually get a binary machine code file, you get code expressed in what's known as an "intermediate language" which, given the existence of the .NET runtime can be turned into machine code upon execution.
+So, it isn't fair to call C# a compiled language.
+When we run the executable, portions of the CIL code is converted to machine code by a Just-in-time (JIT) compiler inside the Common Language Runtime (CLR) which essentially is an interpreter  [{numref}`Chapter %s<interpretation>`].
+So while we often think of C# as a compiled language it is actually a mix of both.
+%C#, the language used in this book, is usually compiled into bytecode which is then ran through an interpreter.
 
-In fact, it isn't even fair to call C# a compiled language.
-The .NET compiler converts the source code into an executable expressed in what in the case of .NET is called the Common Intermediate Language (CIL).
-When we run the executable portions of the CIL code is converted to machine code by a Just-in-time (JIT) compiler.
-This last step is akin to the process of interpretation [{numref}`Chapter %s<interpretation>`].
+Generally, we would refer to CIL code as "bytecode".
+Programs in many languages are converted to machine code in a way similar to this.
+Have a look at {numref}`fig:source-code-byte-code-machine-code`.
+You write human-readable source code, the compiler compiles it machine-readable bytecode, and an interpreter runs the byte-code and coverts it to machine-readable machine code bit by bit as needed.
 
-All this complication is however beyond the scope of this book.
-At least in it's current state.
+```{figure} ../images/source-code-byte-code-machine-code.svg
+:name: fig:source-code-byte-code-machine-code
+A common pattern is to let a compiler compile source code into byte code, and then let an interpreter interpret byte code as machine code.
+```
 
-```{admonition} Donations
-:class: attention
-Please consider [donating](https://patreon.com/christopherokhravi) to allow this work to continue.
-Thank you.
+
+```{exercise}
+In what sense is C# usually both compiled *and* interpreted?
 ```
 
 
@@ -103,6 +110,21 @@ This is the idea of a high-level language, and this is the idea of abstractions.
 Why are compilers useful? Why don't we just write programs in low-level languages?
 ```
 
+## Compile-time
+
+When something happens during or close to compilation and without running the program we refer to it as happening at "compile-time".
+What can we do at compile time beyond translating the source code from the input language to the output language?
+We can check for errors in syntax [{numref}`Chapter %s<syntax>`] and errors in semantics [{numref}`Chapter %s<semantics>`].
+
+Much later we will talk about assessing program correctness [{numref}`Chapter %s<correctness>`] but I want to mention here that if we are using, what is known as, formal methods to verify program correctness then this is a semantic error check that happens at compile-time.
+
+Another semantic error check that we can do at compile-time is what's known as automated "linting".
+Linting is the act of determining whether a program follows some agreed upon stylistic guidelines.
+
+```{exercise}
+What do we mean when we say that something happens at *compile-time* as opposed to at *run-time*?
+```
+
 
 ## Compilation errors
 
@@ -110,120 +132,191 @@ There are plenty of mistakes that we can make that prevent our programs from com
 There are multiple ways of categorizing compilation errors but one way is to divide them into:
 
 - Syntax errors [{numref}`Chapter %s<syntax>`],
-- Static semantic errors [{numref}`Chapter %s<semantics>`], and
-- Type errors [{numref}`Chapter %s<data-types>`].
+- Semantic errors [{numref}`Chapter %s<semantics>`], and
 
-Note that we've already talked about syntax and semantic errors in previous chapters, and we'll talk about type errors in an upcoming chapter.
-In the context of this chapter all these errors prevent the compiler from translating our program from the input to the output language.
+Semantic errors checked for at compile-time is sometimes called "static semantic errors."
 
-A *syntax error* means that we've expressed something that is *grammatically* incorrect in the language.
+If an error occurs when we are attempting to compile then it's a compilation error, also known as compile-time error, since it occurred at compile-time.
+If, on the contrary, an error occurs *when the program is running* then it's a run-time error since it occurred during run-time [{numref}`Chapter %s<execution>`].
 
-A *semantic error* means that we've expressed something which doesn't make sense (such as dividing by zero or referring to some other module that doesn't exist).
-We say that it's a "static" semantic error since it's discoverable at compile-time as opposed to at run-time.
-More about the difference between compile-time and run-time errors in a moment.
-
-A *type error* means that we've expressed something where the *types* don't line up, such as attempting to use a letter in arithmetic addition.
-All type errors ought to be considered semantic errors, but I have chosen to list them separately here due to their importance.
-
+We will discuss types of syntax and semantic compilation errors and contrast them to run-time errors in more detail in the chapter on Errors [{numref}`Chapter %s<errors>`].
 
 ```{exercise}
 What are compilation errors?
 ```
 
 
-## Compile-time vs run-time
 
-If an error occurs when we are attempting to compile then it's a compilation error, also known as compile-time error, since it occurred at compile-time.
-If, on the contrary, an error occurs *when the program is running* then it's a run-time error since it occurred during run-time.
-
-```{exercise}
-What do we mean when we say that something happens at *compile-time* as opposed to at *run-time*?
-```
-
-At first glance it might seem weird that a program that compiles still can crash when it's actually run.
-Unfortunately this is however the case and there are a multitude of reasons as to why this might happen.
-
-A commonly cited run-time error is division by zero.
-In mathematics, division by zero is undefined which means that many programming languages (C# included) throws, what's known as, an exception [{numref}`Chapter %s<exceptions>`].
-But how could this happen?
-Can't the compiler figure out that we are dividing by zero and tell us by emitting an error?
-Well, only in some very direct cases.
-
-Consider a program that simply does nothing but dividing the literal integer $42$ by the literal integer $0$ and printing the result to screen.
-
-```csharp
-Console.WriteLine(42 / 0);
-```
-
-This program cannot be compiled.
-If we try to then we will get a compilation error and no program.
-The compiler is smart enough to realize that we will always divide by zero and refuses to construct the program since it will crash at run-time whenever this piece of code is reached.
-The error might say something like:
-
-```
-Compilation error (line 7, col 19): Division by constant zero
-```
-
-However, by adding the tiniest bit of indirection [{numref}`Chapter %s<indirection>`] we can trick the compiler to compile the program and suddenly we have program that crashes at run-time instead of compile-time.
-I know we haven't talked about variables yet, but by storing our constant zero in a variable and then using that variable in the division we've introduced enough indirection for the compiler to not dare guaranteeing that our program shouldn't be compiled.
-When we run the program we get what is known as an Exception [{numref}`Chapter %s<exceptions>`] and we'll talk more about these later.
-The exception might look something like:
-
-```
-Unhandled exception. System.DivideByZeroException: Attempted to divide by zero.
-```
-
-Note how the compilation error occurs when we *compile* the program, while the exception occurs when we *run* the program.
-
-Another way to get a division-by-zero error at run-time would be to ask the user of the program to input a number.
-In this case there is literally no way for the compiler to know what the user is going to type.
-
-It should be noted that languages are very different and *what works in some languages might not work in others*.
-It all comes down to how the syntax and semantics of the language are defined.
-It is entirely conceivable that a language could exist that didn't allow you to divide numbers unless the dividend was of a data type that guaranteed that it is non-zero.
-
-```{exercise}
-Why can a program that doesn't have compilation errors still fail at run-time (meaning upon execution)?
-```
-
-
-## Prefer compile-time errors
-
-The sooner we can discover a mistake, the easier it will be to fix it.
-So tautologically we conclude that compile-time errors should be favored over run-time errors.
-Indeed we might even call this a "design principle".
-We'll talk about what design principles [{numref}`Chapter %s<design-principles>`] are later.
-But for now, you can think of design principles as ideas that aim to improve the maintainability of code.
-
-```{admonition} Design principle
-:class: tip
-Prefer compile-time errors over run-time errors.
-```
-
-Saying that compile-time errors are preferable over run-time errors solely for the fact that they appear earlier would however be to miss the mark completely.
-The key thing to realize is that if you can move a run-time error to compile-time that means that you're guaranteeing that this error doesn't ever happen when your program is running.
-
-I realize that we haven't talked about enough concepts for this argument to fully fly yet, so we'll return to it when discussing the design principle "types over tests" [{numref}`Chapter %s<types-over-tests>`].
-The key point is simply that instead of designing programs that might crash at runtime, we should design programs that cannot even be compiled if they run the risk of throwing run-time exceptions.
-
-Said differently, a program that contains potential run-time errors must be meticulously searched for all possible places in which it can crash so that a crash can be prevented and even then, there are no guarantees.
-Contrast this to a program that contains compile-time errors.
-This program cannot even be created let alone ran.
-
-```{exercise}
-Why should we prefer compile-time errors over run-time errors?
-```
-
-<!-- TODO: Add some kind of analog example here. -->
-
-
-## `dotnet` binary
-
-```{warning}
-This section is under construction.
-```
+## `dotnet build`
 
 1. `dotnet new console`
 2. `dotnet compile`
 3. Look at CIL code.
+
+Let's take a simple example.
+In this book we will incrementally work on project that we call "Translator".
+The program will be able to encode and decode strings of text using ciphers.
+Let's start.
+
+Find a folder where you want to store your program and enter it on the command line by using the command `cd`.
+Let us then create our empty C# program by running:
+
+```bash
+dotnet new console --name Translator
+```
+
+By passing the value `Translator` as the argument `--name` we tell the `dotnet` program that we want our application to be called `Translator`.
+The `dotnet` command line program will create a new folder with the name `Translator` and generate all the files we need to get started in it.
+
+```{seealso}
+Please refer to the [official documentation](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new) for more information on the `dotnet new` command.
+```
+
+Let's enter the folder that `dotnet` generated for us:
+
+```bash
+cd Translator
+```
+
+and then issue the command `ls` to see what files were generated for us:
+
+```bash
+Program.cs         # Entry point.
+Translator.csproj  # Configuration file.
+obj                # This is a folder that holds intermediary content used by the compiler.
+```
+
+`Program.cs` is the main (and currently only) source file.
+It defines the entry point of the program.
+In other words, when we run the program, the code that's in this file will be run.
+The only line of code that it contains should be:
+
+```csharp
+Console.WriteLine("Hello, World!");
+```
+
+Note how we said that the file *defines* the entry point of the program, not that it *is* the entry point.
+This is due to something introduced in C# 10 and .NET 6 known as "top-level statements".
+The details of this are not relevant now and we'll pick this discussion up again in the Chapter on Static classes [{numref}`Chapter %s<static-classes>`].
+However, you can think of the main file (`Program.cs`) as actually containing more code than you can see.
+It's as if the additional code is entered into the file automatically upon compilation.
+
+`Translator.csproj` is a configuration file for your project.
+It does not contain source code, it contains what is known as "markup".
+The markup language in this case, happens to be called The Extensible Markup Language (XML).
+The details of this file are not significant now but if you were to open it up I'm sure you'd be able to figure out how it, for example, specifies that the output of your project is an executable (`Exe`) file and what version of .NET you are using.
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+</Project>
+```
+
+
+`obj` is a folder that holds intermediary content that's maintained and used by the compiler.
+Don't put any of your files in this folder since they might be overwritten by the compiler.
+
+When you compile the project for the first time, it will also create another folder called `bin`.
+The word "bin" is short for "binaries" which is a term that's often used to describe files that are *not* source files or markup.
+It refers to files that either contain bytecode or machine code.
+Arguably, this is quite confusing since bytecode isn't necessarily expressed in ones and zeroes.
+Binaries may or may not be executable but the word is often used to refer to executables.
+
+If we had not specified a name for our program, `dotnet` would have used the name of the folder we were in.
+So if we wanted to we could just as well have created the folder ourselves like this:
+
+```bash
+mkdir Translator    # Create new folder.
+cd Translator       # Enter the folder.
+dotnet new console  # Create new program with same name as the folder.
+```
+
+We don't need to specify explicitly that we want it to be a C# application since the `dotnet` program defaults to C#.
+However, we could also use the `dotnet` program to create F# applications.
+
+To compile this program we simply make sure that we are in the same folder as the C# project file (`.csproj`) and then issue the command:
+
+```
+dotnet build
+```
+
+This will compile our program and if we haven't introduced any errors when changing the program we should be met with a message that says:
+
+```bash
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+```
+
+In the folder `bin/Debug/net6.0/` the compiler should now have generated the following five files:
+
+```
+Translator.runtimeconfig.json
+Translator.dll
+Translator
+Translator.pdb
+Translator.deps.json
+```
+
+% TODO: Is all the below correct?
+
+The file `Translator.runtime.config.json` is a configuration file that specifies which runtime we are targeting, which in our case is .NET 6.
+Think back to our discussion on the Common Language Runtime (CLR).
+The existence of this file means that the program is assumed to not be "self-contained".
+A self-contained program can be run on a machine that doesn't have access to the .NET runtime.
+The file is a human-readable file expressed in the markup language JSON.
+
+The file `Translator.dll` contains our actual application.
+It is not executable in and of itself, and it is is expressed in CIL represented in hexadecimal format.
+If you open up the file in a text editor you will see a bunch of hexadecimal codes, also known as hex.
+We've discussed base 2 and base 10 number systems in the chapter on Computation [{numref}`Chapter %s<computation>`], hexadecimal is simply base 16.
+It is possible to convert the DLL to more readable CIL code but that is beyond the scope of this book.
+
+The file `Translator` is an executable file that we can run from the command line.
+All this is an oversimplification, but in essence it invokes the runtime that's specified in the configuration file passes the DLL to be interpreted.
+The runtime will then run the program as we've discussed earlier in this chapter.
+The file is expressed in hexadecimal format and its syntax is specific to some set of CPU architectures.
+
+The file `Translator.pbd` contains information which helps the debugger match sections of the executable with section of source code.
+While all the three previous files are required for your program to be runnable, this file is not.
+However, it is needed if you want to debug your program.
+The file is expressed in hexadecimal format.
+
+The file `Translator.deps.json` simply contains information on any packages that your program might depend on.
+If the user of your application is to be able to automatically install these dependencies then they need this file.
+The file is a human-readable file expressed in the markup language JSON.
+
+In the chapter on Execution [{numref}`Chapter %s<execution>`] we'll return to this program and look at how to run it.
+But I want to emphasize here that unless you compile, what is known as a, single-file application, you can not run your executable (`Translator`) without the runtime configuration file (`Translator.runtime.config.json`) and the actual application (`Translator.dll`).
+So if you move your executable to a new folder you must also move these other two files along with it.
+
+If delete the DLL and try to execute your application you are met with an error message that says that "the application to execute does not exist".
+If you delete the runtime configuration file and try to execute the application you are instead met with an error message that says that the application cannot be run since it was assumed to be a self-contained application but that it's not actually self-contained.
+
+It is certainly however possible to produce single-file executables in C#.
+Note that there's a difference between single-file and self-contained.
+Self-contained means that you can run the application on machines that doesn't have the .NET runtime (CLR) installed.
+It essentially means that the CLR is included in the executable itself.
+
+```{note}
+Note that single-file is not the same as self-contained.
+```
+
+Single-file however means that we don't create a separate DLL, dependencies file, and executable.
+All three are included in one.
+Please refer to the official [documentation](https://docs.microsoft.com/en-us/dotnet/core/deploying/single-file/) for more information on how to do create single-file applications.
+To try it out you can however run:
+
+```bash
+dotnet publish --use-current-runtime -p:PublishSingleFile=true --self-contained false`
+```
+
+```{seealso}
+Compiling and executing your application can also be done via the graphical user inteface (GUI) if you are using Visual Studio. Please refer to the [official documentation](https://docs.microsoft.com/en-us/visualstudio/ide/?view=vs-2022) for more information.
+```
 

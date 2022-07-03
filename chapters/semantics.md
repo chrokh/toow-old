@@ -42,7 +42,11 @@ However, not all members of $L$ are semantically meaningful.
 We might call these objectively semantically incorrect members of $L$.
 Further, if we assume that we have some intent of expressing some particular idea, call it $I$, then then not all members $L$ are semantically correct expressions of the idea $I$.
 
-Some compilers [{numref}`Chapter %s<compilation>`] can warn you when you're about to make what appears to be common semantic errors.  Semantic errors cannot be discovered automatically
+Some compilers [{numref}`Chapter %s<compilation>`] can warn you when you're about to make what appears to be common semantic errors.
+These are sometimes called "static semantic errors".
+The word "static" is used since we're performing static checks [{numref}`Chapter %s<correctness>`], meaning checks at compile-time [{numref}`Chapter %s<compilation>`], to find the semantic errors.
+As opposed to letting them arise at run-time [{numref}`Chapter %s<execution>`].
+
 Automatically detecting all semantic errors in an application is however impossible in theory since semantic errors are inherently subjective.
 It all comes down to what you were intending to do.
 Unless your intention is specified somehow then the computer cannot possibly know what your intentions are.

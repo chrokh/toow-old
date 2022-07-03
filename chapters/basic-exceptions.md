@@ -3,7 +3,7 @@
 
 - Unrecoverable states.
 - Try / catch.
-- Examples: IndexOutOfRange, DivideByZero, StackOverflow.
+- Examples: IndexOutOfRange, DivideByZero, StackOverflow, OutOfMemory, no internet connection, response timeout.
 
 
 

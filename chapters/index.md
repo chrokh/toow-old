@@ -24,16 +24,25 @@ Browse the table of contents, or use the search box.
 ```{warning}
 This book is a *work in progress*.
 If you find errors or have suggestions you are more than welcome to [submit an issue](https://github.com/chrokh/the-oo-way/issues/new) in the book's repository on GitHub.
+
+In the table of contents, chapter titles marked with 🟢 are mostly completed but might be missing some images.
+Titles marked with 🟠 contain some content but is very much a work in progress.
+Titles marked with 🔴 only contain a rough todo list.
 ```
 
 
 ## Why this book
 
 In this book we unapologetically untangle everything that needs to be untangled to establish a *useful* understanding of object oriented programming.
-No questions may be left unanswered if they help you understand why.
+No questions may be left unanswered if they help you understand why and thereby can become a better programmer.
 
 I teach two undergraduate courses on object oriented programming using C#.
 After having been involved in object oriented education for about 10 years I figured it was time to write a book that teaches object oriented programming **the way I wish I would have been taught it**.
+
+In this book we're aiming for **breadth rather then depth**.
+It is my belief that our understanding anything is significantly improved by exploring what is in the periphery of that thing.
+We're not going to talk about memory management or vtables.
+There's far too much ground to cover to get bogged down by such details.
 
 
 ## About the author
@@ -125,10 +134,9 @@ If you appreciate what I do here, there are three ways to help.
 
 ## Technicalities
 
-The code in this book is written in C# 9.0 which means that you need at least .NET 5[^net-versions].
+The code in this book is written in C# 10 which means that you need at least .NET 6.
 Earlier versions of .NET did, for example, not support what is known as top-level statements so if you are following an earlier version of .NET and want to follow along with the examples in this book you might have to adapt them.
-
-[^net-versions]: See [the documentation](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/configure-language-version) for more information on versions.
+Please refer to the [documentation](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/configure-language-version) for more information on versions.
 
 ```{important}
 Use C# 9.0 and .NET5 or .NET6.
