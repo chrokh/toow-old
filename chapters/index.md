@@ -1,6 +1,6 @@
 # The Object Oriented Way
 
-Welcome to _**The Object Oriented Way: A complete book on object oriented programming**_.
+Welcome to _**The Object Oriented Way: Everything you need to know**_.
 This book takes you all the way from elementary fundamentals to the most sophisticated ideas.
 Our goal is for this book to be the number one resource for learning object oriented programming using C#.
 
