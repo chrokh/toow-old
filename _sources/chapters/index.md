@@ -7,8 +7,8 @@ Our goal is for this book to be the number one resource for learning object orie
 
 ```{admonition} Top tip
 :class: tip
-Every bite-sized chapter builds upon the previous ones so if you something is too difficult, follow the back references and read earlier chapters.
-Start with whatever chapter peaks your interest.
+Every bite-sized chapter builds upon the previous ones so if something is too difficult, follow the references backwards and read earlier chapters.
+Start with whatever peaks your interest.
 Browse the table of contents, or use the search box.
 ```
 
@@ -25,9 +25,9 @@ Browse the table of contents, or use the search box.
 This book is a *work in progress*.
 If you find errors or have suggestions you are more than welcome to [submit an issue](https://github.com/chrokh/the-oo-way/issues/new) in the book's repository on GitHub.
 
-In the table of contents, chapter titles marked with 🟢 are mostly completed but might be missing some images.
+In the table of contents, chapter titles marked with 🟢 are mostly completed but might be missing images and some content.
 Titles marked with 🟠 contain some content but is very much a work in progress.
-Titles marked with 🔴 only contain a rough todo list.
+Titles marked with 🔴 only contain a rough todo list and are not ready for consumption.
 ```
 
 
@@ -43,6 +43,9 @@ In this book we're aiming for **breadth rather then depth**.
 It is my belief that our understanding anything is significantly improved by exploring what is in the periphery of that thing.
 We're not going to talk about memory management or vtables.
 There's far too much ground to cover to get bogged down by such details.
+
+It should be noted that many of the ideas in this book are not *only* related to object-oriented programming but apply to multiple paradigms.
+Think of it this way: This book contains all the ideas that I argue are useful to know if you want to become a top level object oriented programmer.
 
 
 ## About the author
@@ -64,7 +67,7 @@ If you read this book from the first page to the last then you will be given all
 We start with the fundamentals and then build from there.
 
 ```{note}
-You don't need to know anything about programming to read this book.
+You don't need to know **anything** about programming to read this book.
 We are here to learn.
 ```
 
@@ -83,9 +86,7 @@ I am looking into creating a private community where we can discuss the contents
 Unless the donations for this book are increased this might have to be a paid community to be sustainable.
 If you have thoughts around the creation of a community, please feel free to reach out to me at christopher.okhravi@gmail.com.
 
-```{important}
 To enable the creation of a private community, please consider [supporting my work](https://patreon.com/christopherokhravi).
-```
 
 
 ## Video lectures
@@ -93,18 +94,14 @@ To enable the creation of a private community, please consider [supporting my wo
 Eventually I will release video lectures for each chapter in this book.
 Feel free to subscribe to my [YouTube channel](https://youtube.com/c/christopherokhravi) and hit the bell to be notified when this happens.
 
-```{important}
 To enable the production of video lectures, please consider [supporting my work](https://patreon.com/christopherokhravi).
-```
 
 
 ## Audiobook
 
 If there's an interest in it, and it looks like it would be useful, I aim to record the whole book, when it is finished, as an audio book.
 
-```{important}
 To enable the production of an audiobook, please consider [supporting my work](https://patreon.com/christopherokhravi).
-```
 
 
 ## Free book
@@ -112,9 +109,7 @@ To enable the production of an audiobook, please consider [supporting my work](h
 I am publishing this book online for free because object oriented programming has been around for so long that it's time to make sure everyone has free access to these ideas.
 If you believe in my mission then I truly appreciate if you [support my work on Patreon](https://patreon.com/christopherokhravi).
 
-```{important}
 To enable the continued development of this book, please consider [supporting my work](https://patreon.com/christopherokhravi).
-```
 
 I must also disclose that some links in this book are affiliate links which means that I make a small commission if you happen to purchase whatever is behind the link.
 However, all links in this book are here for pedagogical reasons and pedagogical reasons only.

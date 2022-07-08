@@ -26,10 +26,6 @@ What is a compiler?
 ```
 
 ```{exercise}
-What does it mean when we say that no **language**, in theory, is *either* compiled or interpreted?
-```
-
-```{exercise}
 In what sense is a language not *either* a compiled or an interpreted language?
 ```
 

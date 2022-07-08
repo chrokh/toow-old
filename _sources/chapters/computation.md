@@ -189,10 +189,10 @@ Also, you might be interested in this Wikipedia page on the difference between t
 This section is under construction.
 ```
 
-Pieces of a modern computer.
-
-- ALU
-- CPU
-- Memory
-- I/O
+- Hardware vs software
+- Pieces of a modern computer.
+  - ALU
+  - CPU
+  - Memory
+  - I/O
 

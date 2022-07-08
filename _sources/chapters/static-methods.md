@@ -10,3 +10,4 @@
   - River crossing problem [{numref}`Chapter %s<algorithms>`].
   - Towers of Hanoi [{numref}`Chapter %s<algorithms>`].
 - Parameterization
+- Documentation comments.
