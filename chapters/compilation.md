@@ -145,10 +145,6 @@ What are compilation errors?
 
 ## `dotnet build`
 
-1. `dotnet new console`
-2. `dotnet compile`
-3. Look at CIL code.
-
 Let's take a simple example.
 In this book we will incrementally work on project that we call "Translator".
 The program will be able to encode and decode strings of text using ciphers.
