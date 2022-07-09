@@ -219,5 +219,7 @@ Come up with an algorithm for a problem of your choice.
 This section is a work in progress.
 ```
 
+% For example: quicksort and Tony Hoare.
+
 TODO.
 
