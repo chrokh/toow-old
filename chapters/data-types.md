@@ -1,6 +1,10 @@
 (data-types)=
 # Data types
 
+A data type determines all possible values that may be used in a particular place.
+
+```{admonition} TODO
+- Start from `var` since this is what we've used up to now.
 - Discuss how “hello world” is a string and how the method WriteLine is expecting a string.
 - Null
   - The absence of a value.
@@ -33,4 +37,5 @@
   - "Statically typed languages perform type checking at compile-time, while dynamically-typed languages perform type checking at run-time"
 - Reflection.
 - Typing and compilers.
+```
 

@@ -8,3 +8,16 @@
 - Value types and reference types are the two main categories of types in C# 
 - All this is a bit of a mess.
 - Relation to boxing.
+
+```{admonition} TODO Example
+int x = 10;
+ref int y = ref x;
+
+Console.WriteLine(x);
+Console.WriteLine(y);
+
+x++;
+
+Console.WriteLine(x);
+Console.WriteLine(y);
+```
