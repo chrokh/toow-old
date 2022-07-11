@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>18. Variables &#8212; The Object Oriented Way</title>
+    <title>15. Variables &#8212; The Object Oriented Way</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -27,6 +27,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -51,10 +52,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="19. Type inference" href="type-inference.html" />
-    <link rel="prev" title="17. Abstraction" href="abstraction.html" />
+    <link rel="next" title="16. Data types" href="data-types.html" />
+    <link rel="prev" title="14. Values" href="values.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -174,17 +177,17 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="values.html">
-   14. 🔴 Values
+   14. 🟢 Values
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   15. 🟠 Variables
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="data-types.html">
-   15. 🔴 Data types
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="indirection.html">
-   16. 🔴 Indirection
+   16. 🔴 Data types
   </a>
  </li>
  <li class="toctree-l1">
@@ -192,9 +195,9 @@ const thebe_selector_output = ".output, .cell_output"
    17. 🔴 Abstraction
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   18. 🔴 Variables
+ <li class="toctree-l1">
+  <a class="reference internal" href="indirection.html">
+   18. 🔴 Indirection
   </a>
  </li>
  <li class="toctree-l1">
@@ -217,6 +220,11 @@ const thebe_selector_output = ".output, .cell_output"
    22. 🔴 Debugging
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="io.html">
+   23. 🔴 I/O
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -226,127 +234,122 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="statements.html">
-   23. Statements
+   24. Statements
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="expressions.html">
-   24. Expressions
+   25. Expressions
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="operators.html">
-   25. Operators
+   26. Operators
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="type-conversions.html">
-   26. Type conversions
+   27. Type conversions
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="arrays.html">
-   27. Arrays
+   28. Arrays
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="syntactic-sugar.html">
-   28. Syntactic sugar
+   29. Syntactic sugar
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="indentation.html">
-   29. Indentation
+   30. Indentation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="selection.html">
-   30. Selection
+   31. Selection
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="iteration.html">
-   31. Iteration
+   32. Iteration
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="constants.html">
-   32. Constants
+   33. Constants
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="mutability.html">
-   33. Mutability
+   34. Mutability
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="value-and-reference-semantics.html">
-   34. Value and reference semantics
+   35. Value and reference semantics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="simple-types.html">
-   35. Simple types
+   36. Simple types
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="static-methods.html">
-   36. Static methods (procedures)
+   37. Static methods (procedures)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="purity.html">
-   37. Purity
+   38. Purity
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="static-classes.html">
-   38. Static classes (Modules)
+   39. Static classes (Modules)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="data-structures.html">
-   39. Data structures
+   40. Data structures
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="composition.html">
-   40. Composition
+   41. Composition
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="overloading.html">
-   41. Overloading
+   42. Overloading
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="recursion.html">
-   42. Recursion
+   43. Recursion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="scope.html">
-   43. Scope
+   44. Scope
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="namespaces.html">
-   44. Namespaces
+   45. Namespaces
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="basic-exceptions.html">
-   45. Exceptions (part 1)
+   46. Exceptions (part 1)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="stack-traces.html">
-   46. Stack traces
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="io.html">
-   47. I/O
+   47. Stack traces
   </a>
  </li>
 </ul>
@@ -387,113 +390,118 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="instance-variables.html">
+   54. Instance variables
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="basic-access-modifiers.html">
-   54. Access modifiers (basic).
+   55. Access modifiers (basic).
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="properties.html">
-   55. Properties
+   56. Properties
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="object-composition-1.html">
-   56. Direct object composition
+   57. Direct object composition
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="object-composition-2.html">
-   57. Indirect object composition
+   58. Indirect object composition
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="immutable-objects.html">
-   58. Immutable objects
+   59. Immutable objects
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="interfaces.html">
-   59. Interfaces
+   60. Interfaces
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="subtype-polymorphism.html">
-   60. Subtype polymorphism
+   61. Subtype polymorphism
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inheritance.html">
-   61. Inheritance
+   62. Inheritance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="overriding.html">
-   62. Overriding
+   63. Overriding
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hiding.html">
-   63. Hiding
+   64. Hiding
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="advanced-access-modifiers.html">
-   64. Access modifiers (advanced)
+   65. Access modifiers (advanced)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="object-type-conversions.html">
-   65. Type conversions (of objects)
+   66. Type conversions (of objects)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="advanced-exceptions.html">
-   66. Advanced exceptions
+   67. Advanced exceptions
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="static.html">
-   67. Static
+   68. Static
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="prototypes.html">
-   68. Prototypes
+   69. Prototypes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="object-composition-3.html">
-   69. Abstract indirect object composition
+   70. Abstract indirect object composition
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="base-class-library.html">
-   70. Base class library
+   71. Base class library
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="boxing.html">
-   71. Boxing
+   72. Boxing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="structure-types.html">
-   72. Structure types
+   73. Structure types
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="generics.html">
-   73. Generics
+   74. Generics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="variance.html">
-   74. Variance
+   75. Variance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="business-objects.html">
-   75. Business objects
+   76. Business objects
   </a>
  </li>
 </ul>
@@ -505,92 +513,92 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="requirements.html">
-   76. Requirements
+   77. Requirements
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="correctness.html">
-   77. Correctness
+   78. Correctness
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="maintainability.html">
-   78. Maintainability
+   79. Maintainability
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="code-smells.html">
-   79. Code smells and anti-patterns
+   80. Code smells and anti-patterns
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="coupling.html">
-   80. Coupling
+   81. Coupling
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cohesion.html">
-   81. Cohesion
+   82. Cohesion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="refactoring.html">
-   82. Refactoring
+   83. Refactoring
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="design-principles.html">
-   83. Design principles
+   84. Design principles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="single-responsibility-principle.html">
-   84. Single responsibility principle
+   85. Single responsibility principle
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="interface-segregation-principle.html">
-   85. Interface segregation principle
+   86. Interface segregation principle
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="deep-classes.html">
-   86. Deep classes
+   87. Deep classes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="types-over-tests.html">
-   87. Types over tests
+   88. Types over tests
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="define-errors-out-of-existence.html">
-   88. Define errors out of existence
+   89. Define errors out of existence
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="liskov-substitution-principle.html">
-   89. Liskov substitution principle
+   90. Liskov substitution principle
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="open-closed-principle.html">
-   90. Open-closed principle
+   91. Open-closed principle
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dependency-inversion-principle.html">
-   91. Dependency inversion principle
+   92. Dependency inversion principle
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="composition-over-inheritance.html">
-   92. Composition over inheritance
+   93. Composition over inheritance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="documentation-driven-development.html">
-   93. Documentation-driven development
+   94. Documentation-driven development
   </a>
  </li>
 </ul>
@@ -602,72 +610,72 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="design-patterns.html">
-   94. Design patterns
+   95. Design patterns
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="strategy-pattern.html">
-   95. Strategy pattern
+   96. Strategy pattern
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="delegates.html">
-   96. Delegates
+   97. Delegates
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bridge-pattern.html">
-   97. Bridge pattern
+   98. Bridge pattern
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lambdas.html">
-   98. Lambdas
+   99. Lambdas
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="abstract-factory-pattern.html">
-   99. Abstract factory pattern
+   100. Abstract factory pattern
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="iterator-pattern.html">
-   100. Iterator pattern
+   101. Iterator pattern
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="enumerators.html">
-   101. Enumerators
+   102. Enumerators
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="indexers.html">
-   102. Indexers
+   103. Indexers
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="linq.html">
-   103. LINQ
+   104. LINQ
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="observer-pattern.html">
-   104. Observer pattern
+   105. Observer pattern
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="events.html">
-   105. Events
+   106. Events
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="visitor-pattern.html">
-   106. Visitor pattern
+   107. Visitor pattern
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="pattern-matching.html">
-   107. Pattern matching
+   108. Pattern matching
   </a>
  </li>
 </ul>
@@ -764,12 +772,51 @@ title="Open an issue"
   </span>
 
 </a>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#declaration">
+   15.1. Declaration
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#assignment">
+   15.2. Assignment
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initialization">
+   15.3. Initialization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#constants">
+   15.4. Constants
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -781,6 +828,34 @@ title="Open an issue"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#declaration">
+   15.1. Declaration
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#assignment">
+   15.2. Assignment
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initialization">
+   15.3. Initialization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#constants">
+   15.4. Constants
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -789,13 +864,259 @@ title="Open an issue"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="variables">
-<span id="id1"></span><h1><span class="section-number">18. </span>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">#</a></h1>
-<ul class="simple">
-<li><p>Put “hello world” in a variable and read it from the user.</p></li>
-<li><p>Declaration, assignment, initialisation</p></li>
-<li><p>Assignment is right-associative.</p></li>
-<li><p>Declaration without assignment leads to null.</p></li>
-</ul>
+<span id="id1"></span><h1><span class="section-number">15. </span>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">#</a></h1>
+<p>A variable is a symbolic name that points to a, possibly changing, value.
+More concretely a variable is a symbolic name for a location in memory.
+Upon compilation, all variable names are replaced by their memory locations.
+Variables in programming are similar to but not equivalent to variables in mathematics.</p>
+<p>To declare and initialize a variable called <code class="docutils literal notranslate"><span class="pre">x</span></code> and assign it the value <code class="docutils literal notranslate"><span class="pre">3</span></code> in C# we would say:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">3</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>To declare and initialize a variable called <code class="docutils literal notranslate"><span class="pre">person</span></code> and assign it the value <code class="docutils literal notranslate"><span class="pre">&quot;Chris&quot;</span></code> we would say:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;Chris&quot;</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>We’ll discuss what declaring and initializing means in this chapter.
+In a coming chapter we will talk about <a class="reference internal" href="data-types.html"><span class="doc">Data types</span></a>, and there we will learn to explicitly state the data type of our variables.
+For now however we’ll use the keyword <code class="docutils literal notranslate"><span class="pre">var</span></code> to declare variables.
+This means that the data type of our variable is inferred using what’s known as <a class="reference internal" href="type-inference.html"><span class="doc">Type inference</span></a>.
+In other words, it means that the compiler “figures out” what data type our variable must have without us having to type it.
+More on this in a separate chapter.</p>
+<p>Notice how in the examples above <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">person</span></code> are the symbolic names of the variables, while <code class="docutils literal notranslate"><span class="pre">3</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;Chris&quot;</span></code> are the values that we assign to them.
+The symbolic names <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">person</span></code> are thus pointing to memory locations and in these memory locations we have stored the values <code class="docutils literal notranslate"><span class="pre">3</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;Chris&quot;</span></code> respectively.</p>
+<p>When using variables, there are three important concepts that we must master: declaration, assignment, and initialization.
+Let’s first discuss these one by one and then move on to the more advanced concepts of mutability and constants.</p>
+<section id="declaration">
+<h2><span class="section-number">15.1. </span>Declaration<a class="headerlink" href="#declaration" title="Permalink to this headline">#</a></h2>
+<p>When we create a variable we say that we “declare” it.
+Declaring a variable is as simple as stating the <a class="reference internal" href="data-types.html"><span class="doc">data type</span></a> (more on types later) of the variable followed by the symbolic name that we want to use to refer to the variable.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="w"> </span><span class="n">author</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">numberOfApples</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Note that we can declare variables without assigning them a value.
+Variables that have been declared but haven’t yet been assigned a value are known as “uninitialized”.
+If we compile a program that tries to use an uninitialized variable we’ll get a compilation error that says “use of unassigned variable”.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">numberOfApples</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">Use of unassigned local variable &#39;numberOfApples&#39;.</span>
+</pre></div>
+</div>
+<p>Note that “uninitialized” is <em>not</em> the same as “undeclared”.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">nonExistantVariable</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">The name &#39;nonExistant&#39; does not exist in the current context.</span>
+</pre></div>
+</div>
+<p>We can declare multiple variables of the same type on the same line by separating their names with commas.
+To declare the three integer variables <code class="docutils literal notranslate"><span class="pre">x1</span></code>, <code class="docutils literal notranslate"><span class="pre">x2</span></code>, and <code class="docutils literal notranslate"><span class="pre">x3</span></code> we would say:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="n">x3</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This is known as “multiple declarations” and all variables are left uninitialized.</p>
+</section>
+<section id="assignment">
+<h2><span class="section-number">15.2. </span>Assignment<a class="headerlink" href="#assignment" title="Permalink to this headline">#</a></h2>
+<p>When we assign a value to a variable we refer to this as assignment.
+We use the equals sign (<code class="docutils literal notranslate"><span class="pre">=</span></code>) to perform assignment.
+The variable should be on the left-hand side of the equals symbol and the value should be on the right-hand side.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">3</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>We often talk about the “left-hand side” and “right-hand side” so it is wise to become accustomed to what this means.</p>
+</div>
+<p>Note that the equals sign (<code class="docutils literal notranslate"><span class="pre">=</span></code>) in imperative programming, is <em>not</em> used to mean mathematical equivalence but assignment.
+Imperative is the name of the programming paradigm that object oriented programming belong to.
+More on this in the chapter on <a class="reference internal" href="paradigms.html"><span class="doc">Paradigms</span></a>.</p>
+<p>Some languages, such as R, uses a less than sign and a dash which together looks like an arrow pointing to the left (<code class="docutils literal notranslate"><span class="pre">&lt;-</span></code>) for assignment.
+This is not valid C# syntax but it is useful to think of assignment as an arrow to the left rather than an equals sign.
+Assignment takes the value on the <em>right</em> and stores it (or a <a class="reference internal" href="value-and-reference-semantics.html"><span class="doc">reference</span></a> to it, but more on this later) in memory so that we can access it using the symbolic name on the <em>left</em>.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;-</span> <span class="m">3</span>
+</pre></div>
+</div>
+<p>In mathematics, if we say that <span class="math notranslate nohighlight">\(x=3\)</span> then it is possible to <em>replace</em> <span class="math notranslate nohighlight">\(x\)</span> with <span class="math notranslate nohighlight">\(3\)</span>.
+The two are <em>the same thing at all times</em>.
+This is known as <a class="reference internal" href="purity.html"><span class="doc">referential transparency</span></a> and is something we’ll touch on in a future chapter.
+Variables in imperative languages, including object oriented languages, are not referentially transparent.
+So assignment does not behave like mathematical equivalence.</p>
+<p>So what does assignment mean and how is it different from equivalence?
+Remember how variables point to a memory location and how we store values in that memory location?
+Well, in a mutable language the contents of that memory location can change.
+In C# it is entirely valid to say that <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">1</span></code> and then immediately change it to <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">2</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The program is of course quite pointless and we might just as well have assigned it the number <code class="docutils literal notranslate"><span class="pre">2</span></code> from the start.
+Nevertheless, the program will compile and run.
+However, it also means that we cannot ever be sure that just because we initialized a variable to <code class="docutils literal notranslate"><span class="pre">1</span></code> it will stay that way.</p>
+<p>In mathematics this would not make any sense.
+Either <span class="math notranslate nohighlight">\(x\)</span> is equal to <span class="math notranslate nohighlight">\(1\)</span> <em>or</em> it is equal to <span class="math notranslate nohighlight">\(2\)</span>.
+In mathematics we don’t change the contents of a variable.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+x = 1\\
+x = 2
+\end{split}\]</div>
+<p>We’ll talk a bit more about the <a class="reference internal" href="paradigms.html"><span class="doc">imperative programming paradigm</span></a> later but for now we should realize that in the imperative paradigm, we execute our programs line by line and that future lines may <em>change</em> what was said in previous lines.
+But in mathematics (and in the functional paradigm), we state what is true without order of execution.
+This mathematical way of thinking where there is no order of execution is reflected in the declarative paradigm where you will find functional and logic programming.
+Don’t worry if this isn’t entirely clear, we’ll get back to it in the chapter on <a class="reference internal" href="paradigms.html"><span class="doc">Paradigms</span></a>.</p>
+<p>Since assignment is not equivalence and since we can change the value of variables we can even do bizarre things like incrementing a variable by itself.
+Consider, for example, the statement:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In this case we’re assigning a value to the variable <code class="docutils literal notranslate"><span class="pre">x</span></code>.
+The value is equal to whatever value <code class="docutils literal notranslate"><span class="pre">x</span></code> contained before, but incremented with one.
+In mathematics it would mean that we are trying to define a variable in terms of itself.
+That is self-referential and makes no sense.</p>
+<div class="math notranslate nohighlight">
+\[
+x = x + 1
+\]</div>
+<p>But when we’re dealing with imperative assignment, it is entirely fine for a variable to refer to itself as long as it’s been assigned a value.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">z</span><span class="p">;</span><span class="w">                 </span><span class="c1">// Declare the variable.</span>
+<span class="n">z</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w">                 </span><span class="c1">// Assign it the value 1.</span>
+<span class="n">z</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w">             </span><span class="c1">// Increment the variable by 1.</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">z</span><span class="p">);</span><span class="w">  </span><span class="c1">// Print the variable.</span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">2</span>
+</pre></div>
+</div>
+<p>Changing the value of a numeric variable based on the value of itself is in fact such a common operation that there’s a special syntax for it.
+If we want to increment the value of the numeric variable <code class="docutils literal notranslate"><span class="pre">x</span></code> by one then we can simply use the increment operator (<code class="docutils literal notranslate"><span class="pre">++</span></code>):</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="p">++</span><span class="w"></span>
+</pre></div>
+</div>
+<p>We’ll see more such operations in the chapter on <a class="reference internal" href="operators.html"><span class="doc">Operators</span></a>.</p>
+<p>In this section we’ve said that the <em>variable</em> goes on the left-hand side while the <em>value</em> goes on the right.
+In truth, the right-hand side can actually be any <a class="reference internal" href="expressions.html"><span class="doc">expression</span></a> that evaluates to a value.
+It just so happens that the simplest expression is a value.</p>
+<p>We can also assign multiple variables the same expression by simply chaining the variables with an assignment operator (<code class="docutils literal notranslate"><span class="pre">=</span></code>) and then putting the expression in the end.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">x1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">100</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>At first glance you might think that this is some special syntax.
+However, this is merely a consequence of the fact that (1) assignment is an expression that evaluates to the value of the association and that (2) the assignment expression is right-associative.</p>
+<p>Right-associative means that we evaluate what’s on the right-hand side before we move to the left.
+This is should be more clear if we explicitly write out the parentheses.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">x1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">x2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">x3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">100</span><span class="p">)));</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In the statement above, <code class="docutils literal notranslate"><span class="pre">x3</span></code> is first assigned the value <code class="docutils literal notranslate"><span class="pre">100</span></code>.
+This expression evaluates to the number <code class="docutils literal notranslate"><span class="pre">100</span></code> since this is what was assigned.
+<code class="docutils literal notranslate"><span class="pre">x2</span></code> is then assigned the value <code class="docutils literal notranslate"><span class="pre">100</span></code> and as an expression it evaluates to the number <code class="docutils literal notranslate"><span class="pre">100</span></code> too.
+Finally <code class="docutils literal notranslate"><span class="pre">x1</span></code> is then assigned the value <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p>
+<p>Since assignment is just an expression, this means that we can assign anywhere in an expression.
+I would not recommend doing this but it’s quite interesting to think about.
+Think about what the following code will generate, and then try it.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">x1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">2</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">x3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">x1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x2</span><span class="p">)</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="p">(</span><span class="n">x2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">3</span><span class="p">);</span><span class="w"></span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">x1</span><span class="p">);</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">x2</span><span class="p">);</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">x3</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">2</span>
+<span class="go">3</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="initialization">
+<h2><span class="section-number">15.3. </span>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">#</a></h2>
+<p>When we create a variable and immediately assign it a value, we say that we declare and “initialize” the variable.
+Let’s rewrite our previous variable declarations so that we not only declare but also initialize our variables.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">numberOfCats</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">2</span><span class="p">;</span><span class="w"></span>
+<span class="kt">string</span><span class="w"> </span><span class="n">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;Chris&quot;</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>If we initialize the variable immediately upon declaration then we can use the <code class="docutils literal notranslate"><span class="pre">var</span></code> keyword to infer the type.
+The variables would still have the same types, we just don’t have to state the type explicitly.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">numberOfHats</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">2</span><span class="p">;</span><span class="w"></span>
+<span class="kt">var</span><span class="w"> </span><span class="n">friend</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;Chris&quot;</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>If we don’t initialize the variable we cannot use <code class="docutils literal notranslate"><span class="pre">var</span></code>, since the compiler cannot determine what type we were intending to store in the type.
+If we try, then we get a compilation error.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">numberOfBats</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">Implicitly-typed variables must be initialized.</span>
+</pre></div>
+</div>
+<p>We can initialize multiple variables of the same type on the same line by separating their names with commas and assigning their respective values as we go.
+To declare the three integer variables <code class="docutils literal notranslate"><span class="pre">z1</span></code>, <code class="docutils literal notranslate"><span class="pre">z2</span></code>, and <code class="docutils literal notranslate"><span class="pre">z3</span></code> and assign them them the values <code class="docutils literal notranslate"><span class="pre">100</span></code>, <code class="docutils literal notranslate"><span class="pre">200</span></code>, and <code class="docutils literal notranslate"><span class="pre">300</span></code> respectively, we would say:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">z1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">z2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">200</span><span class="p">,</span><span class="w"> </span><span class="n">z3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">100</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Of course we could break this up into multiple lines.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">z1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">z2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">200</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">z3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">100</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>But I would be inclined to argue that simply initializing all variables separately would be easier to read.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">z1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">100</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">z2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">200</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">z3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">100</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="constants">
+<h2><span class="section-number">15.4. </span>Constants<a class="headerlink" href="#constants" title="Permalink to this headline">#</a></h2>
+<p>In C#, variables are, as we’ve seen, unless otherwise specified, <em>not</em> constants.
+In other words, the value that they point to can be changed.
+However, constants do exist in C#.</p>
+<p>To declare a constant we simply prefix the variable declaration with the keyword <code class="docutils literal notranslate"><span class="pre">const</span></code>.
+Contrary to variables, constants cannot be changed.
+If we declare a constant called <code class="docutils literal notranslate"><span class="pre">numberOfDogs</span></code>, store the number <code class="docutils literal notranslate"><span class="pre">101</span></code>, and then, on the next line, try to reassign the value to <code class="docutils literal notranslate"><span class="pre">102</span></code> we will get a compilation error.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">numberOfDogs</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">101</span><span class="p">;</span><span class="w"></span>
+<span class="n">numberOfDogs</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">102</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">The left-hand side of an assignment must be a variable, property or indexer.</span>
+</pre></div>
+</div>
+<p>Notice how the error message suggests that if the left-hand side of our statement was a variable it would have been fine.
+This means that if we had not prepended our declaration with <code class="docutils literal notranslate"><span class="pre">const</span></code> the program would have compiled.</p>
+<p>Something to bear in mind is that constants must be initialized when they are declared.
+This means that if we try to merely say:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">numberOfFrogs</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>then we will get a compilation error stating that:</p>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">A const field requires a value to be provided.</span>
+</pre></div>
+</div>
+<p>One final, yet important, thing to bear in mind when dealing with constants is that even though the value cannot be reassigned, there’s nothing stopping the value of the variable to mutate.
+We will talk about <a class="reference internal" href="mutability.html"><span class="doc">mutation</span></a> in a separate chapter but what we mean is that some values can be changed without reassignment.</p>
+<p>You can think of this as the difference between changing the name of a person vs choosing a new person.
+In the former case, it is the person itself who is mutating (meaning changing), whereas in the latter it is us who is talking about the person who is changing.
+Constants only guard against us changing not against others being changed.</p>
+<p>If your alarm bells are going off and your thinking that this whole mutation business sounds quite dangerous then you’re in good company.
+Mutation is, tongue in cheek, sometimes called the “root of all evil”.</p>
+<p>More on mutation later.
+But for now, be aware that you cannot depend on the value of a constant remaining constant.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You cannot depend on the value of a constant remaining constant.
+Constants only prohibit reassignment.
+The value of the constant may still mutate.</p>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -825,17 +1146,17 @@ title="Open an issue"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="abstraction.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="values.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">17. </span>Abstraction</p>
+            <p class="prev-next-title"><span class="section-number">14. </span>Values</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="type-inference.html" title="next page">
+    <a class='right-next' id="next-link" href="data-types.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">19. </span>Type inference</p>
+        <p class="prev-next-title"><span class="section-number">16. </span>Data types</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

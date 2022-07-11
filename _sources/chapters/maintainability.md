@@ -9,6 +9,8 @@ This chapter is a work in progress.
 - User requirements is the hard part.
 - Being able to change your program.
 - Providing value as fast as possible without compromising future potential value.
+- "The software isn’t finished until the last user is dead." - [Sidney Markowitz](https://maximilianocontieri.com/software-engineering-great-quotes)
+
 
 
 What will you learn in this book?

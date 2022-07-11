@@ -1,6 +1,9 @@
 (subtype-polymorphism)=
 # Subtype polymorphism
 
+- Also discuss difference between compile-time types and run-time types or left-hand types and right-hand types.
+  - https://stackoverflow.com/questions/11634079/how-can-i-get-the-data-type-of-a-variable-in-c
+
 %- Can be achieved using:
 %  - Interfaces.
 %  - Inheritance:

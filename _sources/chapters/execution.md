@@ -54,7 +54,7 @@ So far so good.
 The compiler is smart enough to realize that we will always divide by zero if this code is reached and refuses to construct the program since it will crash at run-time whenever this piece of code is reached.
 The error might say something like:
 
-```
+```output
 Compilation error (line 7, col 19): Division by constant zero
 ```
 
@@ -63,7 +63,7 @@ Suddenly we have program that crashes at run-time instead of at compile-time.
 I know we haven't talked about variables yet, but by storing our constant zero in a variable and then using that variable in the division we've introduced enough indirection for the compiler to not dare guaranteeing that our program always will crash and hence shouldn't be compiled.
 When we run the program we get an exception which might look something like this:
 
-```
+```output
 Unhandled exception. System.DivideByZeroException: Attempted to divide by zero.
 ```
 
@@ -115,15 +115,13 @@ Please refer to the [official documentation](https://docs.microsoft.com/en-us/do
 ```
 
 Let's go back to our example in [{numref}`Chapter %s<compilation>`] and make sure that we can run it.
-If we navigate to the folder containing our `Translator.csproj` file and then issue the command:
+Navigate to the folder containing our `Translator.csproj` file and then issue the `dotnet run` command and you should see the message `Hello, World!`.
 
 ```bash
-$ dotnet run
+dotnet run
 ```
 
-then we should see:
-
-```bash
+```output
 Hello, World!
 ```
 
@@ -148,7 +146,7 @@ Countless developer hours have been sacrificed to the gods of forgetting to save
 
 When we now run the program by issuing `dotnet run` we should see:
 
-```bash
+```output
 Hello, I am the Translator.
 ```
 
@@ -161,8 +159,11 @@ Of course, instead of running your program using the `dotnet run` command you ca
 First we make sure that we have an executable by compiling our code using the `dotnet build` command, and then we locate the executable file that gets created in the `bin` folder and run it manually.
 
 ```bash
-$ dotnet build
-$ bin/Debug/net6.0/Translator
+dotnet build
+bin/Debug/net6.0/Translator
+```
+
+```output
 Hello, I am the Translator.
 ```
 

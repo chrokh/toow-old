@@ -145,10 +145,6 @@ What are compilation errors?
 
 ## `dotnet build`
 
-1. `dotnet new console`
-2. `dotnet compile`
-3. Look at CIL code.
-
 Let's take a simple example.
 In this book we will incrementally work on project that we call "Translator".
 The program will be able to encode and decode strings of text using ciphers.
@@ -177,9 +173,13 @@ cd Translator
 and then issue the command `ls` to see what files were generated for us:
 
 ```bash
-Program.cs         # Entry point.
-Translator.csproj  # Configuration file.
-obj                # This is a folder that holds intermediary content used by the compiler.
+ls
+```
+
+```output
+Program.cs
+Translator.csproj
+obj
 ```
 
 `Program.cs` is the main (and currently only) source file.
@@ -227,23 +227,25 @@ If we had not specified a name for our program, `dotnet` would have used the nam
 So if we wanted to we could just as well have created the folder ourselves like this:
 
 ```bash
-mkdir Translator    # Create new folder.
-cd Translator       # Enter the folder.
-dotnet new console  # Create new program with same name as the folder.
+mkdir Translator     # Create new directory
+cd Translator        # Open directory
+dotnet new console
 ```
+
+In this case, we would first create a new folder, then enter the new folder, and then finally create a new program in the new folder with the same name as the folder.
 
 We don't need to specify explicitly that we want it to be a C# application since the `dotnet` program defaults to C#.
 However, we could also use the `dotnet` program to create F# applications.
 
 To compile this program we simply make sure that we are in the same folder as the C# project file (`.csproj`) and then issue the command:
 
-```
+```bash
 dotnet build
 ```
 
 This will compile our program and if we haven't introduced any errors when changing the program we should be met with a message that says:
 
-```bash
+```output
 Build succeeded.
     0 Warning(s)
     0 Error(s)
@@ -251,7 +253,7 @@ Build succeeded.
 
 In the folder `bin/Debug/net6.0/` the compiler should now have generated the following five files:
 
-```
+```output
 Translator.runtimeconfig.json
 Translator.dll
 Translator
@@ -312,7 +314,7 @@ To try it out you can however run:
 dotnet publish --use-current-runtime -p:PublishSingleFile=true --self-contained false`
 ```
 
-```{seealso}
+```{danger}
 Compiling and executing your application can also be done via the graphical user inteface (GUI) if you are using Visual Studio. Please refer to the [official documentation](https://docs.microsoft.com/en-us/visualstudio/ide/?view=vs-2022) for more information.
 ```
 

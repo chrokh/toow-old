@@ -215,6 +215,13 @@ The only way to go fast, is to go well.
 -- {cite:p}`martin2019`
 ```
 
+% TODO: Another way to think about this is:
+% "There’s nothing more permanent than a temporary hack."
+% - Kyle Simpson
+% https://maximilianocontieri.com/software-engineering-great-quotes
+
+
+
 The third objection is that comments tend to get out of date to the point where they are outright misleading.
 As we've already alluded to this can be somewhat addressed by using documentation comments.
 {cite:t}`ousterhout2018` however also suggests that comments should be kept as close as possible to the code that it documents rather than say in a separate documentation file.
@@ -254,7 +261,7 @@ Whenever we duplicate something we run the risk of getting "out of sync" by maki
 {cite:t}`ousterhout2018` also suggests that if "information is already documented someplace outside your program, don't repeat the documentation inside the program; just reference the external documentation".
 5. **Add precision with low-level comments.** Comments that are expressed at a lower level of abstraction than the code should provide additional value. For example, what does it mean when the value of a variable is null, are there exclusive or inclusive boundaries for some variable, and so forth. This is stuff that isn't obviously expressed in the code but that's important.
 6. **Enhance intuition with high-level comments.** Comments that are expressed at a higher level of abstraction give readers a high-level understanding of what the code in question does. {cite:t}`ousterhout2018` also argues that high-level comments are much easier to maintain (since they are more likely to remain true in the face of code changes) and hence should be preferred.
-7. **Document interfaces.** We have not yet talked about {doc}`interfaces<abstraction>`, {doc}`methods<static-methods>`, nor {doc}`objects<objects>`, but think of it this way: As soon as you have some "thing" that you can interact with in certain ways then that thing has got an interface. The interface is how we communicate with the thing. Comments should be used to describe how we can interact with the thing. Or in other words, comments should describe the interface.
+7. **Document interfaces.** We have not yet talked about {doc}`interfaces<abstraction>`, {doc}`methods<static-methods>`, nor about {doc}`objects<objects>`, but think of it this way: As soon as you have some "thing" that you can interact with in certain ways then that thing has got, what we call, an interface. The interface is how we communicate with the thing. Comments should be used to describe how we can interact with the thing. Or in other words, comments should describe the interface.
 8. __Express *what* and *why*, not *how*.__ {cite:t}`ousterhout2018` uses the term "implementation comments" to refer to comments that describe concrete implementations. He argues that such comments should focus on *what* some piece of code does and *why* it needs to be done. However, he's suggesting that these comments should not be concerned with *how* it is done. If we focus on *how* then we are back to repeating the code.
 
 Some people even go so far as to suggest that we should write our comments *before* we write our code.
