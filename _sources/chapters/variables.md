@@ -74,6 +74,18 @@ int x1, x2, x3;
 This is known as "multiple declarations" and all variables are left uninitialized.
 
 
+```{exercise}
+Declare and initialize variables with the names, types, and values listed in the table below.
+Show at least two different ways of doing this.
+
+| Name        | Data type | Value        |
+| :--         | :--       | :--          |
+| `message`   | `string`  | `"Hello"`    |
+| `role`      | `string`  | `"CUSTOMER"` |
+| `count`     | `int`     | `"42"`       |
+| `available` | `bool`    | `true`       |
+```
+
 
 
 ## Assignment
@@ -331,6 +343,10 @@ But for now, be aware that you cannot depend on the value of a constant remainin
 You cannot depend on the value of a constant remaining constant.
 Constants only prohibit reassignment.
 The value of the constant may still mutate.
+```
+
+```{exercise}
+Declare and initialize three constants of your choice.
 ```
 
 
