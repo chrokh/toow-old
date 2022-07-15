@@ -97,11 +97,11 @@ Feel free to subscribe to my [YouTube channel](https://youtube.com/c/christopher
 To enable the production of video lectures, please consider [supporting my work](https://patreon.com/christopherokhravi).
 
 
-## Audiobook
-
-If there's an interest in it, and it looks like it would be useful, I aim to record the whole book, when it is finished, as an audio book.
-
-To enable the production of an audiobook, please consider [supporting my work](https://patreon.com/christopherokhravi).
+%## Audiobook
+%
+%If there's an interest in it, and it looks like it would be useful, I aim to record the whole book, when it is finished, as an audio book.
+%
+%To enable the production of an audiobook, please consider [supporting my work](https://patreon.com/christopherokhravi).
 
 
 ## Free book
