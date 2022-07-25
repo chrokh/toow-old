@@ -6,4 +6,7 @@
 - Recursion.
 - Late binding, Dynamic binding? Michaelis (2020)
 - Usually verbs. Or implied verbs as discussed in procedures.
+- String manipulation
+  - Substring
+  - IndexOf
 

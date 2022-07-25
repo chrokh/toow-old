@@ -57,11 +57,20 @@ In a later chapter we will discuss the notion of data types [{numref}`Chapter %s
 Specifically, the set of type errors is a subset of the set of semantic errors.
 
 Whether they are discovered at compile-time or run-time depends on whether we're dealing with a statically typed or a dynamically typed language.
-Or in other words, whether *type checking* is performed during compile-time or run-time.
+Or in other words, whether "type checking" is performed during compile-time or run-time.
 We will discuss type errors in more detail later but I still wanted to mention it here since it is a *very* important topic.
 
-A *type error* means that we've expressed something where the *types* don't line up, such as attempting to use a letter in arithmetic addition.
-All type errors ought to be considered semantic errors, but I have chosen to list them separately here due to their importance.
+A "type error" means that we've expressed something where the *types* don't line up, such as attempting to use a letter in arithmetic addition.
+All type errors ought to be considered semantic errors but I have chosen to highlight them separately here due to their importance.
+
+
+## Null-state errors
+
+In the chapter on [data types](data-types) we will discuss null-state static checking.
+Nowadays, the C# compiler can help us guarantee that our code is free from run-time errors caused by `null`.
+If we choose not to use these features then we may instead be hit with null-state errors at run-time.
+
+Null-state errors ought to be considered semantic errors but I have chosen to highlight them separately here due to their importance.
 
 
 
