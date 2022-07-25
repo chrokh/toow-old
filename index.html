@@ -1,1 +1,1260 @@
-<meta http-equiv="Refresh" content="0; url=chapters/index.html" />
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>The Object Oriented Way &#8212; The Object Oriented Way</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1. Sets" href="chapters/sets.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="#">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">The Object Oriented Way</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search" aria-label="Search" autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Fundamentals
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/sets.html">
+   1. 🟠 Sets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/functions.html">
+   2. 🟢 Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/algorithms.html">
+   3. 🟠 Algorithms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/computation.html">
+   4. 🟠 Computation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/terminals.html">
+   5. 🔴 Terminals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/syntax.html">
+   6. 🟢 Syntax
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/semantics.html">
+   7. 🟢 Semantics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/compilation.html">
+   8. 🟠 Compilation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/execution.html">
+   9. 🟢 Execution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/interpretation.html">
+   10. 🟢 Interpretation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/errors.html">
+   11. 🟢 Errors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/documentation.html">
+   12. 🔴 Documentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/comments.html">
+   13. 🟢 Comments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/values.html">
+   14. 🟢 Values
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/variables.html">
+   15. 🟢 Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/data-types.html">
+   16. 🟠 Data types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/type-systems.html">
+   17. 🟠 Type systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/nothingness.html">
+   18. 🟠 Nothingness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/type-hierarchy.html">
+   19. 🔴 Type hierarchy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/abstraction.html">
+   20. 🔴 Abstraction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/indirection.html">
+   21. 🔴 Indirection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/paradigms.html">
+   22. 🔴 Paradigms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/business-logic.html">
+   23. 🔴 Business logic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/debugging.html">
+   24. 🔴 Debugging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/io.html">
+   25. 🔴 I/O
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Procedural programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/statements.html">
+   26. Statements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/expressions.html">
+   27. Expressions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/operators.html">
+   28. Operators
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/type-conversions.html">
+   29. Type conversions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/arrays.html">
+   30. Arrays
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/syntactic-sugar.html">
+   31. Syntactic sugar
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/indentation.html">
+   32. Indentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/selection.html">
+   33. Selection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/iteration.html">
+   34. Iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/constants.html">
+   35. Constants
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/mutability.html">
+   36. Mutability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/value-and-reference-semantics.html">
+   37. Value and reference semantics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/simple-types.html">
+   38. Simple types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/static-methods.html">
+   39. Static methods (procedures)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/purity.html">
+   40. Purity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/static-classes.html">
+   41. Static classes (Modules)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/data-structures.html">
+   42. Data structures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/composition.html">
+   43. Composition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/overloading.html">
+   44. Overloading
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/recursion.html">
+   45. Recursion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/scope.html">
+   46. Scope
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/namespaces.html">
+   47. Namespaces
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/basic-exceptions.html">
+   48. Exceptions (part 1)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/stack-traces.html">
+   49. Stack traces
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Object oriented programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/pillars.html">
+   50. Pillars
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/objects.html">
+   51. Objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/classes.html">
+   52. Classes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/fields.html">
+   53. Fields
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/constructors.html">
+   54. Constructors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/instance-methods.html">
+   55. Instance methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/instance-variables.html">
+   56. Instance variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/basic-access-modifiers.html">
+   57. Access modifiers (basic).
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/properties.html">
+   58. Properties
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/object-composition-1.html">
+   59. Direct object composition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/object-composition-2.html">
+   60. Indirect object composition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/immutable-objects.html">
+   61. Immutable objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/interfaces.html">
+   62. Interfaces
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/subtype-polymorphism.html">
+   63. Subtype polymorphism
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/inheritance.html">
+   64. Inheritance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/overriding.html">
+   65. Overriding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/hiding.html">
+   66. Hiding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/advanced-access-modifiers.html">
+   67. Access modifiers (advanced)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/object-type-conversions.html">
+   68. Type conversions (of objects)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/advanced-exceptions.html">
+   69. Advanced exceptions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/static.html">
+   70. Static
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/prototypes.html">
+   71. Prototypes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/object-composition-3.html">
+   72. Abstract indirect object composition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/base-class-library.html">
+   73. Base class library
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/boxing.html">
+   74. Boxing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/structure-types.html">
+   75. Structure types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/generics.html">
+   76. Generics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/variance.html">
+   77. Variance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/business-objects.html">
+   78. Business objects
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Object oriented design
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/requirements.html">
+   79. Requirements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/correctness.html">
+   80. Correctness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/maintainability.html">
+   81. Maintainability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/code-smells.html">
+   82. Code smells and anti-patterns
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/coupling.html">
+   83. Coupling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/cohesion.html">
+   84. Cohesion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/refactoring.html">
+   85. Refactoring
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/design-principles.html">
+   86. Design principles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/single-responsibility-principle.html">
+   87. Single responsibility principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/interface-segregation-principle.html">
+   88. Interface segregation principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/deep-classes.html">
+   89. Deep classes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/types-over-tests.html">
+   90. Types over tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/define-errors-out-of-existence.html">
+   91. Define errors out of existence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/liskov-substitution-principle.html">
+   92. Liskov substitution principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/open-closed-principle.html">
+   93. Open-closed principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/dependency-inversion-principle.html">
+   94. Dependency inversion principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/composition-over-inheritance.html">
+   95. Composition over inheritance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/documentation-driven-development.html">
+   96. Documentation-driven development
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Advanced object oriented programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/design-patterns.html">
+   97. Design patterns
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/strategy-pattern.html">
+   98. Strategy pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/delegates.html">
+   99. Delegates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/adapter-pattern.html">
+   100. Adapter pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/bridge-pattern.html">
+   101. Bridge pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/lambdas.html">
+   102. Lambdas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/abstract-factory-pattern.html">
+   103. Abstract factory pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/iterator-pattern.html">
+   104. Iterator pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/enumerators.html">
+   105. Enumerators
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/indexers.html">
+   106. Indexers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/linq.html">
+   107. LINQ
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/observer-pattern.html">
+   108. Observer pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/events.html">
+   109. Events
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/visitor-pattern.html">
+   110. Visitor pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/pattern-matching.html">
+   111. Pattern matching
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/reading.html">
+   Suggested reading
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapters/bibliography.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/chrokh/the-oo-way/issues/new?title=Issue%20on%20page%20%2Findex.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-you-will-learn">
+   What you will learn
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-this-book">
+   Why this book
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#about-the-author">
+   About the author
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-you-must-know">
+   What you must know
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#join-the-community">
+   Join the community
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#video-lectures">
+   Video lectures
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#free-book">
+   Free book
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#contributions">
+   Contributions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#technicalities">
+   Technicalities
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-object-oriented">
+   Why object oriented
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>The Object Oriented Way</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-you-will-learn">
+   What you will learn
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-this-book">
+   Why this book
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#about-the-author">
+   About the author
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-you-must-know">
+   What you must know
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#join-the-community">
+   Join the community
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#video-lectures">
+   Video lectures
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#free-book">
+   Free book
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#contributions">
+   Contributions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#technicalities">
+   Technicalities
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-object-oriented">
+   Why object oriented
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="the-object-oriented-way">
+<h1>The Object Oriented Way<a class="headerlink" href="#the-object-oriented-way" title="Permalink to this headline">#</a></h1>
+<p>Welcome to <em><strong>The Object Oriented Way: Everything you need to know</strong></em>.
+This book takes you all the way from elementary fundamentals to the most sophisticated ideas.
+Our goal is for this book to be the number one resource for learning object oriented programming using C#.</p>
+<div class="tip admonition">
+<p class="admonition-title">Top tip</p>
+<p>Every bite-sized chapter builds upon the previous ones so if something is too difficult, follow the references backwards and read earlier chapters.
+Start with whatever peaks your interest.
+Browse the table of contents, or use the search box.</p>
+</div>
+<section id="what-you-will-learn">
+<h2>What you will learn<a class="headerlink" href="#what-you-will-learn" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p>How to <strong>solve problems</strong> in an object oriented style.</p></li>
+<li><p>How solutions from <strong>other paradigms</strong> are approached in object oriented programming.</p></li>
+<li><p>The most important design <strong>patterns</strong>, design <strong>principles</strong>, and code <strong>smells</strong>.</p></li>
+<li><p>How design patterns reveal <strong>inherent limitations</strong> of object oriented languages.</p></li>
+<li><p>Why object orientation ought to eventually be replaced by functional programming.</p></li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This book is a <em>work in progress</em>.
+If you find errors or have suggestions you are more than welcome to <a class="reference external" href="https://github.com/chrokh/the-oo-way/issues/new">submit an issue</a> in the book’s repository on GitHub.</p>
+<p>In the table of contents, chapter titles marked with 🟢 are mostly completed but might be missing images and some content.
+Titles marked with 🟠 contain some content but is very much a work in progress.
+Titles marked with 🔴 only contain a rough todo list and are not ready for consumption.</p>
+</div>
+</section>
+<section id="why-this-book">
+<h2>Why this book<a class="headerlink" href="#why-this-book" title="Permalink to this headline">#</a></h2>
+<p>In this book we unapologetically untangle everything that needs to be untangled to establish a <em>useful</em> understanding of object oriented programming.
+No questions may be left unanswered if they help you understand why and thereby can become a better programmer.</p>
+<p>I teach two undergraduate courses on object oriented programming using C#.
+After having been involved in object oriented education for about 10 years I figured it was time to write a book that teaches object oriented programming <strong>the way I wish I would have been taught it</strong>.</p>
+<p>In this book we’re aiming for <strong>breadth rather then depth</strong>.
+It is my belief that our understanding anything is significantly improved by exploring what is in the periphery of that thing.
+We’re not going to talk about memory management or vtables.
+There’s far too much ground to cover to get bogged down by such details.</p>
+<p>It should be noted that many of the ideas in this book are not <em>only</em> related to object-oriented programming but apply to multiple paradigms.
+Think of it this way: This book contains all the ideas that I argue are useful to know if you want to become a top level object oriented programmer.</p>
+</section>
+<section id="about-the-author">
+<h2>About the author<a class="headerlink" href="#about-the-author" title="Permalink to this headline">#</a></h2>
+<figure class="align-right" id="fig-author">
+<a class="reference internal image-reference" href="../images/author.png"><img alt="../images/author.png" src="../images/author.png" /></a>
+</figure>
+<p>My name is Christopher Okhravi and I’m a <a class="reference external" href="https://katalog.uu.se/profile/?id=N12-1461">senior lecturer</a> at the department of Informatics and Media at Uppsala University.
+My <a class="reference external" href="http://urn.kb.se/resolve?urn=urn:nbn:se:uu:diva-417037">Ph.D. thesis</a> concerns the use of compositional contracts for modeling policy interventions aimed at stimulating antibiotic development.
+I also run a fairly successful <a class="reference external" href="https://youtube.com/c/christopherokhravi">YouTube channel</a>, with well over 100,000 subscribers, on the topic of programming.</p>
+</section>
+<section id="what-you-must-know">
+<h2>What you must know<a class="headerlink" href="#what-you-must-know" title="Permalink to this headline">#</a></h2>
+<p>If you read this book from the first page to the last then you will be given all the tools you need to understand the contents within.
+We start with the fundamentals and then build from there.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You don’t need to know <strong>anything</strong> about programming to read this book.
+We are here to learn.</p>
+</div>
+<p>You are however expected to have some understanding of elementary algebra.
+You must be able to read a mathematical function such as <span class="math notranslate nohighlight">\(f(x) = x * 2\)</span>.
+If you think of yourself as “not a math person”, don’t worry, there is (almost) no math in this book.
+Nevertheless, math is an excellent tool when it comes to reason about things in a more precise manner.
+It is not complicated and you, yes you, will understand.</p>
+</section>
+<section id="join-the-community">
+<h2>Join the community<a class="headerlink" href="#join-the-community" title="Permalink to this headline">#</a></h2>
+<p>I am looking into creating a private community where we can discuss the contents with me and other readers of this book.
+Unless the donations for this book are increased this might have to be a paid community to be sustainable.
+If you have thoughts around the creation of a community, please feel free to reach out to me at <a class="reference external" href="mailto:christopher&#46;okhravi&#37;&#52;&#48;gmail&#46;com">christopher<span>&#46;</span>okhravi<span>&#64;</span>gmail<span>&#46;</span>com</a>.</p>
+<p>To enable the creation of a private community, please consider <a class="reference external" href="https://patreon.com/christopherokhravi">supporting my work</a>.</p>
+</section>
+<section id="video-lectures">
+<h2>Video lectures<a class="headerlink" href="#video-lectures" title="Permalink to this headline">#</a></h2>
+<p>Eventually I will release video lectures for each chapter in this book.
+Feel free to subscribe to my <a class="reference external" href="https://youtube.com/c/christopherokhravi">YouTube channel</a> and hit the bell to be notified when this happens.</p>
+<p>To enable the production of video lectures, please consider <a class="reference external" href="https://patreon.com/christopherokhravi">supporting my work</a>.</p>
+</section>
+<section id="free-book">
+<h2>Free book<a class="headerlink" href="#free-book" title="Permalink to this headline">#</a></h2>
+<p>I am publishing this book online for free because object oriented programming has been around for so long that it’s time to make sure everyone has free access to these ideas.
+If you believe in my mission then I truly appreciate if you <a class="reference external" href="https://patreon.com/christopherokhravi">support my work on Patreon</a>.</p>
+<p>To enable the continued development of this book, please consider <a class="reference external" href="https://patreon.com/christopherokhravi">supporting my work</a>.</p>
+<p>I must also disclose that some links in this book are affiliate links which means that I make a small commission if you happen to purchase whatever is behind the link.
+However, all links in this book are here for pedagogical reasons and pedagogical reasons only.</p>
+<p>If you are reading this as a student of Uppsala University then most of the linked literature is available online <em>for free</em> via <a class="reference external" href="https://ub.uu.se">Uppsala University Library</a>.
+If studying at a different university, do check whether your library has a similar arrangement.</p>
+</section>
+<section id="contributions">
+<h2>Contributions<a class="headerlink" href="#contributions" title="Permalink to this headline">#</a></h2>
+<p>If you appreciate what I do here, there are three ways to help.</p>
+<ol class="simple">
+<li><p>Share the book with a friend or on social media.</p></li>
+<li><p>Submit feedback via <a class="reference external" href="https://github.com/chrokh/the-oo-way/issues/new">GitHub</a>.</p></li>
+<li><p>Send your donation via <a class="reference external" href="https://patreon.com/christopherokhravi">Patreon</a>.</p></li>
+</ol>
+</section>
+<section id="technicalities">
+<h2>Technicalities<a class="headerlink" href="#technicalities" title="Permalink to this headline">#</a></h2>
+<p>The code in this book is written in C# 10 which means that you need at least .NET 6.
+Earlier versions of .NET did, for example, not support what is known as top-level statements so if you are following an earlier version of .NET and want to follow along with the examples in this book you might have to adapt them.
+Please refer to the <a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/configure-language-version">documentation</a> for more information on versions.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Use C# 9.0 and .NET5 or .NET6.</p>
+</div>
+<p>This book does not cover how to install .NET and a text editor or what is known as an Integrated Development Environment (IDE).
+Instead we recommend that you follow the <a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/core/install/">installation instructions</a> for your platform given in the official documentation.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>If you are interested in the history of C#, what it looked like in the beginning, and what has changed with each version, there’s a page in the documentation called <a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history">The history of C#</a>.</p>
+</div>
+<p>If you are new to programming I would recommend that you either use Visual Studio or Visual Studio Code.
+If you have been programming before and already have a favourite text editor such as Sublime Text, Atom, Vim, or Emacs then I highly recommend that you stick to that editor and simply compile and run your files using the <code class="docutils literal notranslate"><span class="pre">dotnet</span></code> binary.
+We will talk more about the compilation [<a class="reference internal" href="chapters/compilation.html#compilation"><span class="std std-numref">Chapter 8</span></a>] and execution [<a class="reference internal" href="chapters/execution.html#execution"><span class="std std-numref">Chapter 9</span></a>] later.</p>
+<p>All programs that we write in this book are, what is known as, console applications.
+Meaning that they run inside a Command Line Interpretor (CLI) such as <code class="docutils literal notranslate"><span class="pre">bash</span></code> or <code class="docutils literal notranslate"><span class="pre">zsh</span></code> on OS X, or <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code> on Windows.
+Don’t worry if not all of this makes sense yet.</p>
+</section>
+<section id="why-object-oriented">
+<h2>Why object oriented<a class="headerlink" href="#why-object-oriented" title="Permalink to this headline">#</a></h2>
+<p>It is my belief that most programmers will eventually switch to functional programming [<a class="reference internal" href="chapters/paradigms.html#paradigms"><span class="std std-numref">Chapter 22</span></a>] unless artificial intelligence (AI) manages to replace us all before.
+Why do I believe this?
+Because I hold that the functional programming paradigm is superior to that of object oriented programming.</p>
+<p>Why do I believe that functional programming is superior?
+Because concepts such as higher order functions, currying, pattern matching, algebraic data types, and parametric polymorphism are at the heart of functional programming.
+The object oriented concepts of classes and subtype polymorphism are simply not powerful enough in comparison.</p>
+<p>So why bother learning an object oriented language?
+Well, we’re not there yet.
+Object oriented programming is by no means dead, and C# is very much alive and is a very popular language in industry.</p>
+<p>Moreover, C# is a multi-paradigm language so many problems are easier to solve today because C# has borrowed ideas from the functional paradigm.
+We’ll talk about lambdas [<a class="reference internal" href="chapters/lambdas.html#lambdas"><span class="std std-numref">Chapter 102</span></a>], LINQ [<a class="reference internal" href="chapters/linq.html#linq"><span class="std std-numref">Chapter 107</span></a>], and pattern matching [<a class="reference internal" href="chapters/pattern-matching.html#pattern-matching"><span class="std std-numref">Chapter 111</span></a>] much later.</p>
+<p>Nevertheless, part of the reason that I publish this work online for free is that I hope to contribute to the eventual death of object oriented programming.
+Object orientation was a fun exercise, but it’s time to move on.</p>
+<p>However, the only way we can learn to not repeat the mistakes of history is by understanding our history.
+So by learning all the ins and outs of object oriented programming I hope that you too will become a subscriber to the idea that objects and subtype polymorphism is not powerful enough.</p>
+<p>But don’t despair.
+Subtype polymorphism is both powerful and very interesting.
+It all depends on what you compare it to.
+Welcome to the magical world of programming.
+Down the rabbit hole we go.</p>
+</section>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h2>
+<p>How is the book structured?
+This book is meant to be read linearly.
+Start from the first chapter and keep reading.
+I have spent an enormous amount of time trying to figure out how one can learn object oriented programming, step by step, without having to jump back and forth.</p>
+<p>Unlike many other technical books I have chosen to keep the table of contents flat.
+This means that there is a huge number of chapters but it also means that finding what you are looking for should be much easier.
+I have tried my best to make every important concept a top-level chapter.</p>
+<p>Every chapter contains exam-like exercises that range from questions of theoretical definitions, to mini-essays, to practical programming exercises.
+The exercises look like this:</p>
+<div class="exercise admonition" id="index-exercise-0">
+
+<p class="admonition-title"><span class="caption-number">Exercise 1 </span></p>
+<section id="exercise-content">
+<p>Can you find the next exercise in the book?</p>
+</section>
+</div>
+<p>The book is divided into the following five major parts.</p>
+<ul class="simple">
+<li><p><span class="xref std std-doc">Part I: Fundamentals</span><br />
+In this part we lay the foundation necessary to talk about object oriented programming. We talk about sets, functions, computation, data types, paradigms, and so forth.</p></li>
+<li><p><span class="xref std std-doc">Part II: Procedural programming</span><br />
+To understand object oriented programming we must first understand procedural programming. Here we talk about statements, expressions, selection, iteration, arrays, procedures, recursion, and so forth.</p></li>
+<li><p><span class="xref std std-doc">Part III: Object oriented programming</span><br />
+This part is the heart of the book. This is where we learn the core ideas of object oriented programming.</p></li>
+<li><p><span class="xref std std-doc">Part IV: Object oriented design</span><br />
+In this part, we move from programming to design. We look at the forest instead of the trees and start thinking about how to provide value using our newfound programming skills.</p></li>
+<li><p><span class="xref std std-doc">Part V: Advanced object oriented programming</span><br />
+In this last part of the book we explore more advanced object oriented ideas and also ideas from other paradigms that have been adopted in the object oriented paradigm.</p></li>
+</ul>
+<p>I hope you are ready, let’s get started.</p>
+<!--
+## Testimonials
+
+```{epigraph}
+The way he teaches, the rawness, the sheer commitment to make a particular point clear is remarkable.
+
+-- @rajatexplains on Twitter
+```
+
+```{epigraph}
+I wish all my professors were like you.
+
+-- Comment on YouTube channel
+```
+
+```{epigraph}
+Why didn't I discover Christopher's videos earlier in my life??
+
+-- @atpollmann on Twitter
+```
+-->
+<!---
+---
+
+Want to truly understand object oriented programming?
+This is a book on object oriented programming.
+Learn how to write object oriented programs designed to provide as much value as possible as fast as possible without compromising future value.
+
+
+We start from fundamentals and build knowledge step by step. In the end you will have a great understanding of not only object oriented programming but also many things on the way.
+
+In this book we are not asking what a beautiful program looks like and we are not asking what a technically efficient program (in terms of space time complexity) looks like. In this book we are exploring how to write programs that provide value today while still allowing us to keep providing value in the future.
+
+If you want to become a programmer, an architect, a designer, or a modeller of object oriented systems, then you are in the right place.
+
+```{admonition} Video lectures
+<i class="bi bi-youtube card-img-top"></i>
+Every chapter is accompanied by a video lecture covering the same topic. **Coming soon**.
+```
+
+## Testimonials
+
+```{epigraph}
+The way he teaches, the rawness, the sheer commitment to make a particular point clear is remarkable.
+
+-- @rajatexplains on Twitter
+```
+
+```{epigraph}
+I wish all my professors were like you.
+
+-- Comment on YouTube channel
+```
+
+```{epigraph}
+Why didn't I discover Christopher's videos earlier in my life??
+
+-- @atpollmann on Twitter
+```
+
+-->
+</section>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='right-next' id="next-link" href="chapters/sets.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Sets</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Christopher Okhravi<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

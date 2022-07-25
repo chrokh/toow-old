@@ -11,3 +11,10 @@
   - Towers of Hanoi [{numref}`Chapter %s<algorithms>`].
 - Parameterization
 - Documentation comments.
+- Types of methods
+  - `WriteLine : String -> void`
+- Is string interpolation syntactic sugar for `String.Format`?
+- Exercises
+  - Write a method that greets a name that you pass.
+  - Write a method that computes the hypothenuse.
+  - Write a method that converts a `string?` to a `string`. Tie back to the nullable discussion in the chapter on [data types](data-types).

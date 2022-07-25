@@ -23,7 +23,8 @@ We simply need to understand:
 1. Sets.
 2. Members.
 3. Subsets.
-4. Cartesian products.
+4. Unions.
+5. Cartesian products.
 
 So what is a set?
 A set is a collection of elements, which we will refer to as members.

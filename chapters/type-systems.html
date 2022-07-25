@@ -1,0 +1,1052 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>17. Type systems &#8212; The Object Oriented Way</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="18. Nothingness" href="nothingness.html" />
+    <link rel="prev" title="16. Data types" href="data-types.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">The Object Oriented Way</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search" aria-label="Search" autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Fundamentals
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="sets.html">
+   1. 🟠 Sets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="functions.html">
+   2. 🟢 Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="algorithms.html">
+   3. 🟠 Algorithms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="computation.html">
+   4. 🟠 Computation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="terminals.html">
+   5. 🔴 Terminals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="syntax.html">
+   6. 🟢 Syntax
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="semantics.html">
+   7. 🟢 Semantics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="compilation.html">
+   8. 🟠 Compilation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="execution.html">
+   9. 🟢 Execution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="interpretation.html">
+   10. 🟢 Interpretation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="errors.html">
+   11. 🟢 Errors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="documentation.html">
+   12. 🔴 Documentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="comments.html">
+   13. 🟢 Comments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="values.html">
+   14. 🟢 Values
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="variables.html">
+   15. 🟢 Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="data-types.html">
+   16. 🟠 Data types
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   17. 🟠 Type systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nothingness.html">
+   18. 🟠 Nothingness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="type-hierarchy.html">
+   19. 🔴 Type hierarchy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="abstraction.html">
+   20. 🔴 Abstraction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="indirection.html">
+   21. 🔴 Indirection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="paradigms.html">
+   22. 🔴 Paradigms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="business-logic.html">
+   23. 🔴 Business logic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="debugging.html">
+   24. 🔴 Debugging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="io.html">
+   25. 🔴 I/O
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Procedural programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="statements.html">
+   26. Statements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="expressions.html">
+   27. Expressions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="operators.html">
+   28. Operators
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="type-conversions.html">
+   29. Type conversions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arrays.html">
+   30. Arrays
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="syntactic-sugar.html">
+   31. Syntactic sugar
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="indentation.html">
+   32. Indentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="selection.html">
+   33. Selection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="iteration.html">
+   34. Iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="constants.html">
+   35. Constants
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mutability.html">
+   36. Mutability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="value-and-reference-semantics.html">
+   37. Value and reference semantics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simple-types.html">
+   38. Simple types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="static-methods.html">
+   39. Static methods (procedures)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="purity.html">
+   40. Purity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="static-classes.html">
+   41. Static classes (Modules)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="data-structures.html">
+   42. Data structures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="composition.html">
+   43. Composition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="overloading.html">
+   44. Overloading
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="recursion.html">
+   45. Recursion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="scope.html">
+   46. Scope
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="namespaces.html">
+   47. Namespaces
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="basic-exceptions.html">
+   48. Exceptions (part 1)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="stack-traces.html">
+   49. Stack traces
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Object oriented programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pillars.html">
+   50. Pillars
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="objects.html">
+   51. Objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classes.html">
+   52. Classes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="fields.html">
+   53. Fields
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="constructors.html">
+   54. Constructors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="instance-methods.html">
+   55. Instance methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="instance-variables.html">
+   56. Instance variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="basic-access-modifiers.html">
+   57. Access modifiers (basic).
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="properties.html">
+   58. Properties
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="object-composition-1.html">
+   59. Direct object composition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="object-composition-2.html">
+   60. Indirect object composition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="immutable-objects.html">
+   61. Immutable objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="interfaces.html">
+   62. Interfaces
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subtype-polymorphism.html">
+   63. Subtype polymorphism
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inheritance.html">
+   64. Inheritance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="overriding.html">
+   65. Overriding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hiding.html">
+   66. Hiding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="advanced-access-modifiers.html">
+   67. Access modifiers (advanced)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="object-type-conversions.html">
+   68. Type conversions (of objects)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="advanced-exceptions.html">
+   69. Advanced exceptions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="static.html">
+   70. Static
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="prototypes.html">
+   71. Prototypes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="object-composition-3.html">
+   72. Abstract indirect object composition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="base-class-library.html">
+   73. Base class library
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="boxing.html">
+   74. Boxing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="structure-types.html">
+   75. Structure types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="generics.html">
+   76. Generics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="variance.html">
+   77. Variance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="business-objects.html">
+   78. Business objects
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Object oriented design
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="requirements.html">
+   79. Requirements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="correctness.html">
+   80. Correctness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="maintainability.html">
+   81. Maintainability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="code-smells.html">
+   82. Code smells and anti-patterns
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="coupling.html">
+   83. Coupling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cohesion.html">
+   84. Cohesion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="refactoring.html">
+   85. Refactoring
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="design-principles.html">
+   86. Design principles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="single-responsibility-principle.html">
+   87. Single responsibility principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="interface-segregation-principle.html">
+   88. Interface segregation principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="deep-classes.html">
+   89. Deep classes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="types-over-tests.html">
+   90. Types over tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="define-errors-out-of-existence.html">
+   91. Define errors out of existence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="liskov-substitution-principle.html">
+   92. Liskov substitution principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="open-closed-principle.html">
+   93. Open-closed principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dependency-inversion-principle.html">
+   94. Dependency inversion principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="composition-over-inheritance.html">
+   95. Composition over inheritance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="documentation-driven-development.html">
+   96. Documentation-driven development
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Advanced object oriented programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="design-patterns.html">
+   97. Design patterns
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="strategy-pattern.html">
+   98. Strategy pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="delegates.html">
+   99. Delegates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="adapter-pattern.html">
+   100. Adapter pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bridge-pattern.html">
+   101. Bridge pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lambdas.html">
+   102. Lambdas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="abstract-factory-pattern.html">
+   103. Abstract factory pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="iterator-pattern.html">
+   104. Iterator pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="enumerators.html">
+   105. Enumerators
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="indexers.html">
+   106. Indexers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linq.html">
+   107. LINQ
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="observer-pattern.html">
+   108. Observer pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="events.html">
+   109. Events
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="visitor-pattern.html">
+   110. Visitor pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pattern-matching.html">
+   111. Pattern matching
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="reading.html">
+   Suggested reading
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bibliography.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/chrokh/the-oo-way/issues/new?title=Issue%20on%20page%20%2Fchapters/type-systems.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#type-checking">
+   17.1. Type-checking
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#static-vs-dynamic">
+   17.2. Static vs dynamic
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#manifest-vs-inferred">
+   17.3. Manifest vs inferred
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nominal-vs-structural">
+   17.4. Nominal vs structural
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Type systems</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#type-checking">
+   17.1. Type-checking
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#static-vs-dynamic">
+   17.2. Static vs dynamic
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#manifest-vs-inferred">
+   17.3. Manifest vs inferred
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nominal-vs-structural">
+   17.4. Nominal vs structural
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="type-systems">
+<h1><span class="section-number">17. </span>Type systems<a class="headerlink" href="#type-systems" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>Types of type systems</p>
+<ul>
+<li><p>Static vs dynamic</p></li>
+<li><p>Manifest vs inferred</p></li>
+<li><p>Nominal vs structural</p></li>
+</ul>
+</li>
+<li><p>Modeling</p>
+<ul>
+<li><p>Later we will talk about making impossible states impossible. Types over tests.</p></li>
+<li><p>Refer to Modeling (abstraction) chapter.</p></li>
+<li><p>IMPORTANT: <a class="reference external" href="https://maximilianocontieri.com/the-one-and-only-software-design-principle">https://maximilianocontieri.com/the-one-and-only-software-design-principle</a></p>
+<ul>
+<li><p>“The one and only software design principle”</p></li>
+<li><p>“The bijection rule”</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<section id="type-checking">
+<h2><span class="section-number">17.1. </span>Type-checking<a class="headerlink" href="#type-checking" title="Permalink to this headline">#</a></h2>
+<p>As we briefly saw in the chapter on <a class="reference internal" href="errors.html#errors"><span class="std std-ref">Errors</span></a>, type checking is an activity performed by the compiler.
+In the process of type checking the compiler ensures that the program is sound on the type level.
+Concretely this means that the compiler checks what type that every <a class="reference internal" href="expressions.html#expressions"><span class="std std-ref">expression</span></a> will evaluate to and whether that type is acceptible at the place where it will be evaluated.</p>
+<p>A “type error” means that we’ve expressed something where the <em>types</em> don’t “line up”.
+If we try, for example, to use a value of a type that is not <code class="docutils literal notranslate"><span class="pre">bool</span></code>, and that cannot be implicitly converted to <code class="docutils literal notranslate"><span class="pre">bool</span></code>, where a <code class="docutils literal notranslate"><span class="pre">bool</span></code> is expected then we get a type error.
+More on implicit conversions in the chapter on <a class="reference internal" href="type-conversions.html"><span class="doc std std-doc">type conversions</span></a>.
+Let’s say we were attempting to assign, say a value of type integer, to a variable of type boolean.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">predicate</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Then the compilation error would say:</p>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">Cannot implicitly convert type &#39;int&#39; to &#39;bool&#39;.</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">int</span></code> that the error message refers to is the literal value <code class="docutils literal notranslate"><span class="pre">1</span></code> on the right-hand side of our erronous statement.
+The <code class="docutils literal notranslate"><span class="pre">bool</span></code> that the error message refers to is the variable named <code class="docutils literal notranslate"><span class="pre">predicate</span></code> on the left-hand side of our erronous statement.
+Conversion errors in C# conventionally follow this form.
+Type <span class="math notranslate nohighlight">\(X\)</span> cannot be converted to type <span class="math notranslate nohighlight">\(Y\)</span> means that we have something of type <span class="math notranslate nohighlight">\(X\)</span> and we are trying to convert it into something of type <span class="math notranslate nohighlight">\(Y\)</span> but the conversion was unsuccessful.</p>
+<p>Of course it is entirely possible to define your own conversion from <code class="docutils literal notranslate"><span class="pre">int</span></code> to <code class="docutils literal notranslate"><span class="pre">bool</span></code> but that’s an entirely different matter and we’ll see more of this in the chapter on <a class="reference internal" href="type-conversions.html"><span class="doc std std-doc">type conversions</span></a>.</p>
+<p>On the type level, here’s (informally) what the type-checker sees when we tried to assign an integer to a boolean.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">bool</span> <span class="o">=</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>This doesn’t type check since the type on the right-hand side of the assignment must be implicitly convertible to the type on the left-hand side.
+Let’s say we instead used a boolean literal on the right-hand side:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">predicate</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Now the type-checker would (informally) have seen something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">bool</span> <span class="o">=</span> <span class="nb">bool</span>
+</pre></div>
+</div>
+<p>This does of course type check and the program hence compiles.</p>
+<p>But it’s not just in variable assignment that we can mess up the types.
+What happens if we attempt to use a string (meaning a sequence of characters) in arithmetic addition?
+Consider the following statement:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="m">3</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In this example we are declaring a variable of type <code class="docutils literal notranslate"><span class="pre">int</span></code> and initializing it with a value that’s the result of arithmetically adding a <code class="docutils literal notranslate"><span class="pre">string</span></code> and an <code class="docutils literal notranslate"><span class="pre">int</span></code>.
+On the type level, here’s what the type-checker sees:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="o">=</span> <span class="p">(</span><span class="n">string</span> <span class="o">+</span> <span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This doesn’t type check since the arithmetic addition operator (<code class="docutils literal notranslate"><span class="pre">+</span></code>) does not accept <code class="docutils literal notranslate"><span class="pre">string</span></code>.
+Let us instead consider a statement like:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="m">3</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Now the type-checker would see something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span> <span class="o">+</span> <span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This of course does type check and the program ocmpiles.
+An integer added to an integer results in an integer which we then assign to an integer variable.</p>
+<p>The right-hand side in the arithmetic examples above is called an <a class="reference internal" href="expressions.html#expressions"><span class="std std-ref">expression</span></a> and we’ll learn more about these in a separate chapter.</p>
+</section>
+<section id="static-vs-dynamic">
+<h2><span class="section-number">17.2. </span>Static vs dynamic<a class="headerlink" href="#static-vs-dynamic" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Static vs dynamic typing. Strong vs weak.</p>
+<ul>
+<li><p>“Statically typed languages perform type checking at compile-time, while dynamically-typed languages perform type checking at run-time”</p></li>
+</ul>
+</li>
+<li><p>Reflection.</p></li>
+</ul>
+</section>
+<section id="manifest-vs-inferred">
+<h2><span class="section-number">17.3. </span>Manifest vs inferred<a class="headerlink" href="#manifest-vs-inferred" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Implicitly typed local variable</p></li>
+<li><p><a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/var">https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/var</a></p></li>
+</ul>
+</section>
+<section id="nominal-vs-structural">
+<h2><span class="section-number">17.4. </span>Nominal vs structural<a class="headerlink" href="#nominal-vs-structural" title="Permalink to this headline">#</a></h2>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="data-types.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">16. </span>Data types</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="nothingness.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">18. </span>Nothingness</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Christopher Okhravi<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

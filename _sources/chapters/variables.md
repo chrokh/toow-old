@@ -1,4 +1,3 @@
-(variables)=
 # Variables
 
 A variable is a symbolic name that points to a, possibly changing, value.
@@ -38,7 +37,7 @@ When we create a variable we say that we "declare" it.
 Declaring a variable is as simple as stating the {doc}`data type<data-types>` (more on types later) of the variable followed by the symbolic name that we want to use to refer to the variable.
 
 ```csharp
-string author;
+String author;
 int numberOfApples;
 ```
 
@@ -80,10 +79,20 @@ Show at least two different ways of doing this.
 
 | Name        | Data type | Value        |
 | :--         | :--       | :--          |
-| `message`   | `string`  | `"Hello"`    |
-| `role`      | `string`  | `"CUSTOMER"` |
+| `message`   | `String`  | `"Hello"`    |
+| `role`      | `String`  | `"CUSTOMER"` |
 | `count`     | `int`     | `"42"`       |
-| `available` | `bool`    | `true`       |
+| `available` | `Boolean` | `true`       |
+```
+
+```{note}
+At this point you might be wondering why all data types we've seen up to this point starts with a capital letter except for `int`.
+This is because `int` is an alias for the type `Int32`.
+Aliases are defined for more basic types sych as `string`, `bool`, `double`, and so forth.
+More on aliases in the chapters on [data types](data-types) and [namespaces](namespaces).
+
+You can find a table of more aliases [in the documentation](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types).
+The aliases are, [according to the documentation](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/strings/), preferred since we don't have to explicitly include the namespace `System` to have access to them.
 ```
 
 
@@ -199,6 +208,18 @@ x1 = x2 = x3 = 100;
 At first glance you might think that this is some special syntax.
 However, this is merely a consequence of the fact that (1) assignment is an expression that evaluates to the value of the association and that (2) the assignment expression is right-associative.
 
+We can easily show that assignment expressions evaluates to the value they are assigning by simply printing an assignment expression.
+In the statement below we are printing the result of assigning the value `9` to the variable `x`.
+As expected, the output will be `9`.
+
+```csharp
+Console.WriteLine(x = 9);
+```
+
+```csharp
+9
+```
+
 Right-associative means that we evaluate what's on the right-hand side before we move to the left.
 This is should be more clear if we explicitly write out the parentheses.
 
@@ -245,7 +266,7 @@ Let's rewrite our previous variable declarations so that we not only declare but
 
 ```csharp
 int numberOfCats = 2;
-string author = "Chris";
+String author = "Chris";
 ```
 
 If we initialize the variable immediately upon declaration then we can use the `var` keyword to infer the type.
@@ -335,6 +356,7 @@ Constants only guard against us changing not against others being changed.
 
 If your alarm bells are going off and your thinking that this whole mutation business sounds quite dangerous then you're in good company.
 Mutation is, tongue in cheek, sometimes called the "root of all evil".
+Mutation is one reason that some professionals (myself included) have given up hope on object oriented programming in favor of functional programming.
 
 More on mutation later.
 But for now, be aware that you cannot depend on the value of a constant remaining constant.

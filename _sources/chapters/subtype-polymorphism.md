@@ -20,6 +20,7 @@
 %  - Structural gives rise to:
 %    - Depth subtyping
 %    - Width subtyping
+%- Tie back to discussion in [Data types](data-types) on run-time and compile-time types.
 
 % "In a language with structural subtyping, a type U is a subtype of T if its methods and fields are a superset of T’s methods and fields. The interface of a class is simply its public fields and methods; there is no need to declare a separate interface type. In a language with nominal subtyping, on the other hand, U is a subtype of T if and only if it is declared to be. Accordingly, structural subtyping can be considered intrinsic, while nominal subtyping is declarative. Each kind of subtyping has its merits, but a formal model has not been developed for a language that integrates the two subtyping disciplines."
 % https://www.cs.cmu.edu/~aldrich/papers/ecoop08.pdf
