@@ -50,7 +50,7 @@ Think of it this way: This book contains all the ideas that I argue are useful t
 
 ## About the author
 
-```{figure} ../images/author.png
+```{figure} images/author.png
 :name: fig:author
 :scale: 50%
 :align: right
