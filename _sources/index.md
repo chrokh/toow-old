@@ -23,11 +23,11 @@ Browse the table of contents, or use the search box.
 
 ```{warning}
 This book is a *work in progress*.
-If you find errors or have suggestions you are more than welcome to [submit an issue](https://github.com/chrokh/the-oo-way/issues/new) in the book's repository on GitHub.
+If you find errors or have suggestions you are more than welcome to [submit an issue](https://github.com/chrokh/the-oo-way/issues/new) in the book's repository on GitHub or reach out to me via email at christopher.okhravi@gmail.com.
 
 In the table of contents, chapter titles marked with 🟢 are mostly completed but might be missing images and some content.
 Titles marked with 🟠 contain some content but is very much a work in progress.
-Titles marked with 🔴 only contain a rough todo list and are not ready for consumption.
+Titles without any of the two markers only contain a rough todo list and are not ready for consumption.
 ```
 
 
@@ -133,8 +133,8 @@ The code in this book is written in C# 10 which means that you need at least .NE
 Earlier versions of .NET did, for example, not support what is known as top-level statements so if you are following an earlier version of .NET and want to follow along with the examples in this book you might have to adapt them.
 Please refer to the [documentation](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/configure-language-version) for more information on versions.
 
-```{important}
-Use C# 9.0 and .NET5 or .NET6.
+```{warning}
+Use C# 10 and .NET 6 to follow along with the code in this book.
 ```
 
 This book does not cover how to install .NET and a text editor or what is known as an Integrated Development Environment (IDE).
@@ -284,3 +284,8 @@ Why didn't I discover Christopher's videos earlier in my life??
 ```
 
 -->
+
+## Privacy
+
+By using this site you accept that we store cookies on your device that are sent to Google Analytics.
+
