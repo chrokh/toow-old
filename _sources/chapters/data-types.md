@@ -1,13 +1,16 @@
 (data-types)=
 # Data types
 
-A data type defines a set of possible values and a set of operations we can perform upon it.
+A data type defines a set of possible values and a set of operations we can perform upon the values.
 As we saw in the chapter on [Variables](variables), variables have types.
 As we will see in the chapters on [Static methods](static-methods) and [Instance methods](instance-methods) all method parameters have types and all methods have a return type (including methods that return nothing).
 Methods correspond to the operations that we can perform on types.
 As we will see in the chapter on [Classes](classes) and [Structure types](structure-types), these are used to define custom data types that can be used in variables or methods.
 In this chapter we dicsuss types in general, and give examples using variables.
 
+```{important}
+A data type defines a set of possible values and a set of operations we can perform upon the values.
+```
 
 
 ## Values
@@ -127,7 +130,7 @@ A lot of new words here.
 Don't worry, we'll explain everything in due time.
 For now, just note that it is possible to check what the run-time type is of any object by invoking the `GetType()` method.
 More on both instance methods and objects in future chapters.
-We invoke the method using something known as "dot-notation" which we also will discuss later.
+We invoke the method using something known as "dot notation" which we also will discuss later.
 
 ```csharp
 Console.WriteLine( "A".GetType()  );
@@ -141,7 +144,8 @@ System.Int32
 System.Double
 ```
 
-When calling `GetType` on `"hello world"`, `42`, and `3.14` we can see that their types are `String`, `Int32`, and `Double`.
+When calling `GetType` on `"hello world"`, `42`, and `3.14` we can see that their types are `String`, `Int32`, and `Double`, respectively.
+
 
 ```{note}
 Note that there are aliases for a bunch of the basic types of C#.
@@ -214,9 +218,149 @@ System.Boolean
 
 ## Operations
 
-A type defines a set of allowed operations.
+We said that a data type defines a set of values and a set of allowed operations that can be performed on these values.
+Let's now talk about the second part of that statement, namely the operations.
 
-- Dot notation or operator-based expressions. Both are [expressions](expressions).
-- Exemplify with how we've used `.GetType()` above and `int + int` but possibly also string concatenation.
+In general, there are two kinds of operations that a type can support in C#.
+An operation can either be invoked via, so called, "dot notation" or by using an "operator".
+Which one we use, depends on how the operation is defined.
+If it's been defined as a (static or instance) method then we use dot notation.
+If it's been defined as an operator then we use operator notation.
+
+We'll more about dot notation in the chapters on [static](static-methods) and [instance methods](instance-methods) while we'll talk more about operators in the chapter on [operators](operators).
+Perhaps confusingly, both dot notation and operators is used in what's known as [expressions](expressions) but we'll talk more about that in it's own chapter.
+
+It's premature to talk about all of this since we haven't yet established what methods are.
+However let me just quickly show you how we can interpret operations on the type level.
+Again, we'll talk much more about this later.
+
+
+### Operators
+
+Let's first talk about operators.
+In this chapter we have used values in arithmetic and logical expressions.
+More specifically we've seen that the type `int` supports the arithmetic addition (`+`) and multiplication (`*`) operators.
+We've also seen that the type `bool` supports the logical or-operator known as logical disjunction (`||`).
+
+By now you should understand that this means that the data type `int` supports arithmetic addition and multiplication, while `bool` supports logical disjunction.
+Of course, these types support lots of other operations but we have to start somewhere.
+
+The type signature of arithmetic addition could be written as:
+
+```
+(+) :: (int, int) -> int
+```
+
+We could also visualize the type of arithmetic addition as a mapping between the set of integer pairs to the set of integers.
+See {numref}`fig:addition-type`.
+
+```{figure} ../images/arithmetic-addition-type.png
+:name: fig:addition-type
+
+Visualization of the type of arithmetic addition.
+```
+
+We would read this as `+` is an operator that when given an `int` and an `int` returns an `int`.
+Of course the arithmetic addition operator is not only defined for whole numbers (integers) but also for `float`, `decimal`, and so forth but let's keep it simple for now.
+Interestingly the addition operator is also defined for strings to implement something known as "string concatenation" but more on this in the chapter on [operators](operators).
+
+```{warning}
+This is not C# syntax.
+When we are defining type signatures like this, we are using a language-agnostic syntax which is also used by popular standards such as e.g. the [Fantasy Land Specification](https://github.com/fantasyland/fantasy-land).
+We'll talk more about this syntax in the chapter on [type signatures](type-signatures).
+
+In actual C# code we use what's known as [method signatures](static-methods).
+Type signatures are however expressed at a higher level of abstraction, and thus ought to be easier to read and understand, which is why I prefer to use them in this book.
+You'll find a comparison between type signatures and method signatures in the chapter on [type signatures](type-signatures).
+```
+
+The type signature of the logical disjunction operator (`||`) could be written as:
+
+```
+(||) :: (bool, bool) -> bool
+```
+
+We would read this as `||` is an operator that when given a `bool` and a `bool` returns a `bool`.
+
+So what if we try using a logical operator on values of type `int` or an arithmetic operator on values of type `bool`.
+Meaning what if we try to use an operation in a way that doesn't correspond to its type signature.
+Let's try adding to values of type `bool` together.
+
+```csharp
+bool addedBools = true + true;
+```
+
+```output
+error CS0019: Operator '+' cannot be applied to operands of type 'bool' and 'bool'.
+```
+
+As you might have suspected, this doesn't work.
+The type `bool` does not support the arithmetic addition operation.
+Not all types support all operations.
+Checking for this kind of errors is known as type checking and we'll talk about it in the chapter on [type systems](type-systems).
+
+````{warning}
+When we only consider an operations type signature then we know nothing about the underlying implementation.
+Note how for example how addition, multiplication, subtraction, and division all have the same type signature albeit different names.
+
+```
+(+) :: (int, int) -> int
+(-) :: (int, int) -> int
+(*) :: (int, int) -> int
+(/) :: (int, int) -> int
+```
+
+````
+
+
+### Dot notation
+
+Let's now talk about dot notation.
+If you use dot notation on an object then we are calling an [instance method](instance-methods) on that object.
+If you use dot notation on a class then we are calling a [static method](static-methods) on that class.
+We'll talk a lot more about both instance and static methods in their respective chapters so don't worry if it feels overwhelming at this point.
+
+We've already discussed how we can use the instance method `GetType` to make an object report what it's run-time type is.
+This method is an instance method that we call using dot-notation and that can be called on all things that can be treated as objects.
+More on this in the chapter on [type hierarchies](type-hierarchies).
+
+```csharp
+"A".GetType();
+420.GetType();
+3.14.GetType();
+```
+
+What I want to show you now is that the data type of the method `GetType` can be defined like this:
+
+```
+GetType :: object ~> string
+```
+
+We can read this type signatures as that `GetType` is an instance method on the type `object` that when called without any arguments, returns a `string`.
+
+Another method that we've seen a lot is the method `WriteLine`.
+This is a static method that can be run in a number of different ways since it has been defined with a bunch of different, so called, [method overloads](overloading).
+More on this in it's own chapter, but this means that the method `WriteLine` has a bunch of different type signatures.
+Some of the signatures that we've used are listed below.
+
+```
+WriteLine : string -> void
+WriteLine : bool -> void
+WriteLine : int -> void
+```
+
+The first one says that `WriteLine` is a static method that, when called with a `string`, returns nothing.
+The second one says that `WriteLine` is a static method that, when called with a `bool`, returns nothing.
+Finally, the third one says that `WriteLine` is a static method that, when called with an `int`, returns nothing.
+
+The astute reader might have noticed that we snuck the type `void` into the examples above and then referred to it as "nothing" when reading the types.
+We'll return to this special data type in the chapter on [nothingness](nothingness).
+
+
+```{exercise}
+We tend to say that data types define two things.
+What are these two things?
+Explain, in your own words, what this means.
+```
 
 

@@ -1,4 +1,4 @@
-# Type hierarchy
+# Type hierarchies
 
 The C# type system.
 
