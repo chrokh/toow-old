@@ -887,8 +887,13 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#run-time-types">
-     16.1.1. Run-time types
+    <a class="reference internal nav-link" href="#literal-values">
+     16.1.1. Literal values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-time-and-compile-time-types">
+     16.1.2. Run-time and compile-time types
     </a>
    </li>
   </ul>
@@ -935,8 +940,13 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#run-time-types">
-     16.1.1. Run-time types
+    <a class="reference internal nav-link" href="#literal-values">
+     16.1.1. Literal values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-time-and-compile-time-types">
+     16.1.2. Run-time and compile-time types
     </a>
    </li>
   </ul>
@@ -1026,20 +1036,18 @@ We do this by checking two <a class="reference internal" href="static.html"><spa
 <p>Now that we have our limits we can define the set that corresponds to the type <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
 <div class="math notranslate nohighlight">
 \[
-\mathit{int} = \{ -2147483648, \enspace \dotsc \enspace -1 \enspace , \enspace 0 \enspace , \enspace 1 \enspace , \enspace \dotsc \enspace 2147483647 \}
+\mathit{Int} = \{ -2147483648, \enspace \dotsc \enspace -1 \enspace , \enspace 0 \enspace , \enspace 1 \enspace , \enspace \dotsc \enspace 2147483647 \}
 \]</div>
 <p>Sets can be used to describe both compile-time types and run-time types.</p>
-<section id="run-time-types">
-<h3><span class="section-number">16.1.1. </span>Run-time types<a class="headerlink" href="#run-time-types" title="Permalink to this headline">#</a></h3>
-<p>Remember how we’ve previously distinguished between the left-hand side and the right-hand side?
-We’ve learned that variables are on the left and values are on the right.
-Well, data types that go on the left-hand side are sometimes referred to as compile-time types, while data types that go on the right are sometimes referred to as run-time types.
-For now you can think of it as that the type on the right determines what type a value actually is of while the type on the left determines what what we’re treating the type as.
-This will make more sense when we get to the chapter on <a class="reference internal" href="subtype-polymorphism.html#subtype-polymorphism"><span class="std std-ref">subtype polymorphism</span></a>.</p>
-<p>In this chapter we will only see explicit data types on the left and literals or other variables on the right.
-So we don’t explicitly specify the right-hand types, or the run-time types, in this chapter.
-When we get to the chapter on <a class="reference internal" href="classes.html#classes"><span class="std std-ref">classes</span></a> you will start to see explicit types on the right-hand side.
-When we get to the chapter on <a class="reference internal" href="subtype-polymorphism.html#subtype-polymorphism"><span class="std std-ref">subtype polymorphism</span></a> you will start to see how the types on the right and left doesn’t necessarily have to be the same.</p>
+<div class="exercise admonition" id="chapters/data-types-exercise-0">
+
+<p class="admonition-title"><span class="caption-number">Exercise 16.1 </span></p>
+<section id="exercise-content">
+<p>What are literal values, also known as simply literals?</p>
+</section>
+</div>
+<section id="literal-values">
+<h3><span class="section-number">16.1.1. </span>Literal values<a class="headerlink" href="#literal-values" title="Permalink to this headline">#</a></h3>
 <p>In the chapter on <a class="reference internal" href="values.html"><span class="doc std std-doc">Values</span></a> we saw how <code class="docutils literal notranslate"><span class="pre">&quot;Hello</span> <span class="pre">world&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">42</span></code>, and <code class="docutils literal notranslate"><span class="pre">3.14</span></code> are all examples of literal values.
 But what types of values are these?
 Let’s invoke the <code class="docutils literal notranslate"><span class="pre">GetType</span></code> method to find what the run-time type such objects are.</p>
@@ -1152,6 +1160,50 @@ Since all expressions evaluate to objects we can also wrap any expression in par
 </pre></div>
 </div>
 </section>
+<section id="run-time-and-compile-time-types">
+<h3><span class="section-number">16.1.2. </span>Run-time and compile-time types<a class="headerlink" href="#run-time-and-compile-time-types" title="Permalink to this headline">#</a></h3>
+<p>Remember how we’ve previously distinguished between the left-hand side and the right-hand side?
+We’ve learned that variables are on the left and values are on the right.
+Well, the data type on the left-hand side is referred to as the compile-time type, while the data type on the right is referred to as the run-time type.
+For now you can think of it as that the type on the right determines what type a value actually is of while the type on the left determines what what we’re “treating” the type as.</p>
+<p>To understand this business of the type on the left and the type on the right being different we first have to understand <a class="reference internal" href="subtype-polymorphism.html#subtype-polymorphism"><span class="std std-ref">subtype polymorphism</span></a> which is a topic for a much later chapter.
+But for now you can think of it this way:
+Types can form a subtype hierarchy or inheritance hierarchy where a type can be “treated” as any of the supertypes or parent types that it inherits from.
+When we say “treat something of type <span class="math notranslate nohighlight">\(X\)</span> as something of type <span class="math notranslate nohighlight">\(Y\)</span>” we mean that the run-time type is <span class="math notranslate nohighlight">\(X\)</span> but the compile-time type is <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<p>This is all premature, but if you’re really wanting an example then here’s one.
+All objects in C# inherit from the type <code class="docutils literal notranslate"><span class="pre">object</span></code> which means that they can be “treated as” being of type <code class="docutils literal notranslate"><span class="pre">object</span></code> instead of being treated as the type they actually are.
+One such object is the type <code class="docutils literal notranslate"><span class="pre">string</span></code>.
+Consider the code below:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="w"> </span><span class="n">message1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;This is a string.&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="kt">object</span><span class="w"> </span><span class="n">message2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;This is a string.&quot;</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The run-time type of both variables is <code class="docutils literal notranslate"><span class="pre">string</span></code> but the compile-time type of the first line is <code class="docutils literal notranslate"><span class="pre">string</span></code> while the second is <code class="docutils literal notranslate"><span class="pre">object</span></code>.
+We can visually verify that this statement is true in terms of the compile-time type being different since we can see that we’ve used <code class="docutils literal notranslate"><span class="pre">string</span></code> on the left-hand side in the first case and <code class="docutils literal notranslate"><span class="pre">object</span></code> in the second, but how do we verify the run-time type?
+Well, for one, it’s the same literal in both cases.
+But if we’re not satisfied with that answer, we can invoke the instance method <code class="docutils literal notranslate"><span class="pre">GetType</span></code> to check that the run-time type of both variables indeed is <code class="docutils literal notranslate"><span class="pre">string</span></code>.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">message1</span><span class="p">.</span><span class="n">GetType</span><span class="p">());</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">message2</span><span class="p">.</span><span class="n">GetType</span><span class="p">());</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">System.String</span>
+<span class="go">System.String</span>
+</pre></div>
+</div>
+<p>But we’ll get back to this much later so don’t worry if it’s confusing.</p>
+<p>In this chapter we will only see explicit data types on the left and literals or other variables on the right.
+So we don’t explicitly specify the right-hand types, or the run-time types, in this chapter.
+When we get to the chapter on <a class="reference internal" href="classes.html#classes"><span class="std std-ref">classes</span></a> you will start to see explicit types on the right-hand side.
+When we get to the chapter on <a class="reference internal" href="subtype-polymorphism.html#subtype-polymorphism"><span class="std std-ref">subtype polymorphism</span></a> you will start to see how the types on the right and left doesn’t necessarily have to be the same.</p>
+<div class="exercise admonition" id="chapters/data-types-exercise-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 16.2 </span></p>
+<section id="exercise-content">
+<p>What do the terms compile-time type and run-time type mean?
+What’s the difference between the two?</p>
+</section>
+</div>
+</section>
 </section>
 <section id="operations">
 <h2><span class="section-number">16.2. </span>Operations<a class="headerlink" href="#operations" title="Permalink to this headline">#</a></h2>
@@ -1262,9 +1314,9 @@ The second one says that <code class="docutils literal notranslate"><span class=
 Finally, the third one says that <code class="docutils literal notranslate"><span class="pre">WriteLine</span></code> is a static method that, when called with an <code class="docutils literal notranslate"><span class="pre">int</span></code>, returns nothing.</p>
 <p>The astute reader might have noticed that we snuck the type <code class="docutils literal notranslate"><span class="pre">void</span></code> into the examples above and then referred to it as “nothing” when reading the types.
 We’ll return to this special data type in the chapter on <a class="reference internal" href="nothingness.html"><span class="doc std std-doc">nothingness</span></a>.</p>
-<div class="exercise admonition" id="chapters/data-types-exercise-0">
+<div class="exercise admonition" id="chapters/data-types-exercise-2">
 
-<p class="admonition-title"><span class="caption-number">Exercise 16.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 16.3 </span></p>
 <section id="exercise-content">
 <p>We tend to say that data types define two things.
 What are these two things?
