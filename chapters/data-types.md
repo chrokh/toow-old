@@ -67,26 +67,18 @@ Console.WriteLine(int.MaxValue);
 Now that we have our limits we can define the set that corresponds to the type `int`.
 
 $$
-\mathit{int} = \{ -2147483648, \enspace \dotsc \enspace -1 \enspace , \enspace 0 \enspace , \enspace 1 \enspace , \enspace \dotsc \enspace 2147483647 \}
+\mathit{Int} = \{ -2147483648, \enspace \dotsc \enspace -1 \enspace , \enspace 0 \enspace , \enspace 1 \enspace , \enspace \dotsc \enspace 2147483647 \}
 $$
 
 
 Sets can be used to describe both compile-time types and run-time types.
 
+```{exercise}
+What are literal values, also known as simply literals?
+```
 
-### Run-time types
 
-Remember how we've previously distinguished between the left-hand side and the right-hand side?
-We've learned that variables are on the left and values are on the right.
-Well, data types that go on the left-hand side are sometimes referred to as compile-time types, while data types that go on the right are sometimes referred to as run-time types.
-For now you can think of it as that the type on the right determines what type a value actually is of while the type on the left determines what what we're treating the type as.
-This will make more sense when we get to the chapter on [subtype polymorphism](subtype-polymorphism).
-
-In this chapter we will only see explicit data types on the left and literals or other variables on the right.
-So we don't explicitly specify the right-hand types, or the run-time types, in this chapter.
-When we get to the chapter on [classes](classes) you will start to see explicit types on the right-hand side.
-When we get to the chapter on [subtype polymorphism](subtype-polymorphism) you will start to see how the types on the right and left doesn't necessarily have to be the same.
-
+### Literal values
 
 In the chapter on [Values](values) we saw how `"Hello world"`, `42`, and `3.14` are all examples of literal values.
 But what types of values are these?
@@ -213,6 +205,56 @@ System.Int32
 System.Boolean
 ```
 
+
+
+### Run-time and compile-time types
+
+Remember how we've previously distinguished between the left-hand side and the right-hand side?
+We've learned that variables are on the left and values are on the right.
+Well, the data type on the left-hand side is referred to as the compile-time type, while the data type on the right is referred to as the run-time type.
+For now you can think of it as that the type on the right determines what type a value actually is of while the type on the left determines what what we're "treating" the type as.
+
+To understand this business of the type on the left and the type on the right being different we first have to understand [subtype polymorphism](subtype-polymorphism) which is a topic for a much later chapter.
+But for now you can think of it this way:
+Types can form a subtype hierarchy or inheritance hierarchy where a type can be "treated" as any of the supertypes or parent types that it inherits from.
+When we say "treat something of type $X$ as something of type $Y$" we mean that the run-time type is $X$ but the compile-time type is $Y$.
+
+This is all premature, but if you're really wanting an example then here's one.
+All objects in C# inherit from the type `object` which means that they can be "treated as" being of type `object` instead of being treated as the type they actually are.
+One such object is the type `string`.
+Consider the code below:
+
+```csharp
+string message1 = "This is a string.";
+object message2 = "This is a string.";
+```
+
+The run-time type of both variables is `string` but the compile-time type of the first line is `string` while the second is `object`.
+We can visually verify that this statement is true in terms of the compile-time type being different since we can see that we've used `string` on the left-hand side in the first case and `object` in the second, but how do we verify the run-time type?
+Well, for one, it's the same literal in both cases.
+But if we're not satisfied with that answer, we can invoke the instance method `GetType` to check that the run-time type of both variables indeed is `string`.
+
+```csharp
+Console.WriteLine(message1.GetType());
+Console.WriteLine(message2.GetType());
+```
+
+```output
+System.String
+System.String
+```
+
+But we'll get back to this much later so don't worry if it's confusing.
+
+In this chapter we will only see explicit data types on the left and literals or other variables on the right.
+So we don't explicitly specify the right-hand types, or the run-time types, in this chapter.
+When we get to the chapter on [classes](classes) you will start to see explicit types on the right-hand side.
+When we get to the chapter on [subtype polymorphism](subtype-polymorphism) you will start to see how the types on the right and left doesn't necessarily have to be the same.
+
+```{exercise}
+What do the terms compile-time type and run-time type mean?
+What's the difference between the two?
+```
 
 
 
