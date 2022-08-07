@@ -207,6 +207,7 @@ System.Boolean
 
 
 
+(run-time-and-compile-time-types)=
 ### Run-time and compile-time types
 
 Remember how we've previously distinguished between the left-hand side and the right-hand side?
@@ -258,6 +259,7 @@ What's the difference between the two?
 
 
 
+(operations)=
 ## Operations
 
 We said that a data type defines a set of values and a set of allowed operations that can be performed on these values.
@@ -386,9 +388,9 @@ More on this in it's own chapter, but this means that the method `WriteLine` has
 Some of the signatures that we've used are listed below.
 
 ```
-WriteLine : string -> void
-WriteLine : bool -> void
-WriteLine : int -> void
+WriteLine :: string -> void
+WriteLine :: bool -> void
+WriteLine :: int -> void
 ```
 
 The first one says that `WriteLine` is a static method that, when called with a `string`, returns nothing.

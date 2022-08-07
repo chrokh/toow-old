@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>18. Nothingness &#8212; The Object Oriented Way</title>
+    <title>19. Nothingness &#8212; The Object Oriented Way</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -56,8 +56,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="19. Type hierarchies" href="type-hierarchies.html" />
-    <link rel="prev" title="17. Type systems" href="type-systems.html" />
+    <link rel="next" title="20. Type hierarchies" href="type-hierarchies.html" />
+    <link rel="prev" title="18. Type systems" href="type-systems.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -207,48 +207,53 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="type-checking.html">
+   17. 🟠 Type-checking
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="type-systems.html">
-   17. 🟠 Type systems
+   18. 🟠 Type systems
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   18. 🟠 Nothingness
+   19. 🟠 Nothingness
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="type-hierarchies.html">
-   19. Type hierarchies
+   20. Type hierarchies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="abstraction.html">
-   20. Abstraction / Modeling
+   21. Abstraction / Modeling
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="indirection.html">
-   21. Indirection
+   22. Indirection
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="paradigms.html">
-   22. Paradigms
+   23. Paradigms
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="business-logic.html">
-   23. Business logic
+   24. Business logic
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="debugging.html">
-   24. Debugging
+   25. Debugging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="io.html">
-   25. I/O
+   26. I/O
   </a>
  </li>
 </ul>
@@ -304,13 +309,13 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="constants.html">
-   10. Constants
+  <a class="reference internal" href="mutability.html">
+   10. Mutability
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="mutability.html">
-   11. Mutability
+  <a class="reference internal" href="type-testing.html">
+   11. Type testing
   </a>
  </li>
  <li class="toctree-l1">
@@ -883,17 +888,17 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#nullable">
-   18.1. Nullable
+   19.1. Nullable
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#null-state-static-analysis">
-   18.2. Null-state static analysis
+   19.2. Null-state static analysis
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#null-forgiving-operator">
-   18.3. Null-forgiving operator
+   19.3. Null-forgiving operator
   </a>
  </li>
 </ul>
@@ -917,17 +922,17 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#nullable">
-   18.1. Nullable
+   19.1. Nullable
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#null-state-static-analysis">
-   18.2. Null-state static analysis
+   19.2. Null-state static analysis
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#null-forgiving-operator">
-   18.3. Null-forgiving operator
+   19.3. Null-forgiving operator
   </a>
  </li>
 </ul>
@@ -941,7 +946,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="nothingness">
-<h1><span class="section-number">18. </span>Nothingness<a class="headerlink" href="#nothingness" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">19. </span>Nothingness<a class="headerlink" href="#nothingness" title="Permalink to this headline">#</a></h1>
 <div class="admonition-todo admonition">
 <p class="admonition-title">TODO</p>
 <ul class="simple">
@@ -969,7 +974,7 @@ If we do, then we get a compiler error.</p>
 </pre></div>
 </div>
 <section id="nullable">
-<h2><span class="section-number">18.1. </span>Nullable<a class="headerlink" href="#nullable" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">19.1. </span>Nullable<a class="headerlink" href="#nullable" title="Permalink to this headline">#</a></h2>
 <p>However, it is possible to convert a value type into a nullable value type by appending a question mark to the type name.
 So if we say <code class="docutils literal notranslate"><span class="pre">int?</span></code> instead of <code class="docutils literal notranslate"><span class="pre">int</span></code> then we are dealing with a nullable value type.
 Appending a question mark works to create a nullable type works for all value types.</p>
@@ -1002,7 +1007,7 @@ And since objects are reference types, this used to mean that all our custom typ
 Not ideal.</p>
 </section>
 <section id="null-state-static-analysis">
-<h2><span class="section-number">18.2. </span>Null-state static analysis<a class="headerlink" href="#null-state-static-analysis" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">19.2. </span>Null-state static analysis<a class="headerlink" href="#null-state-static-analysis" title="Permalink to this headline">#</a></h2>
 <p>Fortunately, we now have the concept of “nullable reference types” which is enabled by default in new projects since <a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-reference-types">.NET 6 (C# 10)</a>.
 The short story is that reference types are no longer nullable which means that <code class="docutils literal notranslate"><span class="pre">null</span></code> is not a valid value.
 You can find the setting in your <code class="docutils literal notranslate"><span class="pre">.csproj</span></code> file and it looks like this:</p>
@@ -1096,21 +1101,21 @@ If you have something that <em>might be</em> <code class="docutils literal notra
 If not, then I strongly advise you to return this this section after having read those chapters.</p>
 <div class="exercise admonition" id="chapters/nothingness-exercise-0">
 
-<p class="admonition-title"><span class="caption-number">Exercise 18.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 19.1 </span></p>
 <section id="exercise-content">
 <p>What do we mean when we say that the C# compiler tags variables as <code class="docutils literal notranslate"><span class="pre">not-null</span></code> or <code class="docutils literal notranslate"><span class="pre">maybe-null</span></code>?</p>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/nothingness-exercise-1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 18.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 19.2 </span></p>
 <section id="exercise-content">
 <p>Can we convert a value tagged as <code class="docutils literal notranslate"><span class="pre">maybe-null</span></code> to a value tagged as <code class="docutils literal notranslate"><span class="pre">not-null</span></code>?</p>
 </section>
 </div>
 </section>
 <section id="null-forgiving-operator">
-<h2><span class="section-number">18.3. </span>Null-forgiving operator<a class="headerlink" href="#null-forgiving-operator" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">19.3. </span>Null-forgiving operator<a class="headerlink" href="#null-forgiving-operator" title="Permalink to this headline">#</a></h2>
 <p>Finally we must talk about the null-forgiving operator.
 The null-state static analyzer isn’t perfect which means sometimes it tags a value as <code class="docutils literal notranslate"><span class="pre">maybe-null</span></code> even though it actually never is <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
 <p>In the silly example below we are declaring a nullable integer (<code class="docutils literal notranslate"><span class="pre">int?</span></code>) and initialize it to the non-null value <code class="docutils literal notranslate"><span class="pre">1</span></code>.
@@ -1188,13 +1193,13 @@ Avoiding the introduction of <code class="docutils literal notranslate"><span cl
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">17. </span>Type systems</p>
+            <p class="prev-next-title"><span class="section-number">18. </span>Type systems</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="type-hierarchies.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">19. </span>Type hierarchies</p>
+        <p class="prev-next-title"><span class="section-number">20. </span>Type hierarchies</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>17. Type systems &#8212; The Object Oriented Way</title>
+    <title>18. Type systems &#8212; The Object Oriented Way</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,12 +52,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="18. Nothingness" href="nothingness.html" />
-    <link rel="prev" title="16. Data types" href="data-types.html" />
+    <link rel="next" title="19. Nothingness" href="nothingness.html" />
+    <link rel="prev" title="17. Type-checking" href="type-checking.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -206,49 +204,54 @@ const thebe_selector_output = ".output, .cell_output"
    16. 🟢 Data types
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="type-checking.html">
+   17. 🟠 Type-checking
+  </a>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   17. 🟠 Type systems
+   18. 🟠 Type systems
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="nothingness.html">
-   18. 🟠 Nothingness
+   19. 🟠 Nothingness
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="type-hierarchies.html">
-   19. Type hierarchies
+   20. Type hierarchies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="abstraction.html">
-   20. Abstraction / Modeling
+   21. Abstraction / Modeling
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="indirection.html">
-   21. Indirection
+   22. Indirection
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="paradigms.html">
-   22. Paradigms
+   23. Paradigms
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="business-logic.html">
-   23. Business logic
+   24. Business logic
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="debugging.html">
-   24. Debugging
+   25. Debugging
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="io.html">
-   25. I/O
+   26. I/O
   </a>
  </li>
 </ul>
@@ -304,13 +307,13 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="constants.html">
-   10. Constants
+  <a class="reference internal" href="mutability.html">
+   10. Mutability
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="mutability.html">
-   11. Mutability
+  <a class="reference internal" href="type-testing.html">
+   11. Type testing
   </a>
  </li>
  <li class="toctree-l1">
@@ -882,23 +885,18 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#type-checking">
-   17.1. Type-checking
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#static-vs-dynamic">
-   17.2. Static vs dynamic
+   18.1. Static vs dynamic
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#manifest-vs-inferred">
-   17.3. Manifest vs inferred
+   18.2. Manifest vs inferred
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#nominal-vs-structural">
-   17.4. Nominal vs structural
+   18.3. Nominal vs structural
   </a>
  </li>
 </ul>
@@ -921,23 +919,18 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#type-checking">
-   17.1. Type-checking
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#static-vs-dynamic">
-   17.2. Static vs dynamic
+   18.1. Static vs dynamic
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#manifest-vs-inferred">
-   17.3. Manifest vs inferred
+   18.2. Manifest vs inferred
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#nominal-vs-structural">
-   17.4. Nominal vs structural
+   18.3. Nominal vs structural
   </a>
  </li>
 </ul>
@@ -951,8 +944,18 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="type-systems">
-<h1><span class="section-number">17. </span>Type systems<a class="headerlink" href="#type-systems" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">18. </span>Type systems<a class="headerlink" href="#type-systems" title="Permalink to this headline">#</a></h1>
+<p>C# is a statically and nominally typed language with manifested types.
+In this chapter we’ll talk about what that means.
+A type system lets us assign a type to each, so called, term, in a program.
+In C#, all <a class="reference internal" href="variables.html"><span class="doc std std-doc">variables</span></a>, <a class="reference internal" href="variables.html#constants"><span class="std std-ref">constants</span></a>, and <a class="reference internal" href="expressions.html#expressions"><span class="std std-ref">expressions that return values</span></a> have a type.</p>
+<p>Types are checked during a process known as <a class="reference internal" href="type-checking.html"><span class="doc std std-doc">type-checking</span></a>, which exists to enforce a property known as <span class="xref myst">type safety</span>.
+A type-safe language guarantees that no programs lead to undefined behavior.
+C# is a type-safe language where type-checking occurs during compilation.</p>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
 <ul class="simple">
+<li><p><a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/types/">https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/types/</a></p></li>
 <li><p>Types of type systems</p>
 <ul>
 <li><p>Static vs dynamic</p></li>
@@ -960,80 +963,10 @@ title="Print to PDF"
 <li><p>Nominal vs structural</p></li>
 </ul>
 </li>
-<li><p>Modeling</p>
-<ul>
-<li><p>Later we will talk about making impossible states impossible. Types over tests.</p></li>
-<li><p>Refer to Modeling (abstraction) chapter.</p></li>
-<li><p>IMPORTANT: <a class="reference external" href="https://maximilianocontieri.com/the-one-and-only-software-design-principle">https://maximilianocontieri.com/the-one-and-only-software-design-principle</a></p>
-<ul>
-<li><p>“The one and only software design principle”</p></li>
-<li><p>“The bijection rule”</p></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-<section id="type-checking">
-<h2><span class="section-number">17.1. </span>Type-checking<a class="headerlink" href="#type-checking" title="Permalink to this headline">#</a></h2>
-<p>As we briefly saw in the chapter on <a class="reference internal" href="errors.html#errors"><span class="std std-ref">Errors</span></a>, type checking is an activity performed by the compiler.
-In the process of type checking the compiler ensures that the program is sound on the type level.
-Concretely this means that the compiler checks what type that every <a class="reference internal" href="expressions.html#expressions"><span class="std std-ref">expression</span></a> will evaluate to and whether that type is acceptible at the place where it will be evaluated.</p>
-<p>A “type error” means that we’ve expressed something where the <em>types</em> don’t “line up”.
-If we try, for example, to use a value of a type that is not <code class="docutils literal notranslate"><span class="pre">bool</span></code>, and that cannot be implicitly converted to <code class="docutils literal notranslate"><span class="pre">bool</span></code>, where a <code class="docutils literal notranslate"><span class="pre">bool</span></code> is expected then we get a type error.
-More on implicit conversions in the chapter on <a class="reference internal" href="type-conversions.html"><span class="doc std std-doc">type conversions</span></a>.
-Let’s say we were attempting to assign, say a value of type integer, to a variable of type boolean.</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">predicate</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
-</pre></div>
 </div>
-<p>Then the compilation error would say:</p>
-<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">Cannot implicitly convert type &#39;int&#39; to &#39;bool&#39;.</span>
-</pre></div>
-</div>
-<p>The <code class="docutils literal notranslate"><span class="pre">int</span></code> that the error message refers to is the literal value <code class="docutils literal notranslate"><span class="pre">1</span></code> on the right-hand side of our erronous statement.
-The <code class="docutils literal notranslate"><span class="pre">bool</span></code> that the error message refers to is the variable named <code class="docutils literal notranslate"><span class="pre">predicate</span></code> on the left-hand side of our erronous statement.
-Conversion errors in C# conventionally follow this form.
-Type <span class="math notranslate nohighlight">\(X\)</span> cannot be converted to type <span class="math notranslate nohighlight">\(Y\)</span> means that we have something of type <span class="math notranslate nohighlight">\(X\)</span> and we are trying to convert it into something of type <span class="math notranslate nohighlight">\(Y\)</span> but the conversion was unsuccessful.</p>
-<p>Of course it is entirely possible to define your own conversion from <code class="docutils literal notranslate"><span class="pre">int</span></code> to <code class="docutils literal notranslate"><span class="pre">bool</span></code> but that’s an entirely different matter and we’ll see more of this in the chapter on <a class="reference internal" href="type-conversions.html"><span class="doc std std-doc">type conversions</span></a>.</p>
-<p>On the type level, here’s (informally) what the type-checker sees when we tried to assign an integer to a boolean.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">bool</span> <span class="o">=</span> <span class="nb">int</span>
-</pre></div>
-</div>
-<p>This doesn’t type check since the type on the right-hand side of the assignment must be implicitly convertible to the type on the left-hand side.
-Let’s say we instead used a boolean literal on the right-hand side:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">predicate</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Now the type-checker would (informally) have seen something like:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">bool</span> <span class="o">=</span> <span class="nb">bool</span>
-</pre></div>
-</div>
-<p>This does of course type check and the program hence compiles.</p>
-<p>But it’s not just in variable assignment that we can mess up the types.
-What happens if we attempt to use a string (meaning a sequence of characters) in arithmetic addition?
-Consider the following statement:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="m">3</span><span class="p">;</span><span class="w"></span>
-</pre></div>
-</div>
-<p>In this example we are declaring a variable of type <code class="docutils literal notranslate"><span class="pre">int</span></code> and initializing it with a value that’s the result of arithmetically adding a <code class="docutils literal notranslate"><span class="pre">string</span></code> and an <code class="docutils literal notranslate"><span class="pre">int</span></code>.
-On the type level, here’s what the type-checker sees:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="o">=</span> <span class="p">(</span><span class="n">string</span> <span class="o">+</span> <span class="nb">int</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>This doesn’t type check since the arithmetic addition operator (<code class="docutils literal notranslate"><span class="pre">+</span></code>) does not accept <code class="docutils literal notranslate"><span class="pre">string</span></code>.
-Let us instead consider a statement like:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="m">3</span><span class="p">;</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Now the type-checker would see something like:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span> <span class="o">+</span> <span class="nb">int</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>This of course does type check and the program ocmpiles.
-An integer added to an integer results in an integer which we then assign to an integer variable.</p>
-<p>The right-hand side in the arithmetic examples above is called an <a class="reference internal" href="expressions.html#expressions"><span class="std std-ref">expression</span></a> and we’ll learn more about these in a separate chapter.</p>
-</section>
 <section id="static-vs-dynamic">
-<h2><span class="section-number">17.2. </span>Static vs dynamic<a class="headerlink" href="#static-vs-dynamic" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">18.1. </span>Static vs dynamic<a class="headerlink" href="#static-vs-dynamic" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Static vs dynamic typing. Strong vs weak.</p>
 <ul>
@@ -1044,14 +977,14 @@ An integer added to an integer results in an integer which we then assign to an 
 </ul>
 </section>
 <section id="manifest-vs-inferred">
-<h2><span class="section-number">17.3. </span>Manifest vs inferred<a class="headerlink" href="#manifest-vs-inferred" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">18.2. </span>Manifest vs inferred<a class="headerlink" href="#manifest-vs-inferred" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Implicitly typed local variable</p></li>
 <li><p><a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/var">https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/var</a></p></li>
 </ul>
 </section>
 <section id="nominal-vs-structural">
-<h2><span class="section-number">17.4. </span>Nominal vs structural<a class="headerlink" href="#nominal-vs-structural" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">18.3. </span>Nominal vs structural<a class="headerlink" href="#nominal-vs-structural" title="Permalink to this headline">#</a></h2>
 </section>
 </section>
 
@@ -1082,17 +1015,17 @@ An integer added to an integer results in an integer which we then assign to an 
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="data-types.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="type-checking.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">16. </span>Data types</p>
+            <p class="prev-next-title"><span class="section-number">17. </span>Type-checking</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="nothingness.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">18. </span>Nothingness</p>
+        <p class="prev-next-title"><span class="section-number">19. </span>Nothingness</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

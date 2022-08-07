@@ -312,6 +312,7 @@ int z3 = 100;
 ```
 
 
+(constants)=
 ## Constants
 
 In C#, variables are, as we've seen, unless otherwise specified, *not* constants.
