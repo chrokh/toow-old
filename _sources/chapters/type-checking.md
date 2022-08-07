@@ -142,11 +142,7 @@ It is merely related to the fact that that expression yields an integer.
 
 
 
-## Type safety
-
-```{warning}
-This section is not published yet.
-```
+%## TODO: Type safety
 
 % https://courses.cs.washington.edu/courses/cse341/04wi/lectures/26-unsafe-languages.html
 
