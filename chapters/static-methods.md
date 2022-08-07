@@ -18,6 +18,12 @@ In the imperative programming paradigm however we say that a method "returns" a 
 - Documentation comments.
 - Types of methods
   - `WriteLine : String -> void`
+  - Refer back to [type-checking](type-checking) chapter.
+  - Show compiler errors when:
+    - calling non-existant method.
+    - calling with wrong number of arguments.
+    - calling with incorrect type of arguments.
+    - using returned value as wrong type.
 - Is string interpolation syntactic sugar for `String.Format`?
 - Exercises
   - Write a method that greets a name that you pass.

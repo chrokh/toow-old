@@ -17,4 +17,5 @@ This chapter is under construction.
   - Optionality (`[ ]`).
   - Replacements (`< >`).
   - Input/output with dollar sign and lack of dollar sign in multi-line code snippets. No dollar sign used in single-line snippets in this book. Use `echo` to exemplify.
+- Piping. Using output as input.
 
