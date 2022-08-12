@@ -5,7 +5,9 @@ In the process of type checking the compiler ensures that the program is sound o
 Concretely this means that the compiler checks what type that every [expression](expressions) will evaluate to and whether that type is acceptible at the place where it will be evaluated.
 
 Types are checked during a process known as [type-checking](type-checking), which exists to enforce a property known as [type safety](type-safety).
-The definitions of "type safety" varies but under one definition, a type-safe language guarantees that no valid programs lead to undefined behavior.
+Type safety refers to not allowing the execution of operations that violate the [type system](type-system).
+Allowing such operations could lead to undefined behavior since their implementation is unspecified.
+%The definitions of "type safety" varies but under one definition, a type-safe language guarantees that no valid programs lead to undefined behavior.
 C# is a type-safe language where type-checking occurs during compilation.
 
 Simplistically put, type-checking concerns ensuring that all expressions yield [run-time types](run-time-and-compile-time-types) that are members of said expression's [compile-time type](run-time-and-compile-time-type).
@@ -140,6 +142,12 @@ which clearly is not legal.
 This means that the error that we got before is, in a sense, not related to the fact that we used an arithmetic expression on the right-hand side.
 It is merely related to the fact that that expression yields an integer.
 
+```{warning}
+It should be noted that what is and what isn't legal on the type-level is determined by the [type system](type-systems) of the given language.
+There are no universal rules.
+There are many examples of languages that are type safe yet still, for example, adding an integer and a string is valid.
+It all depends on what operations and what type conversions for the types in the language that are defined.
+```
 
 
 %## TODO: Type safety
