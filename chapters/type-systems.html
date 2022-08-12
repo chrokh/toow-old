@@ -211,7 +211,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   18. 🟠 Type systems
+   18. 🟢 Type systems
   </a>
  </li>
  <li class="toctree-l1">
@@ -524,18 +524,23 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="anonymous-types.html">
+   28. Anonymous types
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="generics.html">
-   28. Generics
+   29. Generics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="variance.html">
-   29. Variance
+   30. Variance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="business-objects.html">
-   30. Business objects
+   31. Business objects
   </a>
  </li>
 </ul>
@@ -890,13 +895,18 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#manifest-vs-inferred">
-   18.2. Manifest vs inferred
+  <a class="reference internal nav-link" href="#manifested-vs-inferred">
+   18.2. Manifested vs inferred
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#nominal-vs-structural">
    18.3. Nominal vs structural
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#duck-typing">
+   18.4. Duck typing
   </a>
  </li>
 </ul>
@@ -924,13 +934,18 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#manifest-vs-inferred">
-   18.2. Manifest vs inferred
+  <a class="reference internal nav-link" href="#manifested-vs-inferred">
+   18.2. Manifested vs inferred
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#nominal-vs-structural">
    18.3. Nominal vs structural
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#duck-typing">
+   18.4. Duck typing
   </a>
  </li>
 </ul>
@@ -948,43 +963,236 @@ title="Print to PDF"
 <p>C# is a statically and nominally typed language with manifested types.
 In this chapter we’ll talk about what that means.
 A type system lets us assign a type to each, so called, term, in a program.
-In C#, all <a class="reference internal" href="variables.html"><span class="doc std std-doc">variables</span></a>, <a class="reference internal" href="variables.html#constants"><span class="std std-ref">constants</span></a>, and <a class="reference internal" href="expressions.html#expressions"><span class="std std-ref">expressions that return values</span></a> have a type.</p>
-<p>Types are checked during a process known as <a class="reference internal" href="type-checking.html"><span class="doc std std-doc">type-checking</span></a>, which exists to enforce a property known as <span class="xref myst">type safety</span>.
-A type-safe language guarantees that no programs lead to undefined behavior.
-C# is a type-safe language where type-checking occurs during compilation.</p>
-<div class="admonition-todo admonition">
-<p class="admonition-title">TODO</p>
+In C#, all <a class="reference internal" href="variables.html"><span class="doc std std-doc">variables</span></a>, <a class="reference internal" href="variables.html#constants"><span class="std std-ref">constants</span></a>, <a class="reference internal" href="expressions.html#expressions"><span class="std std-ref">expressions that return values</span></a>, and methods have a type.</p>
+<p>A language with types is said to have a type system and type systems can be classified in a number of dimensions that we’ll discuss in this chapter.</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/types/">https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/types/</a></p></li>
-<li><p>Types of type systems</p>
-<ul>
-<li><p>Static vs dynamic</p></li>
-<li><p>Manifest vs inferred</p></li>
-<li><p>Nominal vs structural</p></li>
+<li><p>A type system is either <a class="reference internal" href="#static-vs-dynamic"><span class="std std-ref">statically or dynamically typed</span></a>. This is also simply known as static or dynamic and refers to whether type-checking occurs at compile-time or at run-time.</p></li>
+<li><p>Types in a typed language are either <a class="reference internal" href="#manifested-vs-inferred"><span class="std std-ref">manifested or inferred</span></a>. This regards whether types are explicitly stated in the code by the programmer or whether the types are automatically inferred by the type-checker. You can think of the latter case as the compiler figuring out whatever types must have been used where.</p></li>
+<li><p>Types in a typed language are either <a class="reference internal" href="#nominal-vs-structural"><span class="std std-ref">nominal, structural, or duck typed</span></a>. This refers to whether types are distinguished from one another by means of their names, their structure, or their usage.</p></li>
 </ul>
-</li>
-</ul>
-</div>
 <section id="static-vs-dynamic">
-<h2><span class="section-number">18.1. </span>Static vs dynamic<a class="headerlink" href="#static-vs-dynamic" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>Static vs dynamic typing. Strong vs weak.</p>
-<ul>
-<li><p>“Statically typed languages perform type checking at compile-time, while dynamically-typed languages perform type checking at run-time”</p></li>
-</ul>
-</li>
-<li><p>Reflection.</p></li>
-</ul>
+<span id="id1"></span><h2><span class="section-number">18.1. </span>Static vs dynamic<a class="headerlink" href="#static-vs-dynamic" title="Permalink to this headline">#</a></h2>
+<p>Whether a language is statically typed or dynamically typed dictates whether <a class="reference internal" href="type-checking.html"><span class="doc std std-doc">type-checking</span></a> occurs at <a class="reference internal" href="compilation.html#compilation"><span class="std std-ref">compile-time</span></a> or at <a class="reference internal" href="execution.html#execution"><span class="std std-ref">run-time</span></a>.
+Colloquially we refer to this as the language being static or dynamic.</p>
+<p>Hopefully you can recall how we, in the chapter on <a class="reference internal" href="errors.html#errors"><span class="std std-ref">errors</span></a> discussed that compile-time errors ought to be preferred over run-time errors since they guarantee that anytime we see a compile-time error we are saved from all errors that could occur as a consequence of this but at run-time, meaning when the application is running.</p>
+<p>By the same token, static typing ought to be preferred over dynamic typing since it gives us type-safety at compile-time instead of at run-time.
+Meaning that anytime we get a type error at compile-time we are saved from all other errors that could occur as a consequence of this but at run-time, meaning when the application is running.</p>
+<div class="exercise admonition" id="chapters/type-systems-exercise-0">
+
+<p class="admonition-title"><span class="caption-number">Exercise 18.1 </span></p>
+<section id="exercise-content">
+<p>What is the difference between statically typed and dynamically typed languages?</p>
 </section>
-<section id="manifest-vs-inferred">
-<h2><span class="section-number">18.2. </span>Manifest vs inferred<a class="headerlink" href="#manifest-vs-inferred" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>Implicitly typed local variable</p></li>
-<li><p><a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/var">https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/var</a></p></li>
-</ul>
+</div>
+<p>Some statically typed languages, such as C#, does however provide ways of leaving the realm of static typing at your request.
+In C# we have the special type <code class="docutils literal notranslate"><span class="pre">dynamic</span></code> which can hold any run-time type.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">dynamic</span><span class="w"> </span><span class="n">v1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="kt">dynamic</span><span class="w"> </span><span class="n">v2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="kt">dynamic</span><span class="w"> </span><span class="n">v3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Like in some dynamically typed languages, the value does however still have a run-time type.
+Check out the code example below where we check the types of the <code class="docutils literal notranslate"><span class="pre">dynamic</span></code> variables declared above.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">v1</span><span class="p">.</span><span class="n">GetType</span><span class="p">()</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">v2</span><span class="p">.</span><span class="n">GetType</span><span class="p">()</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">v3</span><span class="p">.</span><span class="n">GetType</span><span class="p">()</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">System.Int32</span>
+<span class="go">System.String</span>
+<span class="go">System.Boolean</span>
+</pre></div>
+</div>
+<p>Using the keyword <code class="docutils literal notranslate"><span class="pre">dynamic</span></code> consequently doesn’t mean that we move from a world of multiple types into a world of no types at all.
+It means that we move to a uni-typed world where there is only a single compile-time type, namely the type <code class="docutils literal notranslate"><span class="pre">dynamic</span></code>.</p>
+<p>The compiler assumes that values given the compile-time type <code class="docutils literal notranslate"><span class="pre">dynamic</span></code> supports any operation.
+This means that all operations will be allowed at compile-time.
+If we invoke an operation that does in fact also exist in the run-time type, the program will compile and run.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">dynamic</span><span class="w"> </span><span class="n">x1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="kt">dynamic</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">x1</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="n">x2</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-result notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+<p>If however we invoke an operation that does <em>not</em> exist in the run-time type we then the program will still compile but it will crash with an exception at run-time.
+We can get a run-time error if we call a method that doesn’t exist:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">dynamic</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="n">z</span><span class="p">.</span><span class="n">FlyToTheMoon</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">Unhandled exception. Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: &#39;int&#39; does not contain a definition for &#39;FlyToTheMoon&#39;</span>
+</pre></div>
+</div>
+<p>But we can also get a run-time error if we use a value with an operator that isn’t supported:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">dynamic</span><span class="w"> </span><span class="n">y1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="kt">dynamic</span><span class="w"> </span><span class="n">y2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">y1</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="n">y2</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">Unhandled exception. Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: Operator &#39;+&#39; cannot be applied to operands of type &#39;int&#39; and &#39;bool&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="manifested-vs-inferred">
+<span id="id2"></span><h2><span class="section-number">18.2. </span>Manifested vs inferred<a class="headerlink" href="#manifested-vs-inferred" title="Permalink to this headline">#</a></h2>
+<p>Whether a type system uses manifested or inferred types dictates whether we, as programmers, have to explicitly state the types in our programs or whether they are inferred by the compiler.</p>
+<p>Very few languages are fully inferred.
+Instead, languages are usually only inferred to a certain extent, beyond which you still have to manifest the types since the type inference engine is unable to infer them.
+This is a consequence of the sophistication of both the type system and the inference engine.</p>
+<p>C# is traditionally a language with manifested types but we can declare, what’s known as, “implicitly typed local variables” which have inferred types.
+We declare such variables by using the keyword <code class="docutils literal notranslate"><span class="pre">var</span></code> instead of the type of the variable in question.</p>
+<p>In the example below, the type of the first variable is manifested while the type of the second variable is inferred.
+The compile-time type of both is <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">i1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// Explicitly typed (manifested)</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">i2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// Implicitly typed (inferred)</span>
+</pre></div>
+</div>
+<p>It is important to realize that type inference <em>infers</em> types.
+Type inference does <em>not</em> mean that we completely ignore neither compile-time nor run-time types.
+The two compile-time types in the example above are just as “strong”.
+The fact that one of the types is inferred while the other is manifested is irrelevant.</p>
+<p>In the last section, where we discussed static and dynamic, we said that in C# we can use the keyword <code class="docutils literal notranslate"><span class="pre">dynamic</span></code> to bypass static typing.
+When using the <code class="docutils literal notranslate"><span class="pre">dynamic</span></code> keyword we make the compile-time type <code class="docutils literal notranslate"><span class="pre">dynamic</span></code>.
+But, when using the <code class="docutils literal notranslate"><span class="pre">var</span></code> keyword, we use type inference and let the compiler figure out what compile-time type must be used to make the program compile.
+This is not the same thing.</p>
+<p>When is it useful to use type inference instead of manifesting types in C#?
+One use case it to avoid cluttering up our code with the names of very long type names.
+We haven’t talked about these types but say you’re trying to modeling a chess board as a list of lists of positions.
+A list of lists is sometimes also called a two-dimensional lists and is commonly used to represent a grid.</p>
+<p>When declaring such a variable we specify the compile-time type on the left and then assign it a value with a run-time type on the right.
+If we manifest the type it would look something like this:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">List</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;&gt;</span><span class="w"> </span><span class="n">board1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;&gt;&gt;();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>However, since the compile-time type is the same as the run-time type, or in other words, since the type on the left is the same as the type on the right this is a prime use case for type inference.
+By using an implicitly typed local variable on the left our code is significantly less cluttered and arguably easier to read.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">board2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">Piece</span><span class="p">&gt;&gt;&gt;();</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The compile-time type of both variables is still the same since this is type inference, not dynamic typing.
+The keyword <code class="docutils literal notranslate"><span class="pre">var</span></code> is often also used in <a class="reference internal" href="iteration.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">foreach</span></code> loops</span></a> which we will learn about later.</p>
+<p>It should be noted that in the example above, the usage of an implicitly typed local variable (<code class="docutils literal notranslate"><span class="pre">var</span></code>) is optional.
+However, when you have a value with an <a class="reference internal" href="anonymous-types.html#anonymous-types"><span class="std std-ref">anonymous type</span></a>, using <code class="docutils literal notranslate"><span class="pre">var</span></code> is required.
+We’ll talk more about anonymous types in its own chapter, but for now I just wanted to mention that when you deal with anonymous types, you might have to use <code class="docutils literal notranslate"><span class="pre">var</span></code>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>See the <a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/var">official documentation</a> for more information about implicitly typed local variables (the keyword <code class="docutils literal notranslate"><span class="pre">var</span></code>).</p>
+</div>
+<div class="exercise admonition" id="chapters/type-systems-exercise-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 18.2 </span></p>
+<section id="exercise-content">
+<p>What is the difference between manifested types and inferred types?
+What does this difference mean in terms of compile-time and run-time types?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/type-systems-exercise-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 18.3 </span></p>
+<section id="exercise-content">
+<p>Can a language be statically typed yet still have mostly inferred types? Why?</p>
+</section>
+</div>
 </section>
 <section id="nominal-vs-structural">
-<h2><span class="section-number">18.3. </span>Nominal vs structural<a class="headerlink" href="#nominal-vs-structural" title="Permalink to this headline">#</a></h2>
+<span id="id3"></span><h2><span class="section-number">18.3. </span>Nominal vs structural<a class="headerlink" href="#nominal-vs-structural" title="Permalink to this headline">#</a></h2>
+<p>The third dimension in which we can classify a type system is in whether its types are nominal or structural.
+Whether the type system is nominative or structural.
+Again, many languages are mixes of the two but it’s easier to understand the concepts if we look at the extremes.
+C# is mostly a nominally typed language but “anonymous types” (see <a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/types/anonymous-types">documentation</a>) are arguably structurally typed.</p>
+<p>The key question we’re dealing with when we’re dealing with nominal and structural typing is substitutability.
+Can a particular type be used in a particular place?
+More specifically we tend to talk about equivalence and subtyping.
+Equivalence regards whether two types are equal while subtyping regards whether one type is a subtype of another.
+We have yet to talk about <a class="reference internal" href="subtype-polymorphism.html#subtype-polymorphism"><span class="std std-ref">subtype polymorphism</span></a> so this is a bit too much too soon but think of it this way:
+To determine whether a particular type can be used in a particular place we must either prove that the type of the value that we have is equivalent to the type that is expected, or we must prove that the type of the value that we have is a subtype of the type that is expected.</p>
+<p>With nominal types, equivalence and subtyping is determined by means of names.
+With structural types, equivalence and subtyping is determined by means of structure.</p>
+<p>Every nominal type has a name and it is this name that we use to determine equivalence.
+If we declare that a type is a subtype of another type then we declare that one name is a subtype of another name.
+Hence, we can use the names and subtype information to determine whether a nominal type is a subtype of another nominal type.</p>
+<p>Structural types on the other hand don’t need names since equivalence and subtyping is determined on the basis of structure.
+If the type we need must have some properties, then we simply check whether these properties exist in the type that we have.
+If the properties are present then the type that we have is deemed equivalent to the type that we need, and hence can be used.
+If the properties are present but the type also has additional properties then it is considered a subtype.</p>
+<p>In a structural typing system, a type can be equal to and be a subtype of many other types simultaneously.
+In nominal typing two types are only ever equal if they are the same type and they are only ever in a subtype relationship if said relationship has been explicitly defined.</p>
+<p>However, as an aside, in nominally typed languages it is usually not possible to let a type be a subtype of another if the type is not also “wider” than the subtype.
+Consequently, nominal subtypes are also usually structural subtypes.</p>
+<div class="exercise admonition" id="chapters/type-systems-exercise-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 18.4 </span></p>
+<section id="exercise-content">
+<p>What is the difference between a nominative and a structural type system?</p>
+</section>
+</div>
+</section>
+<section id="duck-typing">
+<h2><span class="section-number">18.4. </span>Duck typing<a class="headerlink" href="#duck-typing" title="Permalink to this headline">#</a></h2>
+<p>Before we leave this chapter we must also talk about something known as duck typing.
+Some argue that duck typing is another point on the dimension where we find structural and nominal typing.
+Others hold that duck typing is a special case of structural typing.</p>
+<p>The name “duck typing” refers to the saying:</p>
+<blockquote class="epigraph">
+<div><p>If it quacks like a duck, it must be a duck.</p>
+</div></blockquote>
+<p>In duck typing, the idea is that it doesn’t matter what something “is”, it only matters what it “does”.
+Contrast this to structural typing.
+Structural typing determines suitability of a type based on the full structure of the type.
+But duck typing determines suitability of a type based on the properties used at run-time.</p>
+<p>If we ask something whether it can quack and it can, then it doesn’t really matter if it’s a duck or not.
+For our intents and purposes it behaves like a duck so let’s just keep using it like one.</p>
+<p>Duck typing is usually employed in dynamic languages such as for example Ruby and JavaScript.
+We’re not diving into Ruby or JavaScript in this book but here’s an example in Ruby.</p>
+<div class="highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Duck</span>
+  <span class="k">def</span> <span class="nf">quack</span>
+    <span class="nb">puts</span> <span class="s2">&quot;Quack&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">Robot</span>
+  <span class="k">def</span> <span class="nf">quack</span>
+    <span class="nb">puts</span> <span class="s2">&quot;Brrr&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">test</span> <span class="n">duck</span>
+  <span class="n">duck</span><span class="o">.</span><span class="n">quack</span>
+<span class="k">end</span>
+
+<span class="nb">test</span> <span class="no">Duck</span><span class="o">.</span><span class="n">new</span>
+<span class="nb">test</span> <span class="no">Robot</span><span class="o">.</span><span class="n">new</span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">Quack</span>
+<span class="go">Brrr</span>
+</pre></div>
+</div>
+<p>In the example above we’re defining two types called <code class="docutils literal notranslate"><span class="pre">Duck</span></code> and <code class="docutils literal notranslate"><span class="pre">Robot</span></code>.
+We’re defining a method called <code class="docutils literal notranslate"><span class="pre">test</span></code> which takes an argument and calls the method <code class="docutils literal notranslate"><span class="pre">quack</span></code> on that argument.
+We’re then instantiating one duck and one robot and pass both of them to the <code class="docutils literal notranslate"><span class="pre">test</span></code> method.
+Since both objects respond to the <code class="docutils literal notranslate"><span class="pre">quack</span></code> method we conclude that both are ducks.
+There is no point in arguing about whether robots are not ducks.
+For all intents and purposes they behave like ducks.</p>
+<p>When you’ve read the chapter on <a class="reference internal" href="interfaces.html#interfaces"><span class="std std-ref">interfaces</span></a> I highly recommend that you come back to this chapter again and think about the relationship between duck types and interfaces.</p>
+<div class="exercise admonition" id="chapters/type-systems-exercise-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 18.5 </span></p>
+<section id="exercise-content">
+<p>What is duck typing? How does it relate to structural typing?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/type-systems-exercise-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 18.6 </span></p>
+<section id="exercise-content">
+<p>What is the following maxim trying to convey?
+“If it quacks like a duck, it must be a duck.”</p>
+</section>
+</div>
 </section>
 </section>
 
