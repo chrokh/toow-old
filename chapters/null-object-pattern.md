@@ -1,0 +1,11 @@
+# Null object pattern
+
+
+```{admonition} TODO
+:class: danger
+- Null
+  - Read more: https://maximilianocontieri.com/null-the-billion-dollar-mistake
+  - Move this discussion to chapter on NullObjectPattern where you will also show why null objects are much less maintainable than pattern matching on Maybe's.
+- Void
+```
+

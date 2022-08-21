@@ -1,4 +1,4 @@
-# The Object Oriented Way
+# Introduction
 
 Welcome to _**The Object Oriented Way: Everything you need to know**_.
 This book takes you all the way from elementary fundamentals to the most sophisticated ideas.

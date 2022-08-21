@@ -73,6 +73,10 @@ $$
 
 Sets can be used to describe both compile-time types and run-time types.
 
+But, what about `null` you might ask.
+Well, the short answer is that `int` is not "nullable" which means that its type does not contain the value `null`.
+The long answer is that we'll deal with `null` in the chapter on [nothingness](nothingness).
+
 ```{exercise}
 What are literal values, also known as simply literals?
 ```
