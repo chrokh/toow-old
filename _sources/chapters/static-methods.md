@@ -59,16 +59,6 @@ In the case of `WriteLine` this makes sense since we're not looking to get a val
 We call this a "side effect".
 When we're calling `WriteLine` we're looking for the side effect of having whatever we pass it printed to the screen.
 
-In terms of set theory, you can think of the type `void` as the empty set.
-In theory, there are no elements of type `void`.
-Consequently you couldn't possible store a reference to something of type `void` in a variable.
-
-```{seealso}
-%Whether there exists a single value of type `void` or no values (meaning whether `void` is a singleton set or an empty set) is a theoretical question.
-This is way beyond the scope of this book, but due to the fact that you can declare pointers of type `void` the case could be made that `void` is a singleton set.
-If you're keen to learn more about this, see the page on [Pointer types](https://docs.microsoft.com/en-ca/dotnet/csharp/language-reference/unsafe-code#pointer-types) in the documentation.
-```
-
 ```{admonition} TODO
 - Multiple input types to WriteLine due to overloads.
 - Console can also be thought of as defining a type with only a single member. Static means that there's only one member.
@@ -78,4 +68,8 @@ If you're keen to learn more about this, see the page on [Pointer types](https:/
 ```
 
 
+```{exercise}
+What is the difference between returning `null` and returning `void`?
+In what cases would you use one and in one what cases would you use the other?
+```
 
