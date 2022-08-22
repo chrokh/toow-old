@@ -317,7 +317,7 @@ $$
 $$
 
 It is important to understand that a Cartesian product ($\times$) is not the same as a union ($\cup$).
-A union between two sets yields a new set containing all the elements of the first set as well as all the elements of the last set.
+A union between two sets yields a new set containing all the elements of the first set as well as all the elements of the second set.
 However, a Cartesian product between two sets however yields a new set that contains all combinations of pairs between the two sets.
 
 ```{exercise}
