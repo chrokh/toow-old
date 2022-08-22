@@ -1,3 +1,8 @@
 # Indexers
-Remove this chapter?
+
+```{warning}
+Work in progress.
+```
+
+%Remove this chapter?
 

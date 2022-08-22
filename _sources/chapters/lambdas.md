@@ -1,6 +1,10 @@
 (lambdas)=
 # Lambdas
 
-- Statement lambdas
-- Expression lambdas
+```{warning}
+Work in progress.
+```
+
+%- Statement lambdas
+%- Expression lambdas
 

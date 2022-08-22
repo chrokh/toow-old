@@ -1,2 +1,7 @@
 # Mutability
-- Example: Arrays are mutable.
+
+```{warning}
+Work in progress.
+```
+
+%- Example: Arrays are mutable.

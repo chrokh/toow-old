@@ -1,4 +1,8 @@
 # Interface segregation principle
 
-ISP.
+```{warning}
+Work in progress.
+```
+
+%ISP.
 

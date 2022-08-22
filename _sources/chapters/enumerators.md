@@ -1,5 +1,10 @@
 # Enumerators
-- Yield keyword
-- IEnumerable
-- IEnumerator
+
+```{warning}
+Work in progress.
+```
+
+%- Yield keyword
+%- IEnumerable
+%- IEnumerator
 

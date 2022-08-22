@@ -1,9 +1,13 @@
 # Suggested reading
 
-I highly recommend these books:
+```{warning}
+Work in progress.
+```
 
-- {cite:p}`ousterhout2018`.
-- {cite:p}`martin2017`.
-- Clean Agile
-- Clean Code
-- Clean Coder
+%I highly recommend these books:
+%
+%- {cite:p}`ousterhout2018`.
+%- {cite:p}`martin2017`.
+%- Clean Agile
+%- Clean Code
+%- Clean Coder

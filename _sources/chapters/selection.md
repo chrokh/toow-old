@@ -1,3 +1,8 @@
 # Selection
-- if / else / else-if
-- switch case
+
+```{warning}
+Work in progress.
+```
+
+%- if / else / else-if
+%- switch case

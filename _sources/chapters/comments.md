@@ -17,6 +17,10 @@ requirements, design, technical, and end-user documents.
 Code comments can be used for any of these four purposes.
 Whether they *should* be used for all four is a different question.
 
+```{exercise}
+What are comments?
+```
+
 
 ## Noun and verb
 
@@ -38,6 +42,10 @@ You might say something like:
 
 ```{warning}
 Uncommenting is not the same as removing a comment.
+```
+
+```{exercise}
+What is the difference between "comments" (noun) and "to comment" (verb)?
 ```
 
 
@@ -148,6 +156,10 @@ public class Point
 ```
 ````
 
+```{exercise}
+What are executable comments?
+```
+
 ## Benefits of comments
 
 But why do we even need comments in the first place?
@@ -231,6 +243,10 @@ The fourth and last objection is the empirical observation that many comments ar
 It is easy to write comments, but are they any good?
 So what constitutes good comments?
 
+```{exercise}
+Explain and argue against two common objections to why you would need comments.
+```
+
 
 ## Good comments
 
@@ -243,7 +259,7 @@ Comments should describe things that aren't obvious from the code.
 -- {cite:t}`ousterhout2018`
 ```
 
-From this perspective, comments should increase abstraction [{numref}`Chapter %s<abstraction>`].
+From this perspective, comments should increase [abstraction](abstraction).
 They provide us with a more abstract view of the system.
 A view where we don't actually have to read the code and where we don't need to care about all the nitty gritty details.
 
@@ -267,3 +283,7 @@ Whenever we duplicate something we run the risk of getting "out of sync" by maki
 Some people even go so far as to suggest that we should write our comments *before* we write our code.
 We'll discuss this further in the chapter on {doc}`Documentation-driven development<documentation-driven-development>`.
 
+
+```{exercise}
+Explain three of the eight guidelines for good comments written by {cite:t}`ousterhout2018`.
+```

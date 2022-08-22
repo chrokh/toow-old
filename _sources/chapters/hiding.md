@@ -1,4 +1,9 @@
 # Hiding
-- Not overriding ("new" modifier)
-- Called shadowing?
+
+```{warning}
+Work in progress.
+```
+
+%- Not overriding ("new" modifier)
+%- Called shadowing?
 

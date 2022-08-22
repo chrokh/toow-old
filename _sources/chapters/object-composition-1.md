@@ -1,4 +1,8 @@
 # Direct object composition
 
-Object composition (through instantiation).
+```{warning}
+Work in progress.
+```
+
+%Object composition (through instantiation).
 

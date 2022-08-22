@@ -1,4 +1,9 @@
 # Single responsibility principle
 
-SRP.
+
+```{warning}
+Work in progress.
+```
+
+%SRP.
 

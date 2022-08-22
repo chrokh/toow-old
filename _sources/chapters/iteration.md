@@ -1,6 +1,11 @@
 # Iteration
-- while
-- for
-- foreach
-  - Also works with IEnumerable but we’ll talk about this later.
-- Infinite loop. Will talk about stack overflow later.
+
+```{warning}
+Work in progress.
+```
+
+%- while
+%- for
+%- foreach
+%  - Also works with IEnumerable but we’ll talk about this later.
+%- Infinite loop. Will talk about stack overflow later.

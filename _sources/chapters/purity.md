@@ -1,5 +1,9 @@
 (purity)=
 # Purity
 
-- Pure methods.
-- Referential transparency.
+```{warning}
+Work in progress.
+```
+
+%- Pure methods.
+%- Referential transparency.

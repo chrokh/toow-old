@@ -1,4 +1,9 @@
 # Structure types
 
-- `struct`.
+```{warning}
+Work in progress.
+```
+
+
+%- `struct`.
 

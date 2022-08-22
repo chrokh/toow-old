@@ -1,6 +1,10 @@
 (linq)=
 # LINQ
 
-- Standard query operators (https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/standard-query-operators-overview)
-- Relate to: Relational alegbra. Functional programming and strategy pattern.
+```{warning}
+Work in progress.
+```
 
+%- Standard query operators (https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/standard-query-operators-overview)
+%- Relate to: Relational alegbra. Functional programming and strategy pattern.
+%

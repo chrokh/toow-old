@@ -1,2 +1,7 @@
 # Syntactic sugar
-- Expression-bodied members
+
+```{warning}
+Work in progress.
+```
+
+% - Expression-bodied members
