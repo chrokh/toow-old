@@ -1,4 +1,4 @@
-(sets)=
+
 # Sets
 
 Programmers are modellers.
@@ -8,9 +8,7 @@ These objects and rules must be valuable to whoever is paying our salary.
 Set theory helps us define effective types for both objects and rules.
 Effective in the sense that they only allow the states and behavior that we want.
 Which in turn means that we need fewer tests and suffer fewer bugs.
-We'll talk more about this in future sections [{numref}`Chapter %s<types-over-tests>`] but at this point I hope that you will trust me when I say that great programmers understand that data types can usefully be thought of as sets.
-
-[^business-objects]: TODO: Perhaps this is a poor term to use.
+We'll talk more about this in future sections but at this point I hope that you will trust me when I say that great programmers understand that data types can usefully be thought of as sets.
 
 ```{important}
 Types can be modelled by sets.
@@ -128,6 +126,20 @@ $$
 Define a set that captures the different states of a traffic light.
 ```
 
+## Cardinality
+
+The number of elements in a set is known as the cardinality of a set.
+A set containing three elements has a cardinality of $3$.
+Cardinality is denoted using the "pipe" symbol ($|$) which is also known as "vertical bar".
+So, if $X$ refers to a set, then $|X|$ refers to the cardinality of the set $X$.
+
+$$
+|\mathit{Boolean}| = 2\\
+|\mathit{Trilean}| = 3
+$$
+
+
+
 
 ## Diagrams
 
@@ -147,6 +159,47 @@ Visualization of sets and members.
 ```{exercise}
 Draw a Venn diagram of the set that you came up with in {numref}`ex:set-members`.
 ```
+
+
+## Intersection
+
+Let us first look at the set operation known as "intersection".
+It is a binary operation between two sets and is denoted by a symbol that looks like the letter "U" flipped upside-down ($\cap$).
+
+The intersection of two sets simply yields a new set that contains all the elements that occurr in both sets.
+In other words the intersection is the set of all elements of the first set, that are also found in the second.
+
+$$
+\mathit{Boolean} \cap \mathit{Trilean} = \{\mathit{True}, \mathit{False} \}
+$$
+
+```{figure} ../images/intersection.jpg
+:name: fig:intersection
+
+Visualization of the intersection between the two sets $\mathit{Boolean}$ and $\mathit{Trilean}$.
+```
+
+Remember the set that we called $\mathbb{Z}$ which contains all positive and negative integers?
+Another common set in mathematics is that of natural numbers.
+It is usually denoted $\mathbb{N}$ and it contains all positive (but not all negative) integers.
+Whether 0 is included or not depends but let us here assume that 0 is not included.
+We could informally define the set as:
+
+$$
+\mathbb{N} = \{ 1, 2, 3, \dotsc \}
+$$
+
+Since all natural numbers are also integers but not all integers are natural numbers we observe that the intersection between natural numbers and integers is the same set as the set of natural numbers.
+
+$$
+\mathbb{N} \cap \mathbb{Z} = \mathbb{N}
+$$
+
+This is because there are no elements in $\mathbb{N}$ that are not also in $\mathbb{Z}$.
+There are no elements in $\mathbb{N}$ that are "outside" of $\mathbb{Z}$.
+We refer to this as that $\mathbb{N}$ is an improper subset of $\mathbb{Z}$.
+
+
 
 ## Subsets
 
@@ -184,55 +237,88 @@ Subtype polymorphism is also known as inclusion polymorphism and the set theoret
 So when we think of data types as sets then the subsets help us reason about subtype polymorphism.
 
 
+## Union
+
+Let us now look at the operation known as "union".
+It is denoted by a symbol that looks like the letter U ($\cup$).
+The union of two sets simply yields a new set that contains all the elements of the first and all the elements of the second.
+Since a set cannot contain the same element more than once, duplications are however only counted once.
+
+$$
+\mathit{Boolean} \cup \mathit{Trilean} =
+\{ \mathit{True}, \mathit{False}, \mathit{Unknown} \}
+$$
+
+```{figure} ../images/union.jpg
+:name: fig:union
+
+Visualization of the unioin between the two sets $\mathit{Boolean}$ and $\mathit{Trilean}$.
+```
+
+%Let's take another example.
+%Consider the following two sets:
+%
+%$$
+%\mathit{Letters} = \{ A, B \}\\
+%\mathit{Numbers} = \{ 1, 2, 3 \}\\
+%$$
+%
+%The set $\mathit{Letters}$ contains the elements $A$, and $B$.
+%The set $\mathit{Numbers}$ contains the elements $1$, $2$, and $3$.
+%If we take the union of these two sets we end up with a new set that contains all the elements of the first set as well as all the elements of the second set.
+%
+%$$
+%\mathit{Letters} \cup \mathit{Numbers} = \{ A, B, 1, 2, 3 \}
+%$$
+
+The union operation is often thought of as the set equivalent to algebraic addition.
+The algebraic sum between two and three is five ($2+3=5$).
+Taking the union of a set containing two elements and a set containing three elements yields a new set containing five elements, assuming that no element appears in both sets.
+But what if an elements appear in both sets?
+Well, the number of elements in the resulting set is equal to the number of elements in the first, plus the number of elements in the second, minus the number of elements that appear in both.
+
+$$
+|A \cup B| = |A| + |B| - |A \cap B|
+$$
+
+In other words, the cardinality of the resulting set is equal to the sum of the cardinalities of the two sets minus the cardinality of the intersection between the two sets.
+
+
+
 ## Cartesian products
 
 Before we leave sets I want to share one final thing and that is the idea of the Cartesian product.
-Let's say that I've managed to define a set of all legal given names and all legal last names.
-Let's call them $\mathit{GivenNames}$ and $\mathit{LastNames}$ respectively.
-Let's then say that I then define a set that contains all combinations of given and last names as ordered pairs.
+Cartesian product is also a binary operation applied to sets and it is denoted using a symbol that looks like the letter "X" ($\times$) which importantly is also how multiplication is denoted.
+A Cartesian product between two sets yields a new set that contains all ordered pairs that you can form by taking one element from the first set and one element from the second.
 
 $$
-\mathit{Names} = \mathit{GivenNames} \times \mathit{LastNames}
-$$
-
-It might help to know that the reason we use a symbol looking like the letter X ($\times$) to denote the Cartesian product is that the number of elements in the resulting set is equal to the product of the number of elements in the two constituent sets if no elements are found in both sets.
-%Mathematically we would express the relationship like this:
-%$$
-%|\mathit{Names}| = |\mathit{GivenNames}| * |\mathit{LastNames}|
-%$$
-
-If you happen to be familiar with the set operation called union ($\cup$) from before, it is important to understand that a Cartesian product is not the same as a union.
-A union between two sets yields a new set containing all the elements of the first set as well as all the elements of the last set.
-However, a Cartesian product between two sets however yields a new set that contains all combinations of pairs between the two sets.
-
-Consider the following two sets:
-
-$$
-\mathit{Letters} = \{ A, B \}\\
-\mathit{Numbers} = \{ 1, 2, 3 \}\\
-$$
-
-The set $\mathit{Letters}$ contains the elements $A$, and $B$.
-The set $\mathit{Numbers}$ contains the elements $1$, $2$, and $3$.
-If we take the union of these two sets we end up with a new set that contains all the elements of the first set as well as all the elements of the second set.
-
-$$
-\mathit{Letters} \cup \mathit{Numbers} = \{ A, B, 1, 2, 3 \}
-$$
-
-If, however, we take the Cartesian product of the two sets we end up with a new set that contains six two-element sets that enumerate all the combinations of elements from the two sets.
-
-$$
-\mathit{Letters} \times \mathit{Numbers} =
-\{\ 
-( A, 1 )\ ,\  
-( A, 2 )\ ,\ 
-( A, 3 )\ ,\ 
-( B, 1 )\ ,\ 
-( B, 2 )\ ,\ 
-( B, 3 )\  
+\mathit{Boolean}
+\times
+\mathit{Trilean}
+= \{
+(\top, \top),
+(\top, \bot),
+(\top, \ast),
+(\bot, \top),
+(\bot, \bot),
+(\bot, \ast)
 \}
 $$
+
+For the sake of readability I've abbreviated the value $\mathit{True}$ as $\top$, $\mathit{False}$ as $\bot$, and $\mathit{Unknown}$ as $\ast$.
+Also note that an ordered pair is denoted as two elements separated by a comma and enclosed in parenthasis.
+The expression $(a, b)$ therefore refers to a pair where the first element is $a$ and the second is $b$.
+
+If the algebraic counterpart to union is addition, then the algebraic counterpart to Cartesian product is multiplication.
+The number of elements in the resulting set is equal to the product of the number of elements in the two constituent sets.
+
+$$
+|A \times B| = |A| * |B|
+$$
+
+It is important to understand that a Cartesian product ($\times$) is not the same as a union ($\cup$).
+A union between two sets yields a new set containing all the elements of the first set as well as all the elements of the last set.
+However, a Cartesian product between two sets however yields a new set that contains all combinations of pairs between the two sets.
 
 ```{exercise}
 What is the Cartesian product of the two traffic light sets that you defined in {numref}`ex:subsets`?

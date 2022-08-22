@@ -123,7 +123,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   1. 🟠 Sets
+   1. 🟢 Sets
   </a>
  </li>
  <li class="toctree-l1">
@@ -867,18 +867,33 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cardinality">
+   1.2. Cardinality
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#diagrams">
-   1.2. Diagrams
+   1.3. Diagrams
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#intersection">
+   1.4. Intersection
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#subsets">
-   1.3. Subsets
+   1.5. Subsets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#union">
+   1.6. Union
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#cartesian-products">
-   1.4. Cartesian products
+   1.7. Cartesian products
   </a>
  </li>
 </ul>
@@ -906,18 +921,33 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cardinality">
+   1.2. Cardinality
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#diagrams">
-   1.2. Diagrams
+   1.3. Diagrams
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#intersection">
+   1.4. Intersection
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#subsets">
-   1.3. Subsets
+   1.5. Subsets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#union">
+   1.6. Union
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#cartesian-products">
-   1.4. Cartesian products
+   1.7. Cartesian products
   </a>
  </li>
 </ul>
@@ -931,15 +961,15 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="sets">
-<span id="id1"></span><h1><span class="section-number">1. </span>Sets<a class="headerlink" href="#sets" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">1. </span>Sets<a class="headerlink" href="#sets" title="Permalink to this headline">#</a></h1>
 <p>Programmers are modellers.
-We write programs consisting of business objects<a class="footnote-reference brackets" href="#business-objects" id="id2">1</a> [<a class="reference internal" href="business-objects.html#business-objects"><span class="std std-numref">Chapter 82</span></a>]
+We write programs consisting of business objects[^business-objects] [<a class="reference internal" href="business-objects.html#business-objects"><span class="std std-numref">Chapter 82</span></a>]
 and business rules [<a class="reference internal" href="business-logic.html#business-logic"><span class="std std-numref">Chapter 32</span></a>].
 These objects and rules must be valuable to whoever is paying our salary.
 Set theory helps us define effective types for both objects and rules.
 Effective in the sense that they only allow the states and behavior that we want.
 Which in turn means that we need fewer tests and suffer fewer bugs.
-We’ll talk more about this in future sections [<a class="reference internal" href="types-over-tests.html#types-over-tests"><span class="std std-numref">Chapter 94</span></a>] but at this point I hope that you will trust me when I say that great programmers understand that data types can usefully be thought of as sets.</p>
+We’ll talk more about this in future sections but at this point I hope that you will trust me when I say that great programmers understand that data types can usefully be thought of as sets.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Types can be modelled by sets.</p>
@@ -1048,8 +1078,20 @@ The element <span class="math notranslate nohighlight">\(\mathit{Unknown}\)</spa
 </section>
 </div>
 </section>
+<section id="cardinality">
+<h2><span class="section-number">1.2. </span>Cardinality<a class="headerlink" href="#cardinality" title="Permalink to this headline">#</a></h2>
+<p>The number of elements in a set is known as the cardinality of a set.
+A set containing three elements has a cardinality of <span class="math notranslate nohighlight">\(3\)</span>.
+Cardinality is denoted using the “pipe” symbol (<span class="math notranslate nohighlight">\(|\)</span>) which is also known as “vertical bar”.
+So, if <span class="math notranslate nohighlight">\(X\)</span> refers to a set, then <span class="math notranslate nohighlight">\(|X|\)</span> refers to the cardinality of the set <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+|\mathit{Boolean}| = 2\\
+|\mathit{Trilean}| = 3
+\end{split}\]</div>
+</section>
 <section id="diagrams">
-<h2><span class="section-number">1.2. </span>Diagrams<a class="headerlink" href="#diagrams" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">1.3. </span>Diagrams<a class="headerlink" href="#diagrams" title="Permalink to this headline">#</a></h2>
 <p>Sets can also be visualized.
 You’ve probably come across Venn or Euler diagrams already, and if you understand Venn and Euler diagrams, you understand sets.
 To visualize a set we draw a circle and put a label next to it.
@@ -1070,8 +1112,42 @@ Any point outside the circle is not a member of the set.</p>
 </section>
 </div>
 </section>
+<section id="intersection">
+<h2><span class="section-number">1.4. </span>Intersection<a class="headerlink" href="#intersection" title="Permalink to this headline">#</a></h2>
+<p>Let us first look at the set operation known as “intersection”.
+It is a binary operation between two sets and is denoted by a symbol that looks like the letter “U” flipped upside-down (<span class="math notranslate nohighlight">\(\cap\)</span>).</p>
+<p>The intersection of two sets simply yields a new set that contains all the elements that occurr in both sets.
+In other words the intersection is the set of all elements of the first set, that are also found in the second.</p>
+<div class="math notranslate nohighlight">
+\[
+\mathit{Boolean} \cap \mathit{Trilean} = \{\mathit{True}, \mathit{False} \}
+\]</div>
+<figure class="align-default" id="fig-intersection">
+<img alt="images/intersection.jpg" src="images/intersection.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 1.2 </span><span class="caption-text">Visualization of the intersection between the two sets <span class="math notranslate nohighlight">\(\mathit{Boolean}\)</span> and <span class="math notranslate nohighlight">\(\mathit{Trilean}\)</span>.</span><a class="headerlink" href="#fig-intersection" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Remember the set that we called <span class="math notranslate nohighlight">\(\mathbb{Z}\)</span> which contains all positive and negative integers?
+Another common set in mathematics is that of natural numbers.
+It is usually denoted <span class="math notranslate nohighlight">\(\mathbb{N}\)</span> and it contains all positive (but not all negative) integers.
+Whether 0 is included or not depends but let us here assume that 0 is not included.
+We could informally define the set as:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{N} = \{ 1, 2, 3, \dotsc \}
+\]</div>
+<p>Since all natural numbers are also integers but not all integers are natural numbers we observe that the intersection between natural numbers and integers is the same set as the set of natural numbers.</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{N} \cap \mathbb{Z} = \mathbb{N}
+\]</div>
+<p>This is because there are no elements in <span class="math notranslate nohighlight">\(\mathbb{N}\)</span> that are not also in <span class="math notranslate nohighlight">\(\mathbb{Z}\)</span>.
+There are no elements in <span class="math notranslate nohighlight">\(\mathbb{N}\)</span> that are “outside” of <span class="math notranslate nohighlight">\(\mathbb{Z}\)</span>.
+We refer to this as that <span class="math notranslate nohighlight">\(\mathbb{N}\)</span> is an improper subset of <span class="math notranslate nohighlight">\(\mathbb{Z}\)</span>.</p>
+</section>
 <section id="subsets">
-<h2><span class="section-number">1.3. </span>Subsets<a class="headerlink" href="#subsets" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">1.5. </span>Subsets<a class="headerlink" href="#subsets" title="Permalink to this headline">#</a></h2>
 <p>So what is this idea of subsets?
 If all elements of a set are also members of another set, then the first set is a subset of the second.
 If the two sets are different, which means that some of the elements of the second set are not in the first, then the first set is known as a <em>proper</em> subset.
@@ -1089,7 +1165,7 @@ It is a <em>proper</em> subset since there exists some animals that are not cats
 <figure class="align-default" id="fig-subsets">
 <img alt="../_images/subsets.jpg" src="../_images/subsets.jpg" />
 <figcaption>
-<p><span class="caption-number">Fig. 1.2 </span><span class="caption-text">Visualization of a proper subset relation between the set of all cats and the set of all animals as well as between the set of all dogs and the set of all animals.
+<p><span class="caption-number">Fig. 1.3 </span><span class="caption-text">Visualization of a proper subset relation between the set of all cats and the set of all animals as well as between the set of all dogs and the set of all animals.
 Also note that no dogs are cats.</span><a class="headerlink" href="#fig-subsets" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
@@ -1105,46 +1181,65 @@ Because the, arguably, most important pillar [<a class="reference internal" href
 Subtype polymorphism is also known as inclusion polymorphism and the set theoretic idea of subsets is also known as inclusion.
 So when we think of data types as sets then the subsets help us reason about subtype polymorphism.</p>
 </section>
+<section id="union">
+<h2><span class="section-number">1.6. </span>Union<a class="headerlink" href="#union" title="Permalink to this headline">#</a></h2>
+<p>Let us now look at the operation known as “union”.
+It is denoted by a symbol that looks like the letter U (<span class="math notranslate nohighlight">\(\cup\)</span>).
+The union of two sets simply yields a new set that contains all the elements of the first and all the elements of the second.
+Since a set cannot contain the same element more than once, duplications are however only counted once.</p>
+<div class="math notranslate nohighlight">
+\[
+\mathit{Boolean} \cup \mathit{Trilean} =
+\{ \mathit{True}, \mathit{False}, \mathit{Unknown} \}
+\]</div>
+<figure class="align-default" id="fig-union">
+<img alt="images/union.jpg" src="images/union.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 1.4 </span><span class="caption-text">Visualization of the unioin between the two sets <span class="math notranslate nohighlight">\(\mathit{Boolean}\)</span> and <span class="math notranslate nohighlight">\(\mathit{Trilean}\)</span>.</span><a class="headerlink" href="#fig-union" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The union operation is often thought of as the set equivalent to algebraic addition.
+The algebraic sum between two and three is five (<span class="math notranslate nohighlight">\(2+3=5\)</span>).
+Taking the union of a set containing two elements and a set containing three elements yields a new set containing five elements, assuming that no element appears in both sets.
+But what if an elements appear in both sets?
+Well, the number of elements in the resulting set is equal to the number of elements in the first, plus the number of elements in the second, minus the number of elements that appear in both.</p>
+<div class="math notranslate nohighlight">
+\[
+|A \cup B| = |A| + |B| - |A \cap B|
+\]</div>
+<p>In other words, the cardinality of the resulting set is equal to the sum of the cardinalities of the two sets minus the cardinality of the intersection between the two sets.</p>
+</section>
 <section id="cartesian-products">
-<h2><span class="section-number">1.4. </span>Cartesian products<a class="headerlink" href="#cartesian-products" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">1.7. </span>Cartesian products<a class="headerlink" href="#cartesian-products" title="Permalink to this headline">#</a></h2>
 <p>Before we leave sets I want to share one final thing and that is the idea of the Cartesian product.
-Let’s say that I’ve managed to define a set of all legal given names and all legal last names.
-Let’s call them <span class="math notranslate nohighlight">\(\mathit{GivenNames}\)</span> and <span class="math notranslate nohighlight">\(\mathit{LastNames}\)</span> respectively.
-Let’s then say that I then define a set that contains all combinations of given and last names as ordered pairs.</p>
+Cartesian product is also a binary operation applied to sets and it is denoted using a symbol that looks like the letter “X” (<span class="math notranslate nohighlight">\(\times\)</span>) which importantly is also how multiplication is denoted.
+A Cartesian product between two sets yields a new set that contains all ordered pairs that you can form by taking one element from the first set and one element from the second.</p>
 <div class="math notranslate nohighlight">
 \[
-\mathit{Names} = \mathit{GivenNames} \times \mathit{LastNames}
-\]</div>
-<p>It might help to know that the reason we use a symbol looking like the letter X (<span class="math notranslate nohighlight">\(\times\)</span>) to denote the Cartesian product is that the number of elements in the resulting set is equal to the product of the number of elements in the two constituent sets if no elements are found in both sets.</p>
-<p>If you happen to be familiar with the set operation called union (<span class="math notranslate nohighlight">\(\cup\)</span>) from before, it is important to understand that a Cartesian product is not the same as a union.
-A union between two sets yields a new set containing all the elements of the first set as well as all the elements of the last set.
-However, a Cartesian product between two sets however yields a new set that contains all combinations of pairs between the two sets.</p>
-<p>Consider the following two sets:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\mathit{Letters} = \{ A, B \}\\
-\mathit{Numbers} = \{ 1, 2, 3 \}\\
-\end{split}\]</div>
-<p>The set <span class="math notranslate nohighlight">\(\mathit{Letters}\)</span> contains the elements <span class="math notranslate nohighlight">\(A\)</span>, and <span class="math notranslate nohighlight">\(B\)</span>.
-The set <span class="math notranslate nohighlight">\(\mathit{Numbers}\)</span> contains the elements <span class="math notranslate nohighlight">\(1\)</span>, <span class="math notranslate nohighlight">\(2\)</span>, and <span class="math notranslate nohighlight">\(3\)</span>.
-If we take the union of these two sets we end up with a new set that contains all the elements of the first set as well as all the elements of the second set.</p>
-<div class="math notranslate nohighlight">
-\[
-\mathit{Letters} \cup \mathit{Numbers} = \{ A, B, 1, 2, 3 \}
-\]</div>
-<p>If, however, we take the Cartesian product of the two sets we end up with a new set that contains six two-element sets that enumerate all the combinations of elements from the two sets.</p>
-<div class="math notranslate nohighlight">
-\[
-\mathit{Letters} \times \mathit{Numbers} =
-\{\ 
-( A, 1 )\ ,\  
-( A, 2 )\ ,\ 
-( A, 3 )\ ,\ 
-( B, 1 )\ ,\ 
-( B, 2 )\ ,\ 
-( B, 3 )\  
+\mathit{Boolean}
+\times
+\mathit{Trilean}
+= \{
+(\top, \top),
+(\top, \bot),
+(\top, \ast),
+(\bot, \top),
+(\bot, \bot),
+(\bot, \ast)
 \}
 \]</div>
+<p>For the sake of readability I’ve abbreviated the value <span class="math notranslate nohighlight">\(\mathit{True}\)</span> as <span class="math notranslate nohighlight">\(\top\)</span>, <span class="math notranslate nohighlight">\(\mathit{False}\)</span> as <span class="math notranslate nohighlight">\(\bot\)</span>, and <span class="math notranslate nohighlight">\(\mathit{Unknown}\)</span> as <span class="math notranslate nohighlight">\(\ast\)</span>.
+Also note that an ordered pair is denoted as two elements separated by a comma and enclosed in parenthasis.
+The expression <span class="math notranslate nohighlight">\((a, b)\)</span> therefore refers to a pair where the first element is <span class="math notranslate nohighlight">\(a\)</span> and the second is <span class="math notranslate nohighlight">\(b\)</span>.</p>
+<p>If the algebraic counterpart to union is addition, then the algebraic counterpart to Cartesian product is multiplication.
+The number of elements in the resulting set is equal to the product of the number of elements in the two constituent sets.</p>
+<div class="math notranslate nohighlight">
+\[
+|A \times B| = |A| * |B|
+\]</div>
+<p>It is important to understand that a Cartesian product (<span class="math notranslate nohighlight">\(\times\)</span>) is not the same as a union (<span class="math notranslate nohighlight">\(\cup\)</span>).
+A union between two sets yields a new set containing all the elements of the first set as well as all the elements of the last set.
+However, a Cartesian product between two sets however yields a new set that contains all combinations of pairs between the two sets.</p>
 <div class="exercise admonition" id="chapters/sets-exercise-3">
 
 <p class="admonition-title"><span class="caption-number">Exercise 1.4 </span></p>
@@ -1154,12 +1249,6 @@ If we take the union of these two sets we end up with a new set that contains al
 </div>
 <p>Why is it important to understand Cartesian products?
 Because it helps us reason about functions [<a class="reference internal" href="functions.html#functions"><span class="std std-numref">Chapter 2</span></a>] that take multiple parameters.</p>
-<hr class="footnotes docutils" />
-<dl class="footnote brackets">
-<dt class="label" id="business-objects"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
-<dd><p>TODO: Perhaps this is a poor term to use.</p>
-</dd>
-</dl>
 </section>
 </section>
 

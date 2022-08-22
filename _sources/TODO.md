@@ -12,7 +12,7 @@
   - Reintroduce error code in prefix of printed errors.
   - There is no information on what "keyword" means.
 - Sets
-  - Sets chapter needs to descibre Union.
+  - Perhaps "business objects" is a poor choice of words.
 - Variables
   - Variables chapter missing image placeholders.
 - Type-checking
