@@ -2,7 +2,7 @@
 # Algorithms
 
 ```{warning}
-This chapter is a work in progress.
+Work in progress.
 ```
 
 Algorithms rule our world.
@@ -216,10 +216,8 @@ Come up with an algorithm for a problem of your choice.
 ## Sorting and searching
 
 ```{warning}
-This section is a work in progress.
+Work in progress.
 ```
 
 % For example: quicksort and Tony Hoare.
-
-TODO.
 

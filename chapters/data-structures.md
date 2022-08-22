@@ -1,5 +1,9 @@
 (data-structures)=
 # Data structures
 
-- Procedural data structures.
-- Tuples?
+```{warning}
+Work in progress.
+```
+
+%- Procedural data structures.
+%- Tuples?

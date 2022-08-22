@@ -1,6 +1,6 @@
 # Introduction
 
-Welcome to _**The Object Oriented Way: Everything you need to know**_.
+Welcome to _**The Object Oriented Way.
 This book takes you all the way from elementary fundamentals to the most sophisticated ideas.
 Our goal is for this book to be the number one resource for learning object oriented programming using C#.
 
@@ -14,20 +14,21 @@ Browse the table of contents, or use the search box.
 
 ## What you will learn
 
-1. How to **solve problems** in an object oriented style.
-2. How solutions from **other paradigms** are approached in object oriented programming.
-3. The most important design **patterns**, design **principles**, and code **smells**.
-4. How design patterns reveal **inherent limitations** of object oriented languages.
-5. Why object orientation ought to eventually be replaced by functional programming.
+1. All **key ideas** in object oriented programming.
+2. How to **solve problems** in an object oriented style.
+3. How solutions from **other paradigms** are approached in object oriented programming.
+4. The most important design **patterns**, design **principles**, and code **smells**.
+5. How design patterns reveal **inherent limitations** of object oriented languages.
+6. Why object orientation ought to eventually be replaced by functional programming.
 
 
 ```{warning}
 This book is a *work in progress*.
 If you find errors or have suggestions you are more than welcome to [submit an issue](https://github.com/chrokh/the-oo-way/issues/new) in the book's repository on GitHub or reach out to me via email at christopher.okhravi@gmail.com.
 
-In the table of contents, chapter titles marked with 🟢 are mostly completed but might be missing images and some content.
+In the table of contents, chapter titles marked with 🟢 are mostly completed.
 Titles marked with 🟠 contain some content but is very much a work in progress.
-Titles without any of the two markers only contain a rough todo list and are not ready for consumption.
+Titles without any of the two markers contain no published content.
 ```
 
 

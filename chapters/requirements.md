@@ -1,4 +1,10 @@
 (requirements)=
 # Requirements
-- Are vague and in flux.
+
+```{warning}
+Work in progress.
+```
+
+
+%- Are vague and in flux.
 

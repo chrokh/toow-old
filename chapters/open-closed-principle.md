@@ -1,4 +1,8 @@
 # Open-closed principle
 
-OCP.
+```{warning}
+Work in progress.
+```
+
+%OCP.
 

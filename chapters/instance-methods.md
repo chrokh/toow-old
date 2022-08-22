@@ -1,26 +1,27 @@
 (instance-methods)=
 # Instance methods
-- Overloading
-- Signatures.
-- Void is a return type.
-- Recursion.
-- Late binding, Dynamic binding? Michaelis (2020)
-- Usually verbs. Or implied verbs as discussed in procedures.
-- String manipulation
-  - Substring
-  - IndexOf
 
+```{warning}
+Work in progress.
+```
 
----
+%- Overloading
+%- Signatures.
+%- Void is a return type.
+%- Recursion.
+%- Late binding, Dynamic binding? Michaelis (2020)
+%- Usually verbs. Or implied verbs as discussed in procedures.
+%- String manipulation
+%  - Substring
+%  - IndexOf
 
-## Instance methods
 
 We've talked about the type `string`.
 The type `string` defines many operations but one operation that we call using dot notation is `Contains`.
 The instance method `Contains` accepts an argument of type `string` and returns a boolean that represents whether the `string` instance contains the `string` passed as an argument anywhere.
 
 ```csharp
-Console.WriteLine( "Hello world".Contains("hello") );
+"Hello world".Contains("hello")
 ```
 
 ```output
@@ -35,8 +36,9 @@ The program below would render the same result as the one above.
 ```csharp
 string message = "Hello world";
 string keyword = "hello";
+string result  = message.Contains(keyword);
 
-Console.WriteLine( message.Contains(keyword) );
+Console.WriteLine(result);
 ```
 
 Let's look a slightly more complicated example.

@@ -1,6 +1,15 @@
 (objects)=
 # Objects
 
+```{warning}
+Work in progress.
+```
+
+%- Equivalence (i.e. two structurally equivalent objects are not necessarily the same).
+%  - Relate to value type and reference types semantics chapter.
+%- Talk about closures?
+
+
 Let us now explore the idea of objects.
 In the next chapter we will talk about classes [{numref}`Chapter %s<classes>`] but let's now focus strictly on objects.
 
@@ -265,10 +274,4 @@ Using a value type where an object is expected causes boxing [{numref}`Chapter %
 ```{exercise}
 What three types or kinds of types, in C#, are not objects?
 ```
-
-
-## TODO
-- Equivalence (i.e. two structurally equivalent objects are not necessarily the same).
-  - Relate to value type and reference types semantics chapter.
-- Talk about closures?
 

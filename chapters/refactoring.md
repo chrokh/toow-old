@@ -1,3 +1,8 @@
 # Refactoring
-- Definition from Fowler.
+
+```{warning}
+Work in progress.
+```
+
+%- Definition from Fowler.
 

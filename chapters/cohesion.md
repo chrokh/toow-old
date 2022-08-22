@@ -1,3 +1,8 @@
 # Cohesion
-- What do we want instead of coupling?
+
+```{warning}
+Work in progress.
+```
+
+%- What do we want instead of coupling?
 

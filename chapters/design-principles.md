@@ -1,6 +1,9 @@
 (design-principles)=
 # Design principles
 
-- SOLID.
-- GRASP.
+```{warning}
+Work in progress.
+```
 
+%- SOLID.
+%- GRASP.

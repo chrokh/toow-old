@@ -2,7 +2,7 @@
 # Errors
 
 ```{warning}
-This chapter is a work in progress.
+Work in progress.
 ```
 
 As we have seen, there are plenty of mistakes that we can make that cause our programs to fail to compile or even crash at run-time.
