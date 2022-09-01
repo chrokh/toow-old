@@ -330,6 +330,15 @@ What is null-state static analysis in C#?
 What do we mean when we say that the C# compiler tags variables as `not-null` or `maybe-null`?
 ```
 
+```{exercise}
+Write some code that generates a null reference warning.
+```
+
+```{exercise}
+How can we determine whether a particular variable has been tagged `maybe-null` or `not-null`?
+Give an example in code.
+```
+
 
 
 ## Warnings as errors
@@ -435,7 +444,13 @@ As soon as you introduce the null-forgiving operator you are back at the mercy o
 ```
 
 ```{exercise}
-How can we convert a value tagged as `maybe-null` to a value tagged as `not-null`?
+How can we convert a value tagged as `maybe-null` to a value tagged as `not-null` *without using* the null-forgiving operator?
+Give an example in code.
+```
+
+```{exercise}
+How can we convert a value tagged as `maybe-null` to a value tagged as `not-null` *by using* the null-forgiving operator?
+Give an example in code.
 ```
 
 

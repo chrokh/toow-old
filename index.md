@@ -204,18 +204,18 @@ The exercises look like this:
 Can you find the next exercise in the book?
 ```
 
-The book is divided into the following five major parts.
-
-- {doc}`Part I: Fundamentals<sets>`\
-In this part we lay the foundation necessary to talk about object oriented programming. We talk about sets, functions, computation, data types, paradigms, and so forth.
-- {doc}`Part II: Procedural programming<statements>`\
-To understand object oriented programming we must first understand procedural programming. Here we talk about statements, expressions, selection, iteration, arrays, procedures, recursion, and so forth.
-- {doc}`Part III: Object oriented programming<pillars>`\
-This part is the heart of the book. This is where we learn the core ideas of object oriented programming.
-- {doc}`Part IV: Object oriented design<requirements>`\
-In this part, we move from programming to design. We look at the forest instead of the trees and start thinking about how to provide value using our newfound programming skills.
-- {doc}`Part V: Advanced object oriented programming<design-patterns>`\
-In this last part of the book we explore more advanced object oriented ideas and also ideas from other paradigms that have been adopted in the object oriented paradigm.
+%The book is divided into the following five major parts.
+%
+%- {doc}`Part I: Fundamentals<sets>`\
+%In this part we lay the foundation necessary to talk about object oriented programming. We talk about sets, functions, computation, data types, paradigms, and so forth.
+%- {doc}`Part II: Procedural programming<statements>`\
+%To understand object oriented programming we must first understand procedural programming. Here we talk about statements, expressions, selection, iteration, arrays, procedures, recursion, and so forth.
+%- {doc}`Part III: Object oriented programming<pillars>`\
+%This part is the heart of the book. This is where we learn the core ideas of object oriented programming.
+%- {doc}`Part IV: Object oriented design<requirements>`\
+%In this part, we move from programming to design. We look at the forest instead of the trees and start thinking about how to provide value using our newfound programming skills.
+%- {doc}`Part V: Advanced object oriented programming<design-patterns>`\
+%In this last part of the book we explore more advanced object oriented ideas and also ideas from other paradigms that have been adopted in the object oriented paradigm.
 
 I hope you are ready, let's get started.
 

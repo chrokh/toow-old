@@ -96,6 +96,7 @@ In this book we are concerned with the *maintainability* of an algorithm.
 Meaning, how should we write our algorithms so that we can stay in business.
 
 
+(towers-of-hanoi)=
 ## Towers of Hanoi
 
 Let's take one more example.
