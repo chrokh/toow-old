@@ -62,6 +62,9 @@ System.Boolean
 Using the keyword `dynamic` consequently doesn't mean that we move from a world of multiple types into a world of no types at all.
 It means that we move to a uni-typed world where there is only a single compile-time type, namely the type `dynamic`.
 
+% TODO: https://medium.com/@samth/on-typed-untyped-and-uni-typed-languages-8a3b4bedf68c
+% TODO: https://chetan.medium.com/duck-typing-in-ruby-212a25b90cec
+
 The compiler assumes that values given the compile-time type `dynamic` supports any operation.
 This means that all operations will be allowed at compile-time.
 If we invoke an operation that does in fact also exist in the run-time type, the program will compile and run.
@@ -175,6 +178,9 @@ Can a language be statically typed yet still have mostly inferred types? Why?
 
 (nominal-vs-structural)=
 ## Nominal vs structural
+
+% TODO: http://wiki.c2.com/?NominativeAndStructuralTyping
+% TODO: https://medium.com/higher-order-functions/duck-typing-vs-structural-typing-vs-nominal-typing-e0881860bf10
 
 The third dimension in which we can classify a type system is in whether its types are nominal or structural.
 Whether the type system is nominative or structural.

@@ -1,0 +1,1100 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>63. Object composition &#8212; The Object Oriented Way</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="64. Concrete dependency construction" href="concrete-dependency-construction.html" />
+    <link rel="prev" title="62. Properties" href="properties.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-V69WNXD095"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-V69WNXD095');
+                </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">The Object Oriented Way</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="sets.html">
+   1. 🟢 Sets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="functions.html">
+   2. 🟢 Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="algorithms.html">
+   3. 🟠 Algorithms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="computation.html">
+   4. 🟠 Computation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="terminals.html">
+   5. Terminals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="syntax.html">
+   6. 🟢 Syntax
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="semantics.html">
+   7. 🟢 Semantics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="compilation.html">
+   8. 🟢 Compilation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="execution.html">
+   9. 🟢 Execution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="interpretation.html">
+   10. 🟢 Interpretation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="errors.html">
+   11. 🟢 Errors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="documentation.html">
+   12. Documentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="comments.html">
+   13. 🟢 Comments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="standard-out.html">
+   14. Standard out
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="values.html">
+   15. 🟢 Values
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="variables.html">
+   16. 🟢 Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="standard-in.html">
+   17. Standard in
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="indentation.html">
+   18. Indentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="statements.html">
+   19. Statements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="expressions.html">
+   20. Expressions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="operators.html">
+   21. Operators
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="data-types.html">
+   22. 🟢 Data types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="selection.html">
+   23. Selection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="paradigms.html">
+   24. Paradigms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="type-conversions.html">
+   25. Type conversions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="type-checking.html">
+   26. 🟢 Type-checking
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="type-systems.html">
+   27. 🟢 Type systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nothingness.html">
+   28. 🟢 Nothingness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="type-hierarchies.html">
+   29. Type hierarchies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="abstraction.html">
+   30. Abstraction / Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="indirection.html">
+   31. Indirection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="business-logic.html">
+   32. Business logic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="debugging.html">
+   33. Debugging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arrays.html">
+   34. Arrays
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="syntactic-sugar.html">
+   35. Syntactic sugar
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="iteration.html">
+   36. Iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="command-line-arguments.html">
+   37. Command line arguments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mutability.html">
+   38. Mutability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="type-testing.html">
+   39. Type testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="value-and-reference-semantics.html">
+   40. Value and reference semantics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simple-types.html">
+   41. Simple types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="static-methods.html">
+   42. Static methods (procedures)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="purity.html">
+   43. Purity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="static-classes.html">
+   44. Static classes (Modules)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="data-structures.html">
+   45. Data structures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="composition.html">
+   46. Composition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="overloading.html">
+   47. Overloading
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="recursion.html">
+   48. Recursion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="scope.html">
+   49. Scope
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="namespaces.html">
+   50. Namespaces
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="basic-exceptions.html">
+   51. Exceptions (part 1)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="stack-traces.html">
+   52. Stack traces
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pillars.html">
+   53. Pillars
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="objects.html">
+   54. 🟠 Objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classes.html">
+   55. Classes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="fields.html">
+   56. Fields
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="constructors.html">
+   57. Constructors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="instance-methods.html">
+   58. 🟠 Instance methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="type-signatures.html">
+   59. Type signatures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="instance-variables.html">
+   60. Instance variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="basic-access-modifiers.html">
+   61. Access modifiers (basic).
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="properties.html">
+   62. Properties
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   63. 🟠 Object composition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="concrete-dependency-construction.html">
+   64. 🟢 Concrete dependency construction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="concrete-dependency-injection.html">
+   65. 🟢 Concrete dependency injection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="immutable-objects.html">
+   66. Immutable objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="interfaces.html">
+   67. Interfaces
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subtype-polymorphism.html">
+   68. Subtype polymorphism
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inheritance.html">
+   69. Inheritance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="overriding.html">
+   70. Overriding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hiding.html">
+   71. Hiding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="advanced-access-modifiers.html">
+   72. Access modifiers (advanced)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="object-type-conversions.html">
+   73. Type conversions (of objects)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="abstract-dependency-construction.html">
+   74. Abstract dependency construction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="abstract-dependency-injection.html">
+   75. Abstract dependency injection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="advanced-exceptions.html">
+   76. Advanced exceptions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="prototypes.html">
+   77. Prototypes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="base-class-library.html">
+   78. Base class library
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="boxing.html">
+   79. Boxing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="structure-types.html">
+   80. Structure types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="anonymous-types.html">
+   81. Anonymous types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="generics.html">
+   82. Generics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="variance.html">
+   83. Variance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="business-objects.html">
+   84. Business objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="requirements.html">
+   85. Requirements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="correctness.html">
+   86. Correctness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="maintainability.html">
+   87. Maintainability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="code-smells.html">
+   88. Code smells and anti-patterns
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="coupling.html">
+   89. Coupling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cohesion.html">
+   90. Cohesion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="refactoring.html">
+   91. Refactoring
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="design-principles.html">
+   92. Design principles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="single-responsibility-principle.html">
+   93. Single responsibility principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="interface-segregation-principle.html">
+   94. Interface segregation principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="deep-classes.html">
+   95. Deep classes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="types-over-tests.html">
+   96. Types over tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="define-errors-out-of-existence.html">
+   97. Define errors out of existence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="liskov-substitution-principle.html">
+   98. Liskov substitution principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="open-closed-principle.html">
+   99. Open-closed principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dependency-inversion-principle.html">
+   100. Dependency inversion principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="composition-over-inheritance.html">
+   101. Composition over inheritance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="documentation-driven-development.html">
+   102. Documentation-driven development
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="design-patterns.html">
+   103. Design patterns
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="strategy-pattern.html">
+   104. Strategy pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="delegates.html">
+   105. Delegates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="extension-methods.html">
+   106. Extension methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="null-object-pattern.html">
+   107. Null object pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="adapter-pattern.html">
+   108. Adapter pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bridge-pattern.html">
+   109. Bridge pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lambdas.html">
+   110. Lambdas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="abstract-factory-pattern.html">
+   111. Abstract factory pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="iterator-pattern.html">
+   112. Iterator pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="enumerators.html">
+   113. Enumerators
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="indexers.html">
+   114. Indexers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linq.html">
+   115. LINQ
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="observer-pattern.html">
+   116. Observer pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="events.html">
+   117. Events
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="visitor-pattern.html">
+   118. Visitor pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pattern-matching.html">
+   119. Pattern matching
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="reading.html">
+   120. Suggested reading
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bibliography.html">
+   121. Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/chrokh/the-oo-way/issues/new?title=Issue%20on%20page%20%2Fchapters/object-composition.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/chapters/object-composition.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#uml-association">
+   63.1. UML association
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#abstraction-levels">
+   63.2. Abstraction levels
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Object composition</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#uml-association">
+   63.1. UML association
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#abstraction-levels">
+   63.2. Abstraction levels
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="object-composition">
+<h1><span class="section-number">63. </span>Object composition<a class="headerlink" href="#object-composition" title="Permalink to this headline">#</a></h1>
+<p><a class="reference internal" href="composition.html#composition"><span class="std std-ref">Composition</span></a> is the act of combining simple things into more complex things in order to solve complex problems.
+In procedural programming we compose procedures (which in C# is known as <a class="reference internal" href="static-methods.html#static-methods"><span class="std std-ref">static methods</span></a>), in <a class="reference internal" href="paradigms.html#paradigms"><span class="std std-ref">functional programming</span></a> we compose functions, and in object oriented programming we compose objects.
+So if objects are the “building blocks” in object oriented programming then how do we actually build programs using these blocks?
+How do we actually compose objects?</p>
+<p>In object oriented programming, composition is a binary, <em>directed relationship</em>.
+We say that one object “has a” reference to another object.
+Just because I consider myself your friend, doesn’t necessarily mean that you consider yourself my friend.
+Object composition is not necessarily a two way street.
+So if all we know is that object <code class="docutils literal notranslate"><span class="pre">a</span></code> has a reference to object <code class="docutils literal notranslate"><span class="pre">b</span></code> then we don’t know whether object <code class="docutils literal notranslate"><span class="pre">b</span></code> also has a reference to object <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
+<figure class="align-default" id="fig-object-composition-object-diagram">
+<img alt="images/object-composition-object-diagram.jpg" src="images/object-composition-object-diagram.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 63.1 </span><span class="caption-text">TODO Object diagram?</span><a class="headerlink" href="#fig-object-composition-object-diagram" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The objects involved in a composition could be of the same type or of different types.
+While we call it “object composition”, in a class based object oriented language, we define compositions on the class level.
+So the terms “composition” and “has a” is also used on the type level.</p>
+<p>We could for example say that the type <code class="docutils literal notranslate"><span class="pre">Player</span></code> has a <code class="docutils literal notranslate"><span class="pre">Position</span></code>, or that <code class="docutils literal notranslate"><span class="pre">Animal</span></code> has a <code class="docutils literal notranslate"><span class="pre">Behavior</span></code>.
+Remember the <a class="reference internal" href="algorithms.html#towers-of-hanoi"><span class="std std-ref">Towers of Hanoi</span></a>?
+We might build a system where <code class="docutils literal notranslate"><span class="pre">Rod</span></code> has a <code class="docutils literal notranslate"><span class="pre">Disk</span></code>.
+So, on the type level, types have “has-a”-relationships with other types.
+But as we instantiate objects, our has-a relationships on the type level are turned into has-a relationships on the object level.
+If <code class="docutils literal notranslate"><span class="pre">Rod</span></code> has <code class="docutils literal notranslate"><span class="pre">Disk</span></code> then this means that it is possible, but not necessary, for instances of <code class="docutils literal notranslate"><span class="pre">Rod</span></code> to have access to an object or multiple objects of type <code class="docutils literal notranslate"><span class="pre">Disk</span></code>.</p>
+<p>Of course we could model the Towers of Hanoi so that, for example, <code class="docutils literal notranslate"><span class="pre">Disk</span></code> is in a has-a relationship with <code class="docutils literal notranslate"><span class="pre">Rod</span></code>.
+As always, a domain can always be modeled in a multitude of different ways.
+Each model has different drawbacks and benefits.
+In this chapter however we have chosen examples where <code class="docutils literal notranslate"><span class="pre">Rod</span></code>s have <code class="docutils literal notranslate"><span class="pre">Disk</span></code>s since this seems quite intuitive.
+You stick the disk onto the rod, so the rod has the disk.</p>
+<section id="uml-association">
+<h2><span class="section-number">63.1. </span>UML association<a class="headerlink" href="#uml-association" title="Permalink to this headline">#</a></h2>
+<p>In UML class diagrams we refer to object composition as “association” and we draw it using an arrow as in <a class="reference internal" href="#fig-object-composition-class-diagram"><span class="std std-numref">Fig. 63.2</span></a>.
+The arrow is pointing from the type that has a reference to the type that it has a reference to.
+In the case of Towers of Hanoi, <code class="docutils literal notranslate"><span class="pre">Rod</span></code> is pointing towards <code class="docutils literal notranslate"><span class="pre">Disk</span></code> since <code class="docutils literal notranslate"><span class="pre">Rod</span></code> may have references to <code class="docutils literal notranslate"><span class="pre">Disk</span></code>s.
+Understanding how to use has-a arrows is critical for understanding more complex topics such as <a class="reference internal" href="design-patterns.html#design-patterns"><span class="std std-ref">design patterns</span></a> and helps in understanding simpler topics such as dependency injection.</p>
+<p>UML divides the concept of association into two types that they call “aggregation” and “composition”.
+Unfortunately the term “composition” in UML class diagrams doesn’t mean the same thing as “object composition” that we’re discussing here.
+Fortunately, we will not discuss association aggregation and association composition in this book so hopefully we can leave this confusion behind.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Object composition correspond to the UML class diagram term known as “association”.
+One form of association is composition.
+Consequently, the term “composition” does not mean the same thing in the context of UML class diagrams as in the context of object oriented programming.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>If you want to learn more about the UML class diagram concepts aggregation and composition, check out the <a class="reference external" href="https://en.wikipedia.org/wiki/Class_diagram">Wikipedia</a> page on UML class diagrams.</p>
+</div>
+<figure class="align-default" id="fig-object-composition-class-diagram">
+<img alt="images/object-composition-class-diagram.jpg" src="images/object-composition-class-diagram.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 63.2 </span><span class="caption-text">Composing two classes means that they are in a directed has-a relationship with each other where objects of one type will have a reference to objects of the other type but not necessarily the other way around.</span><a class="headerlink" href="#fig-object-composition-class-diagram" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="abstraction-levels">
+<span id="id1"></span><h2><span class="section-number">63.2. </span>Abstraction levels<a class="headerlink" href="#abstraction-levels" title="Permalink to this headline">#</a></h2>
+<p>We’re going to talk about four types, let’s call them, “abstraction levels” of object composition.
+They are numbered so that the level of <a class="reference internal" href="indirection.html#indirection"><span class="std std-ref">indirection</span></a> and <a class="reference internal" href="maintainability.html#maintainability"><span class="std std-ref">modularity</span></a> increases.
+I like to call these levels:</p>
+<ul class="simple">
+<li><p>LEVEL 1: <span class="xref myst"><strong>Concrete</strong> dependency <strong>construction</strong></span>.</p></li>
+<li><p>LEVEL 2: <span class="xref myst"><strong>Abstract</strong> dependency <strong>construction</strong></span>.</p></li>
+<li><p>LEVEL 3: <span class="xref myst"><strong>Concrete</strong> dependency <strong>injection</strong></span>.</p></li>
+<li><p>LEVEL 4: <span class="xref myst"><strong>Abstract</strong> dependency <strong>injection</strong></span></p></li>
+</ul>
+<p>These four levels are <em>not</em> well established terms to describe types of composition.
+I’m suggesting this division as a way to make sense of the words “object composition” which usually encompasses all four levels, and “dependency injection” which usually encompasses levels three and four.</p>
+<p>We’re going to start by covering levels one and three, but we need to learn more before we can cover levels two and four.
+In other words, we’re going to start by only dealing with concrete dependencies and only start dealing with abstract dependencies later.</p>
+<p>Before we can talk about what these levels mean we must first understand the word “dependency”.
+The word “dependency” refer to the object that’s being “composed”.
+In other words, it refers to the object that the other object has a reference to.
+In the UML diagram of <a class="reference internal" href="#fig-object-composition-class-diagram"><span class="std std-numref">Fig. 63.2</span></a> the dependency is <code class="docutils literal notranslate"><span class="pre">Rod</span></code>.
+<code class="docutils literal notranslate"><span class="pre">Disk</span></code> depends on <code class="docutils literal notranslate"><span class="pre">Rod</span></code>.
+From the perspective of compilers, <code class="docutils literal notranslate"><span class="pre">Disk</span></code> cannot be compiled without also compiling <code class="docutils literal notranslate"><span class="pre">Rod</span></code> since <code class="docutils literal notranslate"><span class="pre">Disk</span></code> must have information on what we can do to things of type <code class="docutils literal notranslate"><span class="pre">Rod</span></code>.</p>
+<p>So what do these levels actually mean?
+Well, there are two basic questions we’re asking when classifying a case of object composition.
+The questions are also visualized as a quadrant diagram in <a class="reference internal" href="#composition-quadrants"><span class="std std-numref">Table 63.1</span></a>.</p>
+<ol class="simple">
+<li><p>Is the dependency <em>constructed</em> or <em>injected</em>?</p></li>
+<li><p>Is the compile-time type of the dependency <em>concrete</em> or <em>abstract</em>?</p></li>
+</ol>
+<p>If the answer to the first question is that the object is injected then we would call this “dependency injection”.
+However, to understand dependency injection we must also understand that the more powerful way of using dependency injection is to depend on abstractions which means that the answer to the second question would be “abstract”.</p>
+<table class="colwidths-auto table" id="composition-quadrants">
+<caption><span class="caption-number">Table 63.1 </span><span class="caption-text">Quadrant diagram of abstraction levels in object composition.</span><a class="headerlink" href="#composition-quadrants" title="Permalink to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p></p></th>
+<th class="text-align:left head"><p>CONCRETE</p></th>
+<th class="text-align:left head"><p>ABSTRACT</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p><strong>CONSTRUCTED</strong></p></td>
+<td class="text-align:left"><p>Level 1</p></td>
+<td class="text-align:left"><p>Level 2</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><strong>INJECTED</strong></p></td>
+<td class="text-align:left"><p>Level 3</p></td>
+<td class="text-align:left"><p>Level 4</p></td>
+</tr>
+</tbody>
+</table>
+<p>Don’t worry if all this seems overwhelming.
+In the following chapters we’re, as mentioned, only going to be dealing with levels 1 and 3.
+Namely, object composition where the dependency is concrete and either constructed or injected.
+So, let’s now get started with something a bit more concrete.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="properties.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">62. </span>Properties</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="concrete-dependency-construction.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">64. </span>Concrete dependency construction</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Christopher Okhravi<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

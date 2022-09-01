@@ -1,0 +1,1408 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>65. Concrete dependency injection &#8212; The Object Oriented Way</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="66. Immutable objects" href="immutable-objects.html" />
+    <link rel="prev" title="64. Concrete dependency construction" href="concrete-dependency-construction.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-V69WNXD095"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-V69WNXD095');
+                </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">The Object Oriented Way</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="sets.html">
+   1. 🟢 Sets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="functions.html">
+   2. 🟢 Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="algorithms.html">
+   3. 🟠 Algorithms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="computation.html">
+   4. 🟠 Computation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="terminals.html">
+   5. Terminals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="syntax.html">
+   6. 🟢 Syntax
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="semantics.html">
+   7. 🟢 Semantics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="compilation.html">
+   8. 🟢 Compilation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="execution.html">
+   9. 🟢 Execution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="interpretation.html">
+   10. 🟢 Interpretation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="errors.html">
+   11. 🟢 Errors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="documentation.html">
+   12. Documentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="comments.html">
+   13. 🟢 Comments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="standard-out.html">
+   14. Standard out
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="values.html">
+   15. 🟢 Values
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="variables.html">
+   16. 🟢 Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="standard-in.html">
+   17. Standard in
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="indentation.html">
+   18. Indentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="statements.html">
+   19. Statements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="expressions.html">
+   20. Expressions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="operators.html">
+   21. Operators
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="data-types.html">
+   22. 🟢 Data types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="selection.html">
+   23. Selection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="paradigms.html">
+   24. Paradigms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="type-conversions.html">
+   25. Type conversions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="type-checking.html">
+   26. 🟢 Type-checking
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="type-systems.html">
+   27. 🟢 Type systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nothingness.html">
+   28. 🟢 Nothingness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="type-hierarchies.html">
+   29. Type hierarchies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="abstraction.html">
+   30. Abstraction / Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="indirection.html">
+   31. Indirection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="business-logic.html">
+   32. Business logic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="debugging.html">
+   33. Debugging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arrays.html">
+   34. Arrays
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="syntactic-sugar.html">
+   35. Syntactic sugar
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="iteration.html">
+   36. Iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="command-line-arguments.html">
+   37. Command line arguments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mutability.html">
+   38. Mutability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="type-testing.html">
+   39. Type testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="value-and-reference-semantics.html">
+   40. Value and reference semantics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="simple-types.html">
+   41. Simple types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="static-methods.html">
+   42. Static methods (procedures)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="purity.html">
+   43. Purity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="static-classes.html">
+   44. Static classes (Modules)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="data-structures.html">
+   45. Data structures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="composition.html">
+   46. Composition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="overloading.html">
+   47. Overloading
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="recursion.html">
+   48. Recursion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="scope.html">
+   49. Scope
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="namespaces.html">
+   50. Namespaces
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="basic-exceptions.html">
+   51. Exceptions (part 1)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="stack-traces.html">
+   52. Stack traces
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pillars.html">
+   53. Pillars
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="objects.html">
+   54. 🟠 Objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classes.html">
+   55. Classes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="fields.html">
+   56. Fields
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="constructors.html">
+   57. Constructors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="instance-methods.html">
+   58. 🟠 Instance methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="type-signatures.html">
+   59. Type signatures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="instance-variables.html">
+   60. Instance variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="basic-access-modifiers.html">
+   61. Access modifiers (basic).
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="properties.html">
+   62. Properties
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="object-composition.html">
+   63. 🟠 Object composition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="concrete-dependency-construction.html">
+   64. 🟢 Concrete dependency construction
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   65. 🟢 Concrete dependency injection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="immutable-objects.html">
+   66. Immutable objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="interfaces.html">
+   67. Interfaces
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subtype-polymorphism.html">
+   68. Subtype polymorphism
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inheritance.html">
+   69. Inheritance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="overriding.html">
+   70. Overriding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hiding.html">
+   71. Hiding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="advanced-access-modifiers.html">
+   72. Access modifiers (advanced)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="object-type-conversions.html">
+   73. Type conversions (of objects)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="abstract-dependency-construction.html">
+   74. Abstract dependency construction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="abstract-dependency-injection.html">
+   75. Abstract dependency injection
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="advanced-exceptions.html">
+   76. Advanced exceptions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="prototypes.html">
+   77. Prototypes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="base-class-library.html">
+   78. Base class library
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="boxing.html">
+   79. Boxing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="structure-types.html">
+   80. Structure types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="anonymous-types.html">
+   81. Anonymous types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="generics.html">
+   82. Generics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="variance.html">
+   83. Variance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="business-objects.html">
+   84. Business objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="requirements.html">
+   85. Requirements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="correctness.html">
+   86. Correctness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="maintainability.html">
+   87. Maintainability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="code-smells.html">
+   88. Code smells and anti-patterns
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="coupling.html">
+   89. Coupling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cohesion.html">
+   90. Cohesion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="refactoring.html">
+   91. Refactoring
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="design-principles.html">
+   92. Design principles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="single-responsibility-principle.html">
+   93. Single responsibility principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="interface-segregation-principle.html">
+   94. Interface segregation principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="deep-classes.html">
+   95. Deep classes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="types-over-tests.html">
+   96. Types over tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="define-errors-out-of-existence.html">
+   97. Define errors out of existence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="liskov-substitution-principle.html">
+   98. Liskov substitution principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="open-closed-principle.html">
+   99. Open-closed principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dependency-inversion-principle.html">
+   100. Dependency inversion principle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="composition-over-inheritance.html">
+   101. Composition over inheritance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="documentation-driven-development.html">
+   102. Documentation-driven development
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="design-patterns.html">
+   103. Design patterns
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="strategy-pattern.html">
+   104. Strategy pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="delegates.html">
+   105. Delegates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="extension-methods.html">
+   106. Extension methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="null-object-pattern.html">
+   107. Null object pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="adapter-pattern.html">
+   108. Adapter pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bridge-pattern.html">
+   109. Bridge pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lambdas.html">
+   110. Lambdas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="abstract-factory-pattern.html">
+   111. Abstract factory pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="iterator-pattern.html">
+   112. Iterator pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="enumerators.html">
+   113. Enumerators
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="indexers.html">
+   114. Indexers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linq.html">
+   115. LINQ
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="observer-pattern.html">
+   116. Observer pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="events.html">
+   117. Events
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="visitor-pattern.html">
+   118. Visitor pattern
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pattern-matching.html">
+   119. Pattern matching
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="reading.html">
+   120. Suggested reading
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bibliography.html">
+   121. Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/chrokh/the-oo-way/issues/new?title=Issue%20on%20page%20%2Fchapters/concrete-dependency-injection.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/chapters/concrete-dependency-injection.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dependency-injection">
+   65.1. Dependency injection
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#injecting-the-dependency">
+   65.2. Injecting the dependency
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parameterizing-the-dependency">
+   65.3. Parameterizing the dependency
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Concrete dependency injection</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dependency-injection">
+   65.1. Dependency injection
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#injecting-the-dependency">
+   65.2. Injecting the dependency
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parameterizing-the-dependency">
+   65.3. Parameterizing the dependency
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="concrete-dependency-injection">
+<h1><span class="section-number">65. </span>Concrete dependency injection<a class="headerlink" href="#concrete-dependency-injection" title="Permalink to this headline">#</a></h1>
+<p>In this chapter we’re going to explore level 3 object composition based on the, previously outlined, <a class="reference internal" href="object-composition.html#abstraction-levels"><span class="std std-ref">object composition abstraction levels</span></a>.
+Why are we talking about level 3 before level 2 you ask.
+Isn’t level 3 more indirect than level 2?
+Yes it is, but going from constructed concrete (level 1) to constructed abstract (level 2) doesn’t win us all that much.
+But to understand level 2 we must understand <a class="reference internal" href="subtype-polymorphism.html#subtype-polymorphism"><span class="std std-ref">subtyping</span></a> so we’ll deal with that later.</p>
+<p>When we move from <em>constructed</em> to <em>injected</em> object composition we gain run-time modifiability.
+We gain the ability to change implementation at run-time instead of merely at compile-time.
+This is usually called “dependency injection”.
+What does this mean?
+Think back to the ciphers that we built in the chapter on <span class="xref myst">constructed concrete object composition</span>.
+Remember how <code class="docutils literal notranslate"><span class="pre">RobbersStringCipher</span></code> had to expose all constructor parameters of <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span></code>, the object that it constructed.</p>
+<p>In other words, remember how, when we construct an object that we want to compose with we are suddenly responsible for exposing all the constructor parameters of that object ourselves?
+Remember how this adds up if we have an object that constructs another object that constructs another object that constructs another object and so forth?
+Injection gives us the ability to change, for example, change how many steps to take in a Caesar Cipher based on user input, without having to duplicate the constructor parameters of the composed object.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Injection gives us the ability to expose the constructor parameters of the composed object without having to duplicate the parameters in the compsing object.</p>
+</div>
+<p>How do we achieve this?
+Simple, by passing the object itself instead of the parameters of the object.
+Instead of directly creating the object that we need, we simply state what the data type is of the thing that we need.
+Whoever is calling us is now responsible for getting hold of such an object before calling us.</p>
+<p>We simply say: in order for me to do my job I need something of type <code class="docutils literal notranslate"><span class="pre">XYZ</span></code>, so if you need me to do my job you must first pass me something of type <code class="docutils literal notranslate"><span class="pre">XYZ</span></code>.
+Whether our caller is the one who creates the object in the end is none of our concern.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>In dependency injection, we expect an object that our callers are responsible for constructing instead of parameters that we use to construct the object ourselves.</p>
+</div>
+<p>Let’s start with the versions of <code class="docutils literal notranslate"><span class="pre">RobbersStringCipher</span></code> and <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span></code> from the chapter on <span class="xref myst">constructed concrete object composition</span> where we’ve hard-coded the vowel to stick in between consonants.
+They looked something like this:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">RobbersStringCipher</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">RobbersCharCipher</span><span class="w"> </span><span class="n">charCipher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RobbersCharCipher</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">output</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">charCipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">c</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RobbersCharCipher</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">consonants</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;bcdfghjklmnpqrstvwxz&quot;</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">consonants</span><span class="p">.</span><span class="n">IndexOf</span><span class="p">(</span><span class="n">Char</span><span class="p">.</span><span class="n">ToLower</span><span class="p">(</span><span class="n">input</span><span class="p">))</span><span class="w"> </span><span class="p">!=</span><span class="w"> </span><span class="p">-</span><span class="m">1</span><span class="p">)</span><span class="w"></span>
+<span class="w">     </span><span class="k">return</span><span class="w"> </span><span class="s">$&quot;{input}o{input}&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">input</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<section id="dependency-injection">
+<h2><span class="section-number">65.1. </span>Dependency injection<a class="headerlink" href="#dependency-injection" title="Permalink to this headline">#</a></h2>
+<p>There are two types of dependency injection:</p>
+<ol class="simple">
+<li><p>Constructor injection.</p></li>
+<li><p>Setter injection (sometimes known as: parameter injection).</p></li>
+</ol>
+<p>In constructor injection we inject the object (meaning the dependency) through the constructor.
+In setter injection we inject the object through a <a class="reference internal" href="properties.html"><span class="doc std std-doc">setter</span></a> or an instance method behaving as a setter.</p>
+<p>Let’s first look at an abstract example where the type <code class="docutils literal notranslate"><span class="pre">Dependency</span></code> is being injected into the type <code class="docutils literal notranslate"><span class="pre">Owner</span></code>.
+We could also describe this as <code class="docutils literal notranslate"><span class="pre">Owner</span></code> has-a <code class="docutils literal notranslate"><span class="pre">Dependency</span></code>.</p>
+<p>Constructor injection would look like this:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Dependency</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Owner</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">Dependency</span><span class="w"> </span><span class="n">dependency</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Owner</span><span class="w"> </span><span class="p">(</span><span class="n">Dependency</span><span class="w"> </span><span class="n">dependency</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">dependency</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">dependency</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Setter injection would look like this:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Dependency</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Owner</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="n">Dependency</span><span class="w"> </span><span class="n">dependency</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In the above example we’re using <a class="reference internal" href="properties.html"><span class="doc std std-doc">properties</span></a>.
+Without properties, setter injection would look like this:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Dependency</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Owner</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">Dependency</span><span class="w"> </span><span class="n">dependency</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetDependency</span><span class="w"> </span><span class="p">(</span><span class="n">Dependency</span><span class="w"> </span><span class="n">dependency</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">dependency</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">dependency</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>In this book we will mostly discuss constructor injection since this is what helps alleviate the problem of having to duplicate constructor parameters.
+If you’re interested in parameter injection I would urge you to read <a class="reference external" href="http://misko.hevery.com/2009/02/19/constructor-injection-vs-setter-injection/">this blog post</a> by Miško Hevery.</p>
+</div>
+</section>
+<section id="injecting-the-dependency">
+<h2><span class="section-number">65.2. </span>Injecting the dependency<a class="headerlink" href="#injecting-the-dependency" title="Permalink to this headline">#</a></h2>
+<p>But let’s get back to our Robber’s language example.
+Let’s rewrite the code to first use parameter injection.
+Have a look at the rewritten version of <code class="docutils literal notranslate"><span class="pre">RobbersStringCipher</span></code> below.
+Can you spot the difference?</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">RobbersStringCipher</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">RobbersCharCipher</span><span class="w"> </span><span class="n">charCipher</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">RobbersStringCipher</span><span class="w"> </span><span class="p">(</span><span class="n">RobbersCharCipher</span><span class="w"> </span><span class="n">charCipher</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">charCipher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">charCipher</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">output</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">charCipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">c</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Notice that the line that used to read <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span> <span class="pre">charCipher</span> <span class="pre">=</span> <span class="pre">new</span> <span class="pre">RobbersCharCipher();</span></code> is now gone.
+So where does the variable <code class="docutils literal notranslate"><span class="pre">charCipher</span></code> come from?
+We still need it of course since we’re still calling the method <code class="docutils literal notranslate"><span class="pre">Encode</span></code> on it later.
+Well, if you have a look at the constructor’s signature you can see that we’re now accepting a <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span></code> as an argument.
+Constructor injection anyone?
+Instead of saying which particular <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span></code> object we will use, we simply state that to run this method you must also provide a <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span></code> object.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Instead of instantiating the dependency ourselves, we simply parameterize a method or a constructor so that callers can pass the dependency.</p>
+</div>
+<p>The class <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span></code> itself does <em>not</em> have to change.
+Even though we’ve moved from dependency construction to dependency injection we can leave the code the same.
+The main program however will have to change since the way we use our building blocks have changed.
+We would now use our classes like this:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">stringCipher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RobbersStringCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RobbersCharCipher</span><span class="p">());</span><span class="w"></span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;Hello world&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;Chris&quot;</span><span class="p">));</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Whoever is instantiating a <code class="docutils literal notranslate"><span class="pre">RobbersStringCipher</span></code> is responsible for passing a <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span></code> object to the constructor.
+Since this is the only constructor of <code class="docutils literal notranslate"><span class="pre">RobbersStringCipher</span></code> we conclude that it is impossible to construct a <code class="docutils literal notranslate"><span class="pre">RobbersStringCipher</span></code> without also passing it a <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span></code><a class="footnote-reference brackets" href="#null" id="id1">1</a>.</p>
+<p>The output, of course, remains the same since we’ve only <a class="reference internal" href="refactoring.html"><span class="doc std std-doc">refactored</span></a> our code.
+Meaning that we’ve rewritten our program without changing its observable behavior.</p>
+<p>Let’s now talk about why this is useful.
+Let’s pause for a moment and think about what we are doing.
+Look at these lines:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">cipher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RobbersStringCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RobbersCharCipher</span><span class="p">());</span><span class="w"></span>
+</pre></div>
+</div>
+<p>When we are constructor injecting, we’re giving ourself the ability to create multiple different variations of <code class="docutils literal notranslate"><span class="pre">RobbersStringCipher</span></code> by simply passing in a different instance of <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span></code>.
+This is immensely more flexible than in the case of concrete dependency construction where we create the object directly.</p>
+<p>In the case of dependency <em>construction</em> there is only ever one kind of <code class="docutils literal notranslate"><span class="pre">RobbersStringCipher</span></code>.
+Whenever we instantiate it, that’s the one that we get.
+In the case of dependency <em>injection</em> the number of different variations of <code class="docutils literal notranslate"><span class="pre">RobbersStringCipher</span></code> that we can instantiate simply depends on how many different variations of <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span></code> we can instantiate and then combine with our <code class="docutils literal notranslate"><span class="pre">RobbersStringCipher</span></code>.</p>
+<div class="exercise admonition" id="ex:concrete-dependency-injection-caesar-cipher">
+
+<p class="admonition-title"><span class="caption-number">Exercise 65.1 </span></p>
+<section id="exercise-content">
+<p>Start from the code you built in <a class="reference internal" href="concrete-dependency-construction.html#ex:concrete-dependency-construction-caesar-cipher"><span class="std std-numref">Exercise 64.1</span></a>.</p>
+<p>Refactor the code so that <code class="docutils literal notranslate"><span class="pre">CaesarCharCipher</span></code> is <em>injected</em> through the constructor of <code class="docutils literal notranslate"><span class="pre">CaesarStringCipher</span></code> instead of <em>constructed</em> within <code class="docutils literal notranslate"><span class="pre">CaesarStringCipher</span></code>.</p>
+<p>Make sure the program behaves according to the usage example below:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">cipher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CaesarStringCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CaesarCharCipher</span><span class="p">());</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;AbYz&quot;</span><span class="p">));</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">BcZa</span>
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+<section id="parameterizing-the-dependency">
+<h2><span class="section-number">65.3. </span>Parameterizing the dependency<a class="headerlink" href="#parameterizing-the-dependency" title="Permalink to this headline">#</a></h2>
+<p>Let’s drive this home with an example.
+We’re not, yet, seeing the benefit of injecting <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span></code> into <code class="docutils literal notranslate"><span class="pre">RobbersStringCipher</span></code> over simply constructing it.
+Why?
+Since the constructor of <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span></code> is parameterless and since the object is stateless then <em>all instances will always behave exactly the same</em>.</p>
+<p>When we’re injecting <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span></code> into <code class="docutils literal notranslate"><span class="pre">RobbersStringCipher</span></code> we’re composing the two.
+We’re making a combination.
+But if all objects of both types behave the same then there’s no benefit.
+We might have just as well written all the code in the same place.</p>
+<p>But what if all instances did not behave the same?
+What if in the future there will be an instance that doesn’t behave the same?
+Let’s bring back the parameterized constructor of <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span></code> so that we can choose what vowel to stick in between consonants.
+This should make the injection meaningful.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">RobbersCharCipher</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">vowel</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">RobbersCharCipher</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">vowel</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">vowel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">vowel</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">consonants</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;bcdfghjklmnpqrstvwxz&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">consonants</span><span class="p">.</span><span class="n">IndexOf</span><span class="p">(</span><span class="n">Char</span><span class="p">.</span><span class="n">ToLower</span><span class="p">(</span><span class="n">input</span><span class="p">))</span><span class="w"> </span><span class="p">!=</span><span class="w"> </span><span class="p">-</span><span class="m">1</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="s">$&quot;{input}{vowel}{input}&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">input</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Our new version of <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span></code> is parameterized over the vowel that we stick in the middle upon encoding.
+Let’s try it out.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">encoder1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RobbersCharCipher</span><span class="p">(</span><span class="sc">&#39;o&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="kt">var</span><span class="w"> </span><span class="n">encoder2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RobbersCharCipher</span><span class="p">(</span><span class="sc">&#39;a&#39;</span><span class="p">);</span><span class="w"></span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">encoder1</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="sc">&#39;B&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">encoder2</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="sc">&#39;B&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">encoder1</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="sc">&#39;L&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">encoder2</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="sc">&#39;L&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">LoL</span>
+<span class="go">LaL</span>
+<span class="go">BoB</span>
+<span class="go">BaB</span>
+</pre></div>
+</div>
+<p>As expected, it is no longer true that all instances of <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span></code> behave the same.
+Only instances parameterized with the same vowel now behave the same.
+Suddenly, the fact that we’ve composed <code class="docutils literal notranslate"><span class="pre">RobbersStringCipher</span></code> and <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span></code> indirectly rather than directly, meaning by means of dependency injection rather than dependency construction, becomes extremely useful.</p>
+<p>Without having to rewrite <em>any code</em> in <code class="docutils literal notranslate"><span class="pre">RobbersStringCipher</span></code> are we able to create new string ciphers on the fly by composing different instances of <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span></code> with <code class="docutils literal notranslate"><span class="pre">RobbersStringCipher</span></code>.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">cipher1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RobbersStringCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RobbersCharCipher</span><span class="p">(</span><span class="sc">&#39;o&#39;</span><span class="p">));</span><span class="w"></span>
+<span class="kt">var</span><span class="w"> </span><span class="n">cipher2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RobbersStringCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RobbersCharCipher</span><span class="p">(</span><span class="sc">&#39;e&#39;</span><span class="p">));</span><span class="w"></span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cipher1</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cipher2</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">));</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">HoHelollolo</span>
+<span class="go">HoHelollolo</span>
+</pre></div>
+</div>
+<p>What’s important to realize is that the behavior of <code class="docutils literal notranslate"><span class="pre">RobbersStringCipher</span></code> is not determined at <em>compile-time</em> but at <em>run-time</em>.
+We can really drive this point home by letting the vowel be read as input from the user.
+Check the following program out.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Read letter from user.</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Press any letter.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="kt">char</span><span class="w"> </span><span class="n">letter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">ReadKey</span><span class="p">().</span><span class="n">KeyChar</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// Make cipher based on letter.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">cipher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RobbersStringCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RobbersCharCipher</span><span class="p">(</span><span class="n">letter</span><span class="p">));</span><span class="w"></span>
+
+<span class="c1">// Encode using cipher.</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">cipher</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Without changing any of the underlying classes we’re able to let the user choose what letter to stick in-between consonants.
+Of course we could have written the same program using concrete dependency <em>construction</em>.
+Heck, we could even have written the same program using method composition.
+But the point is not that the problem cannot be solved using a more direct technique.
+The point is that the more direct technique is less maintainable.
+It suffers from what we later will learn to call <a class="reference internal" href="coupling.html"><span class="doc std std-doc">tighter coupling</span></a>.</p>
+<p>Maintainability is reduced, because as we saw in the chapter on <a class="reference internal" href="concrete-dependency-construction.html"><span class="doc std std-doc">concrete dependency construction</span></a>:</p>
+<ol class="simple">
+<li><p>Whenever the constructor of the composed object changes the composer has to change.</p></li>
+<li><p>The constructor parameters of the composed object has to be duplicated in the composing object’s constructor.</p></li>
+</ol>
+<p>When using dependency injection we are freed from both of these burdens.</p>
+<p>Some of you might object to this and say that all this is way too complicated.
+Would it not be simpler to just ask the user, using <code class="docutils literal notranslate"><span class="pre">Console.ReadKey</span></code>, directly in the <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span></code> class.
+Simpler? Yes, in a sense.
+If we are 100% certain that this is the program that we need to write and that there will never be any other versions of the program that we will have to write then yes, doing it directly like that would be simpler.
+More <em>modular</em> or <em>modifiable</em>?
+Unequivocally and most certainly no.</p>
+<p>We’ll explore this vocabulary more in the chapter on <a class="reference internal" href="maintainability.html#maintainability"><span class="std std-ref">maintainability</span></a>.
+In short however, the point is this:</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>When we’re using dependency injection we give ourselves the ability to solve many different problems by simply composing our simple parts at run-time.</p>
+</div>
+<p>In this case, dependency injection allows us to keep the old functionality (pre-determined vowels) while still enabling new functionality (such as vowels based on user input).
+What if we want to deploy our application on the web and receive letter information based on mouse clicks on a visualized virtual keyboard?
+The possibilities are endless.</p>
+<p>The additional code we need to write to support something like vowels based on user input is trivial.
+More importantly, it’s mostly an exercise in <em>adding</em> code, not in <em>rewriting</em> code.
+Whenever we rewrite something, we run the risk of breaking something.
+You’ll learn more about this when we get to the <a class="reference internal" href="open-closed-principle.html"><span class="doc std std-doc">open-closed principle</span></a>.</p>
+<p>If you think this is cool, man are you in for a treat.
+Just wait until we get to <a class="reference internal" href="abstract-dependency-injection.html"><span class="doc std std-doc">abstract dependency injection</span></a> for something that will really blow your mind.
+Then we will be able to say that any type that satisfies a particular <span class="xref myst">interface</span> is allowed to be injected into <code class="docutils literal notranslate"><span class="pre">RobbersStringCipher</span></code>.
+That kind of object composition seems to me to be the whole idea behind object oriented programming.</p>
+<div class="exercise admonition" id="chapters/concrete-dependency-injection-exercise-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 65.2 </span></p>
+<section id="exercise-content">
+<p>What is concrete dependency injection?
+Give your own example and explain it in your own words.</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/concrete-dependency-injection-exercise-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 65.3 </span></p>
+<section id="exercise-content">
+<p>What is the difference between concrete dependency <em>construction and <em>injection</em></em>?
+Give your own examples and explain it in your own words.</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/concrete-dependency-injection-exercise-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 65.4 </span></p>
+<section id="exercise-content">
+<p>In this exercise we will practice concrete dependency injection.</p>
+<p>Implement the two classes <code class="docutils literal notranslate"><span class="pre">Animal</span></code> and <code class="docutils literal notranslate"><span class="pre">Speech</span></code> such that they correspond to the UML class diagrams below and behave according to the usage example.</p>
+<p>Consider the following two classes drawn in the style of UML class diagrams.
+While not visible in the diagram, there should be an has-a arrow from <code class="docutils literal notranslate"><span class="pre">Animal</span></code> to <code class="docutils literal notranslate"><span class="pre">Speech</span></code> such that <code class="docutils literal notranslate"><span class="pre">Animal</span></code> has <code class="docutils literal notranslate"><span class="pre">Speech</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>        <span class="n">Animal</span>
+<span class="o">===================================</span>
+<span class="o">+</span> <span class="o">&lt;&lt;</span><span class="n">Create</span><span class="o">&gt;&gt;</span> <span class="n">Animal</span> <span class="p">(</span><span class="n">Speech</span> <span class="n">speech</span><span class="p">)</span>
+<span class="o">+</span> <span class="n">Speak</span> <span class="p">()</span> <span class="p">:</span> <span class="n">string</span>
+<span class="o">-----------------------------------</span>
+
+
+        <span class="n">Speech</span>
+<span class="o">===================================</span>
+<span class="o">+</span> <span class="o">&lt;&lt;</span><span class="n">Create</span><span class="o">&gt;&gt;</span> <span class="n">Speech</span> <span class="p">(</span><span class="n">string</span> <span class="n">sound</span><span class="p">)</span>
+<span class="o">+</span> <span class="n">Speak</span> <span class="p">()</span> <span class="p">:</span> <span class="n">string</span>
+<span class="o">-----------------------------------</span>
+</pre></div>
+</div>
+<p>Make sure that your program behaves according to the following usage example and corresponding output:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Speech</span><span class="w"> </span><span class="n">meow</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Speech</span><span class="p">(</span><span class="s">&quot;meow&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">Speech</span><span class="w"> </span><span class="n">woof</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Speech</span><span class="p">(</span><span class="s">&quot;woof&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">Speech</span><span class="w"> </span><span class="n">blub</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Speech</span><span class="p">(</span><span class="s">&quot;blub&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="n">Animal</span><span class="w"> </span><span class="n">cat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Animal</span><span class="p">(</span><span class="n">meow</span><span class="p">);</span><span class="w"></span>
+<span class="n">Animal</span><span class="w"> </span><span class="n">dog</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Animal</span><span class="p">(</span><span class="n">woof</span><span class="p">);</span><span class="w"></span>
+<span class="n">Animal</span><span class="w"> </span><span class="n">fish</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Animal</span><span class="p">(</span><span class="n">blub</span><span class="p">);</span><span class="w"></span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cat</span><span class="p">.</span><span class="n">Speak</span><span class="p">());</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">dog</span><span class="p">.</span><span class="n">Speak</span><span class="p">());</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">fish</span><span class="p">.</span><span class="n">Speak</span><span class="p">());</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">Animal says: &quot;meow&quot;</span>
+<span class="go">Animal says: &quot;woof&quot;</span>
+<span class="go">Animal says: &quot;blub&quot;</span>
+</pre></div>
+</div>
+</section>
+</div>
+<div class="exercise admonition" id="ex:concrete-dependency-injection-parameterized-caesar-cipher">
+
+<p class="admonition-title"><span class="caption-number">Exercise 65.5 </span></p>
+<section id="exercise-content">
+<p>Start from the code you built in <a class="reference internal" href="concrete-dependency-construction.html#ex:concrete-dependency-construction-parameterized-caesar-cipher"><span class="std std-numref">Exercise 64.4</span></a>.</p>
+<p>Refactor the code so that <code class="docutils literal notranslate"><span class="pre">CaesarCharCipher</span></code> is <em>injected</em> through the constructor of <code class="docutils literal notranslate"><span class="pre">CaesarStringCipher</span></code> instead of <em>constructed</em> within <code class="docutils literal notranslate"><span class="pre">CaesarStringCipher</span></code>.</p>
+<p>Make sure that the program behaves according to the usage example below:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">threeStepsForward</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CaesarStringCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CaesarCharCipher</span><span class="p">(</span><span class="m">3</span><span class="p">));</span><span class="w"></span>
+<span class="kt">var</span><span class="w"> </span><span class="n">twoStepsBackwards</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CaesarStringCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CaesarCharCipher</span><span class="p">(-</span><span class="m">2</span><span class="p">));</span><span class="w"></span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">threeStepsForward</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;aB&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">twoStepsBackwards</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;aB&quot;</span><span class="p">));</span><span class="w"></span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">threeStepsForward</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;Yz&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">twoStepsBackwards</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;Yz&quot;</span><span class="p">));</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">dE</span>
+<span class="go">yZ</span>
+<span class="go">Bc</span>
+<span class="go">Wx</span>
+</pre></div>
+</div>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/concrete-dependency-injection-exercise-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 65.6 </span></p>
+<section id="exercise-content">
+<p>Compare your solutions to <a class="reference internal" href="concrete-dependency-construction.html#ex:concrete-dependency-construction-parameterized-caesar-cipher"><span class="std std-numref">Exercise 64.4</span></a> and <a class="reference internal" href="#ex:concrete-dependency-injection-parameterized-caesar-cipher"><span class="std std-numref">Exercise 65.5</span></a>.
+Use your own words to explain what we have gained, in terms of maintainability, by moving from dependency <em>construction</em> to dependency <em>injection</em>.</p>
+</section>
+</div>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="null"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>With the exception of <code class="docutils literal notranslate"><span class="pre">null</span></code> of course, but hopefully you’ve configured your projects to treat null reference warnings as errors as we advised in the chapter on <a class="reference internal" href="nothingness.html"><span class="doc std std-doc">Nothingness</span></a></p>
+</dd>
+</dl>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="concrete-dependency-construction.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">64. </span>Concrete dependency construction</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="immutable-objects.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">66. </span>Immutable objects</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Christopher Okhravi<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

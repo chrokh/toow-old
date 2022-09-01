@@ -74,3 +74,7 @@ What is the difference between returning `null` and returning `void`?
 In what cases would you use one and in one what cases would you use the other?
 ```
 
+
+%```{exercise}
+% Fizz buzz.
+%```

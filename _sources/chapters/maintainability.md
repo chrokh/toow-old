@@ -8,6 +8,11 @@ Work in progress.
 
 
 %- ISO definition.
+%  - Modularity
+%  - Reusability
+%  - Analysability
+%  - Modifiability
+%  - Testability
 %- User requirements is the hard part.
 %- Being able to change your program.
 %- Providing value as fast as possible without compromising future potential value.
@@ -45,3 +50,5 @@ Work in progress.
 %Exploring how to solve problems using code and exploring a language out of pure curiosity is of course an excellent thing.
 %I myself have written countless pieces of code and read countless pages of documentation just for the sake of scratching my own itch.
 %However, with this book I want to encourage you to deliberately practice to become a programmer that knows how to weigh the pros and cons of a solution in the face of real world business constraints and requirements.
+
+%- Possibly relate back to points made in concrete object composition chapter.
