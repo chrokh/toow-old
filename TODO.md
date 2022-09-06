@@ -3,6 +3,7 @@
 - General
   - Links to official documentation like in the [Type Systems](type-systems) chapter?
   - Add "decode" method to all usages of Caesar cipher. This is important because it helps students think about reusability.
+  - Static interface methods? https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/tutorials/static-virtual-interface-members
 - Data types
   - Should discuss Reflection?
   - Expand discussion in Data Types chapter on why treating Nullable warnings as errors is a good idea and that this should be the default.
@@ -14,6 +15,7 @@
 - Object composition
   - Perhaps discussion on Dependency should be its own chapter? How does this relate to how we use the term dependency in the context of coupling?
   - "Constructed" could mean that you call someone who constructs. If the thing you call to construct is constructed in you then it's still a "hard" dependency.
+  - Use term "collaborator".
 - General
   - Reintroduce error code in prefix of printed errors.
   - There is no information on what "keyword" means.

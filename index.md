@@ -84,7 +84,7 @@ It is not complicated and you, yes you, will understand.
 ## Join the community
 
 I am looking into creating a private community where we can discuss the contents with me and other readers of this book.
-Unless the donations for this book are increased this might have to be a paid community to be sustainable.
+%Unless the donations for this book are increased this might have to be a paid community to be sustainable.
 If you have thoughts around the creation of a community, please feel free to reach out to me at christopher.okhravi@gmail.com.
 
 To enable the creation of a private community, please consider [supporting my work](https://patreon.com/christopherokhravi).
