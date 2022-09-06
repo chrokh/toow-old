@@ -8,7 +8,7 @@ Work in progress.
 %- Subroutine on Wikipedia
 %- Procedure, hence Procedural programming paradigm.
 %- Static methods in C\#
-%- Method signature
+%- Method signature (includes return type in the context of [delegates](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/delegates/), but not in the context of overloading).
 %- Parameters/arguments
 %- Return type and value
 %  - In mathematics we say that a function "maps" a certain argument to a certain value, or in other words, a certain input to a certain output. In the imperative programming paradigm however we say that a method "returns" a value. When we define a method we must define what it's, so called, "return type" is. Meaning what the data type is of the values that it returns when we call it.

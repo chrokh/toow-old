@@ -6,6 +6,21 @@
 Work in progress.
 ```
 
+(modularity)=
+## Modularity
+
+(reusability)=
+## Reusability
+
+(analyisability)=
+## Analysability
+
+(modifiability)=
+## Modifiability
+
+(testability)=
+## Testability
+
 
 %- ISO definition.
 %  - Modularity

@@ -451,7 +451,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   67. Interfaces
+   67. 🟢 Interfaces
   </a>
  </li>
  <li class="toctree-l1">
@@ -847,12 +847,56 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   67.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#declaring-an-interface">
+   67.2. Declaring an interface
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-an-interface">
+   67.3. Implementing an interface
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-multiple-interfaces">
+   67.4. Implementing multiple interfaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#uml-class-diagram-notation">
+   67.5. UML class diagram notation
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -864,6 +908,39 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   67.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#declaring-an-interface">
+   67.2. Declaring an interface
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-an-interface">
+   67.3. Implementing an interface
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-multiple-interfaces">
+   67.4. Implementing multiple interfaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#uml-class-diagram-notation">
+   67.5. UML class diagram notation
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -873,10 +950,253 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="interfaces">
 <span id="id1"></span><h1><span class="section-number">67. </span>Interfaces<a class="headerlink" href="#interfaces" title="Permalink to this headline">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
+<p>The word “interface” is, in object oriented programming commonly used to mean two different but related things.</p>
+<ol class="simple">
+<li><p>The abstract idea of an interface.</p></li>
+<li><p>The keyword <code class="docutils literal notranslate"><span class="pre">interface</span></code> used in many object oriented languages.</p></li>
+</ol>
+<p>In this chapter we’ll make a distinction between these two by either saying “interface” or <code class="docutils literal notranslate"><span class="pre">interface</span></code>.
+Let’s start with the abstract idea of an interface.
+What is an interface?</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>An interface defines <em>what</em> something can do without defining <em>how</em> it does it.</p>
 </div>
+<p>Remember how we’ve learned that a <a class="reference internal" href="classes.html#classes"><span class="std std-ref">class</span></a> consists of a bunch of instance and static members?
+Members are either methods or variables.
+Then we have <a class="reference internal" href="properties.html"><span class="doc std std-doc">properties</span></a> which can be thought of somewhere in between methods and variables.</p>
+<p>The set of all <span class="xref myst">public</span> <a class="reference internal" href="classes.html#classes"><span class="std std-ref">instance members</span></a> of a class are part of what we call the “interface” of a class.
+An interface is a “contract” that tells us what we can do with something.
+In other words, the set of all public members define <em>what</em> we can do with objects of the class.</p>
+<p>If we’ve got an object and all we know is its interface then we know what methods we can call and what types to expect in return.
+We know what variables we can access and what types they have.</p>
+<section id="motivation">
+<h2><span class="section-number">67.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
+<p>Why is this a good idea?
+What’s the point?
+Let’s use an analogy.
+Think about screws, bolts, and screwdrivers.
+The drive type of the screw or bolt determines what screwdriver you need to screw or unscrew it.
+The same screwdriver can however be used to drive a wide number of different types of screws and bolts.
+Some fit into nuts, some are intended to penetrate material.
+Some are left-handed and some are right-handed.
+The same screwdriver can be used since different types of screws and bolts share the same drive type.</p>
+<p>The drive type is what we would refer to as the “interface”.
+Think of it as a “standard”.
+It is the contract between the screw and the screwdriver.
+Screw manufacturers make sure that their screw heads adhere to a standardized drive type.
+Similarly, screwdriver manufacturers make sure that their screwdrivers adhere to a standardized drive type.</p>
+<p>This separation between interface and implementation has immense benefits.
+For one we don’t have to buy a new screwdriver every time we buy a new screw.
+In programming we refer to this as <a class="reference internal" href="maintainability.html#reusability"><span class="std std-ref">reusability</span></a>.
+But also, it means that we don’t have to coordinate between screw manufacturers, bolt manufacturers, and screwdrive manufacturers.
+In programming we refer to this as <a class="reference internal" href="maintainability.html#modifiability"><span class="std std-ref">modifiability</span></a>.
+We’ll talk more about both reusability and modifiability in the chapter on <a class="reference internal" href="maintainability.html#maintainability"><span class="std std-ref">maintainability</span></a>.</p>
+<div class="exercise admonition" id="chapters/interfaces-exercise-0">
+
+<p class="admonition-title"><span class="caption-number">Exercise 67.1 </span></p>
+<section id="exercise-content">
+<p>What is the abstract idea of an interface?
+Come up with your own example in natural language that’s different from the example given in this chapter on screws, bolts, and screwdrivers.</p>
+</section>
+</div>
+</section>
+<section id="declaring-an-interface">
+<h2><span class="section-number">67.2. </span>Declaring an interface<a class="headerlink" href="#declaring-an-interface" title="Permalink to this headline">#</a></h2>
+<p>An interface is often referred to as an “abstraction” while classes, in contrast, are referred to as “concretions”.
+Classes are concrete in the sense that they can be instantiated into objects.
+Interfaces can however <em>not</em> be instantiated.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>A class defines a compile-time and a run-time type.
+Interfaces <em>only define compile-time types</em> and cannot be instantiated.</p>
+</div>
+<p>In other words, an interface is only a compile-time type.
+At run-time, any interface must be replaced by a run-time type.
+Consider for example the following definition of a class called <code class="docutils literal notranslate"><span class="pre">Coordinate</span></code>:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Coordinate</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Coordinate</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">X</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Add</span><span class="w"> </span><span class="p">(</span><span class="n">Coordinate</span><span class="w"> </span><span class="n">coord</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">X</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">coord</span><span class="p">.</span><span class="n">X</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Translate</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">X</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Y</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>What is the interface of the class <code class="docutils literal notranslate"><span class="pre">Coordinate</span></code>?
+Well there are three public instance members:</p>
+<ol class="simple">
+<li><p>The property <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">X</span></code>.</p></li>
+<li><p>The property <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">Y</span></code>.</p></li>
+<li><p>The instance method <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">Translate</span> <span class="pre">(int</span> <span class="pre">x,</span> <span class="pre">int</span> <span class="pre">y)</span></code>.</p></li>
+</ol>
+<p>These public instance members are what we would call the “interface” of the class.</p>
+<p>Even though we can talk about the abstract idea of the interface of the class <code class="docutils literal notranslate"><span class="pre">Coordinate</span></code>, we cannot talk about any concrete <code class="docutils literal notranslate"><span class="pre">interface</span></code> since it doesn’t implement one.
+What would a concrete <code class="docutils literal notranslate"><span class="pre">interface</span></code> that captures the same idea look like?
+How about this:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ICoordinate</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">void</span><span class="w"> </span><span class="nf">Translate</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In C# the letter <code class="docutils literal notranslate"><span class="pre">I</span></code> is often prepended to the name of an interface.
+So instead of naming an interface <code class="docutils literal notranslate"><span class="pre">Collection</span></code> we would name it <code class="docutils literal notranslate"><span class="pre">ICollection</span></code>.
+This is purely a convention and serves no technical purpose.
+Choose whether you want to stick to this convention or not and then stick to your decision within a code base.</p>
+</div>
+<p>Remember how we said that interfaces only define compile-time types and hence cannot be instantiated.
+If we try to instantiate an interface we get an error.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ICoordinate</span><span class="w"> </span><span class="n">coord</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ICoordinate</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">error CS0144: Cannot create an instance of the abstract type or interface.</span>
+</pre></div>
+</div>
+<p>However, since interfaces do define compile-time types it is only the right-hand side of the assignment statement above that’s problematic.
+The left-hand side is entirely fine.
+We can declare a variable of type <code class="docutils literal notranslate"><span class="pre">ICoordinate</span></code> and our code will compile just fine.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ICoordinate</span><span class="w"> </span><span class="n">coord</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">Build succeeded.</span>
+</pre></div>
+</div>
+</section>
+<section id="implementing-an-interface">
+<h2><span class="section-number">67.3. </span>Implementing an interface<a class="headerlink" href="#implementing-an-interface" title="Permalink to this headline">#</a></h2>
+<p>But wait a minute you might say.
+If I can declare a variable to be of type <code class="docutils literal notranslate"><span class="pre">ICoordinate</span></code> but there are no instances of <code class="docutils literal notranslate"><span class="pre">ICoordinate</span></code> how could this possibly be useful?
+What can I put inside the variable?
+Glad you asked.
+We have now arrived at the magical destination know as <a class="reference internal" href="subtype-polymorphism.html#subtype-polymorphism"><span class="std std-ref">subtype polymorphism</span></a>.
+But let’s finish up our discussion on interfaces before we dig too deep in that idea.</p>
+<p>We cannot instantiate an <code class="docutils literal notranslate"><span class="pre">interface</span></code>, but we can declare that some concrete class, <a class="reference internal" href="inheritance.html#inheritance"><span class="std std-ref">abstract class</span></a> (more on this later), or other interface <em>implements the interface</em>.
+The key word here is “implements”.
+We say that some type implements some interface.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>A single type can implement multiple interfaces and the same interface can be implemented by multiple types.</p>
+</div>
+<p>To declare that a class implements an interface we use the colon (<code class="docutils literal notranslate"><span class="pre">:</span></code>) symbol after the name of the class in the class declaration and then specify the name of the interface.
+When we compile our program the compiler will check whether our types actually implement all the members of the interfaces that they claim to implement.</p>
+<p>In the example below we’re defining an empty class called <code class="docutils literal notranslate"><span class="pre">Point</span></code> and claim that it implements the interface <code class="docutils literal notranslate"><span class="pre">ICoordinate</span></code>.
+When compiling the program we get an error that states that we haven’t implemented any of the members that <code class="docutils literal notranslate"><span class="pre">ICoordinate</span></code> demands.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Point</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICoordinate</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">error CS0535: &#39;Point&#39; does not implement interface member &#39;ICoordinate.X&#39;.</span>
+<span class="go">error CS0535: &#39;Point&#39; does not implement interface member &#39;ICoordinate.Y&#39;.</span>
+<span class="go">error CS0535: &#39;Point&#39; does not implement interface member &#39;ICoordinate.Translate(int, int)&#39;.</span>
+</pre></div>
+</div>
+<p>But what about our previous class <code class="docutils literal notranslate"><span class="pre">Coordinate</span></code>.
+Since we modeled the interface after that class, surely that class should be a valid implementation of <code class="docutils literal notranslate"><span class="pre">ICoordinate</span></code>.
+Let’s try it out.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Coordinate</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICoordinate</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// Insert same implementation as before...</span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">Build succeeded.</span>
+</pre></div>
+</div>
+<p>Yup, since the class <code class="docutils literal notranslate"><span class="pre">Coordinate</span></code> implements all the required members of the interface <code class="docutils literal notranslate"><span class="pre">ICoordinate</span></code> it is a valid implementation of it.
+This means that we can now declare a variable with the compile-time type <code class="docutils literal notranslate"><span class="pre">ICoordinate</span></code> and run-time type <code class="docutils literal notranslate"><span class="pre">Coordinate</span></code> since the latter implements the interface of the former.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ICoordinate</span><span class="w"> </span><span class="n">coord</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Coordinate</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Notice how the compile-time type on the left is an interface (or generally: an abstraction) while the run-time type on the right is a concrete class.
+Why this is useful and what we can do with this is something that we’ll deal with in the chapter on <a class="reference internal" href="subtype-polymorphism.html#subtype-polymorphism"><span class="std std-ref">subtype polymorphism</span></a>.</p>
+<div class="exercise admonition" id="chapters/interfaces-exercise-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 67.2 </span></p>
+<section id="exercise-content">
+<p>Explain the keyword <code class="docutils literal notranslate"><span class="pre">interface</span></code>?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/interfaces-exercise-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 67.3 </span></p>
+<section id="exercise-content">
+<p>What is the difference between a class and an interface?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/interfaces-exercise-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 67.4 </span></p>
+<section id="exercise-content">
+<p>Does an interface define a compile-time type, a run-time type, or both?
+What does this mean?</p>
+</section>
+</div>
+<div class="exercise admonition" id="ex:interfaces">
+
+<p class="admonition-title"><span class="caption-number">Exercise 67.5 </span></p>
+<section id="exercise-content">
+<ol class="simple">
+<li><p>Define your own interface.</p></li>
+<li><p>Write a class that implements that interface.</p></li>
+<li><p>Declare a variable whose compile-time type is your interface, and whose run-time type is your class.</p></li>
+</ol>
+</section>
+</div>
+</section>
+<section id="implementing-multiple-interfaces">
+<h2><span class="section-number">67.4. </span>Implementing multiple interfaces<a class="headerlink" href="#implementing-multiple-interfaces" title="Permalink to this headline">#</a></h2>
+<p>Before we move on we should mention that you can implement multiple interfaces by simply separating them with commas.
+Let’s say that we want to split our previous interface into the two interfaces <code class="docutils literal notranslate"><span class="pre">IPositionable</span></code> and <code class="docutils literal notranslate"><span class="pre">ITranslatable</span></code>.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IPositionable</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">interface</span><span class="w"> </span><span class="n">ITranslatable</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">void</span><span class="w"> </span><span class="nf">Translate</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Given that we leave our definition of <code class="docutils literal notranslate"><span class="pre">Coordinate</span></code> intact we can now declare our class an implementation of any combination of these three interfaces.
+The following lines are all therefore examples of valid class declarations.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Coordinate</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IPositionable</span><span class="p">,</span><span class="w"> </span><span class="n">ITranslatable</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Coordinate</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IPositionable</span><span class="p">,</span><span class="w"> </span><span class="n">ITranslatable</span><span class="p">,</span><span class="w"> </span><span class="n">ICoordinate</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="uml-class-diagram-notation">
+<h2><span class="section-number">67.5. </span>UML class diagram notation<a class="headerlink" href="#uml-class-diagram-notation" title="Permalink to this headline">#</a></h2>
+<p>In UML class diagram notation, interface implementation is called “realization” and is depicted using a dashed line with a hollow arrow head.
+The arrow points from the implementation to the interface.</p>
+<div class="exercise admonition" id="chapters/interfaces-exercise-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 67.6 </span></p>
+<section id="exercise-content">
+<p>Draw a UML class diagram of the program that you built in <a class="reference internal" href="#ex:interfaces"><span class="std std-numref">Exercise 67.5</span></a>.</p>
+</section>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
