@@ -193,7 +193,7 @@ Console.WriteLine(cipher.Encode("Chris"));
 Whoever is instantiating a `RobbersStringCipher` is responsible for passing a `RobbersCharCipher` object to the constructor.
 Since this is the only constructor of `RobbersStringCipher` we conclude that it is impossible to construct a `RobbersStringCipher` without also passing it a `RobbersCharCipher`[^null].
 
-[^null]: With the exception of `null` of course, but hopefully you've configured your projects to treat null reference warnings as errors as we advised in the chapter on [Nothingness](nothingness)
+[^null]: With the exception of `null` of course, but hopefully you've configured your projects to treat null reference warnings as errors as we advised in the chapter on [Nothingness](nothingness).
 
 The output, of course, remains the same since we've only [refactored](refactoring) our code.
 Meaning that we've rewritten our program without changing its observable behavior.
@@ -386,6 +386,7 @@ That kind of object composition seems to me to be the whole idea behind object o
 
 
 ```{exercise}
+:label: ex:concrete-dependency-injection-example
 What is concrete dependency injection?
 Give your own example and explain it in your own words.
 ```
@@ -473,6 +474,10 @@ Wx
 ```{exercise}
 Compare your solutions to {numref}`ex:concrete-dependency-construction-parameterized-caesar-cipher` and {numref}`ex:concrete-dependency-injection-parameterized-caesar-cipher`.
 Use your own words to explain what we have gained, in terms of maintainability, by moving from dependency *construction* to dependency *injection*.
+```
+
+```{exercise}
+Implement the example you envisioned in {numref}`ex:concrete-dependency-injection-example` in code.
 ```
 
 %````{exercise}

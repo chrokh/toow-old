@@ -247,7 +247,8 @@ Let's talk about better forms of object composition.
 %That's the question we're going to deal with in the next chapter.
 
 ```{exercise}
-What is direct object composition of a concrete dependency?
+:label: ex:concrete-dependency-construction-example
+What is concrete dependency construction?
 Give your own example and explain it in your own words.
 ```
 
@@ -284,4 +285,8 @@ Bc
 Wx
 ```
 ````
+
+```{exercise}
+Implement the example you envisioned in {numref}`ex:concrete-dependency-construction-example` in code.
+```
 
