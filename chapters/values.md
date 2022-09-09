@@ -82,7 +82,7 @@ Let's, for example, say that you've got a `string`, meaning a sequence of charac
 The compiler isn't actually guaranteeing that you have a `string`, it is guaranteeing that you either have a `string`, or you have the absence of one (meaning `null`).
 
 On the type level there is no way of ensuring that you only take a particular path through the program if you actually have a string.
-We'll talk more about `null` and nullable reference types in the chapter on [data types](data-types).
+We'll talk more about `null` and nullable reference types in the chapter on [nothingness](nothingness).
 But the short story is that we used to have to resort to tons and tons of run-time checks to make sure that our programs don't crash as a consequence of `null` values.
 
 It is understandable if the example below doesn't make sense since we haven't yet talked about neither [selection](selection) nor the [equality operator](operators).
