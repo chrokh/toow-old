@@ -11,6 +11,10 @@ Work in progress.
 %- Also discuss difference between compile-time types and run-time types or left-hand types and right-hand types.
 %  - https://stackoverflow.com/questions/11634079/how-can-i-get-the-data-type-of-a-variable-in-c
 
+%- Refer to Types and Programming Languages by Benjamin Pierce, chapter 22 on polymorphism. Defines substitution.
+
+%- Design principle: Replace conditional with polymorphism
+
 %- Can be achieved using:
 %  - Interfaces.
 %  - Inheritance:
