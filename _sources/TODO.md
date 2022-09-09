@@ -13,6 +13,7 @@
 - Indirect object composition
   - Relate to Inversion of Control (IoC).
 - Object composition
+  - Clarify that we are not talking about merely instantiating another object in an instance method but rather storing an object as an instance variable (meaning as a property or in a field).
   - Perhaps discussion on Dependency should be its own chapter? How does this relate to how we use the term dependency in the context of coupling?
   - "Constructed" could mean that you call someone who constructs. If the thing you call to construct is constructed in you then it's still a "hard" dependency.
   - Use term "collaborator".

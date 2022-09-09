@@ -14,7 +14,7 @@ Browse the table of contents, or use the search box.
 
 ## What you will learn
 
-1. All **key ideas** in object oriented programming.
+1. The **key ideas** in object oriented programming.
 2. How to **solve problems** in an object oriented style.
 3. How solutions from **other paradigms** are approached in object oriented programming.
 4. The most important design **patterns**, design **principles**, and code **smells**.
