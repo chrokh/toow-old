@@ -1,9 +1,14 @@
 # TODO
 
 - General
+  - Add a license. Ex: https://creativecommons.org/licenses/by-nc-nd/4.0/
   - Links to official documentation like in the [Type Systems](type-systems) chapter?
   - Add "decode" method to all usages of Caesar cipher. This is important because it helps students think about reusability.
   - Static interface methods? https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/tutorials/static-virtual-interface-members
+- Subtype polymorphism
+  - **More about replace conditional with polymorphism?**
+  - Extract intro part on polymorphism from Subtype polymorphism chapter into its own chapter?
+  - Refer to Types and Programming Languages by Benjamin Pierce, chapter 22 on polymorphism. Defines substitution.
 - Data types
   - Should discuss Reflection?
   - Expand discussion in Data Types chapter on why treating Nullable warnings as errors is a good idea and that this should be the default.

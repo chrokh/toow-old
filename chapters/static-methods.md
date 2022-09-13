@@ -5,6 +5,8 @@
 Work in progress.
 ```
 
+%- Example: LEET language. Convert L<=>7 to allow reversibility.
+
 %- Subroutine on Wikipedia
 %- Procedure, hence Procedural programming paradigm.
 %- Static methods in C\#

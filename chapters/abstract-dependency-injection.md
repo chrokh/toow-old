@@ -13,6 +13,11 @@ Work in progress.
 %Dependency injection/inversion chapter.
 %```
 
+
+% FIRST REAL EXAMPLE MUST BE:
+% Go back to RobbersStringCipher and RobbersChar cipher from concrete dependency injection chapter and show how RobbersStringCipher actually could be called CharwiseCipher since it literally has nothing to do with Robbers language if you introduce another interface that's called ICharCihper.
+
+
 %```{exercise}
 %Draw the [quadrant diagram of abstraction levels in object composition](composition-quadrants) and explain all four abstraction levels.
 %Remember to give examples of each.

@@ -8,6 +8,27 @@ Work in progress.
 %> Make illegal states unrepresentable (https://maximilianocontieri.com/software-engineering-great-quotes)
 %
 %> Make impossible states impossible.
+
+%- The vowel that you stick between consonants in Robber's language is a great example. Wrap it in a class and define an automatic type conversion between that type and char.
+%```csharp
+%class Vowel
+%{
+%  char vowel;
+%
+%  public Vowel (char vowel)
+%  {
+%    string legal = "aeiou";
+%    if (legal.IndexOf(vowel) == -1)
+%      throw new ArgumentException();
+%    this.vowel = vowel;
+%  }
+%
+%  public char ToChar () => vowel;
+%
+%  public static implicit operator char(Vowel v) => v.ToChar();
+%}
+%```
+
 %
 %- https://maximilianocontieri.com/the-one-and-only-software-design-principle
 %  - "The one and only software design principle"

@@ -3,8 +3,8 @@
 
 The word "interface" is, in object oriented programming commonly used to mean two different but related things.
 
-1. The abstract idea of an interface.
-2. The keyword `interface` used in many object oriented languages.
+1. A contract or an abstraction.
+2. A data type declared using the keyword `interface` present in many object oriented languages.
 
 In this chapter we'll make a distinction between these two by either saying "interface" or `interface`.
 Let's start with the abstract idea of an interface.
@@ -23,6 +23,11 @@ Then we have [properties](properties) which can be thought of somewhere in betwe
 The set of all [public](access-modifiers) [instance members](classes) of a class are part of what we call the "interface" of a class.
 An interface is a "contract" that tells us what we can do with something.
 In other words, the set of all public members define *what* we can do with objects of the class.
+
+Think of it like a standard.
+If you've got a thing that adheres to some standard then you know how you can use that thing even if you don't know how the thing works "inside".
+A power plug can be plugged into an outlet if they share the same standard.
+We don't have to understand voltage, wattage, and amperage in order to use it.
 
 If we've got an object and all we know is its interface then we know what methods we can call and what types to expect in return.
 We know what variables we can access and what types they have.
@@ -173,7 +178,7 @@ Glad you asked.
 We have now arrived at the magical destination know as [subtype polymorphism](subtype-polymorphism).
 But let's finish up our discussion on interfaces before we dig too deep in that idea.
 
-We cannot instantiate an `interface`, but we can declare that some concrete class, [abstract class](inheritance) (more on this later), or other interface *implements the interface*.
+We cannot instantiate an `interface`, but we can declare that some concrete class or [abstract class](inheritance) (more on this later) *implements the interface*.
 The key word here is "implements".
 We say that some type implements some interface.
 
