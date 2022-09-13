@@ -163,7 +163,7 @@ Because I hold that the functional programming paradigm is superior to that of o
 Why do I believe that functional programming is superior?
 Because concepts such as higher order functions, currying, pattern matching, algebraic data types, and parametric polymorphism are at the heart of functional programming.
 The object oriented concepts of classes and subtype polymorphism are simply not powerful enough in comparison.
-%Mixing data and methods was simply not the best idea.
+Mixing data and methods, a key tenant in object oriented programming, is simply not a great idea.
 
 So why bother learning an object oriented language?
 Well, we're not there yet.

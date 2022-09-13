@@ -12,6 +12,7 @@ Work in progress.
 %  - (Abstraction)
 %- Refer to how {cite:t}`martin2017` claims that safe polymorphism is the only reasonable definition of OO.
 %- Brief history of OO? Don't prioritize this.
+%- Refer to Types and Programming Languages by Benjamin Pierce, chapter 21 objects. Most definitions of OO are prejudiced.
 %
 %```{seealso}
 %I highly recommend that you read Chapter 5 in [Clean Architecture: A Craftsman's Guide to Software Structure and Design][aff:clean-architecture] [affiliate link] by Robert C. Martin where you will learn how encapsulation, inheritance, and polymorphism were all available before object orientation.

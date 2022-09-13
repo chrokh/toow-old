@@ -181,6 +181,7 @@ Can a language be statically typed yet still have mostly inferred types? Why?
 
 % TODO: http://wiki.c2.com/?NominativeAndStructuralTyping
 % TODO: https://medium.com/higher-order-functions/duck-typing-vs-structural-typing-vs-nominal-typing-e0881860bf10
+% TODO: - P. 252, section 19.3 of Types and Programming Languages. Bejamin Pierce.
 
 The third dimension in which we can classify a type system is in whether its types are nominal or structural.
 Whether the type system is nominative or structural.

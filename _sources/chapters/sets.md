@@ -2,7 +2,7 @@
 # Sets
 
 Programmers are modellers.
-We write programs consisting of business objects[^business-objects] [{numref}`Chapter %s<business-objects>`]
+We write programs consisting of business objects [{numref}`Chapter %s<business-objects>`]
 and business rules [{numref}`Chapter %s<business-logic>`].
 These objects and rules must be valuable to whoever is paying our salary.
 Set theory helps us define effective types for both objects and rules.

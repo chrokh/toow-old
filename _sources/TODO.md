@@ -1,15 +1,21 @@
 # TODO
 
 - General
+  - Add a license. Ex: https://creativecommons.org/licenses/by-nc-nd/4.0/
   - Links to official documentation like in the [Type Systems](type-systems) chapter?
   - Add "decode" method to all usages of Caesar cipher. This is important because it helps students think about reusability.
   - Static interface methods? https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/tutorials/static-virtual-interface-members
+- Subtype polymorphism
+  - **More about replace conditional with polymorphism?**
+  - Extract intro part on polymorphism from Subtype polymorphism chapter into its own chapter?
+  - Refer to Types and Programming Languages by Benjamin Pierce, chapter 22 on polymorphism. Defines substitution.
 - Data types
   - Should discuss Reflection?
   - Expand discussion in Data Types chapter on why treating Nullable warnings as errors is a good idea and that this should be the default.
   - Have I emphasized the importance of null reference static analysis enough?
 - Compilation
   - Compiler warnings in Compilation chapter.
+  - P. 49, section 4.3 of Types and Programming Languages. Bejamin Pierce. Image on how we go from characters on a file to a program that's being printed on screen.
 - Indirect object composition
   - Relate to Inversion of Control (IoC).
 - Object composition
@@ -27,6 +33,7 @@
 - Type-checking
   - On the purpose of types: http://www.cse.chalmers.se/edu/year/2011/course/TIN321/lectures/proglang-07.html
   - More about Type Safety. How even addings strings and ints is type safe in some languages. It all depends.
+    - Referera till Types and Programming Languages, Benjamin Pierce. 8.3. sid 95. Safety = Progress + Preservation.
     - Makes more sense if we divide it into compile-time type safety and run-time type safety. This makes the concept of unsafe much more sensible. It also makes the concept of uni-typed much more sensible since we can talk about compile-time uni-typed and run-time uni-typed. Not sure what compile-time poly-typed + run-time uni-typed would mean though.
     - https://en.wikipedia.org/wiki/Type_system#Type_safety_and_memory_safety
     - https://web.archive.org/web/20211218122334/http://www.pl-enthusiast.net/2014/08/05/type-safety/

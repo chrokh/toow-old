@@ -8,6 +8,8 @@ Work in progress.
 %- Function composition from FP is much more powerful.
 
 %Remember the [Robber's language](https://en.wikipedia.org/wiki/Rövarspråket) ("Rövarspråket") that was popularized by Swedish children's book author Astrid Lindgren?
+% NOTE: YOU ARE NOT ALLOWED TO USE INDEX OF!
+% Instead we should do a long or-statement. We will rewrite to use indexof in the chapter on instance methods.
 
 % REWRITE EXAMPLE IN SAME STYLE AS IN DIRECT OBJECT COMPOSITION CHAPTER. STRING AND CHAR ENCODING.
 

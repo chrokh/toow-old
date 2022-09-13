@@ -15,6 +15,8 @@ Work in progress.
 %  - Substring
 %  - IndexOf
 
+% IMPORTANT: Rewrite the old implementation of RobbersLanguage that used a long or-statement to determine if something is a vowel or not. Now we can use `IndexOf` to check if the vowel is in a string of vowels.
+
 
 We've talked about the type `string`.
 The type `string` defines many operations but one operation that we call using dot notation is `Contains`.
