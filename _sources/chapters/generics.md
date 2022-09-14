@@ -10,7 +10,7 @@ Work in progress.
 %
 %- Type constructor
 %- Type parameter
-%- Type constraints
+%- Type parameter constraints
 %
 %- Bound types
 %- Unbound types

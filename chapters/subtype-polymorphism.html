@@ -488,7 +488,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="abstract-dependency-construction.html">
-   74. Abstract dependency construction
+   74. 🟠 Abstract dependency construction
   </a>
  </li>
  <li class="toctree-l1">
@@ -1081,12 +1081,21 @@ Since subtyping is a transitive relationship, <code class="docutils literal notr
 Since all natural numbers behave like integers, rationals, and reals defining a subtype relation like this seems entirely fine.
 Of course, the relationship is directed and so we can’t go the other way.
 Trying to use a value of type <code class="docutils literal notranslate"><span class="pre">Real</span></code> where a value of type <code class="docutils literal notranslate"><span class="pre">Natural</span></code> does not type-check since <code class="docutils literal notranslate"><span class="pre">Real</span></code> is not a subtype of <code class="docutils literal notranslate"><span class="pre">Natural</span></code>.</p>
-<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-0">
+<div class="exercise admonition" id="ex:subtype-polymorphism-own-types">
 
 <p class="admonition-title"><span class="caption-number">Exercise 68.1 </span></p>
 <section id="exercise-content">
 <p>Come up with your own example of inclusion/subtying that involves at least three sets/types.
 Explain why all members of each subtype is also a member of it’s supertype.</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 68.2 </span></p>
+<section id="exercise-content">
+<p>If type <code class="docutils literal notranslate"><span class="pre">A</span></code> is a subset of type <code class="docutils literal notranslate"><span class="pre">B</span></code> then we would say that the set that models type <code class="docutils literal notranslate"><span class="pre">B</span></code> <em>includes</em> the set that models type <code class="docutils literal notranslate"><span class="pre">A</span></code>.
+If we call the sets <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> then we could write: <span class="math notranslate nohighlight">\(A \subset B\)</span>.
+What does it mean that <span class="math notranslate nohighlight">\(A\)</span> <em>includes</em> <span class="math notranslate nohighlight">\(B\)</span>?</p>
 </section>
 </div>
 </section>
@@ -1167,9 +1176,9 @@ Let’s ignore implementations for now and just make sure that our types make se
 </pre></div>
 </div>
 </div>
-<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-1">
+<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-2">
 
-<p class="admonition-title"><span class="caption-number">Exercise 68.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 68.3 </span></p>
 <section id="exercise-content">
 <p>Assume that you have the following code:</p>
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">Animal</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
@@ -1177,8 +1186,10 @@ Let’s ignore implementations for now and just make sure that our types make se
 <span class="k">class</span><span class="w"> </span><span class="nc">Dog</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Animal</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Which of the following lines will compile and which ones will not?
-Explain why.</p>
+<ol class="simple">
+<li><p>Which of the following lines will compile and which ones will not?</p></li>
+<li><p>Explain <em>why</em> each line will or will not compile.</p></li>
+</ol>
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">a1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cat</span><span class="p">();</span><span class="w"></span>
 <span class="kt">var</span><span class="w"> </span><span class="n">a2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span><span class="p">();</span><span class="w"></span>
 <span class="kt">var</span><span class="w"> </span><span class="n">a3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Animal</span><span class="p">();</span><span class="w"></span>
@@ -1307,9 +1318,9 @@ In the context of addition, the number <span class="math notranslate nohighlight
 </div>
 <p>Does the <code class="docutils literal notranslate"><span class="pre">EncodeTwice</span></code> method work for instances of type <code class="docutils literal notranslate"><span class="pre">NoCipher</span></code> as well?
 Yes, of course.</p>
-<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-2">
+<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-3">
 
-<p class="admonition-title"><span class="caption-number">Exercise 68.3 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 68.4 </span></p>
 <section id="exercise-content">
 <p>Remember the method we wrote in the chapter on <a class="reference internal" href="recursion.html#recursion"><span class="std std-ref">recursion</span></a> that applied the Robber’s cipher multiple times?
 Rewrite the method so that it follows the signature below:</p>
@@ -1328,19 +1339,50 @@ However, when we get to the chapter on <a class="reference internal" href="abstr
 </div>
 <div class="exercise admonition" id="ex:subtype-polymorphism-caesar-cipher">
 
-<p class="admonition-title"><span class="caption-number">Exercise 68.4 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 68.5 </span></p>
 <section id="exercise-content">
 <p>Start from one of your previous implementations of a Caesar Cipher.
 Rewrite the cipher so that it implements the interface <code class="docutils literal notranslate"><span class="pre">ICipher</span></code>.
 Use the cipher in the method <code class="docutils literal notranslate"><span class="pre">EncodeNTimes</span></code>.</p>
 </section>
 </div>
+<div class="exercise admonition" id="ex:subtype-polymorphism-implement-own-types">
+
+<p class="admonition-title"><span class="caption-number">Exercise 68.6 </span></p>
+<section id="exercise-content">
+<ol class="simple">
+<li><p>Write an interface that unifies the three types you designed in <a class="reference internal" href="#ex:subtype-polymorphism-own-types"><span class="std std-numref">Exercise 68.1</span></a>.</p></li>
+<li><p>Declare at least one method/property to the interface.</p></li>
+<li><p>All methods that the interface declares must make sense in all the implementations of the interface.</p></li>
+<li><p>Write a class for each of the three types and make them implementations of the interface.</p></li>
+<li><p>Show that they can be treated polymorphically by assigning instantiations of all three classes to variables with the interface as the compile-time type.</p></li>
+</ol>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-6">
+
+<p class="admonition-title"><span class="caption-number">Exercise 68.7 </span></p>
+<section id="exercise-content">
+<p>Start with the code you wrote in <a class="reference internal" href="#ex:subtype-polymorphism-implement-own-types"><span class="std std-numref">Exercise 68.6</span></a>.
+Write a static method that (1) takes at least one argument whose type is the interface you’ve defined and (2) calls a method or accesses a property that’s defined in that interface.</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-7">
+
+<p class="admonition-title"><span class="caption-number">Exercise 68.8 </span></p>
+<section id="exercise-content">
+<p>Give an example of <em>subtype polymorphism</em> and <em>single dynamic dispatch</em> in code.
+Use code comments when necessary to get your point across.</p>
+</section>
+</div>
 <p>Not impressed enough yet?
 Remember <a class="reference internal" href="concrete-dependency-injection.html"><span class="doc std std-doc">concrete dependency injection</span></a>?
-If you combine dependency injection with subtype polymorphism you end up with what I like to call <span class="xref myst">abstract dependency injection</span>.
-More on that in its specific chapter but abstract dependency injection is really where the key to really flexible code lies.</p>
+If you combine dependency injection with subtype polymorphism you end up with what I like to call <span class="xref myst">abstract dependency injection</span> but what often (but ambiguously) is simply called “dependency injection”.
+It can also be used to implement the so called <a class="reference internal" href="strategy-pattern.html"><span class="doc std std-doc">strategy pattern</span></a>.
+We’ll talk more about abstract dependency injection and strategy pattern in their respective chapters but abstract dependency injection is arguably where the key to really <a class="reference internal" href="maintainability.html#maintainability"><span class="std std-ref">maintainable</span></a> code lies.</p>
 <p>Before leaving the section on dynamic dispatch I should also mention that most languages that implement dynamic dispatch by means of subtype polymorphism provide us with <em>single</em> dynamic dispatch.
-This means that the implementation that is executed depends on the run-time type of one variable.</p>
+This means that the implementation that is executed depends on the run-time type of one variable.
+We will learn about <em>multiple</em> dynamic dispatch in the chapters on <a class="reference internal" href="visitor-pattern.html"><span class="doc std std-doc">visitor pattern</span></a> and <a class="reference internal" href="pattern-matching.html#pattern-matching"><span class="std std-ref">pattern matching</span></a>.</p>
 </section>
 <section id="replacing-conditionals-with-polymorphism">
 <h2><span class="section-number">68.5. </span>Replacing conditionals with polymorphism<a class="headerlink" href="#replacing-conditionals-with-polymorphism" title="Permalink to this headline">#</a></h2>
@@ -1422,13 +1464,27 @@ First edition <span id="id5">[<a class="reference internal" href="bibliography.h
 Put this book on your shelf as a reference.
 It’s a classic.</p>
 </div>
+<div class="exercise admonition" id="ex:replace-conditional-with-polymorphism-in-words">
+
+<p class="admonition-title"><span class="caption-number">Exercise 68.9 </span></p>
+<section id="exercise-content">
+<p>Explain the design principle known as “replace conditional polymorphism” in <em>words</em> using an example.</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-9">
+
+<p class="admonition-title"><span class="caption-number">Exercise 68.10 </span></p>
+<section id="exercise-content">
+<p>Implement the example you gave in <a class="reference internal" href="#ex:replace-conditional-with-polymorphism-in-words"><span class="std std-numref">Exercise 68.9</span></a> in code.</p>
+</section>
+</div>
 </section>
 <section id="constructors">
 <h2><span class="section-number">68.6. </span>Constructors<a class="headerlink" href="#constructors" title="Permalink to this headline">#</a></h2>
 <p>It is important to understand that subtype polymorphism doesn’t require constructors to have any particular signature.
 As we will see in the chapter on <a class="reference internal" href="inheritance.html#inheritance"><span class="std std-ref">inheritance</span></a>, inheriting from a class will force you to call one of the base classes constructor (albeit possibly implicitly) but you’re nevertheless able to define your own constructors in the subclass.
 In the case of interfaces we’re only demanding that implementors define some public instance members.
-The constructors can consequnetly vary wildly between different implementations of an interface.</p>
+The constructors can consequently vary wildly between different implementations of an interface.</p>
 <p>Therefore, it is trivial to parameterize our ciphers and still let them be implementations of the <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> interface.
 Let’s rewrite the class <code class="docutils literal notranslate"><span class="pre">RobbersCipher</span></code> so that you can choose what vowel to stick in-between consonants.</p>
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">RobbersCipher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICipher</span><span class="w"></span>
@@ -1465,13 +1521,20 @@ Not in the very least.</p>
 </div>
 <p>Welcome to the powerful world of subtype polymorphism.
 Use the force, and never look back.</p>
-<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-4">
+<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-10">
 
-<p class="admonition-title"><span class="caption-number">Exercise 68.5 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 68.11 </span></p>
 <section id="exercise-content">
-<p>Start from the code you wrote in <a class="reference internal" href="#ex:subtype-polymorphism-caesar-cipher"><span class="std std-numref">Exercise 68.4</span></a>.
+<p>Start from the code you wrote in <a class="reference internal" href="#ex:subtype-polymorphism-caesar-cipher"><span class="std std-numref">Exercise 68.5</span></a>.
 Rewrite the code so that the number of steps of the Caesar cipher can be chosen by passing an integer through the constructor.
 Make sure that your cipher still implements the <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> interface and thereby still can be passed to the <code class="docutils literal notranslate"><span class="pre">EncodeTwice</span></code> method.</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-11">
+
+<p class="admonition-title"><span class="caption-number">Exercise 68.12 </span></p>
+<section id="exercise-content">
+<p>Why is it important that the signature of constructors can vary freely between subtypes?</p>
 </section>
 </div>
 </section>
@@ -1514,11 +1577,18 @@ The compiler error that we get is actually quite revealing.</p>
 Why?
 Well because <code class="docutils literal notranslate"><span class="pre">Vowel</span></code> is not actually defined in <code class="docutils literal notranslate"><span class="pre">ICipher</span></code>.
 The interface <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> knows absolutely nothing about vowels.
-Only one of the bazilion different interfaces that we could build happen to know about vowels.
+Only one of the bazillion different interfaces that we could build happen to know about vowels.
 Namely, <code class="docutils literal notranslate"><span class="pre">RobbersCipher</span></code>.</p>
 <p>We’ll talk about this a bit more when we get to the chapter on the design principle known as <a class="reference internal" href="interface-segregation-principle.html"><span class="doc std std-doc">interface segregation principle</span></a>.
 But, be sure to only put things in the supertype that actually are relevant for all conceivable subtypes.
 With that out of the way, let’s move on to the next chapter.</p>
+<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-12">
+
+<p class="admonition-title"><span class="caption-number">Exercise 68.13 </span></p>
+<section id="exercise-content">
+<p>When we treat a subtype as a supertype, meaning when we let the compile-time type be the supertype, why can’t we call methods that are only defined in the subtype?</p>
+</section>
+</div>
 </section>
 </section>
 

@@ -14,6 +14,7 @@ Work in progress.
 %- String manipulation
 %  - Substring
 %  - IndexOf
+%- Expression bodied members (uses the => operator but are not lambda expressions).
 
 % IMPORTANT: Rewrite the old implementation of RobbersLanguage that used a long or-statement to determine if something is a vowel or not. Now we can use `IndexOf` to check if the vowel is in a string of vowels.
 
