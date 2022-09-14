@@ -113,8 +113,15 @@ Of course, the relationship is directed and so we can't go the other way.
 Trying to use a value of type `Real` where a value of type `Natural` does not type-check since `Real` is not a subtype of `Natural`.
 
 ```{exercise}
+:label: ex:subtype-polymorphism-own-types
 Come up with your own example of inclusion/subtying that involves at least three sets/types.
 Explain why all members of each subtype is also a member of it's supertype.
+```
+
+```{exercise}
+If type `A` is a subset of type `B` then we would say that the set that models type `B` *includes* the set that models type `A`.
+If we call the sets $A$ and $B$ then we could write: $A \subset B$.
+What does it mean that $A$ *includes* $B$?
 ```
 
 
@@ -234,8 +241,8 @@ class Cat : Animal {}
 class Dog : Animal {}
 ```
 
-Which of the following lines will compile and which ones will not?
-Explain why.
+1. Which of the following lines will compile and which ones will not?
+2. Explain *why* each line will or will not compile.
 
 ```csharp
 var a1 = new Cat();
@@ -410,6 +417,27 @@ Rewrite the cipher so that it implements the interface `ICipher`.
 Use the cipher in the method `EncodeNTimes`.
 ```
 
+```{exercise}
+:label: ex:subtype-polymorphism-implement-own-types
+1. Write an interface that unifies the three types you designed in {numref}`ex:subtype-polymorphism-own-types`.
+2. Declare at least one method/property to the interface.
+3. All methods that the interface declares must make sense in all the implementations of the interface.
+4. Write a class for each of the three types and make them implementations of the interface.
+5. Show that they can be treated polymorphically by assigning instantiations of all three classes to variables with the interface as the compile-time type.
+```
+
+```{exercise}
+Start with the code you wrote in {numref}`ex:subtype-polymorphism-implement-own-types`.
+Write a static method that (1) takes at least one argument whose type is the interface you've defined and (2) calls a method or accesses a property that's defined in that interface.
+```
+
+```{exercise}
+Give an example of *subtype polymorphism* and *single dynamic dispatch* in code.
+Use code comments when necessary to get your point across.
+```
+
+
+
 %````{admonition} Another example
 %:class: dropdown
 %
@@ -456,11 +484,13 @@ Use the cipher in the method `EncodeNTimes`.
 
 Not impressed enough yet?
 Remember [concrete dependency injection](concrete-dependency-injection)?
-If you combine dependency injection with subtype polymorphism you end up with what I like to call [abstract dependency injection](abstract-depenency-injection).
-More on that in its specific chapter but abstract dependency injection is really where the key to really flexible code lies.
+If you combine dependency injection with subtype polymorphism you end up with what I like to call [abstract dependency injection](abstract-depenency-injection) but what often (but ambiguously) is simply called "dependency injection".
+It can also be used to implement the so called [strategy pattern](strategy-pattern).
+We'll talk more about abstract dependency injection and strategy pattern in their respective chapters but abstract dependency injection is arguably where the key to really [maintainable](maintainability) code lies.
 
 Before leaving the section on dynamic dispatch I should also mention that most languages that implement dynamic dispatch by means of subtype polymorphism provide us with *single* dynamic dispatch.
 This means that the implementation that is executed depends on the run-time type of one variable.
+We will learn about *multiple* dynamic dispatch in the chapters on [visitor pattern](visitor-pattern) and [pattern matching](pattern-matching).
 
 
 
@@ -557,13 +587,22 @@ Put this book on your shelf as a reference.
 It's a classic.
 ```
 
+```{exercise}
+:label: ex:replace-conditional-with-polymorphism-in-words
+Explain the design principle known as "replace conditional polymorphism" in *words* using an example.
+```
+
+```{exercise}
+Implement the example you gave in {numref}`ex:replace-conditional-with-polymorphism-in-words` in code.
+```
+
 
 ## Constructors
 
 It is important to understand that subtype polymorphism doesn't require constructors to have any particular signature.
 As we will see in the chapter on [inheritance](inheritance), inheriting from a class will force you to call one of the base classes constructor (albeit possibly implicitly) but you're nevertheless able to define your own constructors in the subclass.
 In the case of interfaces we're only demanding that implementors define some public instance members.
-The constructors can consequnetly vary wildly between different implementations of an interface.
+The constructors can consequently vary wildly between different implementations of an interface.
 
 Therefore, it is trivial to parameterize our ciphers and still let them be implementations of the `ICipher` interface.
 Let's rewrite the class `RobbersCipher` so that you can choose what vowel to stick in-between consonants.
@@ -612,6 +651,10 @@ Use the force, and never look back.
 Start from the code you wrote in {numref}`ex:subtype-polymorphism-caesar-cipher`.
 Rewrite the code so that the number of steps of the Caesar cipher can be chosen by passing an integer through the constructor.
 Make sure that your cipher still implements the `ICipher` interface and thereby still can be passed to the `EncodeTwice` method.
+```
+
+```{exercise}
+Why is it important that the signature of constructors can vary freely between subtypes?
 ```
 
 
@@ -665,10 +708,14 @@ The error tells us that if all the type-checker knows is that it has something o
 Why?
 Well because `Vowel` is not actually defined in `ICipher`.
 The interface `ICipher` knows absolutely nothing about vowels.
-Only one of the bazilion different interfaces that we could build happen to know about vowels.
+Only one of the bazillion different interfaces that we could build happen to know about vowels.
 Namely, `RobbersCipher`.
 
 We'll talk about this a bit more when we get to the chapter on the design principle known as [interface segregation principle](interface-segregation-principle).
 But, be sure to only put things in the supertype that actually are relevant for all conceivable subtypes.
 With that out of the way, let's move on to the next chapter.
+
+```{exercise}
+When we treat a subtype as a supertype, meaning when we let the compile-time type be the supertype, why can't we call methods that are only defined in the subtype?
+```
 
