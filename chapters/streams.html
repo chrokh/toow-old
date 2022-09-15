@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>87. Maintainability &#8212; The Object Oriented Way</title>
+    <title>122. Streams &#8212; The Object Oriented Way</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="88. Code smells and anti-patterns" href="code-smells.html" />
-    <link rel="prev" title="86. Correctness" href="correctness.html" />
+    <link rel="next" title="123. Suggested reading" href="reading.html" />
+    <link rel="prev" title="121. Pattern matching" href="pattern-matching.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -549,8 +549,8 @@ const thebe_selector_output = ".output, .cell_output"
    86. Correctness
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="maintainability.html">
    87. Maintainability
   </a>
  </li>
@@ -724,8 +724,8 @@ const thebe_selector_output = ".output, .cell_output"
    121. Pattern matching
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="streams.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    122. Streams
   </a>
  </li>
@@ -803,7 +803,7 @@ title="Fullscreen mode"
   </span>
 
 </button>
-<a href="https://github.com/chrokh/the-oo-way/issues/new?title=Issue%20on%20page%20%2Fchapters/maintainability.html&body=Your%20issue%20content%20here."
+<a href="https://github.com/chrokh/the-oo-way/issues/new?title=Issue%20on%20page%20%2Fchapters/streams.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="bottom"
@@ -825,7 +825,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/chapters/maintainability.md"
+        <a href="../_sources/chapters/streams.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -862,100 +862,23 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#modularity">
-   87.1. Modularity
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#reusability">
-   87.2. Reusability
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#analysability">
-   87.3. Analysability
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#modifiability">
-   87.4. Modifiability
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#testability">
-   87.5. Testability
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Maintainability</h1>
+                <h1>Streams</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#modularity">
-   87.1. Modularity
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#reusability">
-   87.2. Reusability
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#analysability">
-   87.3. Analysability
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#modifiability">
-   87.4. Modifiability
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#testability">
-   87.5. Testability
-  </a>
- </li>
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -963,27 +886,12 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="maintainability">
-<span id="id1"></span><h1><span class="section-number">87. </span>Maintainability<a class="headerlink" href="#maintainability" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="streams">
+<h1><span class="section-number">122. </span>Streams<a class="headerlink" href="#streams" title="Permalink to this headline">#</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Work in progress.</p>
 </div>
-<section id="modularity">
-<span id="id2"></span><h2><span class="section-number">87.1. </span>Modularity<a class="headerlink" href="#modularity" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="reusability">
-<span id="id3"></span><h2><span class="section-number">87.2. </span>Reusability<a class="headerlink" href="#reusability" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="analysability">
-<span id="analyisability"></span><h2><span class="section-number">87.3. </span>Analysability<a class="headerlink" href="#analysability" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="modifiability">
-<span id="id4"></span><h2><span class="section-number">87.4. </span>Modifiability<a class="headerlink" href="#modifiability" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="testability">
-<span id="id5"></span><h2><span class="section-number">87.5. </span>Testability<a class="headerlink" href="#testability" title="Permalink to this headline">#</a></h2>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1013,17 +921,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="correctness.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="pattern-matching.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">86. </span>Correctness</p>
+            <p class="prev-next-title"><span class="section-number">121. </span>Pattern matching</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="code-smells.html" title="next page">
+    <a class='right-next' id="next-link" href="reading.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">88. </span>Code smells and anti-patterns</p>
+        <p class="prev-next-title"><span class="section-number">123. </span>Suggested reading</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
