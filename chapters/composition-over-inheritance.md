@@ -11,3 +11,9 @@ Work in progress.
 %- Exercises:
 %    - Draw two class diagram in UML that show how a solution that uses inheritance might be refactored into one that uses composition?
 %
+
+%```{important}
+%At it's core, the problem with inheritance is that it assumes that you problem forms a hierarchy.
+%```
+%Few problems are hierarchies, many are graphs.
+

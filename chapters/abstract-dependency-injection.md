@@ -69,3 +69,12 @@ Work in progress.
 %````
 
 % REMIND READER THAT THIS IS JUST RECURSION USING CLASSES.
+
+
+%```{exercise}
+%What is the difference between abstract *dependency* construction and abstract dependency *injection*?
+%```
+%
+%```{exercise}
+%What is the difference between *concrete* dependency injection and *abstract* dependency injection?
+%```
