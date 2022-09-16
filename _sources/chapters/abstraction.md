@@ -4,6 +4,8 @@
 Work in progress.
 ```
 
+% If this chapter came after all the object composition and dependency injection chapters then we could discuss how we've focused on ciphers but how a more useful model probably is `StringTransformers`. Where ciphers is just one example where you can pair an Encoding transformer with a decoding transformer. This is a very interesting discussion.
+
 %- Methods, classes, types.
 %- Implementation details.
 %- Solve problems by composing (combining) abstractions rather than having to be bothered with all the nitty gritty all the time.

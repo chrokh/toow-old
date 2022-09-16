@@ -491,7 +491,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   75. Abstract dependency injection
+   75. 🟠 Abstract dependency injection
   </a>
  </li>
  <li class="toctree-l1">
@@ -888,9 +888,222 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="abstract-dependency-injection">
 <h1><span class="section-number">75. </span>Abstract dependency injection<a class="headerlink" href="#abstract-dependency-injection" title="Permalink to this headline">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
+<p>It is time.
+We are ready for abstraction depdendency injection.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>In abstract dependency injection we inject the composed composed dependency as opposed to construct it, and the dependency is abstract as opposed to concrete.</p>
+</div>
+<p>Think way back to where we ended in the chapter on <a class="reference internal" href="concrete-dependency-injection.html"><span class="doc std std-doc">concrete dependency injection</span></a>.
+Instead of letting <code class="docutils literal notranslate"><span class="pre">RobbersStringCipher</span></code> instantiate a <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span></code> we <em>injected</em> it.
+This meant that we got rid of the need to expose whatever constructor parameters the inner <code class="docutils literal notranslate"><span class="pre">char</span></code> cipher needed in the outer <code class="docutils literal notranslate"><span class="pre">string</span></code> cipher.</p>
+<p>In the end we were still left with one problem however.
+We were able to inject instances of <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span></code> when creating instances of <code class="docutils literal notranslate"><span class="pre">RobbersStringCipher</span></code>.
+However, when we had created a <code class="docutils literal notranslate"><span class="pre">CaesarCharCipher</span></code> we couldn’t inject that to <code class="docutils literal notranslate"><span class="pre">RobbersStringCipher</span></code> when we wanted to create a Caesar cipher.</p>
+<p>Let’s now look at where we more recently left off in the chapter on <a class="reference internal" href="concrete-dependency-injection.html"><span class="doc std std-doc">concrete dependency injection</span></a>.
+The idea of <code class="docutils literal notranslate"><span class="pre">CharWiseCipher</span></code> solves the problem of being able to reuse different <code class="docutils literal notranslate"><span class="pre">char</span></code> ciphers.
+But the idea of injecting the ciphers solves the problem of having to create a separate subclass for each and every variation.
+And the idea of injecting the ciphers solves the problem of having to create a separate subclass for each and every variation.
+Let’s combine these two ideas.</p>
+<p>Instead of subclassing <code class="docutils literal notranslate"><span class="pre">CharWiseCipher</span></code> in order to change which particular cipher we want to use, we’re simply going to inject whatever cipher we need through the constructor.
+The change is simple.
+Here’s what the new <code class="docutils literal notranslate"><span class="pre">CharWiseCipher</span></code> implementation looks like:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CharWiseCipher</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">protected</span><span class="w"> </span><span class="n">ICharCipher</span><span class="w"> </span><span class="n">charCipher</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">CharWiseCipher</span><span class="w"> </span><span class="p">(</span><span class="n">ICharCipher</span><span class="w"> </span><span class="n">charCipher</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">charCipher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">charCipher</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">output</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">charCipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">c</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Instead of <em>instantiating</em> the <code class="docutils literal notranslate"><span class="pre">ICharCipher</span></code> we simply expose it as a constructor parameter.
+Since there is no <a class="reference internal" href="constructors.html"><span class="doc std std-doc">empty constructor</span></a>, and since we have configured our compiler to treat <a class="reference internal" href="nothingness.html"><span class="doc std std-doc">possible null references as errors</span></a> we are guaranteed that whenever we have an instance of <code class="docutils literal notranslate"><span class="pre">CharWiseCipher</span></code> then we know that said instance will have access to an <code class="docutils literal notranslate"><span class="pre">ICharCipher</span></code>.</p>
+<p>There is no longer a need for any of the subclasses of <code class="docutils literal notranslate"><span class="pre">CharWiseCipher</span></code>.
+To create a Robber’s language cipher whose encoding method takes a <code class="docutils literal notranslate"><span class="pre">string</span></code> as input and produces a <code class="docutils literal notranslate"><span class="pre">string</span></code> as output we simply have to inject an instance of <code class="docutils literal notranslate"><span class="pre">RobbersCharCipher</span></code> upon construction of a <code class="docutils literal notranslate"><span class="pre">CharWiseCipher</span></code>.
+The composition happens at run-time and arbitrarily complex types can thus be constructed at run-time.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">leetCipher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CharWiseCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">LeetCharCipher</span><span class="p">());</span><span class="w"></span>
+<span class="kt">var</span><span class="w"> </span><span class="n">robbersCipher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CharWiseCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RobbersCharCipher</span><span class="p">(</span><span class="sc">&#39;o&#39;</span><span class="p">));</span><span class="w"></span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">leetCipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;LOL&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">robbersCipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;LOL&quot;</span><span class="p">));</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="exercise admonition" id="chapters/abstract-dependency-injection-exercise-0">
+
+<p class="admonition-title"><span class="caption-number">Exercise 75.1 </span></p>
+<section id="exercise-content">
+<p>What is the difference between abstract <em>dependency</em> construction and abstract dependency <em>injection</em>?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/abstract-dependency-injection-exercise-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 75.2 </span></p>
+<section id="exercise-content">
+<p>What is the difference between <em>concrete</em> dependency injection and <em>abstract</em> dependency injection?</p>
+</section>
+</div>
+<p>Let’s explore our newfound power.
+How about a composite cipher?
+A cipher that takes two ciphers as constructor arguments and upon encoding applies both of them in sequence.</p>
+<p>First, we must bring back the idea of the interface <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> and let <code class="docutils literal notranslate"><span class="pre">CharWiseCipher</span></code> implement that interface.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ICipher</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CharWiseCipher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICipher</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Then let’s write a class called <code class="docutils literal notranslate"><span class="pre">CompositeCipher</span></code> that implements the <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> interface.
+It takes two objects of type <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> as constructor arguments and when we call <code class="docutils literal notranslate"><span class="pre">Encode</span></code> it runs our input through the <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method of both of its ciphers.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CompositeCipher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICipher</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">ICipher</span><span class="w"> </span><span class="n">cipher1</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">ICipher</span><span class="w"> </span><span class="n">cipher2</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">CompositeCipher</span><span class="w"> </span><span class="p">(</span><span class="n">ICipher</span><span class="w"> </span><span class="n">cipher1</span><span class="p">,</span><span class="w"> </span><span class="n">ICipher</span><span class="w"> </span><span class="n">cipher2</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">cipher1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cipher1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">cipher2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cipher2</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">cipher2</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">cipher1</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">input</span><span class="p">));</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here’s how we can use the <code class="docutils literal notranslate"><span class="pre">CompositeCipher</span></code>:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">leetCipher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CharWiseCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">LeetCharCipher</span><span class="p">());</span><span class="w"></span>
+<span class="kt">var</span><span class="w"> </span><span class="n">robbersCipher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CharWiseCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RobbersCharCipher</span><span class="p">(</span><span class="sc">&#39;O&#39;</span><span class="p">));</span><span class="w"></span>
+<span class="kt">var</span><span class="w"> </span><span class="n">robberThenLeet</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CompositeCipher</span><span class="p">(</span><span class="n">robbersCipher</span><span class="p">,</span><span class="w"> </span><span class="n">leetCipher</span><span class="p">);</span><span class="w"></span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">robberThenLeet</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;LOL&quot;</span><span class="p">));</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">7o707o7</span>
+</pre></div>
+</div>
+<p>Since <code class="docutils literal notranslate"><span class="pre">CompositeCipher</span></code> itself is implements the interface <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> we can at run-time, compose multiple instances of <code class="docutils literal notranslate"><span class="pre">CompositeCipher</span></code> to create an infinitely complex cipher.
+No matter how complex the cipher we construct is, you can still run its encoding through a single call to its <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">robbersO</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CharWiseCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RobbersCharCipher</span><span class="p">(</span><span class="sc">&#39;o&#39;</span><span class="p">));</span><span class="w"></span>
+<span class="kt">var</span><span class="w"> </span><span class="n">robbersA</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CharWiseCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RobbersCharCipher</span><span class="p">(</span><span class="sc">&#39;a&#39;</span><span class="p">));</span><span class="w"></span>
+<span class="kt">var</span><span class="w"> </span><span class="n">robbersE</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CharWiseCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RobbersCharCipher</span><span class="p">(</span><span class="sc">&#39;e&#39;</span><span class="p">));</span><span class="w"></span>
+
+<span class="kt">var</span><span class="w"> </span><span class="n">robbersOEA</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">CompositeCipher</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">robbersO</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">CompositeCipher</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="n">robbersA</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">robbersE</span><span class="p">));</span><span class="w"></span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">robbersOEA</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;D&quot;</span><span class="p">));</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">DeDaDeDoDeDaDeD</span>
+</pre></div>
+</div>
+<p>By the way, we use the term “composite” since this is very similar to the design pattern known as <a class="reference internal" href="composite-pattern.html"><span class="doc std std-doc">Composite pattern</span></a> which we will discuss in a later chapter.
+By the way again, while we’re not discussing data structures in this book you might be interested to know that this data structure is known as a “binary tree”.</p>
+<div class="exercise admonition" id="chapters/abstract-dependency-injection-exercise-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 75.3 </span></p>
+<section id="exercise-content">
+<p>Write a class called <code class="docutils literal notranslate"><span class="pre">DoubleCipher</span></code> that implements the interface <code class="docutils literal notranslate"><span class="pre">ICipher</span></code>.
+Its constructor must take an <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> as an argument.
+The <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method runs the <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method of the injected cipher twice on the input data before returning the result.</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/abstract-dependency-injection-exercise-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 75.4 </span></p>
+<section id="exercise-content">
+<p>Invent and implement another class that implements <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> or <code class="docutils literal notranslate"><span class="pre">ICharCipher</span></code> that requires abstract dependency injection to work.</p>
+</section>
+</div>
+<p>Impressed yet?
+Just imagine trying to write all these ciphers by hand.
+Imagine trying to achieve the same level of run-time flexibility.
+It would be a gigantic mess.</p>
+<p>This is the power of composition.
+And in object oriented languages, object composition is only really powerful if use abstract dependency injection.</p>
+<p>In a later chapter, we will discuss <a class="reference internal" href="dependency-inversion-principle.html"><span class="doc std std-doc">depdendency inversion</span></a> which is the design principle that underlies the idea of abstract dependency injection.
+The gist of it however is that you should:</p>
+<div class="hint admonition">
+<p class="admonition-title">Design principle</p>
+<p>Depend on abstractions not on concretions.</p>
+</div>
+<div class="exercise admonition" id="chapters/abstract-dependency-injection-exercise-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 75.5 </span></p>
+<section id="exercise-content">
+<p>Write a class called <code class="docutils literal notranslate"><span class="pre">EvenOddCipher</span></code> that implements the interface <code class="docutils literal notranslate"><span class="pre">ICipher</span></code>.
+Its constructor must take two arguments of type <code class="docutils literal notranslate"><span class="pre">ICipher</span></code>.
+These arguments should be called <code class="docutils literal notranslate"><span class="pre">even</span></code> and <code class="docutils literal notranslate"><span class="pre">odd</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method runs the <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method of <code class="docutils literal notranslate"><span class="pre">even</span></code> on every even character of the input <code class="docutils literal notranslate"><span class="pre">string</span></code> and <code class="docutils literal notranslate"><span class="pre">odd</span></code> on every odd character of the input <code class="docutils literal notranslate"><span class="pre">string</span></code>.</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/abstract-dependency-injection-exercise-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 75.6 </span></p>
+<section id="exercise-content">
+<p>Draw the <a class="reference internal" href="object-composition.html#composition-quadrants"><span class="std std-ref">quadrant diagram of abstraction levels in object composition</span></a> and explain all four abstraction levels.
+Remember to give examples of each.</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/abstract-dependency-injection-exercise-6">
+
+<p class="admonition-title"><span class="caption-number">Exercise 75.7 </span></p>
+<section id="exercise-content">
+<p>Write a class called <code class="docutils literal notranslate"><span class="pre">ArrayCipher</span></code> that implements the interface <code class="docutils literal notranslate"><span class="pre">ICipher</span></code>.
+Its constructor must take a single argument of type <code class="docutils literal notranslate"><span class="pre">ICipher[]</span></code>, called <code class="docutils literal notranslate"><span class="pre">ciphers</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method runs the <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method of each <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> in <code class="docutils literal notranslate"><span class="pre">ciphers</span></code> on the input, from left to right.</p>
+<p>Hint: When implementing <code class="docutils literal notranslate"><span class="pre">Encode</span></code>, you can choose whether to run the ciphers directly or whether to first build a <code class="docutils literal notranslate"><span class="pre">CompositeCipher</span></code> and then calling the <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method on that.</p>
+<p>Usage example:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">ArrayCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ICipher</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">CharWiseCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RobbersCharCipher</span><span class="p">(</span><span class="sc">&#39;o&#39;</span><span class="p">)),</span><span class="w"></span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">CharWiseCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RobbersCharCipher</span><span class="p">(</span><span class="sc">&#39;a&#39;</span><span class="p">)),</span><span class="w"></span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">CharWiseCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RobbersCharCipher</span><span class="p">(</span><span class="sc">&#39;e&#39;</span><span class="p">)),</span><span class="w"></span>
+<span class="w">    </span><span class="p">}).</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;D&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">DeDaDeDoDeDaDeD</span>
+</pre></div>
+</div>
+</section>
+</div>
+<div class="exercise admonition" id="ex:conditional-char-cipher">
+
+<p class="admonition-title"><span class="caption-number">Exercise 75.8 </span></p>
+<section id="exercise-content">
+<p>Write a class called <code class="docutils literal notranslate"><span class="pre">ConditionalCharCipher</span></code> that implements the interface <code class="docutils literal notranslate"><span class="pre">ICharCipher</span></code>.
+Note that we’re talking about <code class="docutils literal notranslate"><span class="pre">ICharCipher</span></code>, not about <code class="docutils literal notranslate"><span class="pre">ICipher</span></code>.
+Its constructor must take two arguments.
+One is of type <code class="docutils literal notranslate"><span class="pre">ICharCipher</span></code> and the other is of type <code class="docutils literal notranslate"><span class="pre">ICharPredicate</span></code>.
+The interface <code class="docutils literal notranslate"><span class="pre">ICharPredicate</span></code> must look like this:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ICharPredicate</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">Check</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method runs the <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method of the <code class="docutils literal notranslate"><span class="pre">ICharCipher</span></code> if and only if the method <code class="docutils literal notranslate"><span class="pre">Check</span></code> in <code class="docutils literal notranslate"><span class="pre">ICharPredicate</span></code> returns <code class="docutils literal notranslate"><span class="pre">true</span></code> when passed the <code class="docutils literal notranslate"><span class="pre">char</span></code> that’s been passed to <code class="docutils literal notranslate"><span class="pre">Encode</span></code>.
+To test whether this class works you must also implement a concrete implementation for <code class="docutils literal notranslate"><span class="pre">ICharPredicate</span></code>.</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/abstract-dependency-injection-exercise-8">
+
+<p class="admonition-title"><span class="caption-number">Exercise 75.9 </span></p>
+<section id="exercise-content">
+<p>Why are we <em>injecting</em> rather than <em>constructing</em> the <code class="docutils literal notranslate"><span class="pre">ICharPredicate</span></code> in <a class="reference internal" href="#ex:conditional-char-cipher"><span class="std std-numref">Exercise 75.8</span></a>?
+Explain in your own words.</p>
+</section>
 </div>
 </section>
 
