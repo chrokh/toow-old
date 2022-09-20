@@ -13,8 +13,11 @@ What is an interface?
 %## The idea
 
 ```{important}
-An interface defines *what* something can do without defining *how* it does it.
+An interface defines *what* something can do without defining *how* it does it.[^defaults]
 ```
+
+% TODO: Interface default implementations:
+[^defaults]: Since C# 8.0, it is possible to define "default implementations" in interfaces which means that it now actually is possible to define the "how" in an interface. This chapter will soon be updated with more on this topic.
 
 Remember how we've learned that a [class](classes) consists of a bunch of instance and static members?
 Members are either methods or variables.

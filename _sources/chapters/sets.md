@@ -1,5 +1,6 @@
-
 # Sets
+
+% TODO: Split into (Sets) and (Set operations)
 
 Programmers are modellers.
 We write programs consisting of business objects [{numref}`Chapter %s<business-objects>`]

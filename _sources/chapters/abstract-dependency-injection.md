@@ -220,6 +220,7 @@ Remember to give examples of each.
 ```
 
 ````{exercise}
+:label: ex:array-cipher
 Write a class called `ArrayCipher` that implements the interface `ICipher`.
 Its constructor must take a single argument of type `ICipher[]`, called `ciphers`.
 The `Encode` method runs the `Encode` method of each `ICipher` in `ciphers` on the input, from left to right.
