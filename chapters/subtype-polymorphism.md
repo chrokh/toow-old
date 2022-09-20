@@ -2,6 +2,8 @@
 # Subtype polymorphism
 
 
+% TODO: Move intro to its own chapter. So that we don't have to talk about other types of polymorphism in the chapter on subtype polymorphism.
+
 The time has come to talk about subtype polymorphism.
 If you haven't studied polymorphism before, let me just spill the beans and tell you that this is, arguably, *the most important idea in object oriented programming*.
 Luckily it is also the most mind-bendingly interesting topic in object oriented programming.
@@ -20,6 +22,8 @@ Which types of polymorphism exists depends on who you ask but I tend to follow t
 2. Inclusion / subtype / overriding polymorphism.
 3. [Overloading polymorphism](overloading).
 4. [Coercion polymorphism](object-type-conversions).
+
+% TODO: The chapter on generics also uses the terms static vs dynamic polymorphism. So perhaps that must be introduced here.
 
 In this chapter we will talk about subtype polymorphism.
 In previous chapters we have already talked about [overloading](overloading) without calling it overloading polymorphism.
@@ -146,11 +150,11 @@ The static type checker [Flow](https://flow.org) for the language JavaScript is 
 ```
 
 % TODO: "In a language with structural subtyping, a type U is a subtype of T if its methods and fields are a superset of T’s methods and fields. The interface of a class is simply its public fields and methods; there is no need to declare a separate interface type. In a language with nominal subtyping, on the other hand, U is a subtype of T if and only if it is declared to be. Accordingly, structural subtyping can be considered intrinsic, while nominal subtyping is declarative. Each kind of subtyping has its merits, but a formal model has not been developed for a language that integrates the two subtyping disciplines."
- https://www.cs.cmu.edu/~aldrich/papers/ecoop08.pdf
+% https://www.cs.cmu.edu/~aldrich/papers/ecoop08.pdf
 
 % TODO: "We say that T is a subtype of U (written T<:U) if all operations allowed on values of type U are allowed on values of type T."
- https://www.ifazk.com/blog/2018-11-26-Bounded-field-typing.html
- Discussed here: https://www.reddit.com/r/ProgrammingLanguages/comments/a1bfa7/depthsubtyping_and_mutation/
+% https://www.ifazk.com/blog/2018-11-26-Bounded-field-typing.html
+% Discussed here: https://www.reddit.com/r/ProgrammingLanguages/comments/a1bfa7/depthsubtyping_and_mutation/
 
 % TODO: "In 1990, Cook, et al., proved that inheritance is not subtyping in structurally-typed OO languages.[2]" https://en.wikipedia.org/wiki/Structural_type_system
 

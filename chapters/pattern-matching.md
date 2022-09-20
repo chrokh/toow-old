@@ -30,3 +30,35 @@ Work in progress.
 %}
 
 
+
+%```csharp
+%var m1 = new Just<int>(10);
+%Maybe<string> m2 = m1.Map(x => x.ToString());
+%
+%Console.WriteLine(toString(m2));
+%
+%string toString (Maybe<string> maybe) =>
+%  maybe switch
+%  {
+%    Just<string> just => just.Value,
+%    _ => "",
+%  };
+%
+%abstract class Maybe<A>
+%{
+%  public abstract Maybe<B> Map<B> (Func<A, B> f);
+%}
+%class Just<A> : Maybe<A>
+%{
+%  public A Value { get; private set; }
+%  public Just(A val) => Value = val;
+%  public override Maybe<B> Map<B> (Func<A, B> f)
+%    => new Just<B>(f(Value));
+%}
+%class Nothing<A> : Maybe<A>
+%{
+%  public override Maybe<B> Map<B> (Func<A, B> f)
+%    => new Nothing<B>();
+%}
+%```
+
