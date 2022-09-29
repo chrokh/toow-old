@@ -1,4 +1,3 @@
-(maintainability)=
 # Maintainability
 
 
@@ -12,7 +11,7 @@ Work in progress.
 (reusability)=
 ## Reusability
 
-(analyisability)=
+(analysability)=
 ## Analysability
 
 (modifiability)=

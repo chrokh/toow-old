@@ -1,5 +1,4 @@
-(composition)=
-# Composition
+# Method composition
 
 ```{warning}
 Work in progress.
@@ -31,15 +30,15 @@ Work in progress.
 %  return output;
 %}
 %```
-
-```{exercise}
-:label: ex:method-composition-caesar-cipher-1
-
-%Caesar cipher. Fixed number of steps.
-```
-
-```{exercise}
-:label: ex:method-composition-caesar-cipher-2
-
-%Parametrize number of steps.
-```
+%
+%```{exercise}
+%:label: ex:method-composition-caesar-cipher-1
+%
+%%Caesar cipher. Fixed number of steps.
+%```
+%
+%```{exercise}
+%:label: ex:method-composition-caesar-cipher-2
+%
+%%Parametrize number of steps.
+%```

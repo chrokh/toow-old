@@ -1,7 +1,6 @@
-# Design patterns
+# Value tuples
 
 ```{warning}
 Work in progress.
 ```
-
 

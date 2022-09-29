@@ -1,4 +1,3 @@
-(errors)=
 # Errors
 
 ```{warning}
@@ -11,7 +10,7 @@ However, I am quite fond of using a quadrant diagram (meaning a two-by-two) base
 Let's call it "the error quadrant diagram".
 See {numref}`fig:errors`.
 
-```{figure} ../images/errors.svg
+```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
 :name: fig:errors
 The error quadrants classifies errors in the two dimensions "when" and "what".
 ```
@@ -20,18 +19,18 @@ The error quadrants classifies errors in the two dimensions "when" and "what".
 
 In one dimension we've got the notion of *time*.
 When did the error occur?
-Did the error occur at *compile-time* [{numref}`Chapter %s<compilation>`] or at *run-time* [{numref}`Chapter %s<execution>`]?
+Did the error occur at *[compile-time](compilation)* or at *[run-time](execution)*?
 In other words, did it occur when we compiled the program or when we tried to run it?
 
 In the other dimension we're asking what *type* of error it is.
-Is it a *syntax error* [{numref}`Chapter %s<syntax>`] or a *semantic error* [{numref}`Chapter %s<semantics>`]?
+Is it a *[syntax](syntax) error* or a *[semantic](semantics) error*?
 In other words, is it a grammatical error or an error of meaning?
 Is it an error in form or in content?
 
 ```{note}
 Checking for errors at compile-time without running the program, is sometimes called "static code analysis" or "static testing".
 Checking for errors at run-time, meaning while running the program, is sometimes called "dynamic code analysis" or "dynamic testing".
-We'll talk more about assessing correctness in {numref}`Chapter %s<correctness>`.
+We'll talk more about assessing [correctness](correctness) in its own chapter.
 ```
 
 A *syntax error* means that we've expressed something that is *grammatically* incorrect in the language.
@@ -53,7 +52,7 @@ In this book we classfied errors using a quadrant diagram.
 
 ## Type errors
 
-In a later chapter we will discuss the notion of data types [{numref}`Chapter %s<data-types>`] but I want you to make a mental note of the fact that type errors can be considered a specific type of semantic errors.
+In a later chapter we will discuss the notion of [data types](data-types) but I want you to make a mental note of the fact that type errors can be considered a specific type of semantic errors.
 Specifically, the set of type errors is a subset of the set of semantic errors.
 
 Whether they are discovered at compile-time or run-time depends on whether we're dealing with a statically typed or a dynamically typed language.
@@ -83,7 +82,7 @@ Saying that compile-time errors are preferable over run-time errors solely for t
 The key thing to realize is that if you can move a run-time error to compile-time that means that you can guarantee that this error doesn't ever happen when your program is running.
 
 Indeed we might even call this a "design principle".
-We'll talk about what design principles [{numref}`Chapter %s<design-principles>`] are later.
+We'll talk about what [design principles](design-principles) are later.
 But for now, you can think of design principles as ideas that aim to improve the maintainability of code.
 
 ```{admonition} Design principle
@@ -91,7 +90,7 @@ But for now, you can think of design principles as ideas that aim to improve the
 Prefer compile-time errors over run-time errors.
 ```
 
-I realize that we haven't talked about enough concepts for this argument to fully fly yet, so we'll return to it when discussing the design principle "types over tests" [{numref}`Chapter %s<types-over-tests>`].
+I realize that we haven't talked about enough concepts for this argument to fully fly yet, so we'll return to it when discussing the design principle "[types over tests](types-over-tests)" in a later chapter.
 The key point is simply that instead of designing programs that might crash at run-time, we should design programs that cannot even be compiled if they run the risk of crashing at run-time.
 
 Said differently, a program that contains potential run-time errors must be meticulously searched for all possible places in which it can crash so that a crash can be prevented and even then, there are no guarantees.

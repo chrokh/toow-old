@@ -1,4 +1,3 @@
-(expressions)=
 # Expressions
 
 ```{warning}

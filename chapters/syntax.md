@@ -1,9 +1,8 @@
-(syntax)=
 # Syntax
 
 Code is nothing more than text written in a programming language.
 All programming languages have syntax and semantics.
-In this chapter we are discussing syntax, and later we will discuss semantics [{numref}`Chapter %s<semantics>`].
+In this chapter we are discussing syntax, and later we will discuss [semantics](semantics).
 
 %A program is a bunch of code written in some programming language.
 %We refer to files that contain code as "source files" and we sometimes call code "source code".
@@ -21,7 +20,7 @@ The syntax of a language defines how symbols can be combined to form valid state
 ```
 
 Syntax defines the *structure* of sentences but does not concern itself with meaning. 
-As we shall see in the chapter on semantics [{numref}`Chapter %s<semantics>`], all *syntactically* valid sentances are not necessarily also *semantically* valid sentences.
+As we shall see in the chapter on [semantics](semantics), all *syntactically* valid sentances are not necessarily also *semantically* valid sentences.
 Just because some sentence is expressed on the correct form doesn't guarantee that it is meaningful.
 Hence the separation between the words syntax and semantics.
 
@@ -76,7 +75,7 @@ Give an example of a syntax error in a natural language.
 ```
 
 Let's talk about C# instead.
-While we'll discuss expressions [{numref}`Chapter %s<expressions>`], operators [{numref}`Chapter %s<operators>`], and statements [{numref}`Chapter %s<statements>`] in much more detail later let us look at a few trivial examples that ought to make sense to you irrespectively of your level of mathematical proficiency.
+While we'll discuss [expressions](expressions), [operators](operators), and [statements](statements) in much more detail later let us look at a few trivial examples that ought to make sense to you irrespectively of your level of mathematical proficiency.
 
 If we are looking to add the two numbers 1 and 2, then we must (as in the example below) state the first number followed by the operator and then the second number.
 This is known as infix notation, and the addition operator (`+`) is thus an infix operator.
@@ -94,8 +93,8 @@ If we instead tried to use what is known as prefix notation and first stated the
 Syntactic errors are known as syntax errors.
 When we find ourselves looking at a program that "doesn't work", we must ask ourselves whether we mean that the program exhibits syntax errors (also known as syntax errors), semantic errors, or combinations of the two.
 
-When dealing with compiled languages [{numref}`Chapter %s<compilation>`] syntax errors are brought to our attention, by the compiler, at, what is known as, compile-time.
-When dealing with interpreted languages  [{numref}`Chapter %s<interpretation>`] syntax errors are only brought to our attention, by the interpreter, at, what is known as, run-time.
+When dealing with [compiled](compilation) languages, syntax errors are brought to our attention, by the compiler, at, what is known as, compile-time.
+When dealing with [interpreted](interpretation) languages, syntax errors are only brought to our attention, by the interpreter, at, what is known as, run-time.
 This essentially means that in compiled languages we get to know about syntax errors without having to run the program.
 
 <!--

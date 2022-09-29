@@ -1,4 +1,3 @@
-(paradigms)=
 # Paradigms
 
 ```{warning}

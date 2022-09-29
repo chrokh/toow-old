@@ -8,3 +8,4 @@ Work in progress.
 %- Accessing individual elements vs iterating. Lead into iteration chapter.
 %- Bracket notation.
 %- Will look at lists later.
+

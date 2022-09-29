@@ -4,194 +4,277 @@
 format: jb-book
 root: index
 title: Introduction
-defaults:
+#defaults:
+options:
   numbered: true
-chapters:
-#- caption: Fundamentals
-#  numbered: true
-#  chapters:
+parts:
+- caption: Fundamentals
+  numbered: true
+  chapters:
   - file: chapters/sets
-    title: 🟢 Sets
+    title: ★ Sets
   - file: chapters/functions
-    title: 🟢 Functions
-  - file: chapters/algorithms
-    title: 🟠 Algorithms
-  - file: chapters/computation
-    title: 🟠 Computation
+    title: ★ Functions
+
+- caption: Terminals
+  numbered: true
+  chapters:
   - file: chapters/terminals
+  - file: chapters/standard-out
+  - file: chapters/standard-in
+
+- caption: Computation
+  numbered: true
+  chapters:
+  - file: chapters/algorithms
+    title: ★ Algorithms
+  - file: chapters/computation
+    title: ★ Computation
   - file: chapters/syntax
-    title: 🟢 Syntax
+    title: ★ Syntax
   - file: chapters/semantics
-    title: 🟢 Semantics
+  #- file: chapters/syntactic-sugar
+    title: ★ Semantics
+
   - file: chapters/compilation
-    title: 🟢 Compilation
+    title: ★ Compilation
   - file: chapters/execution
-    title: 🟢 Execution
+    title: ★ Execution
   - file: chapters/interpretation
-    title: 🟢 Interpretation
+    title: ★ Interpretation
   - file: chapters/errors
-    title: 🟢 Errors
+    title: ★ Errors
+  - file: chapters/comments
+    title: ★ Comments
+
   #- file: chapters/source-code
   #- file: chapters/markup
-  - file: chapters/documentation
-  - file: chapters/comments
-    title: 🟢 Comments
-  - file: chapters/standard-out
+
+- caption: Values
+  numbered: true
+  chapters:
   - file: chapters/values
-    title: 🟢 Values
+    title: ★ Values
   - file: chapters/variables
-    title: 🟢 Variables
-  - file: chapters/naming
-  - file: chapters/standard-in
-  - file: chapters/indentation
+    title: ★ Variables
+
+#- caption: Standards
+#  numbered: true
+#  chapters:
+#  - file: chapters/documentation
+#  - file: chapters/indentation
+#  - file: chapters/naming
+
+- caption: Statements & expressions
+  numbered: true
+  chapters:
   - file: chapters/statements
   - file: chapters/expressions
   - file: chapters/operators
-  - file: chapters/data-types
-    title: 🟢 Data types
-  - file: chapters/selection
   - file: chapters/paradigms
+
+- caption: Data types
+  numbered: true
+  chapters:
+  - file: chapters/data-types
+    title: ★ Data types
   - file: chapters/type-conversions
   - file: chapters/type-checking
-    title: 🟢 Type-checking
+    title: ★ Type-checking
   - file: chapters/type-systems
-    title: 🟢 Type systems
-  - file: chapters/nothingness
-    title: 🟢 Nothingness
+    title: ★ Type systems
   - file: chapters/type-hierarchies
-  - file: chapters/abstraction
-  - file: chapters/indirection
-  - file: chapters/business-logic
-  - file: chapters/debugging
-#- caption: Procedural programming
+  - file: chapters/type-testing
+
+- caption: Basic types
+  numbered: true
+  chapters:
+  - file: chapters/simple-types
+  - file: chapters/enums
+  - file: chapters/value-tuples
+  - file: chapters/arrays
+
+- caption: Control flow
+  numbered: true
+  chapters:
+  - file: chapters/selection
+    title: ★ Selection
+  - file: chapters/iteration
+    title: ★ Iteration
+
+- caption: Input/output
+  numbered: true
+  chapters:
+  - file: chapters/command-line-arguments
+
+- caption: Mutability
+  numbered: true
+  chapters:
+  - file: chapters/mutability
+  - file: chapters/immutable-objects
+  - file: chapters/value-and-reference-semantics
+
+- caption: Nothingness
+  numbered: true
+  chapters:
+  - file: chapters/nothingness
+    title: ★ Nothingness
+
+#- caption: Modeling
 #  numbered: true
 #  chapters:
-  - file: chapters/arrays
-  - file: chapters/syntactic-sugar
-  - file: chapters/iteration
-  - file: chapters/command-line-arguments
-  - file: chapters/mutability
-  - file: chapters/type-testing
-  - file: chapters/value-and-reference-semantics
-  - file: chapters/simple-types
-  - file: chapters/static-methods
-  - file: chapters/purity
+#  - file: chapters/abstraction
+#  - file: chapters/indirection
+#  - file: chapters/business-logic
+#  - file: chapters/debugging
+
+- caption: Procedures
+  numbered: true
+  chapters:
+  - file: chapters/methods
+    title: ★ Methods
   - file: chapters/static-classes
-  - file: chapters/data-structures
-  - file: chapters/composition
+  - file: chapters/static-methods
+    title: ★ Static methods
+  - file: chapters/purity
+  - file: chapters/method-composition
   - file: chapters/overloading
+    title: ★ Overloading
   - file: chapters/recursion
+
+- caption: Modules
+  numbered: true
+  chapters:
+  - file: chapters/data-structures
   - file: chapters/scope
   - file: chapters/namespaces
+
+- caption: Exceptions
+  numbered: true
+  chapters:
   - file: chapters/basic-exceptions
   - file: chapters/stack-traces
-#- caption: Object oriented programming
-#  numbered: true
-#  chapters:
-  - file: chapters/pillars
+
+- caption: Objects
+  numbered: true
+  chapters:
+ #- file: chapters/pillars
   - file: chapters/objects
-    title: 🟠 Objects
+    title: ★ Objects
   - file: chapters/classes
+    title: ★ Classes
   - file: chapters/fields
+    title: ★ Fields
   - file: chapters/constructors
+    title: ★ Constructors
   - file: chapters/instance-methods
-    title: 🟠 Instance methods
-  - file: chapters/type-signatures
-  - file: chapters/instance-variables
-  - file: chapters/basic-access-modifiers
+    title: ★ Instance methods
+  #- file: chapters/type-signatures
   - file: chapters/properties
-  - file: chapters/object-composition
-    title: 🟢 Object composition
-  - file: chapters/concrete-dependency-construction
-    title: 🟢 Concrete dependency construction
-  - file: chapters/concrete-dependency-injection
-    title: 🟢 Concrete dependency injection
-  - file: chapters/immutable-objects # PRIORITY
+    title: ★ Properties
+  - file: chapters/basic-access-modifiers
+    title: ★ Access modifiers
+
+- caption: Polymorphism
+  numbered: true
+  chapters:
   - file: chapters/interfaces
-    title: 🟢 Interfaces
+    title: ★ Interfaces
   - file: chapters/subtype-polymorphism
-    title: 🟢 Subtype polymorphism
   - file: chapters/inheritance
+  - file: chapters/advanced-access-modifiers
   - file: chapters/overriding
   - file: chapters/hiding
-  - file: chapters/advanced-access-modifiers
   - file: chapters/object-type-conversions
-  - file: chapters/abstract-dependency-construction
-    title: 🟢 Abstract dependency construction
-  - file: chapters/abstract-dependency-injection
-    title: 🟢 Abstract dependency injection
-  - file: chapters/variance # PRIORITY
+  - file: chapters/variance
   - file: chapters/liskov-substitution-principle
-    title: 🟠 Liskov Substitution Principle # PRIORITY
+
+- caption: Object composition
+  numbered: true
+  chapters:
+  - file: chapters/object-composition
+  - file: chapters/concrete-dependency-construction
+  - file: chapters/concrete-dependency-injection
+  - file: chapters/abstract-dependency-construction
+  - file: chapters/abstract-dependency-injection
+
+- caption: Generics
+  numbered: true
+  chapters:
+  - file: chapters/generics
+  - file: chapters/generic-type-parameters
+  - file: chapters/generic-types
+  - file: chapters/generic-methods
+  - file: chapters/type-parameter-constraints
+  - file: chapters/variant-generic-interfaces
+  - file: chapters/business-objects
+
+- caption: Maintainability
+  numbered: true
+  chapters:
+  - file: chapters/maintainability
+  - file: chapters/requirements
+  - file: chapters/correctness
+  - file: chapters/code-smells
+  - file: chapters/coupling
+  - file: chapters/cohesion
+  - file: chapters/refactoring
+
+- caption: Principles
+  numbered: true
+  chapters:
+  - file: chapters/design-principles
+  - file: chapters/single-responsibility-principle
+  - file: chapters/interface-segregation-principle
+  - file: chapters/deep-classes
+  - file: chapters/types-over-tests
+  - file: chapters/define-errors-out-of-existence
+  - file: chapters/open-closed-principle
+  - file: chapters/dependency-inversion-principle
+  - file: chapters/composition-over-inheritance
+  - file: chapters/documentation-driven-development
+
+- caption: Patterns
+  numbered: true
+  chapters:
+  - file: chapters/design-patterns
+  - file: chapters/strategy-pattern
+  - file: chapters/delegates
+  - file: chapters/extension-methods
+  - file: chapters/null-object-pattern
+  - file: chapters/observer-pattern
+  - file: chapters/events
+  - file: chapters/adapter-pattern
+  - file: chapters/bridge-pattern
+  - file: chapters/factory-method-pattern
+  - file: chapters/composite-pattern
+  - file: chapters/state-pattern
+  - file: chapters/iterator-pattern
+  - file: chapters/visitor-pattern
+  - file: chapters/pattern-matching
+
+- caption: Lambdas
+  numbered: true
+  chapters:
+  - file: chapters/lambdas
+  - file: chapters/linq
+
+- caption: TODO
+  numbered: true
+  chapters:
+  - file: chapters/enumerators
+  - file: chapters/indexers
+  - file: chapters/streams
   - file: chapters/advanced-exceptions
   - file: chapters/prototypes
   - file: chapters/base-class-library
   - file: chapters/boxing
   - file: chapters/structure-types
   - file: chapters/anonymous-types
-  - file: chapters/generics
-    title: 🟢 Generics
-  - file: chapters/generic-type-parameters
-    title: 🟢 Generic type parameters
-  - file: chapters/generic-types # PRIORITY
-  - file: chapters/generic-methods # PRIORITY
-  - file: chapters/type-parameter-constraints # PRIORITY
-  - file: chapters/variant-generic-interfaces # PRIORITY
-  - file: chapters/business-objects
-#- caption: Object oriented design
-#  numbered: true
-#  chapters:
-  - file: chapters/requirements
-  - file: chapters/correctness
-  - file: chapters/maintainability # PRIORITY
-  - file: chapters/code-smells
-  - file: chapters/coupling # PRIORITY
-  - file: chapters/cohesion
-  - file: chapters/refactoring
-  - file: chapters/design-principles
-  - file: chapters/single-responsibility-principle
-  - file: chapters/interface-segregation-principle
-  - file: chapters/deep-classes
-  - file: chapters/types-over-tests # PRIORITY
-  - file: chapters/define-errors-out-of-existence
-  - file: chapters/open-closed-principle
-  - file: chapters/dependency-inversion-principle
-  - file: chapters/composition-over-inheritance
-  - file: chapters/documentation-driven-development
-#- caption: Advanced object oriented programming
-#  numbered: true
-#  chapters:
-  - file: chapters/design-patterns
-  - file: chapters/strategy-pattern # PRIORITY
-    title: 🟠 Strategy pattern
-  - file: chapters/delegates # PRIORITY
-  - file: chapters/extension-methods
-  - file: chapters/null-object-pattern
-    title: 🟠 Null object pattern
-  - file: chapters/observer-pattern
-    title: 🟠 Observer pattern
-  - file: chapters/events
-  - file: chapters/adapter-pattern
-    title: 🟠 Adapter pattern
-  - file: chapters/bridge-pattern
-    title: 🟠 Bridge pattern
-  - file: chapters/factory-method-pattern
-    title: 🟠 Factory method pattern
-  - file: chapters/composite-pattern
-    title: 🟠 Composite pattern
-  - file: chapters/state-pattern
-    title: 🟠 State pattern
-  - file: chapters/lambdas # PRIORITY
-  - file: chapters/iterator-pattern
-    title: 🟠 Iterator pattern
-  - file: chapters/enumerators
-  - file: chapters/indexers
-  - file: chapters/linq
-  - file: chapters/visitor-pattern # PRIORITY
-  - file: chapters/pattern-matching # PRIORITY
-  - file: chapters/streams
-#- caption: Epilogue
-#  numbered: false
-#  chapters:
+  #- file: chapters/leaky-abstractions
+
+- caption: Epilogue
+  numbered: false
+  chapters:
   - file: chapters/reading
   - file: chapters/bibliography

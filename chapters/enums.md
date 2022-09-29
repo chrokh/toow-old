@@ -1,7 +1,6 @@
-# Design patterns
+# Enums
 
 ```{warning}
 Work in progress.
 ```
-
 

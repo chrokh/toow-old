@@ -1,5 +1,21 @@
+---
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  display_name: csharp
+  language: .net-csharp
+  name: .net-csharp
+---
+
 (interfaces)=
 # Interfaces
+
+```{warning}
+Work in progress.
+```
 
 The word "interface" is, in object oriented programming commonly used to mean two different but related things.
 
@@ -54,12 +70,12 @@ It is the contract between the screw and the screwdriver.
 Screw manufacturers make sure that their screw heads adhere to a standardized drive type.
 Similarly, screwdriver manufacturers make sure that their screwdrivers adhere to a standardized drive type.
 
-%```{figure} ../images/screws-nuts-and-screwdrivers.jpg
-%:name: fig:screws-nuts-and-screwdrivers
-%
-%TODO.
-%https://cribmode.com/wp-content/uploads/2022/01/screw-chart-jan042022-768x396.jpg.webp
-%```
+%TODO:  https://cribmode.com/wp-content/uploads/2022/01/screw-chart-jan042022-768x396.jpg.webp
+```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
+:name: fig:screws-nuts-and-screwdrivers
+
+The same type of screw driver can be used with many types of screws.
+```
 
 This separation between interface and implementation has immense benefits.
 For one we don't have to buy a new screwdriver every time we buy a new screw.
@@ -71,13 +87,8 @@ We'll talk more about both reusability and modifiability in the chapter on [main
 %This is what we, in the chapter on maintainability, will refer to as "[reusability](reusability)".
 %This is what we, in the chapter on maintainability, will refer to as "[modifiability](modifiability)".
 
-```{exercise}
-What is the abstract idea of an interface?
-Come up with your own example in natural language that's different from the example given in this chapter on screws, bolts, and screwdrivers.
-```
 
-
-## Declaring an interface
+## Definition
 
 An interface is often referred to as an "abstraction" while classes, in contrast, are referred to as "concretions".
 Classes are concrete in the sense that they can be instantiated into objects.
@@ -90,9 +101,13 @@ Interfaces *only define compile-time types* and cannot be instantiated.
 
 In other words, an interface is only a compile-time type.
 At run-time, any interface must be replaced by a run-time type.
+
+
+### The idea
+
 Consider for example the following definition of a class called `Coordinate`:
 
-```csharp
+```{code-cell} csharp
 class Coordinate
 {
   public int X { get; set; }
@@ -127,7 +142,7 @@ Well there are three public instance members:
 These public instance members are what we would call the "interface" of the class.
 
 
-%## The keyword
+### The keyword
 
 Even though we can talk about the abstract idea of the interface of the class `Coordinate`, we cannot talk about any concrete `interface` since it doesn't implement one.
 What would a concrete `interface` that captures the same idea look like?
@@ -172,7 +187,7 @@ ICoordinate coord;
 Build succeeded.
 ```
 
-## Implementing an interface
+### Implementing an interface
 
 But wait a minute you might say.
 If I can declare a variable to be of type `ICoordinate` but there are no instances of `ICoordinate` how could this possibly be useful?
@@ -230,27 +245,8 @@ ICoordinate coord = new Coordinate(0, 0);
 Notice how the compile-time type on the left is an interface (or generally: an abstraction) while the run-time type on the right is a concrete class.
 Why this is useful and what we can do with this is something that we'll deal with in the chapter on [subtype polymorphism](subtype-polymorphism).
 
-```{exercise}
-Explain the keyword `interface`?
-```
 
-```{exercise}
-What is the difference between a class and an interface?
-```
-
-```{exercise}
-Does an interface define a compile-time type, a run-time type, or both?
-What does this mean?
-```
-
-```{exercise}
-:label: ex:interfaces
-1. Define your own interface.
-2. Write a class that implements that interface.
-3. Declare a variable whose compile-time type is your interface, and whose run-time type is your class.
-```
-
-## Implementing multiple interfaces
+### Implementing multiple interfaces
 
 Before we move on we should mention that you can implement multiple interfaces by simply separating them with commas.
 Let's say that we want to split our previous interface into the two interfaces `IPositionable` and `ITranslatable`.
@@ -276,25 +272,264 @@ class Coordinate : IPositionable, ITranslatable { /* ... */ }
 class Coordinate : IPositionable, ITranslatable, ICoordinate { /* ... */ }
 ```
 
-## UML class diagram notation
+### UML class diagram notation
 
 In UML class diagram notation, interface implementation is called "realization" and is depicted using a dashed line with a hollow arrow head.
 The arrow points from the implementation to the interface.
 
-%% TODO REPLACE IMAGE!!
-%```{figure} https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Uml_classes_en.svg/800px-Uml_classes_en.svg.png
-%:name: fig:uml-class-diagram-realization
-%:width: 300
-%
-%In UML class diagram notation, interface implementation is called "realization" and is depicted using a dashed line with a hollow arrow head.
-%The arrow points from the implementation to the interface.
-%[[Image source](https://en.wikipedia.org/wiki/Class_diagram)].
-%```
+% TODO: REPLACE IMAGE!!
+```{figure} https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Uml_classes_en.svg/800px-Uml_classes_en.svg.png
+:name: fig:uml-class-diagram-realization
+:width: 300
+
+In UML class diagram notation, interface implementation is called "realization" and is depicted using a dashed line with a hollow arrow head.
+The arrow points from the implementation to the interface.
+[[Image source](https://en.wikipedia.org/wiki/Class_diagram)].
+```
+
+## Examples
+
+```{warning}
+Work in progress.
+```
+
+### Cipher interfaces
+
+Let's now rally up all the ciphers that we've implemented so far and let's try to write interfaces for them.
+The class names of the ciphers we've seen so far are:
+
+1. `ReverseCipher`
+2. `RobbersCiphers`
+3. `CaesarCipher`
+4. `LeetCipher`
+
+Since we have multiple overloads for the `Encode` method in these interfaces a naive first thought might be to implement the following interface:
+
+```csharp
+interface IChar
+{
+  char Encode (char input);
+  string Encode (string input);
+  string Encode (char input);
+}
+```
+
+That covers all the overloads of these classes.
+Importantly however, this is the [union](union), not the [intersection](intersection).
+It is the "sum" of all overloads, not the overloads that all of them happen to implement.
+Interfaces however should express members that all its implementors *share*.
+Interfaces should express the intersection of members.
+
+As an example, the `RobbersCipher`, as we've talked about before, cannot possibly implement an encoding method that takes a `char` and returns a `char`.
+Why?
+Because that's fundamentally not part of the specification of the Robber's cipher.
+The smallest unit that a Robber's cipher encoding can return is a `string`.
+Because if you are asked to encode a consonant then you must return three characters.
+If you are passed `L` and `o` is used as the vowel, then you must return `LoL`.
+There's just no way around it.
+
+%This is also in line with a design principle known as the [interface segration principle](interface-segregation-principle) which we will discuss in a later chapter.
+
+So to avoid forcing classes that cannot implement certain methods to still implement these methods, we will write a separate interface for each overload.
+We end up with the following interfaces:
+
+```{code-cell} csharp
+interface ICharToCharCipher
+{
+  char Encode (char input);
+}
+
+interface IStringToStringCipher
+{
+  string Encode (string input);
+}
+
+interface ICharToStringCipher
+{
+  string Encode (char input);
+}
+```
+
+
+### Cipher implementations
+
+Let's now make the ciphers actually implement the interfaces.
+
+```{code-cell} csharp
+:tags: [hide-input]
+class RobbersCipher : ICharToStringCipher, IStringToStringCipher
+{
+  private char vowel;
+
+  public RobbersCipher (char vowel)
+    => this.vowel = vowel;
+
+  public string Encode (char input)
+  {
+    string consonants = "BCDFGHJKLMNPQRSTVXYZ";
+    if (consonants.IndexOf(Char.ToUpper(input)) != -1)
+      return $"{input}{vowel}{input}";
+    else
+      return $"{input}";
+  }
+
+  public string Encode (string input)
+  {
+    string output = "";
+    foreach (char letter in input)
+      output += Encode (letter);
+    return output;
+  }
+}
+```
+
+
+```{code-cell} csharp
+:tags: [hide-input]
+class CaesarCipher : ICharToCharCipher, IStringToStringCipher
+{
+  int steps;
+
+  public CaesarCipher (int steps)
+    => this.steps = steps;
+
+  public char Encode (char input)
+  {
+    string alphabet = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
+    int i = alphabet.IndexOf(Char.ToUpper(input));
+    int newIndex = (i + steps) % alphabet.Length;
+    if (i != -1)
+    {
+      if (newIndex < 0)
+        newIndex += alphabet.Length;
+
+      if (Char.IsLower(input))
+        return Char.ToLower(alphabet[newIndex]);
+      else
+        return alphabet[newIndex];
+    }
+    return input;
+  }
+
+  public string Encode (string input)
+  {
+    string output = "";
+    foreach (char letter in input)
+      output += Encode(letter);
+    return output;
+  }
+}
+```
+
+```{code-cell} csharp
+:tags: [hide-input]
+class ReverseCipher : IStringToStringCipher
+{
+  public string Encode (string input)
+  {
+    string output = "";
+    for (int i=input.Length-1; i>=0; i--)
+      output += input[i];
+    return output;
+  }
+}
+```
+
+As it turns out, all the above ciphers implement the interface `IStringToStringCipher`.
+This means that we can use objects of these types interchangibly under that interface.
+In other words, we can assign any object of these types to a variable of the compile-time type `IStringToStringCipher`.
+
+```{code-cell} csharp
+IStringToStringCipher cipher1 = new RobbersCipher('o');
+IStringToStringCipher cipher2 = new CaesarCipher(1);
+IStringToStringCipher cipher3 = new ReverseCipher();
+```
+
+Why this is extremely powerful will become apparent when we get to the chapter on [subtype polymorphism](subtype-polymorphism).
+But in short, the point is that we can now call the method `Encode` without needing to have any idea of what the run-time type is of the thing that we are calling `Encode` on.
+
+
+## Exercises
+
+```{exercise}
+What is the abstract idea of an interface?
+Come up with your own example in natural language that's different from the example given in this chapter on screws, bolts, and screwdrivers.
+```
+
+```{exercise}
+Explain the keyword `interface`?
+```
+
+```{exercise}
+What is the difference between a `class` and an `interface`?
+```
+
+
+```{exercise-start}
+```
+Rewrite the class `LeetCipher` that you wrote in {numref}`ex:instance-methods:leet` so that it implements the two interfaces `IStringToStringCipher` and `ICharToCharCipher` that we defined earlier in this chapter.
+
+```{code-cell} csharp
+:tags: [remove-input]
+class LeetCipher : IStringToStringCipher, ICharToCharCipher
+{
+  public char Encode (char input)
+  {
+    switch (input)
+    {
+      case 'L': return '1';
+      case '1': return 'L';
+      case 'A': return '4';
+      case '4': return 'A';
+      case 'O': return '0';
+      case '0': return 'O';
+      case 'T': return '7';
+      case '7': return 'T';
+      case 'E': return '3';
+      case '3': return 'E';
+      default: return input;
+    }
+  }
+
+  public string Encode (string input)
+  {
+    string output = "";
+    foreach (char c in input)
+      output += Encode(c);
+    return output;
+  }
+}
+```
+When you are done you should be able to run the following code and get the corresponding output.
+```{code-cell} csharp
+// Note how the compile-time and run-time types are different.
+IStringToStringCipher stringCipher = new LeetCipher();
+ICharToCharCipher charCipher = new LeetCipher();
+
+string output1 = stringCipher.Encode("LEET");
+char output2 = charCipher.Encode('E');
+
+Console.WriteLine($"{output1} {output2}");
+```
+```{exercise-end}
+```
+
+
+```{exercise}
+Does an interface define a "[compile-time type](run-time-and-compile-time-types)", a "[run-time type](run-time-and-compile-time-types)", or both?
+What does this mean?
+```
+
+```{exercise}
+:label: ex:interfaces
+1. Define your own interface.
+2. Write a class that implements that interface.
+3. Declare a variable whose compile-time type is your interface, and whose run-time type is your class.
+```
 
 ```{exercise}
 Draw a UML class diagram of the program that you built in {numref}`ex:interfaces`.
 ```
-
 
 
 

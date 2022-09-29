@@ -1,4 +1,3 @@
-(business-logic)=
 # Business logic
 
 ```{warning}

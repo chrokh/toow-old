@@ -1,4 +1,3 @@
-(indirection)=
 # Indirection
 
 ```{warning}

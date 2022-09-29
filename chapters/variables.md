@@ -1,5 +1,7 @@
 # Variables
 
+%- [Initialized to default value](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/variables)
+
 A variable is a symbolic name that points to a, possibly changing, value.
 More concretely a variable is a symbolic name for a location in memory.
 Upon compilation, all variable names are replaced by their memory locations.

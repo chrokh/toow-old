@@ -1,6 +1,6 @@
 # Object composition
 
-[Composition](composition) is the act of combining simple things into more complex things in order to solve complex problems.
+[Composition](method-composition) is the act of combining simple things into more complex things in order to solve complex problems.
 In procedural programming we compose procedures (which in C# is known as [static methods](static-methods)), in [functional programming](paradigms) we compose functions, and in object oriented programming we compose objects.
 So if objects are the "building blocks" in object oriented programming then how do we actually build programs using these blocks?
 How do we actually compose objects?
@@ -11,7 +11,7 @@ Just because I consider myself your friend, doesn't necessarily mean that you co
 Object composition is not necessarily a two way street.
 So if all we know is that object `a` has a reference to object `b` then we don't know whether object `b` also has a reference to object `a`.
 
-```{figure} ../images/object-composition-object-diagram.jpg
+```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
 :name: fig:object-composition-object-diagram
 
 TODO Object diagram?
@@ -58,7 +58,7 @@ If you want to learn more about the UML class diagram concepts aggregation and c
 
 
 % Rod -> Disk
-```{figure} ../images/object-composition-class-diagram.jpg
+```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
 :name: fig:object-composition-class-diagram
 
 Composing two classes means that they are in a directed has-a relationship with each other where objects of one type will have a reference to objects of the other type but not necessarily the other way around.
@@ -87,10 +87,10 @@ I like to call these levels:
 %- LEVEL 3: [**Injected concrete** object composition](injected-concrete-object-composition).
 %- LEVEL 4: [**Injected abstract** object composition](injected-abstract-object-composition)
 
-- LEVEL 1: [**Concrete** dependency **construction**](constructed-concrete-object-composition).
-- LEVEL 2: [**Abstract** dependency **construction**](constructed-abstract-object-composition).
-- LEVEL 3: [**Concrete** dependency **injection**](injected-concrete-object-composition).
-- LEVEL 4: [**Abstract** dependency **injection**](injected-abstract-object-composition)
+- LEVEL 1: [**Concrete** dependency **construction**](concrete-dependency-construction).
+- LEVEL 2: [**Abstract** dependency **construction**](abstract-dependency-construction).
+- LEVEL 3: [**Concrete** dependency **injection**](concrete-dependency-injection).
+- LEVEL 4: [**Abstract** dependency **injection**](abstract-dependency-injection)
 
 These four levels are *not* well established terms to describe types of composition.
 I'm suggesting this division as a way to make sense of the words "object composition" which usually encompasses all four levels, and "dependency injection" which usually encompasses levels three and four.

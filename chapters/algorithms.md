@@ -5,6 +5,10 @@
 Work in progress.
 ```
 
+% TODO: Talk about ciphers since they're basically the case study of this book.
+% Substitution ciphers: https://en.wikipedia.org/wiki/Substitution_cipher
+% Transposition ciphers: https://en.wikipedia.org/wiki/Transposition_cipher
+
 Algorithms rule our world.
 It doesn't matter if you're a programmer, mathematician or not, you will eventually or have already come into contact with the word algorithm.
 
@@ -17,7 +21,7 @@ Evidence of the usage of algorithms have been found dating as far back as 2500 B
 The word algorithm stems from the Persian polymath Muḥammad ibn Mūsā al-Khwārizmī {cite:p}`todo`.
 
 Formal definitions in computer science aside, we can think of an algorithm as a finite sequence of precise instructions.
-As we shall discuss in the next chapter on computation [{numref}`Chapter %s<computation>`], executing the steps of an algorithm is to compute.
+As we shall discuss in the next chapter on [computation](computation), executing the steps of an algorithm is to compute.
 Any sufficiently formalized procedure or recipe can be considered an algorithm.
 Consider for example, the follow recipe for making pancake batter:
 
@@ -49,7 +53,7 @@ But let's look at some more serious algorithms.
 Most people have heard a river crossing puzzle in one form or another.
 Let's take the very old puzzle involving a wolf, a sheep, and a cabbage.
 
-```{figure} ../images/river-crossing.jpg
+```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
 :name: fig:river-crossing
 
 Illustration of the river crossing puzzle involving a wolf, a sheep, and a cabbage.
@@ -105,7 +109,7 @@ In this puzzle we have three rods or poles and some number of disks.
 Each disk has a different diameter but they can all be slid onto the rods through a hole in the middle of each disk.
 See {numref}`fig:towers-of-hanoi` for an illustration.
 
-```{figure} ../images/towers-of-hanoi.jpg
+```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
 :name: fig:towers-of-hanoi
 
 Illustration of The Towers of Hanoi.
@@ -144,7 +148,7 @@ This brings up an important question.
 Is it possible to define a more general algorithm that is capable of handling multiple different input parameters?
 
 ```{important}
-Generalizing a solution by introducing parameters is known as *parameterization* [{numref}`Chapter %s<static-methods>`] and we will talk about this more later.
+Generalizing a solution by introducing parameters is known as *parameterization* and we will talk about that more in the chapter on [methods](methods).
 ```
 
 
@@ -214,11 +218,70 @@ Generalizing a solution by introducing parameters is known as *parameterization*
 Come up with an algorithm for a problem of your choice.
 ```
 
-## Sorting and searching
+## Language games
+
+% https://en.wikipedia.org/wiki/Cant_(language)#Argot
+
+(reverse-cipher)=
+### Reverse cipher
 
 ```{warning}
 Work in progress.
 ```
+
+(caesar-cipher)=
+### Caesar cipher
+
+```{warning}
+Work in progress.
+```
+
+
+(leet-language)=
+### Leetspeak
+
+```{warning}
+Work in progress.
+```
+
+
+```
+A <=> 4
+E <=> 3
+L <=> 1
+O <=> 0
+S <=> 5
+T <=> 7
+```
+
+```
+LEET <=> 1337
+```
+
+
+(robbers-language)=
+### Robber's language
+
+% TODO: Similar to Tutnese, or Double dutch
+
+```{warning}
+Work in progress.
+```
+
+
+
+% ## TODO: Andra språk
+%https://en.wikipedia.org/wiki/L%C3%ADngua_do_Pê
+%https://en.wikipedia.org/wiki/Pig_Latin
+%https://en.wikipedia.org/wiki/Back_slang
+%https://en.wikipedia.org/wiki/Ubbi_dubbi
+
+
+%## Sorting and searching
+%
+%```{warning}
+%Work in progress.
+%```
 
 % For example: quicksort and Tony Hoare.
 

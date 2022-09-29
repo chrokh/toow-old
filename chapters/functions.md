@@ -1,4 +1,3 @@
-(functions)=
 # Functions
 
 Why oh why do we have to talk about mathematical functions?
@@ -7,7 +6,7 @@ It is my belief that understanding sets and understanding functions makes us bet
 
 ```{note}
 In this book we will refrain from using the word "function" when discussing procedural or object oriented programming. Instead we will be using the words "procedure" in the former case and "method" in the latter.
-The reason for this is that procedures and methods tend to be impure [{numref}`Chapter %s<purity>`], but more on this later.
+The reason for this is that procedures and methods tend to be [impure](purity), but more on this later.
 ```
 
 Functions map input to output.
@@ -101,7 +100,7 @@ This means that the function is a *partial* function as opposed to a *total* fun
 A total function must define a mapping for all elements in the domain.
 
 The totality of functions is hugely important for programmers.
-If we define a procedure or method that can be modeled as a partial function then that means that our procedure or method throws an exception [{numref}`Chapter %s<exceptions>`].
+If we define a procedure or method that can be modeled as a partial function then that means that our procedure or method throws an [exception](exceptions).
 We haven't talked about exceptions yet, so if you aren't familiar with them from before then I cannot blame you for saying "so what, what's so bad about exceptions?".
 In short, exceptions are locally unrecoverable states.
 Meaning that when an exception is thrown in a procedure or method, it is because this procedure or method cannot possible determine how the program is to be saved from whatever problem just occurred.

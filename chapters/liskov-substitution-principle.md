@@ -8,6 +8,8 @@ Work in progress.
 %- LSP.
 %- Similar to how Comment chapter argues that you cannot describe all semantic details with names only.
 
+%- Be liberal in what you accept and conservative in what you send. Golden rule. There's also another principle-name for this.
+
 %- Example: `string < char` or `char < string`. Follow up quick discussion from chapter on [generics](generics). Answer: SingleCharString < NonEmptyString < String. Output behaves covariantly, but input (in all but the constructor) is contravariant.
 
 %- ReadOnlyCollection implements ICollection. Violation of LSP with exceptions.
@@ -22,6 +24,7 @@ Work in progress.
 %//ys.Add(4); // Doesn't compile. Good.
 %zs.Add(4); // Compiles, but throws exception. Bad.
 %```
+%- Another example like this is Array implements IList but throws NotImplementedException on Add.
 
 
 %- Return type covariance IS supported in C# since 9.0!!! And is allowed by LSP. Parameter type contravariance is however NOT supported. However it is marked as under consideration in the [spec for C# 9.0](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-9.0/covariant-returns).

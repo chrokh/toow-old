@@ -1,4 +1,3 @@
-(pattern-matching)=
 # Pattern matching
 
 ```{warning}

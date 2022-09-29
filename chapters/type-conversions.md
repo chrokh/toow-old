@@ -5,6 +5,7 @@ Work in progress.
 ```
 
 %- https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/types/casting-and-type-conversions
+%- Safe and unsafe conversions.
 %- Implicit conversions
 %  - Including forward-references to subtyping.
 %- Explicit conversions (casts)
