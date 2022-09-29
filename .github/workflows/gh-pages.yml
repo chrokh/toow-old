@@ -30,13 +30,17 @@ jobs:
       with:
         dotnet-version: '6.0.x'
 
-    # Install dotnet try for Jupyter part 1
+    # Install dotnet interactive
     - name: Install dotnet try for Jupyter 1/1
-      run: dotnet tool install -g dotnet-try
+      run: dotnet tool install -g Microsoft.dotnet-interactive
 
-    # Install dotnet try for Jupyter part 2
-    - name: Install dotnet try for Jupyter 2/2
-      run: dotnet try jupyter install
+    # Install dotnet Jupyter kernel
+    - name: Install dotnet Jupyter kernel
+      run: dotnet interactive jupyter install
+
+    # Verify that the kernel is available
+    - name: Verify that the kernel is available
+      run: jupyter kernelspec list
 
     # Build the book
     - name: Build the book
