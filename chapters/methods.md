@@ -209,7 +209,7 @@ Simple enough.
 Let's try it out.
 
 ```{code-cell} csharp
-Console.WriteLine( reverse("dessert") );
+Console.WriteLine( reverse("desserts") );
 ```
 
 Seems to work.
@@ -423,11 +423,11 @@ I won't show how to write the method that converts any given `char` since that's
 However, the `string`-encoding method ought to look like this:
 
 ```csharp
-string encodeLeetString (string input)
+string leetEncodeString (string input)
 {
   string output = "";
   foreach (char letter in input)
-    output += LeetEncodeChar (letter);
+    output += leetEncodeChar (letter);
   return output;
 }
 ```
