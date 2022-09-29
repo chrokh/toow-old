@@ -1,4 +1,3 @@
-(pillars)=
 # Pillars
 
 ```{warning}

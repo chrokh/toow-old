@@ -26,9 +26,7 @@ Browse the table of contents, or use the search box.
 This book is a *work in progress*.
 If you find errors or have suggestions you are more than welcome to [submit an issue](https://github.com/chrokh/the-oo-way/issues/new) in the book's repository on GitHub or reach out to me via email at christopher.okhravi@gmail.com.
 
-In the table of contents, chapter titles marked with 🟢 are mostly completed.
-Titles marked with 🟠 contain some content but is very much a work in progress.
-Titles without any of the two markers contain no published content.
+In the table of contents, chapter titles marked with ★ contain some content.
 ```
 
 
@@ -147,7 +145,7 @@ If you are interested in the history of C#, what it looked like in the beginning
 
 If you are new to programming I would recommend that you either use Visual Studio or Visual Studio Code.
 If you have been programming before and already have a favourite text editor such as Sublime Text, Atom, Vim, or Emacs then I highly recommend that you stick to that editor and simply compile and run your files using the `dotnet` binary.
-We will talk more about the compilation [{numref}`Chapter %s<compilation>`] and execution [{numref}`Chapter %s<execution>`] later.
+We will talk more about the [compilation](compilation) and [execution](execution) later.
 
 All programs that we write in this book are, what is known as, console applications.
 Meaning that they run inside a Command Line Interpretor (CLI) such as `bash` or `zsh` on OS X, or `cmd.exe` on Windows.
@@ -156,7 +154,7 @@ Don't worry if not all of this makes sense yet.
 
 ## Why object oriented
 
-It is my belief that most programmers will eventually switch to functional programming [{numref}`Chapter %s<paradigms>`] unless artificial intelligence (AI) manages to replace us all before.
+It is my belief that most programmers will eventually switch to [functional programming](paradigms) unless artificial intelligence (AI) manages to replace us all before.
 Why do I believe this?
 Because I hold that the functional programming paradigm is superior to that of object oriented programming.
 
@@ -170,7 +168,7 @@ Well, we're not there yet.
 Object oriented programming is by no means dead, and C# is very much alive and is a very popular language in industry.
 
 Moreover, C# is a multi-paradigm language so many problems are easier to solve today because C# has borrowed ideas from the functional paradigm.
-We'll talk about lambdas [{numref}`Chapter %s<lambdas>`], LINQ [{numref}`Chapter %s<linq>`], and pattern matching [{numref}`Chapter %s<pattern-matching>`] much later.
+We'll talk about [lambdas](lambdas), [LINQ](linq), [pattern matching](pattern-matching), and [parametric polymorphism/generics](generics) much later.
 
 Nevertheless, part of the reason that I publish this work online for free is that I hope to contribute to the eventual death of object oriented programming.
 Object orientation was a fun exercise, but it's time to move on.

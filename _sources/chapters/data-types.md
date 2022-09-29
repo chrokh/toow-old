@@ -1,4 +1,3 @@
-(data-types)=
 # Data types
 
 A data type defines a set of possible values and a set of operations we can perform upon the values.
@@ -27,7 +26,7 @@ The set $\mathit{Boolean}$ has two elements: $\mathit{True}$ and $\mathit{False}
 The set $\mathit{Boolean}$ corresponds to the data type `bool`.
 The possible values of `bool` is `true` and `false`.
 
-```{figure} ../images/bool.svg
+```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
 :name: fig:bool
 A `bool` is either `true` or `false`.
 ```
@@ -302,7 +301,7 @@ The type signature of arithmetic addition could be written as:
 We could also visualize the type of arithmetic addition as a mapping between the set of integer pairs to the set of integers.
 See {numref}`fig:addition-type`.
 
-```{figure} ../images/arithmetic-addition-type.png
+```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
 :name: fig:addition-type
 
 Visualization of the type of arithmetic addition.

@@ -1,4 +1,3 @@
-(compilation)=
 # Compilation
 
 A compiler is a program that translates code written in a source language to code written in a target language.
@@ -9,13 +8,13 @@ In other words, a compiler translates text written in some syntax to text writte
 A compiler translates text written in some syntax to text written in some other syntax.
 ```
 
-```{figure} ../images/compiler.svg
+```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
 :name: fig:compilation
 A compiler translates code written in one language to code written in another language.
 ```
 
 You will often hear people talk about "compiled" programming languages and "interpreted" programming languages.
-However, in theory, a language isn't either compiled or interpreted [{numref}`Chapter %s<interpretation>`].
+However, in theory, a language isn't *either* compiled or interpreted.
 Interpreters and compilers can be built for any language.
 A language is simply a language.
 In practice, however, most languages are associated with either a compiler or interpreted.
@@ -55,13 +54,13 @@ It's not as simple as pushing high-level C# code into a compiler and getting bin
 When you compile a C# program you don't actually get a binary machine code file, you get code expressed in what's known as an "intermediate language" which, given the existence of .NET's Common Language Runtime (CLR) can be turned into machine code upon execution.
 In the case of the .NET compiler this intermediate language is known as the Common Intermediate Language (CIL).
 
-```{figure} ../images/net-compilation.svg
-:name: fig:source-code-byte-code-machine-code
+```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
+:name: fig:net-compilation
 Illustration of how .NET programs are converted to and executed as machine code.
 ```
 
 So, it isn't fair to call C# a compiled language.
-When we run the executable, portions of the CIL code is converted to machine code by a Just-in-time (JIT) compiler inside the Common Language Runtime (CLR) which essentially is an interpreter  [{numref}`Chapter %s<interpretation>`].
+When we run the executable, portions of the CIL code is converted to machine code by a Just-in-time (JIT) compiler inside the Common Language Runtime (CLR) which essentially is an [interpreter](interpretation).
 So while we often think of C# as a compiled language it is actually a mix of both.
 %C#, the language used in this book, is usually compiled into bytecode which is then ran through an interpreter.
 
@@ -70,7 +69,7 @@ Programs in many languages are converted to machine code in a way similar to thi
 Have a look at {numref}`fig:source-code-byte-code-machine-code`.
 You write human-readable source code, the compiler compiles it machine-readable bytecode, and an interpreter runs the byte-code and coverts it to machine-readable machine code bit by bit as needed.
 
-```{figure} ../images/source-code-byte-code-machine-code.svg
+```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
 :name: fig:source-code-byte-code-machine-code
 A common pattern is to let a compiler compile source code into byte code, and then let an interpreter interpret byte code as machine code.
 ```
@@ -93,7 +92,7 @@ The idea is abstraction.
 This is something we'll talk a lot more about in later chapters since abstraction is an immensely important topic in programming.
 The idea is to write programs in a language that's sufficiently abstract so that we don't have to worry about irrelevantly minute details.
 
-Think back to the chapter on algorithms [{numref}`Chapter %s<algorithms>`].
+Think back to the chapter on [algorithms](algorithms).
 To be able to easily express an algorithm, you need a language that helps you focus on the details that matter.
 If, for example, I'm writing a pancake batter recipe then I don't want to have to concern myself with the fact that you have to move your hands in order to pick up the bowl.
 Or the fact that you have to open up the milk carton if it's not open.
@@ -110,9 +109,9 @@ Why are compilers useful? Why don't we just write programs in low-level language
 
 When something happens during or close to compilation and without running the program we refer to it as happening at "compile-time".
 What can we do at compile time beyond translating the source code from the input language to the output language?
-We can check for errors in syntax [{numref}`Chapter %s<syntax>`] and errors in semantics [{numref}`Chapter %s<semantics>`].
+We can check for errors in [syntax](syntax) and errors in [semantics](semantics).
 
-Much later we will talk about assessing program correctness [{numref}`Chapter %s<correctness>`] but I want to mention here that if we are using, what is known as, formal methods to verify program correctness then this is a semantic error check that happens at compile-time.
+Much later we will talk about assessing program [correctness](correctness) but I want to mention here that if we are using, what is known as, formal methods to verify program correctness then this is a semantic error check that happens at compile-time.
 
 Another semantic error check that we can do at compile-time is what's known as automated "linting".
 Linting is the act of determining whether a program follows some agreed upon stylistic guidelines.
@@ -127,15 +126,15 @@ What do we mean when we say that something happens at *compile-time* as opposed 
 There are plenty of mistakes that we can make that prevent our programs from compiling.
 There are multiple ways of categorizing compilation errors but one way is to divide them into:
 
-- Syntax errors [{numref}`Chapter %s<syntax>`],
-- Semantic errors [{numref}`Chapter %s<semantics>`], and
+- [Syntax](syntax) errors,
+- [Semantic](semantics) errors, and
 
 Semantic errors checked for at compile-time is sometimes called "static semantic errors."
 
 If an error occurs when we are attempting to compile then it's a compilation error, also known as compile-time error, since it occurred at compile-time.
-If, on the contrary, an error occurs *when the program is running* then it's a run-time error since it occurred during run-time [{numref}`Chapter %s<execution>`].
+If, on the contrary, an error occurs *when the program is running* then it's a run-time error since it occurred during [run-time](execution).
 
-We will discuss types of syntax and semantic compilation errors and contrast them to run-time errors in more detail in the chapter on Errors [{numref}`Chapter %s<errors>`].
+We will discuss types of syntax and semantic compilation errors and contrast them to run-time errors in more detail in the chapter on [errors](errors).
 
 ```{exercise}
 What are compilation errors?
@@ -191,9 +190,10 @@ The only line of code that it contains should be:
 Console.WriteLine("Hello, World!");
 ```
 
+(top-level-statements)=
 Note how we said that the file *defines* the entry point of the program, not that it *is* the entry point.
 This is due to something introduced in C# 10 and .NET 6 known as "top-level statements".
-The details of this are not relevant now and we'll pick this discussion up again in the Chapter on Static classes [{numref}`Chapter %s<static-classes>`].
+The details of this are not relevant now and we'll pick this discussion up again in the chapter on [static classes](static-classes).
 However, you can think of the main file (`Program.cs`) as actually containing more code than you can see.
 It's as if the additional code is entered into the file automatically upon compilation.
 
@@ -272,7 +272,7 @@ The file is a human-readable file expressed in the markup language JSON.
 The file `Translator.dll` contains our actual application.
 It is not executable in and of itself, and it is is expressed in CIL represented in hexadecimal format.
 If you open up the file in a text editor you will see a bunch of hexadecimal codes, also known as hex.
-We've discussed base 2 and base 10 number systems in the chapter on Computation [{numref}`Chapter %s<computation>`], hexadecimal is simply base 16.
+We've discussed base 2 and base 10 number systems in the chapter on [computation](computation), hexadecimal is simply base 16.
 It is possible to convert the DLL to more readable CIL code but that is beyond the scope of this book.
 
 The file `Translator` is an executable file that we can run from the command line.
@@ -289,7 +289,7 @@ The file `Translator.deps.json` simply contains information on any packages that
 If the user of your application is to be able to automatically install these dependencies then they need this file.
 The file is a human-readable file expressed in the markup language JSON.
 
-In the chapter on Execution [{numref}`Chapter %s<execution>`] we'll return to this program and look at how to run it.
+In the chapter on [execution](execution) we'll return to this program and look at how to run it.
 But I want to emphasize here that unless you compile, what is known as a, single-file application, you can not run your executable (`Translator`) without the runtime configuration file (`Translator.runtime.config.json`) and the actual application (`Translator.dll`).
 So if you move your executable to a new folder you must also move these other two files along with it.
 

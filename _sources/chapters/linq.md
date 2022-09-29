@@ -1,4 +1,3 @@
-(linq)=
 # LINQ
 
 ```{warning}

@@ -1,4 +1,3 @@
-(classes)=
 # Classes
 
 ```{warning}
@@ -16,3 +15,17 @@ Work in progress.
 %  - Make an informal distinction between which of these concepts are object oriented and which are not.
 %
 %- Documentation comments.
+
+## Exercises
+
+```{exercise}
+What is the difference between a static class and a class?
+```
+
+```{exercise}
+What is the difference between an object and a class?
+```
+
+```{exercise}
+What is the difference between an object and an instance?
+```

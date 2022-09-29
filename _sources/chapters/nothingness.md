@@ -1,5 +1,9 @@
 # Nothingness
 
+```{warning}
+Work in progress.
+```
+
 In imperative programming languages we usually find two kinds of nothingness: `null` and `void`.
 The former, `null`, is a value that represents the absence of a value in a variable.
 The latter, `void`, is a type that represents the absence of a value returned from an operation.
@@ -86,6 +90,7 @@ Not ideal.
 
 %## Null-state static analysis
 
+(nullable-reference-types)=
 ## Nullable reference types
 
 Fortunately, C# now has a setting called "nullable reference types" which is enabled by default in new projects since [.NET 6 (C# 10)](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-reference-types).
@@ -192,17 +197,8 @@ string? nullableString = null;
 Build succeeded.
 ```
 
-```{exercise}
-What do the terms "nullable" and "non-nullable" mean in the context of types?
-```
 
-```{exercise}
-With the nullable reference types setting turned on in C#, both reference types and value types are non-nullable. However, they are non-nullable in slightly different ways, how? Give an example.
-
-Hint: Think about the difference between null-state analysis and type-checking.
-```
-
-
+(null-state-static-analysis)=
 ## Null-state static analysis
 
 The null-state static analysis of the C# compiler is actually quite sophisticated.
@@ -322,23 +318,6 @@ Hopefully you can however see the bigger picture.
 If you have something that *might be* `null` then you cannot convert it into something that's *certainly not* `null` without first checking whether you actually have `null`.
 If not, then I strongly advise you to return this this section after having read those chapters.
 
-```{exercise}
-What is null-state static analysis in C#?
-```
-
-```{exercise}
-What do we mean when we say that the C# compiler tags variables as `not-null` or `maybe-null`?
-```
-
-```{exercise}
-Write some code that generates a null reference warning.
-```
-
-```{exercise}
-How can we determine whether a particular variable has been tagged `maybe-null` or `not-null`?
-Give an example in code.
-```
-
 
 
 ## Warnings as errors
@@ -443,16 +422,6 @@ Avoiding the introduction of `null` in the first place is a much better solution
 As soon as you introduce the null-forgiving operator you are back at the mercy of null-state run-time errors.
 ```
 
-```{exercise}
-How can we convert a value tagged as `maybe-null` to a value tagged as `not-null` *without using* the null-forgiving operator?
-Give an example in code.
-```
-
-```{exercise}
-How can we convert a value tagged as `maybe-null` to a value tagged as `not-null` *by using* the null-forgiving operator?
-Give an example in code.
-```
-
 
 ## Void
 
@@ -471,4 +440,44 @@ Since there are no values of type `void` the method cannot ever return a value.
 %Whether there exists a single value of type `void` or no values (meaning whether `void` is a singleton set or an empty set) is a theoretical question.
 This is way beyond the scope of this book, but due to the fact that you can declare pointers of type `void` the case could be made that `void` is a singleton set.
 If you're keen to learn more about this, see the page on [Pointer types](https://docs.microsoft.com/en-ca/dotnet/csharp/language-reference/unsafe-code#pointer-types) in the documentation.
+```
+
+
+## Exercises
+
+```{exercise}
+What do the terms "nullable" and "non-nullable" mean in the context of types?
+```
+
+```{exercise}
+With the nullable reference types setting turned on in C#, both reference types and value types are non-nullable. However, they are non-nullable in slightly different ways, how? Give an example.
+
+Hint: Think about the difference between null-state analysis and type-checking.
+```
+
+```{exercise}
+What is null-state static analysis in C#?
+```
+
+```{exercise}
+What do we mean when we say that the C# compiler tags variables as `not-null` or `maybe-null`?
+```
+
+```{exercise}
+Write some code that generates a null reference warning.
+```
+
+```{exercise}
+How can we determine whether a particular variable has been tagged `maybe-null` or `not-null`?
+Give an example in code.
+```
+
+```{exercise}
+How can we convert a value tagged as `maybe-null` to a value tagged as `not-null` *without using* the null-forgiving operator?
+Give an example in code.
+```
+
+```{exercise}
+How can we convert a value tagged as `maybe-null` to a value tagged as `not-null` *by using* the null-forgiving operator?
+Give an example in code.
 ```

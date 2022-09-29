@@ -3,8 +3,8 @@
 % TODO: Split into (Sets) and (Set operations)
 
 Programmers are modellers.
-We write programs consisting of business objects [{numref}`Chapter %s<business-objects>`]
-and business rules [{numref}`Chapter %s<business-logic>`].
+We write programs consisting of [business objects](business-objects)
+and [business rules](business-logic).
 These objects and rules must be valuable to whoever is paying our salary.
 Set theory helps us define effective types for both objects and rules.
 Effective in the sense that they only allow the states and behavior that we want.
@@ -162,6 +162,7 @@ Draw a Venn diagram of the set that you came up with in {numref}`ex:set-members`
 ```
 
 
+(intersection)=
 ## Intersection
 
 Let us first look at the set operation known as "intersection".
@@ -174,7 +175,7 @@ $$
 \mathit{Boolean} \cap \mathit{Trilean} = \{\mathit{True}, \mathit{False} \}
 $$
 
-```{figure} ../images/intersection.jpg
+```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
 :name: fig:intersection
 
 Visualization of the intersection between the two sets $\mathit{Boolean}$ and $\mathit{Trilean}$.
@@ -233,11 +234,12 @@ How can a set capturing the states of a two-light traffic light be considered a 
 ```
 
 Why do we need to understand subset relations as object oriented programmers?
-Because the, arguably, most important pillar [{numref}`Chapter %s<pillars>`] of object oriented programming is subtype polymorphism [{numref}`Chapter %s<subtype-polymorphism>`].
+Because the, arguably, most important [pillar](pillars) of object oriented programming is [subtype polymorphism](subtype-polymorphism).
 Subtype polymorphism is also known as inclusion polymorphism and the set theoretic idea of subsets is also known as inclusion.
 So when we think of data types as sets then the subsets help us reason about subtype polymorphism.
 
 
+(union)=
 ## Union
 
 Let us now look at the operation known as "union".
@@ -250,7 +252,7 @@ $$
 \{ \mathit{True}, \mathit{False}, \mathit{Unknown} \}
 $$
 
-```{figure} ../images/union.jpg
+```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
 :name: fig:union
 
 Visualization of the unioin between the two sets $\mathit{Boolean}$ and $\mathit{Trilean}$.
@@ -326,5 +328,5 @@ What is the Cartesian product of the two traffic light sets that you defined in 
 ```
 
 Why is it important to understand Cartesian products?
-Because it helps us reason about functions [{numref}`Chapter %s<functions>`] that take multiple parameters.
+Because it helps us reason about [functions](functions) that take multiple parameters.
 

@@ -1,4 +1,3 @@
-(business-objects)=
 # Business objects
 
 ```{warning}

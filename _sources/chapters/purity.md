@@ -1,4 +1,3 @@
-(purity)=
 # Purity
 
 ```{warning}

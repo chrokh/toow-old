@@ -1,4 +1,3 @@
-(types-over-tests)=
 # Types over tests
 
 ```{warning}
@@ -8,6 +7,12 @@ Work in progress.
 %> Make illegal states unrepresentable (https://maximilianocontieri.com/software-engineering-great-quotes)
 %
 %> Make impossible states impossible.
+
+%```{epigraph}
+%Testing is good. Impossible is better.
+%
+%-- Richard Feldman [source](https://youtu.be/IcgmSRJHu_8?t=484)
+%```
 
 %- The vowel that you stick between consonants in Robber's language is a great example. Wrap it in a class and define an automatic type conversion between that type and char.
 %```csharp

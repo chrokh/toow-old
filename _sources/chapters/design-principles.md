@@ -1,4 +1,3 @@
-(design-principles)=
 # Design principles
 
 ```{warning}

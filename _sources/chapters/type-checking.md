@@ -1,5 +1,7 @@
 # Type-checking
 
+% TODO: Must use terminology static/compile-time type safety.
+
 As we briefly saw in the chapter on [Errors](errors), type checking is an activity performed by the compiler.
 In the process of type checking the compiler ensures that the program is sound on the type level.
 Concretely this means that the compiler checks what type that every [expression](expressions) will evaluate to and whether that type is acceptible at the place where it will be evaluated.

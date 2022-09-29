@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>85. Generics &#8212; The Object Oriented Way</title>
+    <title>71. Generics &#8212; The Object Oriented Way (DRAFT)</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="86. Generic type parameters" href="generic-type-parameters.html" />
-    <link rel="prev" title="84. Anonymous types" href="anonymous-types.html" />
+    <link rel="next" title="72. Generic type parameters" href="generic-type-parameters.html" />
+    <link rel="prev" title="70. Abstract dependency injection" href="abstract-dependency-injection.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -102,7 +102,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <h1 class="site-logo" id="site-title">The Object Oriented Way</h1>
+      <h1 class="site-logo" id="site-title">The Object Oriented Way (DRAFT)</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -118,655 +118,781 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Fundamentals
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="sets.html">
-   1. 🟢 Sets
+   1. ★ Sets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="functions.html">
-   2. 🟢 Functions
+   2. ★ Functions
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="algorithms.html">
-   3. 🟠 Algorithms
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="computation.html">
-   4. 🟠 Computation
-  </a>
- </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Terminals
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="terminals.html">
-   5. Terminals
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="syntax.html">
-   6. 🟢 Syntax
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="semantics.html">
-   7. 🟢 Semantics
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="compilation.html">
-   8. 🟢 Compilation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="execution.html">
-   9. 🟢 Execution
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="interpretation.html">
-   10. 🟢 Interpretation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="errors.html">
-   11. 🟢 Errors
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="documentation.html">
-   12. Documentation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="comments.html">
-   13. 🟢 Comments
+   3. Terminals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="standard-out.html">
-   14. Standard out
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="values.html">
-   15. 🟢 Values
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="variables.html">
-   16. 🟢 Variables
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="naming.html">
-   17. Naming
+   4. Standard out
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="standard-in.html">
-   18. Standard in
+   5. Standard in
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Computation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="algorithms.html">
+   6. ★ Algorithms
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="indentation.html">
-   19. Indentation
+  <a class="reference internal" href="computation.html">
+   7. ★ Computation
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="syntax.html">
+   8. ★ Syntax
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="semantics.html">
+   9. ★ Semantics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="compilation.html">
+   10. ★ Compilation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="execution.html">
+   11. ★ Execution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="interpretation.html">
+   12. ★ Interpretation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="errors.html">
+   13. ★ Errors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="comments.html">
+   14. ★ Comments
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Values
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="values.html">
+   15. ★ Values
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="variables.html">
+   16. ★ Variables
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Statements &amp; expressions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="statements.html">
-   20. Statements
+   17. Statements
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="expressions.html">
-   21. Expressions
+   18. Expressions
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="operators.html">
-   22. Operators
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="data-types.html">
-   23. 🟢 Data types
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="selection.html">
-   24. Selection
+   19. Operators
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="paradigms.html">
-   25. Paradigms
+   20. Paradigms
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data types
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="data-types.html">
+   21. ★ Data types
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="type-conversions.html">
-   26. Type conversions
+   22. Type conversions
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="type-checking.html">
-   27. 🟢 Type-checking
+   23. ★ Type-checking
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="type-systems.html">
-   28. 🟢 Type systems
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="nothingness.html">
-   29. 🟢 Nothingness
+   24. ★ Type systems
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="type-hierarchies.html">
-   30. Type hierarchies
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="abstraction.html">
-   31. Abstraction / Modeling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="indirection.html">
-   32. Indirection
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="business-logic.html">
-   33. Business logic
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="debugging.html">
-   34. Debugging
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="arrays.html">
-   35. Arrays
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="syntactic-sugar.html">
-   36. Syntactic sugar
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="iteration.html">
-   37. Iteration
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="command-line-arguments.html">
-   38. Command line arguments
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="mutability.html">
-   39. Mutability
+   25. Type hierarchies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="type-testing.html">
-   40. Type testing
+   26. Type testing
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="value-and-reference-semantics.html">
-   41. Value and reference semantics
-  </a>
- </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Basic types
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="simple-types.html">
-   42. Simple types
+   27. Simple types
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="static-methods.html">
-   43. Static methods (procedures)
+  <a class="reference internal" href="enums.html">
+   28. Enums
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="purity.html">
-   44. Purity
+  <a class="reference internal" href="value-tuples.html">
+   29. Value tuples
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="static-classes.html">
-   45. Static classes (Modules)
+  <a class="reference internal" href="arrays.html">
+   30. Arrays
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Control flow
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="selection.html">
+   31. ★ Selection
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="data-structures.html">
-   46. Data structures
+  <a class="reference internal" href="iteration.html">
+   32. ★ Iteration
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Input/output
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="composition.html">
-   47. Composition
+  <a class="reference internal" href="command-line-arguments.html">
+   33. Command line arguments
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Mutability
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="overloading.html">
-   48. Overloading
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="recursion.html">
-   49. Recursion
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="scope.html">
-   50. Scope
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="namespaces.html">
-   51. Namespaces
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="basic-exceptions.html">
-   52. Exceptions (part 1)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="stack-traces.html">
-   53. Stack traces
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="pillars.html">
-   54. Pillars
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="objects.html">
-   55. 🟠 Objects
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="classes.html">
-   56. Classes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="fields.html">
-   57. Fields
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="constructors.html">
-   58. Constructors
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="instance-methods.html">
-   59. 🟠 Instance methods
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="type-signatures.html">
-   60. Type signatures
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="instance-variables.html">
-   61. Instance variables
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="basic-access-modifiers.html">
-   62. Access modifiers (basic).
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="properties.html">
-   63. Properties
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="object-composition.html">
-   64. 🟢 Object composition
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="concrete-dependency-construction.html">
-   65. 🟢 Concrete dependency construction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="concrete-dependency-injection.html">
-   66. 🟢 Concrete dependency injection
+  <a class="reference internal" href="mutability.html">
+   34. Mutability
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="immutable-objects.html">
-   67. Immutable objects
+   35. Immutable objects
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="value-and-reference-semantics.html">
+   36. Value and reference semantics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Nothingness
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="nothingness.html">
+   37. ★ Nothingness
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Procedures
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="methods.html">
+   38. ★ Methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="static-classes.html">
+   39. Static classes (Modules)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="static-methods.html">
+   40. ★ Static methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="purity.html">
+   41. Purity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="method-composition.html">
+   42. Method composition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="overloading.html">
+   43. ★ Overloading
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="recursion.html">
+   44. Recursion
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Modules
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="data-structures.html">
+   45. Data structures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="scope.html">
+   46. Scope
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="namespaces.html">
+   47. Namespaces
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exceptions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="basic-exceptions.html">
+   48. Exceptions (part 1)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="stack-traces.html">
+   49. Stack traces
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Objects
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="objects.html">
+   50. ★ Objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classes.html">
+   51. ★ Classes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="fields.html">
+   52. ★ Fields
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="constructors.html">
+   53. ★ Constructors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="instance-methods.html">
+   54. ★ Instance methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="properties.html">
+   55. ★ Properties
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="basic-access-modifiers.html">
+   56. ★ Access modifiers
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Polymorphism
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
   <a class="reference internal" href="interfaces.html">
-   68. 🟢 Interfaces
+   57. ★ Interfaces
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="subtype-polymorphism.html">
-   69. 🟢 Subtype polymorphism
+   58. Subtype polymorphism
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inheritance.html">
-   70. Inheritance
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="overriding.html">
-   71. Overriding
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="hiding.html">
-   72. Hiding
+   59. Inheritance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="advanced-access-modifiers.html">
-   73. Access modifiers (advanced)
+   60. Access modifiers (advanced)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="overriding.html">
+   61. Overriding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hiding.html">
+   62. Hiding
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="object-type-conversions.html">
-   74. Type conversions (of objects)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="abstract-dependency-construction.html">
-   75. 🟢 Abstract dependency construction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="abstract-dependency-injection.html">
-   76. 🟢 Abstract dependency injection
+   63. Type conversions (of objects)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="variance.html">
-   77. Variance
+   64. Variance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="liskov-substitution-principle.html">
-   78. 🟠 Liskov Substitution Principle
+   65. Liskov substitution principle
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Object composition
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="object-composition.html">
+   66. Object composition
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="advanced-exceptions.html">
-   79. Advanced exceptions
+  <a class="reference internal" href="concrete-dependency-construction.html">
+   67. Concrete dependency construction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="prototypes.html">
-   80. Prototypes
+  <a class="reference internal" href="concrete-dependency-injection.html">
+   68. Concrete dependency injection
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="base-class-library.html">
-   81. Base class library
+  <a class="reference internal" href="abstract-dependency-construction.html">
+   69. Abstract dependency construction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="boxing.html">
-   82. Boxing
+  <a class="reference internal" href="abstract-dependency-injection.html">
+   70. Abstract dependency injection
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="structure-types.html">
-   83. Structure types
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="anonymous-types.html">
-   84. Anonymous types
-  </a>
- </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Generics
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   85. 🟢 Generics
+   71. Generics
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="generic-type-parameters.html">
-   86. 🟢 Generic type parameters
+   72. Generic type parameters
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="generic-types.html">
-   87. Generic types
+   73. Generic types
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="generic-methods.html">
-   88. Generic methods
+   74. Generic methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="type-parameter-constraints.html">
-   89. Type parameter constraints
+   75. Type parameter constraints
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="variant-generic-interfaces.html">
-   90. Variant generic interfaces
+   76. Variant generic interfaces
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="business-objects.html">
-   91. Business objects
+   77. Business objects
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Maintainability
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="maintainability.html">
+   78. Maintainability
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="requirements.html">
-   92. Requirements
+   79. Requirements
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="correctness.html">
-   93. Correctness
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="maintainability.html">
-   94. Maintainability
+   80. Correctness
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="code-smells.html">
-   95. Code smells and anti-patterns
+   81. Code smells and anti-patterns
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="coupling.html">
-   96. Coupling
+   82. Coupling
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cohesion.html">
-   97. Cohesion
+   83. Cohesion
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="refactoring.html">
-   98. Refactoring
+   84. Refactoring
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Principles
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="design-principles.html">
-   99. Design principles
+   85. Design principles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="single-responsibility-principle.html">
-   100. Single responsibility principle
+   86. Single responsibility principle
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="interface-segregation-principle.html">
-   101. Interface segregation principle
+   87. Interface segregation principle
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="deep-classes.html">
-   102. Deep classes
+   88. Deep classes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="types-over-tests.html">
-   103. Types over tests
+   89. Types over tests
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="define-errors-out-of-existence.html">
-   104. Define errors out of existence
+   90. Define errors out of existence
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="open-closed-principle.html">
-   105. Open-closed principle
+   91. Open-closed principle
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dependency-inversion-principle.html">
-   106. Dependency inversion principle
+   92. Dependency inversion principle
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="composition-over-inheritance.html">
-   107. Composition over inheritance
+   93. Composition over inheritance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="documentation-driven-development.html">
-   108. Documentation-driven development
+   94. Documentation-driven development
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Patterns
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="design-patterns.html">
-   109. Design patterns
+   95. Design patterns
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="strategy-pattern.html">
-   110. 🟠 Strategy pattern
+   96. Strategy pattern
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="delegates.html">
-   111. Delegates
+   97. Delegates
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="extension-methods.html">
-   112. Extension methods
+   98. Extension methods
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="null-object-pattern.html">
-   113. 🟠 Null object pattern
+   99. Null object pattern
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="observer-pattern.html">
-   114. 🟠 Observer pattern
+   100. Observer pattern
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="events.html">
-   115. Events
+   101. Events
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="adapter-pattern.html">
-   116. 🟠 Adapter pattern
+   102. Adapter pattern
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bridge-pattern.html">
-   117. 🟠 Bridge pattern
+   103. Bridge pattern
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="factory-method-pattern.html">
-   118. 🟠 Factory method pattern
+   104. Factory method pattern
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="composite-pattern.html">
-   119. 🟠 Composite pattern
+   105. Composite pattern
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="state-pattern.html">
-   120. 🟠 State pattern
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="lambdas.html">
-   121. Lambdas
+   106. State pattern
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="iterator-pattern.html">
-   122. 🟠 Iterator pattern
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="enumerators.html">
-   123. Enumerators
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="indexers.html">
-   124. Indexers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="linq.html">
-   125. LINQ
+   107. Iterator pattern
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="visitor-pattern.html">
-   126. Visitor pattern
+   108. Visitor pattern
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="pattern-matching.html">
-   127. Pattern matching
+   109. Pattern matching
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Lambdas
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lambdas.html">
+   110. Lambdas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="linq.html">
+   111. LINQ
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  TODO
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="enumerators.html">
+   112. Enumerators
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="indexers.html">
+   113. Indexers
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="streams.html">
-   128. Streams
+   114. Streams
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="advanced-exceptions.html">
+   115. Advanced exceptions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="prototypes.html">
+   116. Prototypes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="base-class-library.html">
+   117. Base class library
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="boxing.html">
+   118. Boxing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="structure-types.html">
+   119. Structure types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="anonymous-types.html">
+   120. Anonymous types
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Epilogue
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
   <a class="reference internal" href="reading.html">
-   129. Suggested reading
+   Suggested reading
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="bibliography.html">
-   130. Bibliography
+   Bibliography
   </a>
  </li>
 </ul>
@@ -892,51 +1018,12 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#motivation">
-   85.1. Motivation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#definition">
-   85.2. Definition
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#examples">
-   85.3. Examples
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   85.4. Exercises
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
     </div>
     <div class="article row">
@@ -948,34 +1035,6 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#motivation">
-   85.1. Motivation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#definition">
-   85.2. Definition
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#examples">
-   85.3. Examples
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   85.4. Exercises
-  </a>
- </li>
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -984,253 +1043,11 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="generics">
-<h1><span class="section-number">85. </span>Generics<a class="headerlink" href="#generics" title="Permalink to this headline">#</a></h1>
-<p>Remember how we said that there are at least <a class="reference internal" href="subtype-polymorphism.html#subtype-polymorphism"><span class="std std-ref">four types of polymorphism</span></a>?
-In object oriented programming subtype polymorphism is the really big one, but in hybrid languages such as C# parametric polymorphism is really important and frequently used.
-In C# parametric polymorphism is implemented through the concept known as “generics”.</p>
-<p>For a basic understanding of generics / parametric polymorphism we must understand the topics listed below.
-The concepts are all discussed in separate chapters but in this chapter we provide an overview to the topic of generics as such.</p>
-<ol class="simple">
-<li><p><a class="reference internal" href="generic-type-parameters.html"><span class="doc std std-doc">Generic type parameters</span></a>.</p></li>
-<li><p><a class="reference internal" href="generic-types.html"><span class="doc std std-doc">Generic types</span></a> (classes, interfaces, and structs).</p></li>
-<li><p><a class="reference internal" href="generic-methods.html"><span class="doc std std-doc">Generic methods</span></a>.</p></li>
-<li><p><a class="reference internal" href="delegates.html"><span class="doc std std-doc">Generic delegates</span></a>.</p></li>
-<li><p><a class="reference internal" href="type-parameter-constraints.html"><span class="doc std std-doc">Type parameter constraints</span></a>.</p></li>
-<li><p><a class="reference internal" href="variance.html"><span class="doc std std-doc">Variance</span></a>.</p></li>
-</ol>
-<section id="motivation">
-<h2><span class="section-number">85.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
-<p>When writing object oriented programs, you will often be struck with the feeling that you are repeating yourself.
-Up to this point we’ve pretended that all duplication can be eliminated with subtype polymorphism.
-As you might have suspected, this is of course not true.</p>
-<p>Think of the case of <code class="docutils literal notranslate"><span class="pre">CompositeCipher</span></code> and <code class="docutils literal notranslate"><span class="pre">CompositeCharCipher</span></code> that we ended up with in the chapter on <a class="reference internal" href="abstract-dependency-injection.html"><span class="doc std std-doc">abstract dependency injection</span></a>.
-Both these classes are dependency injected with different types of ciphers as input.
-The implementation of these two classes is virtually the same.</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CompositeCipher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICipher</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">ICipher</span><span class="w"> </span><span class="n">cipher1</span><span class="p">,</span><span class="w"> </span><span class="n">cipher2</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">CompositeCipher</span><span class="w"> </span><span class="p">(</span><span class="n">ICipher</span><span class="w"> </span><span class="n">cipher1</span><span class="p">,</span><span class="w"> </span><span class="n">ICipher</span><span class="w"> </span><span class="n">cipher2</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">cipher1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cipher1</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">cipher2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cipher2</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">cipher2</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">cipher1</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">input</span><span class="p">));</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">CompositeCharCipher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICharCipher</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">ICharCipher</span><span class="w"> </span><span class="n">cipher1</span><span class="p">,</span><span class="w"> </span><span class="n">cipher2</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">CompositeCharCipher</span><span class="w"> </span><span class="p">(</span><span class="n">ICharCipher</span><span class="w"> </span><span class="n">cipher1</span><span class="p">,</span><span class="w"> </span><span class="n">ICharCipher</span><span class="w"> </span><span class="n">cipher2</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">cipher1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cipher1</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">cipher2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cipher2</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">cipher2</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">cipher1</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">input</span><span class="p">));</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</pre></div>
+<h1><span class="section-number">71. </span>Generics<a class="headerlink" href="#generics" title="Permalink to this headline">#</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Work in progress.</p>
 </div>
-<p>How should we go about removing this duplication?</p>
-<p>The classes <code class="docutils literal notranslate"><span class="pre">CompositeCipher</span></code> and <code class="docutils literal notranslate"><span class="pre">CompositeCharCipher</span></code> are fundamentally not in a subtyping relationship because <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> and <code class="docutils literal notranslate"><span class="pre">ICharCipher</span></code> are fundamentally not subtypes.
-We’ve already learned that C# classes supports <a class="reference internal" href="variance.html"><span class="doc std std-doc">covariant return types</span></a> but not contravariant parameter types.
-Even if C# would support contravariant parameter types and even if variance would be supported in interfaces <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> and <code class="docutils literal notranslate"><span class="pre">ICharCipher</span></code> are still not in a subtyping relationship.
-Even if <code class="docutils literal notranslate"><span class="pre">string</span></code> and <code class="docutils literal notranslate"><span class="pre">char</span></code> would be in a suptyping relationship (which they are not) where <code class="docutils literal notranslate"><span class="pre">char</span></code> would be a subtype (think: specialization) of <code class="docutils literal notranslate"><span class="pre">string</span></code> (which makes more sense than the other way around) <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> and <code class="docutils literal notranslate"><span class="pre">ICharCipher</span></code> would still not be in a subtyping relationship.</p>
-<p>Why?
-Well, because if <code class="docutils literal notranslate"><span class="pre">ICharCipher</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> then the <em>input type</em> of the <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method must be <em>covariant</em> since the subtype <code class="docutils literal notranslate"><span class="pre">ICharCipher</span></code> returns a <code class="docutils literal notranslate"><span class="pre">char</span></code> which then is a specialization/subtype of <code class="docutils literal notranslate"><span class="pre">string</span></code>.
-But covariant input is not allowed according to the <a class="reference internal" href="liskov-substitution-principle.html#liskov-substitution-principle"><span class="std std-ref">Liskov Substitution Principle</span></a>.
-Ok, so let’s flip it?
-Well, if <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">ICharCipher</span></code> then the return type, the <em>output type</em> must be contravariant since the subtype <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> returns a <code class="docutils literal notranslate"><span class="pre">string</span></code> which is a generalization/supertype of <code class="docutils literal notranslate"><span class="pre">char</span></code>.
-So, in this scenario, subtyping simply doesn’t help us eliminate duplication without solving the problem in a completely different way.</p>
-<p>Could we use method overloading instead?
-Sure, we could have a single interface that defines two encoding methods.
-One for <code class="docutils literal notranslate"><span class="pre">string</span></code> and one for <code class="docutils literal notranslate"><span class="pre">char</span></code>.</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ICipher</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</pre></div>
-</div>
-<p>This solves the problem of having two types, but it doesn’t solve the problem of eliminating the duplicated code of the <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method in the composite ciphers.
-Have a look at the code below.</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CompositeCipher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICipher</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">ICipher</span><span class="w"> </span><span class="n">cipher1</span><span class="p">,</span><span class="w"> </span><span class="n">cipher2</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">CompositeCipher</span><span class="w"> </span><span class="p">(</span><span class="n">ICipher</span><span class="w"> </span><span class="n">cipher1</span><span class="p">,</span><span class="w"> </span><span class="n">ICipher</span><span class="w"> </span><span class="n">cipher2</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">cipher1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cipher1</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">cipher2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cipher2</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">cipher2</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">cipher1</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">input</span><span class="p">));</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">cipher2</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">cipher1</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">input</span><span class="p">));</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</pre></div>
-</div>
-<p>Without being able to treat <code class="docutils literal notranslate"><span class="pre">char</span></code> based ciphers and <code class="docutils literal notranslate"><span class="pre">string</span></code> based ciphers uniformly there’s simply no way to get rid of that duplicated code.</p>
-<p>But why would we care about a single duplicated line you might say?
-Well, this is merely an example.
-If there’s one duplicated line, that’s a sign that there are many more possible things that could be duplicated.
-How about, for example the <code class="docutils literal notranslate"><span class="pre">ArrayCipher</span></code> that we wrote in <a class="reference internal" href="abstract-dependency-injection.html#ex:array-cipher"><span class="std std-numref">Exercise 76.7</span></a>?
-That was a cipher that took an array of ciphers as input and then applied them one by one.
-In that exercise, <code class="docutils literal notranslate"><span class="pre">ArrayCipher</span></code> dealt with <code class="docutils literal notranslate"><span class="pre">string</span></code> based ciphers, but if we would write an implementation for <code class="docutils literal notranslate"><span class="pre">char</span></code> based ciphers it would be exactly the same.
-The only difference between the two would be the types.</p>
-<p>Notice a pattern?</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>If the implementation is the same, but the types are different, then you’re probably looking at a scenario where we could use parametric polymorphism.</p>
-</div>
-<p>Enter parametric polymorphism.
-In the following chapters we will instead replace our interfaces <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> and <code class="docutils literal notranslate"><span class="pre">ICharCipher</span></code> with a single generic interface, called <code class="docutils literal notranslate"><span class="pre">ICipher&lt;T&gt;</span></code>.
-This allows us to eliminate further duplication, not only in the interfaces, but also by implementing a single <code class="docutils literal notranslate"><span class="pre">CompositeCipher&lt;T&gt;</span></code> that works for input and outputs of both type <code class="docutils literal notranslate"><span class="pre">string</span></code> and type <code class="docutils literal notranslate"><span class="pre">char</span></code>.</p>
-<p>As we shall see, parametric polymorphism not only help us eliminate duplicated code, but also spreads like a virus.
-The good kind of virus.
-By turning a non-generic type into a generic type it is often possible that things that use this new generic type can too be converted from non-generic to generic types.
-And so the meme permeates throughout our code-base.
-Generic types increase the <a class="reference internal" href="maintainability.html#maintainability"><span class="std std-ref">maintainability</span></a> of our code since they (at least) increase modularity and modularity.</p>
-<p>Another important aspect is that of <a class="reference internal" href="type-checking.html"><span class="doc std std-doc">static type safety</span></a>.
-Most things that we do with generics can trivially be achieved in dynamically typed languages, or even in C# by using the <a class="reference internal" href="type-systems.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code> keyword</span></a> or by simply treating things as the top-type object.
-The fact that all types in C# inherit from object is something that we’ll discuss in further detail in the chapter on <a class="reference internal" href="type-hierarchies.html"><span class="doc std std-doc">type hierarchies</span></a>.
-Both of these strategies involves <a class="reference internal" href="object-type-conversions.html"><span class="doc std std-doc">downcasting</span></a> which may cause <a class="reference internal" href="errors.html#errors"><span class="std std-ref">run-time errors</span></a>.
-A major reason for using a language like C# in the first place is the ability to use static typing to avoid run-time errors.
-Generics help us write reusable code without loosing static type safety.</p>
-</section>
-<section id="definition">
-<h2><span class="section-number">85.2. </span>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">#</a></h2>
-<p>The word “parametric”, in “parametric polymorphism”, was presumably chosen since parametrically polymorphic types are <em>parameterized</em> over types.
-The name “generics” was presumably selected since the use of parametric polymorphism is also known as “generic programming”.
-Which terminology is used mostly depend on the tradition of the language that we are using and in C# we tend to say “generics” rather than “parametric polymorphism”.</p>
-<p>The idea of a generic type is that it is universally polymorphic.
-The instance and static members of a generic type can be defined so that one or more types that these members depend on can be replaced by any possible type.
-We can write the implementation of every member for every possible type at the same time.
-Said differently, the implementation does not depend on the underlying type that we’ve parameterized over.</p>
-<div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>With overloading, we define different implementations for different types.
-With generics, we define <em>a single implementation for all types</em>.</p>
-</div>
-<p>So, what is a generic type?
-The term “generic type” refers to both the “generic type definition” and a “<em>constructed</em> generic type”.
-The former is a type with type parameters that must be replaced with actual types.
-The latter is a type that has had its type parameters replaced with actual types.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>A generic type definition is not a complete type.
-To construct a type we must replace its <em>type parameters</em> with actual types in order to form a <em>constructed generic type</em>.</p>
-</div>
-<p>Think of it this way: A generic type depends on some other type or types, but what these types are is not known at the time you write the implementation of your generic type.
-So, instead you parameterize your generic type with some “type parameters”.
-Whenever someone wishes to use your generic type definition they must replace the type parameters in the generic type definition with actual types so that we get, what is called, a <em>generic constructed type</em> or simply a <em>constructed type</em>.</p>
-<figure class="align-default" id="fig-generic-type-definition">
-<img alt="https://via.placeholder.com/700x200?text=Image+coming+soon" src="https://via.placeholder.com/700x200?text=Image+coming+soon" />
-<figcaption>
-<p><span class="caption-number">Fig. 85.1 </span><span class="caption-text">A “generic type definition” can be turned into any number of “constructed generic types” by replacing its type parameters with actual types.</span><a class="headerlink" href="#fig-generic-type-definition" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>It is important to realize that all type parameters must be replaced with actual types at compile-time rather than at run-time.
-In terms of using the term “polymorphism” we ought to classify this as “static” rather than “dynamic” polymorphism.
-With subtype polymorphism, it is possible to defer the decision of which implementation to use at run-time.
-With parametric polymorphism, which implementation to use has to be known at compile-time.
-Still, it is tremendously useful when it comes to writing reusable and modular code without ever having to give up static typing.</p>
-<div class="seealso admonition">
-<p class="admonition-title">Aside</p>
-<p>If you happen to be familiar with logic quantifiers then we should emphasize that a generic type is a <em>universally quantified</em> type.
-This is why we say that the type is <em>universally</em> polymorphic.</p>
-</div>
-<p>Before we wrap this section up, let’s finish up with some terminology directly from the <a class="reference external" href="https://learn.microsoft.com/en-us/dotnet/standard/generics/">official documentation</a>:</p>
-<ul class="simple">
-<li><p><em>Generic type parameters</em> (or simply type parameters) are placeholders for types in a generic type definition or generic method definition.</p></li>
-<li><p>A <em>generic type definition</em> is a class, struct, or an interface declaration with type parameters. It is like a template rather than a complete type definition. An example is <code class="docutils literal notranslate"><span class="pre">List&lt;T&gt;</span></code>.</p></li>
-<li><p>A <em>constructed generic type</em> is the result of replacing the type parameters in a generic type definition with actual types. An example is: <code class="docutils literal notranslate"><span class="pre">List&lt;int&gt;</span></code>.</p></li>
-<li><p>A <em>generic type</em> is either a generic type definition or a constructed generic type.</p></li>
-<li><p>A <em>generic method definition</em> is a method which before its formal parameter list (for values), also contains a list of generic type parameters. Type parameters can be used as the return type or as the type of formal arguments. An example is: <code class="docutils literal notranslate"><span class="pre">List&lt;T&gt;</span> <span class="pre">Repeat&lt;T&gt;</span> <span class="pre">(T</span> <span class="pre">value,</span> <span class="pre">int</span> <span class="pre">times)</span></code>. The <code class="docutils literal notranslate"><span class="pre">&lt;T&gt;</span></code> in the method name (<code class="docutils literal notranslate"><span class="pre">Repeat&lt;T&gt;</span></code>) is the type parameter.</p></li>
-<li><p>A <em>generic type argument</em> is whatever type is used to replace a type parameter with an actual type. Just like how an argument is used in place of a parameter when applying methods, a generic type argument is used in place of a generic type parameter.</p></li>
-<li><p>The <em>variance</em> of generic type parameters determine whether more or less derived type can be used when some constructed generic type is expected. Variance can only be specified for type parameters in generic interfaces.</p></li>
-<li><p><em>Constraints</em> on generic type parameters limit the types that can be used as type arguments. You might for example declare that a type parameter must be replaced with an argument that is not null, or that is a <code class="docutils literal notranslate"><span class="pre">class</span></code> (as opposed to a <code class="docutils literal notranslate"><span class="pre">struct</span></code> for example).</p></li>
-</ul>
-</section>
-<section id="examples">
-<h2><span class="section-number">85.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
-<p>The most common use-case for generics is collections.
-Think about a list for example.
-When you’re implementing a method that adds items to the list, do you really need to know what type of element you are adding?
-Not really, right?
-Adding is just a matter of sticking the element into the list.
-As long as the type of all elements in the list is the same, and as long as all instances of any list type have the same type, we’re fine.</p>
-<figure class="align-default" id="fig-generic-list">
-<img alt="https://via.placeholder.com/700x200?text=Image+coming+soon" src="https://via.placeholder.com/700x200?text=Image+coming+soon" />
-<figcaption>
-<p><span class="caption-number">Fig. 85.2 </span><span class="caption-text">As long as all elements in the list have the same type it doesn’t matter what the type is.
-None of these lists have the same type, but these types can all be constructed from the generic list type.</span><a class="headerlink" href="#fig-generic-list" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>Let’s take a simpler example.
-How about the notion of a pair.
-This is sometimes also known as a “tuple”.
-A pair is simply a collection of two elements.
-Let’s refer to these elements as the <code class="docutils literal notranslate"><span class="pre">First</span></code> element and the <code class="docutils literal notranslate"><span class="pre">Second</span></code> element.
-The type of <code class="docutils literal notranslate"><span class="pre">First</span></code> might be the same as the type of <code class="docutils literal notranslate"><span class="pre">Second</span></code> or it might not.
-But if we define a data type for a pair then the type of <code class="docutils literal notranslate"><span class="pre">First</span></code> must be the same for every instance of the pair type.
-Same for <code class="docutils literal notranslate"><span class="pre">Second</span></code>.</p>
-<p>But if we define a generic type for pairs then we can create any number of non-generic types of pairs without having to write any implementation.</p>
-<figure class="align-default">
-<img alt="https://via.placeholder.com/700x200?text=Image+coming+soon" src="https://via.placeholder.com/700x200?text=Image+coming+soon" />
-</figure>
-<p>Can every type be converted into a generic type?
-No, some algorithms cannot be expressed without knowledge of the underlying type.
-Think about the difference between the act of adding another element to a list (which we’ve talked about) and that of arithmetic addition.
-Arithmetic addition is only defined for numeric types.
-If you want to say that there is an implementation for a type that is not a number then you have to define that implementation yourself.
-It’s not obviously parametrically polymorphic.</p>
-</section>
-<section id="exercises">
-<h2><span class="section-number">85.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
-<div class="exercise admonition" id="chapters/generics-exercise-0">
-
-<p class="admonition-title"><span class="caption-number">Exercise 85.1 </span></p>
-<section id="exercise-content">
-<p>What are generics?</p>
-</section>
-</div>
-<div class="exercise admonition" id="chapters/generics-exercise-1">
-
-<p class="admonition-title"><span class="caption-number">Exercise 85.2 </span></p>
-<section id="exercise-content">
-<p>What is parametric polymorphism?</p>
-</section>
-</div>
-<div class="exercise admonition" id="chapters/generics-exercise-2">
-
-<p class="admonition-title"><span class="caption-number">Exercise 85.3 </span></p>
-<section id="exercise-content">
-<p>Can any method be converted into a parametrically polymorphic method while still maintaining the same functionality?
-Why or why not?</p>
-</section>
-</div>
-<div class="exercise admonition" id="chapters/generics-exercise-3">
-
-<p class="admonition-title"><span class="caption-number">Exercise 85.4 </span></p>
-<section id="exercise-content">
-<p>Give an example, in your own words, of a type that could be parametrically polymorphic.</p>
-</section>
-</div>
-<div class="exercise admonition" id="chapters/generics-exercise-4">
-
-<p class="admonition-title"><span class="caption-number">Exercise 85.5 </span></p>
-<section id="exercise-content">
-<p>What is the difference between a “generic type definition” and a “constructed generic type”?</p>
-</section>
-</div>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1260,17 +1077,17 @@ Why or why not?</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="anonymous-types.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="abstract-dependency-injection.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">84. </span>Anonymous types</p>
+            <p class="prev-next-title"><span class="section-number">70. </span>Abstract dependency injection</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="generic-type-parameters.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">86. </span>Generic type parameters</p>
+        <p class="prev-next-title"><span class="section-number">72. </span>Generic type parameters</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

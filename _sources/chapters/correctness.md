@@ -1,4 +1,3 @@
-(correctness)=
 # Correctness
 
 ```{warning}

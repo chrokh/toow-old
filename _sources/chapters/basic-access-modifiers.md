@@ -10,3 +10,10 @@ Work in progress.
 %- Principle: The state space of a type should equal the state space of whatever domain concept it is modeling.
 %- Modifiers for variables, methods and classes
 %
+
+
+## Exercises
+
+```{exercise}
+What is the difference between `public` and `private`?
+```

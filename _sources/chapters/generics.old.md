@@ -1,4 +1,21 @@
 # Generics
+TODO: GO THROUGH HAND REMOVE THIS FILE!!!
+!!!!!!
+!!!!!!
+!!!!!!
+!!!!!!
+!!!!!!
+!!!!!!
+!!!!!!
+!!!!!!
+!!!!!!
+!!!!!!
+!!!!!!
+!!!!!!
+!!!!!!
+!!!!!!
+!!!!!!
+!!!!!!
 
 Remember how we said that there are at least [four types of polymorphism](subtype-polymorphism)?
 In object oriented programming subtype polymorphism is the really big one, but in hybrid languages such as C# parametric polymorphism is really important and frequently used.

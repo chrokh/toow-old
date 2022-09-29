@@ -15,6 +15,7 @@
   - Links to official documentation like in the [Type Systems](type-systems) chapter?
   - Add "decode" method to all usages of Caesar cipher. This is important because it helps students think about reusability.
   - Static interface methods? https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/tutorials/static-virtual-interface-members
+  - Separation of concerns. First mentioned in static methods chapter.
 - Interfaces
   - "Default interface methods"
     - https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-8.0/default-interface-methods
@@ -64,3 +65,22 @@
 - Labs
   - Brute-force hangman. Computer does guessing. You input how long the word should be and the program already has a word list stored.
   - Smart hangman. Like simple hangman but guessing computer uses word list and probability theory to make the best guesses.
+
+```csharp
+class CaesarCipher : ICipher<char,char>
+{
+  int steps;
+  string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  public CaesarCipher (int steps) => this.steps = steps;
+  public char Encode (char input)
+  {
+    int index = alphabet.IndexOf(Char.ToUpper(input));
+    if (index == -1) return input;
+    int newIndex = (index + steps) % alphabet.Length;
+    if (Char.IsUpper(input))
+      return alphabet[newIndex];
+    else
+      return Char.ToLower(alphabet[newIndex]);
+  }
+}
+```

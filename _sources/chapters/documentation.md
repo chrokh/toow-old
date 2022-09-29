@@ -21,11 +21,11 @@ In this chapter we're giving a brief overview of the document types that we'll d
 
 %## Requirements documents
 %
-%Requirements [{numref}`Chapter %s<requirements>`].
+%Requirements .
 %
 %
 %## Design documents
-%[{numref}`Chapter %s<requirements>`]
+%
 %
 %
 %

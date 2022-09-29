@@ -1,7 +1,7 @@
 (computation)=
 # Computation
 
-Executing the steps of an algorithm [{numref}`Chapter %s<algorithms>`] is to compute.
+Executing the steps of an [algorithm](algorithm) is to compute.
 Since algorithms were around long before what we today think of as computers, computation is much older than computers.
 To make the distinction clearer we could also use the term computer hardware instead of simply computers.
 
@@ -20,10 +20,10 @@ Work in progress.
 %A modern abacus might be made from a wooden frame with metal wires on which you can slide wooden beads back and forth.
 %See {numref}`fig:abacus` for an illustration.
 %
-%```{figure} ../images/abacus.jpg
+%{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
 %:name: fig:abacus
 %Illustration of a modern abacus.
-%```
+%
 %
 %- Antikythera mechanism.
 %- Planisphere, sector, planimeter, slide rule.
@@ -43,7 +43,7 @@ This is known as "binary".
 Binary code that the processor (CPU) understands is known as "machine code".
 Machine code is usually thought of as the language at the lowest level.
 However, processors themselves sometimes use what's known as "microcode" but that's too close to the hardware for this book.
-We'll talk more about high- and low-level programming languages when we get to Compilation [{numref}`Chapter %s<compilation>`].
+We'll talk more about high- and low-level programming languages when we get to [compilation](compilation).
 
 Binary counting existed before computers entered the scene.
 Let's spend a few moments to get a better understanding of binary counting.
@@ -57,7 +57,7 @@ To add one to whatever number you already have, you simply add another mark.
 The number of marks you have determines the number that you have.
 When we tally something we tend to draw every fifth mark diagonally over the last four marks to make counting easier.
 
-```{figure} ../images/tally-marks.svg
+```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
 ---
 name: tally-marks
 ---
@@ -93,7 +93,7 @@ Digits in the third position from the right are multiplied by $10^2$.
 And so forth.
 
 <!-- https://en.wikipedia.org/wiki/Positional_notation -->
-```{figure} ../images/base-ten.svg
+```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
 ---
 name: base-ten
 ---
@@ -131,11 +131,11 @@ which is equal to $12$.
 
 Since, in binary we either have or don't have a position we can actually simplify this calculation significantly by pre-calculating what number each position either does or does not give us.
 
-````{figure} ../images/base-two.svg
+```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
 ---
 name: base-two
 ---
-Summand: 64 + 32 + 16 + 8 + 4 + 2 + 1 + 0
+Summand: 64 + 32 + 16 + 8 + 4 + 2 + 1 + 0.
 Digit:   8    7    6    5   4   3   2   1
 ````
 
@@ -168,7 +168,7 @@ So to communicate 100 bytes we need 800 transistors.
 If you don't consider cramming billions of transistors into one processor mind blowing I don't know what could possibly be.
 How in the world can all this physically fit into a laptop case?
 
-```{figure} ../images/transistor.svg
+```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
 :name: fig:transistor
 Illustration of a transistor.
 ```

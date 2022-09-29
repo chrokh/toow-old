@@ -1,4 +1,3 @@
-(design-patterns)=
 # Design patterns
 
 ```{warning}
