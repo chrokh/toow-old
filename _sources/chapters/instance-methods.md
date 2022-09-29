@@ -12,6 +12,9 @@ kernelspec:
 
 # Instance methods
 
+```{warning}
+Work in progress.
+```
 
 %- Cannot use top-level statements
 %%- Overloading
@@ -73,10 +76,6 @@ kernelspec:
 
 ## Examples
 
-```{warning}
-Work in progress.
-```
-
 
 
 ### Robber's language
@@ -111,7 +110,7 @@ class RobbersCipher
 Notice how we moved the input vowel to the constructor.
 We're not going to bother with that now but as we saw in the chapter on [constructors](constructors), that would be a prime place for validation.
 
-However, since we've also now learned that other types like for example `string` too expose instance methods we can finally simply the implementation of one of our `Encode` methods.
+However, since we've also now learned that other types like for example `string` too expose instance methods we can finally simplify the implementation of one of our `Encode` methods.
 Have a look at the updated code below.
 
 ```{code-cell} csharp
