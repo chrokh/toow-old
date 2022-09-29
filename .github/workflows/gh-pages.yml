@@ -13,15 +13,30 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    # Install dependencies
+    # Setup python
     - name: Set up Python 3.8
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
 
+    # Install jupyter-book and dependencies
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+
+    # Install dotnet
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '6.0.x'
+
+    # Install dotnet try for Jupyter part 1
+    - name: Install dotnet try for Jupyter 1/1
+      run: dotnet tool install -g dotnet-try
+
+    # Install dotnet try for Jupyter part 2
+    - name: Install dotnet try for Jupyter 2/2
+      run: dotnet try jupyter install
 
     # Build the book
     - name: Build the book
