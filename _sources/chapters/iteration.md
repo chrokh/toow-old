@@ -206,10 +206,10 @@ There are at least four ways of iterating in C#.
 When should we prefer what way of the ones listed below.
 Explain using examples but without writing code.
 
-1. The `if` statement.
-2. The `switch` statement.
-3. The `ternary` operator.
-4. The `switch` expression.
+1. The `for` statement.
+2. The `foreach` statement.
+3. The `do` statement.
+4. The `while` statement.
 ```
 
 ```{exercise-start}

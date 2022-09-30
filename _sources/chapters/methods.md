@@ -604,7 +604,7 @@ In what cases would you use one and in one what cases would you use the other?
 Write a local function with the signature:
 
 ```csharp
-char charToInt (char input);
+int charToInt (char input);
 ```
 
 The method should return a number that represents the character it was given, based on the scheme below.
