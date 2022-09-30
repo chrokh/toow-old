@@ -22,11 +22,15 @@ Browse the table of contents, or use the search box.
 6. Why object orientation ought to eventually be replaced by functional programming.
 
 
-```{warning}
-This book is a *work in progress*.
-If you find errors or have suggestions you are more than welcome to [submit an issue](https://github.com/chrokh/the-oo-way/issues/new) in the book's repository on GitHub or reach out to me via email at christopher.okhravi@gmail.com.
+```{admonition} Work in progress
+:class: warning
+This book is a *draft* that I'm in the process of writing.
+Only the chapter titles marked with a star (★) in the table of contents contain some useful content.
+```
 
-In the table of contents, chapter titles marked with ★ contain some content.
+```{admonition} Errata
+:class: note
+If you find errors or have suggestions you are more than welcome to [submit an issue](https://github.com/chrokh/the-oo-way/issues/new) in the book's repository on GitHub or reach out to me via email at christopher.okhravi@gmail.com.
 ```
 
 
