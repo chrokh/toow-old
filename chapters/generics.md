@@ -26,7 +26,7 @@ Work in progress.
 %As you might have suspected, this is of course not true.
 %
 %% TODO: Actually CompositeCharCipher was never implemented in that chapter???
-%Think of the case of `CompositeCipher` and `CompositeCharCipher` that we ended up with in the chapter on [abstract dependency injection](abstract-dependency-injection).
+%Think of the case of `CompositeCipher` and `CompositeCharCipher` that we ended up with in the chapter on [abstract injected object composition](abstract-injected-object-composition).
 %Both these classes are dependency injected with different types of ciphers as input.
 %The implementation of these two classes is virtually the same.
 %

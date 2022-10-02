@@ -30,9 +30,9 @@ Work in progress.
 Remember how, in the chapter on [static methods](static-methods-example-robbers), we said that we were going to use overloading to simplify the names of the static methods of the static class `RobbersCipher`?
 Well, the time has come to do just that.
 
-As we've seen in this chapter as long as the method signatures (excluding the return type) are different we're free overload away.
+As we've seen in this chapter as long as the method signatures (excluding the return type) are different we're free to overload away.
 Meaning that we can simply just rename the two methods `EncodeChar` and `EncodeString` to the same thing.
-Namely, `Encode`.
+For example, `Encode`.
 
 ```{code-cell} csharp
 static class RobbersCipher

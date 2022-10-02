@@ -8,7 +8,7 @@ Work in progress.
 
 % Arguably, strategy pattern and dependency injection exists since functions are usually not first class citizens in object oriented languages.
 
-%- Example: Use delegate version of `Predicate<T>` instead of `IPredicate<T>` that we saw in [generics](generics) and [abstract dependency injection](abstract-dependency-injection).
+%- Example: Use delegate version of `Predicate<T>` instead of `IPredicate<T>` that we saw in [generics](generics) and [abstract injected object composition](abstract-injected-object-composition).
 %- Implement the method that repeatedly applies ciphers using delegates instead. See the chapter on [subtype polymorphism](subtype-polymorphism).
 
 %```csharp

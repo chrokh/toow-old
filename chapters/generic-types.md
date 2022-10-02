@@ -460,7 +460,7 @@ Work in progress.
 %
 %However let's still build something that takes a `string` as input and gives a `string` as output.
 %But instead of doing a specific cipher like `ReverseCipher`, let's see if we can make `CharWiseCipher` implement the interface `ICipher<TIn,TOut>`.
-%The last time we saw that class was in the chapter on [abstract dependency injection](abstract-dependency-injection) where its implementation looked like this:
+%The last time we saw that class was in the chapter on [abstract injected object composition](abstract-injected-object-composition) where its implementation looked like this:
 %
 %```csharp
 %class CharWiseCipher : ICipher

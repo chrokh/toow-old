@@ -299,8 +299,9 @@ The class names of the ciphers we've seen so far are:
 
 1. `ReverseCipher`
 2. `RobbersCiphers`
-3. `CaesarCipher`
-4. `LeetCipher`
+3. `LeetCipher`
+4. `CaesarCipher`
+5. `FlipFlopCaesarCipher`
 
 Since we have multiple overloads for the `Encode` method in these interfaces a naive first thought might be to implement the following interface:
 
@@ -530,6 +531,12 @@ Why or why not?
 ```{exercise}
 Can the class `RobbersCipher` also implement the interface `ICharToCharCipher`?
 Why or why not?
+```
+
+```{exercise}
+Rewrite the class `FlipFlopCaesarCipher` from the chapter on [concrete injected object composition](concrete-injected-object-composition) so that it implements all the interfaces from this chapter that you believe that it should implement.
+Which ones did you choose and which did you not choose?
+Why?
 ```
 
 

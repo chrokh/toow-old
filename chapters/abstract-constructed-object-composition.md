@@ -1,12 +1,14 @@
-# Abstract dependency construction
+# Abstract constructed object composition
+
+% EXAMPLE: Like the incremeneting caesar cipher but use two ciphers and tik-tok between them. Lets' call it a FlipFlopCipher. Then we can do both the abstract version of this and the abstract version of IncrementingCipher when we get to injected abstract.
 
 ```{warning}
 Work in progress.
 ```
 
 %Remember the four types of [object composition](object-composition) summarized by the quadrant diagram of abstraction levels in object composition ({numref}`fig:object-composition-object-diagram`).
-%We've already talked about *concrete* dependency [construction](abstract-dependency-construction) and [injection](concrete-dependency-injection).
-%However, since we've now also learned about [subtyping](subtyping) we're ready to talk about *abstract* dependency [construction](abstract-dependency-construction) and [injection](abstract-dependency-injection).
+%We've already talked about *concrete* dependency [construction](abstract-constructed-object-composition) and [injection](concrete-dependency-injection).
+%However, since we've now also learned about [subtyping](subtyping) we're ready to talk about *abstract* dependency [construction](abstract-injected-object-composition) and [injection](abstract-injected-object-composition).
 %In this chapter we'll take a quick look at abstract dependency construction.
 %
 %In truth, there isn't much to say about abstract dependency construction.
@@ -217,7 +219,7 @@ Work in progress.
 %## Composing the abstraction
 %
 %So how do we implement this?
-%In this chapter we'll use [inheritance](inheritance) but in the chapter on [abstract dependency injection](abstract-dependency-injection) we'll use composition instead.
+%In this chapter we'll use [inheritance](inheritance) but in the chapter on [abstract injected object composition](abstract-injected-object-composition) we'll use composition instead.
 %Most, including myself, would argue that the composition based solution is superior.
 %If you've ever heard about the design principle [composition over inheritance](composition-over-inheritance) you will soon start to see why this principle exists.
 %At it's core, the problem with inheritance is that it assumes that you problem forms a hierarchy.

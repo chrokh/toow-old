@@ -12,3 +12,4 @@ Work in progress.
 %  - Value equality vs Reference equality
 %- Order
 %- Null coalescing (`??`, `??=`)
+%- Remainder operator (check for even odd e.g.)

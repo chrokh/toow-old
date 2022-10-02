@@ -313,7 +313,7 @@ If you happen to be familiar with functional programming, then choosing what par
 If you are not familiar with functional programming, please ignore what I just said.
 ```
 
-When we get to the chapters on [subtype polymorphism](subtype-polymorphism) and [abstract dependency injection](abstract-dependency-injection) you will start to see why it is so important to think about what you expose in your instance methods and what you "preload" in the constructor.
+When we get to the chapters on [subtype polymorphism](subtype-polymorphism) and [abstract injected object composition](abstract-injected-object-composition) you will start to see why it is so important to think about what you expose in your instance methods and what you "preload" in the constructor.
 I know that this statement doesn't make sense yet, but when you want to use subtype polymorphism whatever instance method you want to override/implement has to have the same signature in all subtypes.
 
 ```{warning}
@@ -321,7 +321,7 @@ If we want to be able to easily switch between different kinds of ciphers (like 
 ```
 
 Don't worry if you still feel confused about why we chose to put `steps` in the constructor and `input` in the instance method.
-After the chapters on [subtype polymorphism](subtype-polymorphism) and [abstract dependency injection](abstract-dependency-injection) you should have a much better idea.
+After the chapters on [subtype polymorphism](subtype-polymorphism) and [abstract injected object composition](abstract-injected-object-composition) you should have a much better idea.
 
 
 

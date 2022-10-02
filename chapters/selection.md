@@ -60,6 +60,8 @@ In C# we have one selection expression:
 
 - The ternary operator.
 
+% TODO: Check for even odd with remainder operator.
+
 In C# we also have one selection expression:
 
 - The `switch` expression.
