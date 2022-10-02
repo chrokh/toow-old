@@ -1234,7 +1234,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="interfaces">
-<span id="id1"></span><h1><span class="section-number">57. </span>Interfaces<a class="headerlink" href="#interfaces" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">57. </span>Interfaces<a class="headerlink" href="#interfaces" title="Permalink to this headline">#</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Work in progress.</p>
@@ -1249,7 +1249,7 @@ Let’s start with the abstract idea of an interface.
 What is an interface?</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>An interface defines <em>what</em> something can do without defining <em>how</em> it does it.<a class="footnote-reference brackets" href="#defaults" id="id2">1</a></p>
+<p>An interface defines <em>what</em> something can do without defining <em>how</em> it does it.<a class="footnote-reference brackets" href="#defaults" id="id1">1</a></p>
 </div>
 <p>Remember how we’ve learned that a <a class="reference internal" href="classes.html"><span class="doc std std-doc">class</span></a> consists of a bunch of instance and static members?
 Members are either methods or variables.
@@ -1337,7 +1337,7 @@ At run-time, any interface must be replaced by a run-time type.</p>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2296.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2283.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1382,12 +1382,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.62:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.41:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2296.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2283.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1633,6 +1633,12 @@ We end up with the following interfaces:</p>
 </div>
 </div>
 </div>
+<p>By the way.
+Feeling upset about the fact that this is so verbose and that we need to have three different interfaces?
+This too feels like duplication.
+You have every right to be upset and your hunch is right.
+Good on you!
+When we get to the chapters on <a class="reference internal" href="generics.html"><span class="doc std std-doc">generics</span></a> we’ll be able merge all three interfaces into one.</p>
 </section>
 <section id="cipher-implementations">
 <h3><span class="section-number">57.3.2. </span>Cipher implementations<a class="headerlink" href="#cipher-implementations" title="Permalink to this headline">#</a></h3>
@@ -1762,7 +1768,7 @@ Come up with your own example in natural language that’s different from the ex
 <p>What is the difference between a <code class="docutils literal notranslate"><span class="pre">class</span></code> and an <code class="docutils literal notranslate"><span class="pre">interface</span></code>?</p>
 </section>
 </div>
-<div class="exercise admonition" id="chapters/interfaces-exercise-3">
+<div class="exercise admonition" id="ex:interfaces:leet">
 
 <p class="admonition-title"><span class="caption-number">Exercise 57.4 </span></p>
 <section id="exercise-content">
@@ -1795,13 +1801,29 @@ Come up with your own example in natural language that’s different from the ex
 
 <p class="admonition-title"><span class="caption-number">Exercise 57.5 </span></p>
 <section id="exercise-content">
+<p>Can the class <code class="docutils literal notranslate"><span class="pre">LeetCipher</span></code> of <a class="reference internal" href="#ex:interfaces:leet"><span class="std std-numref">Exercise 57.4</span></a> also implement the interface <code class="docutils literal notranslate"><span class="pre">ICharToStringCipher</span></code>?
+Why or why not?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/interfaces-exercise-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 57.6 </span></p>
+<section id="exercise-content">
+<p>Can the class <code class="docutils literal notranslate"><span class="pre">RobbersCipher</span></code> also implement the interface <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code>?
+Why or why not?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/interfaces-exercise-6">
+
+<p class="admonition-title"><span class="caption-number">Exercise 57.7 </span></p>
+<section id="exercise-content">
 <p>Does an interface define a “<a class="reference internal" href="data-types.html#run-time-and-compile-time-types"><span class="std std-ref">compile-time type</span></a>”, a “<a class="reference internal" href="data-types.html#run-time-and-compile-time-types"><span class="std std-ref">run-time type</span></a>”, or both?
 What does this mean?</p>
 </section>
 </div>
 <div class="exercise admonition" id="ex:interfaces">
 
-<p class="admonition-title"><span class="caption-number">Exercise 57.6 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 57.8 </span></p>
 <section id="exercise-content">
 <ol class="simple">
 <li><p>Define your own interface.</p></li>
@@ -1810,16 +1832,16 @@ What does this mean?</p>
 </ol>
 </section>
 </div>
-<div class="exercise admonition" id="chapters/interfaces-exercise-6">
+<div class="exercise admonition" id="chapters/interfaces-exercise-8">
 
-<p class="admonition-title"><span class="caption-number">Exercise 57.7 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 57.9 </span></p>
 <section id="exercise-content">
-<p>Draw a UML class diagram of the program that you built in <a class="reference internal" href="#ex:interfaces"><span class="std std-numref">Exercise 57.6</span></a>.</p>
+<p>Draw a UML class diagram of the program that you built in <a class="reference internal" href="#ex:interfaces"><span class="std std-numref">Exercise 57.8</span></a>.</p>
 </section>
 </div>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
-<dt class="label" id="defaults"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
+<dt class="label" id="defaults"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
 <dd><p>Since C# 8.0, it is possible to define “default implementations” in interfaces which means that it now actually is possible to define the “how” in an interface. This chapter will soon be updated with more on this topic.</p>
 </dd>
 </dl>
