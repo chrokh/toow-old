@@ -599,8 +599,10 @@ In what cases would you use one and in one what cases would you use the other?
 ```
 
 
-````{exercise}
+```{exercise-start}
 :label: ex:methods-char-to-int
+```
+
 Write a local function with the signature:
 
 ```csharp
@@ -609,19 +611,22 @@ int charToInt (char input);
 
 The method should return a number that represents the character it was given, based on the scheme below.
 
-```
-A = 0
-B = 1
-...
-Z = 26
-a = 27
-b = 28
-...
-z = 52
+```{code-cell} csharp
+:tags: [remove-input, hide-output]
+string letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+string output="";
+for (int i=0; i<letters.Length; i++)
+  output += $"{letters[i]} => {i}\n";
+
+Console.WriteLine(output);
 ```
 
 All other characters return `-1`.
-````
+```{exercise-end}
+```
+
+
 
 ```{exercise}
 Think back to the definitions of [total and partial functions](functions).
