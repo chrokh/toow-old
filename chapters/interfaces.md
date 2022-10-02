@@ -10,7 +10,6 @@ kernelspec:
   name: .net-csharp
 ---
 
-(interfaces)=
 # Interfaces
 
 ```{warning}
@@ -350,6 +349,13 @@ interface ICharToStringCipher
 }
 ```
 
+By the way.
+Feeling upset about the fact that this is so verbose and that we need to have three different interfaces?
+This too feels like duplication.
+You have every right to be upset and your hunch is right.
+Good on you!
+When we get to the chapters on [generics](generics) we'll be able merge all three interfaces into one.
+
 
 ### Cipher implementations
 
@@ -466,6 +472,7 @@ What is the difference between a `class` and an `interface`?
 
 
 ```{exercise-start}
+:label: ex:interfaces:leet
 ```
 Rewrite the class `LeetCipher` that you wrote in {numref}`ex:instance-methods:leet` so that it implements the two interfaces `IStringToStringCipher` and `ICharToCharCipher` that we defined earlier in this chapter.
 
@@ -512,6 +519,17 @@ char output2 = charCipher.Encode('E');
 Console.WriteLine($"{output1} {output2}");
 ```
 ```{exercise-end}
+```
+
+
+```{exercise}
+Can the class `LeetCipher` of {numref}`ex:interfaces:leet` also implement the interface `ICharToStringCipher`?
+Why or why not?
+```
+
+```{exercise}
+Can the class `RobbersCipher` also implement the interface `ICharToCharCipher`?
+Why or why not?
 ```
 
 
