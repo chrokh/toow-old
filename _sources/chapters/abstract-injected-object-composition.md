@@ -1,4 +1,4 @@
-# Abstract dependency injection
+# Abstract injected object composition
 
 ```{warning}
 Work in progress.
@@ -10,7 +10,7 @@ Work in progress.
 %
 %## Motivation
 %
-%Think way back to where we ended in the chapter on [concrete dependency injection](concrete-dependency-injection).
+%Think way back to where we ended in the chapter on [concrete constructed object composition](concrete-constructed-object-composition).
 %Instead of letting `RobbersStringCipher` instantiate a `RobbersCharCipher` we *injected* it.
 %This meant that we got rid of the need to expose whatever constructor parameters the inner `char` cipher needed in the outer `string` cipher.
 %
@@ -339,3 +339,14 @@ Work in progress.
 %%```
 %%````
 %% Hint: This is just good old [recursion](recursion) but using classes.
+
+
+%```{exercise}
+%Define a class called `CipherRepeater`.
+%Let it take a cipher in the constructor.
+%
+%Let it implement each of the interfaces 
+%Start with the code you wrote in {numref}`ex:subtype-polymorphism:encodeNTimes`
+%```
+
+%Pretty wild stuff right?

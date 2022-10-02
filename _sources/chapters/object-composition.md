@@ -1,5 +1,9 @@
 # Object composition
 
+```{warning}
+Work in progress.
+```
+
 ## Motivation
 
 [Composition](method-composition) is the act of combining simple things into more complex things in order to solve complex problems.
@@ -15,22 +19,27 @@ Just because I consider myself your friend, doesn't necessarily mean that you co
 Object composition is not necessarily a two way street.
 So if all we know is that object `a` has a reference to object `b` then we don't know whether object `b` also has a reference to object `a`.
 
+If object `a` has a field or property that contains an object of type `b` then we say that `a` "has-a" `b`.
+We say that `a` is composed with `b`.
+We refer to `a` as the composing object and `b` as the composed object.
+
 ```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
 :name: fig:object-composition-object-diagram
 
-An object can have a reference to another object.
+Object composition is a binary directed relationship between two objects. In this figure `a` "has-a" `b`.
 ```
 
 The objects involved in a composition could be of the same type or of different types.
 While we call it "object composition", in a class based object oriented language, we define compositions on the class level.
 So the terms "composition" and "has a" is also used on the type level.
+This means that if we define a type `A` such that it has an instance field of type `B` then we would say that `A` has-a `B` and we would refer to this as object composition.
 
 
 ### UML association
 
 In UML class diagrams we refer to object composition as "association" and we draw it using an arrow as in {numref}`fig:object-composition-class-diagram`.
 The arrow is pointing from the type that has a reference to the type that it has a reference to.
-In the case of Towers of Hanoi, `Rod` is pointing towards `Disk` since `Rod` may have references to `Disk`s.
+In the case of [Towers of Hanoi](towers-of-hanoi), `Rod` is pointing towards `Disk` since `Rod` may have references to `Disk`s.
 Understanding how to use has-a arrows is critical for understanding more complex topics such as [design patterns](design-patterns) and helps in understanding simpler topics such as dependency injection.
 
 % Rod -> Disk
@@ -55,7 +64,7 @@ If you want to learn more about the UML class diagram concepts aggregation and c
 ```
 
 
-(abstraction-levels)=
+(object-composition:abstraction-levels)=
 ### Abstraction levels
 
 We're going to talk about four types, let's call them, "abstraction levels" of object composition.
@@ -84,11 +93,12 @@ I like to call these levels:
 %- LEVEL 4: [**Abstract** dependency **injection**](abstract-dependency-injection)
 
 These four levels are *not* well established terms to describe types of composition.
-I'm suggesting this division as a way to make sense of the words "object composition" which ambigiously tend to refer to all four levels.
-As we will discuss in a later chapter, levels three and four are also forms of [dependency injection](dependency-inversion).
+I'm suggesting this division as a way to make sense of the term "object composition" which ambigiously tend to refer to all four levels.
+It will also help us understand how object composition relates to [dependency injection and inversion](dependency-inversion-principle) which is something that we'll talk about in a coming chapter.
+In short, levels 3 and 4 are forms of dependency injection, meaning ways to invert dependencies.
 
-We're going to start by covering levels one and three, but we need to learn more before we can cover levels two and four.
-In other words, we're going to start by only dealing with concrete dependencies and only start dealing with abstract dependencies later.
+We're only going to deal with concrete object composition in the following chapters, and only after we've covered some more ground will we talk about abstract composition.
+%We're going to start by covering levels one and three, but we need to learn more before we can cover levels two and four.
 
 %TODO: So how does the term dependency injection relate to our terminology?
 
@@ -106,12 +116,13 @@ Meaning types that cannot be instantiated.
 The word "constructed" means that the object in question (or some dependency that the object has constructed) *instantiates* the composed object.
 The word "injected" on the other hand means that the object in question (or some dependency that was injected to the object) receives the composed object as an argument through the constructor, a property, or a method.
 
-If the answer to the second question is that the object is injected then this is a form of "[dependency injection](dependency-inversion)".
+If the answer to the second question is that the object is injected then this is a form of "[dependency injection](dependency-inversion-principle)".
+But again, we'll discuss this more in a future chapter.
 
 %However, even though it is useful to inject concretions, it is even more useful to inject abstractions.
 %However, to understand dependency injection we must also understand that the more powerful way of using dependency injection is to depend on abstractions which means that the answer to the second question would be "abstract".
 
-% TODO: Replace this with figure.
+% TODO: Replace this table with image.
 ```{table} Quadrant diagram of abstraction levels in object composition.
 :name: composition-quadrants
 
@@ -121,10 +132,25 @@ If the answer to the second question is that the object is injected then this is
 | **ABSTRACT** |             |          |
 ```
 
-Don't worry if all this seems overwhelming.
-In the following chapters we're only going to be dealing with concrete object composition.
-Namely, object composition where the compile-time type of the composed object is concrete, but said object can either be constructed or injected.
-So, let's now get started with something a bit more concrete.
+But wait a minute, you might ask.
+Aren't all types concrete types?
+What do we mean when we say that a type is "abstract"?
+What's an example of a non-concrete type?
+Well, hold your horses my friend.
+We haven't talked about object oriented abstractions yet but we'll get there very soon.
+To understand what an abstract type is we must first understand
+[interfaces](interfaces),
+[inheritance](inheritance),
+and [subtype polymorphism](subtype-polymorphism).
+This is why we, in the coming chapters, will stick to *concrete* object composition.
+Then we we will deal with understanding what abstract types are.
+Only after that will we finally deal with *abstract* object composition.
+So let's take it one step at a time.
+
+Also, don't worry if all this seems overwhelming.
+We will deal with all forms of object composition one by one.
+So by the end of it you'll be an object composition master.
+Do not go gentle in to that good night.
 
 
 ## Examples
@@ -156,6 +182,13 @@ Let's exemplify the different abstract levels of object composition in the conte
 * - **INJECTED**
   - `Disk` is injected into `Rod` and `Disk` is a class.
   - `Disk` is injected into `Rod` and `Disk` is an interface.
+```
+
+## Exercises
+
+```{exercise}
+Draw the quadrant diagram of object composition abstraction levels.
+Explain each quadrant in your own words and give an example in words.
 ```
 
 

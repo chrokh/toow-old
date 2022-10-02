@@ -505,85 +505,92 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
+  Concrete object composition
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="object-composition.html">
+   57. ★ Object composition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="concrete-constructed-object-composition.html">
+   58. ★ Concrete constructed object composition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="concrete-injected-object-composition.html">
+   59. ★ Concrete injected object composition
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
   Polymorphism
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="interfaces.html">
-   57. ★ Interfaces
+   60. ★ Interfaces
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="subtype-polymorphism.html">
-   58. Subtype polymorphism
+   61. ★ Subtype polymorphism
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inheritance.html">
-   59. Inheritance
+   62. Inheritance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="advanced-access-modifiers.html">
-   60. Access modifiers (advanced)
+   63. Access modifiers (advanced)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="overriding.html">
-   61. Overriding
+   64. Overriding
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hiding.html">
-   62. Hiding
+   65. Hiding
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="object-type-conversions.html">
-   63. Type conversions (of objects)
+   66. Type conversions (of objects)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="variance.html">
-   64. Variance
+   67. Variance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="liskov-substitution-principle.html">
-   65. Liskov substitution principle
+   68. Liskov substitution principle
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Object composition
+  Abstract object composition
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="object-composition.html">
-   66. Object composition
+  <a class="reference internal" href="abstract-constructed-object-composition.html">
+   69. Abstract constructed object composition
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="concrete-dependency-construction.html">
-   67. Concrete dependency construction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="concrete-dependency-injection.html">
-   68. Concrete dependency injection
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="abstract-dependency-construction.html">
-   69. Abstract dependency construction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="abstract-dependency-injection.html">
-   70. Abstract dependency injection
+  <a class="reference internal" href="abstract-injected-object-composition.html">
+   70. Abstract injected object composition
   </a>
  </li>
 </ul>
@@ -1200,7 +1207,7 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2308.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2421.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1245,12 +1252,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.111:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.1.46:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2308.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2421.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1512,14 +1519,14 @@ But given the case of ciphers, I feel it quite unlikely that we would find such 
 <p>If you happen to be familiar with functional programming, then choosing what parameters to expose in the constructor resembles the problem of determining the order of function arguments to allow for useful partial application.
 If you are not familiar with functional programming, please ignore what I just said.</p>
 </div>
-<p>When we get to the chapters on <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype polymorphism</span></a> and <a class="reference internal" href="abstract-dependency-injection.html"><span class="doc std std-doc">abstract dependency injection</span></a> you will start to see why it is so important to think about what you expose in your instance methods and what you “preload” in the constructor.
+<p>When we get to the chapters on <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype polymorphism</span></a> and <a class="reference internal" href="abstract-injected-object-composition.html"><span class="doc std std-doc">abstract injected object composition</span></a> you will start to see why it is so important to think about what you expose in your instance methods and what you “preload” in the constructor.
 I know that this statement doesn’t make sense yet, but when you want to use subtype polymorphism whatever instance method you want to override/implement has to have the same signature in all subtypes.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>If we want to be able to easily switch between different kinds of ciphers (like for example Caesar, Reverse, and Robber’s language) then it is important that we define our instance methods so that they <em>don’t</em> require arguments that are specific to any particular subset of ciphers.</p>
 </div>
 <p>Don’t worry if you still feel confused about why we chose to put <code class="docutils literal notranslate"><span class="pre">steps</span></code> in the constructor and <code class="docutils literal notranslate"><span class="pre">input</span></code> in the instance method.
-After the chapters on <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype polymorphism</span></a> and <a class="reference internal" href="abstract-dependency-injection.html"><span class="doc std std-doc">abstract dependency injection</span></a> you should have a much better idea.</p>
+After the chapters on <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype polymorphism</span></a> and <a class="reference internal" href="abstract-injected-object-composition.html"><span class="doc std std-doc">abstract injected object composition</span></a> you should have a much better idea.</p>
 </section>
 </section>
 <section id="exercises">

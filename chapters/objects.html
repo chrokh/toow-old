@@ -507,85 +507,92 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
+  Concrete object composition
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="object-composition.html">
+   57. ★ Object composition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="concrete-constructed-object-composition.html">
+   58. ★ Concrete constructed object composition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="concrete-injected-object-composition.html">
+   59. ★ Concrete injected object composition
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
   Polymorphism
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="interfaces.html">
-   57. ★ Interfaces
+   60. ★ Interfaces
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="subtype-polymorphism.html">
-   58. Subtype polymorphism
+   61. ★ Subtype polymorphism
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inheritance.html">
-   59. Inheritance
+   62. Inheritance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="advanced-access-modifiers.html">
-   60. Access modifiers (advanced)
+   63. Access modifiers (advanced)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="overriding.html">
-   61. Overriding
+   64. Overriding
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hiding.html">
-   62. Hiding
+   65. Hiding
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="object-type-conversions.html">
-   63. Type conversions (of objects)
+   66. Type conversions (of objects)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="variance.html">
-   64. Variance
+   67. Variance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="liskov-substitution-principle.html">
-   65. Liskov substitution principle
+   68. Liskov substitution principle
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Object composition
+  Abstract object composition
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="object-composition.html">
-   66. Object composition
+  <a class="reference internal" href="abstract-constructed-object-composition.html">
+   69. Abstract constructed object composition
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="concrete-dependency-construction.html">
-   67. Concrete dependency construction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="concrete-dependency-injection.html">
-   68. Concrete dependency injection
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="abstract-dependency-construction.html">
-   69. Abstract dependency construction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="abstract-dependency-injection.html">
-   70. Abstract dependency injection
+  <a class="reference internal" href="abstract-injected-object-composition.html">
+   70. Abstract injected object composition
   </a>
  </li>
 </ul>
@@ -1269,7 +1276,7 @@ So, let’s not dwell on the archeic concept of function pointers.
 What then?</p>
 <p>This is where objects come in to play.
 Objects allow us to bundle up some data with some methods and then <em>send that bundle</em> around.
-As we will learn, objects allow <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype polymorphism</span></a> and hence <span class="xref myst">dynamic dispatch</span> without loosing static type safety.
+As we will learn, objects allow <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype polymorphism</span></a> and hence <a class="reference internal" href="subtype-polymorphism.html#dynamic-dispatch"><span class="std std-ref">dynamic dispatch</span></a> without loosing static type safety.
 This in turn allows us to keep increasing abstraction without having to resort to turning more and more algorithms into data.</p>
 <figure class="align-default" id="fig-local-method">
 <img alt="https://via.placeholder.com/700x200?text=Image+coming+soon" src="https://via.placeholder.com/700x200?text=Image+coming+soon" />
@@ -1411,7 +1418,7 @@ We would then define eight move methods that allow us to move both players north
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2548.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2677.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1456,12 +1463,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.111:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.1.46:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2548.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2677.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1644,7 +1651,7 @@ I urge you to ask yourself: is multiple interpretations of the same piece of raw
 When saying that a language such as Smalltalk is a “purely” object oriented language we don’t mean pure in the sense of <a class="reference internal" href="purity.html"><span class="doc std std-doc">referential transparency</span></a>.
 We mean “pure” in the sense that, in the language, everything (or almost everything) is an object.
 While we tend to use the word “everything” when talking about how purely object oriented a language is it would be more accurate to say something like all values that you can construct and reference using variables.
-We haven’t yet talked about <a class="reference internal" href="inheritance.html#inheritance"><span class="std std-ref">inheritance</span></a> and <a class="reference internal" href="interfaces.html"><span class="doc std std-doc">interfaces</span></a> but another way of saying this is that all types derive from <code class="docutils literal notranslate"><span class="pre">Object</span></code>.
+We haven’t yet talked about <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a> and <a class="reference internal" href="interfaces.html"><span class="doc std std-doc">interfaces</span></a> but another way of saying this is that all types derive from <code class="docutils literal notranslate"><span class="pre">Object</span></code>.
 These statements are however only almost entirely true.</p>
 <p>C# is not a purely object object oriented language.
 When discussing <a class="reference internal" href="paradigms.html"><span class="doc std std-doc">paradigms</span></a> we established that C#, like many other contemporary programming languages, is a multi-paradigm language.
