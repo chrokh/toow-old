@@ -1338,7 +1338,7 @@ When we’re using top-level statements and start defining methods without makin
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2568.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2558.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1383,12 +1383,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.33:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.62:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2568.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2558.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -2081,16 +2081,88 @@ Declare and initialize a variable with the following name and type:</p>
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="p">)[]</span><span class="w"> </span><span class="n">leetSubstitutions</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
-<p>The variable should contain all the substitutions necessary for the Leet language.
-We should be able to use the variable as an argument to the local function <code class="docutils literal notranslate"><span class="pre">substituteString</span></code>.</p>
-<p>See the usage example below:</p>
+<p>The variable should contain all the substitutions necessary for the Leet language.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="kt">char</span><span class="p">)[]</span><span class="w"> </span><span class="n">leetSubstitutions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="kt">char</span><span class="p">)[]</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;A&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;4&#39;</span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;4&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;E&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;3&#39;</span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;3&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;E&#39;</span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;L&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;1&#39;</span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;L&#39;</span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;O&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;0&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;O&#39;</span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;S&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;5&#39;</span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;5&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;S&#39;</span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;7&#39;</span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;7&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">)</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We should be able to use the variable as an argument to the local function <code class="docutils literal notranslate"><span class="pre">substituteString</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"></span>
 <span class="w">  </span><span class="n">substituteString</span><span class="p">(</span><span class="s">&quot;1337 LOLS&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">leetSubstitutions</span><span class="p">)</span><span class="w"></span>
 <span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">LEET 1015</span>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LEET 1015
 </pre></div>
+</div>
+</div>
+</div>
+<p>Since the variable contains all the substitutions necessary for the the Leet language you should also be able to iterate over it using a <code class="docutils literal notranslate"><span class="pre">foreach</span></code>:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">foreach</span><span class="w"> </span><span class="p">((</span><span class="kt">char</span><span class="p">,</span><span class="kt">char</span><span class="p">)</span><span class="w"> </span><span class="n">sub</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">leetSubstitutions</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{sub.Item1} =&gt; {sub.Item2}&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A =&gt; 4
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4 =&gt; A
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>E =&gt; 3
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 =&gt; E
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L =&gt; 1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 =&gt; L
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>O =&gt; 0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 =&gt; O
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>S =&gt; 5
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5 =&gt; S
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T =&gt; 7
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7 =&gt; T
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </div>
@@ -2102,9 +2174,8 @@ We should be able to use the variable as an argument to the local function <code
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="kt">string</span><span class="p">)[]</span><span class="w"> </span><span class="n">makeRobbersSubstitutions</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">vowel</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
-<p>The method should return an array of <code class="docutils literal notranslate"><span class="pre">(char,string)</span></code> substitutions for the Robber’s language when given a <code class="docutils literal notranslate"><span class="pre">vowel</span></code> as input.
-Since the method returns returns an array of <code class="docutils literal notranslate"><span class="pre">(char,string)</span></code> pairs and not <code class="docutils literal notranslate"><span class="pre">(char,char)</span></code> pairs you should be able to use any result of calling the method as the second argument to <code class="docutils literal notranslate"><span class="pre">substituteStringUsingString</span></code>.</p>
-<p>See the usage example below:</p>
+<p>The method should return an array of <code class="docutils literal notranslate"><span class="pre">(char,string)</span></code> substitutions for the Robber’s language when given a <code class="docutils literal notranslate"><span class="pre">vowel</span></code> as input.</p>
+<p>Since the method returns returns an array of <code class="docutils literal notranslate"><span class="pre">(char,string)</span></code> pairs and not <code class="docutils literal notranslate"><span class="pre">(char,char)</span></code> pairs you should be able to use any result of calling the method as the second argument to <code class="docutils literal notranslate"><span class="pre">substituteCharUsingString</span></code>:</p>
 <div class="cell tag_remove-input docutils container">
 </div>
 <div class="cell docutils container">
@@ -2121,6 +2192,138 @@ Since the method returns returns an array of <code class="docutils literal notra
 </div>
 </div>
 </div>
+<p>Since the method returns an array you should also be able to iterate over the substitutions using a <code class="docutils literal notranslate"><span class="pre">foreach</span></code>:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="kt">string</span><span class="p">)[]</span><span class="w"> </span><span class="n">substitutions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">makeRobbersSubstitutions</span><span class="p">(</span><span class="sc">&#39;a&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="k">foreach</span><span class="w"> </span><span class="p">((</span><span class="kt">char</span><span class="p">,</span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="n">sub</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">substitutions</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{sub.Item1} =&gt; {sub.Item2}&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>B =&gt; BaB
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C =&gt; CaC
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>D =&gt; DaD
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F =&gt; FaF
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>G =&gt; GaG
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>H =&gt; HaH
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>J =&gt; JaJ
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>K =&gt; KaK
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L =&gt; LaL
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>M =&gt; MaM
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N =&gt; NaN
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P =&gt; PaP
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Q =&gt; QaQ
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R =&gt; RaR
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>S =&gt; SaS
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T =&gt; TaT
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>V =&gt; VaV
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X =&gt; XaX
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Y =&gt; YaY
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Z =&gt; ZaZ
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b =&gt; bab
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c =&gt; cac
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d =&gt; dad
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f =&gt; faf
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g =&gt; gag
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>h =&gt; hah
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>j =&gt; jaj
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>k =&gt; kak
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>l =&gt; lal
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>m =&gt; mam
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n =&gt; nan
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p =&gt; pap
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>q =&gt; qaq
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>r =&gt; rar
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>s =&gt; sas
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t =&gt; tat
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>v =&gt; vav
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x =&gt; xax
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>y =&gt; yay
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>z =&gt; zaz
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </div>
 <div class="exercise admonition" id="ex:methods-charchar-to-charstring">
@@ -2129,7 +2332,7 @@ Since the method returns returns an array of <code class="docutils literal notra
 <section id="exercise-content">
 <p>Write a method that takes an array of <code class="docutils literal notranslate"><span class="pre">(char,</span> <span class="pre">char)</span></code> tuples and returns a new array of <code class="docutils literal notranslate"><span class="pre">(char,</span> <span class="pre">string)</span></code> tuples without loosing any information.
 It should have the following signature:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="p">)[]</span><span class="w"> </span><span class="n">charCharArrayToCharStringArray</span><span class="w"> </span><span class="p">((</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="p">)[]</span><span class="w"> </span><span class="n">substitutions</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="kt">string</span><span class="p">)[]</span><span class="w"> </span><span class="n">charCharArrayToCharStringArray</span><span class="w"> </span><span class="p">((</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="p">)[]</span><span class="w"> </span><span class="n">substitutions</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 </section>

@@ -660,7 +660,8 @@ S
 Note: In this exercise you are expected to implement the substitution algorithm directly *without* using the local functions `substituteChar` and `substituteString` that we defined earlier in this chapter.
 ````
 
-````{exercise}
+```{exercise-start}
+```
 In this exercise we are going to implement the Leet language using the local function `substituteString` that we defined earlier in this chapter.
 Declare and initialize a variable with the following name and type:
 
@@ -669,20 +670,43 @@ Declare and initialize a variable with the following name and type:
 ```
 
 The variable should contain all the substitutions necessary for the Leet language.
-We should be able to use the variable as an argument to the local function `substituteString`.
 
-See the usage example below:
+```{code-cell} csharp
+(char,char)[] leetSubstitutions = new (char,char)[] {
+  ('A', '4'),
+  ('4', 'A'),
+  ('E', '3'),
+  ('3', 'E'),
+  ('L', '1'),
+  ('1', 'L'),
+  ('O', '0'),
+  ('0', 'O'),
+  ('S', '5'),
+  ('5', 'S'),
+  ('T', '7'),
+  ('7', 'T')
+};
+```
 
-```csharp
+We should be able to use the variable as an argument to the local function `substituteString`:
+
+```{code-cell} csharp
 Console.WriteLine(
   substituteString("1337 LOLS", leetSubstitutions)
 );
 ```
 
-```output
-LEET 1015
+Since the variable contains all the substitutions necessary for the the Leet language you should also be able to iterate over it using a `foreach`:
+
+```{code-cell} csharp
+:tags: [hide-output]
+foreach ((char,char) sub in leetSubstitutions)
+  Console.WriteLine($"{sub.Item1} => {sub.Item2}");
 ```
-````
+```{exercise-end}
+```
+
+
 
 
 ```{exercise-start}
@@ -695,21 +719,68 @@ Write a local function with the following signature:
 ```
 
 The method should return an array of `(char,string)` substitutions for the Robber's language when given a `vowel` as input.
-Since the method returns returns an array of `(char,string)` pairs and not `(char,char)` pairs you should be able to use any result of calling the method as the second argument to `substituteStringUsingString`.
 
-See the usage example below:
+Since the method returns returns an array of `(char,string)` pairs and not `(char,char)` pairs you should be able to use any result of calling the method as the second argument to `substituteCharUsingString`:
 
 ```{code-cell} csharp
 :tags: [remove-input]
 (char,string)[] makeRobbersSubstitutions (char vowel)
   => new (char,string)[] {
-    ('l', "lol") // NOT ACTUAL IMPLEMENTATION!
+      ('B', $"B{vowel}B"),
+      ('C', $"C{vowel}C"),
+      ('D', $"D{vowel}D"),
+      ('F', $"F{vowel}F"),
+      ('G', $"G{vowel}G"),
+      ('H', $"H{vowel}H"),
+      ('J', $"J{vowel}J"),
+      ('K', $"K{vowel}K"),
+      ('L', $"L{vowel}L"),
+      ('M', $"M{vowel}M"),
+      ('N', $"N{vowel}N"),
+      ('P', $"P{vowel}P"),
+      ('Q', $"Q{vowel}Q"),
+      ('R', $"R{vowel}R"),
+      ('S', $"S{vowel}S"),
+      ('T', $"T{vowel}T"),
+      ('V', $"V{vowel}V"),
+      ('X', $"X{vowel}X"),
+      ('Y', $"Y{vowel}Y"),
+      ('Z', $"Z{vowel}Z"),
+      ('b', $"b{vowel}b"),
+      ('c', $"c{vowel}c"),
+      ('d', $"d{vowel}d"),
+      ('f', $"f{vowel}f"),
+      ('g', $"g{vowel}g"),
+      ('h', $"h{vowel}h"),
+      ('j', $"j{vowel}j"),
+      ('k', $"k{vowel}k"),
+      ('l', $"l{vowel}l"),
+      ('m', $"m{vowel}m"),
+      ('n', $"n{vowel}n"),
+      ('p', $"p{vowel}p"),
+      ('q', $"q{vowel}q"),
+      ('r', $"r{vowel}r"),
+      ('s', $"s{vowel}s"),
+      ('t', $"t{vowel}t"),
+      ('v', $"v{vowel}v"),
+      ('x', $"x{vowel}x"),
+      ('y', $"y{vowel}y"),
+      ('z', $"z{vowel}z")
   };
 ```
 ```{code-cell} csharp
 Console.WriteLine(
   substituteCharUsingString('l',
       makeRobbersSubstitutions('o')));
+```
+
+Since the method returns an array you should also be able to iterate over the substitutions using a `foreach`:
+
+```{code-cell} csharp
+:tags: [hide-output]
+(char,string)[] substitutions = makeRobbersSubstitutions('a');
+foreach ((char,string) sub in substitutions)
+  Console.WriteLine($"{sub.Item1} => {sub.Item2}");
 ```
 
 ```{exercise-end}
@@ -723,7 +794,7 @@ Write a method that takes an array of `(char, char)` tuples and returns a new ar
 It should have the following signature:
 
 ```csharp
-(char, string)[] charCharArrayToCharStringArray ((char, char)[] substitutions);
+(char,string)[] charCharArrayToCharStringArray ((char, char)[] substitutions);
 ```
 ````
 
