@@ -177,6 +177,8 @@ Give your own example and explain it in your own words.
 :label: ex:concrete-constructed-object-composition:leet
 Build a `FlipFlopLeetCipher` that encodes or decodes every other character.
 Use the `FlipFlopCaesarCipher` that we wrote in this chapter as inspiration.
+
+Note: Here we don't mean that the cipher should encode some characters and decode some other character. We mean that the cipher should encode all, say odd characters, and leave all even characters be whatever they are.
 ```
 
 ```{exercise}
