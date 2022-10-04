@@ -1224,7 +1224,7 @@ Well, if all the constructors have parameters and we want to expose all paramete
 This is bizarre and a nightmare to maintain.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>If you use constructed object composiotion all the way “down”, the you have to sum the number of constructor arguments all the way “up”. Remember the <a class="reference internal" href="iteration.html#dry"><span class="std std-ref">DRY</span></a> principle? Kind of sounds like a lot of duplication, don’t you think?</p>
+<p>If you use constructed object compostion all the way “down”, the you have to sum the number of constructor arguments all the way “up”. Remember the <a class="reference internal" href="iteration.html#dry"><span class="std std-ref">DRY</span></a> principle? Kind of sounds like a lot of duplication, don’t you think?</p>
 </div>
 <p>So, hopefully that settles it.
 Concrete constructed object composition should be used sparingly and with caution.
@@ -1292,7 +1292,7 @@ It composes our <code class="docutils literal notranslate"><span class="pre">Cae
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2260.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2176.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1337,12 +1337,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.1.18:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.131:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2260.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2176.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1428,7 +1428,8 @@ Well, instead of instantiating the object that we want to compose ourselves, we 
 </div>
 </div>
 </div>
-<p>Notice that the lines that instantiated <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code>s and assigned them to the instance variables are now gone.</p>
+<p>Notice that the lines that instantiated <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code>s and assigned them to the instance variables are now gone.
+They used to look like this:</p>
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">flip</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CaesarCipher</span><span class="p">(</span><span class="n">steps</span><span class="p">);</span><span class="w"></span>
 <span class="n">flop</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CaesarCipher</span><span class="p">(-</span><span class="n">steps</span><span class="p">);</span><span class="w"></span>
 </pre></div>
@@ -1436,8 +1437,15 @@ Well, instead of instantiating the object that we want to compose ourselves, we 
 <p>So where do we assign values to the variables <code class="docutils literal notranslate"><span class="pre">flip</span></code> and <code class="docutils literal notranslate"><span class="pre">flop</span></code> now?
 We still need the variables and we still need values for them since we’re still calling the method <code class="docutils literal notranslate"><span class="pre">Encode</span></code> on them later.</p>
 <p>Well, if you have a look at the constructor’s signature you can see that we’re now accepting two arguments of type <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code>.
-As we will learn in the chapter on <span class="xref myst">dependency inversion</span>, passing arguments like this is known as “parameter injcetion”.</p>
+As we will learn in the chapter on <span class="xref myst">dependency inversion</span>, passing arguments like this is known as “constructor injection”.
+In other words, the old two lines have been replaced with this:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="n">flip</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">flip</span><span class="p">;</span><span class="w"></span>
+<span class="k">this</span><span class="p">.</span><span class="n">flop</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">flop</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Instead of saying which particular <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> object we will use, and instead of requiring that users of this class pass whatever parameters we need to pass on to the <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> cwe simply state that to run this method you must also provide a <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> object.</p>
+<p>So how do we use this updated class?
+Let’s try it out by passing two objects of type <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> upon instantiation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">cipher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FlipFlopCaesarCipher</span><span class="p">(</span><span class="w"></span>

@@ -56,7 +56,7 @@ Well, if all the constructors have parameters and we want to expose all paramete
 This is bizarre and a nightmare to maintain.
 
 ```{important}
-If you use constructed object composiotion all the way "down", the you have to sum the number of constructor arguments all the way "up". Remember the [DRY](DRY) principle? Kind of sounds like a lot of duplication, don't you think?
+If you use constructed object compostion all the way "down", the you have to sum the number of constructor arguments all the way "up". Remember the [DRY](DRY) principle? Kind of sounds like a lot of duplication, don't you think?
 ```
 
 So, hopefully that settles it.
@@ -163,6 +163,7 @@ class FlipFlopCaesarCipher
 ```
 
 Notice that the lines that instantiated `CaesarCipher`s and assigned them to the instance variables are now gone.
+They used to look like this:
 
 ```csharp
 flip = new CaesarCipher(steps);
@@ -173,9 +174,18 @@ So where do we assign values to the variables `flip` and `flop` now?
 We still need the variables and we still need values for them since we're still calling the method `Encode` on them later.
 
 Well, if you have a look at the constructor's signature you can see that we're now accepting two arguments of type `CaesarCipher`.
-As we will learn in the chapter on [dependency inversion](dependency-inversion), passing arguments like this is known as "parameter injcetion".
+As we will learn in the chapter on [dependency inversion](dependency-inversion), passing arguments like this is known as "constructor injection".
+In other words, the old two lines have been replaced with this:
+
+```csharp
+this.flip = flip;
+this.flop = flop;
+```
 
 Instead of saying which particular `CaesarCipher` object we will use, and instead of requiring that users of this class pass whatever parameters we need to pass on to the `CaesarCipher` cwe simply state that to run this method you must also provide a `CaesarCipher` object.
+
+So how do we use this updated class?
+Let's try it out by passing two objects of type `CaesarCipher` upon instantiation.
 
 ```{code-cell} csharp
 var cipher = new FlipFlopCaesarCipher(
