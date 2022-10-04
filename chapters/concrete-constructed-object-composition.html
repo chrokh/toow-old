@@ -1248,7 +1248,7 @@ Let’s try to build this using concrete constructed object composition by compo
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2116.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2107.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1293,12 +1293,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.131:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.1.80:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2116.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2107.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1435,6 +1435,7 @@ Give your own example and explain it in your own words.</p>
 <section id="exercise-content">
 <p>Build a <code class="docutils literal notranslate"><span class="pre">FlipFlopLeetCipher</span></code> that encodes or decodes every other character.
 Use the <code class="docutils literal notranslate"><span class="pre">FlipFlopCaesarCipher</span></code> that we wrote in this chapter as inspiration.</p>
+<p>Note: Here we don’t mean that the cipher should encode some characters and decode some other character. We mean that the cipher should encode all, say odd characters, and leave all even characters be whatever they are.</p>
 </section>
 </div>
 <div class="exercise admonition" id="ex:concrete-constructed-object-composition:own-example">
