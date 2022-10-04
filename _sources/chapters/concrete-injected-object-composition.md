@@ -21,13 +21,6 @@ Work in progress.
 In this chapter we’re exploring the object composition abstraction level that we refer to as "concrete injected object composition". Please have a look at the chapter [object composition](object-composition:abstraction-levels) if you have not already.
 ```
 
-In this chapter we're going to explore level 3 object composition based on the, previously outlined, [object composition abstraction levels](abstraction-levels).
-Why are we talking about level 3 before level 2 you ask.
-Isn't level 3 more indirect than level 2?
-Yes it is, but going from constructed concrete (level 1) to constructed abstract (level 2) doesn't win us all that much.
-But to understand level 2 we must understand [subtyping](subtype-polymorphism) so we'll deal with that later.
-
-
 
 
 ## Motivation
@@ -42,7 +35,7 @@ Remember how `FlipFlopCaesarCipher` had to expose all constructor parameters of 
 More generally, any constructor parameter of the composed object that we want to remain variable has to be exposed as a parameter (possibly through the constructor) of the composing object.
 
 ```{important}
-The danger of concrete dependency construction is that whenever the constructor of the composed object changes, the composer must also change.
+The danger of concrete constructed object composition is that whenever the constructor of the composed object changes, the composer must also change.
 ```
 
 %Whenever we want to change the constructor of the composed object, that change ripples and causes the composing object to also have to change.
@@ -223,11 +216,11 @@ They don't have to be arranged in a encode/decode fashion.
 ## Discussion
 
 When we are constructor injecting, we're giving ourself the ability to create multiple different variations of the object receiving the injection (`FlipFlopCaesarCipher` by simply passing in a different instances of the injected object (`CaesarCipher`).
-This is immensely more flexible than in the case of concrete dependency construction where we create the object directly.
+This is immensely more flexible than in the case of concrete constructed object composition where we create the object directly.
 
 In the case of dependency *construction* there is only ever two kinds of `CaesarCipher`.
 Whatever two instances we instantiate. Those are the ones we'll get.
-In the case of dependency *injection* the number of different variations of `FlipFlopCipher` that we can instantiate simply depends on how many different variations of `RobbersCipher` we can instantiate and then inject.
+In the case of dependency *injection* the number of different variations of `FlipFlopCaesarCipher` that we can instantiate simply depends on how many different variations of `RobbersCipher` we can instantiate and then inject.
 
 Of course we could have written the same program using concrete *constructed* object composition.
 Heck, we could even have written the same program using method composition.
@@ -235,7 +228,7 @@ But the point is not that the problem cannot be solved using a more direct techn
 The point is that the more direct technique is less [maintainable](maintainability).
 It suffers from what we later will learn to call [tighter coupling](coupling).
 
-What's important to realize is that the behavior of `RobbersStringCipher` is not determined at *compile-time* but at *run-time*.
+What's important to realize is that the behavior of `FlipFlopCaesarCipher` is not determined at *compile-time* but at *run-time*.
 
 %Some of you might object to this and say that all this is way too complicated.
 %Would it not be simpler to just ask the user, using `Console.ReadKey`, directly in the `RobbersCharCipher` class.
@@ -587,7 +580,7 @@ Give your own examples and explain it in your own words.
 %```
 
 ```{exercise}
-Why is concrete dependency construction problematic?
+Why is concrete constructed object composition problematic?
 
 *Hint: Constructor arguments.*
 ```

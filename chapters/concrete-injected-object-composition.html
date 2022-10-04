@@ -1196,11 +1196,6 @@ title="Print to PDF"
 <p class="admonition-title">Prerequisites</p>
 <p>In this chapter we’re exploring the object composition abstraction level that we refer to as “concrete injected object composition”. Please have a look at the chapter <a class="reference internal" href="object-composition.html#object-composition-abstraction-levels"><span class="std std-ref">object composition</span></a> if you have not already.</p>
 </div>
-<p>In this chapter we’re going to explore level 3 object composition based on the, previously outlined, <span class="xref myst">object composition abstraction levels</span>.
-Why are we talking about level 3 before level 2 you ask.
-Isn’t level 3 more indirect than level 2?
-Yes it is, but going from constructed concrete (level 1) to constructed abstract (level 2) doesn’t win us all that much.
-But to understand level 2 we must understand <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtyping</span></a> so we’ll deal with that later.</p>
 <section id="motivation">
 <h2><span class="section-number">59.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
 <p>When we move from <em>constructed</em> to <em>injected</em> object composition we gain run-time modifiability of which object is being composed.
@@ -1212,7 +1207,7 @@ Remember how <code class="docutils literal notranslate"><span class="pre">FlipFl
 More generally, any constructor parameter of the composed object that we want to remain variable has to be exposed as a parameter (possibly through the constructor) of the composing object.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>The danger of concrete dependency construction is that whenever the constructor of the composed object changes, the composer must also change.</p>
+<p>The danger of concrete constructed object composition is that whenever the constructor of the composed object changes, the composer must also change.</p>
 </div>
 <p>Why is this a problem?
 Well, the change “ripples” through the system.
@@ -1297,7 +1292,7 @@ It composes our <code class="docutils literal notranslate"><span class="pre">Cae
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2322.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2260.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1342,12 +1337,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.147:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.1.18:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2322.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2260.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1493,16 +1488,16 @@ They don’t have to be arranged in a encode/decode fashion.</p>
 <section id="discussion">
 <h2><span class="section-number">59.4. </span>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">#</a></h2>
 <p>When we are constructor injecting, we’re giving ourself the ability to create multiple different variations of the object receiving the injection (<code class="docutils literal notranslate"><span class="pre">FlipFlopCaesarCipher</span></code> by simply passing in a different instances of the injected object (<code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code>).
-This is immensely more flexible than in the case of concrete dependency construction where we create the object directly.</p>
+This is immensely more flexible than in the case of concrete constructed object composition where we create the object directly.</p>
 <p>In the case of dependency <em>construction</em> there is only ever two kinds of <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code>.
 Whatever two instances we instantiate. Those are the ones we’ll get.
-In the case of dependency <em>injection</em> the number of different variations of <code class="docutils literal notranslate"><span class="pre">FlipFlopCipher</span></code> that we can instantiate simply depends on how many different variations of <code class="docutils literal notranslate"><span class="pre">RobbersCipher</span></code> we can instantiate and then inject.</p>
+In the case of dependency <em>injection</em> the number of different variations of <code class="docutils literal notranslate"><span class="pre">FlipFlopCaesarCipher</span></code> that we can instantiate simply depends on how many different variations of <code class="docutils literal notranslate"><span class="pre">RobbersCipher</span></code> we can instantiate and then inject.</p>
 <p>Of course we could have written the same program using concrete <em>constructed</em> object composition.
 Heck, we could even have written the same program using method composition.
 But the point is not that the problem cannot be solved using a more direct technique.
 The point is that the more direct technique is less <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainable</span></a>.
 It suffers from what we later will learn to call <a class="reference internal" href="coupling.html"><span class="doc std std-doc">tighter coupling</span></a>.</p>
-<p>What’s important to realize is that the behavior of <code class="docutils literal notranslate"><span class="pre">RobbersStringCipher</span></code> is not determined at <em>compile-time</em> but at <em>run-time</em>.</p>
+<p>What’s important to realize is that the behavior of <code class="docutils literal notranslate"><span class="pre">FlipFlopCaesarCipher</span></code> is not determined at <em>compile-time</em> but at <em>run-time</em>.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>When we’re using dependency injection we give ourselves the ability to solve many different problems by simply composing our simple parts at run-time.</p>
@@ -1568,7 +1563,7 @@ Give your own examples and explain it in your own words.</p>
 
 <p class="admonition-title"><span class="caption-number">Exercise 59.7 </span></p>
 <section id="exercise-content">
-<p>Why is concrete dependency construction problematic?</p>
+<p>Why is concrete constructed object composition problematic?</p>
 <p><em>Hint: Constructor arguments.</em></p>
 </section>
 </div>
