@@ -9,5 +9,6 @@ Work in progress.
 % - Also abstract factory pattern (but this is trivial).
 % - Example: Where do we get ciphers from?
 % - Highlight the similarities with bridge pattern!
+% - Tie back to example in abstract constructed object composition.
 
 

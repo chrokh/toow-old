@@ -4,6 +4,8 @@
 Work in progress.
 ```
 
+% EXAMPLE: SOLVE THE ISSUE DISCUSSED IN INHERITANCE CHAPTER WHERE WE COULDN'T IMPLEMENT THE FOREACH FOR BOTH CHAR-TO-STRING CIPHERS and CHAR-TO-CHAR CIPHERS. USE COMPOSITION!
+
 %It is time.
 %We are now ready to talk about abstraction depdendency injection.
 %Where we use subtype polymoprhism to its fullest capacity.
