@@ -549,13 +549,13 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="advanced-access-modifiers.html">
-   63. Access modifiers (advanced)
+  <a class="reference internal" href="abstract-classes.html">
+   63. Abstract classes
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="overriding.html">
-   64. Overriding
+  <a class="reference internal" href="advanced-access-modifiers.html">
+   64. Access modifiers (advanced)
   </a>
  </li>
  <li class="toctree-l1">
@@ -1168,7 +1168,7 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#identity-cipher">
+    <a class="reference internal nav-link" href="#subtype-polymorpism-identity-cipher">
      61.3.5. Identity cipher
     </a>
    </li>
@@ -1276,7 +1276,7 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#identity-cipher">
+    <a class="reference internal nav-link" href="#subtype-polymorpism-identity-cipher">
      61.3.5. Identity cipher
     </a>
    </li>
@@ -1491,7 +1491,7 @@ We only know about what’s in the compile-time type.</p>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2869.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2942.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1536,12 +1536,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.2.2:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.1.38:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2869.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2942.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1953,8 +1953,8 @@ Pretty neat right?</p>
 We’re treating different types as if they are of the same type.
 We’re treating different types of ciphers as if they are all of the same type.</p>
 </section>
-<section id="identity-cipher">
-<h3><span class="section-number">61.3.5. </span>Identity cipher<a class="headerlink" href="#identity-cipher" title="Permalink to this headline">#</a></h3>
+<section id="subtype-polymorpism-identity-cipher">
+<span id="identity-cipher"></span><h3><span class="section-number">61.3.5. </span>Identity cipher<a class="headerlink" href="#subtype-polymorpism-identity-cipher" title="Permalink to this headline">#</a></h3>
 <p>While we’re at it, let’s also write the simplest possible cipher that we can image.
 Namely a cipher that doesn’t actually perform any modifications of the input message but instead just returns it as it is.</p>
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">NoCipher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICipher</span><span class="w"></span>

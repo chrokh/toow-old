@@ -268,6 +268,13 @@ LEET <=> 1337
 Work in progress.
 ```
 
+(identity-cipher)=
+### Identity cipher
+
+```{warning}
+Work in progress.
+```
+
 
 
 % ## TODO: Andra språk

@@ -1,3 +1,4 @@
+(access-modifiers)=
 # Access modifiers (basic).
 
 ```{warning}
@@ -10,6 +11,8 @@ Work in progress.
 %- Principle: The state space of a type should equal the state space of whatever domain concept it is modeling.
 %- Modifiers for variables, methods and classes
 %
+
+% ALSO: MODIFIERS FOR CLASSES.
 
 
 ## Exercises

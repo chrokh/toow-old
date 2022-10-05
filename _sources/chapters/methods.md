@@ -445,6 +445,7 @@ This repetition is not ideal.
 So how do we get rid of this duplication?
 
 
+(methods:substitution-ciphers)=
 (methods-substitutions)=
 ### Substitution ciphers
 
