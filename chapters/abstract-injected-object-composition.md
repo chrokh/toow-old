@@ -1,17 +1,516 @@
+---
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  display_name: csharp
+  language: .net-csharp
+  name: .net-csharp
+---
+
 # Abstract injected object composition
 
 ```{warning}
 Work in progress.
 ```
 
+```{admonition} Prerequisites
+:class: info
+In this chapter we’re exploring the object composition abstraction level that we refer to as "abstract constructed object composition". Please have a look at the chapter [object composition](object-composition:abstraction-levels) if you have not already.
+```
+
+
 % EXAMPLE: SOLVE THE ISSUE DISCUSSED IN INHERITANCE CHAPTER WHERE WE COULDN'T IMPLEMENT THE FOREACH FOR BOTH CHAR-TO-STRING CIPHERS and CHAR-TO-CHAR CIPHERS. USE COMPOSITION!
 
-%It is time.
-%We are now ready to talk about abstraction depdendency injection.
+## Motivation
+
+It is time.
+We are finally ready to talk about abstraction depdendency injection.
+This is the creme de la creme in object oriented programming.
 %Where we use subtype polymoprhism to its fullest capacity.
+
+With abstract injected object composition we are able to swap out both types and values at run-time.
+Meaning that we don't couple to any particular concrete implementation or type at compile-time.
+This makes our code [decoupled](coupling) and increases [maintainability](maintainability).
+
+As we will see in one of the examples, abstract injected object composition enables us to follow the maxim [composition over inheritance](composition-over-inheritance).
+As if that wasn't enough, almost all [design patterns](design-patterns) are, in one way or another, using abstract injected object composition.
+
+Enough motivation, let's get in to it.
+
+
+
+## Definition
+
+An object composition is abstract if the compile-time type of the composed object is abstract.
+It is injected if the composed object is constructed outside of the composing object and instead passed into it (via the constructor, a method, or property).
+
+% TODO: Actually it could be injected through a public field as well no?
+
+Remember, we've discussed the notion of [injection](injection) in the chapter on concrete injected object composition.
+But in short, the idea is that insted of instantiating the object ourselves, we let someone else be responsible for instantiating that object and then passing it to us.
+Instead of, for example, having a constructor that accepts some parameters that I'm going to use to instantiate some object, I simply use the type of that object as the parameter type.
+Instead of asking others to send me some data so that I can instantiate an object, I simply ask them for the object instead.
+
+```{important}
+Instead of instantiating the dependency ourselves, we simply parameterize a method or a constructor so that callers can pass the dependency.
+```
+
+Importantly though, now we're talking about *abstract* injected object composition.
+Which means that the compile-time type of the composed object *must* be abstract.
+Meaning, must be an [interface](interfaces) or an [abstract class](abstract-classes).
+
+
+## Examples
+
+### Substitution ciphers
+
+Let's replace [inheritance](inheritance) with composition.
+Remember how we've struggled, in the chapters on [methods](methods), [inheritance](inheritance), and [abstract classes](abstract-classes) to get rid of the duplicated `foreach` loop in substitution ciphers.
+The loop that iterates over an input `string`, calls a method that takes a `char` and depending on the cipher returns a `char` or a `string`, and then concatenates the result.
+
+The problem has been that some ciphers, like the Caesar cipher, returns a `char` when encoding a `char`, while others, like the Robber's language, returns a `string` when encoding a `char`.
+Well, when we're using composition rather than inheritance, this is no longer a big deal.
+Check this out:
+
+```{code-cell} csharp
+:tags: [hide-input]
+interface ICharToCharCipher
+{
+  char Encode (char input);
+}
+
+interface IStringToStringCipher
+{
+  string Encode (string input);
+}
+
+interface ICharToStringCipher
+{
+  string Encode (char input);
+}
+```
+
+(abstract-injected-object-composition:examples:adapter)=
+```{code-cell} csharp
+class SubstitutionCipher : IStringToStringCipher
+{
+  ICharToStringCipher cipher;
+
+  public SubstitutionCipher (ICharToCharCipher cipher)
+    => this.cipher = new CharToStringAdapter(cipher);
+
+  public SubstitutionCipher (ICharToStringCipher cipher)
+    => this.cipher = cipher;
+
+  public string Encode (string input)
+  {
+    string output = "";
+    foreach (char c in input)
+      output += cipher.Encode(c);
+    return output;
+  }
+}
+
+class CharToStringAdapter : ICharToStringCipher
+{
+  ICharToCharCipher cipher;
+
+  public CharToStringAdapter (ICharToCharCipher cipher)
+    => this.cipher = cipher;
+
+  public string Encode (char input)
+    => cipher.Encode(input).ToString();
+}
+```
+
+Instead of letting the substitution cipher be a superclass that other classes can subclass (meaning: is-a) we simply say that it's a class that composes (meaning: has-a) other classes.
+
+But what's this `CharToStringAdapter`?
+Well, that's the [design pattern](design-patterns) known as adapter pattern.
+But it's also just a simple solution to the problem caused by some ciphers returning a `char` when encoding a `char` while others return a `string`.
+With the adapter, which *also uses abstract injected object composition*, we can simply wrap any cipher that implements the interface `ICharToCharCipher` and make it behave as if it implemented the interface `ICharToStringCipher`.
+
+So how do we use these classes?
+Can we really treat all substitution ciphers uniformly now?
+
+```{code-cell} csharp
+:tags: [hide-input]
+class RobbersCipher : ICharToStringCipher, IStringToStringCipher
+{
+  private char vowel;
+
+  public RobbersCipher (char vowel)
+    => this.vowel = vowel;
+
+  public string Encode (char input)
+  {
+    string consonants = "BCDFGHJKLMNPQRSTVXYZ";
+    if (consonants.IndexOf(Char.ToUpper(input)) != -1)
+      return $"{input}{vowel}{input}";
+    else
+      return $"{input}";
+  }
+
+  public string Encode (string input)
+  {
+    string output = "";
+    foreach (char letter in input)
+      output += Encode (letter);
+    return output;
+  }
+}
+
+class LeetCipher : IStringToStringCipher, ICharToCharCipher
+{
+  public char Encode (char input)
+  {
+    switch (input)
+    {
+      case 'L': return '1'; case '1': return 'L';
+      case 'A': return '4'; case '4': return 'A';
+      case 'O': return '0'; case '0': return 'O';
+      case 'T': return '7'; case '7': return 'T';
+      case 'E': return '3'; case '3': return 'E';
+      default: return input;
+    }
+  }
+
+  public string Encode (string input)
+  {
+    string output = "";
+    foreach (char c in input)
+      output += Encode(c);
+    return output;
+  }
+}
+
+class CaesarCipher : ICharToCharCipher, IStringToStringCipher
+{
+  int steps;
+
+  public CaesarCipher (int steps)
+    => this.steps = steps;
+
+  public char Encode (char input)
+  {
+    string alphabet = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
+    int i = alphabet.IndexOf(Char.ToUpper(input));
+    int newIndex = (i + steps) % alphabet.Length;
+    if (i != -1)
+    {
+      if (newIndex < 0)
+        newIndex += alphabet.Length;
+
+      if (Char.IsLower(input))
+        return Char.ToLower(alphabet[newIndex]);
+      else
+        return alphabet[newIndex];
+    }
+    return input;
+  }
+
+  public string Encode (string input)
+  {
+    string output = "";
+    foreach (char letter in input)
+      output += Encode(letter);
+    return output;
+  }
+}
+```
+
+```{code-cell} csharp
+SubstitutionCipher sub1 = new SubstitutionCipher(new RobbersCipher('o'));
+SubstitutionCipher sub2 = new SubstitutionCipher(new CharToStringAdapter(new CaesarCipher(1)));
+SubstitutionCipher sub3 = new SubstitutionCipher(new CharToStringAdapter(new LeetCipher()));
+```
+
+Indeed we can.
+Moreover, whenever we call the `Encode` method on any of these objects of type `SubstitutionCipher`, it's the same, one and only, `foreach` loop that executes.
+How about we call this mission accomplished?
+
+In the end you might say that it was a bit silly that we tried to replace a simple `foreach` loop which in a later chapter we will replace with [LINQ](linq) anyway.
+Nevertheless, the point is not that this particular loop was bad, but that this is an example of how you can find yourself in a position where you're repeating the same code over and over again for each implementation or subclass.
+
+
+### Flip Flop ciphers
+
+Let's explore our newfound power.
+You must have known that we were going to return to the flipflops.
+In the chapter on [abstract injected object composition](concrete-injected-object-composition:examples:general-flip-flop) we discussed how our flip flop cipher was coupled to the idea of a Caesar cipher even though it in a sense has nothing to do with that specific cipher.
+
+Let's implement it more generally using abstract injected object composition.
+
+```{code-cell} csharp
+class FlipFlopCipher : IStringToStringCipher
+{
+  ICharToStringCipher flip;
+  ICharToStringCipher flop;
+
+  public FlipFlopCipher (ICharToStringCipher flip, ICharToStringCipher flop)
+  {
+    this.flip = flip;
+    this.flop = flop;
+  }
+
+  public string Encode (string input)
+  {
+    string output = "";
+    for (int i=0; i<input.Length; i++)
+      if (i % 2 == 0)
+        output += flip.Encode(input[i]);
+      else
+        output += flop.Encode(input[i]);
+    return output;
+  }
+}
+```
+
+Notice how nothing in the implementation had to change except for the types.
+It's exactly the same implementation as in the chapter on [abstract injected object composition](concrete-injected-object-composition:examples:general-flip-flop) except for the fact that we've generalized the types and also have made the `FlipFlopCipher` implement the interface `IStringToStringCipher`.
+In other words, we've moved from concrete compile-time types to abstract compile-time types.
+
+Why did we choose to, in the constructor, take objects of type `ICharToStringCipher` rather than `ICharToChar`?
+Think back to the example we just gave where we eliminated the [duplicated foreach](abstract-injected-object-composition:examples:adapter).
+By introducing an adapter we are able to convert any `ICharToCharCipher` to a `ICharToStringCipher`.
+The inverse conversion however is not as trivial.
+So if we want the `FlipFlopCipher` to support all substitution ciphers that we have seen then we must pick the type to which others can be converted.
+
+Let's see this thing in action, shall we?
+
+```{code-cell} csharp
+FlipFlopCipher cipher = new FlipFlopCipher(
+    new RobbersCipher('a'),
+    new CharToStringAdapter(new CaesarCipher(1)));
+
+Console.WriteLine( cipher.Encode("HELLO WORLD") );
+```
+
+%Pretty wild stuff right?
+Let me be the first to say that our ciphers are finally getting pretty interesting.
+After the exercises in this chapter I'm suspecting you'll have a pretty good idea of the power of [composition over inheritance](composition-over-inheritance) and abstract injected object composition.
+
+
+
+## Exercises
+
+```{exercise}
+What is the difference between *constructed* and *injected* abstract object composition?
+```
+
+```{exercise}
+What is the difference between *concrete* and *abstract* injected object composition?
+```
+
+```{exercise}
+Invent and implement another class that implements `IStringToStringCipher`, `ICharToCharCipher`, or `ICharToStringCipher` and that uses abstract injected object composition to work.
+```
+
+```{exercise}
+Draw the [quadrant diagram of abstraction levels in object composition](composition-quadrants) and explain all four abstraction levels.
+Remember to give examples of each.
+```
+
+
+
+```{exercise-start}
+:label: ex:array-cipher
+```
+
+Write a class called `SequenceCipher` that implements the interface `IStringToStringCipher`.
+Its constructor must take a single argument of type `IStringToStringCipher[]`, called `ciphers`.
+The `Encode` method runs the `Encode` method of each `IStringToStringCipher` in `ciphers`, in sequence, on the input.
+
+```{code-cell} csharp
+:tags: [remove-input]
+class SequenceCipher
+{
+  IStringToStringCipher[] ciphers;
+  public SequenceCipher (IStringToStringCipher[] ciphers)
+    => this.ciphers = ciphers;
+
+  public string Encode (string input)
+  {
+    string output = input;
+    foreach (var cipher in ciphers)
+      output = cipher.Encode(output);
+    return output;
+  }
+}
+```
+
+It should behave as in the usage example below:
+
+```{code-cell} csharp
+Console.WriteLine(
+  new SequenceCipher(new IStringToStringCipher[] {
+    new SubstitutionCipher(new RobbersCipher('O')),
+    new SubstitutionCipher(new RobbersCipher('E')),
+    new SubstitutionCipher(new CharToStringAdapter(new LeetCipher())),
+    }).Encode("HELLO ELITE")
+);
+```
+```{exercise-end}
+```
+
+
+
+```{exercise-start}
+:label: abstract-injected-object-composition:exercises:predicates
+```
+Write a class called `ConditionalCharToCharCipher` that implements the interface `ICharToCharCipher`.
+Its constructor must take two arguments.
+One is of type `ICharToCharCipher` and the other is of type `ICharPredicate`.
+The interface `ICharPredicate` must look like this:
+
+```{code-cell} csharp
+interface ICharPredicate
+{
+  bool Check (char input);
+}
+```
+
+The `Encode` method runs the `Encode` method of the `ICharToCharCipher` if and only if the method `Check` in `ICharPredicate` returns `true` when passed the `char` that we are trying to encode.
+To test whether this class works you must also implement a concrete implementation for `ICharPredicate`.
+
+```{code-cell} csharp
+:tags: [remove-input]
+class ConditionalCharToCharCipher : ICharToCharCipher
+{
+  ICharToCharCipher cipher;
+  ICharPredicate pred;
+
+  public ConditionalCharToCharCipher (ICharToCharCipher cipher, ICharPredicate pred)
+  {
+    this.cipher = cipher;
+    this.pred = pred;
+  }
+
+  public char Encode (char input)
+    => pred.Check(input) ? cipher.Encode(input) : input;
+}
+```
+
+For the usage example, let's use a simple predicate that just checks whether its input is uppercase or not.
+
+```{code-cell} csharp
+class IsUpperCase : ICharPredicate
+{
+  public bool Check (char input) => Char.IsUpper(input);
+}
+```
+
+With that in place we should be able to set up a conditional cipher.
+We should then be able to run the encode method of that cipher and depending on what we pass it either get encoded characters or the same characters that we pass it back.
+
+```{code-cell} csharp
+ConditionalCharToCharCipher cipher = new ConditionalCharToCharCipher(
+  new CaesarCipher(1),
+  new IsUpperCase());
+```
+
+If we pass an uppercase letter it should encode it using the cipher.
+
+```{code-cell} csharp
+Console.WriteLine( cipher.Encode('A') );
+```
+
+If we pass a lowercase letter it should return the same letter.
+
+```{code-cell} csharp
+Console.WriteLine( cipher.Encode('a') );
+```
+
+
+*Extra questions:*
+
+1. Why are we *injecting* rather than *constructing* the `ICharPredicate`? Explain in your own words.
+2. One could argue that it wouldn't make sense to couple to `ICharToStringCipher` instead of `ICharToCharCipher`. How would you defend that position?
+
+By the way, in the chapters on [generics](generic-types) we will learn how to generalize this implementation so that it also works for `ICharToString` ciphers without adding duplicated code.
+```{exercise-end}
+```
+
+
+
+%```{exercise}
+%Define a class called `CipherRepeater`.
+%Let it take a cipher in the constructor.
 %
-%## Motivation
+%Let it implement each of the interfaces 
+%Start with the code you wrote in {numref}`ex:subtype-polymorphism:encodeNTimes`
+%```
+
+
+
+% ==== TODOs: =====
+
+%```{exercise}
+%Write a class called `CharWiseCompositeCipher` that implements the interface `ICharCipher`.
+%Note that we mean `ICharCipher` and not `ICipher`.
+%Its constructor must take two objects of type `ICharCipher` as arguments.
+%The `Encode` method runs the `Encode` method of both the injected ciphers on the input `char` before returning the result.
+%TODO: THIS DOES NOT WORK BECAUSE Encode :: ICharCipher ~> char -> string
+%```
+
+
+
 %
+%````{exercise}
+%Write a program with three classes called `Speech`, `MultiSpeech`   has one class called `Animal` and one class called `Speech`.
+%
+%```
+%        Animal
+%==========================
+%+ Animal (Speech speech);
+%+ string Speak ();
+%--------------------------
+%
+%
+%        Speech
+%==========================
+%+ Speech (string sound);
+%+ string Speak ();
+%--------------------------
+%```
+%
+%Using your classes, it should be possible to write the following program:
+%
+%```csharp
+%Speech meow = new Speech("meow");
+%Speech blub = new Speech("blub");
+%Speech meowblub = new MultiSpeech(meow, blub);
+%
+%Animal cat = new Animal(meow);
+%Animal fish = new Animal(blub);
+%Animal catfish = new Animal(meowblub);
+%
+%Console.WriteLine( cat.Speak() );
+%Console.WriteLine( fish.Speak() );
+%Console.WriteLine( catfish.Speak() );
+%```
+%
+%And if you run that program, you should get the following output:
+%
+%```output
+%meow
+%blub
+%meow blub
+%```
+%````
+% Hint: This is just good old [recursion](recursion) but using classes.
+
+
+
+
+
+-------------
+
+
+% TODO: Use any of this old stuff?
 %Think way back to where we ended in the chapter on [concrete constructed object composition](concrete-constructed-object-composition).
 %Instead of letting `RobbersStringCipher` instantiate a `RobbersCharCipher` we *injected* it.
 %This meant that we got rid of the need to expose whatever constructor parameters the inner `char` cipher needed in the outer `string` cipher.
@@ -20,38 +519,38 @@ Work in progress.
 %We were able to inject instances of `RobbersCharCipher` when creating instances of `RobbersStringCipher`.
 %However, when we had created a `CaesarCharCipher` we couldn't inject that to `RobbersStringCipher` when we wanted to create a Caesar cipher.
 %
-%%We started with:
-%%
-%%```csharp
-%%class RobbersStringCipher
-%%{
-%%  public string Encode (string input)
-%%  {
-%%    RobbersCharCipher charCipher = new RobbersCharCipher();
-%%    // ...
-%%  }
-%%}
-%%```
-%%
-%%But rewrote it to:
-%%
-%%```csharp
-%%class RobbersStringCipher
-%%{
-%%  RobbersCharCipher charCipher;
-%%
-%%  public RobbersStringCipher (RobbersCharCipher charCipher)
-%%    => this.charCipher = charCipher;
-%%
-%%  public string Encode (string input)
-%%  {
-%%    // ...
-%%  }
-%%}
-%%```
+%We started with:
 %
-%%Remember how we said that there's a design principle stating that we should favor composition over inheritance?
-%%Here's the thing.
+%```csharp
+%class RobbersStringCipher
+%{
+%  public string Encode (string input)
+%  {
+%    RobbersCharCipher charCipher = new RobbersCharCipher();
+%    // ...
+%  }
+%}
+%```
+%
+%But rewrote it to:
+%
+%```csharp
+%class RobbersStringCipher
+%{
+%  RobbersCharCipher charCipher;
+%
+%  public RobbersStringCipher (RobbersCharCipher charCipher)
+%    => this.charCipher = charCipher;
+%
+%  public string Encode (string input)
+%  {
+%    // ...
+%  }
+%}
+%```
+%
+%Remember how we said that there's a design principle stating that we should favor composition over inheritance?
+%Here's the thing.
 %
 %Let's now look at where we more recently left off in the chapter on [concrete dependency injection](concrete-dependency-injection).
 %The idea of `CharWiseCipher` solves the problem of being able to reuse different `char` ciphers.
@@ -62,24 +561,6 @@ Work in progress.
 %Instead of subclassing `CharWiseCipher` in order to change which particular cipher we want to use, we're simply going to inject whatever cipher we need through the constructor.
 %The change is simple.
 %Here's what the new `CharWiseCipher` implementation looks like:
-%
-%```csharp
-%class CharWiseCipher
-%{
-%  ICharCipher charCipher;
-%
-%  public CharWiseCipher (ICharCipher charCipher)
-%    => this.charCipher = charCipher;
-%
-%  public string Encode (string input)
-%  {
-%    string output = "";
-%    foreach (char c in input)
-%      output += charCipher.Encode(c);
-%    return output;
-%  }
-%}
-%```
 %
 %Instead of *instantiating* the `ICharCipher` we simply expose it as a constructor parameter.
 %Since there is no [empty constructor](constructors), and since we have configured our compiler to treat [possible null references as errors](nothingness) we are guaranteed that whenever we have an instance of `CharWiseCipher` then we know that said instance will have access to an `ICharCipher`.
@@ -99,16 +580,10 @@ Work in progress.
 %Console.WriteLine(robbersCipher.Encode("LOL"));
 %```
 %
+
+
+%---
 %
-%```{exercise}
-%What is the difference between abstract *dependency* construction and abstract dependency *injection*?
-%```
-%
-%```{exercise}
-%What is the difference between *concrete* dependency injection and *abstract* dependency injection?
-%```
-%
-%Let's explore our newfound power.
 %How about a composite cipher?
 %A cipher that takes two ciphers as constructor arguments and upon encoding applies both of them in sequence.
 %
@@ -179,16 +654,6 @@ Work in progress.
 %By the way again, while we're not discussing data structures in this book you might be interested to know that this data structure is known as a "binary tree".
 %
 %
-%```{exercise}
-%Write a class called `DoubleCipher` that implements the interface `ICipher`.
-%Its constructor must take an `ICipher` as an argument.
-%The `Encode` method runs the `Encode` method of the injected cipher twice on the input data before returning the result.
-%```
-%
-%```{exercise}
-%Invent and implement another class that implements `ICipher` or `ICharCipher` that requires abstract dependency injection to work.
-%```
-%
 %Impressed yet?
 %Just imagine trying to write all these ciphers by hand.
 %Imagine trying to achieve the same level of run-time flexibility.
@@ -211,144 +676,3 @@ Work in progress.
 %%```{seealso}
 %%Dependency injection/inversion chapter.
 %%```
-%
-%```{exercise}
-%Write a class called `EvenOddCipher` that implements the interface `ICipher`.
-%Its constructor must take two arguments of type `ICipher`.
-%These arguments should be called `even` and `odd`.
-%The `Encode` method runs the `Encode` method of `even` on every even character of the input `string` and `odd` on every odd character of the input `string`.
-%```
-%
-%```{exercise}
-%Draw the [quadrant diagram of abstraction levels in object composition](composition-quadrants) and explain all four abstraction levels.
-%Remember to give examples of each.
-%```
-%
-%````{exercise}
-%:label: ex:array-cipher
-%Write a class called `ArrayCipher` that implements the interface `ICipher`.
-%Its constructor must take a single argument of type `ICipher[]`, called `ciphers`.
-%The `Encode` method runs the `Encode` method of each `ICipher` in `ciphers` on the input, from left to right.
-%
-%Hint: When implementing `Encode`, you can choose whether to run the ciphers directly or whether to first build a `CompositeCipher` and then calling the `Encode` method on that.
-%
-%Usage example:
-%
-%```csharp
-%Console.WriteLine(
-%  new ArrayCipher(new ICipher[] {
-%    new CharWiseCipher(new RobbersCharCipher('o')),
-%    new CharWiseCipher(new RobbersCharCipher('a')),
-%    new CharWiseCipher(new RobbersCharCipher('e')),
-%    }).Encode("D")
-%);
-%```
-%
-%```output
-%DeDaDeDoDeDaDeD
-%```
-%````
-%
-%````{exercise}
-%:label: ex:conditional-char-cipher
-%Write a class called `ConditionalCharCipher` that implements the interface `ICharCipher`.
-%Note that we're talking about `ICharCipher`, not about `ICipher`.
-%Its constructor must take two arguments.
-%One is of type `ICharCipher` and the other is of type `ICharPredicate`.
-%The interface `ICharPredicate` must look like this:
-%
-%```csharp
-%interface ICharPredicate
-%{
-%  bool Check (char input);
-%}
-%```
-%
-%The `Encode` method runs the `Encode` method of the `ICharCipher` if and only if the method `Check` in `ICharPredicate` returns `true` when passed the `char` that's been passed to `Encode`.
-%To test whether this class works you must also implement a concrete implementation for `ICharPredicate`.
-%````
-%
-%```{exercise}
-%Why are we *injecting* rather than *constructing* the `ICharPredicate` in {numref}`ex:conditional-char-cipher`?
-%Explain in your own words.
-%```
-%
-%
-%## Definition
-%
-%```{hint}
-%In abstract dependency injection we *inject* (as opposed to *construct*) a composed *abstract* (as opposed to *concrete*) dependency.
-%```
-%
-%## Examples
-%
-%## Exercises
-%
-%
-%% ==== TODOs: =====
-%
-%%```{exercise}
-%%Write a class called `CharWiseCompositeCipher` that implements the interface `ICharCipher`.
-%%Note that we mean `ICharCipher` and not `ICipher`.
-%%Its constructor must take two objects of type `ICharCipher` as arguments.
-%%The `Encode` method runs the `Encode` method of both the injected ciphers on the input `char` before returning the result.
-%%TODO: THIS DOES NOT WORK BECAUSE Encode :: ICharCipher ~> char -> string
-%%```
-%
-%
-%
-%%
-%%````{exercise}
-%%Write a program with three classes called `Speech`, `MultiSpeech`   has one class called `Animal` and one class called `Speech`.
-%%
-%%```
-%%        Animal
-%%==========================
-%%+ Animal (Speech speech);
-%%+ string Speak ();
-%%--------------------------
-%%
-%%
-%%        Speech
-%%==========================
-%%+ Speech (string sound);
-%%+ string Speak ();
-%%--------------------------
-%%```
-%%
-%%Using your classes, it should be possible to write the following program:
-%%
-%%```csharp
-%%Speech meow = new Speech("meow");
-%%Speech blub = new Speech("blub");
-%%Speech meowblub = new MultiSpeech(meow, blub);
-%%
-%%Animal cat = new Animal(meow);
-%%Animal fish = new Animal(blub);
-%%Animal catfish = new Animal(meowblub);
-%%
-%%Console.WriteLine( cat.Speak() );
-%%Console.WriteLine( fish.Speak() );
-%%Console.WriteLine( catfish.Speak() );
-%%```
-%%
-%%And if you run that program, you should get the following output:
-%%
-%%```output
-%%meow
-%%blub
-%%meow blub
-%%```
-%%````
-%% Hint: This is just good old [recursion](recursion) but using classes.
-
-
-%```{exercise}
-%Define a class called `CipherRepeater`.
-%Let it take a cipher in the constructor.
-%
-%Let it implement each of the interfaces 
-%Start with the code you wrote in {numref}`ex:subtype-polymorphism:encodeNTimes`
-%```
-
-%Pretty wild stuff right?

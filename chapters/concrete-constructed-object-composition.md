@@ -17,7 +17,7 @@ Work in progress.
 ```
 
 ```{admonition} Prerequisites
-:class: danger
+:class: info
 In this chapter we're exploring the simplest level of object composition.
 Please have a look at the chapter [object composition](object-composition:abstraction-levels) if you have not already.
 ```

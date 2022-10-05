@@ -4,6 +4,8 @@
 Work in progress.
 ```
 
+% Example of variance could be the class using Predicate interface from an exercise in the chapter on [abstract inject object composition](abstract-injected-object-composition:exercises:predicates). Works only for CharToChar but with generics could work on both.
+
 %In the chapter on [generics](generics) we gave an introduction to the different aspects of generics.
 %In this chapter we will discuss "generic types", meaning generic classes and interfaces.
 %
