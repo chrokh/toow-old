@@ -22,8 +22,6 @@ In this chapter we’re exploring the object composition abstraction level that 
 ```
 
 
-% EXAMPLE: SOLVE THE ISSUE DISCUSSED IN INHERITANCE CHAPTER WHERE WE COULDN'T IMPLEMENT THE FOREACH FOR BOTH CHAR-TO-STRING CIPHERS and CHAR-TO-CHAR CIPHERS. USE COMPOSITION!
-
 ## Motivation
 
 It is time.
@@ -128,8 +126,11 @@ class CharToStringAdapter : ICharToStringCipher
 
 Instead of letting the substitution cipher be a superclass that other classes can subclass (meaning: is-a) we simply say that it's a class that composes (meaning: has-a) other classes.
 
+Pay special attention to how our concrete ciphers (`RobbersCipher`, `CaesarsCipher`, and `LeetCipher`) no longer need to implement the interface `IStringToStringCipher` and no longer need to implement the method `string Encode (string input)`.
+The string to string conversion is now instead achieved by means of abstract injected composition.
+
 But what's this `CharToStringAdapter`?
-Well, that's the [design pattern](design-patterns) known as adapter pattern.
+Well, that's the [design pattern](design-patterns) known as "adapter pattern".
 But it's also just a simple solution to the problem caused by some ciphers returning a `char` when encoding a `char` while others return a `string`.
 With the adapter, which *also uses abstract injected object composition*, we can simply wrap any cipher that implements the interface `ICharToCharCipher` and make it behave as if it implemented the interface `ICharToStringCipher`.
 
@@ -138,7 +139,7 @@ Can we really treat all substitution ciphers uniformly now?
 
 ```{code-cell} csharp
 :tags: [hide-input]
-class RobbersCipher : ICharToStringCipher, IStringToStringCipher
+class RobbersCipher : ICharToStringCipher
 {
   private char vowel;
 
@@ -153,17 +154,9 @@ class RobbersCipher : ICharToStringCipher, IStringToStringCipher
     else
       return $"{input}";
   }
-
-  public string Encode (string input)
-  {
-    string output = "";
-    foreach (char letter in input)
-      output += Encode (letter);
-    return output;
-  }
 }
 
-class LeetCipher : IStringToStringCipher, ICharToCharCipher
+class LeetCipher : ICharToCharCipher
 {
   public char Encode (char input)
   {
@@ -177,17 +170,9 @@ class LeetCipher : IStringToStringCipher, ICharToCharCipher
       default: return input;
     }
   }
-
-  public string Encode (string input)
-  {
-    string output = "";
-    foreach (char c in input)
-      output += Encode(c);
-    return output;
-  }
 }
 
-class CaesarCipher : ICharToCharCipher, IStringToStringCipher
+class CaesarCipher : ICharToCharCipher
 {
   int steps;
 
@@ -211,14 +196,6 @@ class CaesarCipher : ICharToCharCipher, IStringToStringCipher
     }
     return input;
   }
-
-  public string Encode (string input)
-  {
-    string output = "";
-    foreach (char letter in input)
-      output += Encode(letter);
-    return output;
-  }
 }
 ```
 
@@ -231,6 +208,12 @@ SubstitutionCipher sub3 = new SubstitutionCipher(new CharToStringAdapter(new Lee
 Indeed we can.
 Moreover, whenever we call the `Encode` method on any of these objects of type `SubstitutionCipher`, it's the same, one and only, `foreach` loop that executes.
 How about we call this mission accomplished?
+
+```{code-cell} csharp
+Console.WriteLine(sub1.Encode("Hello"));
+Console.WriteLine(sub2.Encode("Hello"));
+Console.WriteLine(sub3.Encode("Hello"));
+```
 
 In the end you might say that it was a bit silly that we tried to replace a simple `foreach` loop which in a later chapter we will replace with [LINQ](linq) anyway.
 Nevertheless, the point is not that this particular loop was bad, but that this is an example of how you can find yourself in a position where you're repeating the same code over and over again for each implementation or subclass.
