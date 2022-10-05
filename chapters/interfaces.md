@@ -292,6 +292,7 @@ The arrow points from the implementation to the interface.
 Work in progress.
 ```
 
+(interfaces:ciphers)=
 ### Cipher interfaces
 
 Let's now rally up all the ciphers that we've implemented so far and let's try to write interfaces for them.
@@ -332,6 +333,8 @@ There's just no way around it.
 
 So to avoid forcing classes that cannot implement certain methods to still implement these methods, we will write a separate interface for each overload.
 We end up with the following interfaces:
+
+% TODO: You could argue that we should create CharToChar+StringToString and CharToString+StringToString as two kinds of substitution ciphers. Cuz if you e.g. have CharToChar then you always also have StringToString. In fact you also always have CharToString. This would be interesting but I'm not sure how this affects everything when we get to generics. It would however simplify the inheritance stuff.
 
 ```{code-cell} csharp
 interface ICharToCharCipher

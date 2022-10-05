@@ -553,6 +553,7 @@ We're treating different types as if they are of the same type.
 We're treating different types of ciphers as if they are all of the same type.
 
 
+(subtype-polymorpism:identity-cipher)=
 ### Identity cipher
 
 While we're at it, let's also write the simplest possible cipher that we can image.
