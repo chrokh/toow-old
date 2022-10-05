@@ -543,12 +543,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inheritance.html">
-   62. Inheritance
+   62. ★ Inheritance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="abstract-classes.html">
-   63. Abstract classes
+   63. ★ Abstract classes
   </a>
  </li>
  <li class="toctree-l1">
@@ -585,12 +585,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="abstract-constructed-object-composition.html">
-   69. Abstract constructed object composition
+   69. ★ Abstract constructed object composition
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   70. Abstract injected object composition
+   70. ★ Abstract injected object composition
   </a>
  </li>
 </ul>
@@ -953,6 +953,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/chrokh/the-oo-way/main?urlpath=tree/docs/chapters/abstract-injected-object-composition.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -987,6 +1016,23 @@ title="Open an issue"
   </button>
   <div class="menu-dropdown__content">
     <ul>
+      <li>
+        <a href="../_sources/chapters/abstract-injected-object-composition.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
       <li>
         <a href="../_sources/chapters/abstract-injected-object-composition.md"
    class="headerbtn"
@@ -1025,12 +1071,63 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   70.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   70.2. Definition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   70.3. Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#substitution-ciphers">
+     70.3.1. Substitution ciphers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#flip-flop-ciphers">
+     70.3.2. Flip Flop ciphers
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   70.4. Exercises
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -1042,6 +1139,46 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   70.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   70.2. Definition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   70.3. Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#substitution-ciphers">
+     70.3.1. Substitution ciphers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#flip-flop-ciphers">
+     70.3.2. Flip Flop ciphers
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   70.4. Exercises
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -1055,6 +1192,525 @@ title="Print to PDF"
 <p class="admonition-title">Warning</p>
 <p>Work in progress.</p>
 </div>
+<div class="info admonition">
+<p class="admonition-title">Prerequisites</p>
+<p>In this chapter we’re exploring the object composition abstraction level that we refer to as “abstract constructed object composition”. Please have a look at the chapter <a class="reference internal" href="object-composition.html#object-composition-abstraction-levels"><span class="std std-ref">object composition</span></a> if you have not already.</p>
+</div>
+<section id="motivation">
+<h2><span class="section-number">70.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
+<p>It is time.
+We are finally ready to talk about abstraction depdendency injection.
+This is the creme de la creme in object oriented programming.</p>
+<p>With abstract injected object composition we are able to swap out both types and values at run-time.
+Meaning that we don’t couple to any particular concrete implementation or type at compile-time.
+This makes our code <a class="reference internal" href="coupling.html"><span class="doc std std-doc">decoupled</span></a> and increases <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a>.</p>
+<p>As we will see in one of the examples, abstract injected object composition enables us to follow the maxim <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">composition over inheritance</span></a>.
+As if that wasn’t enough, almost all <a class="reference internal" href="design-patterns.html"><span class="doc std std-doc">design patterns</span></a> are, in one way or another, using abstract injected object composition.</p>
+<p>Enough motivation, let’s get in to it.</p>
+</section>
+<section id="definition">
+<h2><span class="section-number">70.2. </span>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">#</a></h2>
+<p>An object composition is abstract if the compile-time type of the composed object is abstract.
+It is injected if the composed object is constructed outside of the composing object and instead passed into it (via the constructor, a method, or property).</p>
+<p>Remember, we’ve discussed the notion of <span class="xref myst">injection</span> in the chapter on concrete injected object composition.
+But in short, the idea is that insted of instantiating the object ourselves, we let someone else be responsible for instantiating that object and then passing it to us.
+Instead of, for example, having a constructor that accepts some parameters that I’m going to use to instantiate some object, I simply use the type of that object as the parameter type.
+Instead of asking others to send me some data so that I can instantiate an object, I simply ask them for the object instead.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Instead of instantiating the dependency ourselves, we simply parameterize a method or a constructor so that callers can pass the dependency.</p>
+</div>
+<p>Importantly though, now we’re talking about <em>abstract</em> injected object composition.
+Which means that the compile-time type of the composed object <em>must</em> be abstract.
+Meaning, must be an <a class="reference internal" href="interfaces.html"><span class="doc std std-doc">interface</span></a> or an <a class="reference internal" href="abstract-classes.html"><span class="doc std std-doc">abstract class</span></a>.</p>
+</section>
+<section id="examples">
+<h2><span class="section-number">70.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
+<section id="substitution-ciphers">
+<h3><span class="section-number">70.3.1. </span>Substitution ciphers<a class="headerlink" href="#substitution-ciphers" title="Permalink to this headline">#</a></h3>
+<p>Let’s replace <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a> with composition.
+Remember how we’ve struggled, in the chapters on <a class="reference internal" href="methods.html"><span class="doc std std-doc">methods</span></a>, <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a>, and <a class="reference internal" href="abstract-classes.html"><span class="doc std std-doc">abstract classes</span></a> to get rid of the duplicated <code class="docutils literal notranslate"><span class="pre">foreach</span></code> loop in substitution ciphers.
+The loop that iterates over an input <code class="docutils literal notranslate"><span class="pre">string</span></code>, calls a method that takes a <code class="docutils literal notranslate"><span class="pre">char</span></code> and depending on the cipher returns a <code class="docutils literal notranslate"><span class="pre">char</span></code> or a <code class="docutils literal notranslate"><span class="pre">string</span></code>, and then concatenates the result.</p>
+<p>The problem has been that some ciphers, like the Caesar cipher, returns a <code class="docutils literal notranslate"><span class="pre">char</span></code> when encoding a <code class="docutils literal notranslate"><span class="pre">char</span></code>, while others, like the Robber’s language, returns a <code class="docutils literal notranslate"><span class="pre">string</span></code> when encoding a <code class="docutils literal notranslate"><span class="pre">char</span></code>.
+Well, when we’re using composition rather than inheritance, this is no longer a big deal.
+Check this out:</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ICharToCharCipher</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">interface</span><span class="w"> </span><span class="n">IStringToStringCipher</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">interface</span><span class="w"> </span><span class="n">ICharToStringCipher</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-2443.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.38:1024/", "http://127.0.0.1:1024/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '2443.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<div class="cell docutils container" id="abstract-injected-object-composition-examples-adapter">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SubstitutionCipher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IStringToStringCipher</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">ICharToStringCipher</span><span class="w"> </span><span class="n">cipher</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">SubstitutionCipher</span><span class="w"> </span><span class="p">(</span><span class="n">ICharToCharCipher</span><span class="w"> </span><span class="n">cipher</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">cipher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CharToStringAdapter</span><span class="p">(</span><span class="n">cipher</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">SubstitutionCipher</span><span class="w"> </span><span class="p">(</span><span class="n">ICharToStringCipher</span><span class="w"> </span><span class="n">cipher</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">cipher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cipher</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">output</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">c</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CharToStringAdapter</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICharToStringCipher</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">ICharToCharCipher</span><span class="w"> </span><span class="n">cipher</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">CharToStringAdapter</span><span class="w"> </span><span class="p">(</span><span class="n">ICharToCharCipher</span><span class="w"> </span><span class="n">cipher</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">cipher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cipher</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">input</span><span class="p">).</span><span class="n">ToString</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Instead of letting the substitution cipher be a superclass that other classes can subclass (meaning: is-a) we simply say that it’s a class that composes (meaning: has-a) other classes.</p>
+<p>But what’s this <code class="docutils literal notranslate"><span class="pre">CharToStringAdapter</span></code>?
+Well, that’s the <a class="reference internal" href="design-patterns.html"><span class="doc std std-doc">design pattern</span></a> known as adapter pattern.
+But it’s also just a simple solution to the problem caused by some ciphers returning a <code class="docutils literal notranslate"><span class="pre">char</span></code> when encoding a <code class="docutils literal notranslate"><span class="pre">char</span></code> while others return a <code class="docutils literal notranslate"><span class="pre">string</span></code>.
+With the adapter, which <em>also uses abstract injected object composition</em>, we can simply wrap any cipher that implements the interface <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code> and make it behave as if it implemented the interface <code class="docutils literal notranslate"><span class="pre">ICharToStringCipher</span></code>.</p>
+<p>So how do we use these classes?
+Can we really treat all substitution ciphers uniformly now?</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">RobbersCipher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICharToStringCipher</span><span class="p">,</span><span class="w"> </span><span class="n">IStringToStringCipher</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">vowel</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">RobbersCipher</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">vowel</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">vowel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">vowel</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">consonants</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;BCDFGHJKLMNPQRSTVXYZ&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">consonants</span><span class="p">.</span><span class="n">IndexOf</span><span class="p">(</span><span class="n">Char</span><span class="p">.</span><span class="n">ToUpper</span><span class="p">(</span><span class="n">input</span><span class="p">))</span><span class="w"> </span><span class="p">!=</span><span class="w"> </span><span class="p">-</span><span class="m">1</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="s">$&quot;{input}{vowel}{input}&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="s">$&quot;{input}&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">letter</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">output</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">Encode</span><span class="w"> </span><span class="p">(</span><span class="n">letter</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">LeetCipher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IStringToStringCipher</span><span class="p">,</span><span class="w"> </span><span class="n">ICharToCharCipher</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;L&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sc">&#39;1&#39;</span><span class="p">;</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;1&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sc">&#39;L&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sc">&#39;4&#39;</span><span class="p">;</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;4&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;O&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">;</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sc">&#39;O&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sc">&#39;7&#39;</span><span class="p">;</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;7&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;E&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sc">&#39;3&#39;</span><span class="p">;</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;3&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sc">&#39;E&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">default</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">input</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">output</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">Encode</span><span class="p">(</span><span class="n">c</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CaesarCipher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICharToCharCipher</span><span class="p">,</span><span class="w"> </span><span class="n">IStringToStringCipher</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">steps</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">CaesarCipher</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">steps</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">steps</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">steps</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">alphabet</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;ABCDEFGHIJKLMNOPQRSTUVXYZ&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">alphabet</span><span class="p">.</span><span class="n">IndexOf</span><span class="p">(</span><span class="n">Char</span><span class="p">.</span><span class="n">ToUpper</span><span class="p">(</span><span class="n">input</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">newIndex</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="n">steps</span><span class="p">)</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">alphabet</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="p">!=</span><span class="w"> </span><span class="p">-</span><span class="m">1</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">newIndex</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">newIndex</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">alphabet</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Char</span><span class="p">.</span><span class="n">IsLower</span><span class="p">(</span><span class="n">input</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Char</span><span class="p">.</span><span class="n">ToLower</span><span class="p">(</span><span class="n">alphabet</span><span class="p">[</span><span class="n">newIndex</span><span class="p">]);</span><span class="w"></span>
+<span class="w">      </span><span class="k">else</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">alphabet</span><span class="p">[</span><span class="n">newIndex</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">input</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">letter</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">output</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">Encode</span><span class="p">(</span><span class="n">letter</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">SubstitutionCipher</span><span class="w"> </span><span class="n">sub1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SubstitutionCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RobbersCipher</span><span class="p">(</span><span class="sc">&#39;o&#39;</span><span class="p">));</span><span class="w"></span>
+<span class="n">SubstitutionCipher</span><span class="w"> </span><span class="n">sub2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SubstitutionCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CharToStringAdapter</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CaesarCipher</span><span class="p">(</span><span class="m">1</span><span class="p">)));</span><span class="w"></span>
+<span class="n">SubstitutionCipher</span><span class="w"> </span><span class="n">sub3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SubstitutionCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CharToStringAdapter</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">LeetCipher</span><span class="p">()));</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Indeed we can.
+Moreover, whenever we call the <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method on any of these objects of type <code class="docutils literal notranslate"><span class="pre">SubstitutionCipher</span></code>, it’s the same, one and only, <code class="docutils literal notranslate"><span class="pre">foreach</span></code> loop that executes.
+How about we call this mission accomplished?</p>
+<p>In the end you might say that it was a bit silly that we tried to replace a simple <code class="docutils literal notranslate"><span class="pre">foreach</span></code> loop which in a later chapter we will replace with <a class="reference internal" href="linq.html"><span class="doc std std-doc">LINQ</span></a> anyway.
+Nevertheless, the point is not that this particular loop was bad, but that this is an example of how you can find yourself in a position where you’re repeating the same code over and over again for each implementation or subclass.</p>
+</section>
+<section id="flip-flop-ciphers">
+<h3><span class="section-number">70.3.2. </span>Flip Flop ciphers<a class="headerlink" href="#flip-flop-ciphers" title="Permalink to this headline">#</a></h3>
+<p>Let’s explore our newfound power.
+You must have known that we were going to return to the flipflops.
+In the chapter on <a class="reference internal" href="concrete-injected-object-composition.html#concrete-injected-object-composition-examples-general-flip-flop"><span class="std std-ref">abstract injected object composition</span></a> we discussed how our flip flop cipher was coupled to the idea of a Caesar cipher even though it in a sense has nothing to do with that specific cipher.</p>
+<p>Let’s implement it more generally using abstract injected object composition.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">FlipFlopCipher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IStringToStringCipher</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">ICharToStringCipher</span><span class="w"> </span><span class="n">flip</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">ICharToStringCipher</span><span class="w"> </span><span class="n">flop</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">FlipFlopCipher</span><span class="w"> </span><span class="p">(</span><span class="n">ICharToStringCipher</span><span class="w"> </span><span class="n">flip</span><span class="p">,</span><span class="w"> </span><span class="n">ICharToStringCipher</span><span class="w"> </span><span class="n">flop</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">flip</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">flip</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">flop</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">flop</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">&lt;</span><span class="n">input</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">++)</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">output</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">flip</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span><span class="w"></span>
+<span class="w">      </span><span class="k">else</span><span class="w"></span>
+<span class="w">        </span><span class="n">output</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">flop</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice how nothing in the implementation had to change except for the types.
+It’s exactly the same implementation as in the chapter on <a class="reference internal" href="concrete-injected-object-composition.html#concrete-injected-object-composition-examples-general-flip-flop"><span class="std std-ref">abstract injected object composition</span></a> except for the fact that we’ve generalized the types and also have made the <code class="docutils literal notranslate"><span class="pre">FlipFlopCipher</span></code> implement the interface <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code>.
+In other words, we’ve moved from concrete compile-time types to abstract compile-time types.</p>
+<p>Why did we choose to, in the constructor, take objects of type <code class="docutils literal notranslate"><span class="pre">ICharToStringCipher</span></code> rather than <code class="docutils literal notranslate"><span class="pre">ICharToChar</span></code>?
+Think back to the example we just gave where we eliminated the <a class="reference internal" href="#abstract-injected-object-composition-examples-adapter"><span class="std std-ref">duplicated foreach</span></a>.
+By introducing an adapter we are able to convert any <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code> to a <code class="docutils literal notranslate"><span class="pre">ICharToStringCipher</span></code>.
+The inverse conversion however is not as trivial.
+So if we want the <code class="docutils literal notranslate"><span class="pre">FlipFlopCipher</span></code> to support all substitution ciphers that we have seen then we must pick the type to which others can be converted.</p>
+<p>Let’s see this thing in action, shall we?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">FlipFlopCipher</span><span class="w"> </span><span class="n">cipher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FlipFlopCipher</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">RobbersCipher</span><span class="p">(</span><span class="sc">&#39;a&#39;</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">CharToStringAdapter</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CaesarCipher</span><span class="p">(</span><span class="m">1</span><span class="p">)));</span><span class="w"></span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;HELLO WORLD&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HaHFLaLMO WPRaRMDaD
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let me be the first to say that our ciphers are finally getting pretty interesting.
+After the exercises in this chapter I’m suspecting you’ll have a pretty good idea of the power of <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">composition over inheritance</span></a> and abstract injected object composition.</p>
+</section>
+</section>
+<section id="exercises">
+<h2><span class="section-number">70.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<div class="exercise admonition" id="chapters/abstract-injected-object-composition-exercise-0">
+
+<p class="admonition-title"><span class="caption-number">Exercise 70.1 </span></p>
+<section id="exercise-content">
+<p>What is the difference between <em>constructed</em> and <em>injected</em> abstract object composition?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/abstract-injected-object-composition-exercise-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 70.2 </span></p>
+<section id="exercise-content">
+<p>What is the difference between <em>concrete</em> and <em>abstract</em> injected object composition?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/abstract-injected-object-composition-exercise-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 70.3 </span></p>
+<section id="exercise-content">
+<p>Invent and implement another class that implements <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code>, <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code>, or <code class="docutils literal notranslate"><span class="pre">ICharToStringCipher</span></code> and that uses abstract injected object composition to work.</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/abstract-injected-object-composition-exercise-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 70.4 </span></p>
+<section id="exercise-content">
+<p>Draw the <a class="reference internal" href="object-composition.html#composition-quadrants"><span class="std std-ref">quadrant diagram of abstraction levels in object composition</span></a> and explain all four abstraction levels.
+Remember to give examples of each.</p>
+</section>
+</div>
+<div class="exercise admonition" id="ex:array-cipher">
+
+<p class="admonition-title"><span class="caption-number">Exercise 70.5 </span></p>
+<section id="exercise-content">
+<p>Write a class called <code class="docutils literal notranslate"><span class="pre">SequenceCipher</span></code> that implements the interface <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code>.
+Its constructor must take a single argument of type <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher[]</span></code>, called <code class="docutils literal notranslate"><span class="pre">ciphers</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method runs the <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method of each <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code> in <code class="docutils literal notranslate"><span class="pre">ciphers</span></code>, in sequence, on the input.</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<p>It should behave as in the usage example below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">SequenceCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">IStringToStringCipher</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">SubstitutionCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RobbersCipher</span><span class="p">(</span><span class="sc">&#39;O&#39;</span><span class="p">)),</span><span class="w"></span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">SubstitutionCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RobbersCipher</span><span class="p">(</span><span class="sc">&#39;E&#39;</span><span class="p">)),</span><span class="w"></span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">SubstitutionCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CharToStringAdapter</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">LeetCipher</span><span class="p">())),</span><span class="w"></span>
+<span class="w">    </span><span class="p">}).</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;HELLO ELITE&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>H3H0H3H3131013113101310 31310131I73707373
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div class="exercise admonition" id="abstract-injected-object-composition:exercises:predicates">
+
+<p class="admonition-title"><span class="caption-number">Exercise 70.6 </span></p>
+<section id="exercise-content">
+<p>Write a class called <code class="docutils literal notranslate"><span class="pre">ConditionalCharToCharCipher</span></code> that implements the interface <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code>.
+Its constructor must take two arguments.
+One is of type <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code> and the other is of type <code class="docutils literal notranslate"><span class="pre">ICharPredicate</span></code>.
+The interface <code class="docutils literal notranslate"><span class="pre">ICharPredicate</span></code> must look like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ICharPredicate</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">Check</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method runs the <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method of the <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code> if and only if the method <code class="docutils literal notranslate"><span class="pre">Check</span></code> in <code class="docutils literal notranslate"><span class="pre">ICharPredicate</span></code> returns <code class="docutils literal notranslate"><span class="pre">true</span></code> when passed the <code class="docutils literal notranslate"><span class="pre">char</span></code> that we are trying to encode.
+To test whether this class works you must also implement a concrete implementation for <code class="docutils literal notranslate"><span class="pre">ICharPredicate</span></code>.</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<p>For the usage example, let’s use a simple predicate that just checks whether its input is uppercase or not.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">IsUpperCase</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICharPredicate</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">Check</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Char</span><span class="p">.</span><span class="n">IsUpper</span><span class="p">(</span><span class="n">input</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With that in place we should be able to set up a conditional cipher.
+We should then be able to run the encode method of that cipher and depending on what we pass it either get encoded characters or the same characters that we pass it back.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ConditionalCharToCharCipher</span><span class="w"> </span><span class="n">cipher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ConditionalCharToCharCipher</span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">CaesarCipher</span><span class="p">(</span><span class="m">1</span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">IsUpperCase</span><span class="p">());</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we pass an uppercase letter it should encode it using the cipher.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="sc">&#39;A&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>B
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we pass a lowercase letter it should return the same letter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="sc">&#39;a&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>Extra questions:</em></p>
+<ol class="simple">
+<li><p>Why are we <em>injecting</em> rather than <em>constructing</em> the <code class="docutils literal notranslate"><span class="pre">ICharPredicate</span></code>? Explain in your own words.</p></li>
+<li><p>One could argue that it wouldn’t make sense to couple to <code class="docutils literal notranslate"><span class="pre">ICharToStringCipher</span></code> instead of <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code>. How would you defend that position?</p></li>
+</ol>
+<p>By the way, in the chapters on <a class="reference internal" href="generic-types.html"><span class="doc std std-doc">generics</span></a> we will learn how to generalize this implementation so that it also works for <code class="docutils literal notranslate"><span class="pre">ICharToString</span></code> ciphers without adding duplicated code.</p>
+</section>
+</div>
+<hr class="docutils" />
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1066,16 +1722,16 @@ title="Print to PDF"
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            kernelName: "python3",
+            kernelName: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
 
               </div>
               

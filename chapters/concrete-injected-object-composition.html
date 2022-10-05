@@ -543,12 +543,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="inheritance.html">
-   62. Inheritance
+   62. ★ Inheritance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="abstract-classes.html">
-   63. Abstract classes
+   63. ★ Abstract classes
   </a>
  </li>
  <li class="toctree-l1">
@@ -585,12 +585,12 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="abstract-constructed-object-composition.html">
-   69. Abstract constructed object composition
+   69. ★ Abstract constructed object composition
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="abstract-injected-object-composition.html">
-   70. Abstract injected object composition
+   70. ★ Abstract injected object composition
   </a>
  </li>
 </ul>
@@ -1109,8 +1109,13 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#flip-flop-caesar-cipher">
+     59.3.1. Flip flop Caesar cipher
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#generalizing">
-     59.3.1. Generalizing
+     59.3.2. Generalizing
     </a>
    </li>
   </ul>
@@ -1160,8 +1165,13 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#flip-flop-caesar-cipher">
+     59.3.1. Flip flop Caesar cipher
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#generalizing">
-     59.3.1. Generalizing
+     59.3.2. Generalizing
     </a>
    </li>
   </ul>
@@ -1192,7 +1202,7 @@ title="Print to PDF"
 <p class="admonition-title">Warning</p>
 <p>Work in progress.</p>
 </div>
-<div class="danger admonition">
+<div class="info admonition">
 <p class="admonition-title">Prerequisites</p>
 <p>In this chapter we’re exploring the object composition abstraction level that we refer to as “concrete injected object composition”. Please have a look at the chapter <a class="reference internal" href="object-composition.html#object-composition-abstraction-levels"><span class="std std-ref">object composition</span></a> if you have not already.</p>
 </div>
@@ -1249,6 +1259,8 @@ Whether our caller is the one who creates the object in the end is none of our c
 </section>
 <section id="examples">
 <h2><span class="section-number">59.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
+<section id="flip-flop-caesar-cipher">
+<span id="concrete-injected-object-composition-examples-flip-flop"></span><h3><span class="section-number">59.3.1. </span>Flip flop Caesar cipher<a class="headerlink" href="#flip-flop-caesar-cipher" title="Permalink to this headline">#</a></h3>
 <p>Let’s keep working on the <code class="docutils literal notranslate"><span class="pre">FlipFlopCaesarCipher</span></code> that we introduced in the chapter on <a class="reference internal" href="concrete-constructed-object-composition.html"><span class="doc std std-doc">concrete constructed object composition</span></a>.
 It composes our <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> so first we need to get a hold of that definition.</p>
 <div class="cell tag_hide-input docutils container">
@@ -1292,7 +1304,7 @@ It composes our <code class="docutils literal notranslate"><span class="pre">Cae
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2321.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2563.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1337,12 +1349,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.179:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.38:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2321.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2563.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1486,8 +1498,9 @@ We would now use our classes like this:</p>
 </div>
 </div>
 </div>
+</section>
 <section id="generalizing">
-<h3><span class="section-number">59.3.1. </span>Generalizing<a class="headerlink" href="#generalizing" title="Permalink to this headline">#</a></h3>
+<span id="concrete-injected-object-composition-examples-general-flip-flop"></span><h3><span class="section-number">59.3.2. </span>Generalizing<a class="headerlink" href="#generalizing" title="Permalink to this headline">#</a></h3>
 <p>At this point you might already have realized that the <code class="docutils literal notranslate"><span class="pre">FlipFlopCaesarCipher</span></code> actually has very little to do with the encoding-decoding idea.
 Our current abstraction accepts any two objects of type <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> which means that we can send any two instances of it.
 They don’t have to be arranged in a encode/decode fashion.</p>

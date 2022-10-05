@@ -17,7 +17,7 @@ Work in progress.
 ```
 
 ```{admonition} Prerequisites
-:class: danger
+:class: info
 In this chapter we’re exploring the object composition abstraction level that we refer to as "concrete injected object composition". Please have a look at the chapter [object composition](object-composition:abstraction-levels) if you have not already.
 ```
 
@@ -94,6 +94,9 @@ In dependency injection, we expect an object that our callers are responsible fo
 
 ## Examples
 
+
+(concrete-injected-object-composition:examples:flip-flop)=
+### Flip flop Caesar cipher
 Let's keep working on the `FlipFlopCaesarCipher` that we introduced in the chapter on [concrete constructed object composition](concrete-constructed-object-composition).
 It composes our `CaesarCipher` so first we need to get a hold of that definition.
 
@@ -212,6 +215,7 @@ FlipFlopCaesarCipher cipher = new FlipFlopCaesarCipher(
 Console.WriteLine(cipher.Encode("AABBCC"));
 ```
 
+(concrete-injected-object-composition:examples:general-flip-flop)=
 ### Generalizing
 
 At this point you might already have realized that the `FlipFlopCaesarCipher` actually has very little to do with the encoding-decoding idea.
