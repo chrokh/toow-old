@@ -647,14 +647,20 @@ Why or why not?
 ```{exercise-start}
 :label: ex:subtype-polymorphism:encodeNTimes
 ```
-Remember the method we wrote in the chapter on [recursion](recursion) that applied the Robber's cipher multiple times?
-Rewrite the method so that it follows the signature below:
+%TODO: Remember the method we wrote in the chapter on [recursion](recursion) that applied the Robber's cipher multiple times? Rewrite the method so that it follows the signature below:
+
+Write a method with the following signature:
 
 ```csharp
 string encodeNTimes (string input, IStringToStringCipher cipher, int times);
 ```
 
-This means that you must be able to run the method with any cipher that implements the interface `IStringToStringCipher`.
+The method should apply the same cipher multiple times to a single input.
+The parameter `cipher` determines the cipher that should be used.
+The parameter `times` determines how many times the cipher should be applied to the input string.
+The parameter `input` determines the input to encode.
+
+Since the method takes a cipher of type `IStringToStringCipher` you must be able to run the method with any of your ciphers that implement that interface.
 
 When you're done you should be able to run the following code and get the corresponding output.
 
