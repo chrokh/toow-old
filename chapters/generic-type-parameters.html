@@ -1025,12 +1025,63 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   72.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   72.2. Definition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   72.3. Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naming-conventions">
+     72.3.1. Naming conventions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#declaring-vs-using">
+     72.3.2. Declaring vs using
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   72.4. Exercises
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -1042,6 +1093,46 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   72.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   72.2. Definition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   72.3. Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naming-conventions">
+     72.3.1. Naming conventions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#declaring-vs-using">
+     72.3.2. Declaring vs using
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   72.4. Exercises
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -1055,6 +1146,141 @@ title="Print to PDF"
 <p class="admonition-title">Warning</p>
 <p>Work in progress.</p>
 </div>
+<p>We’ve already given an overview of <a class="reference internal" href="generics.html"><span class="doc std std-doc">generics</span></a>.
+It’s now time to start talking about the specifics.
+In this chapter we’re going to discuss the concept of generic type parameters.</p>
+<section id="motivation">
+<h2><span class="section-number">72.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
+<p>In the chapter on <a class="reference internal" href="generics.html"><span class="doc std std-doc">generics</span></a> we listed a bunch things that can be defined generically.
+Generic classes, interfaces, structs, and delegates are together referred to as generic types.
+Then we also have generic methods.</p>
+<p>Irrespectively of how you’re using generics, we discussed how retaining <span class="xref myst">static type safety</span> is a key feature.
+Since types in the type system of C# are partly <a class="reference internal" href="type-systems.html#manifested-vs-inferred"><span class="std std-ref">manifested</span></a> rather than inferred we must have a way of explicitly talking about the types that will eventually be used when generics are constructed.
+This is why we have type parameters.</p>
+</section>
+<section id="definition">
+<h2><span class="section-number">72.2. </span>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">#</a></h2>
+<p>Generic type definitions and generic method definitions contain type parameters that must be replaced by actual types in order to create an instance of the generic type or run the generic method.</p>
+<p>A “generic type argument” is whatever type is used to replace a type parameter with an actual type. Just like how an argument is used in place of a parameter when applying methods, a generic type argument is used in place of a generic type parameter.</p>
+<p>In the generic type <code class="docutils literal notranslate"><span class="pre">List&lt;T&gt;</span></code> the letter <code class="docutils literal notranslate"><span class="pre">T</span></code> is the type parameter.
+To turn the generic type definition <code class="docutils literal notranslate"><span class="pre">List&lt;T&gt;</span></code> into a constructed generic type we must replace the type parameter with an actual type such as <code class="docutils literal notranslate"><span class="pre">string</span></code>, <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">Cat</span></code> so that it becomes for example <code class="docutils literal notranslate"><span class="pre">List&lt;int&gt;</span></code>.
+In the constructed type <code class="docutils literal notranslate"><span class="pre">Tuple&lt;int,</span> <span class="pre">string&gt;</span></code> the types <code class="docutils literal notranslate"><span class="pre">int</span></code> and <code class="docutils literal notranslate"><span class="pre">string</span></code> are generic type arguments.</p>
+<p>The type that we use to replace the type parameter can be arbitrarily complex.
+Importantly, it can also be another constructed generic type.
+This means that <code class="docutils literal notranslate"><span class="pre">List&lt;List&lt;List&lt;int&gt;&gt;&gt;</span></code> is an entirely valid constructed generic type.
+What could such a type possible model?
+Well, how about a three-dimensional coordinate system?</p>
+<p>In the chapters on <a class="reference internal" href="generic-types.html"><span class="doc std std-doc">generic types</span></a> and <a class="reference internal" href="generic-methods.html"><span class="doc std std-doc">generic methods</span></a> we will explore the syntax of type parameters in detail.
+In the chapter on <a class="reference internal" href="type-parameter-constraints.html"><span class="doc std std-doc">generic type parameter constraints</span></a> we will show how to put constraints on a type parameter so that only a subset of all types can be used in place of a type parameter.</p>
+</section>
+<section id="examples">
+<h2><span class="section-number">72.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
+<p>In the generic type <code class="docutils literal notranslate"><span class="pre">List&lt;T&gt;</span></code> the letter <code class="docutils literal notranslate"><span class="pre">T</span></code> is the type parameter.</p>
+<p>In the generic type <code class="docutils literal notranslate"><span class="pre">Tuple&lt;T1,</span> <span class="pre">T2&gt;</span></code> both <code class="docutils literal notranslate"><span class="pre">T1</span></code> and <code class="docutils literal notranslate"><span class="pre">T2</span></code> are type parameters.</p>
+<p>In the constructed type <code class="docutils literal notranslate"><span class="pre">List&lt;int&gt;</span></code> the type <code class="docutils literal notranslate"><span class="pre">int</span></code> is the generic type argument.</p>
+<p>In the constructed type <code class="docutils literal notranslate"><span class="pre">Tuple&lt;int,</span> <span class="pre">string&gt;</span></code> the types <code class="docutils literal notranslate"><span class="pre">int</span></code> and <code class="docutils literal notranslate"><span class="pre">string</span></code> are generic type arguments.</p>
+<section id="naming-conventions">
+<h3><span class="section-number">72.3.1. </span>Naming conventions<a class="headerlink" href="#naming-conventions" title="Permalink to this headline">#</a></h3>
+<p>The letter <code class="docutils literal notranslate"><span class="pre">T</span></code> is conventionally used when only a single type parameter is needed.
+Using the letter <code class="docutils literal notranslate"><span class="pre">T</span></code> is merely convention and was probably initiated since “T” is the first letter in the word “type”.
+In contrast, in the language Haskell the convention is to start with the letter <code class="docutils literal notranslate"><span class="pre">a</span></code> and then move forward in the alphabet if we need more parameters.<a class="footnote-reference brackets" href="#haskell-type-parameter-names" id="id1">1</a>
+The name used to reference a type parameter is arbitrary in the same sense that any variable name is arbitrary.</p>
+<p>However, arbitrary single-letter names tend to be used only if there is no other name that more clearly conveys what role the type parameter plays.
+For example, the generic type <code class="docutils literal notranslate"><span class="pre">Dictionary&lt;TKey,</span> <span class="pre">TValue&gt;</span></code> captures the idea of a collection of key-value pairs.
+In the collection you have values of type <code class="docutils literal notranslate"><span class="pre">TValue</span></code> that are identified by keys of type <code class="docutils literal notranslate"><span class="pre">TKey</span></code>.</p>
+<p>Using meaningful type parameter names can convey a lot of information to the reader of the type.
+Imagine if the type of the generic dictionary instead would have been declared as <code class="docutils literal notranslate"><span class="pre">Dictionary&lt;A,</span> <span class="pre">B&gt;</span></code> instead of <code class="docutils literal notranslate"><span class="pre">Dictionary&lt;TKey,</span> <span class="pre">TValue&gt;</span></code>.
+How would we know whether it stores values of type <code class="docutils literal notranslate"><span class="pre">A</span></code> or <code class="docutils literal notranslate"><span class="pre">B</span></code>?
+We would have to resort to reading the implementation or the documentation.
+Not ideal.
+As we discussed in the chapter on <a class="reference internal" href="naming.html"><span class="doc std std-doc">naming</span></a>, names matter.</p>
+<p>In C# it is also conventional to prefix descriptive type parameter names with the letter <code class="docutils literal notranslate"><span class="pre">T</span></code>.
+So instead of saying for example <code class="docutils literal notranslate"><span class="pre">Left</span></code> and <code class="docutils literal notranslate"><span class="pre">Right</span></code> we would say <code class="docutils literal notranslate"><span class="pre">TLeft</span></code> and <code class="docutils literal notranslate"><span class="pre">TRight</span></code>.</p>
+</section>
+<section id="declaring-vs-using">
+<h3><span class="section-number">72.3.2. </span>Declaring vs using<a class="headerlink" href="#declaring-vs-using" title="Permalink to this headline">#</a></h3>
+<p>It is important that we keep track of whether we are declaring or using a type parameter.
+If you use a type parameter which has already been declared then the type that will be used when the generic type is constructed is the same as the type that replaced the type parameter.</p>
+<p>Just like with variables, we cannot <em>declare</em> the same name twice within the same scope.
+We are however free to <em>use</em> the same name any number of times.
+If we try to declare a generic type with two type parameters of the same name we will get a compiler error:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Pair</span><span class="p">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">error CS0692: Duplicate type parameter &#39;T&#39;.</span>
+</pre></div>
+</div>
+<p>Instead, we must use different names for each type parameter.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Pair</span><span class="p">&lt;</span><span class="n">T1</span><span class="p">,</span><span class="w"> </span><span class="n">T2</span><span class="p">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This will make a lot more sense in the chapter on <a class="reference internal" href="generic-types.html"><span class="doc std std-doc">generic types</span></a> and <a class="reference internal" href="generic-methods.html"><span class="doc std std-doc">generic methods</span></a> since we need a bit more syntax to explore this deeper.
+The <code class="docutils literal notranslate"><span class="pre">T</span></code> which is surrounded by angle-brackets (<code class="docutils literal notranslate"><span class="pre">&lt;T&gt;</span></code>) is the type parameter.
+So don’t worry if you feel a bit confused at the moment.
+It will soon all come together.</p>
+<p>Just like with variables however, we are free to <em>use</em> our type variables any number of types in our generic type or method definition.
+In fact, what would be the point of type or value variables if we couldn’t use them?</p>
+<p>Again, I know that this is way too much syntax too soon, but just give the code below a glance.
+Whenever the type is constructed, <code class="docutils literal notranslate"><span class="pre">T1</span></code> and <code class="docutils literal notranslate"><span class="pre">T2</span></code> will be replaced by actual types, and the type of the property <code class="docutils literal notranslate"><span class="pre">Fst</span></code> will always be the same as the type that replaced <code class="docutils literal notranslate"><span class="pre">T1</span></code>.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Pair</span><span class="p">&lt;</span><span class="n">T1</span><span class="p">,</span><span class="w"> </span><span class="n">T2</span><span class="p">&gt;</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="n">T1</span><span class="w"> </span><span class="n">Fst</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="n">T2</span><span class="w"> </span><span class="n">Snd</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Pair</span><span class="w"> </span><span class="p">(</span><span class="n">T1</span><span class="w"> </span><span class="n">fst</span><span class="p">,</span><span class="w"> </span><span class="n">T2</span><span class="w"> </span><span class="n">snd</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Fst</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">fst</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Snd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">snd</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Upon construction it is of course entirely possible to let <code class="docutils literal notranslate"><span class="pre">T1</span></code> and <code class="docutils literal notranslate"><span class="pre">T2</span></code> be the same type.
+Which in turn would mean that the properties <code class="docutils literal notranslate"><span class="pre">Fst</span></code> and <code class="docutils literal notranslate"><span class="pre">Snd</span></code> have the same type, but this is only a possibility.
+In other words it is possible that <code class="docutils literal notranslate"><span class="pre">typeof(T1)</span> <span class="pre">==</span> <span class="pre">typeof(T2)</span></code> but it’s not necessary.</p>
+</section>
+</section>
+<section id="exercises">
+<h2><span class="section-number">72.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<div class="exercise admonition" id="chapters/generic-type-parameters-exercise-0">
+
+<p class="admonition-title"><span class="caption-number">Exercise 72.1 </span></p>
+<section id="exercise-content">
+<p>What is the difference between a generic type <em>parameter</em> and a generic type <em>argument</em>?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/generic-type-parameters-exercise-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 72.2 </span></p>
+<section id="exercise-content">
+<p>Why do we need type parameters?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/generic-type-parameters-exercise-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 72.3 </span></p>
+<section id="exercise-content">
+<p>Assume that we declare two type parameters, let’s call them <code class="docutils literal notranslate"><span class="pre">T1</span></code> and <code class="docutils literal notranslate"><span class="pre">T2</span></code> within a generic type definition.</p>
+<ol class="simple">
+<li><p>When the generic type is constructed, is it <em>necessary</em> that <code class="docutils literal notranslate"><span class="pre">T1</span></code> is the same type as <code class="docutils literal notranslate"><span class="pre">T2</span></code>?</p></li>
+<li><p>When the generic type is constructed, is it <em>possible</em> for <code class="docutils literal notranslate"><span class="pre">T1</span></code> to be the same type as <code class="docutils literal notranslate"><span class="pre">T2</span></code>?</p></li>
+</ol>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/generic-type-parameters-exercise-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 72.4 </span></p>
+<section id="exercise-content">
+<p>In your own words, give an example of a type parameter that could be used in a generic type or a generic method.
+In other words, where could you make use of the type parameter?</p>
+</section>
+</div>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="haskell-type-parameter-names"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>In Haskell, type parameters start with a lower case letter so we would name it <code class="docutils literal notranslate"><span class="pre">a</span></code> rather than <code class="docutils literal notranslate"><span class="pre">A</span></code>.</p>
+</dd>
+</dl>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
