@@ -30,8 +30,8 @@ In cases where the implementation is the same, but the types are different, and 
 
 The most common use case for generic types in C# is probably that of generic collections.
 C# offers an extensive [type hierarchy](type-hierarchies) of generic collection types which include both interfaces and concrete classes.
-Part of this hierarchy is depicted in {numref}`fig:generic-collections-hierarchy`.
 This involves everything from simple types like `Set<T>` and `Stack<T>` to more complex types like `Dictionary<TKey,TValue>` and `KeyedCollection<TKey,TItem>`.
+%Part of this hierarchy is depicted in {numref}`fig:generic-collections-hierarchy`.
 
 But there are tons of problems that we can solve by writing our own generic types and that's mostly what we're going to explore in this chapter.
 
