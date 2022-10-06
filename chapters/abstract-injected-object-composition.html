@@ -1118,6 +1118,11 @@ title="Print to PDF"
      70.3.2. Flip Flop ciphers
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#composite-ciphers">
+     70.3.3. Composite ciphers
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -1167,6 +1172,11 @@ title="Print to PDF"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#flip-flop-ciphers">
      70.3.2. Flip Flop ciphers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#composite-ciphers">
+     70.3.3. Composite ciphers
     </a>
    </li>
   </ul>
@@ -1256,7 +1266,7 @@ Check this out:</p>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2234.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2246.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1301,12 +1311,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.1.13:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.86:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2234.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2246.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1367,9 +1377,6 @@ else {
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SubstitutionCipher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IStringToStringCipher</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="n">ICharToStringCipher</span><span class="w"> </span><span class="n">cipher</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">SubstitutionCipher</span><span class="w"> </span><span class="p">(</span><span class="n">ICharToCharCipher</span><span class="w"> </span><span class="n">cipher</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">cipher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CharToStringAdapter</span><span class="p">(</span><span class="n">cipher</span><span class="p">);</span><span class="w"></span>
 
 <span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">SubstitutionCipher</span><span class="w"> </span><span class="p">(</span><span class="n">ICharToStringCipher</span><span class="w"> </span><span class="n">cipher</span><span class="p">)</span><span class="w"></span>
 <span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">cipher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cipher</span><span class="p">;</span><span class="w"></span>
@@ -1566,6 +1573,58 @@ So if we want the <code class="docutils literal notranslate"><span class="pre">F
 </div>
 <p>Let me be the first to say that our ciphers are finally getting pretty interesting.
 After the exercises in this chapter I’m suspecting you’ll have a pretty good idea of the power of <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">composition over inheritance</span></a> and abstract injected object composition.</p>
+</section>
+<section id="composite-ciphers">
+<span id="abstract-injected-object-composition-examples-composite-ciphers"></span><h3><span class="section-number">70.3.3. </span>Composite ciphers<a class="headerlink" href="#composite-ciphers" title="Permalink to this headline">#</a></h3>
+<p>One final example.
+Here’s a classic.
+How about a composite cipher that takes two ciphers in the constructor and applies both of them to whatever input we give it when encoding?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CompositeCipher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICharToCharCipher</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">ICharToCharCipher</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">second</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">CompositeCipher</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="n">ICharToCharCipher</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">ICharToCharCipher</span><span class="w"> </span><span class="n">second</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">first</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">first</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">second</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">second</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">first</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">input</span><span class="p">));</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">CompositeCipher</span><span class="w"> </span><span class="n">composite</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CompositeCipher</span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">CaesarCipher</span><span class="p">(</span><span class="m">1</span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">LeetCipher</span><span class="p">());</span><span class="w"></span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">composite</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="sc">&#39;E&#39;</span><span class="p">));</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>We named this cipher <code class="docutils literal notranslate"><span class="pre">CompositeCipher</span></code> because this essentially is an implementation of the <a class="reference internal" href="composite-pattern.html"><span class="doc std std-doc">Composite design pattern</span></a>.
+More on that pattern later.</p>
+</div>
+<p>However, our composite cipher only works with ciphers of type <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code>.
+But if you think about it for a moment you will quickly realize that we could do the same thing for <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code>.
+But to also support ciphers of type <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code> we must duplicate the whole <code class="docutils literal notranslate"><span class="pre">CompositeCipher</span></code> implementation.
+We don’t want that, so let’s drop that idea for now and let’s get back to it when we get to <a class="reference internal" href="generics.html"><span class="doc std std-doc">generics</span></a>.</p>
 </section>
 </section>
 <section id="exercises">

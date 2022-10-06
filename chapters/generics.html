@@ -953,6 +953,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/chrokh/the-oo-way/main?urlpath=tree/docs/chapters/generics.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -987,6 +1016,23 @@ title="Open an issue"
   </button>
   <div class="menu-dropdown__content">
     <ul>
+      <li>
+        <a href="../_sources/chapters/generics.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
       <li>
         <a href="../_sources/chapters/generics.md"
    class="headerbtn"
@@ -1025,12 +1071,58 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   71.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   71.2. Definition
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#terminology">
+     71.2.1. Terminology
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   71.3. Examples
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   71.4. Exercises
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -1042,6 +1134,41 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   71.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   71.2. Definition
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#terminology">
+     71.2.1. Terminology
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   71.3. Examples
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   71.4. Exercises
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -1055,6 +1182,361 @@ title="Print to PDF"
 <p class="admonition-title">Warning</p>
 <p>Work in progress.</p>
 </div>
+<p>Remember how we said that there are at least <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">four types of polymorphism</span></a>?
+In object oriented programming subtype polymorphism is the really big one, but in hybrid languages such as C# parametric polymorphism is really important and frequently used.
+In C# parametric polymorphism is implemented through the concept known as “generics”.</p>
+<p>For a basic understanding of generics / parametric polymorphism we must understand the topics below.
+The concepts are all discussed in separate chapters but in this chapter we provide an overview to the topic of generics as such.</p>
+<ol class="simple">
+<li><p><a class="reference internal" href="generic-type-parameters.html"><span class="doc std std-doc">Generic type parameters</span></a>.</p></li>
+<li><p><a class="reference internal" href="generic-types.html"><span class="doc std std-doc">Generic types</span></a> (classes, interfaces, and structs).</p></li>
+<li><p><a class="reference internal" href="generic-methods.html"><span class="doc std std-doc">Generic methods</span></a>.</p></li>
+<li><p><a class="reference internal" href="delegates.html"><span class="doc std std-doc">Generic delegates</span></a>.</p></li>
+<li><p><a class="reference internal" href="type-parameter-constraints.html"><span class="doc std std-doc">Type parameter constraints</span></a>.</p></li>
+<li><p><a class="reference internal" href="variance.html"><span class="doc std std-doc">Variance</span></a>.</p></li>
+</ol>
+<section id="motivation">
+<h2><span class="section-number">71.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
+<p>When writing object oriented programs, you will often find that you are repeating yourself.
+Up to this point we’ve pretended that all duplication can be eliminated with subtype polymorphism and object composition.
+As you might have suspected, this is of course not true.</p>
+<p>Think of the case of the <code class="docutils literal notranslate"><span class="pre">CompositeCipher</span></code> that we wrote in the chapter on <a class="reference internal" href="abstract-injected-object-composition.html"><span class="doc std std-doc">abstract injected object composition</span></a>.
+The class is dependency injected with two ciphers of type <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code> and the class itself is an <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code>.
+When we call the instance method <code class="docutils literal notranslate"><span class="pre">Encode</span></code> and supply some input the cipher runs the input through the first cipher, takes the result, and runs it through the second cipher.</p>
+<p>Remember how we said that it clearly should be possible to define a <code class="docutils literal notranslate"><span class="pre">CompositeCipher</span></code> type that instead supported ciphers of type <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code>?
+But that doing so would involve duplicating the whole class.
+Have a look at the code below where we’ve duplicated the code in order to make a second class that supports <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code>.
+The implementation of these two classes is virtually the same.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CompositeCharToCharCipher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICharToCharCipher</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">ICharToCharCipher</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">second</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">CompositeCharToCharCipher</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="n">ICharToCharCipher</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">ICharToCharCipher</span><span class="w"> </span><span class="n">second</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">first</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">first</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">second</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">second</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">first</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">input</span><span class="p">));</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CompositeStringToStringCipher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IStringToStringCipher</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">IStringToStringCipher</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">second</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">CompositeStringToStringCipher</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="n">IStringToStringCipher</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">IStringToStringCipher</span><span class="w"> </span><span class="n">second</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">first</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">first</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">second</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">second</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">first</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">input</span><span class="p">));</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">interface</span><span class="w"> </span><span class="n">ICharToCharCipher</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="k">interface</span><span class="w"> </span><span class="n">IStringToStringCipher</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="k">interface</span><span class="w"> </span><span class="n">ICharToStringCipher</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-2536.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.86:1024/", "http://127.0.0.1:1024/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '2536.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>How should we go about removing this duplication?</p>
+<p>The two composite classes are fundamentally not in a subtyping relationship because <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code> and <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code> are fundamentally not subtypes.</p>
+<p>We’ve already learned that C# classes supports <a class="reference internal" href="variance.html"><span class="doc std std-doc">covariant return types</span></a> but not contravariant parameter types.
+Even if C# would support contravariant parameter types and even if variance would be supported in interfaces <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code> and <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code> are still not in a subtyping relationship.
+Even if <code class="docutils literal notranslate"><span class="pre">string</span></code> and <code class="docutils literal notranslate"><span class="pre">char</span></code> would be in a suptyping relationship (which they are not) where <code class="docutils literal notranslate"><span class="pre">char</span></code> would be a subtype (think: specialization) of <code class="docutils literal notranslate"><span class="pre">string</span></code> (which makes more sense than the other way around) <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code> and <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code> would still not be in a subtyping relationship.</p>
+<p>Why?
+Well, because if <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code> then the <em>input type</em> of the <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method must be <em>covariant</em> since the subtype <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code> returns a <code class="docutils literal notranslate"><span class="pre">char</span></code> which then is a specialization/subtype of <code class="docutils literal notranslate"><span class="pre">string</span></code>.
+But covariant input is not allowed according to the <a class="reference internal" href="liskov-substitution-principle.html#liskov-substitution-principle"><span class="std std-ref">Liskov Substitution Principle</span></a>.</p>
+<p>Ok, so let’s flip it?
+Well, if <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code> then the return type, the <em>output type</em> must be contravariant since the subtype <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code> returns a <code class="docutils literal notranslate"><span class="pre">string</span></code> which is a generalization/supertype of <code class="docutils literal notranslate"><span class="pre">char</span></code>.
+So, in this scenario, subtyping simply doesn’t help us eliminate duplication without solving the problem in a completely different way.</p>
+<p>Without being able to treat <code class="docutils literal notranslate"><span class="pre">char</span></code> based ciphers and <code class="docutils literal notranslate"><span class="pre">string</span></code> based ciphers uniformly there’s simply no way to get rid of that duplicated code.</p>
+<p>But why would we care about a single duplicated line you might say?
+If we ignore the constructors, it’s just a single line that’s duplicated.
+The contents of the <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method.
+Well, this is merely an example.
+If there’s one duplicated line, that’s a sign that there are many more possible things that could be duplicated.</p>
+<p>How about, for example the <code class="docutils literal notranslate"><span class="pre">SequenceCipher</span></code> that we wrote in <a class="reference internal" href="abstract-injected-object-composition.html#ex:array-cipher"><span class="std std-numref">Exercise 70.5</span></a>?
+That was a cipher that took an array of ciphers as input and then applied them one by one.
+In that exercise, <code class="docutils literal notranslate"><span class="pre">SequenceCipher</span></code> dealt with <code class="docutils literal notranslate"><span class="pre">string</span></code> based ciphers, but if we would write an implementation for <code class="docutils literal notranslate"><span class="pre">char</span></code> based ciphers it would be exactly the same.
+The only difference between the two would be the types.</p>
+<p>Notice a pattern?</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><em>If the implementation is the same, but the types are different</em>, then you’re probably looking at a scenario where we could use parametric polymorphism.</p>
+</div>
+<p>Enter parametric polymorphism.
+Generic programming.
+In the following chapters we will replace our interfaces <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code>, <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code>, and <code class="docutils literal notranslate"><span class="pre">ICharToStringCipher</span></code> with a single generic interface, called <code class="docutils literal notranslate"><span class="pre">ICipher&lt;TIn,</span> <span class="pre">TOut&gt;</span></code>.
+This allows us to eliminate further duplication, not only in the interfaces, but also by implementing a single <code class="docutils literal notranslate"><span class="pre">CompositeCipher&lt;T&gt;</span></code> that works for input and outputs of both type <code class="docutils literal notranslate"><span class="pre">string</span></code> and type <code class="docutils literal notranslate"><span class="pre">char</span></code>.</p>
+<p>As we shall see, parametric polymorphism not only help us eliminate duplicated code, but also spreads like a virus.
+The good kind of virus.
+By turning a non-generic type into a generic type it is often possible that things that use this new generic type can too be converted from non-generic to generic types.
+And so the meme permeates throughout our code-base.
+Generic types increase the <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a> of our code since they (at least) increase modularity and modularity.</p>
+<p>Another important aspect is that of <a class="reference internal" href="type-checking.html"><span class="doc std std-doc">static type safety</span></a>.
+Most things that we do with generics can trivially be achieved in dynamically typed languages, or even in C# by using the <a class="reference internal" href="type-systems.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code> keyword</span></a> or by simply treating things as the top-type <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">object</span></a>.
+The fact that all types in C# inherit from object is something that we’ll discuss in further detail in the chapter on <a class="reference internal" href="type-hierarchies.html"><span class="doc std std-doc">type hierarchies</span></a>.
+The first strategy involve unsafe <a class="reference internal" href="object-type-conversions.html"><span class="doc std std-doc">type conversions</span></a> and the second potential <a class="reference internal" href="object-type-conversions.html"><span class="doc std std-doc">downcasting</span></a> which may cause <a class="reference internal" href="errors.html"><span class="doc std std-doc">run-time errors</span></a>.
+A major reason for using a language like C# in the first place is the ability to use static typing to avoid run-time errors.
+Generics help us write reusable code without loosing static type safety.</p>
+</section>
+<section id="definition">
+<h2><span class="section-number">71.2. </span>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">#</a></h2>
+<p>The word “parametric”, in “parametric polymorphism”, was presumably chosen since parametrically polymorphic types are <em>parameterized</em> over types.
+The name “generics” was presumably selected since the use of parametric polymorphism is also known as “generic programming”.
+Which terminology is used mostly depend on the tradition of the language that we are using and in C# we tend to say “generics” rather than “parametric polymorphism”.</p>
+<p>The idea of a generic type is that it is universally polymorphic.
+The instance and static members of a generic type can be defined so that one or more types that these members depend on can be replaced by any possible type.
+Let me say that again, they can be replaced by <em>any possible type</em>.
+We write a single implementation that works for every member of every possible type at the same time.
+Said differently, the implementation does not depend on the underlying type that we’ve parameterized over.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>With overloading, we define different implementations for different types.
+With overriding, we define specialized implementations for specialized types.
+With generics, we define <em>a single implementation for all types</em>.</p>
+</div>
+<p>So, what is a generic type?
+The term “generic type” refers to both the “generic type definition” and a “<em>constructed</em> generic type”.
+The former is a type with type parameters that must be replaced with actual types.
+The latter is a type that has had its type parameters replaced with actual types.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>A generic type definition is not a complete type.
+To construct a type we must replace its <em>type parameters</em> with actual types in order to form a <em>constructed generic type</em>.</p>
+</div>
+<p>Think of it this way: A generic type depends on some other type or types, but what these types are is not known at the time you write the implementation of your generic type.
+So, instead you parameterize your generic type with some “type parameters”.
+Whenever someone wishes to use your generic type definition they must replace the type parameters in the generic type definition with actual types so that we get, what is called, a <em>generic constructed type</em> or simply a <em>constructed type</em>.</p>
+<figure class="align-default" id="fig-generic-type-definition">
+<img alt="https://via.placeholder.com/700x200?text=Image+coming+soon" src="https://via.placeholder.com/700x200?text=Image+coming+soon" />
+<figcaption>
+<p><span class="caption-number">Fig. 71.1 </span><span class="caption-text">A “generic type definition” can be turned into any number of “constructed generic types” by replacing its type parameters with actual types.</span><a class="headerlink" href="#fig-generic-type-definition" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>It is important to realize that all type parameters must be replaced with actual types at compile-time rather than at run-time.
+In terms of using the term “polymorphism” we ought to classify this as “static” rather than “dynamic” polymorphism.
+With subtype polymorphism, it is possible to defer the decision of which implementation to use at run-time.
+With parametric polymorphism, which implementation to use has to be known at compile-time.
+Still, it is tremendously useful when it comes to writing reusable and modular code without ever having to give up static typing.</p>
+<div class="seealso admonition">
+<p class="admonition-title">Aside</p>
+<p>If you happen to be familiar with logic quantifiers then we should emphasize that a generic type is a <em>universally quantified</em> type.
+This is why we say that the type is <em>universally</em> polymorphic.</p>
+</div>
+<section id="terminology">
+<span id="generics-terminology"></span><h3><span class="section-number">71.2.1. </span>Terminology<a class="headerlink" href="#terminology" title="Permalink to this headline">#</a></h3>
+<p>Before we wrap this section up, let’s finish up with some terminology directly from the <a class="reference external" href="https://learn.microsoft.com/en-us/dotnet/standard/generics/">official documentation</a>:</p>
+<ul class="simple">
+<li><p><em>Generic type parameters</em> (or simply type parameters) are placeholders for types in a generic type definition or generic method definition.</p></li>
+<li><p>A <em>generic type definition</em> is a class, struct, or an interface declaration with type parameters. It is like a template rather than a complete type definition. An example is <code class="docutils literal notranslate"><span class="pre">List&lt;T&gt;</span></code>.</p></li>
+<li><p>A <em>constructed generic type</em> is the result of replacing the type parameters in a generic type definition with actual types. An example is: <code class="docutils literal notranslate"><span class="pre">List&lt;int&gt;</span></code>.</p></li>
+<li><p>A <em>generic type</em> is either a generic type definition or a constructed generic type.</p></li>
+<li><p>A <em>generic method definition</em> is a method which before its formal parameter list (for values), also contains a list of generic type parameters. Type parameters can be used as the return type or as the type of formal arguments. An example is: <code class="docutils literal notranslate"><span class="pre">List&lt;T&gt;</span> <span class="pre">Repeat&lt;T&gt;</span> <span class="pre">(T</span> <span class="pre">value,</span> <span class="pre">int</span> <span class="pre">times)</span></code>. The <code class="docutils literal notranslate"><span class="pre">&lt;T&gt;</span></code> in the method name (<code class="docutils literal notranslate"><span class="pre">Repeat&lt;T&gt;</span></code>) is the type parameter.</p></li>
+<li><p>A <em>generic type argument</em> is whatever type is used to replace a type parameter with an actual type. Just like how an argument is used in place of a parameter when applying methods, a generic type argument is used in place of a generic type parameter.</p></li>
+<li><p>The <em>variance</em> of generic type parameters determine whether more or less derived type can be used when some constructed generic type is expected. Variance can only be specified for type parameters in generic interfaces.</p></li>
+<li><p><em>Constraints</em> on generic type parameters limit the types that can be used as type arguments. You might for example declare that a type parameter must be replaced with an argument that is not null, or that is a <code class="docutils literal notranslate"><span class="pre">class</span></code> (as opposed to a <code class="docutils literal notranslate"><span class="pre">struct</span></code> for example).</p></li>
+</ul>
+</section>
+</section>
+<section id="examples">
+<h2><span class="section-number">71.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
+<p>The most common use-case for generics is collections.
+Think about a list for example.
+When you’re implementing a method that adds items to the list, do you really need to know what type of element you are adding?
+Not really, right?
+Adding is just a matter of sticking the element into the list.
+As long as the type of all elements in the list is the same, and as long as all instances of any list type have the same type, we’re fine.</p>
+<figure class="align-default" id="fig-generic-list">
+<img alt="https://via.placeholder.com/700x200?text=Image+coming+soon" src="https://via.placeholder.com/700x200?text=Image+coming+soon" />
+<figcaption>
+<p><span class="caption-number">Fig. 71.2 </span><span class="caption-text">As long as all elements in the list have the same type it doesn’t matter what the type is.
+None of these lists have the same type, but these types can all be constructed from the generic list type.</span><a class="headerlink" href="#fig-generic-list" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Let’s take a simpler example.
+How about the notion of a pair.
+This is sometimes also known as a “tuple”.
+A pair is simply a collection of two elements.
+Let’s refer to these elements as the <code class="docutils literal notranslate"><span class="pre">First</span></code> element and the <code class="docutils literal notranslate"><span class="pre">Second</span></code> element.
+The type of <code class="docutils literal notranslate"><span class="pre">First</span></code> might be the same as the type of <code class="docutils literal notranslate"><span class="pre">Second</span></code> or it might not.
+But if we define a data type for a pair then the type of <code class="docutils literal notranslate"><span class="pre">First</span></code> must be the same for every instance of the pair type.
+Same for <code class="docutils literal notranslate"><span class="pre">Second</span></code>.</p>
+<p>But if we define a generic type for pairs then we can create any number of non-generic types of pairs without having to write any implementation.</p>
+<figure class="align-default" id="id1">
+<img alt="https://via.placeholder.com/700x200?text=Image+coming+soon" src="https://via.placeholder.com/700x200?text=Image+coming+soon" />
+<figcaption>
+<p><span class="caption-number">Fig. 71.3 </span><span class="caption-text">As long as all instances of a pair type store elements of the same type in the first position and elements of the same type in the right position then it doesn’t matter what these types are.
+The pairs that are grouped together have the same type, and all pair types could be constructed from the same generic pair type.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Can every type be converted into a generic type?
+No, some algorithms cannot be expressed without knowledge of the underlying type.
+Think about the difference between the act of adding another element to a list (which we’ve talked about) and that of arithmetic addition.
+Arithmetic addition is only defined for numeric types.
+If you want to say that there is an implementation for a type that is not a number then you have to define that implementation yourself.
+It’s not obviously parametrically polymorphic.</p>
+</section>
+<section id="exercises">
+<h2><span class="section-number">71.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<div class="exercise admonition" id="chapters/generics-exercise-0">
+
+<p class="admonition-title"><span class="caption-number">Exercise 71.1 </span></p>
+<section id="exercise-content">
+<p>What are generics?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/generics-exercise-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 71.2 </span></p>
+<section id="exercise-content">
+<p>What is parametric polymorphism?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/generics-exercise-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 71.3 </span></p>
+<section id="exercise-content">
+<p>Can any method be converted into a parametrically polymorphic method while still maintaining the same functionality?
+Why or why not?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/generics-exercise-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 71.4 </span></p>
+<section id="exercise-content">
+<p>Give an example, in your own words, of a type that could be parametrically polymorphic.</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/generics-exercise-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 71.5 </span></p>
+<section id="exercise-content">
+<p>What is the difference between a “generic type definition” and a “constructed generic type”?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/generics-exercise-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 71.6 </span></p>
+<section id="exercise-content">
+<p>Why can’t we use subtyping to somehow “merge” the types <code class="docutils literal notranslate"><span class="pre">CompositeCharToCharCipher</span></code> and <code class="docutils literal notranslate"><span class="pre">CompositeStringToStringCipher</span></code>?</p>
+</section>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1066,16 +1548,16 @@ title="Print to PDF"
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            kernelName: "python3",
+            kernelName: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
 
               </div>
               
