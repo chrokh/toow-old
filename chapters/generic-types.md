@@ -99,7 +99,7 @@ We get hit with a run-time exception.
 
 ```csharp
 DynamicBox dynStrBox = new DynamicBox("hello");
-int todo = dynStrBox.X;
+int number = dynStrBox.X;
 ```
 
 ```output
@@ -126,7 +126,7 @@ We get hit with a run-time exception.
 
 ```csharp
 ObjectBox objStrBox  = new ObjectBox("hello");
-int todo = (int)objStrBox.X;
+int number = (int)objStrBox.X;
 ```
 
 ```output
