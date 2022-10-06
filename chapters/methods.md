@@ -11,6 +11,7 @@ kernelspec:
 ---
 
 % TODO: Algorithms chapter claims that we talk about "parameterization" here.
+% TODO: Parameter vs argument
 
 
 (local-functions)=
