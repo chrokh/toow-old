@@ -118,11 +118,6 @@ class Coordinate
     Y = y;
   }
 
-  public void Add (Coordinate coord)
-  {
-    X += coord.X;
-  }
-
   public void Translate (int x, int y)
   {
     X += x;
@@ -147,7 +142,7 @@ Even though we can talk about the abstract idea of the interface of the class `C
 What would a concrete `interface` that captures the same idea look like?
 How about this:
 
-```csharp
+```{code-cell} csharp
 interface ICoordinate
 {
   int X { get; set; }
@@ -166,24 +161,17 @@ Choose whether you want to stick to this convention or not and then stick to you
 Remember how we said that interfaces only define compile-time types and hence cannot be instantiated.
 If we try to instantiate an interface we get an error.
 
-```csharp
+```{code-cell} csharp
+:tags: [raises-exception]
 ICoordinate coord = new ICoordinate();
-```
-
-```output
-error CS0144: Cannot create an instance of the abstract type or interface.
 ```
 
 However, since interfaces do define compile-time types it is only the right-hand side of the assignment statement above that's problematic.
 The left-hand side is entirely fine.
 We can declare a variable of type `ICoordinate` and our code will compile just fine.
 
-```csharp
+```{code-cell} csharp
 ICoordinate coord;
-```
-
-```output
-Build succeeded.
 ```
 
 ### Implementing an interface
@@ -209,35 +197,44 @@ When we compile our program the compiler will check whether our types actually i
 In the example below we're defining an empty class called `Point` and claim that it implements the interface `ICoordinate`.
 When compiling the program we get an error that states that we haven't implemented any of the members that `ICoordinate` demands.
 
-```csharp
+```{code-cell} csharp
+:tags: [raises-exception]
 class Point : ICoordinate { }
-```
-
-```output
-error CS0535: 'Point' does not implement interface member 'ICoordinate.X'.
-error CS0535: 'Point' does not implement interface member 'ICoordinate.Y'.
-error CS0535: 'Point' does not implement interface member 'ICoordinate.Translate(int, int)'.
 ```
 
 But what about our previous class `Coordinate`.
 Since we modeled the interface after that class, surely that class should be a valid implementation of `ICoordinate`.
 Let's try it out.
 
-```csharp
+```{code-cell} csharp
 class Coordinate : ICoordinate
 {
-  // Insert same implementation as before...
-}
-```
+  public int X { get; set; }
+  public int Y { get; set; }
 
-```output
-Build succeeded.
+  public Coordinate (int x, int y)
+  {
+    X = x;
+    Y = y;
+  }
+
+  public void Add (Coordinate coord)
+  {
+    X += coord.X;
+  }
+
+  public void Translate (int x, int y)
+  {
+    X += x;
+    Y += y;
+  }
+}
 ```
 
 Yup, since the class `Coordinate` implements all the required members of the interface `ICoordinate` it is a valid implementation of it.
 This means that we can now declare a variable with the compile-time type `ICoordinate` and run-time type `Coordinate` since the latter implements the interface of the former.
 
-```csharp
+```{code-cell} csharp
 ICoordinate coord = new Coordinate(0, 0);
 ```
 
@@ -250,7 +247,7 @@ Why this is useful and what we can do with this is something that we'll deal wit
 Before we move on we should mention that you can implement multiple interfaces by simply separating them with commas.
 Let's say that we want to split our previous interface into the two interfaces `IPositionable` and `ITranslatable`.
 
-```csharp
+```{code-cell} csharp
 interface IPositionable
 {
   int X { get; set; }
@@ -264,12 +261,28 @@ interface ITranslatable
 ```
 
 Given that we leave our definition of `Coordinate` intact we can now declare our class an implementation of any combination of these three interfaces.
-The following lines are all therefore examples of valid class declarations.
+The following two classes are therefore both entirely valid.
 
-```csharp
-class Coordinate : IPositionable, ITranslatable { /* ... */ }
-class Coordinate : IPositionable, ITranslatable, ICoordinate { /* ... */ }
+```{code-cell} csharp
+class Point : IPositionable, ITranslatable
+{
+  public int X { get; set; }
+  public int Y { get; set; }
+  public void Translate (int x, int y) { X += x; Y += y; }
+}
+
+class Position : IPositionable, ITranslatable, ICoordinate
+{
+  public int X { get; set; }
+  public int Y { get; set; }
+  public void Translate (int x, int y) { X += x; Y += y; }
+}
 ```
+
+Also, note that it's entirely fine for the interfaces to "overlap".
+Meaning that multiple interfaces demand that a member with the same signature exists.
+
+
 
 ### UML class diagram notation
 
@@ -287,10 +300,6 @@ The arrow points from the implementation to the interface.
 ```
 
 ## Examples
-
-```{warning}
-Work in progress.
-```
 
 (interfaces:ciphers)=
 ### Cipher interfaces

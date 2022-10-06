@@ -1327,11 +1327,6 @@ At run-time, any interface must be replaced by a run-time type.</p>
 <span class="w">    </span><span class="n">Y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Add</span><span class="w"> </span><span class="p">(</span><span class="n">Coordinate</span><span class="w"> </span><span class="n">coord</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">X</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">coord</span><span class="p">.</span><span class="n">X</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
 <span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Translate</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"></span>
 <span class="w">  </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="n">X</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
@@ -1344,7 +1339,7 @@ At run-time, any interface must be replaced by a run-time type.</p>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2734.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2778.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1389,12 +1384,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.236:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.171:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2734.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2778.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1464,6 +1459,8 @@ Well there are three public instance members:</p>
 <p>Even though we can talk about the abstract idea of the interface of the class <code class="docutils literal notranslate"><span class="pre">Coordinate</span></code>, we cannot talk about any concrete <code class="docutils literal notranslate"><span class="pre">interface</span></code> since it doesn’t implement one.
 What would a concrete <code class="docutils literal notranslate"><span class="pre">interface</span></code> that captures the same idea look like?
 How about this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ICoordinate</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
@@ -1471,6 +1468,8 @@ How about this:</p>
 <span class="w">  </span><span class="k">void</span><span class="w"> </span><span class="nf">Translate</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
+</div>
+</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1481,20 +1480,30 @@ Choose whether you want to stick to this convention or not and then stick to you
 </div>
 <p>Remember how we said that interfaces only define compile-time types and hence cannot be instantiated.
 If we try to instantiate an interface we get an error.</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ICoordinate</span><span class="w"> </span><span class="n">coord</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ICoordinate</span><span class="p">();</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">error CS0144: Cannot create an instance of the abstract type or interface.</span>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1,21): error CS0144: Cannot create an instance of the abstract type or interface &#39;ICoordinate&#39;
 </pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
 </div>
 <p>However, since interfaces do define compile-time types it is only the right-hand side of the assignment statement above that’s problematic.
 The left-hand side is entirely fine.
 We can declare a variable of type <code class="docutils literal notranslate"><span class="pre">ICoordinate</span></code> and our code will compile just fine.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ICoordinate</span><span class="w"> </span><span class="n">coord</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">Build succeeded.</span>
-</pre></div>
+</div>
 </div>
 </section>
 <section id="implementing-an-interface">
@@ -1516,30 +1525,64 @@ We say that some type implements some interface.</p>
 When we compile our program the compiler will check whether our types actually implement all the members of the interfaces that they claim to implement.</p>
 <p>In the example below we’re defining an empty class called <code class="docutils literal notranslate"><span class="pre">Point</span></code> and claim that it implements the interface <code class="docutils literal notranslate"><span class="pre">ICoordinate</span></code>.
 When compiling the program we get an error that states that we haven’t implemented any of the members that <code class="docutils literal notranslate"><span class="pre">ICoordinate</span></code> demands.</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Point</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICoordinate</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">error CS0535: &#39;Point&#39; does not implement interface member &#39;ICoordinate.X&#39;.</span>
-<span class="go">error CS0535: &#39;Point&#39; does not implement interface member &#39;ICoordinate.Y&#39;.</span>
-<span class="go">error CS0535: &#39;Point&#39; does not implement interface member &#39;ICoordinate.Translate(int, int)&#39;.</span>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1,15): error CS0535: &#39;Point&#39; does not implement interface member &#39;ICoordinate.X&#39;
+
+(1,15): error CS0535: &#39;Point&#39; does not implement interface member &#39;ICoordinate.Y&#39;
+
+(1,15): error CS0535: &#39;Point&#39; does not implement interface member &#39;ICoordinate.Translate(int, int)&#39;
 </pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
 </div>
 <p>But what about our previous class <code class="docutils literal notranslate"><span class="pre">Coordinate</span></code>.
 Since we modeled the interface after that class, surely that class should be a valid implementation of <code class="docutils literal notranslate"><span class="pre">ICoordinate</span></code>.
 Let’s try it out.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Coordinate</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICoordinate</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="c1">// Insert same implementation as before...</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Coordinate</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">X</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Add</span><span class="w"> </span><span class="p">(</span><span class="n">Coordinate</span><span class="w"> </span><span class="n">coord</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">X</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">coord</span><span class="p">.</span><span class="n">X</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Translate</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">X</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Y</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">Build succeeded.</span>
-</pre></div>
+</div>
 </div>
 <p>Yup, since the class <code class="docutils literal notranslate"><span class="pre">Coordinate</span></code> implements all the required members of the interface <code class="docutils literal notranslate"><span class="pre">ICoordinate</span></code> it is a valid implementation of it.
 This means that we can now declare a variable with the compile-time type <code class="docutils literal notranslate"><span class="pre">ICoordinate</span></code> and run-time type <code class="docutils literal notranslate"><span class="pre">Coordinate</span></code> since the latter implements the interface of the former.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ICoordinate</span><span class="w"> </span><span class="n">coord</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Coordinate</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">);</span><span class="w"></span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Notice how the compile-time type on the left is an interface (or generally: an abstraction) while the run-time type on the right is a concrete class.
 Why this is useful and what we can do with this is something that we’ll deal with in the chapter on <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype polymorphism</span></a>.</p>
@@ -1548,6 +1591,8 @@ Why this is useful and what we can do with this is something that we’ll deal w
 <h3><span class="section-number">60.2.4. </span>Implementing multiple interfaces<a class="headerlink" href="#implementing-multiple-interfaces" title="Permalink to this headline">#</a></h3>
 <p>Before we move on we should mention that you can implement multiple interfaces by simply separating them with commas.
 Let’s say that we want to split our previous interface into the two interfaces <code class="docutils literal notranslate"><span class="pre">IPositionable</span></code> and <code class="docutils literal notranslate"><span class="pre">ITranslatable</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IPositionable</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
@@ -1560,12 +1605,31 @@ Let’s say that we want to split our previous interface into the two interfaces
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
+</div>
+</div>
 <p>Given that we leave our definition of <code class="docutils literal notranslate"><span class="pre">Coordinate</span></code> intact we can now declare our class an implementation of any combination of these three interfaces.
-The following lines are all therefore examples of valid class declarations.</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Coordinate</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IPositionable</span><span class="p">,</span><span class="w"> </span><span class="n">ITranslatable</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Coordinate</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IPositionable</span><span class="p">,</span><span class="w"> </span><span class="n">ITranslatable</span><span class="p">,</span><span class="w"> </span><span class="n">ICoordinate</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+The following two classes are therefore both entirely valid.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Point</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IPositionable</span><span class="p">,</span><span class="w"> </span><span class="n">ITranslatable</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Translate</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Position</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IPositionable</span><span class="p">,</span><span class="w"> </span><span class="n">ITranslatable</span><span class="p">,</span><span class="w"> </span><span class="n">ICoordinate</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Translate</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
+</div>
+</div>
+<p>Also, note that it’s entirely fine for the interfaces to “overlap”.
+Meaning that multiple interfaces demand that a member with the same signature exists.</p>
 </section>
 <section id="uml-class-diagram-notation">
 <h3><span class="section-number">60.2.5. </span>UML class diagram notation<a class="headerlink" href="#uml-class-diagram-notation" title="Permalink to this headline">#</a></h3>
@@ -1583,10 +1647,6 @@ The arrow points from the implementation to the interface.
 </section>
 <section id="examples">
 <h2><span class="section-number">60.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
-</div>
 <section id="cipher-interfaces">
 <span id="interfaces-ciphers"></span><h3><span class="section-number">60.3.1. </span>Cipher interfaces<a class="headerlink" href="#cipher-interfaces" title="Permalink to this headline">#</a></h3>
 <p>Let’s now rally up all the ciphers that we’ve implemented so far and let’s try to write interfaces for them.
