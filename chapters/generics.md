@@ -16,9 +16,6 @@ kernelspec:
 Work in progress.
 ```
 
-% TODO: PROBLEM WITH MANY OF THE GENERAL CIPHERS IN ABSTRACT INJECTED COMPOSITION EXAMPLES AND EXERCISES IS THAT THEY HAVE TO BE DUPLICATED FOR DIFFERENT TYPES. char->char and char->string often but could also be string->string. Why cant eg the predicate cipher be on a string basis? You can also do RepeatCipher, CompositeCipher, etc.
-
-% TODO: Why did I not talk about CompositeCipher in chapter on abstract injected composition?
 
 
 Remember how we said that there are at least [four types of polymorphism](subtype-polymorphism)?
