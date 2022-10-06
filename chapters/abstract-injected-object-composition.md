@@ -97,9 +97,6 @@ class SubstitutionCipher : IStringToStringCipher
 {
   ICharToStringCipher cipher;
 
-  public SubstitutionCipher (ICharToCharCipher cipher)
-    => this.cipher = new CharToStringAdapter(cipher);
-
   public SubstitutionCipher (ICharToStringCipher cipher)
     => this.cipher = cipher;
 
@@ -275,6 +272,52 @@ Console.WriteLine( cipher.Encode("HELLO WORLD") );
 %Pretty wild stuff right?
 Let me be the first to say that our ciphers are finally getting pretty interesting.
 After the exercises in this chapter I'm suspecting you'll have a pretty good idea of the power of [composition over inheritance](composition-over-inheritance) and abstract injected object composition.
+
+
+(abstract-injected-object-composition:examples:composite-ciphers)=
+### Composite ciphers
+
+One final example.
+Here's a classic.
+How about a composite cipher that takes two ciphers in the constructor and applies both of them to whatever input we give it when encoding?
+
+```{code-cell} csharp
+class CompositeCipher : ICharToCharCipher
+{
+  ICharToCharCipher first, second;
+
+  public CompositeCipher (
+      ICharToCharCipher first,
+      ICharToCharCipher second)
+  {
+    this.first = first;
+    this.second = second;
+  }
+
+  public char Encode (char input)
+    => second.Encode(first.Encode(input));
+}
+```
+
+```{code-cell} csharp
+CompositeCipher composite = new CompositeCipher(
+  new CaesarCipher(1),
+  new LeetCipher());
+
+Console.WriteLine(composite.Encode('E'));
+```
+
+```{seealso}
+We named this cipher `CompositeCipher` because this essentially is an implementation of the [Composite design pattern](composite-pattern).
+More on that pattern later.
+```
+
+However, our composite cipher only works with ciphers of type `ICharToCharCipher`.
+But if you think about it for a moment you will quickly realize that we could do the same thing for `IStringToStringCipher`.
+But to also support ciphers of type `IStringToStringCipher` we must duplicate the whole `CompositeCipher` implementation.
+We don't want that, so let's drop that idea for now and let's get back to it when we get to [generics](generics).
+
+
 
 
 
