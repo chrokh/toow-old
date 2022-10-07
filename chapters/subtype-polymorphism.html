@@ -1491,7 +1491,7 @@ We only know about what’s in the compile-time type.</p>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3207.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3197.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1536,12 +1536,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.171:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.177:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3207.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3197.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -2025,21 +2025,18 @@ What does it mean that <span class="math notranslate nohighlight">\(A\)</span> <
 
 <p class="admonition-title"><span class="caption-number">Exercise 61.3 </span></p>
 <section id="exercise-content">
-<p>Can we send instances of <code class="docutils literal notranslate"><span class="pre">RobbersCipher</span></code> to <code class="docutils literal notranslate"><span class="pre">encodeCharTwice</span></code>?
-Why or why not?</p>
-</section>
-</div>
-<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-3">
-
-<p class="admonition-title"><span class="caption-number">Exercise 61.4 </span></p>
-<section id="exercise-content">
-<p>Can we send instances of <code class="docutils literal notranslate"><span class="pre">ReverseCipher</span></code> to <code class="docutils literal notranslate"><span class="pre">encodeCharTwice</span></code>?
-Why or why not?</p>
+<p>Which of the following types (if any) are supported by the method <code class="docutils literal notranslate"><span class="pre">encodeCharTwice</span></code>?</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">RobbersCipher</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ReverseCipher</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LeetCipher</span></code></p></li>
+</ol>
+<p>Note that we are talking about <code class="docutils literal notranslate"><span class="pre">encodeCharTwice</span></code> <em>not</em> <code class="docutils literal notranslate"><span class="pre">encodeStringTwice</span></code>.</p>
 </section>
 </div>
 <div class="exercise admonition" id="ex:subtype-polymorphism:encodeNTimes">
 
-<p class="admonition-title"><span class="caption-number">Exercise 61.5 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 61.4 </span></p>
 <section id="exercise-content">
 <p>Write a method with the following signature:</p>
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="w"> </span><span class="nf">encodeNTimes</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">IStringToStringCipher</span><span class="w"> </span><span class="n">cipher</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">times</span><span class="p">);</span><span class="w"></span>
@@ -2079,18 +2076,18 @@ The parameter <code class="docutils literal notranslate"><span class="pre">input
 </div>
 </section>
 </div>
-<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-5">
+<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-4">
 
-<p class="admonition-title"><span class="caption-number">Exercise 61.6 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 61.5 </span></p>
 <section id="exercise-content">
-<p>Is it possible to pass the class <code class="docutils literal notranslate"><span class="pre">LeetCipher</span></code> that you wrote in <a class="reference internal" href="interfaces.html#ex:interfaces:leet"><span class="std std-numref">Exercise 60.4</span></a> to the method <code class="docutils literal notranslate"><span class="pre">encodeNTimes</span></code> that you wrote in <a class="reference internal" href="#ex:subtype-polymorphism:encodeNTimes"><span class="std std-numref">Exercise 61.5</span></a>?
+<p>Is it possible to pass the class <code class="docutils literal notranslate"><span class="pre">LeetCipher</span></code> that you wrote in <a class="reference internal" href="interfaces.html#ex:interfaces:leet"><span class="std std-numref">Exercise 60.4</span></a> to the method <code class="docutils literal notranslate"><span class="pre">encodeNTimes</span></code> that you wrote in <a class="reference internal" href="#ex:subtype-polymorphism:encodeNTimes"><span class="std std-numref">Exercise 61.4</span></a>?
 Why or why not?
 If not, can we make it possible?</p>
 </section>
 </div>
 <div class="exercise admonition" id="ex:subtype-polymorphism-own-types">
 
-<p class="admonition-title"><span class="caption-number">Exercise 61.7 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 61.6 </span></p>
 <section id="exercise-content">
 <p>Come up with your own example of inclusion/subtying that involves at least three sets/types.
 Explain why all members of each subtype is also a member of it’s supertype.</p>
@@ -2098,10 +2095,10 @@ Explain why all members of each subtype is also a member of it’s supertype.</p
 </div>
 <div class="exercise admonition" id="ex:subtype-polymorphism-implement-own-types">
 
-<p class="admonition-title"><span class="caption-number">Exercise 61.8 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 61.7 </span></p>
 <section id="exercise-content">
 <ol class="simple">
-<li><p>Write an interface that unifies the three types you designed in <a class="reference internal" href="#ex:subtype-polymorphism-own-types"><span class="std std-numref">Exercise 61.7</span></a>.</p></li>
+<li><p>Write an interface that unifies the three types you designed in <a class="reference internal" href="#ex:subtype-polymorphism-own-types"><span class="std std-numref">Exercise 61.6</span></a>.</p></li>
 <li><p>Declare at least one method/property to the interface.</p></li>
 <li><p>All methods that the interface declares must make sense in all the implementations of the interface.</p></li>
 <li><p>Write a class for each of the three types and make them implementations of the interface.</p></li>
@@ -2109,32 +2106,32 @@ Explain why all members of each subtype is also a member of it’s supertype.</p
 </ol>
 </section>
 </div>
+<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-7">
+
+<p class="admonition-title"><span class="caption-number">Exercise 61.8 </span></p>
+<section id="exercise-content">
+<p>Start with the code you wrote in <a class="reference internal" href="#ex:subtype-polymorphism-implement-own-types"><span class="std std-numref">Exercise 61.7</span></a>.
+Write a static method that (1) takes at least one argument whose type is the interface you’ve defined and (2) calls a method or accesses a property that’s defined in that interface.</p>
+</section>
+</div>
 <div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-8">
 
 <p class="admonition-title"><span class="caption-number">Exercise 61.9 </span></p>
 <section id="exercise-content">
-<p>Start with the code you wrote in <a class="reference internal" href="#ex:subtype-polymorphism-implement-own-types"><span class="std std-numref">Exercise 61.8</span></a>.
-Write a static method that (1) takes at least one argument whose type is the interface you’ve defined and (2) calls a method or accesses a property that’s defined in that interface.</p>
+<p>Give an example of <em>subtype polymorphism</em> and <em>single dynamic dispatch</em> in code.
+Use code comments when necessary to get your point across.</p>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-9">
 
 <p class="admonition-title"><span class="caption-number">Exercise 61.10 </span></p>
 <section id="exercise-content">
-<p>Give an example of <em>subtype polymorphism</em> and <em>single dynamic dispatch</em> in code.
-Use code comments when necessary to get your point across.</p>
+<p>Why is it important that the signature of constructors can vary freely between subtypes?</p>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-10">
 
 <p class="admonition-title"><span class="caption-number">Exercise 61.11 </span></p>
-<section id="exercise-content">
-<p>Why is it important that the signature of constructors can vary freely between subtypes?</p>
-</section>
-</div>
-<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-11">
-
-<p class="admonition-title"><span class="caption-number">Exercise 61.12 </span></p>
 <section id="exercise-content">
 <p>When we treat a subtype as a supertype, meaning when we let the compile-time type be the supertype, why can’t we call methods that are only defined in the subtype?</p>
 </section>

@@ -633,13 +633,13 @@ Animal a12 = new Animal();
 
 
 ```{exercise}
-Can we send instances of `RobbersCipher` to `encodeCharTwice`?
-Why or why not?
-```
+Which of the following types (if any) are supported by the method `encodeCharTwice`?
 
-```{exercise}
-Can we send instances of `ReverseCipher` to `encodeCharTwice`?
-Why or why not?
+1. `RobbersCipher`
+2. `ReverseCipher`
+3. `LeetCipher`
+
+Note that we are talking about `encodeCharTwice` *not* `encodeStringTwice`.
 ```
 
 
