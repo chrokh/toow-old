@@ -73,6 +73,7 @@ Null-state errors ought to be considered semantic errors but I have chosen to hi
 
 
 
+(prefer-compile-time-errors)=
 ## Prefer compile-time errors
 
 The sooner we can discover a mistake, the easier it will be to fix it.

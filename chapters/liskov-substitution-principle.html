@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>68. Liskov substitution principle &#8212; The Object Oriented Way (DRAFT)</title>
+    <title>70. Liskov substitution principle &#8212; The Object Oriented Way (DRAFT)</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,10 +52,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="69. Abstract constructed object composition" href="abstract-constructed-object-composition.html" />
-    <link rel="prev" title="67. Variance" href="variance.html" />
+    <link rel="next" title="71. Generics" href="generics.html" />
+    <link rel="prev" title="69. Variance" href="variance.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -530,7 +532,7 @@ const thebe_selector_output = ".output, .cell_output"
   Polymorphism
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="interfaces.html">
    60. ★ Interfaces
@@ -566,16 +568,6 @@ const thebe_selector_output = ".output, .cell_output"
    66. Type conversions (of objects)
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="variance.html">
-   67. Variance
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   68. Liskov substitution principle
-  </a>
- </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -585,12 +577,29 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="abstract-constructed-object-composition.html">
-   69. ★ Abstract constructed object composition
+   67. ★ Abstract constructed object composition
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="abstract-injected-object-composition.html">
-   70. ★ Abstract injected object composition
+   68. ★ Abstract injected object composition
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Substitutability
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="variance.html">
+   69. Variance
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   70. Liskov substitution principle
   </a>
  </li>
 </ul>
@@ -1025,12 +1034,80 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   70.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   70.2. Definition
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#type-rules">
+     70.2.1. Type rules
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#behavioral-rules">
+     70.2.2. Behavioral rules
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   70.3. Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#violations-in-net">
+     70.3.1. Violations in .NET
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#history-rule">
+     70.3.2. History rule
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   70.4. Exercises
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#video">
+   70.5. Video
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -1042,6 +1119,63 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   70.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   70.2. Definition
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#type-rules">
+     70.2.1. Type rules
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#behavioral-rules">
+     70.2.2. Behavioral rules
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   70.3. Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#violations-in-net">
+     70.3.1. Violations in .NET
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#history-rule">
+     70.3.2. History rule
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   70.4. Exercises
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#video">
+   70.5. Video
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -1050,12 +1184,198 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="liskov-substitution-principle">
-<span id="id1"></span><h1><span class="section-number">68. </span>Liskov substitution principle<a class="headerlink" href="#liskov-substitution-principle" title="Permalink to this headline">#</a></h1>
+<span id="id1"></span><h1><span class="section-number">70. </span>Liskov substitution principle<a class="headerlink" href="#liskov-substitution-principle" title="Permalink to this headline">#</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Work in progress.</p>
 </div>
+<section id="motivation">
+<h2><span class="section-number">70.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
+<p>When writing programs in a language with a type system that supports subtyping it is of vital importance that all of our subtypes respect the rules that are set by their supertypes.
+If subtypes do not behave according to the specification set by their supertypes, then we cannot safely use subtypes where supertypes are expected without running the risk of unexpected behavior or errors occurring at run-time.</p>
+</section>
+<section id="definition">
+<h2><span class="section-number">70.2. </span>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">#</a></h2>
+<p>In an influential keynote adress Barbara Liskov informally proclaimed that substitutability ought to be a property defined so that when subtypes are used instead of supertypes this should not “break” the program.
+The concept was later refined in a publication by <span id="id2">Liskov and Wing [<a class="reference internal" href="bibliography.html#id11" title="Barbara H Liskov and Jeannette M Wing. A behavioral notion of subtyping. ACM Transactions on Programming Languages and Systems, 1994. doi:10.1145/197320.197383.">1994</a>]</span>.</p>
+<blockquote class="epigraph">
+<div><p>Let <span class="math notranslate nohighlight">\(P(x)\)</span> be a property provable about objects <span class="math notranslate nohighlight">\(x\)</span> of type <span class="math notranslate nohighlight">\(T\)</span>. Then <span class="math notranslate nohighlight">\(P(x)\)</span> should be true for objects <span class="math notranslate nohighlight">\(y\)</span> of type <span class="math notranslate nohighlight">\(S\)</span> where <span class="math notranslate nohighlight">\(S\)</span> is a subtype of <span class="math notranslate nohighlight">\(T\)</span>.</p>
+<p class="attribution">—<span id="id3">[<a class="reference internal" href="bibliography.html#id11" title="Barbara H Liskov and Jeannette M Wing. A behavioral notion of subtyping. ACM Transactions on Programming Languages and Systems, 1994. doi:10.1145/197320.197383.">Liskov and Wing, 1994</a>]</span></p>
+</div></blockquote>
+<p>This view on subtyping has become known as “behavioral subtyping” or “strong behavioral subtyping”.
+It is also popularly referred to as simply the “Liskov substitution principle”, which is why we’ve named this chapter that.</p>
+<p>The principle stipulates some type rules and some behavioral rules.
+All or some of the type rules are implemented by compilers, while the behavioral rules are difficult to implement by compilers.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>If you want to understand more about how the behavioral rules could be implemented by compilers I recommend that you read more about <a class="reference external" href="https://en.wikipedia.org/wiki/Design_by_contract">Design By Contract</a> and Dependent Types.</p>
+</div>
+<section id="type-rules">
+<h3><span class="section-number">70.2.1. </span>Type rules<a class="headerlink" href="#type-rules" title="Permalink to this headline">#</a></h3>
+<p>The Liskov substitution principle stipulates the following three type rules.</p>
+<ol class="simple">
+<li><p>Subtype method parameter must be <em>contravariant</em>.</p></li>
+<li><p>Subtype method return types must be <em>covariant</em>.</p></li>
+<li><p>Subtype exceptions must all be the same type or subtypes of exceptions in the supertype.</p></li>
+</ol>
+<p>Remember <a class="reference internal" href="variance.html#robustness-principle"><span class="std std-ref">the robustness principle</span></a> that we discussed in the chapter on <a class="reference internal" href="variance.html"><span class="doc std std-doc">variance</span></a>?
+Well, the first two points are basically that principle again.</p>
+<p><em>Contravariant method parameters</em> means that instance methods in the subtype must have the same method parameter types as those in the supertype, or more general types.
+Meaning that the input types in the subtype must either be the same as those in the supertype or a generalization of the types accepted in the supertype.</p>
+<p>If a method parameter type is a generalization of a method parameter type used in the supertype then the subtype will be able to handle all possible input types that can be sent to the supertype since the type used in the subtype is more general.
+The subtype will never reject an input type that is supported in the supertype.
+The subtype will thus never reject input types in a way that is surprising to a user of the subtype who only knows about the supertype (meaning where the compile-time type is the supertype and the run-time type the subtype).</p>
+<p><em>Covariant method return types</em> means that instance methods in the subtype must have the same return types as those in the supertype, or more specialized types.
+Meaning that the output types in the subtype must either be the same as those in the supertype or a generalization of the types returned from the supertype.
+If a method return type is a specialization of a method return type used in the supertype then the subtype will never return values of a type that is surprising for a user of the subtype who only knows about the supertype (meaning where compile-time type is the supertype and the run-time type the subtype).</p>
+<p>The <em>no new exceptions</em> rule, means that all exceptions may be thrown in the subtype must be of the same type or a subtype of the exceptions expected from the supertype.
+If a method never throws an exception that isn’t a subtype of an exception expected from the supertype, then the subtype will never throw an exception that is surprising for a user of the subtype who only knows about the supertype (meaning where the compile-time type is the supertype and the run-time type the subtype).</p>
+</section>
+<section id="behavioral-rules">
+<h3><span class="section-number">70.2.2. </span>Behavioral rules<a class="headerlink" href="#behavioral-rules" title="Permalink to this headline">#</a></h3>
+<p>The Liskov substitution principle stipulates the following four behavioral rules:</p>
+<ul class="simple">
+<li><p>Preconditions cannot be stronger in the subtype.</p></li>
+<li><p>Postconditions cannot be weaker in the subtype.</p></li>
+<li><p>Single-state invariants must hold in subtype.</p></li>
+<li><p>Multi-state invariants must hold in subtype (a.k.a.: the “history rule”).</p></li>
+</ul>
+<p>Preconditions, postconditions, and invariants are terms used when discussing the formal specification of programs.
+Meaning, when we use formal logic to describe the contract of a section of a program such as a method.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Some languages have native support formal specification while others such as C# have extensions (such as <a class="reference external" href="https://www.microsoft.com/en-us/research/project/spec/">Spec#</a>) that provide more compile-time and run-time support for verifying a formal specification.
+The Liskov substitution principle does however not stipulate that you use such tools.
+The principle merely uses that terminology to define what substitutability ought to mean.</p>
+</div>
+<p><em>Preconditions</em> are predicates that must be true before a method is allowed to be executed.
+A predicate is a logical statement about something which is either true or false.
+If the precondition is not true, then the method is undefined.
+In programming terms this could mean that if a method demands that you pass a positive integer but you pass a negative one, then it will throw an <a class="reference internal" href="basic-exceptions.html"><span class="doc std std-doc">exception</span></a>.</p>
+<p><em>Postconditions</em> are predicates that must be true after a method has been executed.
+If the postcondition is not true then the method is not a valid implementation of the specification.
+In the case of, say, a method that returns the absolute value of a number, the returned value must be positive.</p>
+<p><em>Single-state invariants</em> are predicates that must hold true at all times within a type.
+This could, for example, mean that the value of some instance variable never may fall outside of some defined bounds.</p>
+<p><em>Multi-state predicates</em>, are predicates that must hold true when applied to all pairs of states.
+This could, for example, mean that the value of some instance variable always must remain the same or be incremented, but never decremented.</p>
+</section>
+</section>
+<section id="examples">
+<h2><span class="section-number">70.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
+<section id="violations-in-net">
+<h3><span class="section-number">70.3.1. </span>Violations in .NET<a class="headerlink" href="#violations-in-net" title="Permalink to this headline">#</a></h3>
+<p>In the .NET framework there is a widely used, generic, interface called <code class="docutils literal notranslate"><span class="pre">ICollection&lt;T&gt;</span></code>.
+We haven’t talked about <a class="reference internal" href="generics.html"><span class="doc std std-doc">generics</span></a> yet, but I’m convinced that you’ll be able to understand this example anyway.
+So if you know nothing about generics, simply ignore the part in the type that says <code class="docutils literal notranslate"><span class="pre">&lt;T&gt;</span></code>.</p>
+<p>The interface <code class="docutils literal notranslate"><span class="pre">ICollection&lt;T&gt;</span></code> (<a class="reference external" href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.icollection-1?view=net-6.0">documentation</a>) captures the idea of a collection of things.
+Examples of collections include lists, linked lists, sets, sorted sets, dictionaries, and so forth.
+There’s a lot of them.</p>
+<p>Now, one method that is declared in the interface <code class="docutils literal notranslate"><span class="pre">ICollection&lt;T&gt;</span></code> is called <code class="docutils literal notranslate"><span class="pre">Add</span></code> (<a class="reference external" href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.icollection-1.add?view=net-6.0">documentation</a>) and as you might suspect, the add method should add things to the collection.
+But, does everyone who implements the interface <code class="docutils literal notranslate"><span class="pre">ICollection&lt;T&gt;</span></code> also support the <code class="docutils literal notranslate"><span class="pre">Add</span></code> method?
+You would hope so, but no.</p>
+<p>Suddenly we find a class called <code class="docutils literal notranslate"><span class="pre">ReadOnlyCollection&lt;T&gt;</span></code>.
+What does read-only mean?
+Well, usually it means that you cannot add things to it because it is only possible to read from it, but never write to it.
+Right?</p>
+<p>So, what interfaces does this read-only collection implement?
+Surely, it couldn’t implement the interface <code class="docutils literal notranslate"><span class="pre">ICollection&lt;T&gt;</span></code> since that requires it to specify an <code class="docutils literal notranslate"><span class="pre">Add</span></code> method.
+Well, the world is full of violations of behavioral subtyping so indeed it does.
+<code class="docutils literal notranslate"><span class="pre">ReadOnlyCollection&lt;T&gt;</span></code> (<a class="reference external" href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.objectmodel.readonlycollection-1?view=net-6.0">documentation</a>) implements the interface <code class="docutils literal notranslate"><span class="pre">ICollection&lt;T&gt;</span></code> which demands that it specifies an <code class="docutils literal notranslate"><span class="pre">Add</span></code> method even though it cannot possibly do so since it is read-only.
+So what does the poor read-only collection do?
+Throws an exception.
+Boom.
+*Facepalm*.</p>
+<p>Now, is this truly a violation of the Liskov substitution principle?
+Not really, because I didn’t tell you the whole truth.
+It is a violation of the principle if the type rules of the interface specifies that the add method doesn’t throw exceptions.
+Alas, it does not.
+In the documentation of the add method we can see that <code class="docutils literal notranslate"><span class="pre">NotSupportedException</span></code> is thrown if the collection happen to be read-only.</p>
+<p>So, I sort of lied to you when I said that this is a violation of the Liskov substitution principle.
+However, here’s what I will say.
+Just because we couldn’t keep our hands out of the cookie jar of reusability and really wanted two things to be in a subtyping relationship we’re now left with an interface which is <em>significantly</em> less useful than before.</p>
+<p>The whole game of static typing is to (prefer compile-time over run-time errors)(prefer-compile-time-errors).
+So what is more useful?
+An interface whose implementers throw run-time exceptions or an interface whose implementers don’t.
+Why in the world would we give up compile-time type safety instead of just redesigning a hierarchy that, given behavioral subtyping, clearly doesn’t make sense.
+What an utterly unnecessary mess.</p>
+<p>By the way, there is also the interface <code class="docutils literal notranslate"><span class="pre">IReadOnlyCollection&lt;T&gt;</span></code> which of course, as should be, does <em>not</em> subtype <code class="docutils literal notranslate"><span class="pre">ICollection&lt;T&gt;</span></code>.
+So I would guess that the decision to let the concrete read-only class implement <code class="docutils literal notranslate"><span class="pre">ICollection&lt;T&gt;</span></code> is a purely pragmatic decision since the language designers wanted to make all the facilities that work on collections available for read-only collections.
+Would I still argue that this is the wrong decision though.
+Yes.
+Doing the wrong thing and calling it pragmatism is a slippery slope.</p>
+</section>
+<section id="history-rule">
+<h3><span class="section-number">70.3.2. </span>History rule<a class="headerlink" href="#history-rule" title="Permalink to this headline">#</a></h3>
+<p><span id="id4">Liskov and Wing [<a class="reference internal" href="bibliography.html#id11" title="Barbara H Liskov and Jeannette M Wing. A behavioral notion of subtyping. ACM Transactions on Programming Languages and Systems, 1994. doi:10.1145/197320.197383.">1994</a>]</span> gives an example of the three types <code class="docutils literal notranslate"><span class="pre">Incrementer</span></code>, <code class="docutils literal notranslate"><span class="pre">Doubler</span></code>, and <code class="docutils literal notranslate"><span class="pre">Multiplier</span></code> which all subtype the type <code class="docutils literal notranslate"><span class="pre">Counter</span></code>.
+The multi-state invariant established by the supertype <code class="docutils literal notranslate"><span class="pre">Counter</span></code> is that the counter never decrements.</p>
+<p>As you would imagine from the names of the subclasses, these all respect that multi-state invariant, meaning the “history rule”, since they all are merely different ways of incrementing.
+If we would create a new subtype called <code class="docutils literal notranslate"><span class="pre">Decrementor</span></code> or <code class="docutils literal notranslate"><span class="pre">Divider</span></code> that decremented the counter we would be violating the history rule.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Counter</span>
+<span class="n">Incrementer</span> <span class="p">:</span> <span class="n">Counter</span>
+<span class="n">Doubler</span> <span class="p">:</span> <span class="n">Counter</span>
+<span class="n">Multiplier</span> <span class="p">:</span> <span class="n">Counter</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="exercises">
+<h2><span class="section-number">70.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<div class="exercise admonition" id="chapters/liskov-substitution-principle-exercise-0">
+
+<p class="admonition-title"><span class="caption-number">Exercise 70.1 </span></p>
+<section id="exercise-content">
+<p>What is the Liskov substitution principle?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/liskov-substitution-principle-exercise-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 70.2 </span></p>
+<section id="exercise-content">
+<p>Why must exceptions in the subtype be subtypes (or the same type) of exceptions that can be thrown in the supertype?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/liskov-substitution-principle-exercise-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 70.3 </span></p>
+<section id="exercise-content">
+<p>How does the Robustness principle (also known as Postel’s law) relate to the Liskov substitution principle?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/liskov-substitution-principle-exercise-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 70.4 </span></p>
+<section id="exercise-content">
+<p>Give your own example, in your own words, of a precondition violation.</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/liskov-substitution-principle-exercise-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 70.5 </span></p>
+<section id="exercise-content">
+<p>Give your own example, in your own words, of a postcondition violation.</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/liskov-substitution-principle-exercise-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 70.6 </span></p>
+<section id="exercise-content">
+<p>Give your own example, in your own words, of a single-state invariant violation.</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/liskov-substitution-principle-exercise-6">
+
+<p class="admonition-title"><span class="caption-number">Exercise 70.7 </span></p>
+<section id="exercise-content">
+<p>Give your own example, in your own words, of a multi-state invariant violation.</p>
+</section>
+</div>
+</section>
+<section id="video">
+<h2><span class="section-number">70.5. </span>Video<a class="headerlink" href="#video" title="Permalink to this headline">#</a></h2>
+<p>Way back in 2017 I recorded a video lecture on the Liskov substitution principle which is embedded below.</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ObHQHszbIcE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1089,13 +1409,13 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">67. </span>Variance</p>
+            <p class="prev-next-title"><span class="section-number">69. </span>Variance</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="abstract-constructed-object-composition.html" title="next page">
+    <a class='right-next' id="next-link" href="generics.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">69. </span>Abstract constructed object composition</p>
+        <p class="prev-next-title"><span class="section-number">71. </span>Generics</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

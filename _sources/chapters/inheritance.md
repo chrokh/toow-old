@@ -16,6 +16,8 @@ kernelspec:
 Work in progress.
 ```
 
+% TODO: Mention drawback of only one spot for inheritance. Referenced from chapter on Liskov.
+
 
 ## Motivation
 

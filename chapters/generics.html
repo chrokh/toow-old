@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="72. Generic type parameters" href="generic-type-parameters.html" />
-    <link rel="prev" title="70. Abstract injected object composition" href="abstract-injected-object-composition.html" />
+    <link rel="prev" title="70. Liskov substitution principle" href="liskov-substitution-principle.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -566,16 +566,6 @@ const thebe_selector_output = ".output, .cell_output"
    66. Type conversions (of objects)
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="variance.html">
-   67. Variance
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="liskov-substitution-principle.html">
-   68. Liskov substitution principle
-  </a>
- </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -585,12 +575,29 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="abstract-constructed-object-composition.html">
-   69. ★ Abstract constructed object composition
+   67. ★ Abstract constructed object composition
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="abstract-injected-object-composition.html">
-   70. ★ Abstract injected object composition
+   68. ★ Abstract injected object composition
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Substitutability
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="variance.html">
+   69. Variance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="liskov-substitution-principle.html">
+   70. Liskov substitution principle
   </a>
  </li>
 </ul>
@@ -1246,7 +1253,7 @@ The implementation of these two classes is virtually the same.</p>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2584.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2593.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1291,12 +1298,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.177:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.38:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2584.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2593.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1369,7 +1376,7 @@ If we ignore the constructors, it’s just a single line that’s duplicated.
 The contents of the <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method.
 Well, this is merely an example.
 If there’s one duplicated line, that’s a sign that there are many more possible things that could be duplicated.</p>
-<p>How about, for example the <code class="docutils literal notranslate"><span class="pre">SequenceCipher</span></code> that we wrote in <a class="reference internal" href="abstract-injected-object-composition.html#ex:array-cipher"><span class="std std-numref">Exercise 70.5</span></a>?
+<p>How about, for example the <code class="docutils literal notranslate"><span class="pre">SequenceCipher</span></code> that we wrote in <a class="reference internal" href="abstract-injected-object-composition.html#ex:array-cipher"><span class="std std-numref">Exercise 68.5</span></a>?
 That was a cipher that took an array of ciphers as input and then applied them one by one.
 In that exercise, <code class="docutils literal notranslate"><span class="pre">SequenceCipher</span></code> dealt with <code class="docutils literal notranslate"><span class="pre">string</span></code> based ciphers, but if we would write an implementation for <code class="docutils literal notranslate"><span class="pre">char</span></code> based ciphers it would be exactly the same.
 The only difference between the two would be the types.</p>
@@ -1566,11 +1573,11 @@ Why or why not?</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="abstract-injected-object-composition.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="liskov-substitution-principle.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">70. </span>Abstract injected object composition</p>
+            <p class="prev-next-title"><span class="section-number">70. </span>Liskov substitution principle</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="generic-type-parameters.html" title="next page">

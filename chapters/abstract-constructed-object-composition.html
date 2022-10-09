@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>69. Abstract constructed object composition &#8212; The Object Oriented Way (DRAFT)</title>
+    <title>67. Abstract constructed object composition &#8212; The Object Oriented Way (DRAFT)</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="70. Abstract injected object composition" href="abstract-injected-object-composition.html" />
-    <link rel="prev" title="68. Liskov substitution principle" href="liskov-substitution-principle.html" />
+    <link rel="next" title="68. Abstract injected object composition" href="abstract-injected-object-composition.html" />
+    <link rel="prev" title="66. Type conversions (of objects)" href="object-type-conversions.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -566,16 +566,6 @@ const thebe_selector_output = ".output, .cell_output"
    66. Type conversions (of objects)
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="variance.html">
-   67. Variance
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="liskov-substitution-principle.html">
-   68. Liskov substitution principle
-  </a>
- </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -585,12 +575,29 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   69. ★ Abstract constructed object composition
+   67. ★ Abstract constructed object composition
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="abstract-injected-object-composition.html">
-   70. ★ Abstract injected object composition
+   68. ★ Abstract injected object composition
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Substitutability
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="variance.html">
+   69. Variance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="liskov-substitution-principle.html">
+   70. Liskov substitution principle
   </a>
  </li>
 </ul>
@@ -1095,24 +1102,24 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#motivation">
-   69.1. Motivation
+   67.1. Motivation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#examples">
-   69.2. Examples
+   67.2. Examples
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#cipher-identification">
-     69.2.1. Cipher identification
+     67.2.1. Cipher identification
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
-   69.3. Exercises
+   67.3. Exercises
   </a>
  </li>
 </ul>
@@ -1136,24 +1143,24 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#motivation">
-   69.1. Motivation
+   67.1. Motivation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#examples">
-   69.2. Examples
+   67.2. Examples
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#cipher-identification">
-     69.2.1. Cipher identification
+     67.2.1. Cipher identification
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
-   69.3. Exercises
+   67.3. Exercises
   </a>
  </li>
 </ul>
@@ -1167,7 +1174,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="abstract-constructed-object-composition">
-<h1><span class="section-number">69. </span>Abstract constructed object composition<a class="headerlink" href="#abstract-constructed-object-composition" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">67. </span>Abstract constructed object composition<a class="headerlink" href="#abstract-constructed-object-composition" title="Permalink to this headline">#</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Work in progress.</p>
@@ -1177,18 +1184,18 @@ title="Print to PDF"
 <p>In this chapter we’re exploring the object composition abstraction level that we refer to as “abstract constructed object composition”. Please have a look at the chapter <a class="reference internal" href="object-composition.html#object-composition-abstraction-levels"><span class="std std-ref">object composition</span></a> if you have not already.</p>
 </div>
 <section id="motivation">
-<h2><span class="section-number">69.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">67.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
 <p>If an object composition is constructed then that means that the composing object is the one who instantiates the composed.
 If the object composition is abstract then that means that the compile-time type of the constructed object is abstract.</p>
 <p>We mean “abstract” in the sense of “abstraction”, which means an <a class="reference internal" href="interfaces.html"><span class="doc std std-doc">interface</span></a> or an <a class="reference internal" href="abstract-classes.html"><span class="doc std std-doc">abstract class</span></a>.</p>
 <p>So, abstract constructed object composition only makes sense if we want to use the power of subtype polymorphism within a class but don’t want to let others outside choose what object or objects from that subtyping hierarchy we use.</p>
 </section>
 <section id="examples">
-<h2><span class="section-number">69.2. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">67.2. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
 <p>Let’s be honest.
 I have a really hard time coming up with examples of this that don’t also somehow include abstract injected object composition in one form or another.</p>
 <section id="cipher-identification">
-<h3><span class="section-number">69.2.1. </span>Cipher identification<a class="headerlink" href="#cipher-identification" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">67.2.1. </span>Cipher identification<a class="headerlink" href="#cipher-identification" title="Permalink to this headline">#</a></h3>
 <p>Nevertheless, how about a cipher that determines what cipher to use based on what cipher it thinks has been used to encode some other string.</p>
 <p>Let’s assume that we have the following code that we’ve written in previous chapters.</p>
 <div class="cell tag_hide-input docutils container">
@@ -1273,7 +1280,7 @@ I have a really hard time coming up with examples of this that don’t also some
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2174.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2181.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1318,12 +1325,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.177:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.38:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2174.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2181.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1456,10 +1463,10 @@ Instead, it should just return the object.</p>
 </section>
 </section>
 <section id="exercises">
-<h2><span class="section-number">69.3. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">67.3. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
 <div class="exercise admonition" id="abstract-constructed-object-composition:exercises:example">
 
-<p class="admonition-title"><span class="caption-number">Exercise 69.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 67.1 </span></p>
 <section id="exercise-content">
 <p>What is abstract constructed object composition?
 Give your own example and explain it in your own words.</p>
@@ -1467,14 +1474,14 @@ Give your own example and explain it in your own words.</p>
 </div>
 <div class="exercise admonition" id="chapters/abstract-constructed-object-composition-exercise-1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 69.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 67.2 </span></p>
 <section id="exercise-content">
-<p>Implement the example you envisioned in <a class="reference internal" href="#abstract-constructed-object-composition:exercises:example"><span class="std std-numref">Exercise 69.1</span></a> in code.</p>
+<p>Implement the example you envisioned in <a class="reference internal" href="#abstract-constructed-object-composition:exercises:example"><span class="std std-numref">Exercise 67.1</span></a> in code.</p>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/abstract-constructed-object-composition-exercise-2">
 
-<p class="admonition-title"><span class="caption-number">Exercise 69.3 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 67.3 </span></p>
 <section id="exercise-content">
 <p>What is the difference between <em>concrete</em> and <em>abstract</em> constructed object composition?
 Give your own examples and explain it in your own words.</p>
@@ -1483,7 +1490,7 @@ Give your own examples and explain it in your own words.</p>
 <hr class="docutils" />
 <div class="exercise admonition" id="chapters/abstract-constructed-object-composition-exercise-3">
 
-<p class="admonition-title"><span class="caption-number">Exercise 69.4 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 67.4 </span></p>
 <section id="exercise-content">
 <p>What is the difference between <em>concrete</em> dependency construction and <em>abstract</em> dependency construction?</p>
 </section>
@@ -1518,17 +1525,17 @@ Give your own examples and explain it in your own words.</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="liskov-substitution-principle.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="object-type-conversions.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">68. </span>Liskov substitution principle</p>
+            <p class="prev-next-title"><span class="section-number">66. </span>Type conversions (of objects)</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="abstract-injected-object-composition.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">70. </span>Abstract injected object composition</p>
+        <p class="prev-next-title"><span class="section-number">68. </span>Abstract injected object composition</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
