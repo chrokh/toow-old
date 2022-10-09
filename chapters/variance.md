@@ -244,5 +244,5 @@ What do we mean when we say that method input types is contravariant and method 
 ```
 
 ```{exercise}
-Come up with your own example that uses a covariant return type and implement it in code.
+Come up with your own example that uses a covariant return type and implement the example in code.
 ```
