@@ -309,6 +309,7 @@ error CS0029: Cannot implicitly convert type 'string' to 'bool'.
 ```
 
 
+(generic-types:icipher)=
 ### Generic cipher interface
 
 Remember how we, in the introductory chapter to [generics](generics), promised that we would combine our [interfaces](interfaces) `IStringToStringCipher`, `ICharToCharCipher`, and `ICharToStringCipher` into a single generic interface?
