@@ -1,3 +1,4 @@
+(ienumerable)=
 # Type hierarchies
 
 The C# type system.

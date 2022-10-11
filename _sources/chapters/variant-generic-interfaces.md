@@ -1,8 +1,261 @@
+---
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  display_name: csharp
+  language: .net-csharp
+  name: .net-csharp
+---
+
 # Variant generic interfaces
 
 ```{warning}
 Work in progress.
 ```
+
+## Examples
+
+
+### Predicates
+
+What's an example of something that could be contravariant?
+How about predicates?
+
+```{code-cell} csharp
+interface IPredicate<in T> // Contravariant!
+{
+  bool Check (T input);
+}
+```
+
+Let's say that we have a subtyping hierarchy where `Rectangle` is a subtype of the interface `IShape`.
+
+```{code-cell} csharp
+interface IShape
+{
+  public double Area ();
+}
+
+class Rectangle : IShape
+{
+  int width, height;
+  public Rectangle (int width, int height)
+  {
+    this.width = width;
+    this.height = height;
+  }
+  public double Area () => width * height;
+}
+```
+
+Let us then define a predicate that works on objects of type `Shape`.
+
+```{code-cell} csharp
+class LargerThan : IPredicate<IShape>
+{
+  double lim;
+  public LargerThan (double lim) => this.lim = lim;
+  public bool Check (IShape shape) => shape.Area() > lim;
+}
+```
+
+Since the type parameter in `IPredicate` is contravariant we can now use values of type `IPredicate<IShape>` where values of type `IPredicate<Rectangle>` are expected.
+
+```{code-cell} csharp
+IPredicate<IShape> shapePredicate = new LargerThan(2);
+IPredicate<Rectangle> p = shapePredicate; // Needs contravariance.
+```
+
+Without `T` marked as covariant we would get the following error:
+
+```{code-cell} csharp
+:tags: [hide-input, raises-exception]
+interface IPredicate<T>
+{
+  bool Check (T input);
+}
+
+interface IShape
+{
+  public double Area ();
+}
+
+class Rectangle : IShape
+{
+  int width, height;
+  public Rectangle (int width, int height)
+  {
+    this.width = width;
+    this.height = height;
+  }
+  public double Area () => width * height;
+}
+
+class LargerThan : IPredicate<IShape>
+{
+  double lim;
+  public LargerThan (double lim) => this.lim = lim;
+  public bool Check (IShape shape) => shape.Area() > lim;
+}
+
+IPredicate<IShape> shapePredicate = new LargerThan(2);
+IPredicate<Rectangle> p = shapePredicate; // Needs contravariance.
+```
+
+
+%``{code-cell} csharp
+%//class ConditionalCipher<T> : ICipher<T,T>
+%//{
+%//  ICipher<T,T> cipher;
+%//  IPredicate<T> predicate;
+%//  public ConditionalCipher (ICipher<T,T> cipher, IPredicate<T> predicate)
+%//  {
+%//    this.cipher = cipher;
+%//    this.predicate = predicate;
+%//  }
+%//
+%//  public T Encode (T input)
+%//  {
+%//    if (predicate.Check(input))
+%//      return cipher.Encode(input);
+%//    else
+%//      return input;
+%//  }
+%//}
+%``
+
+
+
+### Cipher factories
+
+Let's look at a contravariant example that can be used in the context of our ciphers.
+Let's model a type that can spit out any number of objects of another type.
+You can think of this as a [factory](factory-method-pattern), a stream, a sequence, an infinite list, or an [iterator](iterator-pattern).
+
+```{code-cell} csharp
+interface IFactory<out T>
+{
+  T Next ();
+  IEnumerable<T> Take (int n);
+}
+```
+
+The method `Next` returns the next element in the sequence.
+The method `Take` returns the `n` number of next elements in the sequence wrapped in an `IEnumerable` which you can think of as a read-only collection.
+You can read more about `IEnumerable` in a [later chapter](ienumerable).
+
+Let's first define an abstract factory that other factories can inherit from so that we won't have to reimplement the `Take` method for all factories.
+
+```{code-cell} csharp
+abstract class Factory<T> : IFactory<T>
+{
+  public abstract T Next();
+  public IEnumerable<T> Take (int n)
+  {
+    List<T> result = new List<T>();
+    for (int i=0; i<n; i++)
+      result.Add(Next());
+    return result;
+  }
+}
+```
+
+Our old trusted friend `CaesarCipher` remains the same, except that we've now also exposed the `steps` parameter as a property that publicly can be read and privately set.
+
+```{code-cell} csharp
+:tags: [hide-input]
+interface ICipher<TIn, TOut>
+{
+  TOut Encode (TIn input);
+}
+
+class CaesarCipher : ICipher<char,char>
+{
+  public int Steps { get; private set; }
+
+  public CaesarCipher (int Steps)
+    => this.Steps = Steps;
+
+  public char Encode (char input)
+  {
+    string alphabet = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
+    int i = alphabet.IndexOf(Char.ToUpper(input));
+    int newIndex = (i + Steps) % alphabet.Length;
+    if (i != -1)
+    {
+      if (newIndex < 0)
+        newIndex += alphabet.Length;
+
+      if (Char.IsLower(input))
+        return Char.ToLower(alphabet[newIndex]);
+      else
+        return alphabet[newIndex];
+    }
+    return input;
+  }
+}
+```
+
+Let's now build two factories that yield instances of `CaesarCipher`.
+The first cipher that the factories generate will have `Steps` set to `0`.
+Upon every subsequent generation of a new factory, the factories will either increment or decrement the counter used to determine what number of `Steps` the next cipher will be instantiated with.
+
+```{code-cell} csharp
+class IncrementingCaesarCipherFactory : Factory<CaesarCipher>
+{
+  int i = 0;
+  public override CaesarCipher Next () => new CaesarCipher(i++);
+}
+
+class DecrementingCaesarCipherFactory : Factory<CaesarCipher>
+{
+  int i = 0;
+  public override CaesarCipher Next () => new CaesarCipher(i--);
+}
+```
+
+So what can we do with this?
+Well, since `T` in the factory interface is covariant, we can assign a typed as a factory that generates subtypes to a variable typed as a factory that generates the supertype.
+
+```{code-cell}
+IFactory<CaesarCipher> caesarFactory = new IncrementingCaesarCipherFactory();
+IFactory<ICipher<char,char>> charFactory = caesarFactory; // Needs covariance.
+```
+
+Why would this be useful?
+Well, sometimes we want to be able to treat a variable as its specific type, and sometimes we want to treat it as its general type.
+
+In the example below, we have two methods that take factories of different type.
+Since `T` in the factory interface is covariant we can pass the value of type `IFactory<CaesarCipher>` to both methods even though one of them excepts a value of type `IFactory<ICipher<char,char>>`.
+Why?
+Because a supertype of `CaesarCipher` is `ICipher<char,char>` and the type parameter where we apply this type is covariant.
+
+```{code-cell} csharp
+string encodeAny (int n, IFactory<ICipher<char,char>> factory) {
+  string output = "";
+  foreach (ICipher<char,char> cipher in factory.Take(n))
+    output += cipher.Encode('A');
+  return output;
+}
+
+string encodeCaesar (int n, IFactory<CaesarCipher> factory) {
+  string output = "";
+  foreach (CaesarCipher cipher in factory.Take(n))
+    output += $"{cipher.Steps}=>{cipher.Encode('A')} ";
+  return output;
+}
+
+IFactory<CaesarCipher> factory = new IncrementingCaesarCipherFactory();
+
+Console.WriteLine(encodeAny(5, factory));
+Console.WriteLine(encodeCaesar(5, factory)); // Needs covariance.
+```
+
+
+
 
 % Example of variance could be the Predicate interface from an exercise in the chapter on [abstract inject object composition](abstract-injected-object-composition:exercises:predicates). The variant type is always fed in, but never out.
 
