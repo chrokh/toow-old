@@ -24,6 +24,8 @@ Before the advent of agile software development methods it was commonly believed
 At the same time, software rules the world, and is developed faster than ever before.
 To remain in business you have to adapt to the constant stream of ever changing requirements.
 Survival of the fittest.
+"Move fast and break things" was an internal motto used at Facebook (now: Meta) until 2014.
+Zuckerberg was reported to have said that "unless you are breaking stuff, you are not moving fast enough" {cite:p}`todo`.
 
 % TODO: Reference!
 ```{epigraph}
@@ -31,9 +33,6 @@ Move fast and break things.
 
 -- Interal motto at Facebook until 2014.
 ```
-
-"Move fast and break things" was an internal motto used at Facebook (now: Meta) until 2014.
-Zuckerberg was reported to have said that "unless you are breaking stuff, you are not moving fast enough" {cite:p}`todo`.
 
 While this is not a book on agile methods, and while there are many ingredients to moving fast, software quality certainly is one of them.
 If, whenever we have to change something in our code, we have to rewrite half of our code base then clearly the time it will take to implement a change will exponentially increase as our code base grows.
@@ -92,7 +91,11 @@ We will now dissect the characteristics one by one.
 (modularity)=
 ### Modularity
 
-> Degree to which a system or computer program is composed of discrete components such that a change to one component has minimal impact on other components {cite:p}`isoiec25010`.
+```{epigraph}
+Degree to which a system or computer program is composed of discrete components such that a change to one component has minimal impact on other components.
+
+-- {cite:t}`isoiec25010`
+```
 
 Remember the anti-pattern [shotgun surgery](concrete-injected-object-composition) that we mentioned in the chapter on concrete injected object composition?
 When your code is [tightly coupled](coupling) and monolithic we have to change code in many different places as soon as we want to make a change.
@@ -108,7 +111,11 @@ By following the [open-closed principle](open-closed-principle) and the [depende
 (reusability)=
 ### Reusability
 
-> Degree to which an asset can be used in more than one system, or in building other assets {cite:p}`isoiec25010`.
+```{epigraph}
+Degree to which an asset can be used in more than one system, or in building other assets.
+
+-- {cite:t}`isoiec25010`
+```
 
 %The choice of the word "system" in the quote above is, in my view, quite unfortunate.
 %One might read "another system" as meaning "another product".
@@ -120,9 +127,20 @@ In business, authors like John Warrillow (see for example "Built to sell" {cite:
 The argument being that we should create a strong system that sells few products or services before we venture into new verticals which would require an even broader system.
 
 In my reading, we should, in the context of maintainability, interpret "reusability" as possible reusability right now or in the immediate future.
-However, when we reason about reuse in the immediate future, the value of being able to reuse a given asset minus the cost of having to write it in a more general way now, must be greater than the cost of simply writing that code later.
+However, the cost-benefit analysis of possible reuse in the future is not always straight-forward.
+It ought to go something like this:
 
-Thus, we should *not* use this maintainability characteristic to justify increasing the level of abstraction only because that abstraction will be useful *once we expand into a new vertical*.
+```{epigraph}
+The cost of developing an abstraction now must be lower than the present value of the cost of developing that abstraction in the future, multiplied by the probability that we need that abstraction in the first place.
+```
+
+I'm by no means suggesting that we actually do this calculation on paper.
+I'm suggesting that when we reason about whether to get out and hunt for an abstraction, our reasoning should follow those general lines.
+Do note that the model is too simplistic, since it doesn't take the possible immediate benefits of using the abstraction for other purposes now.
+
+%However, when we reason about reuse in the immediate future, the value of being able to reuse a given asset minus the cost of having to write it in a more general way now, must be greater than the cost of simply writing that code later.
+
+Either way, we should *not* use this maintainability characteristic to justify increasing the level of abstraction only because that abstraction will be useful *once we expand into a new vertical*.
 Striving to make software assets usable across multiple products, that don't already exist, I believe, is a strategy that will put you out of business.
 
 > A bird in the hand is worth two in the bush.
@@ -158,13 +176,21 @@ Whenever you start dipping your toes in functional programming I highly recommen
 There's also a [video recording](https://www.youtube.com/watch?v=b0zFmWsnoV0) available online of a presentation Simon Peyton Jones did back in 2008.
 ```
 
+But remember, reusability is a means, not an end.
+Reusability, only for the sake of reusability is not economically justifiable.
+We must strive for reusability only when it makes sense to actually reuse.
+
 % TODO: My thesis? Showed that this can be applied to policy interventions.
 
 
 (analysability)=
 ### Analysability
 
-> Degree of effectiveness and efficiency with which it is possible to assess the impact on a product or system of an intended change to one or more of its parts, or to diagnose a product for deficiencies or causes of failures, or to identify parts to be modified {cite:p}`isoiec25010`.
+```{epigraph}
+Degree of effectiveness and efficiency with which it is possible to assess the impact on a product or system of an intended change to one or more of its parts, or to diagnose a product for deficiencies or causes of failures, or to identify parts to be modified.
+
+-- {cite:t}`isoiec25010`
+```
 
 Think of your code as a model of the real world.
 The fewer abstractions your model consists of, and the simpler these abstractions are the simpler that model is to reason about.
@@ -201,7 +227,11 @@ In other words, we must write code under the assumption that we always will get 
 (modifiability)=
 ### Modifiability
 
-> Degree to which a product or system can be effectively and efficiently modified without introducing defects or degrading existing product quality {cite:p}`isoiec25010`.
+```{epigraph}
+Degree to which a product or system can be effectively and efficiently modified without introducing defects or degrading existing product quality.
+
+-- {cite:t}`isoiec25010`
+```
 
 I never said that the ISO/IEC 25010:2011(E) standard is perfect did I?
 Since modularity is defined in terms of allowing modifications of one component without having an impact on other components it could be argued that the modifiability characteristic is quite overlapping.
@@ -236,9 +266,18 @@ Well, if our code is not modular then it would be utterly difficult to support s
 (testability)=
 ### Testability
 
-> Degree of effectiveness and efficiency with which test criteria can be established for a system, product or component and tests can be performed to determine whether those criteria have been met {cite:p}`isoiec25010`.
+```{epigraph}
+Degree of effectiveness and efficiency with which test criteria can be established for a system, product or component and tests can be performed to determine whether those criteria have been met.
 
-A key ingredient that enables the practice of continuous deployment is automated software testing.
+-- {cite:t}`isoiec25010`
+```
+
+```{note}
+We're focusing on the second part of the "testability" definition since the first is mostly related to process, rather than code.
+Process is outside the scope of this book.
+```
+
+A key ingredient that enables the practice of continuous integration and continuous delivery/deployment is automated software testing.
 We'll discuss testing more in the chapter on [correctness](correctness) but think of it this way:
 
 Every piece of code we write should come with another piece of code that exercises the first to make sure that it behaves the way it should.
