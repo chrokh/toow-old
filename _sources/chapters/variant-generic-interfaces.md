@@ -255,6 +255,24 @@ Console.WriteLine(encodeCaesar(5, factory)); // Needs covariance.
 ```
 
 
+## Exercises
+
+```{exercise}
+In the chapter on [generic types](generic-types:icipher) we introduced the generic interface `ICipher<TIn,TOut>`.
+Both type parameters in this generic type *can* be variant.
+Explain why this in your own words and write a new version of `ICipher` where the type parameters are variant.
+```
+
+```{exercise}
+Come up with and implement your own example of an interface with a type parameter that usefully exhibits covariance.
+Give an example in code where you are using the fact that the type parameter is covariant.
+```
+
+```{exercise}
+Come up with and implement your own example of an interface with a type parameter that usefully exhibits contravariance.
+Give an example in code where you are using the fact that the type parameter is covariant.
+```
+
 
 
 % Example of variance could be the Predicate interface from an exercise in the chapter on [abstract inject object composition](abstract-injected-object-composition:exercises:predicates). The variant type is always fed in, but never out.
