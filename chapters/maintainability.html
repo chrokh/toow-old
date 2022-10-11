@@ -1208,13 +1208,13 @@ See <a class="reference internal" href="#fig-cost-of-change"><span class="std st
 </figure>
 <p>At the same time, software rules the world, and is developed faster than ever before.
 To remain in business you have to adapt to the constant stream of ever changing requirements.
-Survival of the fittest.</p>
+Survival of the fittest.
+“Move fast and break things” was an internal motto used at Facebook (now: Meta) until 2014.
+Zuckerberg was reported to have said that “unless you are breaking stuff, you are not moving fast enough” <span id="id1">[<a class="reference internal" href="bibliography.html#id2" title="Reference. TODO."><em>reference</em>, TODO</a>]</span>.</p>
 <blockquote class="epigraph">
 <div><p>Move fast and break things.</p>
 <p class="attribution">—Interal motto at Facebook until 2014.</p>
 </div></blockquote>
-<p>“Move fast and break things” was an internal motto used at Facebook (now: Meta) until 2014.
-Zuckerberg was reported to have said that “unless you are breaking stuff, you are not moving fast enough” <span id="id1">[<a class="reference internal" href="bibliography.html#id2" title="Reference. TODO."><em>reference</em>, TODO</a>]</span>.</p>
 <p>While this is not a book on agile methods, and while there are many ingredients to moving fast, software quality certainly is one of them.
 If, whenever we have to change something in our code, we have to rewrite half of our code base then clearly the time it will take to implement a change will exponentially increase as our code base grows.
 If however, we diligently <a class="reference internal" href="refactoring.html"><span class="doc std std-doc">refactor</span></a> to reduce coupling and improve maintainability then we ought to be able to flatten out the curve.</p>
@@ -1258,8 +1258,9 @@ Lucky for us, the standards document ISO/IEC 25010:2011 <span id="id2">[<a class
 <p>We will now dissect the characteristics one by one.</p>
 <section id="modularity">
 <span id="id3"></span><h3><span class="section-number">77.2.1. </span>Modularity<a class="headerlink" href="#modularity" title="Permalink to this headline">#</a></h3>
-<blockquote>
-<div><p>Degree to which a system or computer program is composed of discrete components such that a change to one component has minimal impact on other components <span id="id4">[<a class="reference internal" href="bibliography.html#id12" title="ISO/IEC 25010:2011(E). Systems and software engineering — systems and software quality requirements and evaluation (square) — system and software quality models. Standard, International Organization for Standardization, 2011.">ISO/IEC 25010:2011(E), 2011</a>]</span>.</p>
+<blockquote class="epigraph">
+<div><p>Degree to which a system or computer program is composed of discrete components such that a change to one component has minimal impact on other components.</p>
+<p class="attribution">—<span id="id4">ISO/IEC 25010:2011(E) [<a class="reference internal" href="bibliography.html#id12" title="ISO/IEC 25010:2011(E). Systems and software engineering — systems and software quality requirements and evaluation (square) — system and software quality models. Standard, International Organization for Standardization, 2011.">2011</a>]</span></p>
 </div></blockquote>
 <p>Remember the anti-pattern <a class="reference internal" href="concrete-injected-object-composition.html"><span class="doc std std-doc">shotgun surgery</span></a> that we mentioned in the chapter on concrete injected object composition?
 When your code is <a class="reference internal" href="coupling.html"><span class="doc std std-doc">tightly coupled</span></a> and monolithic we have to change code in many different places as soon as we want to make a change.
@@ -1271,16 +1272,24 @@ By following the <a class="reference internal" href="open-closed-principle.html"
 </section>
 <section id="reusability">
 <span id="id5"></span><h3><span class="section-number">77.2.2. </span>Reusability<a class="headerlink" href="#reusability" title="Permalink to this headline">#</a></h3>
-<blockquote>
-<div><p>Degree to which an asset can be used in more than one system, or in building other assets <span id="id6">[<a class="reference internal" href="bibliography.html#id12" title="ISO/IEC 25010:2011(E). Systems and software engineering — systems and software quality requirements and evaluation (square) — system and software quality models. Standard, International Organization for Standardization, 2011.">ISO/IEC 25010:2011(E), 2011</a>]</span>.</p>
+<blockquote class="epigraph">
+<div><p>Degree to which an asset can be used in more than one system, or in building other assets.</p>
+<p class="attribution">—<span id="id6">ISO/IEC 25010:2011(E) [<a class="reference internal" href="bibliography.html#id12" title="ISO/IEC 25010:2011(E). Systems and software engineering — systems and software quality requirements and evaluation (square) — system and software quality models. Standard, International Organization for Standardization, 2011.">2011</a>]</span></p>
 </div></blockquote>
 <p>In software we have the saying “premature abstraction”.
 This saying captures the problem of generalizing code before we have sufficient information to determine what problems we actually will need to solve.</p>
 <p>In business, authors like John Warrillow (see for example “Built to sell” <span id="id7">[<a class="reference internal" href="bibliography.html#id13" title="J. Warrillow. Built to Sell: Creating a Business That Can Thrive Without You. Penguin Publishing Group, 2011. ISBN 9781101514115. URL: https://books.google.se/books?id=4rAYQfHk\_0AC.">Warrillow, 2011</a>]</span>) have popularized the value of not expanding into too many verticals too soon.
 The argument being that we should create a strong system that sells few products or services before we venture into new verticals which would require an even broader system.</p>
 <p>In my reading, we should, in the context of maintainability, interpret “reusability” as possible reusability right now or in the immediate future.
-However, when we reason about reuse in the immediate future, the value of being able to reuse a given asset minus the cost of having to write it in a more general way now, must be greater than the cost of simply writing that code later.</p>
-<p>Thus, we should <em>not</em> use this maintainability characteristic to justify increasing the level of abstraction only because that abstraction will be useful <em>once we expand into a new vertical</em>.
+However, the cost-benefit analysis of possible reuse in the future is not always straight-forward.
+It ought to go something like this:</p>
+<blockquote class="epigraph">
+<div><p>The cost of developing an abstraction now must be lower than the present value of the cost of developing that abstraction in the future, multiplied by the probability that we need that abstraction in the first place.</p>
+</div></blockquote>
+<p>I’m by no means suggesting that we actually do this calculation on paper.
+I’m suggesting that when we reason about whether to get out and hunt for an abstraction, our reasoning should follow those general lines.
+Do note that the model is too simplistic, since it doesn’t take the possible immediate benefits of using the abstraction for other purposes now.</p>
+<p>Either way, we should <em>not</em> use this maintainability characteristic to justify increasing the level of abstraction only because that abstraction will be useful <em>once we expand into a new vertical</em>.
 Striving to make software assets usable across multiple products, that don’t already exist, I believe, is a strategy that will put you out of business.</p>
 <blockquote>
 <div><p>A bird in the hand is worth two in the bush.</p>
@@ -1312,11 +1321,15 @@ But, make sure that the things you do are so useful that they can be used for lo
 Whenever you start dipping your toes in functional programming I highly recommend that you put this research paper on your todo list.
 There’s also a <a class="reference external" href="https://www.youtube.com/watch?v=b0zFmWsnoV0">video recording</a> available online of a presentation Simon Peyton Jones did back in 2008.</p>
 </div>
+<p>But remember, reusability is a means, not an end.
+Reusability, only for the sake of reusability is not economically justifiable.
+We must strive for reusability only when it makes sense to actually reuse.</p>
 </section>
 <section id="analysability">
 <span id="id9"></span><h3><span class="section-number">77.2.3. </span>Analysability<a class="headerlink" href="#analysability" title="Permalink to this headline">#</a></h3>
-<blockquote>
-<div><p>Degree of effectiveness and efficiency with which it is possible to assess the impact on a product or system of an intended change to one or more of its parts, or to diagnose a product for deficiencies or causes of failures, or to identify parts to be modified <span id="id10">[<a class="reference internal" href="bibliography.html#id12" title="ISO/IEC 25010:2011(E). Systems and software engineering — systems and software quality requirements and evaluation (square) — system and software quality models. Standard, International Organization for Standardization, 2011.">ISO/IEC 25010:2011(E), 2011</a>]</span>.</p>
+<blockquote class="epigraph">
+<div><p>Degree of effectiveness and efficiency with which it is possible to assess the impact on a product or system of an intended change to one or more of its parts, or to diagnose a product for deficiencies or causes of failures, or to identify parts to be modified.</p>
+<p class="attribution">—<span id="id10">ISO/IEC 25010:2011(E) [<a class="reference internal" href="bibliography.html#id12" title="ISO/IEC 25010:2011(E). Systems and software engineering — systems and software quality requirements and evaluation (square) — system and software quality models. Standard, International Organization for Standardization, 2011.">2011</a>]</span></p>
 </div></blockquote>
 <p>Think of your code as a model of the real world.
 The fewer abstractions your model consists of, and the simpler these abstractions are the simpler that model is to reason about.
@@ -1344,8 +1357,9 @@ If we are not willing to throw it out, then the code must exhibit analyse abilit
 </section>
 <section id="modifiability">
 <span id="id11"></span><h3><span class="section-number">77.2.4. </span>Modifiability<a class="headerlink" href="#modifiability" title="Permalink to this headline">#</a></h3>
-<blockquote>
-<div><p>Degree to which a product or system can be effectively and efficiently modified without introducing defects or degrading existing product quality <span id="id12">[<a class="reference internal" href="bibliography.html#id12" title="ISO/IEC 25010:2011(E). Systems and software engineering — systems and software quality requirements and evaluation (square) — system and software quality models. Standard, International Organization for Standardization, 2011.">ISO/IEC 25010:2011(E), 2011</a>]</span>.</p>
+<blockquote class="epigraph">
+<div><p>Degree to which a product or system can be effectively and efficiently modified without introducing defects or degrading existing product quality.</p>
+<p class="attribution">—<span id="id12">ISO/IEC 25010:2011(E) [<a class="reference internal" href="bibliography.html#id12" title="ISO/IEC 25010:2011(E). Systems and software engineering — systems and software quality requirements and evaluation (square) — system and software quality models. Standard, International Organization for Standardization, 2011.">2011</a>]</span></p>
 </div></blockquote>
 <p>I never said that the ISO/IEC 25010:2011(E) standard is perfect did I?
 Since modularity is defined in terms of allowing modifications of one component without having an impact on other components it could be argued that the modifiability characteristic is quite overlapping.</p>
@@ -1373,10 +1387,16 @@ Well, if our code is not modular then it would be utterly difficult to support s
 </section>
 <section id="testability">
 <span id="id13"></span><h3><span class="section-number">77.2.5. </span>Testability<a class="headerlink" href="#testability" title="Permalink to this headline">#</a></h3>
-<blockquote>
-<div><p>Degree of effectiveness and efficiency with which test criteria can be established for a system, product or component and tests can be performed to determine whether those criteria have been met <span id="id14">[<a class="reference internal" href="bibliography.html#id12" title="ISO/IEC 25010:2011(E). Systems and software engineering — systems and software quality requirements and evaluation (square) — system and software quality models. Standard, International Organization for Standardization, 2011.">ISO/IEC 25010:2011(E), 2011</a>]</span>.</p>
+<blockquote class="epigraph">
+<div><p>Degree of effectiveness and efficiency with which test criteria can be established for a system, product or component and tests can be performed to determine whether those criteria have been met.</p>
+<p class="attribution">—<span id="id14">ISO/IEC 25010:2011(E) [<a class="reference internal" href="bibliography.html#id12" title="ISO/IEC 25010:2011(E). Systems and software engineering — systems and software quality requirements and evaluation (square) — system and software quality models. Standard, International Organization for Standardization, 2011.">2011</a>]</span></p>
 </div></blockquote>
-<p>A key ingredient that enables the practice of continuous deployment is automated software testing.
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We’re focusing on the second part of the “testability” definition since the first is mostly related to process, rather than code.
+Process is outside the scope of this book.</p>
+</div>
+<p>A key ingredient that enables the practice of continuous integration and continuous delivery/deployment is automated software testing.
 We’ll discuss testing more in the chapter on <a class="reference internal" href="correctness.html"><span class="doc std std-doc">correctness</span></a> but think of it this way:</p>
 <p>Every piece of code we write should come with another piece of code that exercises the first to make sure that it behaves the way it should.
 If we for some reason refactor our code then our tests should tell us whether our refactoring has introduced bugs or not.</p>
