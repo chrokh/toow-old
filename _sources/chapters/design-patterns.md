@@ -1,3 +1,4 @@
+(facade-pattern)=
 # Design patterns
 
 ```{warning}

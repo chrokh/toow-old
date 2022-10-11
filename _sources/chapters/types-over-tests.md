@@ -45,3 +45,10 @@ Work in progress.
 %- Problem with null:
 %  - https://maximilianocontieri.com/null-the-billion-dollar-mistake
 %
+
+%- https://maximilianocontieri.com/code-smell-120-sequential-ids
+
+%## Examples
+
+% - Phone numbers over strings.
+% - Nullable reference types and warnings as errors.
