@@ -273,6 +273,40 @@ Come up with and implement your own example of an interface with a type paramete
 Give an example in code where you are using the fact that the type parameter is covariant.
 ```
 
+```{exercise-start}
+```
+Why does the following code generate a compiler-error?
+```{code-cell} csharp
+:tags: [raises-exception, remove-output]
+interface IBox<out T>
+{
+  T Get ();
+  void Set(T x);
+}
+```
+```{exercise-end}
+```
+
+```{exercise-start}
+```
+Why does the method `Set` in the following code example *not* generate a compiler-error even though `T` is marked as covariant.
+```{code-cell} csharp
+interface IBox<out T>
+{
+  T Get ();
+}
+
+class Box<T> : IBox<T>
+{
+  T x;
+  public Box (T x) => this.x = x;
+  public T Get () => x;
+  public void Set (T x) => this.x = x;
+}
+```
+```{exercise-end}
+```
+
 
 
 % Example of variance could be the Predicate interface from an exercise in the chapter on [abstract inject object composition](abstract-injected-object-composition:exercises:predicates). The variant type is always fed in, but never out.
