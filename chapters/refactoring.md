@@ -4,6 +4,38 @@
 Work in progress.
 ```
 
+## Definition
+
+% TODO: Make sure that these quotes are from 1999 and not from a later edition!
+```{epigraph}
+Refactoring (noun): a change made to the internal structure of software to make it easier to understand and cheaper to modify without changing its observable behavior.
+
+Refactoring (verb): to restructure software by applying a series of refactorings without changing its observable behavior.
+
+-- {cite:t}`fowler1999`
+```
+
+## Examples
+
+### Replace conditional with polymorphism
+
+See chapter 1 of {cite:t}`fowler1999`.
+
+
+## Exercises
+
+```{exercise}
+What is refactoring?
+```
+
+```{exercise}
+Explain why refactoring is useful in terms of the terminology from the chapter on [maintainability](maintainability).
+```
+
+```{exercise}
+Explain the refactoring commonly known as "replace conditional with polymorphism".
+```
+
 %- Definition from Fowler.
 
 
