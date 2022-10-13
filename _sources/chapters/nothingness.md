@@ -1,3 +1,15 @@
+---
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  display_name: csharp
+  language: .net-csharp
+  name: .net-csharp
+---
+
 # Nothingness
 
 ```{warning}
@@ -481,3 +493,41 @@ Give an example in code.
 How can we convert a value tagged as `maybe-null` to a value tagged as `not-null` *by using* the null-forgiving operator?
 Give an example in code.
 ```
+
+```{exercise-start}
+```
+Does the following code compile? Why or why not?
+Assume that we compile with the nullable reference types setting enabled and treat nullable warnings as errors.
+```csharp
+string? x = "Hello";
+string y = x;
+```
+```{exercise-end}
+```
+
+```{exercise-start}
+```
+Does the following code compile? Why or why not?
+Assume that we compile with the nullable reference types setting enabled and treat nullable warnings as errors.
+```csharp
+string? x = "A";
+if (x == "B")
+  x = null;
+string y = x;
+```
+```{exercise-end}
+```
+
+```{exercise-start}
+```
+Does the following code compile? Why or why not?
+Assume that we compile with the nullable reference types setting enabled and treat nullable warnings as errors.
+```csharp
+string? x = "A";
+if (x == "B")
+  x = null;
+string y = x!; // <-- Note the exclamation mark!
+```
+```{exercise-end}
+```
+

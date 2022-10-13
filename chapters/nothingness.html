@@ -982,6 +982,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/chrokh/the-oo-way/main?urlpath=tree/docs/chapters/nothingness.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -1016,6 +1045,23 @@ title="Open an issue"
   </button>
   <div class="menu-dropdown__content">
     <ul>
+      <li>
+        <a href="../_sources/chapters/nothingness.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
       <li>
         <a href="../_sources/chapters/nothingness.md"
    class="headerbtn"
@@ -1553,6 +1599,46 @@ Give an example in code.</p>
 Give an example in code.</p>
 </section>
 </div>
+<div class="exercise admonition" id="chapters/nothingness-exercise-8">
+
+<p class="admonition-title"><span class="caption-number">Exercise 37.9 </span></p>
+<section id="exercise-content">
+<p>Does the following code compile? Why or why not?
+Assume that we compile with the nullable reference types setting enabled and treat nullable warnings as errors.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string?</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="kt">string</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/nothingness-exercise-9">
+
+<p class="admonition-title"><span class="caption-number">Exercise 37.10 </span></p>
+<section id="exercise-content">
+<p>Does the following code compile? Why or why not?
+Assume that we compile with the nullable reference types setting enabled and treat nullable warnings as errors.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string?</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;A&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="s">&quot;B&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span><span class="w"></span>
+<span class="kt">string</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/nothingness-exercise-10">
+
+<p class="admonition-title"><span class="caption-number">Exercise 37.11 </span></p>
+<section id="exercise-content">
+<p>Does the following code compile? Why or why not?
+Assume that we compile with the nullable reference types setting enabled and treat nullable warnings as errors.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string?</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;A&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="s">&quot;B&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span><span class="w"></span>
+<span class="kt">string</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x</span><span class="p">!;</span><span class="w"> </span><span class="c1">// &lt;-- Note the exclamation mark!</span>
+</pre></div>
+</div>
+</section>
+</div>
 </section>
 </section>
 
@@ -1565,16 +1651,16 @@ Give an example in code.</p>
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            kernelName: "python3",
+            kernelName: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
 
               </div>
               
