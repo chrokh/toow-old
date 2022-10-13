@@ -175,3 +175,32 @@ Work in progress.
 %In the UML diagram of {numref}`fig:object-composition-class-diagram` the dependency is `Rod`.
 %`Disk` depends on `Rod`.
 %From the perspective of compilers, `Disk` cannot be compiled without also compiling `Rod` since `Disk` must have information on what we can do to things of type `Rod`.
+
+%## Definition
+%- TODO: Good resource on differences: https://stackoverflow.com/questions/46709170/difference-between-dependency-injection-and-dependency-inversion
+%- TODO: Should also discuss Inversion of control? Here or separate chapter?
+
+## Exercises
+
+```{exercise}
+Explain the dependency inversion principle in your own words.
+```
+
+```{exercise}
+It could be argued that the dependency inversion principle prescribes that we should stay in one quadrant of the [abstraction levels diagram of object composition](object-composition:abstraction-levels) that we discussed in the chapter on object composition.
+Which quadrant, and why?
+```
+
+```{exercise}
+What is the difference between the dependency inversion principle and dependency injection?
+```
+
+%```{exercise}
+%What is the difference between the dependency inversion principle and inversion of control (IoC)?
+%```
+
+```{exercise}
+How does the dependency inversion principle improve [maintainability](maintainability) in terms of the [five characteristics](maintainability:definition) that we discussed in the chapter on maintainability?
+```
+
+
