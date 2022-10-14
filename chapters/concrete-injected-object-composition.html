@@ -527,7 +527,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Polymorphism
+  Subtype polymorphism
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -1331,7 +1331,7 @@ It composes our <code class="docutils literal notranslate"><span class="pre">Cae
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2374.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2515.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1376,12 +1376,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.1.79:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.180:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2374.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2515.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1531,6 +1531,11 @@ We would now use our classes like this:</p>
 <p>At this point you might already have realized that the <code class="docutils literal notranslate"><span class="pre">FlipFlopCaesarCipher</span></code> actually has very little to do with the encoding-decoding idea.
 Our current abstraction accepts any two objects of type <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> which means that we can send any two instances of it.
 They don’t have to be arranged in a encode/decode fashion.</p>
+<p>Pretty cool stuff right?
+But hold your horses.
+The basic idea of a flip flop cipher doesn’t even have anything to do with a Caesar cipher at all.
+In the chapter on <span class="xref myst">abstract injected object composition</span> we’ll see how we can generalize beyond Caesar ciphers.
+But to do that we need to learn about <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype polymorphism</span></a> first.</p>
 </section>
 </section>
 <section id="discussion">

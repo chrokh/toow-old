@@ -527,7 +527,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Polymorphism
+  Subtype polymorphism
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -1249,7 +1249,7 @@ As if that wasn’t enough, almost all <a class="reference internal" href="desig
 <h2><span class="section-number">68.2. </span>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">#</a></h2>
 <p>An object composition is abstract if the compile-time type of the composed object is abstract.
 It is injected if the composed object is constructed outside of the composing object and instead passed into it (via the constructor, a method, or property).</p>
-<p>Remember, we’ve discussed the notion of <span class="xref myst">injection</span> in the chapter on concrete injected object composition.
+<p>Remember, we’ve discussed the notion of <span class="xref myst">injection</span> in the chapter on <a class="reference internal" href="concrete-injected-object-composition.html"><span class="doc std std-doc">concrete injected object composition</span></a>.
 But in short, the idea is that insted of instantiating the object ourselves, we let someone else be responsible for instantiating that object and then passing it to us.
 Instead of, for example, having a constructor that accepts some parameters that I’m going to use to instantiate some object, I simply use the type of that object as the parameter type.
 Instead of asking others to send me some data so that I can instantiate an object, I simply ask them for the object instead.</p>
@@ -1293,7 +1293,7 @@ Check this out:</p>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2251.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2388.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1338,12 +1338,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.1.79:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.180:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2251.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2388.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1543,7 +1543,7 @@ Nevertheless, the point is not that this particular loop was bad, but that this 
 <h3><span class="section-number">68.3.2. </span>Flip Flop ciphers<a class="headerlink" href="#flip-flop-ciphers" title="Permalink to this headline">#</a></h3>
 <p>Let’s explore our newfound power.
 You must have known that we were going to return to the flipflops.
-In the chapter on <a class="reference internal" href="concrete-injected-object-composition.html#concrete-injected-object-composition-examples-general-flip-flop"><span class="std std-ref">abstract injected object composition</span></a> we discussed how our flip flop cipher was coupled to the idea of a Caesar cipher even though it in a sense has nothing to do with that specific cipher.</p>
+In the chapter on <a class="reference internal" href="concrete-injected-object-composition.html#concrete-injected-object-composition-examples-general-flip-flop"><span class="std std-ref">concrete injected object composition</span></a> we discussed how our flip flop cipher was coupled to the idea of a Caesar cipher even though it in a sense has nothing to do with that specific cipher.</p>
 <p>Let’s implement it more generally using abstract injected object composition.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
