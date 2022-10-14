@@ -222,9 +222,11 @@ At this point you might already have realized that the `FlipFlopCaesarCipher` ac
 Our current abstraction accepts any two objects of type `CaesarCipher` which means that we can send any two instances of it.
 They don't have to be arranged in a encode/decode fashion.
 
-%Pretty cool stuff right?
-%But hold your horses.
-%[Abstract injected object composition](abstract-injected-object-compsition) is even better.
+Pretty cool stuff right?
+But hold your horses.
+The basic idea of a flip flop cipher doesn't even have anything to do with a Caesar cipher at all.
+In the chapter on [abstract injected object composition](abstract-injected-object-compsition) we'll see how we can generalize beyond Caesar ciphers.
+But to do that we need to learn about [subtype polymorphism](subtype-polymorphism) first.
 
 
 ## Discussion

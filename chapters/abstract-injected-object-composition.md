@@ -47,7 +47,7 @@ It is injected if the composed object is constructed outside of the composing ob
 
 % TODO: Actually it could be injected through a public field as well no?
 
-Remember, we've discussed the notion of [injection](injection) in the chapter on concrete injected object composition.
+Remember, we've discussed the notion of [injection](injection) in the chapter on [concrete injected object composition](concrete-injected-object-composition).
 But in short, the idea is that insted of instantiating the object ourselves, we let someone else be responsible for instantiating that object and then passing it to us.
 Instead of, for example, having a constructor that accepts some parameters that I'm going to use to instantiate some object, I simply use the type of that object as the parameter type.
 Instead of asking others to send me some data so that I can instantiate an object, I simply ask them for the object instead.
@@ -220,7 +220,7 @@ Nevertheless, the point is not that this particular loop was bad, but that this 
 
 Let's explore our newfound power.
 You must have known that we were going to return to the flipflops.
-In the chapter on [abstract injected object composition](concrete-injected-object-composition:examples:general-flip-flop) we discussed how our flip flop cipher was coupled to the idea of a Caesar cipher even though it in a sense has nothing to do with that specific cipher.
+In the chapter on [concrete injected object composition](concrete-injected-object-composition:examples:general-flip-flop) we discussed how our flip flop cipher was coupled to the idea of a Caesar cipher even though it in a sense has nothing to do with that specific cipher.
 
 Let's implement it more generally using abstract injected object composition.
 
