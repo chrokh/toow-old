@@ -1121,8 +1121,20 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   92.1. Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ducks">
+     92.1.1. Ducks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
-   92.1. Exercises
+   92.2. Exercises
   </a>
  </li>
 </ul>
@@ -1145,8 +1157,20 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   92.1. Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ducks">
+     92.1.1. Ducks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
-   92.1. Exercises
+   92.2. Exercises
   </a>
  </li>
 </ul>
@@ -1165,8 +1189,307 @@ title="Print to PDF"
 <p class="admonition-title">Warning</p>
 <p>Work in progress.</p>
 </div>
+<section id="examples">
+<h2><span class="section-number">92.1. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
+<section id="ducks">
+<h3><span class="section-number">92.1.1. </span>Ducks<a class="headerlink" href="#ducks" title="Permalink to this headline">#</a></h3>
+<p>Let’s run through an example similar to the duck example made famous by <span id="id1">Freeman and Robson [<a class="reference internal" href="bibliography.html#id15" title="E. Freeman and E Robson. Head First Design Patterns: A Brain-Friendly Guide. Head First Series. O'Reilly Media, Incorporated, 2004. ISBN 9780596800741. URL: https://books.google.se/books?id=NbCNAQAAQBAJ.">2004</a>]</span>.</p>
+<p>We start with this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IDuck</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">WildDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IDuck</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;Quack quack.&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;Flying with wings.&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RubberDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IDuck</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;Squeak squeak.&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;Cannot fly.&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RocketPoweredWildDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">WildDuck</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;Flying with rockets.&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RocketPoweredRubberDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">RubberDuck</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;Flying with rockets.&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RubberDuckWithVoiceSynthesizer</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">RubberDuck</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;Quack quack.&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-2292.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.1.90:1024/", "http://127.0.0.1:1024/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '2292.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>Pay special attention to how inheritance in the example above doesn’t help us in eliminating all duplication.
+Our use case doesn’t simply form a nice hierarchy and so we end up with duplicated code even though we try our best to use the code-reuse facilities of <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a> to eliminate it.</p>
+<p>Either way, we can use the code like this:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IDuck</span><span class="p">[]</span><span class="w"> </span><span class="n">ducks</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IDuck</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">WildDuck</span><span class="p">(),</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">RubberDuck</span><span class="p">(),</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">RocketPoweredWildDuck</span><span class="p">(),</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">RocketPoweredRubberDuck</span><span class="p">(),</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">RubberDuckWithVoiceSynthesizer</span><span class="p">()</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">IDuck</span><span class="w"> </span><span class="n">duck</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">ducks</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">duck</span><span class="p">.</span><span class="n">Quack</span><span class="p">()</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="s">&quot; | &quot;</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="n">duck</span><span class="p">.</span><span class="n">Fly</span><span class="p">());</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Flying with wings.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Squeak squeak. | Cannot fly.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Flying with rockets.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Squeak squeak. | Flying with rockets.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Cannot fly.
+</pre></div>
+</div>
+</div>
+</div>
+<p>But as we apply the idea of favoring composition over inheritance we realize that we can break out individual behaviors into their own classes and then compose them as we see fit.
+Let’s start with quacking behaviors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IQuackBehavior</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">QuackBehavior</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IQuackBehavior</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;Quack quack.&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SqueakBehavior</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IQuackBehavior</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;Squeak squeak.&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Starting to see where this is going?
+Let’s now do the same thing for fly behaviors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IFlyBehavior</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">FlyWithWings</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IFlyBehavior</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;Flying with wings.&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">NoFlyBehavior</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IFlyBehavior</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;Cannot fly.&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">FlyWithRockets</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IFlyBehavior</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;Fly with rockets.&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ok, but what happens to all the duck subclasses?
+Well, now that we’re composing behaviors instead of inheriting and overriding them, we don’t need inheritance anymore.
+A single <code class="docutils literal notranslate"><span class="pre">Duck</span></code> class will do just fine.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Duck</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">IQuackBehavior</span><span class="w"> </span><span class="n">quackBehavior</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">IFlyBehavior</span><span class="w"> </span><span class="n">flyBehavior</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Duck</span><span class="w"> </span><span class="p">(</span><span class="n">IQuackBehavior</span><span class="w"> </span><span class="n">quackBehavior</span><span class="p">,</span><span class="w"> </span><span class="n">IFlyBehavior</span><span class="w"> </span><span class="n">flyBehavior</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">quackBehavior</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">quackBehavior</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">flyBehavior</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">flyBehavior</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">quackBehavior</span><span class="p">.</span><span class="n">Quack</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">flyBehavior</span><span class="p">.</span><span class="n">Fly</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>What we previously considered to be different “types” of ducks no longer need to be represented by different individual classes.
+Instead we can grab any two combination of existing or future quack and fly behaviors and pass them as arguments when constructing a duck.
+The creation of different “types” of ducks, consequently, now happens at run-time rather than compile-time.</p>
+<p>To execute code equivalent to the example that we had before, we would write something like this:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Duck</span><span class="p">[]</span><span class="w"> </span><span class="n">ducks</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Duck</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Duck</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">QuackBehavior</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FlyWithWings</span><span class="p">()),</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Duck</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SqueakBehavior</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NoFlyBehavior</span><span class="p">()),</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Duck</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">QuackBehavior</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FlyWithRockets</span><span class="p">()),</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Duck</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SqueakBehavior</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FlyWithRockets</span><span class="p">()),</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Duck</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">QuackBehavior</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NoFlyBehavior</span><span class="p">())</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Duck</span><span class="w"> </span><span class="n">duck</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">ducks</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">duck</span><span class="p">.</span><span class="n">Quack</span><span class="p">()</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="s">&quot; | &quot;</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="n">duck</span><span class="p">.</span><span class="n">Fly</span><span class="p">());</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Flying with wings.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Squeak squeak. | Cannot fly.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Fly with rockets.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Squeak squeak. | Fly with rockets.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Cannot fly.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 <section id="exercises">
-<h2><span class="section-number">92.1. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">92.2. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
 <div class="exercise admonition" id="chapters/composition-over-inheritance-exercise-0">
 
 <p class="admonition-title"><span class="caption-number">Exercise 92.1 </span></p>
@@ -1308,114 +1631,6 @@ Instead you simply instantiate another <code class="docutils literal notranslate
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-<div>
-    <div id='dotnet-interactive-this-cell-2326.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
-        The below script needs to be able to find the current output cell; this is an easy method to get it.
-    </div>
-    <script type='text/javascript'>
-async function probeAddresses(probingAddresses) {
-    function timeout(ms, promise) {
-        return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                reject(new Error('timeout'))
-            }, ms)
-            promise.then(resolve, reject)
-        })
-    }
-
-    if (Array.isArray(probingAddresses)) {
-        for (let i = 0; i < probingAddresses.length; i++) {
-
-            let rootUrl = probingAddresses[i];
-
-            if (!rootUrl.endsWith('/')) {
-                rootUrl = `${rootUrl}/`;
-            }
-
-            try {
-                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
-                    method: 'POST',
-                    cache: 'no-cache',
-                    mode: 'cors',
-                    timeout: 1000,
-                    headers: {
-                        'Content-Type': 'text/plain'
-                    },
-                    body: probingAddresses[i]
-                }));
-
-                if (response.status == 200) {
-                    return rootUrl;
-                }
-            }
-            catch (e) { }
-        }
-    }
-}
-
-function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.128:1024/", "http://127.0.0.1:1024/"])
-        .then((root) => {
-        // use probing to find host url and api resources
-        // load interactive helpers and language services
-        let dotnetInteractiveRequire = require.config({
-        context: '2326.Microsoft.DotNet.Interactive.Http.HttpPort',
-                paths:
-            {
-                'dotnet-interactive': `${root}resources`
-                }
-        }) || require;
-
-            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
-
-            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
-                let paths = {};
-                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
-                
-                let internalRequire = require.config({
-                    context: extensionCacheBuster,
-                    paths: paths,
-                    urlArgs: `cacheBuster=${extensionCacheBuster}`
-                    }) || require;
-
-                return internalRequire
-            };
-        
-            dotnetInteractiveRequire([
-                    'dotnet-interactive/dotnet-interactive'
-                ],
-                function (dotnet) {
-                    dotnet.init(window);
-                },
-                function (error) {
-                    console.log(error);
-                }
-            );
-        })
-        .catch(error => {console.log(error);});
-    }
-
-// ensure `require` is available globally
-if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
-    let require_script = document.createElement('script');
-    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
-    require_script.setAttribute('type', 'text/javascript');
-    
-    
-    require_script.onload = function() {
-        loadDotnetInteractiveApi();
-    };
-
-    document.getElementsByTagName('head')[0].appendChild(require_script);
-}
-else {
-    loadDotnetInteractiveApi();
-}
-
-    </script>
-</div></div></div>
 </div>
 <p>Be sure to try out the game before you start refactoring it.
 The example below shows how to start a game.</p>
