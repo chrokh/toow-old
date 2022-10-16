@@ -18,6 +18,7 @@ Work in progress.
 
 ## Examples
 
+(composition-over-inheritance:examples:ducks)=
 ### Ducks
 
 Let's run through an example similar to the duck example made famous by {cite:t}`freemanAndRobson2004`.
