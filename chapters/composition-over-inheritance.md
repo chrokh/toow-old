@@ -184,3 +184,9 @@ Consider your solution to {numref}`ex:composition-over-inheritance:levels`.
 How is the [maintainability](maintainability:characteristics) of the application changed after having favored composition over inheritance?
 ```
 
+```{exercise}
+Come up with your own example of a case where one ought to favor composition over inheritance.
+Describe your case in detail but without using any code.
+Use UML class diagrams to illustrate the before and after.
+```
+
