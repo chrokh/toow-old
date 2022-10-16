@@ -316,7 +316,7 @@ The class names of the ciphers we've seen so far are:
 Since we have multiple overloads for the `Encode` method in these interfaces a naive first thought might be to implement the following interface:
 
 ```csharp
-interface IChar
+interface ICipher
 {
   char Encode (char input);
   string Encode (string input);
