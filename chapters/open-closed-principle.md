@@ -15,5 +15,5 @@ Explain the open-closed principle in your own words.
 ```
 
 ```{exercise}
-How does the open-closed principle relate to the maintainability characteristics that we discussed in the chapter on [maintainability](maintainability)?
+How does the open-closed principle relate to the maintainability characteristics that we discussed in the chapter on [maintainability](maintainability:characteristics)?
 ```

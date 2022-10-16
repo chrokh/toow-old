@@ -17,7 +17,7 @@ Explain the interface segregation principle in your own words.
 ```
 
 ```{exercise}
-How does the interface segregation principle relate to the maintainability characteristics that we discussed in the chapter on [maintainability](maintainability)?
+How does the interface segregation principle relate to the maintainability characteristics that we discussed in the chapter on [maintainability](maintainability:characteristics)?
 ```
 
 ```{exercise}
