@@ -334,6 +334,12 @@ Give your own example, in your own words, of a single-state invariant violation.
 Give your own example, in your own words, of a multi-state invariant violation.
 ```
 
+```{exercise}
+In the chapter on [interfaces](interfaces:ciphers) we chose to use three interfaces (`ICharToCharCipher`, `ICharToStringCipher`, and `IStringToStringCipher`) instead of one (`ICipher`).
+This decision was motivated by the Liskov substitution principle.
+Use your own words to explain how.
+```
+
 
 ## Video
 
