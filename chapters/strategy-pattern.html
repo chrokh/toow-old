@@ -750,7 +750,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   95. Strategy pattern
+   95. ★ Strategy pattern
   </a>
  </li>
  <li class="toctree-l1">
@@ -1052,12 +1052,63 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   95.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   95.2. Definition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   95.3. Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ducks">
+     95.3.1. Ducks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#video">
+   95.4. Video
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   95.5. Exercises
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -1069,6 +1120,46 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   95.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   95.2. Definition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   95.3. Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ducks">
+     95.3.1. Ducks
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#video">
+   95.4. Video
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   95.5. Exercises
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -1082,7 +1173,49 @@ title="Print to PDF"
 <p class="admonition-title">Warning</p>
 <p>Work in progress.</p>
 </div>
+<section id="motivation">
+<h2><span class="section-number">95.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
+<p>This should also explain why this chapter is surprisingly short.</p>
+</section>
+<section id="definition">
+<h2><span class="section-number">95.2. </span>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">#</a></h2>
+<p>The definition of the strategy pattern from the classic design patterns book <span id="id1">Gamma <em>et al.</em> [<a class="reference internal" href="bibliography.html#id16" title="Erich Gamma, Richard Helm, Ralph Johnson, Ralph E. Johnson, and John Vlissides. Design Patterns: Elements of Reusable Object-Oriented Software. Addison-Wesley professional computing series. Addison-Wesley, 1995. ISBN 9783827330437. URL: http://amazon.christopherokhravi.com?id=design-patterns.">1995</a>]</span> is as follows:</p>
+<blockquote class="epigraph">
+<div><p>Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it.</p>
+<p class="attribution">—<span id="id2">Gamma <em>et al.</em> [<a class="reference internal" href="bibliography.html#id16" title="Erich Gamma, Richard Helm, Ralph Johnson, Ralph E. Johnson, and John Vlissides. Design Patterns: Elements of Reusable Object-Oriented Software. Addison-Wesley professional computing series. Addison-Wesley, 1995. ISBN 9783827330437. URL: http://amazon.christopherokhravi.com?id=design-patterns.">1995</a>]</span></p>
+</div></blockquote>
+<figure class="align-default" id="id3">
+<img alt="https://upload.wikimedia.org/wikipedia/commons/3/39/Strategy_Pattern_in_UML.png" src="https://upload.wikimedia.org/wikipedia/commons/3/39/Strategy_Pattern_in_UML.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 95.1 </span><span class="caption-text">UML class diagram of strategy pattern.
+<em>[Image will be replaced soon]</em> [<a class="reference external" href="https://en.wikipedia.org/wiki/Strategy_pattern#/media/File:Strategy_Pattern_in_UML.png">Image source</a>]</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In strategy pattern we are concerned with using composition over inheritance to allow the implementation of a behavior be decidable at run-time.
+Instead of using inheritance to enable re-use of behaviors we use <a class="reference internal" href="abstract-injected-object-composition.html"><span class="doc std std-doc">abstract injected object composition</span></a>.</p>
+</section>
+<section id="examples">
+<h2><span class="section-number">95.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
+<section id="ducks">
+<h3><span class="section-number">95.3.1. </span>Ducks<a class="headerlink" href="#ducks" title="Permalink to this headline">#</a></h3>
+<p>The example in the chapter on <a class="reference internal" href="composition-over-inheritance.html#composition-over-inheritance-examples-ducks"><span class="std std-ref">composition over inheritance</span></a> regarding ducks with different quack and fly behaviors is a prime example of strategy pattern.
+A very similar example is also discussed in the video embedded at the end of this chapter.</p>
+</section>
+</section>
+<section id="video">
+<h2><span class="section-number">95.4. </span>Video<a class="headerlink" href="#video" title="Permalink to this headline">#</a></h2>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/v9ejT8FO-7I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</section>
+<section id="exercises">
+<h2><span class="section-number">95.5. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<div class="exercise admonition" id="chapters/strategy-pattern-exercise-0">
+
+<p class="admonition-title"><span class="caption-number">Exercise 95.1 </span></p>
+<section id="exercise-content">
+<p>What is the strategy pattern? Explain it in your own words and by using an example.</p>
+</section>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
