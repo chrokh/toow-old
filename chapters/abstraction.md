@@ -4,6 +4,8 @@
 Work in progress.
 ```
 
+% TODO: IMPORTANT: https://www.pathsensitive.com/2022/03/abstraction-not-what-you-think-it-is.html
+
 % > An abstraction that solves more problems is better than one that solves fewer. Think: a method that can be used with more input/output-pairs is better than one that can be used with fewer.
 
 % If this chapter came after all the object composition and dependency injection chapters then we could discuss how we've focused on ciphers but how a more useful model probably is `StringTransformers`. Where ciphers is just one example where you can pair an Encoding transformer with a decoding transformer. This is a very interesting discussion.
