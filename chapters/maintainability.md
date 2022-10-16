@@ -74,6 +74,7 @@ Said differently, we need to be able to provide value today without compromising
 
 
 
+(maintainability:characteristics)=
 (maintainability:definition)=
 ## Definition
 
