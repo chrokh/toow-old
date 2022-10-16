@@ -322,6 +322,11 @@ Explain the benefits of *generics* in terms of the five characteristics of maint
 Explain the benefits of *abstract injected object composition* in terms of the five characteristics of maintainability listed by ISO/IEC 25010:2011?
 ```
 
+```{exercise}
+How does adding more and more members to an interface impact the modularity, reusability, and modifiability of that interface?
+Make sure to relate your answer to the Liskov substitution principle.
+```
+
 
 
 % TODO: Use any of this old intro stuff?
