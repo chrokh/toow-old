@@ -4,7 +4,7 @@
 Work in progress.
 ```
 
-## Motivation
+%## Motivation
 
 %I would be so bold as to suggest that there is no *useful* distinction between strategy pattern and [abstract injected object composition](abstract-injected-object-composition), or even [dependency inversion](dependency-inversion-principle).
 %
@@ -17,7 +17,7 @@ Work in progress.
 %Not for practice and not for purposes of theorization.
 %
 %So, you can assume that the chapter called [composition over inheritance](composition-over-inheritance) is just as much about strategy pattern as it is about composition over inheritance.
-This should also explain why this chapter is surprisingly short.
+%This should also explain why this chapter is surprisingly short.
 
 ## Definition
 
@@ -29,15 +29,16 @@ Define a family of algorithms, encapsulate each one, and make them interchangeab
 -- {cite:t}`gammaEtAl1995`
 ```
 
+In strategy pattern we are concerned with using composition over inheritance to allow the implementation of a behavior be decidable at run-time.
+Instead of using inheritance to enable re-use of behaviors we use [abstract injected object composition](abstract-injected-object-composition).
+
 % TODO: Replace image.
 ```{figure} https://upload.wikimedia.org/wikipedia/commons/3/39/Strategy_Pattern_in_UML.png
+:height: 300px
 
 UML class diagram of strategy pattern.
 *[Image will be replaced soon]* [[Image source](https://en.wikipedia.org/wiki/Strategy_pattern#/media/File:Strategy_Pattern_in_UML.png)]
 ```
-
-In strategy pattern we are concerned with using composition over inheritance to allow the implementation of a behavior be decidable at run-time.
-Instead of using inheritance to enable re-use of behaviors we use [abstract injected object composition](abstract-injected-object-composition).
 
 
 ## Examples
@@ -59,3 +60,8 @@ A very similar example is also discussed in the video embedded at the end of thi
 ```{exercise}
 What is the strategy pattern? Explain it in your own words and by using an example.
 ```
+
+```{exercise}
+Come up with your own example use case for strategy pattern and implement it in code.
+```
+

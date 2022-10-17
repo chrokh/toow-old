@@ -13,6 +13,14 @@ Work in progress.
 
 
 
+% DEPENDENCY INCEJTION EXAMPLE. INCEJTION WITHOUT COMPOSITION:
+% interface IEncodeable
+%{
+%  void Encode (ICipher cipher);
+%}
+% class Person : IEncodeable
+% class PhoneNumber : IEncodeable
+
 
 
 %----------
