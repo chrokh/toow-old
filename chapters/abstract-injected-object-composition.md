@@ -100,6 +100,9 @@ class SubstitutionCipher : IStringToStringCipher
   public SubstitutionCipher (ICharToStringCipher cipher)
     => this.cipher = cipher;
 
+  public SubstitutionCipher (ICharToCharCipher cipher)
+    => this.cipher = new CharToStringAdapter(cipher);
+
   public string Encode (string input)
   {
     string output = "";
@@ -131,8 +134,9 @@ Well, that's the [design pattern](design-patterns) known as "adapter pattern".
 But it's also just a simple solution to the problem caused by some ciphers returning a `char` when encoding a `char` while others return a `string`.
 With the adapter, which *also uses abstract injected object composition*, we can simply wrap any cipher that implements the interface `ICharToCharCipher` and make it behave as if it implemented the interface `ICharToStringCipher`.
 
-So how do we use these classes?
-Can we really treat all substitution ciphers uniformly now?
+Notice also how we make use of the `CharToStringAdapter` in one of the constructors of `SubstitutionCipher`.
+You might remember from the chapter on [constructors](constructors) that constructors too can be [overloaded](overloading).
+Let me show you why this is sensible, but first let's bring in some ciphers:
 
 ```{code-cell} csharp
 :tags: [hide-input]
@@ -196,10 +200,35 @@ class CaesarCipher : ICharToCharCipher
 }
 ```
 
+
+The overloaded constructor that instantiates the `CharToStringAdapter` and wraps the cipher we've passed simplifies the use of this class by allowing us to write:
+
+```{code-cell} csharp
+new SubstitutionCipher(new CaesarCipher(1));
+```
+
+Without the overloaded constructor we would have to write:
+
+```{code-cell} csharp
+new SubstitutionCipher(new CharToStringAdapter(new CaesarCipher(1)));
+```
+
+```{note}
+But, isn't this concrete constructed object composition you ask?
+Yes, it is.
+Didn't I say to always prefer abstract injected object composition?
+Yes, I did.
+Sometimes I too break the rules.
+In this case, I do it because it makes using our class simpler, but we don't have to sacrifice any modularity.
+```
+
+So how do we use these classes?
+Can we really treat all substitution ciphers uniformly now?
+
 ```{code-cell} csharp
 SubstitutionCipher sub1 = new SubstitutionCipher(new RobbersCipher('o'));
-SubstitutionCipher sub2 = new SubstitutionCipher(new CharToStringAdapter(new CaesarCipher(1)));
-SubstitutionCipher sub3 = new SubstitutionCipher(new CharToStringAdapter(new LeetCipher()));
+SubstitutionCipher sub2 = new SubstitutionCipher(new CaesarCipher(1));
+SubstitutionCipher sub3 = new SubstitutionCipher(new LeetCipher());
 ```
 
 Indeed we can.

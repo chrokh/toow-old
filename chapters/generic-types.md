@@ -553,6 +553,9 @@ class SubstitutionCipher : ICipher<string,string>
   public SubstitutionCipher (ICipher<char,string> cipher)
     => this.cipher = cipher;
 
+  public SubstitutionCipher (ICipher<char,char> cipher)
+    => this.cipher = new CharToStringAdapter(cipher);
+
   public string Encode (string input)
   {
     string output = "";
@@ -577,8 +580,8 @@ class CharToStringAdapter : ICipher<char,string>
 With that out of the way, let's now look at an example that uses our generic composite cipher type to compose ciphers that map from `string` to `string`.
 
 ```{code-cell} csharp
-var caesars = new SubstitutionCipher(new CharToStringAdapter(new CaesarCipher(1)));
-var leet = new SubstitutionCipher(new CharToStringAdapter(new LeetCipher()));
+var caesars = new SubstitutionCipher(new CaesarCipher(1));
+var leet = new SubstitutionCipher(new LeetCipher());
 
 CompositeCipher<string> composite =
   new CompositeCipher<string>(caesars, leet);

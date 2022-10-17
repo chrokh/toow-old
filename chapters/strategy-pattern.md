@@ -60,3 +60,8 @@ A very similar example is also discussed in the video embedded at the end of thi
 ```{exercise}
 What is the strategy pattern? Explain it in your own words and by using an example.
 ```
+
+```{exercise}
+Come up with your own example use case for strategy pattern and implement it in code.
+```
+

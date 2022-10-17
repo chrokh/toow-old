@@ -10,6 +10,8 @@ kernelspec:
   name: .net-csharp
 ---
 
+% TODO: Must mention that abstract classes still can have constructors!
+
 # Abstract classes
 
 ```{warning}
