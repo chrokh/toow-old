@@ -301,3 +301,29 @@ Why would it be useful to have more layers of abstraction?
 
 Hint: `new A(new B(new C()))`
 ```
+
+```{exercise-start}
+```
+Write another class that implements the interface `ICipherView` or inherits from the abstract class `CipherView` from the examples in this chapter.
+Let's call the new class `ArrowView`.
+It should behave like this:
+
+```{code-cell} csharp
+:tags: [remove-input]
+class ArrowView : ICipherView
+{
+  ICipher<string,string> cipher;
+  public ArrowView ( ICipher<string,string> cipher)
+    => this.cipher = cipher;
+  public void Draw (string input)
+    => Console.WriteLine($"{input} => {cipher.Encode(input)}");
+}
+```
+```{code-cell} csharp
+ArrowView reverseView = new ArrowView(new ReverseCipher());
+ArrowView caesar2View = new ArrowView(new SubstitutionCipher(new CaesarCipher(2)));
+reverseView.Draw("Secret message");
+caesar2View.Draw("Secret message");
+```
+```{exercise-end}
+```
