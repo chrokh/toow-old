@@ -18,12 +18,16 @@ Work in progress.
 
 ## Motivation
 
+% TODO: This first part should perhaps be moved to strategy pattern intro?
 Verbs are just as important as nouns.
 Functions are also values.
 Functions have types, just like values have types.
 The value `2` might have type `int` and the function `+` might have type `int -> int`.
 We would read the latter as "int to int".
 Or verbosely, we would say that the function `+` maps from `int` to `int`.
+
+Delegates, in C#, can be viewed as a more compact implementation of strategy pattern.
+Inversely, strategy pattern can be seen as a way to implement delegates in object oriented languages.
 
 ## Definition
 
@@ -135,7 +139,7 @@ both();
 ```
 
 ```{note}
-If you happen to be famililar with function composition you might want to know that multicast delegates unfortunately do not behave liek composition.
+If you happen to be famililar with function composition you might want to know that multicast delegates unfortunately do not behave like composition.
 It seems reasonable to assume that multicast delegates is a feature that exists to simplify the act of adding event handlers.
 But more on that in the chapter on [events](events).
 ```
@@ -170,6 +174,26 @@ Action op3 = Print1;
 ```{seealso}
 See the documentation for more information on the various versions of [Func](https://learn.microsoft.com/en-us/dotnet/api/system.func-2?view=net-7.0) and [Action](https://learn.microsoft.com/en-us/dotnet/api/system.action?view=net-6.0) respectively.
 ```
+
+%## Closures
+%Instance methods can be assigned to delegates.
+%Num num1 = new Num(10);
+%Func<Num> neg = num1.Neg;
+%
+%Num num2 = neg();
+%
+%Console.WriteLine(num1.n);
+%Console.WriteLine(num2.n);
+%
+%class Num
+%{
+%  public int n { get; private set; }
+%  public Num (int n)
+%    => this.n = n;
+%  public Num Neg ()
+%    => new Num(-n);
+%}
+
 
 
 
