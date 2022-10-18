@@ -72,7 +72,7 @@ Simple enough, right?
 Does it work?
 Sure, both these types work in the sense that we can instantiate them and plop any type of value inside.
 
-```{aside}
+```{admonition} Aside
 In fact, if our type could store multiple values at the same time (like say a list) we could even mix values of different types in the same box.
 If you want to read more about such a type, have a look at the archeic type `ArrayList` in the [documentation](https://learn.microsoft.com/en-us/dotnet/api/system.collections.arraylist?view=net-6.0#remarks).
 ```
@@ -670,6 +670,7 @@ Why or why not?
 ```
 
 ```{exercise}
+:label: ex:generic-types:conditional-cipher
 Rewrite the conditional cipher that we implemented in {numref}`abstract-injected-object-composition:exercises:predicates` so that it is generic.
 
 Hint: This also requires that we rewrite the predicate interface from that same exercise.

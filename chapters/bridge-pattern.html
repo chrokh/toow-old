@@ -1330,7 +1330,7 @@ In this newer interpretation I think it is useful to think of this as <a class="
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2292.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2323.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1375,12 +1375,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.1.122:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.83:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2292.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2323.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1641,6 +1641,35 @@ Use the <a class="reference internal" href="maintainability.html#maintainability
 Is it possible to have a number of layers of abstraction?
 Why would it be useful to have more layers of abstraction?</p>
 <p>Hint: <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">A(new</span> <span class="pre">B(new</span> <span class="pre">C()))</span></code></p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/bridge-pattern-exercise-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 97.5 </span></p>
+<section id="exercise-content">
+<p>Write another class that implements the interface <code class="docutils literal notranslate"><span class="pre">ICipherView</span></code> or inherits from the abstract class <code class="docutils literal notranslate"><span class="pre">CipherView</span></code> from the examples in this chapter.
+Let’s call the new class <code class="docutils literal notranslate"><span class="pre">ArrowView</span></code>.
+It should behave like this:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ArrowView</span><span class="w"> </span><span class="n">reverseView</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrowView</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ReverseCipher</span><span class="p">());</span><span class="w"></span>
+<span class="n">ArrowView</span><span class="w"> </span><span class="n">caesar2View</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrowView</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SubstitutionCipher</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CaesarCipher</span><span class="p">(</span><span class="m">2</span><span class="p">)));</span><span class="w"></span>
+<span class="n">reverseView</span><span class="p">.</span><span class="n">Draw</span><span class="p">(</span><span class="s">&quot;Secret message&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">caesar2View</span><span class="p">.</span><span class="n">Draw</span><span class="p">(</span><span class="s">&quot;Secret message&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Secret message =&gt; egassem terceS
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Secret message =&gt; Ugetgv oguucig
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </div>
 </section>
