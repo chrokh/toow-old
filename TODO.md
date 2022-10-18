@@ -65,6 +65,7 @@
 - Labs
   - Brute-force hangman. Computer does guessing. You input how long the word should be and the program already has a word list stored.
   - Smart hangman. Like simple hangman but guessing computer uses word list and probability theory to make the best guesses.
+- IDisposable. Used in e.g. Subscribe method of .NET IObservable.
 
 ```csharp
 class CaesarCipher : ICipher<char,char>

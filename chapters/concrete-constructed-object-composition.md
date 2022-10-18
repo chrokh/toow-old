@@ -40,6 +40,8 @@ Instead, the composing object simply creates the composed object on its own.
 
 ## Examples
 
+% TODO: Vigenere cipher. Can be implemented as a cycling list of Caesar ciphers where letters have been mapped to numbers. This is a much more interesting example. The generalization goes beyond Caesar ciphers. Simply inject a list of ciphers to use in sequence. This is a great use case for Factory Method pattern later. Make the FlipFlop cipher I discuss here an exercise instead? Note that FlipFlop is used in the following object composition chapters. But Vigenere ought to be a more sensible example. https://sv.wikipedia.org/wiki/Vigenère-chiffret
+
 Let's use our ciphers as an example and let's build something new.
 How about a cipher that flip flops between encoding and decoding between some variation of itself.
 Sounds weird but I think the results will be pretty fun.
