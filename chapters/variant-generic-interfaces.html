@@ -785,7 +785,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="factory-method-pattern.html">
-   102. Factory method pattern
+   102. ★ Factory method pattern
   </a>
  </li>
  <li class="toctree-l1">
@@ -1222,7 +1222,7 @@ How about predicates?</p>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3783.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3831.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1267,12 +1267,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.1.103:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.1.16:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3783.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3831.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1468,7 +1468,7 @@ For the sake of simplicity, let’s pick the constant cipher.</p>
 <p>Notice how the type arguments on the left says <code class="docutils literal notranslate"><span class="pre">&lt;Cat,Animal&gt;</span></code> while the type arguments on the right says <code class="docutils literal notranslate"><span class="pre">&lt;Animal,Cat&gt;</span></code>.</p>
 </section>
 <section id="cipher-factories">
-<h3><span class="section-number">77.1.3. </span>Cipher factories<a class="headerlink" href="#cipher-factories" title="Permalink to this headline">#</a></h3>
+<span id="variant-generic-interfaces-cipher-factories"></span><h3><span class="section-number">77.1.3. </span>Cipher factories<a class="headerlink" href="#cipher-factories" title="Permalink to this headline">#</a></h3>
 <p>Let’s look at a contravariant example that can be used in the context of our ciphers.
 Let’s model a type that can spit out any number of objects of another type.
 You can think of this as a <a class="reference internal" href="factory-method-pattern.html"><span class="doc std std-doc">factory</span></a>, a stream, a sequence, an infinite list, or an <a class="reference internal" href="iterator-pattern.html"><span class="doc std std-doc">iterator</span></a>.</p>

@@ -785,7 +785,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   102. Factory method pattern
+   102. ★ Factory method pattern
   </a>
  </li>
  <li class="toctree-l1">
@@ -975,6 +975,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/chrokh/the-oo-way/main?urlpath=tree/docs/chapters/factory-method-pattern.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -1009,6 +1038,23 @@ title="Open an issue"
   </button>
   <div class="menu-dropdown__content">
     <ul>
+      <li>
+        <a href="../_sources/chapters/factory-method-pattern.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
       <li>
         <a href="../_sources/chapters/factory-method-pattern.md"
    class="headerbtn"
@@ -1047,12 +1093,63 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   102.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   102.2. Definition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   102.3. Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cipher-factories">
+     102.3.1. Cipher factories
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#video">
+   102.4. Video
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   102.5. Exercises
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -1064,6 +1161,46 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   102.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   102.2. Definition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   102.3. Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cipher-factories">
+     102.3.1. Cipher factories
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#video">
+   102.4. Video
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   102.5. Exercises
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -1077,7 +1214,386 @@ title="Print to PDF"
 <p class="admonition-title">Warning</p>
 <p>Work in progress.</p>
 </div>
+<section id="motivation">
+<h2><span class="section-number">102.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
+<p>The purpose of the factory method pattern is to allow objects to create new objects without being concerned about what subtypes to create nor how to actually create them.
+Said differently, it allows us to defer object construction.</p>
+<p>We’ve touted the idea of <a class="reference internal" href="abstract-injected-object-composition.html"><span class="doc std std-doc">abstract injected object composition</span></a> as the way to compose objects.
+However, we haven’t addressed two obvious problems of injection.</p>
+<ol class="simple">
+<li><p>What if the object that we want isn’t available at the time of construction of the object that wants to use it?</p></li>
+<li><p>What if we want to be able to inject an arbitrary number of objects?</p></li>
+</ol>
+<p>Think about the classic game of Tetris for example.
+It’s not like we can <em>inject</em> a <code class="docutils literal notranslate"><span class="pre">Piece</span></code> to <code class="docutils literal notranslate"><span class="pre">Board</span></code>.
+A Tetris board is ever-changing.
+As soon as we have landed one piece, the next is generated.
+Where should this piece come from?
+Do we need to instantiate a whole new board every time we want to inject a new piece?
+Or should we inject via an instance method and let someone else be responsible for sending us a piece at the right time?
+But how would they know that the time to send a new piece is now?
+Perhaps we could use the <a class="reference internal" href="observer-pattern.html"><span class="doc std std-doc">observer pattern</span></a> or <a class="reference internal" href="events.html"><span class="doc std std-doc">events</span></a> for that?</p>
+<p>All these solutions are unnecessarily complicated.
+This is where the factory method pattern comes into play.
+Instead of injecting the thing we want to use, which in the case of Tetris is the piece, we inject a factory that can produce objects of the type that we need.
+In the terminology of the <a class="reference internal" href="bridge-pattern.html"><span class="doc std std-doc">Bridge pattern</span></a>, we add another layer of abstraction.
+Whenever we need a new object, we simply ask the factory for another object.</p>
+</section>
+<section id="definition">
+<h2><span class="section-number">102.2. </span>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">#</a></h2>
+<p>The definition of the factory method pattern from the classic design patterns book <span id="id1">Gamma <em>et al.</em> [<a class="reference internal" href="bibliography.html#id16" title="Erich Gamma, Richard Helm, Ralph Johnson, Ralph E. Johnson, and John Vlissides. Design Patterns: Elements of Reusable Object-Oriented Software. Addison-Wesley professional computing series. Addison-Wesley, 1995. ISBN 9783827330437. URL: http://amazon.christopherokhravi.com?id=design-patterns.">1995</a>]</span> is as follows:</p>
+<blockquote class="epigraph">
+<div><p>Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses.</p>
+<p class="attribution">—<span id="id2">Gamma <em>et al.</em> [<a class="reference internal" href="bibliography.html#id16" title="Erich Gamma, Richard Helm, Ralph Johnson, Ralph E. Johnson, and John Vlissides. Design Patterns: Elements of Reusable Object-Oriented Software. Addison-Wesley professional computing series. Addison-Wesley, 1995. ISBN 9783827330437. URL: http://amazon.christopherokhravi.com?id=design-patterns.">1995</a>]</span></p>
+</div></blockquote>
+<figure class="align-default" id="id3">
+<img alt="https://upload.wikimedia.org/wikipedia/commons/4/43/W3sDesign_Factory_Method_Design_Pattern_UML.jpg?20170805180321" src="https://upload.wikimedia.org/wikipedia/commons/4/43/W3sDesign_Factory_Method_Design_Pattern_UML.jpg?20170805180321" />
+<figcaption>
+<p><span class="caption-number">Fig. 102.1 </span><span class="caption-text">UML class diagram of factory method pattern.
+<em>[Image will be replaced soon]</em> [<a class="reference external" href="https://commons.wikimedia.org/wiki/File:W3sDesign_Factory_Method_Design_Pattern_UML.jpg">Image source</a>]</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="examples">
+<h2><span class="section-number">102.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
+<section id="cipher-factories">
+<h3><span class="section-number">102.3.1. </span>Cipher factories<a class="headerlink" href="#cipher-factories" title="Permalink to this headline">#</a></h3>
+<p>Remember the cipher sequences that we built in the chapter on <a class="reference internal" href="variant-generic-interfaces.html#variant-generic-interfaces-cipher-factories"><span class="std std-ref">variant generic interfaces</span></a>?
+We mentioned that that essentially was an example of the factory method pattern so let’s run through that example again.</p>
+<p>Let’s first make sure that we’ve got our cipher interface and some ciphers.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ICipher</span><span class="p">&lt;</span><span class="k">in</span><span class="w"> </span><span class="n">TIn</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="w"> </span><span class="n">TOut</span><span class="p">&gt;</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">TOut</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="n">TIn</span><span class="w"> </span><span class="n">input</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CaesarCipher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICipher</span><span class="p">&lt;</span><span class="kt">char</span><span class="p">,</span><span class="kt">char</span><span class="p">&gt;</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Steps</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">CaesarCipher</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">Steps</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">Steps</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Steps</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">alphabet</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;ABCDEFGHIJKLMNOPQRSTUVXYZ&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">alphabet</span><span class="p">.</span><span class="n">IndexOf</span><span class="p">(</span><span class="n">Char</span><span class="p">.</span><span class="n">ToUpper</span><span class="p">(</span><span class="n">input</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">newIndex</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="n">Steps</span><span class="p">)</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">alphabet</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="p">!=</span><span class="w"> </span><span class="p">-</span><span class="m">1</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">newIndex</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">newIndex</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">alphabet</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Char</span><span class="p">.</span><span class="n">IsLower</span><span class="p">(</span><span class="n">input</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Char</span><span class="p">.</span><span class="n">ToLower</span><span class="p">(</span><span class="n">alphabet</span><span class="p">[</span><span class="n">newIndex</span><span class="p">]);</span><span class="w"></span>
+<span class="w">      </span><span class="k">else</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">alphabet</span><span class="p">[</span><span class="n">newIndex</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">input</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RobbersCipher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICipher</span><span class="p">&lt;</span><span class="kt">char</span><span class="p">,</span><span class="kt">string</span><span class="p">&gt;</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">vowel</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">RobbersCipher</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">vowel</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">vowel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">vowel</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">consonants</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;BCDFGHJKLMNPQRSTVXYZ&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">consonants</span><span class="p">.</span><span class="n">IndexOf</span><span class="p">(</span><span class="n">Char</span><span class="p">.</span><span class="n">ToUpper</span><span class="p">(</span><span class="n">input</span><span class="p">))</span><span class="w"> </span><span class="p">!=</span><span class="w"> </span><span class="p">-</span><span class="m">1</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="s">$&quot;{input}{vowel}{input}&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="s">$&quot;{input}&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-2742.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.1.16:1024/", "http://127.0.0.1:1024/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '2742.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>Ok, so here’s what the factory interface looked like in the chapter on <a class="reference internal" href="variant-generic-interfaces.html#variant-generic-interfaces-cipher-factories"><span class="std std-ref">variant generic interfaces</span></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IFactory</span><span class="p">&lt;</span><span class="k">out</span><span class="w"> </span><span class="n">T</span><span class="p">&gt;</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">T</span><span class="w"> </span><span class="nf">Next</span><span class="w"> </span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In that chapter we discussed how the type parameter <code class="docutils literal notranslate"><span class="pre">T</span></code> in the generic type <code class="docutils literal notranslate"><span class="pre">IFactory&lt;out</span> <span class="pre">T&gt;</span></code> can be covariant since this type is only ever used as a return type.
+This is not relevant to factory method pattern, but we’ll keep it here since it allows us to use more specific return types in the implementations’ factory methods.</p>
+<p>In that chapter we also discussed two potential implementations of the factory interface.
+A factory that generates Caesar ciphers with increasing number of steps and one that generates ciphers of decreasing number of steps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">IncrementingCaesarCipherFactory</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IFactory</span><span class="p">&lt;</span><span class="n">CaesarCipher</span><span class="p">&gt;</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="n">CaesarCipher</span><span class="w"> </span><span class="nf">Next</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CaesarCipher</span><span class="p">(</span><span class="n">i</span><span class="p">++);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DecrementingCaesarCipherFactory</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IFactory</span><span class="p">&lt;</span><span class="n">CaesarCipher</span><span class="p">&gt;</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="n">CaesarCipher</span><span class="w"> </span><span class="nf">Next</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CaesarCipher</span><span class="p">(</span><span class="n">i</span><span class="p">--);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You might of course already have figured out that by using <a class="reference internal" href="delegates.html"><span class="doc std std-doc">delegates</span></a> or the <a class="reference internal" href="strategy-pattern.html"><span class="doc std std-doc">strategy pattern</span></a> to write a more general Caesar cipher factory that makes the above two redundant.
+However, this is given as an exercise for you in <a class="reference internal" href="#ex:factory-method-pattern:transforming-caesar-cipher-factory"><span class="std std-numref">Exercise 102.5</span></a>, so let’s leave that topic for now.</p>
+<p>There are of course plenty of other factories that we can produce.
+Here’s a factory that produces Robber’s ciphers based around various vowels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">VowelCyclingRobbersCipherFactory</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IFactory</span><span class="p">&lt;</span><span class="n">RobbersCipher</span><span class="p">&gt;</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">vowels</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;aouei&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="n">RobbersCipher</span><span class="w"> </span><span class="nf">Next</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RobbersCipher</span><span class="p">(</span><span class="n">vowels</span><span class="p">[</span><span class="n">i</span><span class="p">++</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">vowels</span><span class="p">.</span><span class="n">Length</span><span class="p">]);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s a variation of the factory above that take the letters that it can vary between as input.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CyclingRobbersCipherFactory</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IFactory</span><span class="p">&lt;</span><span class="n">RobbersCipher</span><span class="p">&gt;</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">letters</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">CyclingRobbersCipherFactory</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">letters</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">letters</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">letters</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="n">RobbersCipher</span><span class="w"> </span><span class="nf">Next</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RobbersCipher</span><span class="p">(</span><span class="n">letters</span><span class="p">[</span><span class="n">i</span><span class="p">++</span><span class="w"> </span><span class="p">%</span><span class="w"> </span><span class="n">letters</span><span class="p">.</span><span class="n">Length</span><span class="p">]);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s try this latest factory out.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">CyclingRobbersCipherFactory</span><span class="w"> </span><span class="n">factory</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CyclingRobbersCipherFactory</span><span class="p">(</span><span class="s">&quot;@€!&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">factory</span><span class="p">.</span><span class="n">Next</span><span class="p">().</span><span class="n">Encode</span><span class="p">(</span><span class="sc">&#39;L&#39;</span><span class="p">));</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">factory</span><span class="p">.</span><span class="n">Next</span><span class="p">().</span><span class="n">Encode</span><span class="p">(</span><span class="sc">&#39;L&#39;</span><span class="p">));</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">factory</span><span class="p">.</span><span class="n">Next</span><span class="p">().</span><span class="n">Encode</span><span class="p">(</span><span class="sc">&#39;L&#39;</span><span class="p">));</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L@L
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L€L
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L!L
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="video">
+<h2><span class="section-number">102.4. </span>Video<a class="headerlink" href="#video" title="Permalink to this headline">#</a></h2>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/EcFVTgRHJLM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</section>
+<section id="exercises">
+<h2><span class="section-number">102.5. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<div class="exercise admonition" id="chapters/factory-method-pattern-exercise-0">
+
+<p class="admonition-title"><span class="caption-number">Exercise 102.1 </span></p>
+<section id="exercise-content">
+<p>What is the factory method pattern?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/factory-method-pattern-exercise-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 102.2 </span></p>
+<section id="exercise-content">
+<p>Which method would we call the “factory method” when we’ve got a case of the factory method pattern?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/factory-method-pattern-exercise-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 102.3 </span></p>
+<section id="exercise-content">
+<p>Come up with your own example of the factory method pattern and implement it in code.</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/factory-method-pattern-exercise-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 102.4 </span></p>
+<section id="exercise-content">
+<p>Let’s say that we’ve got a factory that always produces structurally equivalent objects and that this factory is an implementation of some interface.
+Let’s then say that we in some other class want objects of the type that the factory creates.
+Consider the following two alternatives.</p>
+<ol class="simple">
+<li><p>Either we let the other class create the objects that it wants itself.</p></li>
+<li><p>Or we couple the other class to our interface and inject the factory (e.g. through the constructor) and let our factory create the objects.</p></li>
+</ol>
+<p>It could be argued that the second option is more <span class="xref myst">maintainable</span>, even if we only have a single concrete factory at the moment. Why is this?</p>
+</section>
+</div>
+<div class="exercise admonition" id="ex:factory-method-pattern:transforming-caesar-cipher-factory">
+
+<p class="admonition-title"><span class="caption-number">Exercise 102.5 </span></p>
+<section id="exercise-content">
+<p>Perhaps you have already realized that by using our newfound skills in either <a class="reference internal" href="delegates.html"><span class="doc std std-doc">delegates</span></a> or <a class="reference internal" href="strategy-pattern.html"><span class="doc std std-doc">strategy pattern</span></a> we can create a more general Caesar cipher factory which we can use to create the incrementing and decrementing factories.
+What’s common between the incrementing and the decrementing Caesar cipher factories?
+The idea of applying a transformation to the steps variable upon each request to get the next cipher.</p>
+<p>Write a class called <code class="docutils literal notranslate"><span class="pre">TransformingCaesarCipherFactory</span></code> that implements the interface <code class="docutils literal notranslate"><span class="pre">IFactory&lt;CaesarCipher&gt;</span></code> and takes an argument in the constructor of type <code class="docutils literal notranslate"><span class="pre">Func&lt;int,int&gt;</span></code>.
+This argument can be thought of as the transformer that we should apply after each time we generate a new cipher.</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<p>When we’ve written the factory, we should be able to create both incrementing and decrementing Caesar cipher generating factories at run-time.
+Like in the example below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">inc</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">var</span><span class="w"> </span><span class="n">incrementingCaesarCipherFactory</span><span class="w"></span>
+<span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TransformingCaesarCipherFactory</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">inc</span><span class="p">);</span><span class="w"></span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">incrementingCaesarCipherFactory</span><span class="p">.</span><span class="n">Next</span><span class="p">().</span><span class="n">Encode</span><span class="p">(</span><span class="sc">&#39;A&#39;</span><span class="p">));</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">incrementingCaesarCipherFactory</span><span class="p">.</span><span class="n">Next</span><span class="p">().</span><span class="n">Encode</span><span class="p">(</span><span class="sc">&#39;A&#39;</span><span class="p">));</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">incrementingCaesarCipherFactory</span><span class="p">.</span><span class="n">Next</span><span class="p">().</span><span class="n">Encode</span><span class="p">(</span><span class="sc">&#39;A&#39;</span><span class="p">));</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>B
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1089,16 +1605,16 @@ title="Print to PDF"
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            kernelName: "python3",
+            kernelName: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
 
               </div>
               

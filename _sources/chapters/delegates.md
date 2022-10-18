@@ -278,6 +278,8 @@ Console.WriteLine( cipher.Encode('e') );
 ```
 
 
+% TODO: Add exercise that generalizes IncrementingCaesarCipherFactory and DecrementingCaesarCipherFactory from the chapter on generic variant interfaces. Use delegates instead of hard-coding the operation to perform on the int.
+
 
 %--------------
 
