@@ -775,7 +775,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   100. Events
+   100. ★ Events
   </a>
  </li>
  <li class="toctree-l1">
@@ -975,6 +975,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/chrokh/the-oo-way/main?urlpath=tree/docs/chapters/events.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -1009,6 +1038,23 @@ title="Open an issue"
   </button>
   <div class="menu-dropdown__content">
     <ul>
+      <li>
+        <a href="../_sources/chapters/events.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
       <li>
         <a href="../_sources/chapters/events.md"
    class="headerbtn"
@@ -1047,12 +1093,53 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   100.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   100.2. Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#observable-ciphers">
+     100.2.1. Observable ciphers
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   100.3. Exercises
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -1064,6 +1151,36 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   100.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   100.2. Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#observable-ciphers">
+     100.2.1. Observable ciphers
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   100.3. Exercises
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -1077,6 +1194,405 @@ title="Print to PDF"
 <p class="admonition-title">Warning</p>
 <p>Work in progress.</p>
 </div>
+<section id="motivation">
+<h2><span class="section-number">100.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
+<p>As mentioned in the chapter on <a class="reference internal" href="observer-pattern.html"><span class="doc std std-doc">observer pattern</span></a>, events together with delegates are, in a sense, solving the same problem as the observer pattern.
+Events and delegates allow to subscribe to some event, and run some code as a consequence of that event occurring.</p>
+</section>
+<section id="examples">
+<h2><span class="section-number">100.2. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
+<section id="observable-ciphers">
+<h3><span class="section-number">100.2.1. </span>Observable ciphers<a class="headerlink" href="#observable-ciphers" title="Permalink to this headline">#</a></h3>
+<p>Let’s take the example of generic observable ciphers from the chapter on <a class="reference internal" href="observer-pattern.html#observer-pattern-generic-observable-ciphers"><span class="std std-ref">observer pattern</span></a> and reimplement it using events and delegates.</p>
+<p>When using events and delegates our observers become delegates.
+So let’s start there.
+Recall that we had three observers: <code class="docutils literal notranslate"><span class="pre">CipherViewer</span></code>, <code class="docutils literal notranslate"><span class="pre">CipherWriter</span></code>, and <code class="docutils literal notranslate"><span class="pre">CipherLog</span></code>.
+But just as in the chapter on observer pattern that last observer is left as an exercise for you.</p>
+<p>Let’s use simple <a class="reference internal" href="methods.html#local-functions"><span class="std std-ref">local functions</span></a> to build our two observables that can be stored in delegates.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">void</span><span class="w"> </span><span class="nf">printTranslation</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;\&quot;{input}\&quot; was translated into \&quot;{output}\&quot;&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="k">void</span><span class="w"> </span><span class="nf">writeTranslation</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Writing encoded data to file...&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-2710.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.1.103:1024/", "http://127.0.0.1:1024/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '2710.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>Ok, so what about the observable cipher?
+Let’s build that now.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ICipher</span><span class="p">&lt;</span><span class="k">in</span><span class="w"> </span><span class="n">TIn</span><span class="p">,</span><span class="k">out</span><span class="w"> </span><span class="n">TOut</span><span class="p">&gt;</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">TOut</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="n">TIn</span><span class="w"> </span><span class="n">input</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ObservableCipher</span><span class="p">&lt;</span><span class="n">TIn</span><span class="p">,</span><span class="n">TOut</span><span class="p">&gt;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICipher</span><span class="p">&lt;</span><span class="n">TIn</span><span class="p">,</span><span class="n">TOut</span><span class="p">&gt;</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// This corresponds to the IObservable interface in observer pattern.</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">delegate</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">EncodedEventHandler</span><span class="w"> </span><span class="p">(</span><span class="n">TIn</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">TOut</span><span class="w"> </span><span class="n">output</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">// This corresponds to the subscribe/unsubscribe methods in the observer pattern.</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">event</span><span class="w"> </span><span class="n">EncodedEventHandler</span><span class="w"> </span><span class="n">Encoded</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="n">ICipher</span><span class="p">&lt;</span><span class="n">TIn</span><span class="p">,</span><span class="n">TOut</span><span class="p">&gt;</span><span class="w"> </span><span class="n">cipher</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">ObservableCipher</span><span class="w"> </span><span class="p">(</span><span class="n">ICipher</span><span class="p">&lt;</span><span class="n">TIn</span><span class="p">,</span><span class="n">TOut</span><span class="p">&gt;</span><span class="w"> </span><span class="n">cipher</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">cipher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cipher</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="n">TOut</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="n">TIn</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">TOut</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">input</span><span class="p">);</span><span class="w"> </span><span class="c1">// Delegate the encoding of input.</span>
+<span class="w">    </span><span class="n">onEncoded</span><span class="p">(</span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">);</span><span class="w">           </span><span class="c1">// Raise event (i.e. notify subscribers).</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">// This corresponds to the method that notifies all observers in the observer pattern.</span>
+<span class="w">  </span><span class="k">void</span><span class="w"> </span><span class="nf">onEncoded</span><span class="w"> </span><span class="p">(</span><span class="n">TIn</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">TOut</span><span class="w"> </span><span class="n">output</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Encoded</span><span class="w"> </span><span class="p">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">Encoded</span><span class="p">(</span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s now reintroduce our old Reverse cipher class so that we have an actual cipher to work with.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ReverseCipher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICipher</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">string</span><span class="p">&gt;</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">=</span><span class="n">input</span><span class="p">.</span><span class="n">Length</span><span class="p">-</span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">&gt;=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">--)</span><span class="w"></span>
+<span class="w">      </span><span class="n">output</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ok, now we are ready to create an instance of our observable cipher.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ObservableCipher</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">string</span><span class="p">&gt;</span><span class="w"> </span><span class="n">observable</span><span class="w"></span>
+<span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ObservableCipher</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">string</span><span class="p">&gt;(</span><span class="k">new</span><span class="w"> </span><span class="n">ReverseCipher</span><span class="p">());</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s now add our event handlers to the <code class="docutils literal notranslate"><span class="pre">Encoded</span></code> event.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">observable</span><span class="p">.</span><span class="n">Encoded</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">printTranslation</span><span class="p">;</span><span class="w"></span>
+<span class="n">observable</span><span class="p">.</span><span class="n">Encoded</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">writeTranslation</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>All dressed up. It’s time to go.
+Let’s now run the encode method in our observable cipher to see if our event handlers are fired off in order.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">observable</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;ABC&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">observable</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;123&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;ABC&quot; was translated into &quot;CBA&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing encoded data to file...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;123&quot; was translated into &quot;321&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing encoded data to file...
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>What is this <code class="docutils literal notranslate"><span class="pre">+=</span></code> syntax used when adding the events?
+Events in C# make use of <a class="reference internal" href="delegates.html#delegates-multicast"><span class="std std-ref">multi-cast delegates</span></a>.
+This allows us to add event handlers to the event by using the <code class="docutils literal notranslate"><span class="pre">+=</span></code> syntax.</p>
+</div>
+</section>
+</section>
+<section id="exercises">
+<h2><span class="section-number">100.3. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<div class="exercise admonition" id="chapters/events-exercise-0">
+
+<p class="admonition-title"><span class="caption-number">Exercise 100.1 </span></p>
+<section id="exercise-content">
+<p>What are events and why are they useful?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/events-exercise-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 100.2 </span></p>
+<section id="exercise-content">
+<p>How are delegates used in events?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/events-exercise-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 100.3 </span></p>
+<section id="exercise-content">
+<p>It could be argued that events and delegates together solve the same problem as the observer pattern do.
+How so?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/events-exercise-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 100.4 </span></p>
+<section id="exercise-content">
+<p>What is event-driven programming?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/events-exercise-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 100.5 </span></p>
+<section id="exercise-content">
+<p>Rewrite the observer <code class="docutils literal notranslate"><span class="pre">CipherLog</span></code> that we wrote in <a class="reference internal" href="observer-pattern.html#ex:observer-pattern:cipher-log"><span class="std std-numref">Exercise 99.4</span></a> as a method that we can add as an event handler to the event <code class="docutils literal notranslate"><span class="pre">Encoded</span></code> on instances of <code class="docutils literal notranslate"><span class="pre">ObservableCipher</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CipherLog</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">List</span><span class="p">&lt;(</span><span class="kt">string</span><span class="p">,</span><span class="kt">string</span><span class="p">)&gt;</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="p">&lt;(</span><span class="kt">string</span><span class="p">,</span><span class="kt">string</span><span class="p">)&gt;();</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Update</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">log</span><span class="p">.</span><span class="n">Add</span><span class="p">((</span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">));</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">ToTSV</span><span class="p">()</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;INPUT\tOUTPUT\n&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">log</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">output</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="s">$&quot;{entry.Item1}\t{entry.Item2}\n&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Instantiate observable cipher.</span>
+<span class="n">ObservableCipher</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">string</span><span class="p">&gt;</span><span class="w"> </span><span class="n">observable</span><span class="w"></span>
+<span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ObservableCipher</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">string</span><span class="p">&gt;(</span><span class="k">new</span><span class="w"> </span><span class="n">ReverseCipher</span><span class="p">());</span><span class="w"></span>
+
+<span class="c1">// Instantiate log that will observe.</span>
+<span class="n">CipherLog</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CipherLog</span><span class="p">();</span><span class="w"></span>
+
+<span class="c1">// Add the log&#39;s update method as an event handler.</span>
+<span class="n">observable</span><span class="p">.</span><span class="n">Encoded</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">log</span><span class="p">.</span><span class="n">Update</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// Run the encoding on the observable.</span>
+<span class="n">observable</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;abc&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">observable</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;ABC&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">observable</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;123&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// Print the log.</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">log</span><span class="p">.</span><span class="n">ToTSV</span><span class="p">());</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INPUT	OUTPUT
+abc	cba
+ABC	CBA
+123	321
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/events-exercise-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 100.6 </span></p>
+<section id="exercise-content">
+<p>Instantiate two observable ciphers and call them <code class="docutils literal notranslate"><span class="pre">o1</span></code> and <code class="docutils literal notranslate"><span class="pre">o2</span></code>.
+The first should wrap a reverse cipher and the other a Caesar cipher with steps set to 1.</p>
+<p>Then instantiate two logs and call them <code class="docutils literal notranslate"><span class="pre">log1</span></code> and <code class="docutils literal notranslate"><span class="pre">log2</span></code>.
+The first log should be updated whenever any of the two ciphers encode data.
+The second log should only be updated when the first cipher encode data.</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<p>Then encode the following data using the first observable:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">o1</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;abc&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">o1</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;ABC&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And the following input using the second observable:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">o2</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;123&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">o2</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;987&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you’ve followed these instructions precisely, then <code class="docutils literal notranslate"><span class="pre">log1</span></code> should report the following when we print it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">log1</span><span class="p">.</span><span class="n">ToTSV</span><span class="p">());</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INPUT	OUTPUT
+abc	cba
+ABC	CBA
+123	321
+987	789
+</pre></div>
+</div>
+</div>
+</div>
+<p>However <code class="docutils literal notranslate"><span class="pre">log2</span></code> should only contain the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">log2</span><span class="p">.</span><span class="n">ToTSV</span><span class="p">());</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INPUT	OUTPUT
+abc	cba
+ABC	CBA
+</pre></div>
+</div>
+</div>
+</div>
+<p>Bonus question: Why is the output of the two logs different?</p>
+</section>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1088,16 +1604,16 @@ title="Print to PDF"
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            kernelName: "python3",
+            kernelName: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
 
               </div>
               

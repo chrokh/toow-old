@@ -61,14 +61,14 @@ interface ICipher<TIn,TOut>
 
 Let's then introduce interfaces for the idea of being an observer and that of being an observable.
 
-Our observers are simply required to implement a method called `Notify` which takes two strings as arguments.
+Our observers are simply required to implement a method called `Update` which takes two strings as arguments.
 This method will be called on all observers whenever the observable that they observe have completed its encoding.
 The first string parameter represents the input value that was sent to the Encode method and the second represents the output value.
 
 ```{code-cell} csharp
 interface ICipherObserver
 {
-  void Notify (string input, string output);
+  void Update (string input, string output);
 }
 ```
 
@@ -92,7 +92,7 @@ Let's first build an observer that writes to screen:
 ```{code-cell} csharp
 class CipherViewer : ICipherObserver
 {
-  public void Notify(string input, string output)
+  public void Update(string input, string output)
     => Console.WriteLine($"\"{input}\" was translated into \"{output}\"");
 }
 ```
@@ -103,8 +103,8 @@ But, since we don't actually care about file writing in this example, let's just
 ```{code-cell} csharp
 class CipherWriter : ICipherObserver
 {
-  public void Notify(string input, string output)
-    => Console.WriteLine("Writing encode data to file...");
+  public void Update(string input, string output)
+    => Console.WriteLine("Writing encoded data to file...");
 }
 ```
 
@@ -135,7 +135,7 @@ class ObservableCipher : ICipher<string,string>
   void notify (string input, string output)
   {
     foreach (ICipherObserver observer in observers)
-      observer.Notify(input, output);
+      observer.Update(input, output);
   }
 }
 ```
@@ -160,10 +160,11 @@ Then we simply call `Encode` on the observable cipher and watch as the observers
 observable.Encode("foobar");
 ```
 
-Notice how the `Notify` method of both observers is executed.
+Notice how the `Update` method of both observers is executed.
 Notice also how we don't actually need to store the return value of the call to the method `Encode`.
 
 
+(observer-pattern:generic-observable-ciphers)=
 ### Generic observable ciphers
 
 As you might have suspected however, most of the code in `ObservableCipher` will have to be duplicated as soon as we want to be able to create a new observable cipher.
@@ -188,7 +189,7 @@ But let's start by generalizing the observer interface.
 ```{code-cell} csharp
 interface ICipherObserver<TIn,TOut>
 {
-  void Notify (TIn input, TOut output);
+  void Update (TIn input, TOut output);
 }
 ```
 
@@ -200,13 +201,13 @@ Of course our cipher observers presume that the cipher that they are observing w
 ```{code-cell} csharp
 class CipherViewer : ICipherObserver<string,string>
 {
-  public void Notify(string input, string output)
+  public void Update(string input, string output)
     => Console.WriteLine($"\"{input}\" was translated into \"{output}\"");
 }
 
 class CipherWriter : ICipherObserver<string,string>
 {
-  public void Notify(string input, string output)
+  public void Update(string input, string output)
     => Console.WriteLine("Writing encode data to file...");
 }
 ```
@@ -231,15 +232,15 @@ class ObservableCipher<TIn,TOut> : ICipher<TIn,TOut>
 
   public TOut Encode (TIn input)
   {
-    TOut output = cipher.Encode(input);  // Compute the output.
+    TOut output = cipher.Encode(input);  // Delegate the encoding of input.
     notify(input, output);               // Notify all observers.
-    return output;                       // Return output.
+    return output;
   }
 
   void notify (TIn input, TOut output)
   {
     foreach (ICipherObserver<TIn,TOut> observer in observers)
-      observer.Notify(input, output);
+      observer.Update(input, output);
   }
 }
 ```
@@ -260,7 +261,6 @@ class ReverseCipher : ICipher<string,string>
     return output;
   }
 }
-
 ```
 
 Ok, let's now run it to make sure that it works.
@@ -451,12 +451,13 @@ What do we mean when we say that observer pattern replaces "polling" with "pushi
 ```
 
 ```{exercise-start}
+:label: ex:observer-pattern:cipher-log
 ```
 Write a class called `CipherLog` that implements the interface `ICipherObserver<string,string>` from this chapter.
 The observer should log the input and output of all completed encode operations.
 You can choose to log the translations any way you like, but I would suggest a simple list of `(string,string)` tuples.
-It should also expose a method with the signature `string ToCSV ()` that returns, for example, a [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) formatted string of the full log.
-In the example below I've opted to separate columns with comma (`,`) and rows with semi-colon (`;`).
+It should also expose a method with the signature `string ToTSV()` or `string ToCSV()` that returns a [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) or [TSV](https://en.wikipedia.org/wiki/Tab-separated_values) formatted string of the full log.
+%In the example below I've opted to separate columns with comma (`,`) and rows with semi-colon (`;`).
 
 The completed class should behave like in the example below.
 
@@ -465,13 +466,13 @@ The completed class should behave like in the example below.
 class CipherLog : ICipherObserver<string,string>
 {
   List<(string,string)> log = new List<(string,string)>();
-  public void Notify (string input, string output)
+  public void Update (string input, string output)
     => log.Add((input, output));
-  public string ToCSV()
+  public string ToTSV()
   {
-    string output = "INPUT,OUTPUT;";
+    string output = "INPUT\tOUTPUT\n";
     foreach (var entry in log)
-      output += $"{entry.Item1},{entry.Item2};";
+      output += $"{entry.Item1}\t{entry.Item2}\n";
     return output;
   }
 }
@@ -493,7 +494,7 @@ observable.Encode("ABC");
 observable.Encode("123");
 
 // Print the log.
-Console.WriteLine(log.ToCSV());
+Console.WriteLine(log.ToTSV());
 ```
 ```{exercise-end}
 ```

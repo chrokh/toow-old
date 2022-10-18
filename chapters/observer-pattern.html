@@ -775,7 +775,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="events.html">
-   100. Events
+   100. ★ Events
   </a>
  </li>
  <li class="toctree-l1">
@@ -1255,7 +1255,7 @@ Assume that we’ve got our good old <code class="docutils literal notranslate">
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3297.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3368.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1300,12 +1300,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.139:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.1.103:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3297.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3368.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1362,14 +1362,14 @@ else {
 </div></div></div>
 </div>
 <p>Let’s then introduce interfaces for the idea of being an observer and that of being an observable.</p>
-<p>Our observers are simply required to implement a method called <code class="docutils literal notranslate"><span class="pre">Notify</span></code> which takes two strings as arguments.
+<p>Our observers are simply required to implement a method called <code class="docutils literal notranslate"><span class="pre">Update</span></code> which takes two strings as arguments.
 This method will be called on all observers whenever the observable that they observe have completed its encoding.
 The first string parameter represents the input value that was sent to the Encode method and the second represents the output value.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ICipherObserver</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">void</span><span class="w"> </span><span class="nf">Notify</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">void</span><span class="w"> </span><span class="nf">Update</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="p">);</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
@@ -1397,7 +1397,7 @@ Let’s first build an observer that writes to screen:</p>
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CipherViewer</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICipherObserver</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Notify</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Update</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="p">)</span><span class="w"></span>
 <span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;\&quot;{input}\&quot; was translated into \&quot;{output}\&quot;&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
@@ -1410,8 +1410,8 @@ But, since we don’t actually care about file writing in this example, let’s 
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CipherWriter</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICipherObserver</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Notify</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Writing encode data to file...&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Update</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Writing encoded data to file...&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
@@ -1444,7 +1444,7 @@ Meaning that it returns whatever input we give it back as output.</p>
 <span class="w">  </span><span class="k">void</span><span class="w"> </span><span class="nf">notify</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="p">)</span><span class="w"></span>
 <span class="w">  </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">ICipherObserver</span><span class="w"> </span><span class="n">observer</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">observers</span><span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="n">observer</span><span class="p">.</span><span class="n">Notify</span><span class="p">(</span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">observer</span><span class="p">.</span><span class="n">Update</span><span class="p">(</span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
@@ -1480,16 +1480,16 @@ First we instantiate the observable.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;foobar&quot; was translated into &quot;foobar&quot;
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing encode data to file...
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing encoded data to file...
 </pre></div>
 </div>
 </div>
 </div>
-<p>Notice how the <code class="docutils literal notranslate"><span class="pre">Notify</span></code> method of both observers is executed.
+<p>Notice how the <code class="docutils literal notranslate"><span class="pre">Update</span></code> method of both observers is executed.
 Notice also how we don’t actually need to store the return value of the call to the method <code class="docutils literal notranslate"><span class="pre">Encode</span></code>.</p>
 </section>
 <section id="generic-observable-ciphers">
-<h3><span class="section-number">99.2.2. </span>Generic observable ciphers<a class="headerlink" href="#generic-observable-ciphers" title="Permalink to this headline">#</a></h3>
+<span id="observer-pattern-generic-observable-ciphers"></span><h3><span class="section-number">99.2.2. </span>Generic observable ciphers<a class="headerlink" href="#generic-observable-ciphers" title="Permalink to this headline">#</a></h3>
 <p>As you might have suspected however, most of the code in <code class="docutils literal notranslate"><span class="pre">ObservableCipher</span></code> will have to be duplicated as soon as we want to be able to create a new observable cipher.
 Such as an observable Caesar cipher, or observable Robbers cipher, etc.
 Also, why did we couple to ciphers that take and return strings?
@@ -1509,7 +1509,7 @@ Good old <a class="reference internal" href="abstract-injected-object-compositio
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ICipherObserver</span><span class="p">&lt;</span><span class="n">TIn</span><span class="p">,</span><span class="n">TOut</span><span class="p">&gt;</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">void</span><span class="w"> </span><span class="nf">Notify</span><span class="w"> </span><span class="p">(</span><span class="n">TIn</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">TOut</span><span class="w"> </span><span class="n">output</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">void</span><span class="w"> </span><span class="nf">Update</span><span class="w"> </span><span class="p">(</span><span class="n">TIn</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">TOut</span><span class="w"> </span><span class="n">output</span><span class="p">);</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
@@ -1522,13 +1522,13 @@ We’re mostly just replacing actual types with type parameters.</p>
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CipherViewer</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICipherObserver</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">string</span><span class="p">&gt;</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Notify</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Update</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="p">)</span><span class="w"></span>
 <span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;\&quot;{input}\&quot; was translated into \&quot;{output}\&quot;&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">CipherWriter</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICipherObserver</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">string</span><span class="p">&gt;</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Notify</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Update</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="p">)</span><span class="w"></span>
 <span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Writing encode data to file...&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
@@ -1555,15 +1555,15 @@ The observable cipher delegates the actual encoding to the composed cipher, but 
 
 <span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="n">TOut</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="n">TIn</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
 <span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">TOut</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">input</span><span class="p">);</span><span class="w">  </span><span class="c1">// Compute the output.</span>
+<span class="w">    </span><span class="n">TOut</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">input</span><span class="p">);</span><span class="w">  </span><span class="c1">// Delegate the encoding of input.</span>
 <span class="w">    </span><span class="n">notify</span><span class="p">(</span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">);</span><span class="w">               </span><span class="c1">// Notify all observers.</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span><span class="w">                       </span><span class="c1">// Return output.</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
 <span class="w">  </span><span class="k">void</span><span class="w"> </span><span class="nf">notify</span><span class="w"> </span><span class="p">(</span><span class="n">TIn</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">TOut</span><span class="w"> </span><span class="n">output</span><span class="p">)</span><span class="w"></span>
 <span class="w">  </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">ICipherObserver</span><span class="p">&lt;</span><span class="n">TIn</span><span class="p">,</span><span class="n">TOut</span><span class="p">&gt;</span><span class="w"> </span><span class="n">observer</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">observers</span><span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="n">observer</span><span class="p">.</span><span class="n">Notify</span><span class="p">(</span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">observer</span><span class="p">.</span><span class="n">Update</span><span class="p">(</span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
@@ -1642,15 +1642,14 @@ Explain it in your own words and by using an example.</p>
 <p>What do we mean when we say that observer pattern replaces “polling” with “pushing”, from the perspective of the observer?</p>
 </section>
 </div>
-<div class="exercise admonition" id="chapters/observer-pattern-exercise-3">
+<div class="exercise admonition" id="ex:observer-pattern:cipher-log">
 
 <p class="admonition-title"><span class="caption-number">Exercise 99.4 </span></p>
 <section id="exercise-content">
 <p>Write a class called <code class="docutils literal notranslate"><span class="pre">CipherLog</span></code> that implements the interface <code class="docutils literal notranslate"><span class="pre">ICipherObserver&lt;string,string&gt;</span></code> from this chapter.
 The observer should log the input and output of all completed encode operations.
 You can choose to log the translations any way you like, but I would suggest a simple list of <code class="docutils literal notranslate"><span class="pre">(string,string)</span></code> tuples.
-It should also expose a method with the signature <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">ToCSV</span> <span class="pre">()</span></code> that returns, for example, a <a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV</a> formatted string of the full log.
-In the example below I’ve opted to separate columns with comma (<code class="docutils literal notranslate"><span class="pre">,</span></code>) and rows with semi-colon (<code class="docutils literal notranslate"><span class="pre">;</span></code>).</p>
+It should also expose a method with the signature <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">ToTSV()</span></code> or <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">ToCSV()</span></code> that returns a <a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/Tab-separated_values">TSV</a> formatted string of the full log.</p>
 <p>The completed class should behave like in the example below.</p>
 <div class="cell tag_remove-input docutils container">
 </div>
@@ -1672,12 +1671,15 @@ In the example below I’ve opted to separate columns with comma (<code class="d
 <span class="n">observable</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;123&quot;</span><span class="p">);</span><span class="w"></span>
 
 <span class="c1">// Print the log.</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">log</span><span class="p">.</span><span class="n">ToCSV</span><span class="p">());</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">log</span><span class="p">.</span><span class="n">ToTSV</span><span class="p">());</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INPUT,OUTPUT;abc,cba;ABC,CBA;123,321;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INPUT	OUTPUT
+abc	cba
+ABC	CBA
+123	321
 </pre></div>
 </div>
 </div>
