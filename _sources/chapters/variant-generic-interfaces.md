@@ -129,6 +129,51 @@ IPredicate<Rectangle> p = shapePredicate; // Needs contravariance.
 
 
 
+### Variant ciphers
+
+Remember `ICipher<TIn,TOut>` from the chapter on on [generic types](generic-types:icipher)?
+If you think about it, `TIn` is only used as input, and `TOut` is only used as output.
+Consequently, we can, without causing any issues mark `TIn` as being contravariant and `TOut` as being covariant.
+
+```{code-cell} csharp
+interface ICipher<in TIn, out TOut>
+{
+  TOut Encode (TIn input);
+}
+```
+
+Let's then assume that we've got a cipher that implements this interface.
+For the sake of simplicity, let's pick the constant cipher.
+
+```{code-cell} csharp
+class ConstantCipher<TIn, TOut> : ICipher<TIn,TOut>
+{
+  TOut output;
+  public ConstantCipher (TOut output) => this.output = output;
+  public TOut Encode (TIn input) => output;
+}
+```
+
+Let's then assume that we have a simple type hierarchy like this:
+
+```{code-cell} csharp
+class Animal {}
+class Cat : Animal {}
+```
+
+Since `TIn` is marked as being contravariant and `TOut` is marked as being covariant we can now do the following:
+
+```{code-cell} csharp
+Cat output = new Cat();
+ICipher<Cat,Animal> cipher = new ConstantCipher<Animal,Cat>(output);
+```
+
+Notice how the type arguments on the left says `<Cat,Animal>` while the type arguments on the right says `<Animal,Cat>`.
+
+
+
+
+
 ### Cipher factories
 
 Let's look at a contravariant example that can be used in the context of our ciphers.
@@ -311,7 +356,6 @@ class Box<T> : IBox<T>
 
 % Example of variance could be the Predicate interface from an exercise in the chapter on [abstract inject object composition](abstract-injected-object-composition:exercises:predicates). The variant type is always fed in, but never out.
 
-%% Pick up on ICipher with two arguments from generic-types chapter. This is a great example because one type is strictly in and one type is strictly out.
 %%```csharp
 %%interface ICipher<in TIn, out TOut>
 %%{
@@ -352,3 +396,4 @@ class Box<T> : IBox<T>
 %%  public T Get () => x;
 %%}
 %%```
+
