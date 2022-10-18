@@ -211,9 +211,6 @@ What is the difference between *concrete* and *abstract* constructed object comp
 Give your own examples and explain it in your own words.
 ```
 
-
----
-
 ```{exercise}
 What is the difference between *concrete* dependency construction and *abstract* dependency construction?
 ```

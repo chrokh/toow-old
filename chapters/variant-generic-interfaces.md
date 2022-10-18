@@ -174,6 +174,7 @@ Notice how the type arguments on the left says `<Cat,Animal>` while the type arg
 
 
 
+(variant-generic-interfaces:cipher-factories)=
 ### Cipher factories
 
 Let's look at a contravariant example that can be used in the context of our ciphers.
