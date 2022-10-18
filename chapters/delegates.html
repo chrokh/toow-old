@@ -765,7 +765,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   98. Delegates
+   98. ★ Delegates
   </a>
  </li>
  <li class="toctree-l1">
@@ -1232,6 +1232,8 @@ Functions have types, just like values have types.
 The value <code class="docutils literal notranslate"><span class="pre">2</span></code> might have type <code class="docutils literal notranslate"><span class="pre">int</span></code> and the function <code class="docutils literal notranslate"><span class="pre">+</span></code> might have type <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code>.
 We would read the latter as “int to int”.
 Or verbosely, we would say that the function <code class="docutils literal notranslate"><span class="pre">+</span></code> maps from <code class="docutils literal notranslate"><span class="pre">int</span></code> to <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
+<p>Delegates, in C#, can be viewed as a more compact implementation of strategy pattern.
+Inversely, strategy pattern can be seen as a way to implement delegates in object oriented languages.</p>
 </section>
 <section id="definition">
 <h2><span class="section-number">98.2. </span>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">#</a></h2>
@@ -1253,7 +1255,7 @@ We can however define a new class inside a namespace or another class.</p>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2629.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2627.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1298,12 +1300,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.83:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.253:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2629.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2627.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1470,7 +1472,7 @@ This is, in C#, known as “multicast delegates”.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you happen to be famililar with function composition you might want to know that multicast delegates unfortunately do not behave liek composition.
+<p>If you happen to be famililar with function composition you might want to know that multicast delegates unfortunately do not behave like composition.
 It seems reasonable to assume that multicast delegates is a feature that exists to simplify the act of adding event handlers.
 But more on that in the chapter on <a class="reference internal" href="events.html"><span class="doc std std-doc">events</span></a>.</p>
 </div>
