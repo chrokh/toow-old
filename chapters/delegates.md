@@ -116,6 +116,7 @@ BinaryOperation<bool> op2 = And;
 ```
 
 
+(delegates:multicast)=
 ### Multicast delegates
 
 Multiple delegates values, in C#, can be combined into a single delegate value.
@@ -206,7 +207,7 @@ What are delegates and why are they useful?
 
 ```{exercise}
 It could be argued that strategy pattern and delegates solve the same problem (albeit in syntactically different ways).
-How is that so?
+How so?
 ```
 
 ```{exercise}
