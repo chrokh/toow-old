@@ -16,7 +16,7 @@ kernelspec:
 Work in progress.
 ```
 
-%Strategy pattern as it should be used.
+%TODO: Strategy pattern as it should be used.
 
 ## Definition
 
@@ -37,7 +37,7 @@ In bridge pattern we have one abstraction composed with another abstraction wher
 :name: fig:bridge-pattern-original
 :height: 300px
 
-UML class diagram of bridge pattern as originally depicted by {cite:t}`gammaEtAl1995`.
+UML class diagram of bridge pattern.
 *[Image will be replaced soon]* [[Image source](https://en.wikipedia.org/wiki/File:Bridge_UML_class_diagram.svg)]
 ```
 
@@ -49,6 +49,7 @@ This is even more flexible than the original idea since different concretions of
 If the first abstraction holds the reference to the second abstraction, then the second abstraction is fixed.
 If instead, the concretions of the first abstraction holds a reference to the second abstraction than all the concretions of the first abstraction can hold a reference to whatever abstraction they wish.
 
+% TODO: IS THIS ACTUALLY A MODERN CONCEPTION OR IS IT DISCUSSED IN THE ORIGINAL BOOK TOO?
 Notice where the association arrow comes from in {numref}`fig:bridge-pattern-modern`.
 In this newer interpretation I think it is useful to think of this as [strategy pattern](strategy-pattern) applied to each strategy in a case of strategy pattern.
 

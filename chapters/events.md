@@ -16,6 +16,8 @@ kernelspec:
 Work in progress.
 ```
 
+% TODO: Discuss event-driven programming, reactive programming, and FRP.
+
 ## Motivation
 
 As mentioned in the chapter on [observer pattern](observer-pattern), events together with delegates are, in a sense, solving the same problem as the observer pattern.
