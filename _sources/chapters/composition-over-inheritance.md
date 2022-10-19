@@ -191,7 +191,7 @@ Explain the principle usually called "composition over inheritance" in your own 
 ```
 
 ```{exercise}
-How does the principle of "composition over inheritance" relate to the maintainability characteristics that we discussed in the chapter on [maintainability](maintainability:characteristics)?
+How are the [maintainability characteristics](maintainability:characteristics) affected when following the principle of composition over inheritance?
 ```
 
 ```{exercise}

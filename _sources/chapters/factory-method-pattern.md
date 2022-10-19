@@ -223,6 +223,10 @@ Come up with your own example of the factory method pattern and implement it in 
 ```
 
 ```{exercise}
+How are the [maintainability characteristics](maintainability:characteristics) affected when using the factory method pattern?
+```
+
+```{exercise}
 Let's say that we've got a factory that always produces structurally equivalent objects and that this factory is an implementation of some interface.
 Let's then say that we in some other class want objects of the type that the factory creates.
 Consider the following two alternatives.

@@ -450,6 +450,10 @@ Come up with your own example that meaningfully uses the observer pattern and im
 What do we mean when we say that observer pattern replaces "polling" with "pushing", from the perspective of the observer?
 ```
 
+```{exercise}
+How are the [maintainability characteristics](maintainability:characteristics) affected when using the observer pattern?
+```
+
 ```{exercise-start}
 :label: ex:observer-pattern:cipher-log
 ```

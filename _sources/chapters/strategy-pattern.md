@@ -65,3 +65,7 @@ What is the strategy pattern? Explain it in your own words and by using an examp
 Come up with your own example use case for strategy pattern and implement it in code.
 ```
 
+```{exercise}
+How are the [maintainability characteristics](maintainability:characteristics) affected when using the strategy pattern?
+```
+

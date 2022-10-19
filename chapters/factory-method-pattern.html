@@ -1316,7 +1316,7 @@ We mentioned that that essentially was an example of the factory method pattern 
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2742.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2775.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1361,12 +1361,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.1.16:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.221:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2742.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2775.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1455,7 +1455,7 @@ A factory that generates Caesar ciphers with increasing number of steps and one 
 </div>
 </div>
 <p>You might of course already have figured out that by using <a class="reference internal" href="delegates.html"><span class="doc std std-doc">delegates</span></a> or the <a class="reference internal" href="strategy-pattern.html"><span class="doc std std-doc">strategy pattern</span></a> to write a more general Caesar cipher factory that makes the above two redundant.
-However, this is given as an exercise for you in <a class="reference internal" href="#ex:factory-method-pattern:transforming-caesar-cipher-factory"><span class="std std-numref">Exercise 102.5</span></a>, so let’s leave that topic for now.</p>
+However, this is given as an exercise for you in <a class="reference internal" href="#ex:factory-method-pattern:transforming-caesar-cipher-factory"><span class="std std-numref">Exercise 102.6</span></a>, so let’s leave that topic for now.</p>
 <p>There are of course plenty of other factories that we can produce.
 Here’s a factory that produces Robber’s ciphers based around various vowels.</p>
 <div class="cell docutils container">
@@ -1543,6 +1543,13 @@ Here’s a factory that produces Robber’s ciphers based around various vowels.
 
 <p class="admonition-title"><span class="caption-number">Exercise 102.4 </span></p>
 <section id="exercise-content">
+<p>How are the <a class="reference internal" href="maintainability.html#maintainability-characteristics"><span class="std std-ref">maintainability characteristics</span></a> affected when using the factory method pattern?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/factory-method-pattern-exercise-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 102.5 </span></p>
+<section id="exercise-content">
 <p>Let’s say that we’ve got a factory that always produces structurally equivalent objects and that this factory is an implementation of some interface.
 Let’s then say that we in some other class want objects of the type that the factory creates.
 Consider the following two alternatives.</p>
@@ -1555,7 +1562,7 @@ Consider the following two alternatives.</p>
 </div>
 <div class="exercise admonition" id="ex:factory-method-pattern:transforming-caesar-cipher-factory">
 
-<p class="admonition-title"><span class="caption-number">Exercise 102.5 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 102.6 </span></p>
 <section id="exercise-content">
 <p>Perhaps you have already realized that by using our newfound skills in either <a class="reference internal" href="delegates.html"><span class="doc std std-doc">delegates</span></a> or <a class="reference internal" href="strategy-pattern.html"><span class="doc std std-doc">strategy pattern</span></a> we can create a more general Caesar cipher factory which we can use to create the incrementing and decrementing factories.
 What’s common between the incrementing and the decrementing Caesar cipher factories?

@@ -1047,12 +1047,58 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   103.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   103.2. Definition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   103.3. Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vector-graphics">
+     103.3.1. Vector graphics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   103.4. Exercises
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -1064,6 +1110,41 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   103.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   103.2. Definition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   103.3. Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vector-graphics">
+     103.3.1. Vector graphics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   103.4. Exercises
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -1078,6 +1159,67 @@ title="Print to PDF"
 <p>Work in progress.</p>
 </div>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/EWDmWbJ4wRA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<section id="motivation">
+<h2><span class="section-number">103.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
+<p>Sometimes you’ve got a thing, and other times you’ve got a thing that contains things.
+In the chapter on <a class="reference internal" href="abstract-injected-object-composition.html"><span class="doc std std-doc">abstract injected object composition</span></a> we introduced the notions of Composite ciphers by saying that some ciphers are ciphers and others are composites of ciphers.
+This is the composite pattern.</p>
+<p>Composite pattern is used when you’ve got data and behavior that is neatly organizable as a tree.</p>
+</section>
+<section id="definition">
+<h2><span class="section-number">103.2. </span>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">#</a></h2>
+<p>In the original <a class="reference internal" href="design-patterns.html"><span class="doc std std-doc">design patterns</span></a> book <span id="id1">Gamma <em>et al.</em> [<a class="reference internal" href="bibliography.html#id16" title="Erich Gamma, Richard Helm, Ralph Johnson, Ralph E. Johnson, and John Vlissides. Design Patterns: Elements of Reusable Object-Oriented Software. Addison-Wesley professional computing series. Addison-Wesley, 1995. ISBN 9783827330437. URL: http://amazon.christopherokhravi.com?id=design-patterns.">1995</a>]</span>, the intent of the bridge pattern is defined as:</p>
+<blockquote class="epigraph">
+<div><p>Compose objects into tree structures to represent part-whole hierarchies. Composite lets clients treat individual objects and compositions of objects uniformly.</p>
+<p class="attribution">—<span id="id2">[<a class="reference internal" href="bibliography.html#id16" title="Erich Gamma, Richard Helm, Ralph Johnson, Ralph E. Johnson, and John Vlissides. Design Patterns: Elements of Reusable Object-Oriented Software. Addison-Wesley professional computing series. Addison-Wesley, 1995. ISBN 9783827330437. URL: http://amazon.christopherokhravi.com?id=design-patterns.">Gamma <em>et al.</em>, 1995</a>]</span></p>
+</div></blockquote>
+<figure class="align-default" id="id4">
+<a class="reference internal image-reference" href="https://upload.wikimedia.org/wikipedia/commons/3/39/W3sDesign_Composite_Design_Pattern_Type_Safety_UML.jpg"><img alt="https://upload.wikimedia.org/wikipedia/commons/3/39/W3sDesign_Composite_Design_Pattern_Type_Safety_UML.jpg" src="https://upload.wikimedia.org/wikipedia/commons/3/39/W3sDesign_Composite_Design_Pattern_Type_Safety_UML.jpg" style="height: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 103.1 </span><span class="caption-text">UML class diagram of the two variations of composite pattern as envisaged by <span id="id3">Gamma <em>et al.</em> [<a class="reference internal" href="bibliography.html#id16" title="Erich Gamma, Richard Helm, Ralph Johnson, Ralph E. Johnson, and John Vlissides. Design Patterns: Elements of Reusable Object-Oriented Software. Addison-Wesley professional computing series. Addison-Wesley, 1995. ISBN 9783827330437. URL: http://amazon.christopherokhravi.com?id=design-patterns.">1995</a>]</span>.
+<em>[Image will be replaced soon]</em> [<a class="reference external" href="https://commons.wikimedia.org/wiki/File:W3sDesign_Composite_Design_Pattern_Type_Safety_UML.jpg">Image source</a>]</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="examples">
+<h2><span class="section-number">103.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
+<section id="vector-graphics">
+<h3><span class="section-number">103.3.1. </span>Vector graphics<a class="headerlink" href="#vector-graphics" title="Permalink to this headline">#</a></h3>
+<p>When you’re drawing vector images in a program like Adobe Illustrator you can think of your drawing as a tree.
+At the root you have the image.
+The image contains a bunch of shapes.
+Each shape might contain subshapes and each subshape might contain subshapes.</p>
+<p>Of course, in reality there are a bunch of different types of objects involved here.
+Like lines, points, brush strokes, and so forth.
+Nevertheless the basic idea is the same.</p>
+<p>The image can be thought of as a tree at any level of the tree.
+You can open up a part of the tree, but when you do, you will reveal a new part of the tree, until you reach a “leaf”.</p>
+</section>
+</section>
+<section id="exercises">
+<h2><span class="section-number">103.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<div class="exercise admonition" id="chapters/composite-pattern-exercise-0">
+
+<p class="admonition-title"><span class="caption-number">Exercise 103.1 </span></p>
+<section id="exercise-content">
+<p>What is the composite pattern? Explain it in your own words and by using an example.</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/composite-pattern-exercise-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 103.2 </span></p>
+<section id="exercise-content">
+<p>Come up with your own example use case for the composite pattern and implement it in code.</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/composite-pattern-exercise-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 103.3 </span></p>
+<section id="exercise-content">
+<p>How are the <a class="reference internal" href="maintainability.html#maintainability-characteristics"><span class="std std-ref">maintainability characteristics</span></a> affected when using the composite pattern?</p>
+</section>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
