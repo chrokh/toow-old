@@ -159,6 +159,7 @@ What is event-driven programming?
 ```
 Rewrite the observer `CipherLog` that we wrote in {numref}`ex:observer-pattern:cipher-log` as a method that we can add as an event handler to the event `Encoded` on instances of `ObservableCipher`.
 ```{code-cell} csharp
+:tags: [remove-input]
 class CipherLog
 {
   List<(string,string)> log = new List<(string,string)>();
