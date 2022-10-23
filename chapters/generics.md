@@ -158,7 +158,7 @@ As we shall see, parametric polymorphism not only help us eliminate duplicated c
 The good kind of virus.
 By turning a non-generic type into a generic type it is often possible that things that use this new generic type can too be converted from non-generic to generic types.
 And so the meme permeates throughout our code-base.
-Generic types increase the [maintainability](maintainability) of our code since they (at least) increase modularity and modularity.
+Generic types increase the [maintainability](maintainability) of our code since they (at least) ought to increase modularity.
 
 Another important aspect is that of [static type safety](type-checking).
 Most things that we do with generics can trivially be achieved in dynamically typed languages, or even in C# by using the [`dynamic` keyword](type-systems) or by simply treating things as the top-type [object](inheritance).
