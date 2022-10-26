@@ -324,3 +324,6 @@ What is the difference between a "generic type definition" and a "constructed ge
 Why can't we use subtyping to somehow "merge" the types `CompositeCharToCharCipher` and `CompositeStringToStringCipher`?
 ```
 
+```{exercise}
+Explain the benefits of generics in terms of the five characteristics of [maintainability](maintainability:characteristics).
+```

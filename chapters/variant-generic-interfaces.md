@@ -398,3 +398,24 @@ class Box<T> : IBox<T>
 %%}
 %%```
 
+
+% TODO: Example where when we go from two type parameters to one:
+
+%IParent<Dog,Dog> id1 = new Identity<Dog>();
+%IParent<Dog,Animal> id2 = new Identity<Dog>();
+%IParent<Dog,Animal> id3 = new Identity<Animal>();
+%
+%interface IParent <in T1, out T2>
+%{
+%  T2 Transform (T1 input);
+%}
+%
+%class Identity<T> : IParent<T,T>
+%{
+%  public T Transform (T x) => x;
+%}
+%
+%class Animal {}
+%class Mammal : Animal {}
+%class Cat : Mammal {}
+%class Dog : Mammal {}
