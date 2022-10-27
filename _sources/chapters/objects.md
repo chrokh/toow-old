@@ -16,11 +16,6 @@ kernelspec:
 Work in progress.
 ```
 
-%- Equivalence (i.e. two structurally equivalent objects are not necessarily the same).
-%  - Relate to value type and reference types semantics chapter.
-%- Talk about closures?
-% TODO: In some languages, such as JavaScript, an arguably simpler structure than that of objects is what's known as closures.  We say that a closure closes over some state.
-
 Let us now explore the idea of objects.
 In the next chapter we will talk about [classes](classes) but let's now focus strictly on objects.
 
@@ -28,7 +23,7 @@ In the next chapter we will talk about [classes](classes) but let's now focus st
 ## Motivation
 
 In procedural programming, the building block is the [procedure](method-composition).
-In object oriented programming, the building block is the object.
+**In object oriented programming, the building block is the object.**
 In procedural programming, we solve complex problems by composing simple procedures.
 In object oriented programming, we solve complex problems by composing simple objects.
 [Object composition](object-composition) is something that we'll discuss at length in future chapters.
@@ -59,34 +54,83 @@ In the case of substitution ciphers it happened to be simple.
 But some algorithms are arguably easier to express as methods.
 
 Back in the days, this is where function pointers would come into play.
-But, pointers are not (type safe)[type-safety] and by now I'm hoping that you're convinced that static type safety is really important.
+But, pointers are not [type safe](type-safety) and by now I'm hoping that you're convinced that static type safety is really important.
 So, let's not dwell on the archeic concept of function pointers.
-What then?
+But what then?
 
-This is where objects come in to play.
+Well, this is where objects enter the scene.
 Objects allow us to bundle up some data with some methods and then *send that bundle* around.
 As we will learn, objects allow [subtype polymorphism](subtype-polymorphism) and hence [dynamic dispatch](dynamic-dispatch) without loosing static type safety.
 This in turn allows us to keep increasing abstraction without having to resort to turning more and more algorithms into data.
 
-```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
-:name: fig:local-method
-
-Objects give us subtype polymorphism without loosing static type safety.
-```
-
+```{note}
 In the coming chapters we will mostly focus on the idea of writing the substitution algorithms ourselves rather than turning the substitutions into data.
 But rest assured that when we're done rewriting this in a more object oriented fashion we'll also be able to support both ideas at the same time.
 So if you really liked the idea of substitution ciphers, don't worry.
 %Pretty neat, right?
+```
 
 
 
 ## Definition
 
 So what is an object?
-Think of it this way.
-An object is a (possibly) stateful agent that you can interact with by sending messages and receiving responses.
-Another way of saying this is that an object is a bunch of methods (known as [instance methods](instance-methods)) that operate on some [encapsulated](pillars) state (known as [instance fields](fields)).
+Well, there's basically two camps.
+The fundamentalists and the practical bunch.
+
+The fundamentalists hold that objects are (possibly stateful) agents that you can interact with by sending messages and receiving responses.
+They hold that message passing is a philosophy, and that by following the way of the message we will write better programs.
+
+The practical bunch, argue that an object is just a bunch of methods (known as [instance methods](instance-methods)) that operate on some [encapsulated](encapsulation) state (known as [instance fields](fields)).
+
+I myself happen to symphatize with the more practical view.
+There's nothing magical, mystical, or philosophical about object oriented programming.
+It's just a way of giving us [single dynamic dispatch](dynamic-dispatch) by means of [subtype polymorphism](subtype-polymorphism) without loosing [static type-safety](type-safety).
+If that sentence doesn't make any sense to you, don't worry.
+When you're done reading this book, it will.
+
+
+### Encapsulation
+
+Objects mix methods and data in order to hide the data that belongs to a particular object so that other objects cannot accidentally change it.
+This is known as "encapsulation" or "information hiding".
+
+The two terms are, today, often considered synonymous.
+Originally though, they may have been used to describe different things.
+If you are interested in learning more about the different definitions of *encapsulation* and *information hiding* I highly recomend reading this answer on [Stack Overflow](https://stackoverflow.com/a/39499367).
+
+The short story is that encapsulation sometimes simply refers to the idea of mixing methods and data, while information hiding sometimes more specifically refers to the idea of making the object that encapsulates the data the only one able to change the data.
+In other words, information hiding makes it impossible for data in an object to be changed by objects of other types.
+The following saying is a cheeky way to remember the idea of information hiding:
+
+```{tip}
+Hide your private parts.
+```
+
+We say that objects encapsulate or hide state.
+That they hide their private parts.
+That objects are a set of methods that operate on some encapsulated state?
+But what do we mean by all this?
+
+Let's say that we're passing around two integers that correspond to some `x` and `y` coordinates of some `player` in some game that we're building.
+Let's then say that we've got a bunch of methods like `moveEast` and `moveNorthEast` that we use to update these coordinates.
+Doing this the object oriented way we would encapsulate the `x` and `y` coordinates in an object whose type we might call `Position`.
+We might also encapsulate the position object itself in an object whose type we might call `Player`.
+The methods `moveEast` and `moveNorthEast` would now likely become instance methods on the objects of type `Player` and `Position`.
+These instance methods update the state that's been encapsulated in the objects.
+
+%They refer to the idea of hiding implementation details that are likely to change inside an object.
+
+```{figure} https://m.media-amazon.com/images/I/41-sN-mzwKL._SX381_BO1,204,203,200_.jpg
+:figclass: margin
+
+[Clean Architecture, by Robert C. Martin](http://amazon.christopherokhravi.com?id=0134494164).
+```
+
+It is my duty however, to mention that some authors, like Robert C. Martin (see for example {cite:t}`martin2017`), argues that the mixing of methods and data isn't unique to object oriented programming.
+Instead, he proposes that the defining feature of object oriented languages is that they make subtype polymorphism type safe at compile-time.
+This is the same argument we made in the motivation section of this chapter.
+
 
 
 ### Message passing
@@ -95,10 +139,7 @@ Pessimistically, a message is nothing more than a call to an [instance method](i
 We'll talk about instance methods in a separate chapter but in short, they are just regular methods that are executed within the context of the state of an object.
 Meaning that instance methods have access to and can mutate the state of the object it is invoked upon.
 
-Optimistically, message passing is a philosophy.
-Object oriented advocates tend to favor this view and argue that if we truly understood message passing, we would write our programs differently.
-
-Alan Kay, a pioneer and vocal advocate of object oriented program has given for example argued that message passing is a more important idea than objects.
+Alan Kay, a pioneer and vocal advocate of object oriented program has argued that message passing is a more important idea than objects.
 
 ```{epigraph}
 I'm sorry that I long ago coined the term "objects" for this topic because it gets many people to focus on the lesser idea. The big idea is "messaging".
@@ -130,6 +171,27 @@ width: 66%
 Objects can send messages to other objects as well as reply to messages sent to them.
 ```
 
+```{admonition} Parable
+:class: dropdown note
+If you happen to be familiar with the concept of "closures", then you might enjoy this classic parable:
+
+*The venerable master Qc Na was walking with his student, Anton. Hoping to prompt the master into a discussion, Anton said "Master, I have heard that objects are a very good thing - is this true?" Qc Na looked pityingly at his student and replied, "Foolish pupil - objects are merely a poor man's closures."*
+
+*Chastised, Anton took his leave from his master and returned to his cell, intent on studying closures. He carefully read the entire "Lambda: The Ultimate..." series of papers and its cousins, and implemented a small Scheme interpreter with a closure-based object system. He learned much, and looked forward to informing his master of his progress.*
+
+*On his next walk with Qc Na, Anton attempted to impress his master by saying "Master, I have diligently studied the matter, and now understand that objects are truly a poor man's closures." Qc Na responded by hitting Anton with his stick, saying "When will you learn? Closures are a poor man's object." At that moment, Anton became enlightened.*
+
+-- [Anton van Straaten](http://people.csail.mit.edu/gregs/ll1-discuss-archive-html/msg03277.html)
+```
+
+
+
+
+
+## Examples
+
+### Message passing
+
 Let's look at an example.
 Assume that you are an object in an application and that you've declared that you're capable of sending responses the messages asking you for what your current mood is.
 If I ask you what your mood is while you're hanging out with your friends you might reply that you're *happy*.
@@ -154,34 +216,6 @@ The interpreter is the object and the data is contained within the object.
 Now whenever we want to interact with the "raw" data somehow, we have to do so via the interpreter.
 
 
-
-### Encapsulation
-
-The notion of hiding state in an object is known as *encapsulation* or *information hiding*.
-Both of these concepts we've looked at briefly when discussing attempts at defining "[pillars](pillars)" of object oriented programming.
-But what is encapsulation?
-What do we mean when we say that objects encapsulate state?
-Objects mix methods and data in order to hide the data that belongs to a particular object so that other objects cannot accidentally change it.
-
-```{important}
-The terms *encapsulation* and *information hiding* are often considered synonymous and then refer to the idea of hiding implementation details that are likely to change.
-```
-
-```{seealso}
-If you are interested in learning more about the different definitions of *encapsulation* and *information hiding* I highly recomend reading this short answer on [Stack Overflow](https://stackoverflow.com/a/39499367).
-```
-
-Some authors, like Robert C. Martin (see for example {cite:t}`martin2017`), argues that the mixing of methods and data isn't unique to object oriented programming.
-Instead, he proposes that the defining feature of object oriented languages is that they make subtype polymorphism safe and readily available.
-This is the same argument that we made in the Motivation section of this chapter.
-
-
-
-## Examples
-
-```{warning}
-Work in progress.
-```
 
 ### Encapsulating state
 
@@ -413,3 +447,29 @@ What is *information hiding*?
 What kinds of types, in C#, are not *convertible* to the type `object`?
 ```
 
+
+%----
+%
+%## TODO: Use any of the stuff below from the old Pillars chapter?
+%- 3 pillars of OO
+%  - Encapsulation
+%  - Inheritance
+%  - Polymorphism
+%  - (Abstraction)
+%- Refer to how {cite:t}`martin2017` claims that safe polymorphism is the only reasonable definition of OO.
+%- Brief history of OO? Don't prioritize this.
+%- Refer to Types and Programming Languages by Benjamin Pierce, chapter 21 objects. Most definitions of OO are prejudiced.
+%
+%```{seealso}
+%I highly recommend that you read Chapter 5 in [Clean Architecture: A Craftsman's Guide to Software Structure and Design][aff:clean-architecture] [affiliate link] by Robert C. Martin where you will learn how encapsulation, inheritance, and polymorphism were all available before object orientation.
+%```
+%
+%[aff:clean-architecture]: http://amazon.christopherokhravi.com?id=0134494164
+%
+%
+%---
+%
+%- Equivalence (i.e. two structurally equivalent objects are not necessarily the same).
+%  - Relate to value type and reference types semantics chapter.
+%- Talk about closures?
+% TODO: In some languages, such as JavaScript, an arguably simpler structure than that of objects is what's known as closures.  We say that a closure closes over some state.
