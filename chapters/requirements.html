@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>8. Syntax &#8212; The Object Oriented Way (DRAFT)</title>
+    <title>50. Requirements &#8212; The Object Oriented Way (DRAFT)</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="9. Semantics" href="semantics.html" />
-    <link rel="prev" title="7. Computation" href="computation.html" />
+    <link rel="next" title="51. Validation" href="validation.html" />
+    <link rel="prev" title="49. Stack traces" href="stack-traces.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -162,7 +162,7 @@ const thebe_selector_output = ".output, .cell_output"
   Computation
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="algorithms.html">
    6. ★ Algorithms
@@ -173,8 +173,8 @@ const thebe_selector_output = ".output, .cell_output"
    7. ★ Computation
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="syntax.html">
    8. ★ Syntax
   </a>
  </li>
@@ -466,9 +466,9 @@ const thebe_selector_output = ".output, .cell_output"
   Requirements
  </span>
 </p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="requirements.html">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    50. ★ Requirements
   </a>
  </li>
@@ -1005,7 +1005,7 @@ title="Fullscreen mode"
   </span>
 
 </button>
-<a href="https://github.com/chrokh/the-oo-way/issues/new?title=Issue%20on%20page%20%2Fchapters/syntax.html&body=Your%20issue%20content%20here."
+<a href="https://github.com/chrokh/the-oo-way/issues/new?title=Issue%20on%20page%20%2Fchapters/requirements.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="bottom"
@@ -1027,7 +1027,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/chapters/syntax.md"
+        <a href="../_sources/chapters/requirements.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -1064,23 +1064,60 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   50.1. Motivation
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Syntax</h1>
+                <h1>Requirements</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   50.1. Motivation
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -1088,107 +1125,58 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="syntax">
-<h1><span class="section-number">8. </span>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">#</a></h1>
-<p>Code is nothing more than text written in a programming language.
-All programming languages have syntax and semantics.
-In this chapter we are discussing syntax, and later we will discuss <a class="reference internal" href="semantics.html"><span class="doc std std-doc">semantics</span></a>.</p>
-<p>There’s nothing magical about files containing code.
-They are just plain old text files with contents that (hopefully) adhere to the <em>syntax</em> and <em>semantics</em> of the language that we aimed to express the files in.</p>
-<p>What is syntax and how is it different from semantics?
-The syntax of a language determines whether a given sentence is valid or not, while semantics determines what that sentence means.</p>
-<p>By understanding syntactic and semantic validity, we will also learn to distinguish between syntactic and semantic errors.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="requirements">
+<h1><span class="section-number">50. </span>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">#</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Work in progress.</p>
+</div>
+<section id="motivation">
+<h2><span class="section-number">50.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
+<p>In this book we are concerned with <strong>providing value by means of programming</strong> in an object oriented language.
+We’ve jumped into the deep end of programming without ever really stopping to think about why we would ever write code in the first place.</p>
+<p>In this book we are <em>not</em> asking what a <em>beautiful</em> program looks like and we are not asking what a space- or time-efficient program looks like.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>The syntax of a language defines how symbols can be combined to form valid statements or expressions in the language.</p>
+<p>In this book we are exploring how to write programs that not only make money today but also can keep making money in the future.</p>
 </div>
-<p>Syntax defines the <em>structure</em> of sentences but does not concern itself with meaning.
-As we shall see in the chapter on <a class="reference internal" href="semantics.html"><span class="doc std std-doc">semantics</span></a>, all <em>syntactically</em> valid sentances are not necessarily also <em>semantically</em> valid sentences.
-Just because some sentence is expressed on the correct form doesn’t guarantee that it is meaningful.
-Hence the separation between the words syntax and semantics.</p>
-<div class="exercise admonition" id="chapters/syntax-exercise-0">
-
-<p class="admonition-title"><span class="caption-number">Exercise 8.1 </span></p>
-<section id="exercise-content">
-<p>Define the term “syntax” in your own words.</p>
+<p>I say “make money” because it points our attention to the challenge of balancing costs and benefits.
+It points us to the challenge of always thinking in terms of return on investment (ROI).
+Clearly, we write software for other reasons too.
+Sometimes we write open source software and sometimes we work for non-profit agencies.
+But no matter who you write the software for, if we are aiming to provide <em>value</em> (or <em>utility</em> if you prefer) for someone then we are always faced with the challenge of balancing input costs with output value.</p>
+<p>This book does not see code as “l’art pour l’art”, art for art’s sake.
+In this book we see code as a means to an end.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Exploring how to solve problems using code and exploring a language out of pure curiosity is of course an excellent thing.
+I myself have written countless pieces of code and read countless pages of documentation just for the sake of scratching my own itch.
+In this book however, we focus on writing code to produce value.</p>
+</div>
+<p>So, all this leads us to the million dollar question.
+What is valuable?
+From the business owner’s perspective, this is a non-trivial question.
+But from our perspective as software developers, it’s easier.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Value is what our client deems valuable.</p>
+</div>
+<p>But what if we are entrepreneurs?
+What if we’re a tech startup?
+Well then, all the power to you and I hope you take the world with storm.
+If you are high up in the food chain of your company, then you my friend, are the client.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In Scrum, a popular agile software development method, the representative from the client company who has the final say on what the software should and should not do and what should be prioritized is known as the “product owner”.
+We’ll talk briefly about agile software development methods in the chapter on <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a>.</p>
+</div>
+<p>Ok, so how do we know what is valuable to the client?
+Well, that’s what we have the term “requirements” for.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Work in progress.</p>
+</div>
 </section>
-</div>
-<!--
-Theoreticians have studied syntax in many ways.
-In computing we tend to talk about generative grammar, an idea proposed by Noam Chomsky.
-See e.g. [Chomsky (1957)](#ref_chomsky_1957_syntactic).
-
-The syntax of a given language is defined by what we refer to as a grammar.
--->
-<p>Consider the following three sentences.
-Which of these sentences are syntactically invalid given the rules of English?</p>
-<ul class="simple">
-<li><p>I am here.</p></li>
-<li><p>Here am I.</p></li>
-<li><p>I here am.</p></li>
-</ul>
-<p>The last sentence is grammatically incorrect and hence syntactically incorrect.
-The issue is not that the sentence in question does not have meaning (meaning that it is semantically incorrect or meaningless).
-The issue is that it cannot possibly have meaning in the language since it is not a member of it.
-In a sense you can think of the sentence as being “unreadable”.</p>
-<p>Think of a language as a (possibly infinite set) of members where each member corresponds to a valid sentence in the language.
-The sentence “I here am” is not a member of this set and does thus not constitute a valid sentence in the language English.</p>
-<figure class="align-default" id="syntax-error">
-<img alt="../_images/syntax-error.png" src="../_images/syntax-error.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 8.1 </span><span class="caption-text">Syntactically incorrect combinations of symbols are not members of the language.</span><a class="headerlink" href="#syntax-error" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>As we’ve already mentioned however, syntax doesn’t just deal with words, but with symbols.
-Again, let us use the English language as an example and look at a few sentences.</p>
-<ul class="simple">
-<li><p>Am I here?</p></li>
-<li><p>¿Am I here?</p></li>
-</ul>
-<p>In the example above, the second sentence is syntactically invalid.
-However, if we consider the Spanish language, the prepended upside down question mark would be expected and the latter of the two examples would be syntactically correct.</p>
-<ul class="simple">
-<li><p>Estoy aquí?</p></li>
-<li><p>¿Estoy aquí?</p></li>
-</ul>
-<div class="exercise admonition" id="chapters/syntax-exercise-1">
-
-<p class="admonition-title"><span class="caption-number">Exercise 8.2 </span></p>
-<section id="exercise-content">
-<p>Give an example of a syntax error in a natural language.</p>
-</section>
-</div>
-<p>Let’s talk about C# instead.
-While we’ll discuss <a class="reference internal" href="expressions.html"><span class="doc std std-doc">expressions</span></a>, <a class="reference internal" href="operators.html"><span class="doc std std-doc">operators</span></a>, and <a class="reference internal" href="statements.html#statements"><span class="std std-ref">statements</span></a> in much more detail later let us look at a few trivial examples that ought to make sense to you irrespectively of your level of mathematical proficiency.</p>
-<p>If we are looking to add the two numbers 1 and 2, then we must (as in the example below) state the first number followed by the operator and then the second number.
-This is known as infix notation, and the addition operator (<code class="docutils literal notranslate"><span class="pre">+</span></code>) is thus an infix operator.</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="m">1</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="m">2</span><span class="w">    </span><span class="c1">// Syntactically valid expression in C#.</span>
-</pre></div>
-</div>
-<p>If we instead tried to use what is known as prefix notation and first stated the addition operator followed by the first number and then the second number we would have an example of a syntactically invalid expression in C#.</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="p">+</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w">    </span><span class="c1">// Syntactically invalid in C#.</span>
-</pre></div>
-</div>
-<p>Syntactic errors are known as syntax errors.
-When we find ourselves looking at a program that “doesn’t work”, we must ask ourselves whether we mean that the program exhibits syntax errors (also known as syntax errors), semantic errors, or combinations of the two.</p>
-<p>When dealing with <a class="reference internal" href="compilation.html"><span class="doc std std-doc">compiled</span></a> languages, syntax errors are brought to our attention, by the compiler, at, what is known as, compile-time.
-When dealing with <a class="reference internal" href="interpretation.html"><span class="doc std std-doc">interpreted</span></a> languages, syntax errors are only brought to our attention, by the interpreter, at, what is known as, run-time.
-This essentially means that in compiled languages we get to know about syntax errors without having to run the program.</p>
-<!--
-- *Grammars (beyond scope).*
-- *Övningsuppgifter på detta längre fram när vi har mer kunskap.*
-- *Syntax error*
--->
-<div class="exercise admonition" id="chapters/syntax-exercise-2">
-
-<p class="admonition-title"><span class="caption-number">Exercise 8.3 </span></p>
-<section id="exercise-content">
-<ol class="simple">
-<li><p>Give an example of a syntax error in a programming language (e.g. C#).</p></li>
-<li><p>Explain why this is a syntax error rather than a semantic error.</p></li>
-</ol>
-</section>
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1218,17 +1206,17 @@ This essentially means that in compiled languages we get to know about syntax er
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="computation.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="stack-traces.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">7. </span>Computation</p>
+            <p class="prev-next-title"><span class="section-number">49. </span>Stack traces</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="semantics.html" title="next page">
+    <a class='right-next' id="next-link" href="validation.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">9. </span>Semantics</p>
+        <p class="prev-next-title"><span class="section-number">51. </span>Validation</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

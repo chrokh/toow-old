@@ -4,6 +4,10 @@
 Work in progress.
 ```
 
+```{epigraph}
+Are we doing the thing right?
+```
+
 
 %- Verification & validation.
 %- Testing & Formal Checking.
