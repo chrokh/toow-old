@@ -369,6 +369,10 @@ Draw the [quadrant diagram of abstraction levels in object composition](composit
 Remember to give examples of each.
 ```
 
+```{exercise}
+Explain the benefits of *abstract injected object composition* in terms of the five characteristics of [maintainability](maintainability:characteristics).
+```
+
 
 
 ```{exercise-start}

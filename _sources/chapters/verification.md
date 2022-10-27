@@ -1,4 +1,4 @@
-# Correctness
+# Verification
 
 ```{warning}
 Work in progress.

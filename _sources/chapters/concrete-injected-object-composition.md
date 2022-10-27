@@ -44,11 +44,10 @@ Why is this a problem?
 Well, the change "ripples" through the system.
 This is really bad for [maintainability](maintainability) and is part of an [anti-pattern](anti-pattern) called "[shotgun surgery](shotgun-surgery)".
 
-```{hint}
-When thinking about whether something is a good or bad design decision we should ask ourselves what happens if we take our current practice to the extreme.
+```{tip}
+Remember how we in the chapter on [maintainability](maintainability) said that when thinking about whether something is a good or bad design decision we should ask ourselves what happens if we take our current practice to the extreme?
 What happens if I design my whole system like this?
 What happens if I compose ten objects like this?
-We'll talk more about design in the chapter on [maintainability](maintainability) and its related chapters.
 ```
 
 What happens if I have a class that instantiates a class, that instantiates a class, that instantiates a class, that instantiates a class, and so forth...

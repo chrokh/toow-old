@@ -340,6 +340,10 @@ This decision was motivated by the Liskov substitution principle.
 Use your own words to explain how.
 ```
 
+```{exercise}
+In the context of the Liskov substitution principle, how does adding more and more members to an interface impact the [modularity, reusability, and modifiability](maintainability:characteristics) of that interface?
+```
+
 
 ## Video
 

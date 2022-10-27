@@ -74,7 +74,11 @@ Null-state errors ought to be considered semantic errors but I have chosen to hi
 
 
 (prefer-compile-time-errors)=
-## Prefer compile-time errors
+## Fail fast!
+
+% TODO: Also known as: Fail fast!
+% TODO: Also talk about how exceptions should be thrown as early as possible so that we can find the root cause.
+% TODO: https://maximilianocontieri.com/fail-fast
 
 The sooner we can discover a mistake, the easier it will be to fix it.
 So tautologically we conclude that compile-time errors should be favored over run-time errors.
