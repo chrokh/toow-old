@@ -14,6 +14,7 @@ A language with types is said to have a type system and type systems can be clas
 % https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/types/
 
 
+(type-safety)=
 (static-vs-dynamic)=
 ## Static vs dynamic
 
