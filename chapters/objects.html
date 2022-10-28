@@ -1157,7 +1157,7 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
+    <a class="reference internal nav-link" href="#id2">
      57.3.1. Message passing
     </a>
    </li>
@@ -1174,7 +1174,7 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
+    <a class="reference internal nav-link" href="#id3">
      57.4.1. Message-passing
     </a>
    </li>
@@ -1237,7 +1237,7 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
+    <a class="reference internal nav-link" href="#id2">
      57.3.1. Message passing
     </a>
    </li>
@@ -1254,7 +1254,7 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
+    <a class="reference internal nav-link" href="#id3">
      57.4.1. Message-passing
     </a>
    </li>
@@ -1366,10 +1366,10 @@ Doing this the object oriented way we would encapsulate the <code class="docutil
 We might also encapsulate the position object itself in an object whose type we might call <code class="docutils literal notranslate"><span class="pre">Player</span></code>.
 The methods <code class="docutils literal notranslate"><span class="pre">moveEast</span></code> and <code class="docutils literal notranslate"><span class="pre">moveNorthEast</span></code> would now likely become instance methods on the objects of type <code class="docutils literal notranslate"><span class="pre">Player</span></code> and <code class="docutils literal notranslate"><span class="pre">Position</span></code>.
 These instance methods update the state that’s been encapsulated in the objects.</p>
-<figure class="margin align-default" id="id5">
+<figure class="margin align-default" id="id4">
 <img alt="https://m.media-amazon.com/images/I/41-sN-mzwKL._SX381_BO1,204,203,200_.jpg" src="https://m.media-amazon.com/images/I/41-sN-mzwKL._SX381_BO1,204,203,200_.jpg" />
 <figcaption>
-<p><span class="caption-number">Fig. 57.1 </span><span class="caption-text"><a class="reference external" href="http://amazon.christopherokhravi.com?id=0134494164">Clean Architecture, by Robert C. Martin</a>.</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 57.1 </span><span class="caption-text"><a class="reference external" href="http://amazon.christopherokhravi.com?id=0134494164">Clean Architecture, by Robert C. Martin</a>.</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>It is my duty however, to mention that some authors, like Robert C. Martin (see for example <span id="id1">Martin [<a class="reference internal" href="bibliography.html#id4" title="R. C. Martin. Clean Architecture: A Craftsman's Guide to Software Structure and Design. Robert C. Martin Series. Pearson Education, 2017. ISBN 9780134494326. URL: http://amazon.christopherokhravi.com?id=0134494164.">2017</a>]</span>), argues that the mixing of methods and data isn’t unique to object oriented programming.
@@ -1378,31 +1378,58 @@ This is the same argument we made in the motivation section of this chapter.</p>
 </section>
 <section id="message-passing">
 <h3><span class="section-number">57.2.2. </span>Message passing<a class="headerlink" href="#message-passing" title="Permalink to this headline">#</a></h3>
-<p>Pessimistically, a message is nothing more than a call to an <a class="reference internal" href="instance-methods.html"><span class="doc std std-doc">instance method</span></a>.
+<p>Ok, so what is this idea of message passing?
+Pessimistically, a message is nothing more than a call to an <a class="reference internal" href="instance-methods.html"><span class="doc std std-doc">instance method</span></a>.
 We’ll talk about instance methods in a separate chapter but in short, they are just regular methods that are executed within the context of the state of an object.
 Meaning that instance methods have access to and can mutate the state of the object it is invoked upon.</p>
-<p>Alan Kay, a pioneer and vocal advocate of object oriented program has argued that message passing is a more important idea than objects.</p>
+<p>A message is sent from a sender to a receiver.
+We commonly think of the message as having a name (i.e., the name of the method) and possibly some payload (i.e., the arguments of the method).
+The receiving object may choose what to do in response to the message and may choose to provide a response to the message.</p>
+<figure class="align-default" id="fig-message-passing">
+<img alt="../_images/message-passing.png" src="../_images/message-passing.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 57.2 </span><span class="caption-text">Objects can send messages to other objects as well as reply to messages sent to them.</span><a class="headerlink" href="#fig-message-passing" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Since objects encapsulate state, the messages can contain or be based upon state from the object.
+In <a class="reference internal" href="#fig-message-passing"><span class="std std-numref">Fig. 57.2</span></a> we are implying that both the name and the mood of the object on the left is part of its state.
+If its state was different, its answers to the messages might be different.</p>
+<p>But what about the more philosophical view of messages?
+Alan Kay, a pioneer and vocal advocate of object oriented program, has argued that message passing is a more important idea than objects.</p>
 <blockquote class="epigraph">
 <div><p>I’m sorry that I long ago coined the term “objects” for this topic because it gets many people to focus on the lesser idea. The big idea is “messaging”.</p>
 <p class="attribution">—Alan Kay <a class="reference external" href="http://lists.squeakfoundation.org/pipermail/squeak-dev/1998-October/017019.html">[source]</a></p>
 </div></blockquote>
-<p>In one of the more heated debates of modern object oriented times Alan Kay and Rich Hickey (inventor of the programming language Closure) argued about the usefulness of sending data without an interpreter.</p>
+<p>Think of it this way.
+The difference between message passing and simply invoking a method lies in thinking of the object that sends the message as an ambassador of information.
+In 2016, Alan Kay was doing an Ask Me Anything (AMA) on <a class="reference external" href="https://news.ycombinator.com/item?id=11945722">Hacker News</a>.
+When someone asked a question related to the validity of the assumptions of the object oriented paradigm, Alan Kay responded by saying:</p>
+<blockquote class="epigraph">
+<div><p>What if “data” is a really bad idea?</p>
+<p class="attribution">—Alan Kay, in an AMA discussion on <a class="reference external" href="https://news.ycombinator.com/item?id=11945722">Hacker News</a>.</p>
+</div></blockquote>
+<p>This somewhat controversial statement of course sparked debate.
+Rich Hickey, inventor of the programming language Closure, entered the debate to defend the opposing view.
+It is truly remarkable that we get to observe as these giants discuss this fundamental topic so if your interest happens to be peaked then I highly recommend having a look at the full conversation.
+At one point in the conversation Alan Kay proclaims that:</p>
 <blockquote class="epigraph">
 <div><p>For important negotiations we don’t send telegrams, we send ambassadors.</p>
-<p class="attribution">—Alan Kay, in public discussion with Rich Hickey on <a class="reference external" href="https://news.ycombinator.com/item?id=11945722">reddit</a></p>
+<p class="attribution">—Alan Kay, in conversation with Rich Hickey on <a class="reference external" href="https://news.ycombinator.com/item?id=11945722">Hacker News</a>.</p>
 </div></blockquote>
-<p>These quotes and the heat of that debate I believe conveys how some people truly argue that object oriented programming is a way of thinking.
-And that if you get this thinking right, then you will write superior programs.</p>
-<p>But what is a message in the philosophical sense then?
-A message is sent from a sender to a receiver.
-We commonly think of the message as having a name (i.e., the name of the method) and possibly some payload (i.e., the arguments of the method).
-The receiving object may choose what to do in response to the message and may choose to provide a response to the message.</p>
-<figure class="align-default" id="id2">
-<a class="reference internal image-reference" href="../_images/message-passing.png"><img alt="../_images/message-passing.png" src="../_images/message-passing.png" style="width: 66%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 57.2 </span><span class="caption-text">Objects can send messages to other objects as well as reply to messages sent to them.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
+<p>Think about this quote.
+What does it mean?
+We shouldn’t send data to methods, we should send objects that we can talk to and that themselves have access to the data.
+We should send an ambassador of information, not “raw” data.
+A message is data as interpreted by an ambassador of that message.</p>
+<p>These quotes and the heat of that debate hopefully conveys the point of how some defenders of object oriented programming truly are more philosophical than practical.
+This is why I’m cautioning you that some defenders of object oriented programming are, with all due respect, quite like fundamentalists.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Whether messages and objects are good ideas or not is up for debate.
+I myself happen to believe that the declarative (possibly functional) paradigm is the future and that these philosophical discussions around message passing and objects is a misguided distraction that doesn’t bear enough fruit.</p>
+</div>
+<p>But, in this book we are taking a more practical view of what object oriented programming is.
+So let’s dispense with the philosophy and let’s look at it more concretely from now.</p>
 <div class="dropdown note admonition">
 <p class="admonition-title">Parable</p>
 <p>If you happen to be familiar with the concept of “closures”, then you might enjoy this classic parable:</p>
@@ -1415,9 +1442,9 @@ The receiving object may choose what to do in response to the message and may ch
 </section>
 <section id="examples">
 <h2><span class="section-number">57.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
-<section id="id3">
-<h3><span class="section-number">57.3.1. </span>Message passing<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
-<p>Let’s look at an example.
+<section id="id2">
+<h3><span class="section-number">57.3.1. </span>Message passing<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<p>Let’s expand on the example illustrated in <a class="reference internal" href="#fig-message-passing"><span class="std std-numref">Fig. 57.2</span></a>.
 Assume that you are an object in an application and that you’ve declared that you’re capable of sending responses the messages asking you for what your current mood is.
 If I ask you what your mood is while you’re hanging out with your friends you might reply that you’re <em>happy</em>.
 But if I ask you what your mood is while you’re reading this book you might reply that you’re <em>confused</em>.
@@ -1486,7 +1513,7 @@ We would then define eight move methods that allow us to move both players north
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3503.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3320.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1531,12 +1558,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.1.163:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.167:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3503.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3320.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1705,8 +1732,8 @@ We’re also able to trivially support an arbitrary number of players without ha
 </section>
 <section id="discussion">
 <h2><span class="section-number">57.4. </span>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">#</a></h2>
-<section id="id4">
-<h3><span class="section-number">57.4.1. </span>Message-passing<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<section id="id3">
+<h3><span class="section-number">57.4.1. </span>Message-passing<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
 <p>Whether the idea of sending the interpreter together with the data is a good idea or not is up for debate.
 This is merely my opinion, but I myself have lost all hope in it.
 I am a functional programming convert, with no regrets.</p>

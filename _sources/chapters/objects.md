@@ -135,11 +135,29 @@ This is the same argument we made in the motivation section of this chapter.
 
 ### Message passing
 
+Ok, so what is this idea of message passing?
 Pessimistically, a message is nothing more than a call to an [instance method](instance-methods).
 We'll talk about instance methods in a separate chapter but in short, they are just regular methods that are executed within the context of the state of an object.
 Meaning that instance methods have access to and can mutate the state of the object it is invoked upon.
 
-Alan Kay, a pioneer and vocal advocate of object oriented program has argued that message passing is a more important idea than objects.
+A message is sent from a sender to a receiver.
+We commonly think of the message as having a name (i.e., the name of the method) and possibly some payload (i.e., the arguments of the method).
+The receiving object may choose what to do in response to the message and may choose to provide a response to the message.
+
+```{figure} ../images/message-passing.png
+---
+name: fig:message-passing
+---
+Objects can send messages to other objects as well as reply to messages sent to them.
+```
+
+Since objects encapsulate state, the messages can contain or be based upon state from the object.
+In {numref}`fig:message-passing` we are implying that both the name and the mood of the object on the left is part of its state.
+If its state was different, its answers to the messages might be different.
+
+
+But what about the more philosophical view of messages?
+Alan Kay, a pioneer and vocal advocate of object oriented program, has argued that message passing is a more important idea than objects.
 
 ```{epigraph}
 I'm sorry that I long ago coined the term "objects" for this topic because it gets many people to focus on the lesser idea. The big idea is "messaging".
@@ -147,29 +165,50 @@ I'm sorry that I long ago coined the term "objects" for this topic because it ge
 -- Alan Kay [[source]](http://lists.squeakfoundation.org/pipermail/squeak-dev/1998-October/017019.html)
 ```
 
-In one of the more heated debates of modern object oriented times Alan Kay and Rich Hickey (inventor of the programming language Closure) argued about the usefulness of sending data without an interpreter.
+Think of it this way.
+The difference between message passing and simply invoking a method lies in thinking of the object that sends the message as an ambassador of information.
+In 2016, Alan Kay was doing an Ask Me Anything (AMA) on [Hacker News](https://news.ycombinator.com/item?id=11945722).
+When someone asked a question related to the validity of the assumptions of the object oriented paradigm, Alan Kay responded by saying:
+
+```{epigraph}
+What if "data" is a really bad idea?
+
+-- Alan Kay, in an AMA discussion on [Hacker News](https://news.ycombinator.com/item?id=11945722).
+```
+
+This somewhat controversial statement of course sparked debate.
+Rich Hickey, inventor of the programming language Closure, entered the debate to defend the opposing view.
+It is truly remarkable that we get to observe as these giants discuss this fundamental topic so if your interest happens to be peaked then I highly recommend having a look at the full conversation.
+At one point in the conversation Alan Kay proclaims that:
+
+%In one of the more heated debates of modern object oriented times Alan Kay and Rich Hickey (inventor of the programming language Closure) argued about the usefulness of sending data without an interpreter.
 
 ```{epigraph}
 For important negotiations we don't send telegrams, we send ambassadors.
 
--- Alan Kay, in public discussion with Rich Hickey on [reddit](https://news.ycombinator.com/item?id=11945722)
+-- Alan Kay, in conversation with Rich Hickey on [Hacker News](https://news.ycombinator.com/item?id=11945722).
+```
+% -- Alan Kay, in conversation with Rich Hickey as part of an AMA discussion on [Hacker News](https://news.ycombinator.com/item?id=11945722)
+
+Think about this quote.
+What does it mean?
+We shouldn't send data to methods, we should send objects that we can talk to and that themselves have access to the data.
+We should send an ambassador of information, not "raw" data.
+A message is data as interpreted by an ambassador of that message.
+
+These quotes and the heat of that debate hopefully conveys the point of how some defenders of object oriented programming truly are more philosophical than practical.
+This is why I'm cautioning you that some defenders of object oriented programming are, with all due respect, quite like fundamentalists.
+
+```{note}
+Whether messages and objects are good ideas or not is up for debate.
+I myself happen to believe that the declarative (possibly functional) paradigm is the future and that these philosophical discussions around message passing and objects is a misguided distraction that doesn't bear enough fruit.
+%Nevertheless, I think it captures the philosophical view of messages quite nicely.
 ```
 
-These quotes and the heat of that debate I believe conveys how some people truly argue that object oriented programming is a way of thinking.
-And that if you get this thinking right, then you will write superior programs.
+But, in this book we are taking a more practical view of what object oriented programming is.
+So let's dispense with the philosophy and let's look at it more concretely from now.
 
-But what is a message in the philosophical sense then?
-A message is sent from a sender to a receiver.
-We commonly think of the message as having a name (i.e., the name of the method) and possibly some payload (i.e., the arguments of the method).
-The receiving object may choose what to do in response to the message and may choose to provide a response to the message.
 
-```{figure} ../images/message-passing.png
----
-name: message-passing
-width: 66%
----
-Objects can send messages to other objects as well as reply to messages sent to them.
-```
 
 ```{admonition} Parable
 :class: dropdown note
@@ -192,7 +231,7 @@ If you happen to be familiar with the concept of "closures", then you might enjo
 
 ### Message passing
 
-Let's look at an example.
+Let's expand on the example illustrated in {numref}`fig:message-passing`.
 Assume that you are an object in an application and that you've declared that you're capable of sending responses the messages asking you for what your current mood is.
 If I ask you what your mood is while you're hanging out with your friends you might reply that you're *happy*.
 But if I ask you what your mood is while you're reading this book you might reply that you're *confused*.
