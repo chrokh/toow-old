@@ -987,6 +987,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/chrokh/the-oo-way/main?urlpath=tree/docs/chapters/classes.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -1021,6 +1050,23 @@ title="Open an issue"
   </button>
   <div class="menu-dropdown__content">
     <ul>
+      <li>
+        <a href="../_sources/chapters/classes.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
       <li>
         <a href="../_sources/chapters/classes.md"
    class="headerbtn"
@@ -1082,8 +1128,45 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   58.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   58.2. Definition
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#declaration">
+     58.2.1. Declaration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#instantiation">
+     58.2.2. Instantiation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#equality">
+     58.2.3. Equality
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#class-members">
+     58.2.4. Class members
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#uml-class-diagrams">
+     58.2.5. UML class diagrams
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
-   58.1. Exercises
+   58.3. Exercises
   </a>
  </li>
 </ul>
@@ -1106,8 +1189,45 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   58.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   58.2. Definition
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#declaration">
+     58.2.1. Declaration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#instantiation">
+     58.2.2. Instantiation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#equality">
+     58.2.3. Equality
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#class-members">
+     58.2.4. Class members
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#uml-class-diagrams">
+     58.2.5. UML class diagrams
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
-   58.1. Exercises
+   58.3. Exercises
   </a>
  </li>
 </ul>
@@ -1122,31 +1242,384 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="classes">
 <h1><span class="section-number">58. </span>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
+<section id="motivation">
+<h2><span class="section-number">58.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
+<p>Where do objects come from?
+We’ve said that in object oriented programming we compose simple objects to solve complex problems.
+Fair enough.
+But how do we create these objects?
+Where do they come from?</p>
+<p>In general, there are two types of object oriented languages:</p>
+<ol class="simple">
+<li><p>Class based object oriented languages.</p></li>
+<li><p>Prototype based object oriented languages.</p></li>
+</ol>
+<p>In the former, objects are created by instantiating classes.
+In the latter objects are created by cloning prototypes.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since C# is a class based object oriented language, we won’t discuss the idea of prototypes at length.
+However, you can think of it this way.
+In a prototype based object oriented language you define an object that serves as the prototypical object of some type.
+That object can then be cloned in order to create new instances of the same type.</p>
 </div>
+</section>
+<section id="definition">
+<h2><span class="section-number">58.2. </span>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">#</a></h2>
+<p>A class defines a type.
+So, if we define a class then we’re also defining a type with the same name as that class.</p>
+<p>Values of the type that’s defined by a class are either called “objects”  or “instances” of that class.
+The words “object” and “instance” mean the same thing.</p>
+<p>From a set theory perspective, a class, just like a type, defines a set.
+The members of the set are the objects or instances of that class.</p>
+<section id="declaration">
+<h3><span class="section-number">58.2.1. </span>Declaration<a class="headerlink" href="#declaration" title="Permalink to this headline">#</a></h3>
+<p>To declare a class in C# we simply use the keyword <code class="docutils literal notranslate"><span class="pre">class</span></code> and follow it with the identifier name that we want to use to refer to the class and hence to the type.</p>
+<p>If we, for example, wanted to define a class that models cats, we could say like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Cat</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// Class members are defined here...</span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-2347.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.18:1024/", "http://127.0.0.1:1024/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '2347.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>Class identifier names in C# conventionally start with a capital letter.
+In fact, type names in most programming languages, usually start with a capital letter.
+This is why we have named the class above <code class="docutils literal notranslate"><span class="pre">Cat</span></code> with an uppercase “C” rather than <code class="docutils literal notranslate"><span class="pre">cat</span></code> with a lowercase “c”.</p>
+<p>Within the opening (<code class="docutils literal notranslate"><span class="pre">{</span></code>) and closing (<code class="docutils literal notranslate"><span class="pre">}</span></code>) curly brackets we would define the members of the class.
+We’ll talk more about what members are in a moment.</p>
+</section>
+<section id="instantiation">
+<h3><span class="section-number">58.2.2. </span>Instantiation<a class="headerlink" href="#instantiation" title="Permalink to this headline">#</a></h3>
+<p>To understand the difference between classes and objects think of the difference between the notion of a number and that of any particular number.
+The idea of a number refers to the set of all numbers.
+But when talking about any particular number we’re talking about a particular member of the set.</p>
+<p>The particular number <code class="docutils literal notranslate"><span class="pre">3</span></code> is not the same as the idea of numbers.
+Similarly, the idea of numbers is not the same as any particular number.</p>
+<p>We might for example define a class called <code class="docutils literal notranslate"><span class="pre">Nat</span></code> which we want to use to model natural numbers.
+Meaning whole numbers larger than zero.
+Any particular instance of the class <code class="docutils literal notranslate"><span class="pre">Nat</span></code> then corresponds to any particular natural number, such as <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p>
+<p>Have a look at <a class="reference internal" href="#fig-class-vs-objects"><span class="std std-numref">Fig. 58.1</span></a>.
+The two “blobs” whose names are <code class="docutils literal notranslate"><span class="pre">&quot;garfield&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;pelle</span> <span class="pre">svanslös&quot;</span></code> are objects.
+The class of which they are instances is called <code class="docutils literal notranslate"><span class="pre">Cat</span></code>.</p>
+<p>Neither the object with the name <code class="docutils literal notranslate"><span class="pre">&quot;garfield&quot;</span></code> nor the object with the name <code class="docutils literal notranslate"><span class="pre">&quot;pelle</span> <span class="pre">svanslös&quot;</span></code> are classes.
+They are <em>instances</em>.
+Conversely, the class <code class="docutils literal notranslate"><span class="pre">Cat</span></code> is not an object, it is the type that these two objects share.</p>
+<figure class="align-default" id="fig-class-vs-objects">
+<img alt="https://via.placeholder.com/700x200?text=Image+coming+soon" src="https://via.placeholder.com/700x200?text=Image+coming+soon" />
+<figcaption>
+<p><span class="caption-number">Fig. 58.1 </span><span class="caption-text">Objects are instances (values) of a class.</span><a class="headerlink" href="#fig-class-vs-objects" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If you don’t understand the difference between classes and objects/instances then you don’t understand the difference between types and values.
+Let me humbly suggest that you go back and re-read the chapters on <a class="reference internal" href="values.html"><span class="doc std std-doc">values</span></a> and <a class="reference internal" href="data-types.html"><span class="doc std std-doc">data types</span></a>.
+The difference between classes and objects corresponds to the difference between types and values.</p>
+</div>
+<p>To instantiate a class in C# we use the keyword <code class="docutils literal notranslate"><span class="pre">new</span></code> and follow it with the identifier, meaning the name of the class.
+So if we have a class called <code class="docutils literal notranslate"><span class="pre">Cat</span></code> then we would create instances of the <code class="docutils literal notranslate"><span class="pre">Cat</span></code> class by saying:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">new</span><span class="w"> </span><span class="nf">Cat</span><span class="p">();</span><span class="w">  </span><span class="c1">// Creates an object (i.e. a value) of type Cat.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The opening (<code class="docutils literal notranslate"><span class="pre">(</span></code>) and closing (<code class="docutils literal notranslate"><span class="pre">)</span></code>) parentheses give us a hint that we’re doing something that resembles calling a method.
+Indeed, the method that we’re calling is known as a <a class="reference internal" href="constructors.html"><span class="doc std std-doc">constructor</span></a> of the class, and the two parentheses delimit the argument list of that constructor.
+A constructor return an instance of the class in which it is defined.
+We’ll talk more about constructors in its own chapter.</p>
+<p>Since the class also defines a type, we can declare a variable to be of this type and assign it a value that’s an instance of the class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Cat</span><span class="w"> </span><span class="n">cat1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cat</span><span class="p">();</span><span class="w"></span>
+<span class="n">Cat</span><span class="w"> </span><span class="n">cat2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cat</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="equality">
+<h3><span class="section-number">58.2.3. </span>Equality<a class="headerlink" href="#equality" title="Permalink to this headline">#</a></h3>
+<p>It’s possible to instantiate an infinite number of objects from a class.
+Whether all these objects are structurally different is a different question.
+But, any time we create an object from a class it’s a new object.
+We cannot instantiate two objects that will be equal.</p>
+<p>Remember the <a class="reference internal" href="value-and-reference-semantics.html#value-and-reference-semantics"><span class="std std-ref">reference and value semantics</span></a> that we talked about in a previous chapter?
+Classes in C#, define <em>reference types</em>.
+<a class="reference internal" href="structure-types.html"><span class="doc std std-doc">Structure types</span></a> (which we’ll talk about later) define value types.</p>
+<p>Since classes have reference semantics that means that two different instances of a class are considered different objects, and thus inequivalent, even if they are structurally equivalent.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cat1</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="n">cat2</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, if we take one of the objects and assign it to the other variable, then suddenly both variables are equal.
+Why?
+Because they both contain the same object.
+We don’t mean “the same” in the sense that they are structurally equivalent, we mean that both variables point to, literally, the same object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Cat</span><span class="w"> </span><span class="n">cat3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cat1</span><span class="p">;</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cat3</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="n">cat1</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Think of it as if both variables are pointing to the same piece of memory in the machine.
+Remember how we, in the chapter on <a class="reference internal" href="value-and-reference-semantics.html#value-and-reference-semantics"><span class="std std-ref">value and reference semantics</span></a>, discussed how weird it would be if numbers followed reference semantics.
+Two instances of the number <code class="docutils literal notranslate"><span class="pre">3</span></code> would not be considered equal if they were not also pointing to the same object in memory.
+Reference semantics are quite unintuitive when it comes to some types, which is why the simple types are value types.</p>
+<p>For more complex types however, the reference semantics is slightly more intuitive.
+Two cats are only the same cat if they actually are the same cat.
+Once you’ve constructed a cat, there’s only a single solitary instance of that cat.
+Any other new cat that you construct could not possibly be the same cat.</p>
+<p>Think about real life.
+If two identical twin kittens are born then it doesn’t matter how “identical” they are.
+They are fundamentally not the same kitten.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Of course, it’s possible to make define your own class that behaves almost like a reference type by <a class="reference internal" href="overriding.html"><span class="doc std std-doc">overriding</span></a> some key methods.
+But that’s a discussion for later.</p>
+</div>
+</section>
+<section id="class-members">
+<h3><span class="section-number">58.2.4. </span>Class members<a class="headerlink" href="#class-members" title="Permalink to this headline">#</a></h3>
+<p>Remember how we in the chapter on <a class="reference internal" href="objects.html"><span class="doc std std-doc">objects</span></a> said that objects mix data and methods?
+In a class based object oriented langauge, this is achieved by defining class members.
+There are usually two types of class members:
+Instance members and static members.</p>
+<p>The most commonly used types of class members are <a class="reference internal" href="fields.html"><span class="doc std std-doc">fields</span></a>, <a class="reference internal" href="methods.html"><span class="doc std std-doc">methods</span></a>, and <a class="reference internal" href="constructors.html"><span class="doc std std-doc">constructors</span></a>.
+These kinds of members can either be defined as instance members or as static members.</p>
+<p>Perhaps you remember, that we’ve actually already talked about <a class="reference internal" href="static-methods.html"><span class="doc std std-doc">static methods</span></a> in an earlier chapter.
+A static member is in other words a static member of the class in which it is defined.
+We talked about static methods in the context of <a class="reference internal" href="static-classes.html#static-classes"><span class="std std-ref">static classes</span></a>.
+Although, a static method can be defined on non-static classes as well.</p>
+<p><a class="reference internal" href="fields.html"><span class="doc std std-doc">Fields</span></a> and <a class="reference internal" href="constructors.html"><span class="doc std std-doc">constructors</span></a> we will however talk about in the chapters coming next.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The idea of <code class="docutils literal notranslate"><span class="pre">static</span></code> is, fundamentally, a procedural idea, <em>not</em> an object oriented idea.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For a complete list of the kinds of members that we can define on a class, please see <a class="reference external" href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/members">the official documentation</a>.</p>
+</div>
+</section>
+<section id="uml-class-diagrams">
+<h3><span class="section-number">58.2.5. </span>UML class diagrams<a class="headerlink" href="#uml-class-diagrams" title="Permalink to this headline">#</a></h3>
+<p>In this book we make heavy use of UML class diagrams.
+When reasoning about object oriented design nothing is really quite as efficient as using UML class diagrams.
+Even if only informally.</p>
+<p>We’ll discuss the syntax of UML class diagrams in every chapter where we’re covering a concept that’s also modelable in UML.</p>
+<p>For now, it’s enough to know that to depict a class in a UML class diagram, we draw a rectangle with two sections.
+See the figure below.
+In the top section we write the name of the class.
+In the bottom section of the rectangle write the members of the class.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">|--------------------|</span>     <span class="o">|--------------------|</span>
+<span class="o">|</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">identifier</span><span class="o">&gt;</span> <span class="o">|</span>     <span class="o">|</span>         <span class="n">Cat</span>        <span class="o">|</span>
+<span class="o">|--------------------|</span>     <span class="o">|--------------------|</span>
+<span class="o">|</span>                    <span class="o">|</span>     <span class="o">|</span>                    <span class="o">|</span>
+<span class="o">|</span>  <span class="o">&lt;</span><span class="k">class</span> <span class="nc">members</span><span class="o">&gt;</span>   <span class="o">|</span>     <span class="o">|</span>                    <span class="o">|</span>
+<span class="o">|</span>                    <span class="o">|</span>     <span class="o">|</span>                    <span class="o">|</span>
+<span class="o">|--------------------|</span>     <span class="o">|--------------------|</span>
+</pre></div>
+</div>
+<p>A general example on the left and a specific example on the right.</p>
+</section>
+</section>
 <section id="exercises">
-<h2><span class="section-number">58.1. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">58.3. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
 <div class="exercise admonition" id="chapters/classes-exercise-0">
 
 <p class="admonition-title"><span class="caption-number">Exercise 58.1 </span></p>
 <section id="exercise-content">
-<p>What is the difference between a static class and a class?</p>
+<p>What is the difference between an object and a class?</p>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/classes-exercise-1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 58.2 </span></p>
 <section id="exercise-content">
-<p>What is the difference between an object and a class?</p>
+<p>What is the difference between an object and an instance?</p>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/classes-exercise-2">
 
 <p class="admonition-title"><span class="caption-number">Exercise 58.3 </span></p>
 <section id="exercise-content">
-<p>What is the difference between an object and an instance?</p>
+<p>Given that we have defined a class called <code class="docutils literal notranslate"><span class="pre">House</span></code> with no members like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">House</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Will the variable <code class="docutils literal notranslate"><span class="pre">b</span></code> below contain <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>?
+Why is this?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">House</span><span class="w"> </span><span class="n">h1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">House</span><span class="p">();</span><span class="w"></span>
+<span class="n">House</span><span class="w"> </span><span class="n">h2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">House</span><span class="p">();</span><span class="w"></span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">h1</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="n">h2</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Does it matter if we instead write the code like this?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">House</span><span class="p">()</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">House</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/classes-exercise-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 58.4 </span></p>
+<section id="exercise-content">
+<p>What is the difference between a static class and a class?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/classes-exercise-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 58.5 </span></p>
+<section id="exercise-content">
+<p>What are class members?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/classes-exercise-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 58.6 </span></p>
+<section id="exercise-content">
+<p>Create a UML class diagram that depicts two classes.
+One class is called <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> and the other <code class="docutils literal notranslate"><span class="pre">Bowl</span></code>.</p>
 </section>
 </div>
 </section>
@@ -1161,16 +1634,16 @@ title="Print to PDF"
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            kernelName: "python3",
+            kernelName: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
 
               </div>
               

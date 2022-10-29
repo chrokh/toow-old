@@ -25,3 +25,5 @@ Work in progress.
 %Console.WriteLine(x);
 %Console.WriteLine(y);
 %```
+
+% EXAMPLE: if numbers were following reference semantics. This example is referred to from the chapter on Classes.
