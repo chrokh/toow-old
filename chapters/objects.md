@@ -12,12 +12,13 @@ kernelspec:
 
 # Objects
 
-```{warning}
-Work in progress.
-```
-
 Let us now explore the idea of objects.
 In the next chapter we will talk about [classes](classes) but let's now focus strictly on objects.
+
+% TODO:
+%- Somewhere I should deal with the question of what it means and whether it was a good thing or not that OO systems became increasingly concerned with Abstract Data Types rather than objects. Here are some links:
+%- https://www.quora.com/Why-is-OOP-Object-Oriented-Programming-the-standard-paradigm-for-most-software/answer/Richard-Kenneth-Eng
+%- https://www.youtube.com/watch?v=AnrlSqtpOkw
 
 
 ## Motivation
@@ -201,14 +202,13 @@ This is why I'm cautioning you that some defenders of object oriented programmin
 
 ```{note}
 Whether messages and objects are good ideas or not is up for debate.
-I myself happen to believe that the declarative (specifically the functional) paradigm is the future and that these philosophical discussions around message passing and objects is a misguided distraction that doesn't bear enough fruit.
+I myself happen to believe that the declarative (specifically the functional) paradigm is the future and that these philosophical discussions around message passing and objects might be a misguided distraction that doesn't bear enough fruit.
 %Nevertheless, I think it captures the philosophical view of messages quite nicely.
-Ask yourself: is multiple interpretations of the same piece of raw data perhaps not a bug, but a useful feature?
+In regards to the question of sending ambassadors, I suggest that you ask yourself whether multiple interpretations of the same piece of raw data perhaps is not a bug, but a useful feature?
 ```
 
 But, in this book we are taking a more practical view of what object oriented programming is.
 So let's dispense with the philosophy and let's look at it more concretely from now.
-
 
 
 ```{admonition} Parable
@@ -324,8 +324,9 @@ class Nat
 
   // This is just a helper method to get the
   // contained number out so that we can print it.
-  public int ToInt ()
-    => n;
+  // We will learn more about this later.
+  public override string ToString()
+    => n.ToString();
 }
 ```
 
@@ -339,7 +340,7 @@ Nat y = new Nat(2);  // Instantiates an object of type Nat.
 // to the object x, passing object y as an argument.
 Nat z = x.Add(y);
 
-Console.WriteLine($"{x.ToInt()} + {y.ToInt()} = {z.ToInt()}");
+Console.WriteLine($"{x} + {y} = {z}");
 ```
 
 Don't worry if this feels like an overwhelming amount of code.
