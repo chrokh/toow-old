@@ -1097,7 +1097,7 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fail-fast">
+  <a class="reference internal nav-link" href="#prefer-compile-time-errors">
    13.4. Fail fast!
   </a>
  </li>
@@ -1136,7 +1136,7 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fail-fast">
+  <a class="reference internal nav-link" href="#prefer-compile-time-errors">
    13.4. Fail fast!
   </a>
  </li>
@@ -1219,8 +1219,8 @@ Nowadays, the C# compiler can help us guarantee that our code is free from run-t
 If we choose not to use these features then we may instead be hit with null-state errors at run-time.</p>
 <p>Null-state errors ought to be considered semantic errors but I have chosen to highlight them separately here due to their importance.</p>
 </section>
-<section id="fail-fast">
-<span id="prefer-compile-time-errors"></span><h2><span class="section-number">13.4. </span>Fail fast!<a class="headerlink" href="#fail-fast" title="Permalink to this headline">#</a></h2>
+<section id="prefer-compile-time-errors">
+<span id="fail-fast"></span><span id="id1"></span><h2><span class="section-number">13.4. </span>Fail fast!<a class="headerlink" href="#prefer-compile-time-errors" title="Permalink to this headline">#</a></h2>
 <p>The sooner we can discover a mistake, the easier it will be to fix it.
 So tautologically we conclude that compile-time errors should be favored over run-time errors.</p>
 <p>Saying that compile-time errors are preferable over run-time errors solely for the fact that they appear earlier would however be to miss the mark completely.
@@ -1241,6 +1241,10 @@ This program cannot even be created let alone ran if it contains errors.</p>
 Assume that we agree that there is no reasonable one-size-fits-all implementation of the addition operators that let us add numbers and letters.
 Would it be preferable to define the addition operator so that it crashes at compile-time or at runtime if you attempt to add a number to a letter?
 Would you want to be allowed to the compile a program that, by accident, contains the expression <code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">+</span> <span class="pre">'A'</span></code> only to have it crash at run-time or would you rather be prevented from ever running the program in the first place?</p>
+<p>Here’s an analogy.
+If you’re going to paint the facade of a house and you’re using a tall ladder that you’re suspecting is unreliable.
+Would you rather that the ladder breaks down and leaves you tumbling when you’ve just stepped off the ground or when your three meters up in the air?
+Failing fast is safer because it has less consequences.</p>
 <div class="exercise admonition" id="chapters/errors-exercise-1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 13.2 </span></p>

@@ -52,8 +52,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="58. Classes" href="classes.html" />
@@ -1149,6 +1147,16 @@ title="Print to PDF"
      57.2.2. Message passing
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#messages-can-contain-objects">
+     57.2.3. Messages can contain objects
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#impurity">
+     57.2.4. Impurity
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -1157,13 +1165,13 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     57.3.1. Message passing
+    <a class="reference internal nav-link" href="#addition">
+     57.3.1. Addition
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#encapsulating-state">
-     57.3.2. Encapsulating state
+    <a class="reference internal nav-link" href="#coordinates">
+     57.3.2. Coordinates
     </a>
    </li>
   </ul>
@@ -1172,18 +1180,6 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#discussion">
    57.4. Discussion
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     57.4.1. Message-passing
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#everything-is-an-object">
-     57.4.2. Everything is an object
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
@@ -1229,6 +1225,16 @@ title="Print to PDF"
      57.2.2. Message passing
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#messages-can-contain-objects">
+     57.2.3. Messages can contain objects
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#impurity">
+     57.2.4. Impurity
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -1237,13 +1243,13 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     57.3.1. Message passing
+    <a class="reference internal nav-link" href="#addition">
+     57.3.1. Addition
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#encapsulating-state">
-     57.3.2. Encapsulating state
+    <a class="reference internal nav-link" href="#coordinates">
+     57.3.2. Coordinates
     </a>
    </li>
   </ul>
@@ -1252,18 +1258,6 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#discussion">
    57.4. Discussion
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     57.4.1. Message-passing
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#everything-is-an-object">
-     57.4.2. Everything is an object
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
@@ -1366,10 +1360,10 @@ Doing this the object oriented way we would encapsulate the <code class="docutil
 We might also encapsulate the position object itself in an object whose type we might call <code class="docutils literal notranslate"><span class="pre">Player</span></code>.
 The methods <code class="docutils literal notranslate"><span class="pre">moveEast</span></code> and <code class="docutils literal notranslate"><span class="pre">moveNorthEast</span></code> would now likely become instance methods on the objects of type <code class="docutils literal notranslate"><span class="pre">Player</span></code> and <code class="docutils literal notranslate"><span class="pre">Position</span></code>.
 These instance methods update the state that’s been encapsulated in the objects.</p>
-<figure class="margin align-default" id="id4">
+<figure class="margin align-default" id="id2">
 <img alt="https://m.media-amazon.com/images/I/41-sN-mzwKL._SX381_BO1,204,203,200_.jpg" src="https://m.media-amazon.com/images/I/41-sN-mzwKL._SX381_BO1,204,203,200_.jpg" />
 <figcaption>
-<p><span class="caption-number">Fig. 57.1 </span><span class="caption-text"><a class="reference external" href="http://amazon.christopherokhravi.com?id=0134494164">Clean Architecture, by Robert C. Martin</a>.</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 57.1 </span><span class="caption-text"><a class="reference external" href="http://amazon.christopherokhravi.com?id=0134494164">Clean Architecture, by Robert C. Martin</a>.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>It is my duty however, to mention that some authors, like Robert C. Martin (see for example <span id="id1">Martin [<a class="reference internal" href="bibliography.html#id4" title="R. C. Martin. Clean Architecture: A Craftsman's Guide to Software Structure and Design. Robert C. Martin Series. Pearson Education, 2017. ISBN 9780134494326. URL: http://amazon.christopherokhravi.com?id=0134494164.">2017</a>]</span>), argues that the mixing of methods and data isn’t unique to object oriented programming.
@@ -1426,7 +1420,8 @@ This is why I’m cautioning you that some defenders of object oriented programm
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Whether messages and objects are good ideas or not is up for debate.
-I myself happen to believe that the declarative (possibly functional) paradigm is the future and that these philosophical discussions around message passing and objects is a misguided distraction that doesn’t bear enough fruit.</p>
+I myself happen to believe that the declarative (specifically the functional) paradigm is the future and that these philosophical discussions around message passing and objects is a misguided distraction that doesn’t bear enough fruit.</p>
+<p>Ask yourself: is multiple interpretations of the same piece of raw data perhaps not a bug, but a useful feature?</p>
 </div>
 <p>But, in this book we are taking a more practical view of what object oriented programming is.
 So let’s dispense with the philosophy and let’s look at it more concretely from now.</p>
@@ -1439,74 +1434,45 @@ So let’s dispense with the philosophy and let’s look at it more concretely f
 <p>– <a class="reference external" href="http://people.csail.mit.edu/gregs/ll1-discuss-archive-html/msg03277.html">Anton van Straaten</a></p>
 </div>
 </section>
-</section>
-<section id="examples">
-<h2><span class="section-number">57.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
-<section id="id2">
-<h3><span class="section-number">57.3.1. </span>Message passing<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
-<p>Let’s expand on the example illustrated in <a class="reference internal" href="#fig-message-passing"><span class="std std-numref">Fig. 57.2</span></a>.
-Assume that you are an object in an application and that you’ve declared that you’re capable of sending responses the messages asking you for what your current mood is.
-If I ask you what your mood is while you’re hanging out with your friends you might reply that you’re <em>happy</em>.
-But if I ask you what your mood is while you’re reading this book you might reply that you’re <em>confused</em>.
-It’s contextual.
-Your mood depends on the state that you are currently in.</p>
-<p>More generally, since objects might be stateful we cannot guarantee that the same message always will result in the same response.
-Instead, it depends on the state of the object.
-The statefulness of objects mean that messages are possibly <a class="reference internal" href="purity.html"><span class="doc std std-doc">impure</span></a> (in the sense of not referentially transparent).</p>
+<section id="messages-can-contain-objects">
+<h3><span class="section-number">57.2.3. </span>Messages can contain objects<a class="headerlink" href="#messages-can-contain-objects" title="Permalink to this headline">#</a></h3>
 <p>Any or all of the arguments (meaning the input) as well as the response (meaning the output) might be objects.
 So objects can contain objects.
-This is object composition.
-In fact, in a <em>purely</em> (here we don’t mean pure as in referentially transparent) object oriented language (such as Smalltalk) any arguments and any responses <em>must</em> be objects, but we’ll return to that technical detail in the <a class="reference external" href="#discussion">Discussion</a> section.</p>
-<p>Herein lies the idea of the “interpreter” that follows with the “data”.
+We’ll talk more about this when we get to <a class="reference internal" href="object-composition.html"><span class="doc std std-doc">object composition</span></a>.
+In fact, in a <em>purely</em> (here we don’t mean pure as in referentially transparent) object oriented language (such as Smalltalk) any arguments and any responses <em>must</em> be objects since all <a class="reference internal" href="values.html"><span class="doc std std-doc">values</span></a> are objects, but we’ll return to that technical detail in the <a class="reference external" href="#discussion">Discussion</a> section.</p>
+<p>Herein lies the idea of the “interpreter” that follows with the “data” that Alan Kay talked about above.
 In the non-object oriented world we pass around, let’s call it, “raw” data.
 This means that everytime we want to do something with the data we have to interpret it.
 In the object-oriented world however, we pass around data together with an interpreter.
 The interpreter is the object and the data is contained within the object.
 Now whenever we want to interact with the “raw” data somehow, we have to do so via the interpreter.</p>
 </section>
-<section id="encapsulating-state">
-<h3><span class="section-number">57.3.2. </span>Encapsulating state<a class="headerlink" href="#encapsulating-state" title="Permalink to this headline">#</a></h3>
-<p>Let’s say that we’re building a game where two players are controlling their own characters on a two dimensional grid.
-This means that each player probably has at least two values associated with it at any given point in time: An <span class="math notranslate nohighlight">\(x\)</span> and a <span class="math notranslate nohighlight">\(y\)</span> coordinate.</p>
-<p>If we were to solve this in a naive procedural style then we might declare four variables that correspond to the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> coordinates of both players.
-We would then define eight move methods that allow us to move both players north, east, south, and west.</p>
-<div class="cell tag_hide-input docutils container">
+<section id="impurity">
+<h3><span class="section-number">57.2.4. </span>Impurity<a class="headerlink" href="#impurity" title="Permalink to this headline">#</a></h3>
+<p>Since objects might be stateful we cannot guarantee that the same message always will result in the same response.
+Instead, it depends on the state of the object.
+The statefulness of objects mean that messages are possibly <a class="reference internal" href="purity.html"><span class="doc std std-doc">impure</span></a> (in the sense of not referentially transparent).</p>
+</section>
+</section>
+<section id="examples">
+<h2><span class="section-number">57.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
+<section id="addition">
+<span id="objects-examples-nat"></span><h3><span class="section-number">57.3.1. </span>Addition<a class="headerlink" href="#addition" title="Permalink to this headline">#</a></h3>
+<p>Let’s talk about integer addition.
+We’re going to reason by analogy, since addition is not actually implemented like this in most object oriented languages.
+Nevertheless, it serves well as an example of how to convert a function to a message.</p>
+<p>The addition operator (<code class="docutils literal notranslate"><span class="pre">+</span></code>) is usually thought of as a binary operator defined for numeric types such as integers.
+Let’s call it <code class="docutils literal notranslate"><span class="pre">add</span></code> instead.
+Remember the notation for <a class="reference internal" href="data-types.html#type-signatures"><span class="std std-ref">type signatures</span></a> of functions?
+We might say that:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">add</span> <span class="p">:</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>We would read this signature as “<code class="docutils literal notranslate"><span class="pre">add</span></code> is a binary method that when given two <code class="docutils literal notranslate"><span class="pre">int</span></code>s, yields an <code class="docutils literal notranslate"><span class="pre">int</span></code>”.
+In C# we might implement the function like this:</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Player1</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">player1X</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
-<span class="kt">int</span><span class="w"> </span><span class="n">player1Y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
-
-<span class="c1">// Player 2</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">player2X</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
-<span class="kt">int</span><span class="w"> </span><span class="n">player2Y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
-
-<span class="c1">// Player 1 move commands</span>
-<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer1East</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">player1X</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer1West</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">player1X</span><span class="w"> </span><span class="p">-=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer1North</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">player1Y</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer1South</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">player1Y</span><span class="w"> </span><span class="p">-=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-
-<span class="c1">// Player 2 move commands</span>
-<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer2East</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">player2X</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer2West</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">player2X</span><span class="w"> </span><span class="p">-=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer2North</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">player2Y</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer2South</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">player2Y</span><span class="w"> </span><span class="p">-=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">add</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -1558,7 +1524,7 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.167:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.109:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
@@ -1619,46 +1585,141 @@ else {
     </script>
 </div></div></div>
 </div>
-<p>This solution is of course both cumbersome to maintain and very prone to error.
-We’ve duplicated the business logic of what it means to move north, east, south, since we need to define it for both players.
-There are of course many ways of addressing these concerns while still solving the problem in a procedural style.
-One way would be to stick all the player positions in arrays where the indices determine which player we are talking about.</p>
-<div class="cell tag_hide-input docutils container">
+<p>However, in the object oriented world, addition is not a binary function that can be invoked by passing two integers.
+In the object oriented world, <code class="docutils literal notranslate"><span class="pre">add</span></code> is a message that we send to an object of type <code class="docutils literal notranslate"><span class="pre">int</span></code> while also giving another <code class="docutils literal notranslate"><span class="pre">int</span></code> as an argument.
+So while the function <code class="docutils literal notranslate"><span class="pre">add</span></code> is binary, the message <code class="docutils literal notranslate"><span class="pre">add</span></code> is unary.</p>
+<p>As we’ve already learned, <code class="docutils literal notranslate"><span class="pre">int</span></code> is, in C#, a <span class="xref myst">simple type</span> which means that it’s a built-in <a class="reference internal" href="value-and-reference-semantics.html#value-and-reference-semantics"><span class="std std-ref">value type</span></a>.
+So, let’s instead invent our own type called <code class="docutils literal notranslate"><span class="pre">Nat</span></code> when talking about objects and messages.</p>
+<p>So, we’ll rewrite the type signature of our object oriented version of addition as:</p>
+<p id="type-signatures-oo">Type signatures for object oriented <a class="reference internal" href="instance-methods.html"><span class="doc std std-doc">instance methods</span></a> which is what messages are written in different ways depending on who you ask, but I prefer to use the squiggly arrow (<code class="docutils literal notranslate"><span class="pre">~&gt;</span></code>).
+I would write the type signature of an object oriented add method like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Add</span> <span class="p">:</span> <span class="n">Nat</span> <span class="o">~&gt;</span> <span class="n">Nat</span> <span class="o">-&gt;</span> <span class="n">Nat</span>
+</pre></div>
+</div>
+<p>We would read this signature as “<code class="docutils literal notranslate"><span class="pre">Add</span></code> is an instance method, defined on the type <code class="docutils literal notranslate"><span class="pre">Nat</span></code>, which takes a <code class="docutils literal notranslate"><span class="pre">Nat</span></code> and returns a <code class="docutils literal notranslate"><span class="pre">Nat</span></code>”.
+Notice how we’re using two different types of arrows in the example above.
+The first arrow, the squiggly arrow (<code class="docutils literal notranslate"><span class="pre">~&gt;</span></code>), denotes that whatever follows on the right is not a function, but an instance method defined on the type <code class="docutils literal notranslate"><span class="pre">Nat</span></code>.
+The second arrow (<code class="docutils literal notranslate"><span class="pre">-&gt;</span></code>) is our usual arrow which in this case says that the instance method maps from <code class="docutils literal notranslate"><span class="pre">Nat</span></code> to <code class="docutils literal notranslate"><span class="pre">Nat</span></code>.</p>
+<p>We haven’t talked about enough syntax yet to understand an implementation of this instance method but let me just show you what it could look like:</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">xPositions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="m">2</span><span class="p">];</span><span class="w"></span>
-<span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">yPositions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="m">2</span><span class="p">];</span><span class="w"></span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Nat</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// This is known as an instance field.</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"></span>
 
-<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayerEast</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">player</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">xPositions</span><span class="p">[</span><span class="n">player</span><span class="p">]</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayerWest</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">player</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">xPositions</span><span class="p">[</span><span class="n">player</span><span class="p">]</span><span class="w"> </span><span class="p">-=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayerNorth</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">player</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">yPositions</span><span class="p">[</span><span class="n">player</span><span class="p">]</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayerSouth</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">player</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">yPositions</span><span class="p">[</span><span class="n">player</span><span class="p">]</span><span class="w"> </span><span class="p">-=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// This is known as a constructor.</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Nat</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">n</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">// This is the instance method add.</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="n">Nat</span><span class="w"> </span><span class="nf">Add</span><span class="w"> </span><span class="p">(</span><span class="n">Nat</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Nat</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">n</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">// This is just a helper method to get the</span>
+<span class="w">  </span><span class="c1">// contained number out so that we can print it.</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">ToInt</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>While this solves the problem we loose static type safety and expose ourselves to potential run-time errors.
-What happens if we mistakenly pass the number <code class="docutils literal notranslate"><span class="pre">1</span></code> to a move method, as in <code class="docutils literal notranslate"><span class="pre">MovePlayerEast(1)</span></code>?
+<p>We would be able to use the type to create objects of type <code class="docutils literal notranslate"><span class="pre">Nat</span></code> and then add them like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Nat</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Nat</span><span class="p">(</span><span class="m">10</span><span class="p">);</span><span class="w"> </span><span class="c1">// Instantiates an object of type Nat.</span>
+<span class="n">Nat</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Nat</span><span class="p">(</span><span class="m">2</span><span class="p">);</span><span class="w">  </span><span class="c1">// Instantiates an object of type Nat.</span>
+
+<span class="c1">// Sends the message (calls the instance method) Add</span>
+<span class="c1">// to the object x, passing object y as an argument.</span>
+<span class="n">Nat</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{x.ToInt()} + {y.ToInt()} = {z.ToInt()}&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10 + 2 = 12
+</pre></div>
+</div>
+</div>
+</div>
+<p>Don’t worry if this feels like an overwhelming amount of code.
+I just wanted to show you a quick example of what the implementation would look like when following the object oriented way.
+We’ll talk much more about <a class="reference internal" href="classes.html"><span class="doc std std-doc">classes</span></a>, <a class="reference internal" href="instance-methods.html"><span class="doc std std-doc">instance methods</span></a>, <a class="reference internal" href="fields.html"><span class="doc std std-doc">fields</span></a> and more in the coming chapter.</p>
+</section>
+<section id="coordinates">
+<h3><span class="section-number">57.3.2. </span>Coordinates<a class="headerlink" href="#coordinates" title="Permalink to this headline">#</a></h3>
+<p>Before we leave, let’s quickly discuss the example I gave earlier of moving around players in a game on a two dimensional grid.
+Each player probably has at least two values associated with it at any given point in time: An <code class="docutils literal notranslate"><span class="pre">x</span></code> and a <code class="docutils literal notranslate"><span class="pre">y</span></code> coordinate.
+Let’s model these as integers.</p>
+<p>Solving this in a procedural style we might declare four variables that correspond to the <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> coordinates of both players.
+We would then define a bunch of methods for moving both players in a number of different directions like north, east, south, and west.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Player1</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">player1X</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">player1Y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// Player 2</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">player2X</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">player2Y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// Player 1 move commands</span>
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer1East</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">player1X</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer1West</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">player1X</span><span class="w"> </span><span class="p">-=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer1North</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">player1Y</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer1South</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">player1Y</span><span class="w"> </span><span class="p">-=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+
+
+<span class="c1">// Player 2 move commands</span>
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer2East</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">player2X</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer2West</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">player2X</span><span class="w"> </span><span class="p">-=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer2North</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">player2Y</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayer2South</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">player2Y</span><span class="w"> </span><span class="p">-=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This solution is of course both cumbersome to maintain and very prone to error.
+We’ve duplicated the business logic of what it means to move north, east, south, since we need to define it for both players.
+Remember the DRY (<a class="reference internal" href="dont-repeat-yourself.html"><span class="doc std std-doc">Don’t repeat yourself</span></a>) principle?</p>
+<p>We’ve also hard-coded the number of players to two.
+What if we have hundreds methods that operate on players and then suddenly we realize that we want to add another player?</p>
+<p>There are of course many ways of addressing these concerns while still solving the problem in a procedural style.
+One way would be to stick all the player positions in arrays where the indices determine which player we are talking about.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">xPositions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="m">2</span><span class="p">];</span><span class="w"></span>
+<span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">yPositions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="m">2</span><span class="p">];</span><span class="w"></span>
+
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayerEast</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">player</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">xPositions</span><span class="p">[</span><span class="n">player</span><span class="p">]</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayerWest</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">player</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">xPositions</span><span class="p">[</span><span class="n">player</span><span class="p">]</span><span class="w"> </span><span class="p">-=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayerNorth</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">player</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">yPositions</span><span class="p">[</span><span class="n">player</span><span class="p">]</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+<span class="k">void</span><span class="w"> </span><span class="nf">MovePlayerSouth</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">player</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">yPositions</span><span class="p">[</span><span class="n">player</span><span class="p">]</span><span class="w"> </span><span class="p">-=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>While this solves the problem we loose static type safety for player access.
+We expose ourselves to potential run-time errors.
+What happens if we mistakenly pass the number <code class="docutils literal notranslate"><span class="pre">1</span></code> to a move method, as in <code class="docutils literal notranslate"><span class="pre">MovePlayerEast(1)</span></code> when we only happen to have a single player in the game.
 That’s right, instead of getting an error at compile time, we get an <code class="docutils literal notranslate"><span class="pre">IndexOutOfRangeException</span></code> when actually running the program.
-In the chapter on <a class="reference internal" href="errors.html"><span class="doc std std-doc">errors</span></a> we discussed the value of discovering errors at compile-time rather than run-time.</p>
+Remember the principle of <a class="reference internal" href="errors.html#fail-fast"><span class="std std-ref">failling fast</span></a> that we discussed in the chapter on errors?
+We should prefer compile-time errors over run-time errors.</p>
 <p>Hopefully you are starting to see that what we need here is something a bit more powerful than procedures.
 We need more powerful <a class="reference internal" href="data-structures.html#data-structures"><span class="std std-ref">data structures</span></a>.
 We need a better abstraction of what we’re trying to model.</p>
-<p>C# does however not allow us to construct custom data structures that aren’t also essentially objects.
+<p>C# does however not allow us to construct custom data structures that aren’t also essentially objects (or implicitly <a class="reference internal" href="#everything-is-an-object"><span class="std std-ref">convertible to an object</span></a>).
 So for the sake of not having to introduce an entirely new language into this book we’re going to pretend that languages that existed before the advent of object oriented programming didn’t grant us encapsulated custom data structures.
-As we learned in the chapter on <span class="xref myst">pillars</span>, this is certainly <em>not true</em>.
-Non-object oriented languages did indeed provide mechanisms for encapsulation and as such it would be possible to solve the issues outlined even in some languages that we might want to categorize as procedural.</p>
-<p>So, let’s get back to object oriented programming.
-We’ll talk about <a class="reference internal" href="classes.html"><span class="doc std std-doc">classes</span></a> later but allow me to give you a quick taste of what an object oriented solution might look like.
-If we were to model players in a class based object oriented language then that class might have a constructor that takes two arguments, and have two instance variables. These two arguments and instance variables are used to encapsulate the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> coordinates.</p>
-<div class="cell tag_hide-input docutils container">
+That assumption is certainly <em>not true</em>
+Non-object oriented languages did indeed provide mechanisms for encapsulation and as such it would be possible to solve the issues outlined even in a language that we might want to categorize as procedural.</p>
+<p>But, let’s get back to object oriented programming.
+We’ll talk about <a class="reference internal" href="classes.html"><span class="doc std std-doc">classes</span></a> very soon but allow me to give you a quick taste of what an object oriented solution might look like.
+If we were to model players in a class based object oriented language then that class might have a <a class="reference internal" href="constructors.html"><span class="doc std std-doc">constructor</span></a> that takes two arguments, and have two instance <a class="reference internal" href="fields.html"><span class="doc std std-doc">fields</span></a> (also known as “instance variables”).
+These two arguments and instance fields are used to encapsulate the <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> coordinates.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Player</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
@@ -1674,8 +1735,9 @@ If we were to model players in a class based object oriented language then that 
 <span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MoveWest</span><span class="w"> </span><span class="p">()</span><span class="w">  </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">-=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MoveNorth</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MoveSouth</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">-=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Print</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
-<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;({x} , {y})&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">ToString</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">$&quot;({x} , {y})&quot;</span><span class="p">;</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
@@ -1699,7 +1761,8 @@ Which means that we can invite the objects to change their internal states.</p>
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="p">.</span><span class="n">MoveEast</span><span class="p">();</span><span class="w"></span>
 <span class="n">p1</span><span class="p">.</span><span class="n">MoveEast</span><span class="p">();</span><span class="w"></span>
 <span class="n">p1</span><span class="p">.</span><span class="n">MoveSouth</span><span class="p">();</span><span class="w"></span>
-<span class="n">p1</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span><span class="w"></span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">p1</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -1709,12 +1772,14 @@ Which means that we can invite the objects to change their internal states.</p>
 </div>
 </div>
 </div>
+<p>Now, we can’t try to access a non-existent player but we can still create an arbitrary number of players.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">p2</span><span class="p">.</span><span class="n">MoveWest</span><span class="p">();</span><span class="w"></span>
 <span class="n">p2</span><span class="p">.</span><span class="n">MoveSouth</span><span class="p">();</span><span class="w"></span>
 <span class="n">p2</span><span class="p">.</span><span class="n">MoveSouth</span><span class="p">();</span><span class="w"></span>
-<span class="n">p2</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span><span class="w"></span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">p2</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -1725,40 +1790,51 @@ Which means that we can invite the objects to change their internal states.</p>
 </div>
 </div>
 <p>What do we gain from this?
-Well, without getting into subtype polymorphism we gain encapsulation.
+Well, without getting into <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype polymorphism</span></a> we gain encapsulation.
 It’s arguably harder to accidentally update the position of one player when we actually were intending to update the position of the other.
 We’re also able to trivially support an arbitrary number of players without having to write any more code and without risking run-time caused by for example trying to access indexes in arrays that don’t exist.</p>
+<p>Remember, the point is not that this cannot be done in a procedural language.
+It can.
+Any Turing complete language can solve any computable problem.
+That’s not the problem.
+Heck, we could write all programs in <a class="reference internal" href="compilation.html#machine-code"><span class="std std-ref">machine code</span></a> if we wanted to.</p>
+<p>But if the problem isn’t that it cannot be done, then what is the problem?
+The problem is <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a>.
+Remember?
+Writing software that will put us and keep us in business.
+Writing software that will keep us ahead of our competition.</p>
 </section>
 </section>
 <section id="discussion">
 <h2><span class="section-number">57.4. </span>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">#</a></h2>
-<section id="id3">
-<h3><span class="section-number">57.4.1. </span>Message-passing<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
-<p>Whether the idea of sending the interpreter together with the data is a good idea or not is up for debate.
-This is merely my opinion, but I myself have lost all hope in it.
-I am a functional programming convert, with no regrets.</p>
-<p>More objectively, functional programming is gaining ground by the day and in that paradigm we don’t worry about sending interpreters along with data.
-I urge you to ask yourself: is multiple interpretations of the same piece of raw data perhaps not a bug, but a useful feature?</p>
-</section>
-<section id="everything-is-an-object">
-<h3><span class="section-number">57.4.2. </span>Everything is an object<a class="headerlink" href="#everything-is-an-object" title="Permalink to this headline">#</a></h3>
-<p>So what about this notion of “purely” object oriented languages that we left unanswered?
-When saying that a language such as Smalltalk is a “purely” object oriented language we don’t mean pure in the sense of <a class="reference internal" href="purity.html"><span class="doc std std-doc">referential transparency</span></a>.
-We mean “pure” in the sense that, in the language, everything (or almost everything) is an object.
-While we tend to use the word “everything” when talking about how purely object oriented a language is it would be more accurate to say something like all values that you can construct and reference using variables.
-We haven’t yet talked about <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a> and <a class="reference internal" href="interfaces.html"><span class="doc std std-doc">interfaces</span></a> but another way of saying this is that all types derive from <code class="docutils literal notranslate"><span class="pre">Object</span></code>.
-These statements are however only almost entirely true.</p>
-<p>C# is not a purely object object oriented language.
-When discussing <a class="reference internal" href="paradigms.html"><span class="doc std std-doc">paradigms</span></a> we established that C#, like many other contemporary programming languages, is a multi-paradigm language.
+<span class="target" id="everything-is-an-object"></span><p>When trying to learn more about object oriented programming you may have come across the following phrase:</p>
+<blockquote class="epigraph">
+<div><p>Everything is an object.</p>
+</div></blockquote>
+<p>This is what we referred to when we, earlier in this chapter, called some object oriented languages “pure”.</p>
+<p>When saying that a language such as Smalltalk is a “purely” object oriented language we don’t mean pure in the sense of <a class="reference internal" href="purity.html"><span class="doc std std-doc">referential transparency</span></a>.
+We mean “pure” in the sense that, in the language, everything (or almost everything) is an object.</p>
+<p>We tend to use the word “everything” when talking about how purely object oriented a language is.
+However, it would be more accurate to say something like “all values that you can construct and reference using variables”.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>What I’m about to say now is mostly for the sake of completeness.
+If you feel like this is wooshing over your head, make a note of this section, and come back to it when you’ve got more tools in your belt.</p>
+</div>
+<p>We haven’t yet talked about <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a> and <a class="reference internal" href="interfaces.html"><span class="doc std std-doc">interfaces</span></a> but another way of saying this is that “all types derive from <code class="docutils literal notranslate"><span class="pre">Object</span></code>”.
+However, this is also only almost true in C#.
+C# is not a purely object object oriented language in the sense that all types derive from <code class="docutils literal notranslate"><span class="pre">Object</span></code>.</p>
+<p>When discussing <a class="reference internal" href="paradigms.html"><span class="doc std std-doc">paradigms</span></a> we established that C#, like many other contemporary programming languages, is a multi-paradigm language.
 C# contains ideas from procedural, object oriented, as well as functional programming.</p>
-<p>Remember the built-in value types, also known as the <a class="reference internal" href="simple-types.html#simple-types"><span class="std std-ref">simple types</span></a>?
+<p>In Java, one problem is, the types that in C# are called built-in value types, or <a class="reference internal" href="simple-types.html#simple-types"><span class="std std-ref">simple types</span></a>.
 In Java these are known as primitive types and they are not objects, but in C# they actually are.
 So if simple types are objects, then these are not the problem.</p>
-<p>The non-object types are:</p>
+<p>What are the non-object types in C#?
+The non-object types in C# are:</p>
 <ol class="simple">
-<li><p>Pointers.</p></li>
-<li><p>Interfaces.</p></li>
-<li><p>Open type parameters.</p></li>
+<li><p>Pointers</p></li>
+<li><p>Interfaces</p></li>
+<li><p>Open type parameters</p></li>
 </ol>
 <p>You could argue that pointers are an archaic remnant of the procedural days.
 As such, we won’t talk about them here.</p>
@@ -1776,7 +1852,6 @@ Open type parameters will be discussed in much more detail when we talk about <a
 </div></blockquote>
 <p>We should however also mention that while an object of a child type can be implicitly converted to its parent class, when value types, such as the simple types like <code class="docutils literal notranslate"><span class="pre">int</span></code>, are converted to objects this causes what is known as <a class="reference internal" href="boxing.html#boxing"><span class="std std-ref">boxing</span></a>.
 More on that later though.</p>
-</section>
 </section>
 <section id="exercises">
 <h2><span class="section-number">57.5. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
@@ -1806,13 +1881,6 @@ More on that later though.</p>
 <p class="admonition-title"><span class="caption-number">Exercise 57.4 </span></p>
 <section id="exercise-content">
 <p>What is <em>information hiding</em>?</p>
-</section>
-</div>
-<div class="exercise admonition" id="chapters/objects-exercise-4">
-
-<p class="admonition-title"><span class="caption-number">Exercise 57.5 </span></p>
-<section id="exercise-content">
-<p>What kinds of types, in C#, are not <em>convertible</em> to the type <code class="docutils literal notranslate"><span class="pre">object</span></code>?</p>
 </section>
 </div>
 </section>
