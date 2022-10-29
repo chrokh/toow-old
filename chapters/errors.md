@@ -73,6 +73,7 @@ Null-state errors ought to be considered semantic errors but I have chosen to hi
 
 
 
+(fail-fast)=
 (prefer-compile-time-errors)=
 ## Fail fast!
 
@@ -106,6 +107,13 @@ As an example, think about the addition operator.
 Assume that we agree that there is no reasonable one-size-fits-all implementation of the addition operators that let us add numbers and letters.
 Would it be preferable to define the addition operator so that it crashes at compile-time or at runtime if you attempt to add a number to a letter?
 Would you want to be allowed to the compile a program that, by accident, contains the expression `10 + 'A'` only to have it crash at run-time or would you rather be prevented from ever running the program in the first place?
+
+Here's an analogy.
+If you're going to paint the facade of a house and you're using a tall ladder that you're suspecting is unreliable.
+Would you rather that the ladder breaks down and leaves you tumbling when you've just stepped off the ground or when your three meters up in the air?
+Failing fast is safer because it has less consequences.
+
+
 
 ```{exercise}
 Why could it be argued that we should prefer compile-time errors over run-time errors?

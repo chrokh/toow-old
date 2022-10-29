@@ -77,6 +77,42 @@ Work in progress.
 ## Examples
 
 
+%### Mutable numbers
+%
+%Remember the `Nat` example from when we discussed [message passing](objects:examples:nat) in the chapter on objects?
+%
+%```{code-cell} csharp
+%class Nat
+%{
+%  int n;
+%
+%  public Nat (int n)
+%    => this.n = n;
+%
+%  public void Add (Nat other)
+%    => this.n += other.n;
+%
+%  public int ToInt ()
+%    => n;
+%}
+%```
+
+We would be able to use the type to create objects of type `Nat` and then add them like this:
+
+```{code-cell} csharp
+Nat x = new Nat(10); // Instantiates an object of type Nat.
+Nat y = new Nat(2);  // Instantiates an object of type Nat.
+
+Console.WriteLine($"x = {x.ToInt()}");
+
+// Sends the message (calls the instance method) Add
+// to the object x, passing object y as an argument.
+x.Add(y);
+
+Console.WriteLine($"x = {x.ToInt()}");
+```
+
+
 
 ### Robber's language
 

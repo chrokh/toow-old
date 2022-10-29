@@ -29,6 +29,7 @@ In what sense is a language not *either* a compiled or an interpreted language?
 ```
 
 
+(machine-code)=
 ## Source code
 
 The word "compiler" is usually used to describe programs that translate programs written in "high-level" languages, to programs written in "low-level" languages.

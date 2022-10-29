@@ -292,6 +292,7 @@ We've also seen that the type `bool` supports the logical or-operator known as l
 By now you should understand that this means that the data type `int` supports arithmetic addition and multiplication, while `bool` supports logical disjunction.
 Of course, these types support lots of other operations but we have to start somewhere.
 
+(type-signatures)=
 The type signature of arithmetic addition could be written as:
 
 ```
