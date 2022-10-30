@@ -1288,7 +1288,7 @@ The members of the set are the objects or instances of that class.</p>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2347.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2444.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1333,12 +1333,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.18:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.75:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2347.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2444.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1450,6 +1450,15 @@ We’ll talk more about constructors in its own chapter.</p>
 </div>
 </div>
 </div>
+<p>Since defining a class also means that we define a type, we can of course also declare a variable of that type without assigning it an instance.
+We would say that such a variable is an object reference that doesn’t yet reference an object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Cat</span><span class="w"> </span><span class="n">cat3</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="equality">
 <h3><span class="section-number">58.2.3. </span>Equality<a class="headerlink" href="#equality" title="Permalink to this headline">#</a></h3>
@@ -1479,8 +1488,8 @@ Because they both contain the same object.
 We don’t mean “the same” in the sense that they are structurally equivalent, we mean that both variables point to, literally, the same object.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Cat</span><span class="w"> </span><span class="n">cat3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cat1</span><span class="p">;</span><span class="w"></span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cat3</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="n">cat1</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Cat</span><span class="w"> </span><span class="n">cat4</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cat1</span><span class="p">;</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cat4</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="n">cat1</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -1539,6 +1548,14 @@ Even if only informally.</p>
 See the figure below.
 In the top section we write the name of the class.
 In the bottom section of the rectangle write the members of the class.</p>
+<p>The class <code class="docutils literal notranslate"><span class="pre">Cat</span></code> in the figure below corresponds to a class <code class="docutils literal notranslate"><span class="pre">Cat</span></code> without any members like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Cat</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">|--------------------|</span>     <span class="o">|--------------------|</span>
 <span class="o">|</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">identifier</span><span class="o">&gt;</span> <span class="o">|</span>     <span class="o">|</span>         <span class="n">Cat</span>        <span class="o">|</span>
 <span class="o">|--------------------|</span>     <span class="o">|--------------------|</span>
@@ -1548,7 +1565,7 @@ In the bottom section of the rectangle write the members of the class.</p>
 <span class="o">|--------------------|</span>     <span class="o">|--------------------|</span>
 </pre></div>
 </div>
-<p>A general example on the left and a specific example on the right.</p>
+<p>The syntax is depicted on the left and an example of a class called <code class="docutils literal notranslate"><span class="pre">Cat</span></code> without any members is on the right.</p>
 </section>
 </section>
 <section id="exercises">
