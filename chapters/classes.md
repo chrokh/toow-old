@@ -120,6 +120,15 @@ Cat cat1 = new Cat();
 Cat cat2 = new Cat();
 ```
 
+Since defining a class also means that we define a type, we can of course also declare a variable of that type without assigning it an instance.
+We would say that such a variable is an object reference that doesn't yet reference an object.
+
+```{code-cell}
+Cat cat3;
+```
+
+% TODO:!!! Must discuss default values, initially assigned, definitely assigned, etc somewhere. In some places variables are assigned defaults and in some they are not. This is a very important concept in C#. We can discuss the generalization beyond C#. Are variables assigned default values or not, and what is the default value.
+
 
 ### Equality
 
@@ -144,8 +153,8 @@ Because they both contain the same object.
 We don't mean "the same" in the sense that they are structurally equivalent, we mean that both variables point to, literally, the same object.
 
 ```{code-cell}
-Cat cat3 = cat1;
-Console.WriteLine(cat3 == cat1);
+Cat cat4 = cat1;
+Console.WriteLine(cat4 == cat1);
 ```
 
 Think of it as if both variables are pointing to the same piece of memory in the machine.
@@ -215,6 +224,12 @@ See the figure below.
 In the top section we write the name of the class.
 In the bottom section of the rectangle write the members of the class.
 
+The class `Cat` in the figure below corresponds to a class `Cat` without any members like this:
+
+```{code-cell}
+class Cat { }
+```
+
 ```
 |--------------------|     |--------------------|
 | <class identifier> |     |         Cat        |
@@ -225,7 +240,7 @@ In the bottom section of the rectangle write the members of the class.
 |--------------------|     |--------------------|
 ```
 
-A general example on the left and a specific example on the right.
+The syntax is depicted on the left and an example of a class called `Cat` without any members is on the right.
 
 
 %## Examples
