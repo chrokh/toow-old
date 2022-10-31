@@ -97,20 +97,20 @@ Work in progress.
 %}
 %```
 
-We would be able to use the type to create objects of type `Nat` and then add them like this:
-
-```{code-cell} csharp
-Nat x = new Nat(10); // Instantiates an object of type Nat.
-Nat y = new Nat(2);  // Instantiates an object of type Nat.
-
-Console.WriteLine($"x = {x.ToInt()}");
-
-// Sends the message (calls the instance method) Add
-// to the object x, passing object y as an argument.
-x.Add(y);
-
-Console.WriteLine($"x = {x.ToInt()}");
-```
+%We would be able to use the type to create objects of type `Nat` and then add them like this:
+%
+%```{code-cell} csharp
+%Nat x = new Nat(10); // Instantiates an object of type Nat.
+%Nat y = new Nat(2);  // Instantiates an object of type Nat.
+%
+%Console.WriteLine($"x = {x.ToInt()}");
+%
+%// Sends the message (calls the instance method) Add
+%// to the object x, passing object y as an argument.
+%x.Add(y);
+%
+%Console.WriteLine($"x = {x.ToInt()}");
+%```
 
 
 
