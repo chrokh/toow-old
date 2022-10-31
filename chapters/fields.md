@@ -188,6 +188,35 @@ deflated.Text = "Deflated";
 ```
 
 
+### UML class diagrams
+
+In UML class diagrams, instance fields are modeled by what UML calls "attributes".
+Remember how, in the chapter on [classes](classes), we discussed that the section that lists class members of a class in a UML class diagram is divided in two subsections.
+The first lists attributes, and the second lists operations.
+Instance fields in C# (as well as [properties](properties) which we'll talk about soon) are represented as attributes in UML class diagrams.
+
+The balloon class would, in a UML class diagram, be represented as the right class in the figure below.
+
+```
+|--------------------|     |--------------------|
+| <class identifier> |     |       Balloon      |
+|--------------------|     |--------------------|
+|                    |     | Text : string      |
+|    <attributes>    |     | Diameter : int     |
+|                    |     |                    |
+|--------------------|     |--------------------|
+|                    |     |                    |
+|    <operations>    |     |                    |
+|                    |     |                    |
+|--------------------|     |--------------------|
+```
+
+Notice how, when listing an attribute we also write out the type of the attribute.
+In the chapter on [classes](classes:uml) we mentioned that UML class diagrams are often draw with a varying level of informality.
+As such, the data types of attributes are often omitted if the situtation doesn't require them in order to explain whatever it is we're trying to explain.
+
+
+
 
 ## Examples
 
@@ -408,7 +437,7 @@ printPoint(p2);
 
 
 ```{exercise-start}
-:label: ex:fields:point-deltas
+:label: ex:fields:move-points
 ```
 Start with the code that you wrote in {numref}`ex:fields:point`.
 Write three local or static methods with the following signatures:
@@ -465,9 +494,10 @@ printPoint(p2);
 
 
 ```{exercise-start}
+:label: ex:fields:delta
 ```
 Start with the code that you wrote in {numref}`ex:fields:point`.
-In {numref}`ex:fields:point-deltas` we solved the problem of applying some delta to a number of potentially different points at the same time.
+In {numref}`ex:fields:move-points` we solved the problem of applying some delta to a number of potentially different points at the same time.
 Let's solve that in a slightly more general way now.
 
 Write a new class called `Delta` which contains three `public` instance fields of type `int`, named `X`, `Y`, and `Z`.
@@ -562,6 +592,11 @@ initial.Z = 10;
 printPointArray(makeIncrementingPoints(5, 10, initial));
 ```
 ```{exercise-end}
+```
+
+```{exercise}
+Draw a UML class diagram containing both the class `Point` from {numref}`ex:fields:point` and the class `Delta` from {numref}`ex:fields:delta`.
+Remember to represent all instance fields.
 ```
 
 
