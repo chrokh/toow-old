@@ -1213,26 +1213,40 @@ title="Print to PDF"
 </div>
 <section id="examples">
 <h2><span class="section-number">62.1. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
-<p>We would be able to use the type to create objects of type <code class="docutils literal notranslate"><span class="pre">Nat</span></code> and then add them like this:</p>
+<section id="robber-s-language">
+<h3><span class="section-number">62.1.1. </span>Robber’s language<a class="headerlink" href="#robber-s-language" title="Permalink to this headline">#</a></h3>
+<p>We are now ready to convert the static class <code class="docutils literal notranslate"><span class="pre">RobbersCipher</span></code> from the chapter on <a class="reference internal" href="overloading.html#overloading-examples-robbers"><span class="std std-ref">overloading</span></a> to a regular class where all methods are instance methods.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Nat</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Nat</span><span class="p">(</span><span class="m">10</span><span class="p">);</span><span class="w"> </span><span class="c1">// Instantiates an object of type Nat.</span>
-<span class="n">Nat</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Nat</span><span class="p">(</span><span class="m">2</span><span class="p">);</span><span class="w">  </span><span class="c1">// Instantiates an object of type Nat.</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">RobbersCipher</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">vowel</span><span class="p">;</span><span class="w"></span>
 
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;x = {x.ToInt()}&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">RobbersCipher</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">vowel</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">vowel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">vowel</span><span class="p">;</span><span class="w"></span>
 
-<span class="c1">// Sends the message (calls the instance method) Add</span>
-<span class="c1">// to the object x, passing object y as an argument.</span>
-<span class="n">x</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="sc">&#39;B&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;b&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;C&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;c&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;D&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;d&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;F&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;f&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;G&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;g&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;H&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;h&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;J&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;j&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;K&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;k&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;L&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;l&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;M&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;m&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;N&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;n&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;P&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;p&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;Q&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;q&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;R&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;r&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;S&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;s&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;t&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;V&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;v&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;W&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;w&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;X&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;x&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;Y&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;y&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;Z&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;z&#39;</span><span class="w"></span>
+<span class="w">      </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">$&quot;{input}{vowel}{input}&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">$&quot;{input}&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">};</span><span class="w"></span>
 
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;x = {x.ToInt()}&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">letter</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">output</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">Encode</span><span class="w"> </span><span class="p">(</span><span class="n">letter</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3078.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3138.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1277,12 +1291,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.171:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.1.15:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3078.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3138.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1336,50 +1350,7 @@ else {
 }
 
     </script>
-</div></div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1,1): error CS0246: The type or namespace name &#39;Nat&#39; could not be found (are you missing a using directive or an assembly reference?)
-
-(2,1): error CS0246: The type or namespace name &#39;Nat&#39; could not be found (are you missing a using directive or an assembly reference?)
-
-(1,13): error CS0246: The type or namespace name &#39;Nat&#39; could not be found (are you missing a using directive or an assembly reference?)
-
-(2,13): error CS0246: The type or namespace name &#39;Nat&#39; could not be found (are you missing a using directive or an assembly reference?)
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
-</div>
-<section id="robber-s-language">
-<h3><span class="section-number">62.1.1. </span>Robber’s language<a class="headerlink" href="#robber-s-language" title="Permalink to this headline">#</a></h3>
-<p>We are now ready to convert the static class <code class="docutils literal notranslate"><span class="pre">RobbersCipher</span></code> from the chapter on <a class="reference internal" href="overloading.html#overloading-examples-robbers"><span class="std std-ref">overloading</span></a> to a regular class where all methods are instance methods.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">RobbersCipher</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">vowel</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">RobbersCipher</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">vowel</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">vowel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">vowel</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="sc">&#39;B&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;b&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;C&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;c&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;D&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;d&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;F&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;f&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;G&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;g&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;H&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;h&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;J&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;j&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;K&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;k&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;L&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;l&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;M&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;m&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;N&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;n&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;P&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;p&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;Q&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;q&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;R&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;r&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;S&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;s&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;t&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;V&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;v&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;W&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;w&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;X&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;x&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;Y&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;y&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;Z&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;z&#39;</span><span class="w"></span>
-<span class="w">      </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">$&quot;{input}{vowel}{input}&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">$&quot;{input}&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">};</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">letter</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="n">output</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">Encode</span><span class="w"> </span><span class="p">(</span><span class="n">letter</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
+</div></div></div>
 </div>
 <p>Notice how we moved the input vowel to the constructor.
 We’re not going to bother with that now but as we saw in the chapter on <a class="reference internal" href="constructors.html"><span class="doc std std-doc">constructors</span></a>, that would be a prime place for validation.</p>
@@ -1434,10 +1405,20 @@ Well, first off we need to create instances of the <code class="docutils literal
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HoHelollolo
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">c2</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">));</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HaHelallalo
 </pre></div>
 </div>
 </div>
@@ -1511,10 +1492,20 @@ Here’s what the class would look like:</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CdAb
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">backOne</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;AbYz&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ZaXy
 </pre></div>
 </div>
 </div>
@@ -1613,6 +1604,11 @@ Explain using your own words.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>olleH
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </div>
@@ -1638,6 +1634,11 @@ The code first instantiates a cipher and then encodes both a <code class="docuti
 <span class="kt">char</span><span class="w"> </span><span class="n">output2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">leet</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="sc">&#39;E&#39;</span><span class="p">);</span><span class="w"></span>
 
 <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{output1} {output2}&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1337 3
 </pre></div>
 </div>
 </div>
