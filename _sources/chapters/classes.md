@@ -211,37 +211,77 @@ For a complete list of the kinds of members that we can define on a class, pleas
 
 
 
+(classes:uml)=
 ### UML class diagrams
 
 In this book we make heavy use of UML class diagrams.
 When reasoning about object oriented design nothing is really quite as efficient as using UML class diagrams.
 Even if only informally.
+Having a good understanding of UML class diagram notation is essential if we are to be able to eventually understand object oriented [design patterns](design-patterns).
 
-We'll discuss the syntax of UML class diagrams in every chapter where we're covering a concept that's also modelable in UML.
+We'll discuss the syntax of UML class diagrams in every chapter where we're covering a concept that's also possible to model using UML class diagram syntax.
 
-For now, it's enough to know that to depict a class in a UML class diagram, we draw a rectangle with two sections.
+For now, it's enough to know that to depict a class in a UML class diagram, we draw a rectangle with three sections.
 See the figure below.
-In the top section we write the name of the class.
-In the bottom section of the rectangle write the members of the class.
 
-The class `Cat` in the figure below corresponds to a class `Cat` without any members like this:
+```
+|--------------------|
+| <class identifier> |
+|--------------------|
+|                    |
+|    <attributes>    |
+|                    |
+|--------------------|
+|                    |
+|    <operations>    |
+|                    |
+|--------------------|
+```
+
+
+In the smaller top section we write the name of the class.
+In the middle section we write the attributes of the class.
+In the bottom section we write the operations of the class.
+Attributes are essentially instance variables (which in C# means that they are either instance [fields](fields) or instance [properties](properties)).
+Operations on the other hand are essentially [instance methods](instance-methods).
+We'll talk about these more in their respective chapters.
+The attributes and members of a class are together referred to as the "members" of the class.
+
+Consider for example the class `Cat` below.
 
 ```{code-cell}
 class Cat { }
 ```
 
+To depict this class using UML class diagram notation we would draw it like this:
+
 ```
-|--------------------|     |--------------------|
-| <class identifier> |     |         Cat        |
-|--------------------|     |--------------------|
-|                    |     |                    |
-|  <class members>   |     |                    |
-|                    |     |                    |
-|--------------------|     |--------------------|
+|--------------------|
+|         Cat        |
+|--------------------|
+|                    |
+|                    |
+|--------------------|
+|                    |
+|                    |
+|--------------------|
 ```
 
-The syntax is depicted on the left and an example of a class called `Cat` without any members is on the right.
+UML class diagrams are often, just like with math, used with a tad of informality with the purpose of not bogging down the user with too many details.
+Consequently you will often find that the class `Cat` might be depicted without the line between attributes and operations (left in the figure below).
+If the members are not relevant for the sake of the argument that's trying to be made, you'll sometimes find that they're even omitted altogether (right in the figure below).
 
+```
+|--------------------|    |--------------------|
+|         Cat        |    |                    |
+|--------------------|    |                    |
+|                    |    |         Cat        |
+|                    |    |                    |
+|                    |    |                    |
+|--------------------|    |--------------------|
+```
+
+Above: Two models of the `Cat` class using a more informal UML class diagram syntax.
 
 %## Examples
 

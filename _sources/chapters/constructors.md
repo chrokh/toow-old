@@ -20,6 +20,7 @@ Work in progress.
 %- Use it to set defaults.
 %- this keyword.
 %- Empty constructors. Implicit, explicit.
+%- Field initialization happens BEFORE.
 
 
 ## Motivation

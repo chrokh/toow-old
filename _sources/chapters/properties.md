@@ -7,7 +7,7 @@ Work in progress.
 %- Specific to some languages.
 %- Synonyms: Getters / Setters, Accessors, Mutators.
 %- Uniform access principle (use Robert Martin as source?)
-%- Initializers
+%- Object initializers. Have already taked about them a bit in the chapter on fields.
 %- Get, set, init, read-only (no setter).
 %
 

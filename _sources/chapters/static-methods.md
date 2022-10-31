@@ -10,6 +10,7 @@ kernelspec:
   name: .net-csharp
 ---
 
+(blocks)=
 # Static methods
 
 ```{warning}

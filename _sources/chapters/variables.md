@@ -55,6 +55,16 @@ Console.WriteLine(numberOfApples);
 Use of unassigned local variable 'numberOfApples'.
 ```
 
+% TODO: Write about the kinds of variables there are in C#? Too much technical detail? https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/variables#928-local-variables
+
+```{note}
+The kind of variables that we're looking at in this chapter are, in C#, known as "local variables".
+Local variables are "initially unassigned" 
+They can be defined in a [block](blocks), a [foreach](iteration) statement, or a [catch](exceptions) clause.
+Other kinds of variables are [static variables](static-variables) and [instance variables](fields) (instance fields).
+We'll talk more about all these things later.
+```
+
 Note that "uninitialized" is *not* the same as "undeclared".
 
 ```csharp
