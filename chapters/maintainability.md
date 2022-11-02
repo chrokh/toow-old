@@ -565,8 +565,18 @@ Explain each of them in your own words.
 ```
 
 ```{exercise}
-How is it possible to have a high level of modularity with a low level of reusability?
-Why is such a system problematic?
+How could it possible to have a high level of modularity while also having a low level of reusability?
+Why could such a system problematic?
+```
+
+```{exercise}
+How could it possible to have a high level of modularity while also having a low level of analysability?
+Why could such a system problematic?
+```
+
+```{exercise}
+How could it possible to have a high level of analysability while also having a low level of modularity?
+Why could such a system problematic?
 ```
 
 ```{exercise}
