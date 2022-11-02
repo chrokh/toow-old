@@ -16,6 +16,9 @@ kernelspec:
 Work in progress.
 ```
 
+%## Motivation
+%- NASA units example.
+
 ## Definition
 
 %### Make impossible states impossible
@@ -65,7 +68,7 @@ Each domain concept should map to a single object in our model. [Image will be r
 
 %## Examples
 
-% - Phone numbers over strings.
+% - Phone numbers over strings. Not just state, it's also about operations. Strings support concatenation, phone numbers do not.
 % - Nullable reference types and warnings as errors.
 
 %- The vowel that you stick between consonants in Robber's language is a great example. Wrap it in a class and define an automatic type conversion between that type and char.
@@ -99,109 +102,6 @@ Use set theory in your explanation.
 Why is `double` not a suitable type to represent the area of a triangle in centimeters?
 ```
 
-
-
-```{exercise-start}
-```
-```{code-cell} csharp
-:tags: [remove-input]
-class Vowel
-{
-  char letter;
-
-  public Vowel (char vowel)
-  {
-    string legal = "AEIOU";
-    if (legal.IndexOf(Char.ToUpper(vowel)) == -1)
-      throw new ArgumentException("Must be a vowel (AEIOU).");
-    letter = vowel;
-  }
-
-  public char ToChar () => letter;
-
-  public static implicit operator char(Vowel v) => v.ToChar();
-}
-```
-Write a class that models the domain concept of English vowels.
-It should be possible to pass upper and lowercase vowels as characters when instantiating it, and it should be possible to extract these vowels again.
-See the usage examples below.
-
-```{code-cell} csharp
-char c1 = new Vowel('A').ToChar();
-Console.WriteLine(c1);
-```
-
-```{code-cell} csharp
-char c2 = new Vowel('u').ToChar();
-Console.WriteLine(c2);
-```
-
-If however you try to instantiate the class by passing a non-vowel character then the class should throw an `ArgumentException`.
-
-```{code-cell} csharp
-:tags: [raises-exception]
-new Vowel('z').ToChar();
-```
-```{exercise-end}
-```
-
-
-
-
-
-```{exercise-start}
-```
-Write a bunch of classes that can be used to model time in seconds, minutes, and hours.
-Make sure that your code behaves according to the usage example below.
-
-Hint: Consider converting to the base unit (seconds) before performing other conversions to avoid duplication.
-```{code-cell} csharp
-:tags: [remove-input]
-abstract class Time
-{
-  public double Number { get; set; }
-  public abstract Seconds ToBaseUnit ();
-  public Seconds ToSeconds () => ToBaseUnit();
-  public Minutes ToMinutes () => new Minutes(ToBaseUnit().Number / 60);
-  public Hours ToHours () => new Hours(ToBaseUnit().Number / 3600);
-}
-
-class Seconds : Time {
-  public Seconds (double x) => Number = x;
-  public override Seconds ToBaseUnit ()
-    => this;
-}
-class Minutes : Time {
-  public Minutes (double x) => Number = x;
-  public override Seconds ToBaseUnit () => new Seconds (Number * 60);
-}
-class Hours : Time {
-  public Hours (double x) => Number = x;
-  public override Seconds ToBaseUnit() => new Seconds (Number * 3600);
-}
-```
-```{code-cell} csharp
-void printTime (Time t)
-{
-  Seconds s = t.ToSeconds();
-  Minutes m = t.ToMinutes();
-  Hours h = t.ToHours();
-  Console.WriteLine($"{s.Number}s = {m.Number}mins = {h.Number}hrs.");
-}
-
-printTime(new Seconds(4500));
-printTime(new Hours(0.75));
-printTime(new Minutes(15));
-```
-```{exercise-end}
-```
-
-
-
-```{exercise}
-Write a class that can be used to represent phone numbers for your country.
-Illegal states should not be representable.
-```
 
 
 

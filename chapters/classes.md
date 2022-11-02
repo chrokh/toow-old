@@ -297,6 +297,28 @@ Above: Two models of the `Cat` class using a more informal UML class diagram syn
 %
 %- TODO: Documentation comments.
 
+
+(throwing-exceptions)=
+### Exceptions
+
+Let's talk about one more thing before we move on.
+Remember how our programs throw an [exception](exceptions) if, for example, we try to access an index that's outside the bounds of an [array](array)?
+Well, we can also throw exceptions ourselves.
+
+To throw an exception, in C#, we simply type `throw` and then instantiate an exception class.
+What are some available exception classes in .NET?
+To find that out we have to resort to the [documentation](https://learn.microsoft.com/en-us/dotnet/api/system.exception?view=net-7.0).
+
+One exception that we use extensively in this book, is `ArgumentException`.
+Try instantiating and throwing an exception and see what happens.
+
+```{code-cell}
+throw new ArgumentException();
+```
+
+
+
+
 ## Exercises
 
 ```{exercise}
@@ -338,5 +360,9 @@ What are class members?
 ```{exercise}
 Create a UML class diagram that depicts two classes.
 One class is called `Fruit` and the other `Bowl`.
+```
+
+```{exercise}
+Write a program that instantiates and throws an exception of type `ArgumentException`.
 ```
 

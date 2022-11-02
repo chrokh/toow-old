@@ -160,6 +160,7 @@ Console.WriteLine( new Balloon().Diameter == 0 );
 ```
 
 
+(object-initializers)=
 ### Object initializers
 
 When you've got a class whose instance fields you have access to, it is, in C#, possible to use the "object initializer" syntax.

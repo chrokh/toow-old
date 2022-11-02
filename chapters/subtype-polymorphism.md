@@ -726,6 +726,60 @@ Why is it important that the signature of constructors can vary freely between s
 When we treat a subtype as a supertype, meaning when we let the compile-time type be the supertype, why can't we call methods that are only defined in the subtype?
 ```
 
+```{exercise}
+Rewrite the class `Vowel` that you wrote in {numref}`ex:constructors:vowel` so that each vowel is modeled by its own subtype of `IVowel`.
+```
+
+
+```{exercise-start}
+```
+Write a bunch of classes that can be used to model time in seconds, minutes, and hours.
+Make sure that your code behaves according to the usage example below.
+
+Hint: Consider converting to the base unit (seconds) before performing other conversions to avoid duplication.
+```{code-cell} csharp
+:tags: [remove-input]
+abstract class Time
+{
+  public double Number { get; set; }
+  public abstract Seconds ToBaseUnit ();
+  public Seconds ToSeconds () => ToBaseUnit();
+  public Minutes ToMinutes () => new Minutes(ToBaseUnit().Number / 60);
+  public Hours ToHours () => new Hours(ToBaseUnit().Number / 3600);
+}
+
+class Seconds : Time {
+  public Seconds (double x) => Number = x;
+  public override Seconds ToBaseUnit ()
+    => this;
+}
+class Minutes : Time {
+  public Minutes (double x) => Number = x;
+  public override Seconds ToBaseUnit () => new Seconds (Number * 60);
+}
+class Hours : Time {
+  public Hours (double x) => Number = x;
+  public override Seconds ToBaseUnit() => new Seconds (Number * 3600);
+}
+```
+```{code-cell} csharp
+void printTime (Time t)
+{
+  Seconds s = t.ToSeconds();
+  Minutes m = t.ToMinutes();
+  Hours h = t.ToHours();
+  Console.WriteLine($"{s.Number}s = {m.Number}mins = {h.Number}hrs.");
+}
+
+printTime(new Seconds(4500));
+printTime(new Hours(0.75));
+printTime(new Minutes(15));
+```
+Rember the maxim [types over tests](types-over-tests).
+Illegal states should not be representable.
+```{exercise-end}
+```
+
 
 % TODO:
 %````{admonition} Another example

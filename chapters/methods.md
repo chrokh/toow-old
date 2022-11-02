@@ -143,6 +143,7 @@ Inserting a return statement before the end of the method is known as an "early 
 
 
 % TODO: Make its own chapter?
+(expression-bodied-members)=
 ### Expression-bodied members
 
 In C# there's this feature known as expression-bodied members.

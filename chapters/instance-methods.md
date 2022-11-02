@@ -16,6 +16,9 @@ kernelspec:
 Work in progress.
 ```
 
+%Let's look at the `Balloon` class that we discussed in the chapter on [classes](classes).
+%We said that by exposing instance fields using the [access modifier](access-modifiers) `public` we are breaking encapsulation, or violating the principle of information hiding.
+
 %- Cannot use top-level statements
 %%- Overloading
 %%- Signatures.
@@ -368,8 +371,7 @@ In your own words, explain how instance methods are different from static method
 ```
 
 ```{exercise}
-When and why would you choose to expose a parameter through the constructor as opposed to through an instance method?
-Explain using your own words.
+What do we mean when we say that public fields "break" encapsulation?
 ```
 
 ```{exercise-start}
