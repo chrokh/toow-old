@@ -26,22 +26,23 @@ Work in progress.
 ```{epigraph}
 Testing is good. Impossible is better.
 
--- Richard Feldman [[Source needed.](https://youtu.be/IcgmSRJHu_8?t=484)]
+-- Richard Feldman [[Source.](https://youtu.be/IcgmSRJHu_8?t=484)]
 ```
 
 ```{epigraph}
 Make illegal states unrepresentable.
 
--- Yaron Minsky [[Source needed.](https://maximilianocontieri.com/software-engineering-great-quotes)]
+-- Yaron Minsky [[Source.](https://maximilianocontieri.com/software-engineering-great-quotes)]
 ```
 
 ```{epigraph}
 Make impossible states impossible.
 
--- Richard Feldman [[Source needed.](https://youtu.be/IcgmSRJHu_8)]
+-- Richard Feldman [[Source.](https://youtu.be/IcgmSRJHu_8)]
 ```
 
 
+(bijection-rule)=
 %### Bijection rule
 
 ```{epigraph}

@@ -405,7 +405,7 @@ While this solves the problem we loose static type safety for player access.
 We expose ourselves to potential run-time errors.
 What happens if we mistakenly pass the number `1` to a move method, as in `MovePlayerEast(1)` when we only happen to have a single player in the game.
 That's right, instead of getting an error at compile time, we get an `IndexOutOfRangeException` when actually running the program.
-Remember the principle of [failling fast](fail-fast) that we discussed in the chapter on errors?
+Remember the principle of [failling fast](fail-fast)?
 We should prefer compile-time errors over run-time errors.
 
 Hopefully you are starting to see that what we need here is something a bit more powerful than procedures.

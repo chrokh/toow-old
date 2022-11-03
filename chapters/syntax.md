@@ -91,7 +91,7 @@ If we instead tried to use what is known as prefix notation and first stated the
 ```
 
 Syntactic errors are known as syntax errors.
-When we find ourselves looking at a program that "doesn't work", we must ask ourselves whether we mean that the program exhibits syntax errors (also known as syntax errors), semantic errors, or combinations of the two.
+When we find ourselves looking at a program that "doesn't work", we must ask ourselves whether we mean that the program exhibits syntax errors, semantic errors, or combinations of the two.
 
 When dealing with [compiled](compilation) languages, syntax errors are brought to our attention, by the compiler, at, what is known as, compile-time.
 When dealing with [interpreted](interpretation) languages, syntax errors are only brought to our attention, by the interpreter, at, what is known as, run-time.

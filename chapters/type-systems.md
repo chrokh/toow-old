@@ -1,9 +1,27 @@
+---
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  display_name: csharp
+  language: .net-csharp
+  name: .net-csharp
+---
+
 # Type systems
+
+
+## Motivation
 
 C# is a statically and nominally typed language with manifested types.
 In this chapter we'll talk about what that means.
 A type system lets us assign a type to each, so called, term, in a program.
 In C#, all [variables](variables), [constants](constants), [expressions that return values](expressions), and methods have a type.
+
+
+## Definition
 
 A language with types is said to have a type system and type systems can be classified in a number of dimensions that we'll discuss in this chapter.
 
@@ -16,7 +34,7 @@ A language with types is said to have a type system and type systems can be clas
 
 (type-safety)=
 (static-vs-dynamic)=
-## Static vs dynamic
+### Static vs dynamic
 
 Whether a language is statically typed or dynamically typed dictates whether [type-checking](type-checking) occurs at [compile-time](compilation) or at [run-time](execution).
 Colloquially we refer to this as the language being static or dynamic.
@@ -32,14 +50,10 @@ Meaning that anytime we get a type error at compile-time we are saved from all o
 %In practice however, most compilers and interpreters for most languages are all either static or dynamic which leads to us referring to the languages themselves as one or the other.
 %The official C# compiler employs static typing and hence C# is usually referred to as a statically typed language.
 
-```{exercise}
-What is the difference between statically typed and dynamically typed languages?
-```
-
 Some statically typed languages, such as C#, does however provide ways of leaving the realm of static typing at your request.
 In C# we have the special type `dynamic` which can hold any run-time type.
 
-```csharp
+```{code-cell}
 dynamic v1 = 1;
 dynamic v2 = "hello";
 dynamic v3 = true;
@@ -48,16 +62,10 @@ dynamic v3 = true;
 Like in some dynamically typed languages, the value does however still have a run-time type.
 Check out the code example below where we check the types of the `dynamic` variables declared above.
 
-```csharp
+```{code-cell}
 Console.WriteLine( v1.GetType() );
 Console.WriteLine( v2.GetType() );
 Console.WriteLine( v3.GetType() );
-```
-
-```output
-System.Int32
-System.String
-System.Boolean
 ```
 
 Using the keyword `dynamic` consequently doesn't mean that we move from a world of multiple types into a world of no types at all.
@@ -70,45 +78,35 @@ The compiler assumes that values given the compile-time type `dynamic` supports 
 This means that all operations will be allowed at compile-time.
 If we invoke an operation that does in fact also exist in the run-time type, the program will compile and run.
 
-```csharp
+```{code-cell}
 dynamic x1 = 1;
 dynamic x2 = 1;
 Console.WriteLine(x1 + x2);
 ```
 
-```result
-2
-```
-
 If however we invoke an operation that does *not* exist in the run-time type we then the program will still compile but it will crash with an exception at run-time.
 We can get a run-time error if we call a method that doesn't exist:
 
-```csharp
+```{code-cell}
+:tags: [raises-exception]
 dynamic z = 1;
 z.FlyToTheMoon();
 ```
 
-```output
-Unhandled exception. Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'int' does not contain a definition for 'FlyToTheMoon'
-```
-
 But we can also get a run-time error if we use a value with an operator that isn't supported:
 
-```csharp
+```{code-cell}
+:tags: [raises-exception]
 dynamic y1 = 1;
 dynamic y2 = true;
 
 int result = y1 + y2;
 ```
 
-```output
-Unhandled exception. Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: Operator '+' cannot be applied to operands of type 'int' and 'bool'
-```
-
 
 
 (manifested-vs-inferred)=
-## Manifested vs inferred
+### Manifested vs inferred
 
 Whether a type system uses manifested or inferred types dictates whether we, as programmers, have to explicitly state the types in our programs or whether they are inferred by the compiler.
 
@@ -167,25 +165,16 @@ We'll talk more about anonymous types in its own chapter, but for now I just wan
 See the [official documentation](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/var) for more information about implicitly typed local variables (the keyword `var`).
 ```
 
-```{exercise}
-What is the difference between manifested types and inferred types?
-What does this difference mean in terms of compile-time and run-time types?
-```
-
-```{exercise}
-Can a language be statically typed yet still have mostly inferred types? Why?
-```
-
 
 (nominal-vs-structural)=
-## Nominal vs structural
+### Nominal vs structural
 
 % TODO: http://wiki.c2.com/?NominativeAndStructuralTyping
 % TODO: https://medium.com/higher-order-functions/duck-typing-vs-structural-typing-vs-nominal-typing-e0881860bf10
 % TODO: - P. 252, section 19.3 of Types and Programming Languages. Bejamin Pierce.
 
 The third dimension in which we can classify a type system is in whether its types are nominal or structural.
-Whether the type system is nominative or structural.
+Whether the type system is nominal or structural.
 Again, many languages are mixes of the two but it's easier to understand the concepts if we look at the extremes.
 C# is mostly a nominally typed language but "anonymous types" (see [documentation](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/types/anonymous-types)) are arguably structurally typed.
 
@@ -217,12 +206,8 @@ Consequently, nominal subtypes are also usually structural subtypes.
 %Theoretically, the concept of nominal types can be thought of as a subset of the idea of structural types.
 %Any two nominal types that are in an equivalence or subtype relationship is also structurally equivalent.
 
-```{exercise}
-What is the difference between a nominative and a structural type system?
-```
 
-
-## Duck typing
+### Duck typing
 
 Before we leave this chapter we must also talk about something known as duck typing.
 Some argue that duck typing is another point on the dimension where we find structural and nominal typing.
@@ -279,6 +264,26 @@ There is no point in arguing about whether robots are not ducks.
 For all intents and purposes they behave like ducks.
 
 When you've read the chapter on [interfaces](interfaces) I highly recommend that you come back to this chapter again and think about the relationship between duck types and interfaces.
+
+
+## Exercises
+
+```{exercise}
+What is the difference between statically typed and dynamically typed languages?
+```
+
+```{exercise}
+What is the difference between manifested types and inferred types?
+What does this difference mean in terms of compile-time and run-time types?
+```
+
+```{exercise}
+Can a language be statically typed yet still have mostly inferred types? Why?
+```
+
+```{exercise}
+What is the difference between a nominal and a structural type system?
+```
 
 ```{exercise}
 What is duck typing? How does it relate to structural typing?

@@ -73,52 +73,6 @@ Null-state errors ought to be considered semantic errors but I have chosen to hi
 
 
 
-(fail-fast)=
-(prefer-compile-time-errors)=
-## Fail fast!
-
-% TODO: Also known as: Fail fast!
-% TODO: Also talk about how exceptions should be thrown as early as possible so that we can find the root cause.
-% TODO: https://maximilianocontieri.com/fail-fast
-
-The sooner we can discover a mistake, the easier it will be to fix it.
-So tautologically we conclude that compile-time errors should be favored over run-time errors.
-
-Saying that compile-time errors are preferable over run-time errors solely for the fact that they appear earlier would however be to miss the mark completely.
-The key thing to realize is that if you can move a run-time error to compile-time that means that you can guarantee that this error doesn't ever happen when your program is running.
-
-Indeed we might even call this a "design principle".
-We'll talk about what [design principles](design-principles) are later.
-But for now, you can think of design principles as ideas that aim to improve the maintainability of code.
-
-```{admonition} Design principle
-:class: tip
-Prefer compile-time errors over run-time errors.
-```
-
-I realize that we haven't talked about enough concepts for this argument to fully fly yet, so we'll return to it when discussing the design principle "[types over tests](types-over-tests)" in a later chapter.
-The key point is simply that instead of designing programs that might crash at run-time, we should design programs that cannot even be compiled if they run the risk of crashing at run-time.
-
-Said differently, a program that contains potential run-time errors must be meticulously searched for all possible places in which it can crash so that a crash can be prevented and even then, there are no guarantees.
-Contrast this to a program that contains compile-time errors.
-This program cannot even be created let alone ran if it contains errors.
-
-As an example, think about the addition operator.
-Assume that we agree that there is no reasonable one-size-fits-all implementation of the addition operators that let us add numbers and letters.
-Would it be preferable to define the addition operator so that it crashes at compile-time or at runtime if you attempt to add a number to a letter?
-Would you want to be allowed to the compile a program that, by accident, contains the expression `10 + 'A'` only to have it crash at run-time or would you rather be prevented from ever running the program in the first place?
-
-Here's an analogy.
-If you're going to paint the facade of a house and you're using a tall ladder that you're suspecting is unreliable.
-Would you rather that the ladder breaks down and leaves you tumbling when you've just stepped off the ground or when your three meters up in the air?
-Failing fast is safer because it has less consequences.
-
-
-
-```{exercise}
-Why could it be argued that we should prefer compile-time errors over run-time errors?
-```
-
 
 %## TODO: Unavoidable run-time errors
 %
