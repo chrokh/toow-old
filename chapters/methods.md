@@ -449,6 +449,7 @@ So how do we get rid of this duplication?
 
 (methods:substitution-ciphers)=
 (methods-substitutions)=
+(parameterizing-what-varies)=
 ### Substitution ciphers
 
 Let's think about our use case a bit more.

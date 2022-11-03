@@ -578,6 +578,13 @@ Yes, of course.
 
 Welcome to the powerful world of subtype polymorphism.
 
+(replace-conditional-with-polymorphism)=
+### Replace conditional with polymorphism
+
+```{warning}
+Work in progress.
+```
+
 
 ## Discussion
 
