@@ -18,6 +18,7 @@ Work in progress.
 
 %Let's look at the `Balloon` class that we discussed in the chapter on [classes](classes).
 %We said that by exposing instance fields using the [access modifier](access-modifiers) `public` we are breaking encapsulation, or violating the principle of information hiding.
+% ~>
 
 %- Cannot use top-level statements
 %%- Overloading
