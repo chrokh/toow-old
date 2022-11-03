@@ -921,3 +921,50 @@ How is it useful?
 %
 %This means that the `LeetStringCipher` which we've now renamed to `LeetCipher` and the `RobbersStringCipher` which we've now renamed to simply `RobbersCipher` can become utterly trivial.
 %
+
+
+
+
+% TODO: MOVED HERE FROM DATA TYPES CHAPTER. USE HERE?
+%#### Dot notation
+%
+%Let's now talk about dot notation.
+%If you use dot notation on an object then we are calling an [instance method](instance-methods) on that object.
+%If you use dot notation on a class then we are calling a [static method](static-methods) on that class.
+%We'll talk a lot more about both instance and static methods in their respective chapters so don't worry if it feels overwhelming at this point.
+%
+%We've already discussed how we can use the instance method `GetType` to make an object report what it's run-time type is.
+%This method is an instance method that we call using dot-notation and that can be called on all things that can be treated as objects.
+%More on this in the chapter on [type hierarchies](type-hierarchies).
+%
+%```csharp
+%"A".GetType();
+%420.GetType();
+%3.14.GetType();
+%```
+%
+%What I want to show you now is that the data type of the method `GetType` can be defined like this:
+%
+%```
+%GetType :: object ~> string
+%```
+%
+%We can read this type signatures as that `GetType` is an instance method on the type `object` that when called without any arguments, returns a `string`.
+%
+%Another method that we've seen a lot is the method `WriteLine`.
+%This is a static method that can be run in a number of different ways since it has been defined with a bunch of different, so called, [method overloads](overloading).
+%More on this in it's own chapter, but this means that the method `WriteLine` has a bunch of different type signatures.
+%Some of the signatures that we've used are listed below.
+%
+%```
+%WriteLine :: string -> void
+%WriteLine :: bool -> void
+%WriteLine :: int -> void
+%```
+%
+%The first one says that `WriteLine` is a static method that, when called with a `string`, returns nothing.
+%The second one says that `WriteLine` is a static method that, when called with a `bool`, returns nothing.
+%Finally, the third one says that `WriteLine` is a static method that, when called with an `int`, returns nothing.
+%
+%The astute reader might have noticed that we snuck the type `void` into the examples above and then referred to it as "nothing" when reading the types.
+%We'll return to this special data type in the chapter on [nothingness](nothingness).
