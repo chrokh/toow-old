@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>53. Verification &#8212; The Object Oriented Way (DRAFT)</title>
+    <title>59. Fail fast &#8212; The Object Oriented Way (DRAFT)</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="54. Maintainability" href="maintainability.html" />
-    <link rel="prev" title="52. Validation" href="validation.html" />
+    <link rel="next" title="60. Objects" href="objects.html" />
+    <link rel="prev" title="58. Types over tests" href="types-over-tests.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -471,7 +471,7 @@ const thebe_selector_output = ".output, .cell_output"
   Requirements
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="requirements.html">
    51. ★ Requirements
@@ -482,8 +482,8 @@ const thebe_selector_output = ".output, .cell_output"
    52. Validation
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="verification.html">
    53. Verification
   </a>
  </li>
@@ -493,7 +493,7 @@ const thebe_selector_output = ".output, .cell_output"
   Maintainability
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="maintainability.html">
    54. ★ Maintainability
@@ -519,8 +519,8 @@ const thebe_selector_output = ".output, .cell_output"
    58. (★E) Types over tests
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="fail-fast.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    59. ★ Fail fast
   </a>
  </li>
@@ -1010,7 +1010,7 @@ title="Fullscreen mode"
   </span>
 
 </button>
-<a href="https://github.com/chrokh/the-oo-way/issues/new?title=Issue%20on%20page%20%2Fchapters/verification.html&body=Your%20issue%20content%20here."
+<a href="https://github.com/chrokh/the-oo-way/issues/new?title=Issue%20on%20page%20%2Fchapters/fail-fast.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="bottom"
@@ -1032,7 +1032,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/chapters/verification.md"
+        <a href="../_sources/chapters/fail-fast.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -1069,23 +1069,60 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   59.1. Exercises
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Verification</h1>
+                <h1>Fail fast</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   59.1. Exercises
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -1093,15 +1130,62 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="verification">
-<h1><span class="section-number">53. </span>Verification<a class="headerlink" href="#verification" title="Permalink to this headline">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="prefer-compile-time-errors">
+<span id="fail-fast"></span><span id="id1"></span><h1><span class="section-number">59. </span>Fail fast<a class="headerlink" href="#prefer-compile-time-errors" title="Permalink to this headline">#</a></h1>
+<p>As we have seen, there are plenty of mistakes that we can make that cause our programs to fail to compile or even crash at run-time.</p>
+<p>One way of classifying errors is in regards to the notion of <em>time</em>.
+When did the error occur?
+Did the error occur at <em><a class="reference internal" href="compilation.html"><span class="doc std std-doc">compile-time</span></a></em> or at <em><a class="reference internal" href="execution.html"><span class="doc std std-doc">run-time</span></a></em>?
+In other words, did it occur when we compiled the program or when we tried to run it?
+Many (mostly <a class="reference internal" href="interpretation.html"><span class="doc std std-doc">interpreted</span></a>) languages (such as JavaScript and Python) tend to skip compile-time error checking altogether.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Checking for errors at compile-time without running the program, is sometimes called “static code analysis” or “static testing”.
+Checking for errors at run-time, meaning while running the program, is sometimes called “dynamic code analysis” or “dynamic testing”.
+We’ll talk more about assessing <span class="xref myst">correctness</span> in its own chapter.</p>
 </div>
-<blockquote class="epigraph">
-<div><p>Are we doing the thing right?</p>
-</div></blockquote>
+<p>A simple, but important design principle is that of “failing fast”.
+The principle postulates that the sooner we can discover a mistake, the easier it will be to fix it.
+The more “local” an error is, the easier it is to recover from it.</p>
+<p>Practically, this has two consequences:</p>
+<ol class="simple">
+<li><p>If we’ve encountered a “bad” value we should not propogate the value further since it may cause a run-time error later. Instead we should throw an exception.</p></li>
+<li><p>Compile-time errors should be favored over run-time errors.</p></li>
+</ol>
+<p>We’ll talk much more about what a “bad” value could be when we get to the <a class="reference internal" href="types-over-tests.html#bijection-rule"><span class="std std-ref">bijection rule</span></a>.
+In short, what we mean is a value that doesn’t correspond to anything meaningful in the domain that we’re trying to model.
+Like an invalidly formatted phone number <code class="docutils literal notranslate"><span class="pre">string</span></code> for example.</p>
+<p>Regarding the point of not propagating a “bad” value, the idea is that, as mentioned, that an error ought to be easier to deal with the more local it is.
+Take the invalid phone number again as an example.
+What would be easier?
+Dealing with an incorrectly formatted phone number right after the user has entered it.
+Or dealing with an incorrectly formatted phone number that the user entered a long time ago when we are now trying to call the user on that phone number.
+Clearly, we can write more meaningful implementations if we deal with the error when the incorrect phone number was entered.</p>
+<p>Let’s talk about the second idea.
+The principle of preferring compile-time errors over run-time errors.</p>
+<p>I realize that we haven’t talked about enough concepts for this argument to fully fly yet, so we’ll return to it when discussing the design principle “<a class="reference internal" href="types-over-tests.html"><span class="doc std std-doc">types over tests</span></a>” in a later chapter.
+The key point is though that:</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Instead of designing programs that might crash at run-time, we should design programs that cannot even be compiled if they run the risk of crashing at run-time.</p>
+</div>
+<p>Said differently, a program that contains potential run-time errors must be meticulously searched for all possible places in which it can crash so that a crash can be prevented and even then, there are no guarantees.
+Contrast this to a program that contains compile-time errors.
+This program cannot even be created let alone ran if it contains errors.</p>
+<p>Here’s an analogy.
+If you’re going to paint the facade of a house and you’re using a tall ladder that you’re suspecting is unreliable.
+Would you rather that the ladder breaks down and leaves you tumbling when you’ve just stepped off the ground or when your three meters up in the air?
+Failing fast is safer because it has less consequences.</p>
+<section id="exercises">
+<h2><span class="section-number">59.1. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<div class="exercise admonition" id="chapters/fail-fast-exercise-0">
+
+<p class="admonition-title"><span class="caption-number">Exercise 59.1 </span></p>
+<section id="exercise-content">
+<p>Why could it be argued that we should prefer compile-time errors over run-time errors?</p>
+</section>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1131,17 +1215,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="validation.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="types-over-tests.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">52. </span>Validation</p>
+            <p class="prev-next-title"><span class="section-number">58. </span>Types over tests</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="maintainability.html" title="next page">
+    <a class='right-next' id="next-link" href="objects.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">54. </span>Maintainability</p>
+        <p class="prev-next-title"><span class="section-number">60. </span>Objects</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

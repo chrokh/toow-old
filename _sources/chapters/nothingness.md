@@ -154,7 +154,7 @@ You can still compile the program and it might run just fine.
 %Before we move forward we should make one distinction clear.
 %I use sets and types to reason about how we change the permitted values of reference types but null-state analysis is not the same as any old type-checking.
 
-So, while both value types and reference types are non-nullable the way they are so differs in two important ways:
+So, while both value types and reference types are non-nullable the way they are so differs in three important ways:
 
 1. Value types are non-nullable regardless of whether we turn on the `Nullable` setting or not. The `Nullable` setting only affects the nullability of reference types.
 2. A program that assigns `null` to a value type can *not* be compiled while a program that assigns `null` to a reference type *can* be. In the case of value types you get a compilation error but in the case of reference types you only get a warning.
