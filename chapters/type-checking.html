@@ -1195,7 +1195,7 @@ In the process of type checking the compiler ensures that the program is sound o
 Concretely this means that the compiler checks what type that every <a class="reference internal" href="expressions.html"><span class="doc std std-doc">expression</span></a> will evaluate to and whether that type is acceptible at the place where it will be evaluated.</p>
 <p>Type-checking can be performed at compile-time or at run-time.
 In C# type-checking occurrs at compile-time.</p>
-<p>Simplistically put, type-checking concerns ensuring that all expressions yield <a class="reference internal" href="data-types.html#run-time-and-compile-time-types"><span class="std std-ref">run-time types</span></a> that are members of said expression’s <span class="xref myst">compile-time type</span>.
+<p>Simplistically put, type-checking concerns ensuring that all expressions evaluate to values of types that are compatible with whatever type is expected where the expressions are evaluated.
 This not only includes checking for example arithmetic and logical expressions but also method calls.
 We have yet to talk about <a class="reference internal" href="static-methods.html"><span class="doc std std-doc">methods</span></a>, but as we saw in the chapter on <a class="reference internal" href="data-types.html#operations"><span class="std std-ref">data types</span></a> methods too have types.
 The type of a method declaration is its name; its number, order, and type of arguments; as well as its return type.</p>
@@ -1223,7 +1223,7 @@ Have a look at the error we get.</p>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3875.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-4009.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1268,12 +1268,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.142:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.1.175:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3875.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '4009.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
