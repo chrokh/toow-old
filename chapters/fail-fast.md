@@ -153,7 +153,18 @@ Failing fast is safer because it has less consequences.
 ## Exercises
 
 ```{exercise}
+We've argued that the principle of "failing fast" has two consequences.
+One regards run-time errors, and the other compile-time errors.
+What are these two consequences?
+```
+
+```{exercise}
 Why could it be argued that we should prefer compile-time errors over run-time errors?
+```
+
+```{exercise}
+The principle of "failing fast" prescribes that we should prefer to throw exceptions over letting invalid data propagate through the system.
+Why?
 ```
 
 
