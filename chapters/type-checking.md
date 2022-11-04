@@ -22,7 +22,7 @@ Concretely this means that the compiler checks what type that every [expression]
 Type-checking can be performed at compile-time or at run-time.
 In C# type-checking occurrs at compile-time.
 
-Simplistically put, type-checking concerns ensuring that all expressions yield [run-time types](run-time-and-compile-time-types) that are members of said expression's [compile-time type](run-time-and-compile-time-type).
+Simplistically put, type-checking concerns ensuring that all expressions evaluate to values of types that are compatible with whatever type is expected where the expressions are evaluated.
 This not only includes checking for example arithmetic and logical expressions but also method calls.
 We have yet to talk about [methods](static-methods), but as we saw in the chapter on [data types](operations) methods too have types.
 The type of a method declaration is its name; its number, order, and type of arguments; as well as its return type.
