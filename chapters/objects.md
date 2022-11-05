@@ -414,7 +414,7 @@ We need a better abstraction of what we're trying to model.
 
 C# does however not allow us to construct custom data structures that aren't also essentially objects (or implicitly [convertible to an object](everything-is-an-object)).
 So for the sake of not having to introduce an entirely new language into this book we're going to pretend that languages that existed before the advent of object oriented programming didn't grant us encapsulated custom data structures.
-That assumption is certainly *not true*
+That assumption is certainly *not true*.
 Non-object oriented languages did indeed provide mechanisms for encapsulation and as such it would be possible to solve the issues outlined even in a language that we might want to categorize as procedural.
 
 But, let's get back to object oriented programming.
