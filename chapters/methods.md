@@ -18,10 +18,6 @@ kernelspec:
 (local-functions)=
 # Methods
 
-```{warning}
-Work in progress.
-```
-
 ## Motivation
 
 Remember the design principle "[don't repeat yourself](DRY)"?
@@ -55,8 +51,12 @@ Why are we starting here?
 Well, perhaps you remember how we in the chapter on [compilation](top-level-statements) discussed how C# supports something called "top-level statements" which allow you to just start writing code without having to define a main class and a static main method.
 It's not that the main method doesn't exist, it's just that it's generated for you.
 
-So, what should you take away from all this nonsense?
 When we're using top-level statements and start defining methods without making them members of a class then they will be either local functions or [lambda expressions](lambdas) which we'll talk about much later.
+
+So, what should you take away from all this nonsense?
+What C# calls local functions is the simplest way to learn about methods/procedures/functions in C#.
+There are other ways to write methods in C# but let's worry about that later.
+Now, let's just learn how to do local functions.
 ```
 
 A local function consists of four parts that we must understand.
@@ -66,11 +66,12 @@ A local function consists of four parts that we must understand.
 3. A list of parameters with types.
 4. An implementation.
 
-```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
-:name: fig:local-method
-
-A local function consists of four parts: A name, a return type, a list of parameters, and an implementation.
-```
+% TODO: Figure
+%``{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
+%:name: fig:local-method
+%
+%A local function consists of four parts: A name, a return type, a list of parameters, and an implementation.
+%``
 
 In the code example below we're defining a local function called `add` which takes two parameters of type `int` and returns a value of type `int`.
 
@@ -113,7 +114,7 @@ In terms of terminology, an "argument" is used in place of a "parameter".
 
 Let's say we want to add the numbers `1` and `2`.
 Well, we simply apply the function, just like we would in mathematics.
-We state the name of the function, an opening parenthasis, whatever values we want to pass as arguments for the parameters separated by comma, and close the parenthasis.
+We state the name of the function, an opening parenthesis, whatever values we want to pass as arguments for the parameters separated by comma, and close the parenthesis.
 Voilà, we've called the function.
 
 ```{code-cell} csharp
@@ -161,6 +162,7 @@ int add (int x, int y) => x + y;
 
 Notice how the `return` keyword is no longer needed since the function returns whatever the single expression returns.
 Notice also how there are no curly brackets needed since there's no block that needs delimiting.
+Instead we use the symbol known as "fat arrow" (`=>`) before we write the [expression](expression) that constitutes our method implementation.
 
 Of course we can still call it the same way:
 
@@ -184,11 +186,6 @@ We cannot declare a variable of type `void` and so we cannot ever store the resu
 
 
 ## Examples
-
-
-```{warning}
-Work in progress.
-```
 
 
 ### Reverse cipher
@@ -415,7 +412,7 @@ There are essentially three.
 
 ### Leet language
 
-But the eerie similarties doesn't stop here.
+But the eerie similarties don't stop there.
 Remember the [Leet language](leet-langauge) that you wrote a program for in {numref}`ex:iteration-leet`?
 
 Let's say we choose the same strategy as with the Caesar cipher and the Robber's language and decompose the problem into two subproblems.
@@ -473,7 +470,7 @@ And if you can subtype then you can pass around vastly different methods.
 But it's too soon to talk about those things.
 Don't worry, we'll get there eventually.
 
-```{seealso}
+```{note}
 It should however be noted that in the functional programming paradigm functions are, what we call, first-class citizens.
 This means that you can pass around functions as if they were data.
 It should be noted that this is a non-issue in functional programming languages since functions are first-class citizens.
