@@ -311,7 +311,8 @@ Console.WriteLine(SubstitutionCipher.EncodeStringWithStringReplacements("HELLO",
 ```
 
 ```{tip}
-We also wrote a method called `charCharArrayToCharStringArray` in the chapter on [methods](methods) and you're free to choose whether to add this as another method to this static class, to inline that code in the appropriate method above, or simply to use more duplication.
+We also wrote a method called `charCharArrayToCharStringArray` in {numref}`ex:methods-charchar-to-charstring`.
+Feel free to choose whether to add this as another method to this static class, to inline that code in the appropriate method above, or simply to use more duplication.
 ```
 ```{exercise-end}
 ```
