@@ -1303,7 +1303,7 @@ We do this by checking two <a class="reference internal" href="static.html"><spa
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2839.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2682.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1348,12 +1348,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.1.175:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.2.5:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2839.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2682.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1667,6 +1667,7 @@ But if we’re not satisfied with that answer, we can invoke the instance method
 So we don’t explicitly specify the right-hand types, or the run-time types, in this chapter.
 When we get to the chapter on <a class="reference internal" href="classes.html"><span class="doc std std-doc">classes</span></a> you will start to see explicit types on the right-hand side.
 When we get to the chapter on <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype polymorphism</span></a> you will start to see how the types on the right and left doesn’t necessarily have to be the same.</p>
+<p>Simplistically, the compile-time type is used for all actions at compile-time, while the run-time type is used for all actions at run-time.</p>
 </section>
 </section>
 <section id="operations">

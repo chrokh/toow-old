@@ -12,11 +12,6 @@ kernelspec:
 
 # Selection
 
-```{warning}
-Work in progress.
-```
-
-
 
 ## Motivation
 
@@ -28,11 +23,12 @@ To write any useful program, we need branches.
 Programs are not like lines, they are more like trees, or rather graphs.
 Most programs sprawl into a wild number of directions as soon as you start them up.
 
-```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
-:name: fig:programs-are-like-graphs
-
-Programs are not like lines, they are more like trees or graphs.
-```
+% TODO: Insert image
+%``{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
+%:name: fig:programs-are-like-graphs
+%
+%Programs are not like lines, they are more like trees or graphs.
+%``
 
 Just think of any old app or website where you have an account.
 When you login you enter your credentials.
@@ -158,31 +154,117 @@ This means that as soon as a matching condition is found, all other `else if` an
 
 (switch-statements)=
 ### The `switch` statement
-%- switch statement + switch expression
 
-```{warning}
-Work in progress.
+A switch statement matches an expression of your choice against a pattern of your choice in order to select which path to take.
+This is a process known as [pattern matching](pattern-matching) and we'll discuss it in more detail later.
+You can find a list of supported patterns in the [documentation](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/patterns).
+
+The different cases of the switch statement are checked one-by-one from the top down.
+As soon as our expression matches a pattern we enter into that branch and start executing the list of statements that defined there.
+
+In the example below you can see how we use the keyword `break`.
+This keyword is required in C# does not support what is known as "fall-through".
+Languages that support fall-through would, in the absence of a `break` keyword, keep checking cases even after it had found a match and executed some code.
+An example of a language that support fall-through is JavaScript.
+
+```{note}
+We have not talked about [methods](methods) yet, but if we use a `switch` statement in the body of a method and we `return` whenever we've found a match then we don't need to use the `break` keyword.
 ```
 
-### The ternary operator
+```{code-cell}
+char input = 'A';
 
-```{warning}
-Work in progress.
+switch (input)
+{
+  case 'A':
+    Console.WriteLine("The letter is A.");
+    break;
+  case 'B':
+    Console.WriteLine("The letter is B.");
+    break;
+  case 'C':
+  case 'D':
+  case 'E':
+    Console.WriteLine("The letter is C, D, or E.");
+    break;
+  default:
+    Console.WriteLine("The letter is something else.");
+    break;
+}
 ```
+
 
 (switch-expressions)=
 ### The `switch` expression
 
+The `switch` expression essentially works like a `switch` statement with one key difference.
+All cases must yield a single [expression](expression).
+
+Think about it, when we use a `switch` statement then we can do any number of things whenever we find a match.
+A `switch` *statement* selects a list of statements to execute.
+We can print to screen, write to file, ask the user for input, and so forth.
+A `switch` *expression* however selects an expression to evaluate.
+This means that we can take the result of a `switch` *expression* and, for example, assign it to a variable.
+
+To create a `switch` expression rather than a `switch` statement we say `expression switch { ... }` rather than `switch (expression) { ... }`.
+In a `switch` expression we don't have to explicitly use the keyword `case`.
+We use the commas (`,`) to delimit cases, which are known as "expression arms".
+We use the symbol known as "fat arrow" (`=>`) instead of colon (`:`).
+
+If we want to let multiple patterns result in the same expression then we can use a [logical pattern](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/patterns#logical-patterns), like `or`.
+But more on this in the chapter on [pattern matching](pattern-matching).
+
+
 ```{code-cell} csharp
 char input = 'A';
+
 string output = input switch
 {
-  'A' => "The input letter is an A.",
-  _   => "The input letter is something else."
+  'A' => "The letter is A.",
+  'B' => "The letter is B.",
+  ('C' or 'D' or 'E') => "The letter is C, D, or E.",
+  _ => "The letter is something else.",
 };
+
 Console.WriteLine(output);
 ```
 
+
+
+### The ternary operator
+
+The difference between an `if` statement and the ternary operator is like the difference between a `switch` statement and a `switch` expression.
+The former results in statements and the latter in an expression.
+
+The ternary operator checks whether some expression evaluates to `true` and if it does evaluates the first expression, otherwise it evaluates the second.
+The syntax is as follows:
+
+```
+condition ? consequent : alternative
+```
+
+Let's take an example.
+
+```{code-cell}
+char input = 'A';
+string msg = (input == 'A') ? "Letter is A." : "Letter is something else";
+Console.WriteLine(msg);
+```
+
+The parenthases in the above example are not necessary.
+They are merely used here for added readability.
+
+When you have a long ternary expression, some choose to format it over multiple lines like in the example below.
+
+```{code-cell}
+char input = 'A';
+
+string msg = input == 'A'
+  ? "Letter is A."
+  : "Letter is something else";
+
+Console.WriteLine(msg);
+```
 
 
 
@@ -301,27 +383,22 @@ Give a code example of each of the following four ways of doing selection in C#:
 Assume that you have a variable called `letter` of type `char` but you don't know what value it contains.
 Write a program that prints `VOWEL` if the letter is a vowel and `CONSONANT` if the letter is a consonant.
 
-If e.g. the program starts with:
-
+If your program starts like this:
 ```csharp
 char letter = 'A';
 ```
-
-then your program should print:
-
+then when you run it, it should print:
 ```output
 VOWEL
 ```
 ````
 
-````{exercise}
+```{exercise-start}
 :label: ex:selection-leet
+```
 Remember the Leet language that we talked about in the chapter on [algorithms](leet-language)?
 Much like the Robber's language the Leet language encodes the string by replacing character by character.
 In other words, it too is a substitution cipher.
-
-Depending on what substitutions you choose in the Leet language your encoding might not be reversible, so let's pick a conservative subset of rules that makes it possible for us to reverse our encoded strings.
-
 
 Write an implementation that can translate any given `char` into a new `char` using the above scheme.
 
@@ -333,12 +410,24 @@ And so forth.
 For a complete list of translations, go back to the [definition](leet-language).
 
 Have a look at our implementation of the Robber's language for inspiration.
-````
+
+If your program starts like this:
+```{code-cell}
+char input = 'L';
+char vowel = 'o';
+// ....
+```
+then when you run it, it should print:
+```output
+LoL
+```
+```{exercise-end}
+```
 
 ````{solution} ex:selection-leet
 :hidden:
 ```csharp
-char input = 'E';
+char input = 'L';
 char vowel = 'o';
 
 switch (input)

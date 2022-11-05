@@ -1170,19 +1170,19 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-ternary-operator">
-     30.2.3. The ternary operator
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-switch-expression">
-     30.2.4. The
+     30.2.3. The
      <code class="docutils literal notranslate">
       <span class="pre">
        switch
       </span>
      </code>
      expression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-ternary-operator">
+     30.2.4. The ternary operator
     </a>
    </li>
   </ul>
@@ -1256,19 +1256,19 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-ternary-operator">
-     30.2.3. The ternary operator
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-switch-expression">
-     30.2.4. The
+     30.2.3. The
      <code class="docutils literal notranslate">
       <span class="pre">
        switch
       </span>
      </code>
      expression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-ternary-operator">
+     30.2.4. The ternary operator
     </a>
    </li>
   </ul>
@@ -1302,10 +1302,6 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="selection">
 <h1><span class="section-number">30. </span>Selection<a class="headerlink" href="#selection" title="Permalink to this headline">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
-</div>
 <section id="motivation">
 <h2><span class="section-number">30.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
 <p>If all programs were linear, programming would not be very useful.
@@ -1314,12 +1310,6 @@ What’s the point of having a word processor if all it can do is give me the sa
 To write any useful program, we need branches.</p>
 <p>Programs are not like lines, they are more like trees, or rather graphs.
 Most programs sprawl into a wild number of directions as soon as you start them up.</p>
-<figure class="align-default" id="fig-programs-are-like-graphs">
-<img alt="https://via.placeholder.com/700x200?text=Image+coming+soon" src="https://via.placeholder.com/700x200?text=Image+coming+soon" />
-<figcaption>
-<p><span class="caption-number">Fig. 30.1 </span><span class="caption-text">Programs are not like lines, they are more like trees or graphs.</span><a class="headerlink" href="#fig-programs-are-like-graphs" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
 <p>Just think of any old app or website where you have an account.
 When you login you enter your credentials.
 Possibly a username and password.
@@ -1422,36 +1412,47 @@ This means that as soon as a matching condition is found, all other <code class=
 </section>
 <section id="the-switch-statement">
 <span id="switch-statements"></span><h3><span class="section-number">30.2.2. </span>The <code class="docutils literal notranslate"><span class="pre">switch</span></code> statement<a class="headerlink" href="#the-switch-statement" title="Permalink to this headline">#</a></h3>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
+<p>A switch statement matches an expression of your choice against a pattern of your choice in order to select which path to take.
+This is a process known as <a class="reference internal" href="pattern-matching.html"><span class="doc std std-doc">pattern matching</span></a> and we’ll discuss it in more detail later.
+You can find a list of supported patterns in the <a class="reference external" href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/patterns">documentation</a>.</p>
+<p>The different cases of the switch statement are checked one-by-one from the top down.
+As soon as our expression matches a pattern we enter into that branch and start executing the list of statements that defined there.</p>
+<p>In the example below you can see how we use the keyword <code class="docutils literal notranslate"><span class="pre">break</span></code>.
+This keyword is required in C# does not support what is known as “fall-through”.
+Languages that support fall-through would, in the absence of a <code class="docutils literal notranslate"><span class="pre">break</span></code> keyword, keep checking cases even after it had found a match and executed some code.
+An example of a language that support fall-through is JavaScript.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We have not talked about <a class="reference internal" href="methods.html"><span class="doc std std-doc">methods</span></a> yet, but if we use a <code class="docutils literal notranslate"><span class="pre">switch</span></code> statement in the body of a method and we <code class="docutils literal notranslate"><span class="pre">return</span></code> whenever we’ve found a match then we don’t need to use the <code class="docutils literal notranslate"><span class="pre">break</span></code> keyword.</p>
 </div>
-</section>
-<section id="the-ternary-operator">
-<h3><span class="section-number">30.2.3. </span>The ternary operator<a class="headerlink" href="#the-ternary-operator" title="Permalink to this headline">#</a></h3>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
-</div>
-</section>
-<section id="the-switch-expression">
-<span id="switch-expressions"></span><h3><span class="section-number">30.2.4. </span>The <code class="docutils literal notranslate"><span class="pre">switch</span></code> expression<a class="headerlink" href="#the-switch-expression" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="k">switch</span><span class="w"></span>
+
+<span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">input</span><span class="p">)</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="sc">&#39;A&#39;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;The input letter is an A.&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">_</span><span class="w">   </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;The input letter is something else.&quot;</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">output</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;The letter is A.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;B&#39;</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;The letter is B.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;C&#39;</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;D&#39;</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;E&#39;</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;The letter is C, D, or E.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">default</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;The letter is something else.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3828.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3686.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1496,12 +1497,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.1.175:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.2.5:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3828.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3686.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1555,7 +1556,91 @@ else {
 }
 
     </script>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The input letter is an A.
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The letter is A.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-switch-expression">
+<span id="switch-expressions"></span><h3><span class="section-number">30.2.3. </span>The <code class="docutils literal notranslate"><span class="pre">switch</span></code> expression<a class="headerlink" href="#the-switch-expression" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">switch</span></code> expression essentially works like a <code class="docutils literal notranslate"><span class="pre">switch</span></code> statement with one key difference.
+All cases must yield a single <span class="xref myst">expression</span>.</p>
+<p>Think about it, when we use a <code class="docutils literal notranslate"><span class="pre">switch</span></code> statement then we can do any number of things whenever we find a match.
+A <code class="docutils literal notranslate"><span class="pre">switch</span></code> <em>statement</em> selects a list of statements to execute.
+We can print to screen, write to file, ask the user for input, and so forth.
+A <code class="docutils literal notranslate"><span class="pre">switch</span></code> <em>expression</em> however selects an expression to evaluate.
+This means that we can take the result of a <code class="docutils literal notranslate"><span class="pre">switch</span></code> <em>expression</em> and, for example, assign it to a variable.</p>
+<p>To create a <code class="docutils literal notranslate"><span class="pre">switch</span></code> expression rather than a <code class="docutils literal notranslate"><span class="pre">switch</span></code> statement we say <code class="docutils literal notranslate"><span class="pre">expression</span> <span class="pre">switch</span> <span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></code> rather than <code class="docutils literal notranslate"><span class="pre">switch</span> <span class="pre">(expression)</span> <span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></code>.
+In a <code class="docutils literal notranslate"><span class="pre">switch</span></code> expression we don’t have to explicitly use the keyword <code class="docutils literal notranslate"><span class="pre">case</span></code>.
+We use the commas (<code class="docutils literal notranslate"><span class="pre">,</span></code>) to delimit cases, which are known as “expression arms”.
+We use the symbol known as “fat arrow” (<code class="docutils literal notranslate"><span class="pre">=&gt;</span></code>) instead of colon (<code class="docutils literal notranslate"><span class="pre">:</span></code>).</p>
+<p>If we want to let multiple patterns result in the same expression then we can use a <a class="reference external" href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/patterns#logical-patterns">logical pattern</a>, like <code class="docutils literal notranslate"><span class="pre">or</span></code>.
+But more on this in the chapter on <a class="reference internal" href="pattern-matching.html"><span class="doc std std-doc">pattern matching</span></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="k">switch</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="sc">&#39;A&#39;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;The letter is A.&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="sc">&#39;B&#39;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;The letter is B.&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;C&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;D&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;E&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;The letter is C, D, or E.&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;The letter is something else.&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">output</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The letter is A.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-ternary-operator">
+<h3><span class="section-number">30.2.4. </span>The ternary operator<a class="headerlink" href="#the-ternary-operator" title="Permalink to this headline">#</a></h3>
+<p>The difference between an <code class="docutils literal notranslate"><span class="pre">if</span></code> statement and the ternary operator is like the difference between a <code class="docutils literal notranslate"><span class="pre">switch</span></code> statement and a <code class="docutils literal notranslate"><span class="pre">switch</span></code> expression.
+The former results in statements and the latter in an expression.</p>
+<p>The ternary operator checks whether some expression evaluates to <code class="docutils literal notranslate"><span class="pre">true</span></code> and if it does evaluates the first expression, otherwise it evaluates the second.
+The syntax is as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>condition ? consequent : alternative
+</pre></div>
+</div>
+<p>Let’s take an example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="kt">string</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">input</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="s">&quot;Letter is A.&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Letter is something else&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Letter is A.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The parenthases in the above example are not necessary.
+They are merely used here for added readability.</p>
+<p>When you have a long ternary expression, some choose to format it over multiple lines like in the example below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">string</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="p">?</span><span class="w"> </span><span class="s">&quot;Letter is A.&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Letter is something else&quot;</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Letter is A.
 </pre></div>
 </div>
 </div>
@@ -1686,11 +1771,11 @@ Explain using your own words.</p>
 <section id="exercise-content">
 <p>Assume that you have a variable called <code class="docutils literal notranslate"><span class="pre">letter</span></code> of type <code class="docutils literal notranslate"><span class="pre">char</span></code> but you don’t know what value it contains.
 Write a program that prints <code class="docutils literal notranslate"><span class="pre">VOWEL</span></code> if the letter is a vowel and <code class="docutils literal notranslate"><span class="pre">CONSONANT</span></code> if the letter is a consonant.</p>
-<p>If e.g. the program starts with:</p>
+<p>If your program starts like this:</p>
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span><span class="w"> </span><span class="n">letter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
-<p>then your program should print:</p>
+<p>then when you run it, it should print:</p>
 <div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">VOWEL</span>
 </pre></div>
 </div>
@@ -1703,7 +1788,6 @@ Write a program that prints <code class="docutils literal notranslate"><span cla
 <p>Remember the Leet language that we talked about in the chapter on <a class="reference internal" href="algorithms.html#leet-language"><span class="std std-ref">algorithms</span></a>?
 Much like the Robber’s language the Leet language encodes the string by replacing character by character.
 In other words, it too is a substitution cipher.</p>
-<p>Depending on what substitutions you choose in the Leet language your encoding might not be reversible, so let’s pick a conservative subset of rules that makes it possible for us to reverse our encoded strings.</p>
 <p>Write an implementation that can translate any given <code class="docutils literal notranslate"><span class="pre">char</span></code> into a new <code class="docutils literal notranslate"><span class="pre">char</span></code> using the above scheme.</p>
 <p>Remember the characters that aren’t present in the scheme should just be passed through.
 So if we give the program the character <code class="docutils literal notranslate"><span class="pre">A</span></code> it should print <code class="docutils literal notranslate"><span class="pre">4</span></code>.
@@ -1712,6 +1796,20 @@ If we give the program the character <code class="docutils literal notranslate">
 And so forth.
 For a complete list of translations, go back to the <a class="reference internal" href="algorithms.html#leet-language"><span class="std std-ref">definition</span></a>.</p>
 <p>Have a look at our implementation of the Robber’s language for inspiration.</p>
+<p>If your program starts like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="sc">&#39;L&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="kt">char</span><span class="w"> </span><span class="n">vowel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="sc">&#39;o&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="c1">// ....</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>then when you run it, it should print:</p>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">LoL</span>
+</pre></div>
+</div>
 </section>
 </div>
 </section>

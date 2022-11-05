@@ -206,6 +206,8 @@ Console.WriteLine( (true || false).GetType() );
 (run-time-and-compile-time-types)=
 #### Run-time and compile-time types
 
+% TODO: Clarify this more based on: https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/#compile-time-type-and-run-time-type
+
 Remember how we've previously distinguished between the left-hand side and the right-hand side?
 We've learned that variables are on the left and values are on the right.
 Well, the data type on the left-hand side is referred to as the compile-time type, while the data type on the right is referred to as the run-time type.
@@ -243,6 +245,7 @@ So we don't explicitly specify the right-hand types, or the run-time types, in t
 When we get to the chapter on [classes](classes) you will start to see explicit types on the right-hand side.
 When we get to the chapter on [subtype polymorphism](subtype-polymorphism) you will start to see how the types on the right and left doesn't necessarily have to be the same.
 
+Simplistically, the compile-time type is used for all actions at compile-time, while the run-time type is used for all actions at run-time.
 
 
 (operations)=
