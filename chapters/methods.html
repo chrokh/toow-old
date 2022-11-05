@@ -1328,10 +1328,6 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="methods">
 <span id="local-functions"></span><h1><span class="section-number">37. </span>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
-</div>
 <section id="motivation">
 <h2><span class="section-number">37.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
 <p>Remember the design principle “<a class="reference internal" href="iteration.html#dry"><span class="std std-ref">don’t repeat yourself</span></a>”?
@@ -1360,8 +1356,11 @@ Private, member, constructor.
 Why are we starting here?</p>
 <p>Well, perhaps you remember how we in the chapter on <a class="reference internal" href="compilation.html#top-level-statements"><span class="std std-ref">compilation</span></a> discussed how C# supports something called “top-level statements” which allow you to just start writing code without having to define a main class and a static main method.
 It’s not that the main method doesn’t exist, it’s just that it’s generated for you.</p>
+<p>When we’re using top-level statements and start defining methods without making them members of a class then they will be either local functions or <a class="reference internal" href="lambdas.html"><span class="doc std std-doc">lambda expressions</span></a> which we’ll talk about much later.</p>
 <p>So, what should you take away from all this nonsense?
-When we’re using top-level statements and start defining methods without making them members of a class then they will be either local functions or <a class="reference internal" href="lambdas.html"><span class="doc std std-doc">lambda expressions</span></a> which we’ll talk about much later.</p>
+What C# calls local functions is the simplest way to learn about methods/procedures/functions in C#.
+There are other ways to write methods in C# but let’s worry about that later.
+Now, let’s just learn how to do local functions.</p>
 </div>
 <p>A local function consists of four parts that we must understand.</p>
 <ol class="simple">
@@ -1370,12 +1369,6 @@ When we’re using top-level statements and start defining methods without makin
 <li><p>A list of parameters with types.</p></li>
 <li><p>An implementation.</p></li>
 </ol>
-<figure class="align-default" id="fig-local-method">
-<img alt="https://via.placeholder.com/700x200?text=Image+coming+soon" src="https://via.placeholder.com/700x200?text=Image+coming+soon" />
-<figcaption>
-<p><span class="caption-number">Fig. 37.1 </span><span class="caption-text">A local function consists of four parts: A name, a return type, a list of parameters, and an implementation.</span><a class="headerlink" href="#fig-local-method" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
 <p>In the code example below we’re defining a local function called <code class="docutils literal notranslate"><span class="pre">add</span></code> which takes two parameters of type <code class="docutils literal notranslate"><span class="pre">int</span></code> and returns a value of type <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1389,7 +1382,7 @@ When we’re using top-level statements and start defining methods without makin
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3394.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3460.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1434,12 +1427,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.2.5:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.103:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3394.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3460.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1521,7 +1514,7 @@ When we call the function we pass arguments to it.
 In terms of terminology, an “argument” is used in place of a “parameter”.</p>
 <p>Let’s say we want to add the numbers <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">2</span></code>.
 Well, we simply apply the function, just like we would in mathematics.
-We state the name of the function, an opening parenthasis, whatever values we want to pass as arguments for the parameters separated by comma, and close the parenthasis.
+We state the name of the function, an opening parenthesis, whatever values we want to pass as arguments for the parameters separated by comma, and close the parenthesis.
 Voilà, we’ve called the function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1573,7 +1566,8 @@ As we shall see in future chapters we can also use this syntax to define <a clas
 </div>
 </div>
 <p>Notice how the <code class="docutils literal notranslate"><span class="pre">return</span></code> keyword is no longer needed since the function returns whatever the single expression returns.
-Notice also how there are no curly brackets needed since there’s no block that needs delimiting.</p>
+Notice also how there are no curly brackets needed since there’s no block that needs delimiting.
+Instead we use the symbol known as “fat arrow” (<code class="docutils literal notranslate"><span class="pre">=&gt;</span></code>) before we write the <span class="xref myst">expression</span> that constitutes our method implementation.</p>
 <p>Of course we can still call it the same way:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1602,10 +1596,6 @@ When we’re calling <code class="docutils literal notranslate"><span class="pre
 </section>
 <section id="examples">
 <h2><span class="section-number">37.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
-</div>
 <section id="reverse-cipher">
 <h3><span class="section-number">37.3.1. </span>Reverse cipher<a class="headerlink" href="#reverse-cipher" title="Permalink to this headline">#</a></h3>
 <p>It should be possible to wrap all ciphers that we’ve defined up to this point in methods.
@@ -1877,7 +1867,7 @@ There are essentially three.</p>
 </section>
 <section id="leet-language">
 <h3><span class="section-number">37.3.4. </span>Leet language<a class="headerlink" href="#leet-language" title="Permalink to this headline">#</a></h3>
-<p>But the eerie similarties doesn’t stop here.
+<p>But the eerie similarties don’t stop there.
 Remember the <span class="xref myst">Leet language</span> that you wrote a program for in <a class="reference internal" href="iteration.html#ex:iteration-leet"><span class="std std-numref">Exercise 31.4</span></a>?</p>
 <p>Let’s say we choose the same strategy as with the Caesar cipher and the Robber’s language and decompose the problem into two subproblems.
 One method is responsible for determining what character to replace any given single character with.
@@ -1921,8 +1911,8 @@ If you mix data and methods then you have a way of passing around methods.
 And if you can subtype then you can pass around vastly different methods.
 But it’s too soon to talk about those things.
 Don’t worry, we’ll get there eventually.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>It should however be noted that in the functional programming paradigm functions are, what we call, first-class citizens.
 This means that you can pass around functions as if they were data.
 It should be noted that this is a non-issue in functional programming languages since functions are first-class citizens.

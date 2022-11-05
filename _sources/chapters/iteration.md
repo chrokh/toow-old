@@ -12,10 +12,6 @@ kernelspec:
 
 # Iteration
 
-```{warning}
-Work in progress.
-```
-
 %- while
 %- for
 %- foreach
@@ -80,10 +76,6 @@ Work in progress.
 
 
 ## Examples
-
-```{warning}
-Work in progress.
-```
 
 (iteration-reverse)=
 ### Reverse cipher
