@@ -12,6 +12,9 @@ kernelspec:
 
 # Objects
 
+%**TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+%Also talk about how many uses the 3 or 4 Pillars to define OO. Michaelis says that "Classes exhibit the three principal characteristics of object-oriented programming: encapsulation, inheritance, and polymorphism.".**
+
 Let us now explore the idea of objects.
 In the next chapter we will talk about [classes](classes) but let's now focus strictly on objects.
 
