@@ -188,7 +188,7 @@ Why are static methods useful?
 
 
 ```{exercise}
-What is the difference between a *static method* and a *local function*?
+In C#, what is the difference between a *static method* and a *local function*?
 ```
 
 
@@ -196,7 +196,7 @@ What is the difference between a *static method* and a *local function*?
 :label: ex:static-methods-leet
 ```
 Create a static class called `LeetCipher` and let it contain two static methods called `EncodeString` and `EncodeChar`.
-These methods should essentially contain the code that wrote in {numref}`ex:methods-leet`.
+These methods should essentially contain the code that we wrote in {numref}`ex:methods-leet`.
 In other words, the static methods should implement the leet language and be able to convert strings and individual characters.
 Your static methods should behave according to the usage example below.
 

@@ -32,7 +32,7 @@ Well, the time has come to do just that.
 
 As we've seen in this chapter as long as the method signatures (excluding the return type) are different we're free to overload away.
 Meaning that we can simply just rename the two methods `EncodeChar` and `EncodeString` to the same thing.
-For example, `Encode`.
+Let's just rename them to, `Encode`.
 
 ```{code-cell} csharp
 static class RobbersCipher
