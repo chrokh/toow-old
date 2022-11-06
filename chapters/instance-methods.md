@@ -468,6 +468,38 @@ Console.WriteLine($"{output1} {output2}");
 ```{exercise-end}
 ```
 
+```{exercise}
+Can you *overload* an instance method by just varying the *return type*?
+Why or why not?
+```
+
+```{exercise}
+Can you *overload* an instance method by just varying a single *parameter name*?
+Why or why not?
+```
+
+```{exercise}
+Can you *overload* an instance method by just varying a single *parameter type*?
+Why or why not?
+```
+
+
+
+
+%```{exercise-start}
+%```
+%Start with the classes you wrote in {numref}`ex:first-classes`.
+%What does the following code print?
+%Why is this the output that we get?
+%
+%```{code-cell}
+%Apple f1 = new Apple();
+%Pear f2 = new Pear();
+%Console.WriteLine(f1);
+%Console.WriteLine(f2);
+%```
+%```{exercise-end}
+%```
 
 
 
@@ -601,4 +633,6 @@ Console.WriteLine($"{output1} {output2}");
 %Why is this?
 %Explain using your own words.
 %```
+
+
 
