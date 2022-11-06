@@ -11,6 +11,7 @@ Work in progress.
 %- Get, set, init, read-only (no setter).
 %
 
+%- EXAMPLE: Use Circle from fields chapter. If you change width or height then it actually changes radius. Width and height refers to bounding box.
 
 ## Exercises
 
