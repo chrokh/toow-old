@@ -117,6 +117,8 @@ Work in progress.
 %```
 
 
+% TODO: EXAMPLE: Random walk. Drunk student.
+
 
 ### Robber's language
 

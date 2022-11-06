@@ -17,6 +17,8 @@ kernelspec:
 Work in progress.
 ```
 
+% TODO: Dot notation must be explained here. Take text from fields chapter.
+
 %TODO: SIMPLE SUBSTITUTION CIPHERS.
 
 %- Example: LEET language. Convert L<=>7 to allow reversibility.

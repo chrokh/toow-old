@@ -108,7 +108,7 @@ Let me humbly suggest that you go back and re-read the chapters on [values](valu
 The difference between classes and objects corresponds to the difference between types and values.
 ```
 
-To instantiate a class in C# we use the keyword `new` and follow it with the identifier, meaning the name of the class.
+To instantiate a class in C# we use the `new` operator and follow it with the identifier, meaning the name of the class.
 So if we have a class called `Cat` then we would create instances of the `Cat` class by saying:
 
 ```{code-cell}
@@ -185,17 +185,17 @@ For now, it's enough to know that to depict a class in a UML class diagram, we d
 See the figure below.
 
 ```
-|--------------------|
-| <class identifier> |
-|--------------------|
-|                    |
-|    <attributes>    |
-|                    |
-|--------------------|
-|                    |
-|    <operations>    |
-|                    |
-|--------------------|
+┌────────────────────┐
+│ <class identifier> │
+├────────────────────┤
+│                    │
+│    <attributes>    │
+│                    │
+├────────────────────┤
+│                    │
+│    <operations>    │
+│                    │
+└────────────────────┘
 ```
 
 
@@ -217,32 +217,35 @@ class Pear { }
 To depict these classes using UML class diagram notation we would draw like this:
 
 ```
-|---------------------|    |--------------------|
-|        Apple        |    |        Pear        |
-|---------------------|    |--------------------|
-|                     |    |                    |
-|                     |    |                    |
-|---------------------|    |--------------------|
-|                     |    |                    |
-|                     |    |                    |
-|---------------------|    |--------------------|
+┌─────────────────────┐   ┌────────────────────┐
+│        Apple        │   │        Pear        │
+├─────────────────────┤   ├────────────────────┤
+│                     │   │                    │
+│                     │   │                    │
+├─────────────────────┤   ├────────────────────┤
+│                     │   │                    │
+│                     │   │                    │
+└─────────────────────┘   └────────────────────┘
 ```
 
 UML class diagrams are often, just like with math, used with a tad of informality with the purpose of not bogging down the user with too many details.
-Consequently you will often find that a class like `Apple` might be depicted without the line between attributes and operations (left in the figure below).
-If the members are not relevant for the sake of the argument that's trying to be made, you'll sometimes find that they're even omitted altogether (right in the figure below).
+Consequently you will often find that a class is depicted without the line between attributes and operations.
+See the class `Apple` in the figure below for an example.
+
+If the members are not relevant for the sake of the argument that's trying to be made, you'll sometimes even find that they're even omitted altogether.
+See the class `Pear` in the figure below for an example.
 
 ```
-|---------------------|    |-------------------|
-|        Apple        |    |                   |
-|---------------------|    |                   |
-|                     |    |       Apple       |
-|                     |    |                   |
-|                     |    |                   |
-|---------------------|    |-------------------|
+┌─────────────────────┐   ┌────────────────────┐
+│        Apple        │   │                    │
+├─────────────────────┤   │                    │
+│                     │   │        Pear        │
+│                     │   │                    │
+│                     │   │                    │
+└─────────────────────┘   └────────────────────┘
 ```
 
-Above: Two models of the `Apple` class using a more informal UML class diagram syntax.
+Above: Two models of classes using a more informal UML class diagram syntax.
 
 
 

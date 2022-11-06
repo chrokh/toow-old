@@ -94,6 +94,8 @@ If that sentence doesn't make any sense to you, don't worry.
 When you're done reading this book, it will.
 
 
+(encapsulation)=
+(information-hiding)=
 ### Encapsulation
 
 Objects mix methods and data in order to hide the data that belongs to a particular object so that other objects cannot accidentally change it.
