@@ -10,6 +10,8 @@ kernelspec:
   name: .net-csharp
 ---
 
+% TODO: Also talk about how exceptions derive from eachother so that we can capture more general or specific exceptions?
+
 (polymorphism)=
 # Subtype polymorphism
 

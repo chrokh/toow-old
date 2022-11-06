@@ -10,6 +10,10 @@ kernelspec:
   name: .net-csharp
 ---
 
+% TODO: IMPORTANT!!!!!!!: I should make chapters much smaller. Classes should be a chapter of which e.g. type testing should be a subsection that has its own division into Motiviation/Definition/Examples. This will make it MUCH easier to write!
+
+% TODO:!!! Must discuss default values, initially assigned, definitely assigned, etc somewhere. In some places variables are assigned defaults and in some they are not. This is a very important concept in C#. We can discuss the generalization beyond C#. Are variables assigned default values or not, and what is the default value.
+
 # Classes
 
 ## Motivation
@@ -81,19 +85,22 @@ We might for example define a class called `Nat` which we want to use to model n
 Meaning whole numbers larger than zero.
 Any particular instance of the class `Nat` then corresponds to any particular natural number, such as `3`.
 
-Have a look at {numref}`fig:class-vs-objects`.
-The two "blobs" whose names are `"garfield"` and `"pelle svanslös"` are objects.
-The class of which they are instances is called `Cat`.
-
-Neither the object with the name `"garfield"` nor the object with the name `"pelle svanslös"` are classes.
-They are *instances*.
+%Have a look at {numref}`fig:class-vs-objects`.
+If we've got objects stored in variables named `"garfield"`, `"simba"`, `"bagheera"`,  and `"pelle svanslös"` then the class of which they are instances might be called `Cat`.
+Neither one of the objects are classes.
+Stated differently, neither one of these specific cats are a generic representation of the notion of cat:ness.
+They are *not* the *idea* of cat.
+They are however *instances* of the idea of a cat.
+They are let's call it embodiments of the idea of a cat.
+They are models of actual cats, not of the idea of a cat.
 Conversely, the class `Cat` is not an object, it is the type that these two objects share.
 
-```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
-:name: fig:class-vs-objects
-
-Objects are instances (values) of a class.
-```
+% TODO: Draw image of how multiple objects can be derived from a single class.
+%``{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
+%:name: fig:class-vs-objects
+%
+%Objects are instances (values) of a class.
+%``
 
 ```{hint}
 If you don't understand the difference between classes and objects/instances then you don't understand the difference between types and values.
@@ -127,7 +134,117 @@ We would say that such a variable is an object reference that doesn't yet refere
 Cat cat3;
 ```
 
-% TODO:!!! Must discuss default values, initially assigned, definitely assigned, etc somewhere. In some places variables are assigned defaults and in some they are not. This is a very important concept in C#. We can discuss the generalization beyond C#. Are variables assigned default values or not, and what is the default value.
+
+
+### Class members
+
+Remember how we in the chapter on [objects](objects) said that objects mix data and methods?
+In a class based object oriented langauge, this is achieved by defining class members.
+There are usually two kinds of class members:
+*Instance* members and *static* members.
+
+The most commonly used kinds of class members are [fields](fields), [methods](methods), and [constructors](constructors).
+These kinds of members can either be defined as instance members or as static members.
+
+Perhaps you remember, that we've actually already talked about [static methods](static-methods) in an earlier chapter.
+A static member is in other words a static member of the class in which it is defined.
+We talked about static methods in the context of [static classes](static-classes).
+Static classes are classes that *only* can contain static members.
+Non-static classes (which we usually simply call classes) however can contain both static and non-static members.
+So a static method can be defined on non-static classes as well.
+
+[Fields](fields) and [constructors](constructors) we will talk about in the chapters coming next.
+
+```{caution}
+The idea of `static` is, fundamentally, a procedural idea, *not* an object oriented idea.
+A static class can be thought of as a namespace, and a static method as a namespaced method.
+Nothing more fancy going on there.
+```
+
+```{seealso}
+For a complete list of the kinds of members that we can define on a class, please see [the official documentation](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/members).
+```
+
+% "Fields, properties, methods, and events on a class are collectively referred to as class members."
+% https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/members
+
+
+
+
+(classes:uml)=
+### UML class diagrams
+
+In this book we make heavy use of UML class diagrams.
+When reasoning about object oriented design nothing is really quite as efficient as using UML class diagrams.
+Even if only informally.
+Having a good understanding of UML class diagram notation is essential if we are to be able to eventually understand object oriented [design patterns](design-patterns).
+
+We'll discuss the syntax of UML class diagrams in every chapter where we're covering a concept that's also possible to model using UML class diagram syntax.
+
+For now, it's enough to know that to depict a class in a UML class diagram, we draw a rectangle with three sections.
+See the figure below.
+
+```
+|--------------------|
+| <class identifier> |
+|--------------------|
+|                    |
+|    <attributes>    |
+|                    |
+|--------------------|
+|                    |
+|    <operations>    |
+|                    |
+|--------------------|
+```
+
+
+In the smaller top section we write the name of the class.
+In the middle section we write the attributes of the class.
+In the bottom section we write the operations of the class.
+Attributes are essentially instance variables (which in C# means that they are either instance [fields](fields) or instance [properties](properties)).
+Operations on the other hand are essentially [instance methods](instance-methods).
+We'll talk about these more in their respective chapters.
+The attributes and members of a class are together referred to as the "members" of the class.
+
+Consider for example the two classes `Apple` and `Pear` as defined below.
+
+```{code-cell}
+class Apple { }
+class Pear { }
+```
+
+To depict these classes using UML class diagram notation we would draw like this:
+
+```
+|---------------------|    |--------------------|
+|        Apple        |    |        Pear        |
+|---------------------|    |--------------------|
+|                     |    |                    |
+|                     |    |                    |
+|---------------------|    |--------------------|
+|                     |    |                    |
+|                     |    |                    |
+|---------------------|    |--------------------|
+```
+
+UML class diagrams are often, just like with math, used with a tad of informality with the purpose of not bogging down the user with too many details.
+Consequently you will often find that a class like `Apple` might be depicted without the line between attributes and operations (left in the figure below).
+If the members are not relevant for the sake of the argument that's trying to be made, you'll sometimes find that they're even omitted altogether (right in the figure below).
+
+```
+|---------------------|    |-------------------|
+|        Apple        |    |                   |
+|---------------------|    |                   |
+|                     |    |       Apple       |
+|                     |    |                   |
+|                     |    |                   |
+|---------------------|    |-------------------|
+```
+
+Above: Two models of the `Apple` class using a more informal UML class diagram syntax.
+
+
 
 
 ### Equality
@@ -179,110 +296,111 @@ But that's a discussion for later.
 ```
 
 
-### Class members
+### Assignment
+% TODO: What's the title here?
+Of course, when we assign an object to a variable, the run-time type of the object must be either equal to the compile-time type of the variable or a subtype of it.
+We've talked about this general idea when we discussed [run-time and compile-time types](run-time-and-compile-time-types).
+The object must either be of the same type as that of the variable or of, what we call, a "substitutable" type.
 
-Remember how we in the chapter on [objects](objects) said that objects mix data and methods?
-In a class based object oriented langauge, this is achieved by defining class members.
-There are usually two types of class members:
-Instance members and static members.
-
-The most commonly used types of class members are [fields](fields), [methods](methods), and [constructors](constructors).
-These kinds of members can either be defined as instance members or as static members.
-
-Perhaps you remember, that we've actually already talked about [static methods](static-methods) in an earlier chapter.
-A static member is in other words a static member of the class in which it is defined.
-We talked about static methods in the context of [static classes](static-classes).
-Although, a static method can be defined on non-static classes as well.
-
-[Fields](fields) and [constructors](constructors) we will however talk about in the chapters coming next.
-
-```{caution}
-The idea of `static` is, fundamentally, a procedural idea, *not* an object oriented idea.
-```
-
-```{seealso}
-For a complete list of the kinds of members that we can define on a class, please see [the official documentation](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/members).
-```
-
-
-% "Fields, properties, methods, and events on a class are collectively referred to as class members."
-% https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/members
-
-
-
-
-(classes:uml)=
-### UML class diagrams
-
-In this book we make heavy use of UML class diagrams.
-When reasoning about object oriented design nothing is really quite as efficient as using UML class diagrams.
-Even if only informally.
-Having a good understanding of UML class diagram notation is essential if we are to be able to eventually understand object oriented [design patterns](design-patterns).
-
-We'll discuss the syntax of UML class diagrams in every chapter where we're covering a concept that's also possible to model using UML class diagram syntax.
-
-For now, it's enough to know that to depict a class in a UML class diagram, we draw a rectangle with three sections.
-See the figure below.
-
-```
-|--------------------|
-| <class identifier> |
-|--------------------|
-|                    |
-|    <attributes>    |
-|                    |
-|--------------------|
-|                    |
-|    <operations>    |
-|                    |
-|--------------------|
-```
-
-
-In the smaller top section we write the name of the class.
-In the middle section we write the attributes of the class.
-In the bottom section we write the operations of the class.
-Attributes are essentially instance variables (which in C# means that they are either instance [fields](fields) or instance [properties](properties)).
-Operations on the other hand are essentially [instance methods](instance-methods).
-We'll talk about these more in their respective chapters.
-The attributes and members of a class are together referred to as the "members" of the class.
-
-Consider for example the class `Cat` below.
+[Subtyping](subtype-polymorphism) is something we'll discuss in a later chapter.
+So let's stick to equal types for the moment.
+This means that we cannot assign an instance of type `Dog` to a variable of type `Cat` if these two types are not in a subtyping relationship.
+This is essentially no different from how we cannot assign a value of type `string` to a variable of type `int`.
 
 ```{code-cell}
+:tags: [raises-exception]
 class Cat { }
+class Dog { }
+
+Cat cat = new Dog();
 ```
 
-To depict this class using UML class diagram notation we would draw it like this:
 
-```
-|--------------------|
-|         Cat        |
-|--------------------|
-|                    |
-|                    |
-|--------------------|
-|                    |
-|                    |
-|--------------------|
-```
 
-UML class diagrams are often, just like with math, used with a tad of informality with the purpose of not bogging down the user with too many details.
-Consequently you will often find that the class `Cat` might be depicted without the line between attributes and operations (left in the figure below).
-If the members are not relevant for the sake of the argument that's trying to be made, you'll sometimes find that they're even omitted altogether (right in the figure below).
+(type-testing-objects)=
+### Type testing
 
-```
-|--------------------|    |--------------------|
-|         Cat        |    |                    |
-|--------------------|    |                    |
-|                    |    |         Cat        |
-|                    |    |                    |
-|                    |    |                    |
-|--------------------|    |--------------------|
+We've talked about object equality, let's now talk about type equality.
+Remember the methods `GetType` and `typeof` from the chapter on [type testing](type-testing)?
+These methods work on classes and objects just as well as they work on other types and other values.
+
+Let's define two new classes.
+One that models apples and another one that models pears.
+
+```{code-cell}
+class Apple { }
+class Pear { }
 ```
 
-Above: Two models of the `Cat` class using a more informal UML class diagram syntax.
+You can extract the [compile-time type](run-time-and-compile-time-types) from the class name by using the `typeof` method.
 
+% TODO: For these manual examples 
+```csharp
+Type t1 = typeof(Apple);
+Type t2 = typeof(Pear);
+
+Console.WriteLine(t1);
+Console.WriteLine(t2);
+```
+
+```
+Apple
+Pear
+```
+
+If you've defined the classes in a namespace, such as e.g. `System` then the program would instead print the name of your namespace followed by a dot and then the name of your class.
+
+```
+System.Apple
+System.Pear
+```
+
+Of course, we can then perform type testing to, at run-time, check whether two types are the same or not.
+
+```{code-cell}
+Console.WriteLine(typeof(Apple) == typeof(Apple));
+Console.WriteLine(typeof(Pear)  == typeof(Pear));
+Console.WriteLine(typeof(Apple) == typeof(Pear));
+```
+
+Ok, so that's the compile-time type.
+But what about the [run-time type](run-time-and-compile-time-types)?
+Same thing as in the chapter on [type testing](type-testing).
+You can extract the run-time type from an object constructed from a class by using the [instance method](instance-methods) `GetType()`.
+We have still not talked about instance methods, but now we're getting very, very close.
+
+```
+Apple apple = new Apple();
+Type t3 = apple.GetType();
+Console.WriteLine(t3);
+```
+
+```
+Apple
+```
+
+So then we can of course check if the run-time type of an object corresponds to some compile-time type.
+
+```{code-cell}
+Apple apple = new Apple();
+Console.WriteLine(apple.GetType() == typeof(Apple));
+Console.WriteLine(apple.GetType() == typeof(Pear));
+```
+
+As we saw in the chapter on [type testing](type-testing), we can also use the more compact pattern `is` to achieve the same thing.
+
+```{code-cell}
+:tags: [remove-stderr]
+Console.WriteLine(apple is Apple);
+Console.WriteLine(apple is Pear);
+```
+
+
+
+
+
+
+%TODO: What to keep from the below?
 %## Examples
 
 %- Equivalence (i.e. two structurally equivalent objects are not necessarily the same).
@@ -298,14 +416,18 @@ Above: Two models of the `Cat` class using a more informal UML class diagram syn
 %- TODO: Documentation comments.
 
 
+
+
+
 (throwing-exceptions)=
 ### Exceptions
 
 Let's talk about one more thing before we move on.
 Remember how our programs throw an [exception](exceptions) if, for example, we try to access an index that's outside the bounds of an [array](array)?
-Well, we can also throw exceptions ourselves.
 
+Well, we can also throw exceptions ourselves.
 To throw an exception, in C#, we simply type `throw` and then instantiate an exception class.
+
 What are some available exception classes in .NET?
 To find that out we have to resort to the [documentation](https://learn.microsoft.com/en-us/dotnet/api/system.exception?view=net-7.0).
 
@@ -313,9 +435,11 @@ One exception that we use extensively in this book, is `ArgumentException`.
 Try instantiating and throwing an exception and see what happens.
 
 ```{code-cell}
+:tags: [raises-exception]
 throw new ArgumentException();
 ```
 
+We'll talk about how to define our own [custom exceptions](custom-exceptions) in a later chapter.
 
 
 
@@ -349,17 +473,107 @@ bool b = new House() == new House();
 ```{exercise-end}
 ```
 
+
+```{exercise}
+Create a UML class diagram that depicts two classes.
+One class is called `Apple` and the other `Pear`.
+```
+
+
+```{exercise-start}
+```
+Write two classes called `Apple` and `Pear`.
+When you're done, you should be able to run the following code and get the same result.
+Why do we get `true` in some cases as output and `false` in other?
+```{code-cell}
+:tags: [remove-input]
+class Apple {}
+class Pear {}
+```
+```{code-cell}
+:tags: [remove-stderr]
+Apple apple1 = new Apple();
+Apple apple2 = new Apple();
+
+Pear pear1 = new Pear();
+Pear pear2 = new Pear();
+
+Console.WriteLine(apple1 == apple1);
+Console.WriteLine(apple1 == apple2);
+Console.WriteLine(pear1 == pear1);
+Console.WriteLine(pear1 == pear2);
+```
+```{exercise-end}
+```
+
+
+```{exercise-start}
+```
+Write two classes called `Apple` and `Pear`.
+Why does the following line generate a compiler error?
+```{code-cell}
+:tags: [remove-input]
+class Apple {}
+class Pear {}
+```
+```{code-cell}
+:tags: [raises-exception, remove-stderr, remove-output]
+Apple obj = new Pear();
+```
+```{exercise-end}
+```
+
+
+```{exercise-start}
+```
+Write two classes called `Apple` and `Pear`.
+Try to run the following code.
+
+1. What is the compiler error that it results in?
+2. Why does it result in a compiler error?
+
+```{code-cell}
+:tags: [raises-exception, remove-output]
+Apple apple = new Apple();
+Pear pear = new Pear();
+Console.WriteLine(apple == pear);
+```
+```{exercise-end}
+```
+
+
+```{exercise-start}
+```
+Write two classes called `Apple` and `Pear`.
+Try to run the following lines of code.
+
+1. Which of the lines cause compiler errors?
+2. Why do they give a compiler errors?
+
+```{code-cell}
+:tags: [raises-exception, remove-output]
+Apple f1 = new Apple();
+Apple f2 = new Pear();
+Pear f3 = new Pear();
+Pear f4 = new Apple();
+```
+```{exercise-end}
+```
+
+
+```{exercise}
+Instantiate an object from the class `Apple` and then first compare whether its *run-time type* is equal to the type defined by the class `Apple`.
+Then check whether its run-time type is equal to the type defined by the class `Pear`.
+First solve these two problems without using the `is` operator and then solve it using the `is` operator.
+```
+
+
 ```{exercise}
 What is the difference between a static class and a class?
 ```
 
 ```{exercise}
 What are class members?
-```
-
-```{exercise}
-Create a UML class diagram that depicts two classes.
-One class is called `Fruit` and the other `Bowl`.
 ```
 
 ```{exercise}

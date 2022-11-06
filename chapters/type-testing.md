@@ -5,6 +5,7 @@ Work in progress.
 ```
 
 %- Switching over types.
+%- There are back-references here from the chapter on classes. Make sure to cover all that stuff.
 
 
 
