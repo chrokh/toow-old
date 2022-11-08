@@ -12,7 +12,8 @@ kernelspec:
 
 # Constructors
 
-%- TODO: Empty constructors. Implicit, explicit.
+% TODO: Benefits are very similar to partial application when we send in data through the constructor. Our data depends on the state of the object. Being able to store some data in an instance and then use objects of the same type interchangably at runtime. For example instantiating caesar ciphers with multiple different steps, passing them around, and then switching between them.
+
 
 
 ## Motivation
@@ -148,6 +149,12 @@ To achieve true information hiding we must also learn about [instance methods](i
 
 
 ### `this` keyword
+
+% MOST OF THIS IS ALREADY EXPLAINED IN THE CHAPTER ON INSTANCE METHODS.
+% MUST HOWEVER SHOW COMPILER WARNING THAT WE GET WHEN WE ASSIGN WIDTH TO WIDTH:
+%The C# compiler will assume that we are referring to the local variable which means that we will be assigning the value of a variable to itself.
+%Which of course is pointless and not what we meant to do.
+%Have a look at the compiler warnings that we get below:
 
 So what about the `this` keyword that's being used in the example above.
 What is it and what does it do?

@@ -72,6 +72,11 @@ This is why we have named the class above `Cat` with an uppercase "C" rather tha
 Within the opening (`{`) and closing (`}`) curly brackets we would define the members of the class.
 We'll talk more about what members are in a moment.
 
+```{tip}
+If you are using Visual Studio then you can right-click on your project, choose "Add", and then "Class" to easily create a new file with the same name as the name of your class and the necessary boilerplate code.
+```
+
+
 ### Instantiation
 
 To understand the difference between classes and objects think of the difference between the notion of a number and that of any particular number.
@@ -300,6 +305,7 @@ But that's a discussion for later.
 
 
 ### Assignment
+% TODO: This chapter should follow directly after instantiation.
 % TODO: What's the title here?
 Of course, when we assign an object to a variable, the run-time type of the object must be either equal to the compile-time type of the variable or a subtype of it.
 We've talked about this general idea when we discussed [run-time and compile-time types](run-time-and-compile-time-types).
