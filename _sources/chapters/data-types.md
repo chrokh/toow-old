@@ -319,24 +319,24 @@ inc :: int -> int
 ```
 
 Since this operation takes a single input argument, we can visualize it as a function that maps from the set of integers to the set of integers.
-See {numref}`fig:inc-type`.
+%See {numref}`fig:inc-type`.
 
-% TODO: Add figure.
-```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
-:name: fig:inc-type
-
-Visualization of the type of integer incrementation.
-```
+%% TODO: Add figure.
+%```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
+%:name: fig:inc-type
+%
+%Visualization of the type of integer incrementation.
+%```
 
 We could also visualize the type of arithmetic addition, but since it takes two integers as input we would have to draw it as a a mapping between the set of ordered integer pairs to the set of integers.
-See {numref}`fig:addition-type`.
+%See {numref}`fig:addition-type`.
 
-% TODO: Add figure.
-```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
-:name: fig:addition-type
-
-Visualization of the type of arithmetic addition.
-```
+%% TODO: Add figure.
+%```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
+%:name: fig:addition-type
+%
+%Visualization of the type of arithmetic addition.
+%```
 
 We would read this as `+` is an operator that when given an `int` and an `int` returns an `int`.
 Of course the arithmetic addition operator is not only defined for whole numbers (integers) but also for `float`, `decimal`, and so forth but let's keep it simple for now.

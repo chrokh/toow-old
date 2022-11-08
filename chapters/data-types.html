@@ -1303,7 +1303,7 @@ We do this by checking two <a class="reference internal" href="static.html"><spa
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2659.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2736.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1348,12 +1348,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.1.21:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.179:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2659.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2736.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1711,22 +1711,8 @@ We would say that the type of this operation is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inc</span> <span class="p">::</span> <span class="nb">int</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </pre></div>
 </div>
-<p>Since this operation takes a single input argument, we can visualize it as a function that maps from the set of integers to the set of integers.
-See <a class="reference internal" href="#fig-inc-type"><span class="std std-numref">Fig. 20.1</span></a>.</p>
-<figure class="align-default" id="fig-inc-type">
-<img alt="https://via.placeholder.com/700x200?text=Image+coming+soon" src="https://via.placeholder.com/700x200?text=Image+coming+soon" />
-<figcaption>
-<p><span class="caption-number">Fig. 20.1 </span><span class="caption-text">Visualization of the type of integer incrementation.</span><a class="headerlink" href="#fig-inc-type" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>We could also visualize the type of arithmetic addition, but since it takes two integers as input we would have to draw it as a a mapping between the set of ordered integer pairs to the set of integers.
-See <a class="reference internal" href="#fig-addition-type"><span class="std std-numref">Fig. 20.2</span></a>.</p>
-<figure class="align-default" id="fig-addition-type">
-<img alt="https://via.placeholder.com/700x200?text=Image+coming+soon" src="https://via.placeholder.com/700x200?text=Image+coming+soon" />
-<figcaption>
-<p><span class="caption-number">Fig. 20.2 </span><span class="caption-text">Visualization of the type of arithmetic addition.</span><a class="headerlink" href="#fig-addition-type" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
+<p>Since this operation takes a single input argument, we can visualize it as a function that maps from the set of integers to the set of integers.</p>
+<p>We could also visualize the type of arithmetic addition, but since it takes two integers as input we would have to draw it as a a mapping between the set of ordered integer pairs to the set of integers.</p>
 <p>We would read this as <code class="docutils literal notranslate"><span class="pre">+</span></code> is an operator that when given an <code class="docutils literal notranslate"><span class="pre">int</span></code> and an <code class="docutils literal notranslate"><span class="pre">int</span></code> returns an <code class="docutils literal notranslate"><span class="pre">int</span></code>.
 Of course the arithmetic addition operator is not only defined for whole numbers (integers) but also for <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">decimal</span></code>, and so forth but let’s keep it simple for now.
 Interestingly the addition operator is also defined for strings to implement something known as “string concatenation” but more on this in the chapter on <a class="reference internal" href="operators.html"><span class="doc std std-doc">operators</span></a>.</p>
