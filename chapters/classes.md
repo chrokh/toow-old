@@ -72,6 +72,11 @@ This is why we have named the class above `Cat` with an uppercase "C" rather tha
 Within the opening (`{`) and closing (`}`) curly brackets we would define the members of the class.
 We'll talk more about what members are in a moment.
 
+```{tip}
+If you are using Visual Studio then you can right-click on your project, choose "Add", and then "Class" to easily create a new file with the same name as the name of your class and the necessary boilerplate code.
+```
+
+
 ### Instantiation
 
 To understand the difference between classes and objects think of the difference between the notion of a number and that of any particular number.
