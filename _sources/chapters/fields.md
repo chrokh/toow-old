@@ -15,6 +15,7 @@ kernelspec:
 %- Static / instance.
 %- Also works on struct.
 %- Only use private / protected fields.
+% - TODO: Mention uppercase lowercase convention of public and private members.
 
 %- [Initialized to default value](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/variables)
 
@@ -280,7 +281,7 @@ The `Rectangle` class would, in a UML class diagram, be represented as the right
 
 ```
 ┌────────────────────┐   ┌────────────────────┐
-│ <class identifier> │   │       Circle       │
+│ <class identifier> │   │     Rectangle      │
 ├────────────────────┤   ├────────────────────┤
 │                    │   │ Width : int        │
 │    <attributes>    │   │ Height : int       │
@@ -296,14 +297,14 @@ Notice how, when listing an attribute we also write out the type of the attribut
 In the chapter on [classes](classes:uml) we mentioned that UML class diagrams are often draw with a varying level of informality.
 As such, the data types of attributes are often omitted if the situtation doesn't require them in order to explain whatever it is we're trying to explain.
 
-Since the instance fields of the class `Circle` are marked as `public` we should actually also add a plus sign (`+`) before the name of the field.
+Since the instance fields of the class `Rectangle` are marked as `public` we should actually also add a plus sign (`+`) before the name of the field.
 In UML class diagrams, this is known as the "visibility" of the class member.
 But more on this in the chapter on [access modifiers](access-modifiers).
 And again, depending on the level of informality, visibility is often omitted.
 
 ```
 ┌────────────────┐
-│     Circle     │
+│   Rectangle    │
 ├────────────────┤
 │ + Width : int  │
 │ + Height : int │

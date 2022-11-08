@@ -198,6 +198,8 @@ The details of this are not relevant now and we'll pick this discussion up again
 However, you can think of the main file (`Program.cs`) as actually containing more code than you can see.
 It's as if the additional code is entered into the file automatically upon compilation.
 
+% TODO: Must describe how the top-level statements file is divided into three "parts" somewhere.
+
 `Translator.csproj` is a configuration file for your project.
 It does not contain source code, it contains what is known as "markup".
 The markup language in this case, happens to be called The Extensible Markup Language (XML).

@@ -1348,7 +1348,7 @@ One is called <code class="docutils literal notranslate"><span class="pre">Width
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2901.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2991.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1393,12 +1393,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.1.144:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.1.32:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2901.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2991.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1688,7 +1688,7 @@ See the left class in the figure below for a reminder of what the UML class diag
 Instance fields in C# (as well as <a class="reference internal" href="properties.html"><span class="doc std std-doc">properties</span></a> which we’ll talk about soon) are represented as attributes in UML class diagrams.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class would, in a UML class diagram, be represented as the right class in the figure below.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌────────────────────┐   ┌────────────────────┐
-│ &lt;class identifier&gt; │   │       Circle       │
+│ &lt;class identifier&gt; │   │     Rectangle      │
 ├────────────────────┤   ├────────────────────┤
 │                    │   │ Width : int        │
 │    &lt;attributes&gt;    │   │ Height : int       │
@@ -1703,12 +1703,12 @@ Instance fields in C# (as well as <a class="reference internal" href="properties
 <p>Notice how, when listing an attribute we also write out the type of the attribute.
 In the chapter on <a class="reference internal" href="classes.html#classes-uml"><span class="std std-ref">classes</span></a> we mentioned that UML class diagrams are often draw with a varying level of informality.
 As such, the data types of attributes are often omitted if the situtation doesn’t require them in order to explain whatever it is we’re trying to explain.</p>
-<p>Since the instance fields of the class <code class="docutils literal notranslate"><span class="pre">Circle</span></code> are marked as <code class="docutils literal notranslate"><span class="pre">public</span></code> we should actually also add a plus sign (<code class="docutils literal notranslate"><span class="pre">+</span></code>) before the name of the field.
+<p>Since the instance fields of the class <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> are marked as <code class="docutils literal notranslate"><span class="pre">public</span></code> we should actually also add a plus sign (<code class="docutils literal notranslate"><span class="pre">+</span></code>) before the name of the field.
 In UML class diagrams, this is known as the “visibility” of the class member.
 But more on this in the chapter on <a class="reference internal" href="basic-access-modifiers.html#access-modifiers"><span class="std std-ref">access modifiers</span></a>.
 And again, depending on the level of informality, visibility is often omitted.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌────────────────┐
-│     Circle     │
+│   Rectangle    │
 ├────────────────┤
 │ + Width : int  │
 │ + Height : int │
