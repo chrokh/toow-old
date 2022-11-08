@@ -139,6 +139,7 @@ This is the same argument we made in the motivation section of this chapter.
 
 
 
+(message-passing)=
 ### Message passing
 
 Ok, so what is this idea of message passing?

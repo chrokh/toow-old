@@ -300,6 +300,7 @@ But that's a discussion for later.
 
 
 ### Assignment
+% TODO: This chapter should follow directly after instantiation.
 % TODO: What's the title here?
 Of course, when we assign an object to a variable, the run-time type of the object must be either equal to the compile-time type of the variable or a subtype of it.
 We've talked about this general idea when we discussed [run-time and compile-time types](run-time-and-compile-time-types).

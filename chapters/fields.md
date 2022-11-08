@@ -93,6 +93,8 @@ Once we've learned about [instance methods](instance-methods) and [constructors]
 
 ### Access
 
+% TODO: Must mention that you cannot access instance field that is not defined in class.
+
 When an object exposes an instance field (or an [instance method](instance-methods) for that matter) then we can access it using dot-notation.
 
 We've already used dot-notation when interacting with [arrays](arrays), but we never really discussed why we interact with the object that way.

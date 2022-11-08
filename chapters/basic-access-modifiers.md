@@ -11,6 +11,7 @@ Work in progress.
 %- Principle: The state space of a type should equal the state space of whatever domain concept it is modeling.
 %- Modifiers for variables, methods and classes
 %- UML Class diagrams
+%- Convention of uppercase first letter when public and lowercase when private.
 
 % ALSO: MODIFIERS FOR CLASSES.
 
