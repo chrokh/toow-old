@@ -14,6 +14,7 @@ Work in progress.
 %- Convention of uppercase first letter when public and lowercase when private.
 
 % ALSO: MODIFIERS FOR CLASSES.
+%- Point adding point in instance methods chapter is a good example of how private does not mean in the same instance but in the same type. A good exercise might be to ask whether the methods we've defined still work even when we switch to `private`.
 
 
 ## Exercises

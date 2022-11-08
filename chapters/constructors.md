@@ -331,6 +331,78 @@ class Person
 %Hint: Use [enums](enums).
 
 
+%### Robber's cipher
+%
+%As we create a class to encapsulate this encoding logic we need to ask ourselves whether we want the two parameters `input` and `steps` to be given as arguments to the `Encode` method or to the constructor.
+%We will opt for setting the `steps` in the constructor, and the `input` in the method.
+%This very much determines what kind of objects we create with this class.
+%Let's first look at the code and then discuss the consequences of what we choose to put in the constructor.
+
+%Back to the question of constructor parameters.
+%Think about it.
+%If we take `steps` in the constructor and `input` in the instance method `Encode` then we're creating a step-specific cipher that can encode any character.
+%You instantiate the cipher, can pass it around, and can send it any character upon which you get back an encoded character.
+%
+%What kind of objects would we have been creating if we instead exposed both `steps` and `input` in the constructor?
+%Well, in that case the `Encode` method would be nullary, meaning it would not take any arguments.
+%When we call `Encode` we would always get back the same value since `Encode` is a [pure](purity) method.
+%Choosing this strategy would imply that we are looking for the ability to evaluate translations at a later time.
+%Meaning that we have all the input data available beforehand and want to "preload" it.
+%But that we want to be able to wait before we execute the encoding.
+%
+%```csharp
+%class CaesarCipher
+%{
+%  string input;
+%  int steps;
+%  public CaesarCipher (string input, int steps) // ...
+%  public char Encode () => // ...
+%}
+%```
+%
+%What kind of objects would we have been creating if we instead exposed `input` in the constructor but took `steps` as an argument in `Encode`?
+%This would imply that we want to be able to pass around an object that contains the information to be encoded, but we don't know how many steps we want to encode it with.
+%
+%```csharp
+%class CaesarCipher
+%{
+%  string input;
+%  public CaesarCipher (string input) // ...
+%  public string Encode (int steps) => // ...
+%}
+%```
+%
+%What kind of objects would we have been creating if we instead didn't expose *any* arguments in the constructor and instead took both as arguments in `Encode`?
+%Well, since the constructor is parameterless and since the `Encode` method is [pure](purity), all instances of the cipher would essentially be equivalent.
+%There isn't too much of a point of wrapping this in a class in that case.
+%Sure, if we can identity other classes that have a different implementation of `Encode` but still share exactly the same signature, it would be meaningfull.
+%Because then we could still use [subtype polymorphism](subtype-polymorphism).
+%But given the case of ciphers, I feel it quite unlikely that we would find such ciphers.
+%
+%```csharp
+%class CaesarCipher
+%{
+%  public char Encode (char input, int steps) => // ...
+%  public string Encode (string input, int steps) => // ...
+%}
+%```
+%
+%```{seealso}
+%If you happen to be familiar with functional programming, then choosing what parameters to expose in the constructor resembles the problem of determining the order of function arguments to allow for useful partial application.
+%If you are not familiar with functional programming, please ignore what I just said.
+%```
+%
+%When we get to the chapters on [subtype polymorphism](subtype-polymorphism) and [abstract injected object composition](abstract-injected-object-composition) you will start to see why it is so important to think about what you expose in your instance methods and what you "preload" in the constructor.
+%I know that this statement doesn't make sense yet, but when you want to use subtype polymorphism whatever instance method you want to override/implement has to have the same signature in all subtypes.
+%
+%```{warning}
+%If we want to be able to easily switch between different kinds of ciphers (like for example Caesar, Reverse, and Robber's language) then it is important that we define our instance methods so that they *don't* require arguments that are specific to any particular subset of ciphers.
+%```
+%
+%Don't worry if you still feel confused about why we chose to put `steps` in the constructor and `input` in the instance method.
+%After the chapters on [subtype polymorphism](subtype-polymorphism) and [abstract injected object composition](abstract-injected-object-composition) you should have a much better idea.
+
+
 ### Robber's cipher vowel
 
 In the chapter on [fields](fields) we gave an example where we assigned the consonant `B` to a field that was supposed to contain a vowel.

@@ -414,12 +414,11 @@ Have a look at our implementation of the Robber's language for inspiration.
 If your program starts like this:
 ```{code-cell}
 char input = 'L';
-char vowel = 'o';
 // ....
 ```
 then when you run it, it should print:
 ```output
-LoL
+7
 ```
 ```{exercise-end}
 ```
@@ -428,7 +427,6 @@ LoL
 :hidden:
 ```csharp
 char input = 'L';
-char vowel = 'o';
 
 switch (input)
 {

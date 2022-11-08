@@ -22,6 +22,7 @@ In this chapter we're exploring the simplest level of object composition.
 Please have a look at the chapter [object composition](object-composition:abstraction-levels) if you have not already.
 ```
 
+%- TODO: Return to the drunk student example from instance methods. Use composition this time so that we can gather some stats like the max and min steps.
 
 ## Motivation
 
