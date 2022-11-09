@@ -14,6 +14,10 @@ kernelspec:
 
 % TODO: Benefits are very similar to partial application when we send in data through the constructor. Our data depends on the state of the object. Being able to store some data in an instance and then use objects of the same type interchangably at runtime. For example instantiating caesar ciphers with multiple different steps, passing them around, and then switching between them.
 
+%- Principle: Encapsulation / Information hiding (coupling, hide what changes)
+%    - <https://stackoverflow.com/questions/13913174/what-are-the-differences-between-information-hiding-and-encapsulation>
+%- Principle: The state space of a type should equal the state space of whatever domain concept it is modeling.
+
 
 
 ## Motivation
@@ -45,6 +49,8 @@ class [identifier]
   }
 }
 ```
+
+% TODO:!!!!!!!!!!!!!!!!  USE THE STATIC METHOD MakeCircle (from access modifiers) AS A STARTING POINT FOR EXPLAINING CONSTRUCTORS. A CONSTRUCTOR IS BASICALLY THE SAME THING AS THAT METHOD!!
 
 In the chapter on [classes](classes) we discussed the keyword `new` which is used to create instances of a class.
 When we use the keyword `new` followed by a class name, a pair of parentheses, and possibly some arguments, then a constructor (that matches that list of arguments is called) is called and we get back an object of that type.
