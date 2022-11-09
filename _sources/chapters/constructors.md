@@ -46,6 +46,8 @@ class [identifier]
 }
 ```
 
+% TODO:!!!!!!!!!!!!!!!!  USE THE STATIC METHOD MakeCircle (from access modifiers) AS A STARTING POINT FOR EXPLAINING CONSTRUCTORS. A CONSTRUCTOR IS BASICALLY THE SAME THING AS THAT METHOD!!
+
 In the chapter on [classes](classes) we discussed the keyword `new` which is used to create instances of a class.
 When we use the keyword `new` followed by a class name, a pair of parentheses, and possibly some arguments, then a constructor (that matches that list of arguments is called) is called and we get back an object of that type.
 I say "a constructor" rather than "the constructor" since constructors support overloading and so a class might have any number of constructors.

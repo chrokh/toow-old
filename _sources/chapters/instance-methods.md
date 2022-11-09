@@ -206,6 +206,7 @@ But let's devise a slightly more contrived example now.
 Let's define an instance method called `Scale` that takes two parameters called `Width` and `Height`.
 The method multiplies the current width and height with the scalars that we've passed in.
 
+(rectangle-scale)=
 ```{code-cell}
 class Rectangle
 {

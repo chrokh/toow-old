@@ -9,6 +9,7 @@ Work in progress.
 %- Uniform access principle (use Robert Martin as source?)
 %- Object initializers. Have already taked about them a bit in the chapter on fields.
 %- Get, set, init, read-only (no setter).
+%- UML class diagrams.
 %
 
 %- EXAMPLE: Use Circle from fields chapter. If you change width or height then it actually changes radius. Width and height refers to bounding box.

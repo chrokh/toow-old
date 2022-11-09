@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>65. Access modifiers (basic). &#8212; The Object Oriented Way (DRAFT)</title>
+    <title>63. Access modifiers &#8212; The Object Oriented Way (DRAFT)</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,10 +52,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="66. Extension methods" href="extension-methods.html" />
-    <link rel="prev" title="64. Properties" href="properties.html" />
+    <link rel="next" title="64. Constructors" href="constructors.html" />
+    <link rel="prev" title="62. Instance methods" href="instance-methods.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -546,19 +548,19 @@ const thebe_selector_output = ".output, .cell_output"
    62. ★ Instance methods
   </a>
  </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   63. ★ Access modifiers
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="constructors.html">
-   63. ★ Constructors
+   64. ★ Constructors
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="properties.html">
-   64. ★ Properties
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   65. ★ Access modifiers
+   65. ★ Properties
   </a>
  </li>
  <li class="toctree-l1">
@@ -997,6 +999,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/chrokh/the-oo-way/main?urlpath=tree/docs/chapters/basic-access-modifiers.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -1031,6 +1062,23 @@ title="Open an issue"
   </button>
   <div class="menu-dropdown__content">
     <ul>
+      <li>
+        <a href="../_sources/chapters/basic-access-modifiers.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
       <li>
         <a href="../_sources/chapters/basic-access-modifiers.md"
    class="headerbtn"
@@ -1092,8 +1140,64 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   63.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   63.2. Definition
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#methods">
+     63.2.1. Methods
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fields">
+     63.2.2. Fields
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#uml-class-diagrams">
+     63.2.3. UML class diagrams
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   63.3. Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rectangles">
+     63.3.1. Rectangles
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classes-not-objects">
+     63.3.2. Classes not objects
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#instance-method-accessing-another-instance">
+       63.3.2.1. Instance method accessing another instance
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#static-method-accessing-an-instance">
+       63.3.2.2. Static method accessing an instance
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
-   65.1. Exercises
+   63.4. Exercises
   </a>
  </li>
 </ul>
@@ -1105,7 +1209,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Access modifiers (basic).</h1>
+                <h1>Access modifiers</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -1116,8 +1220,64 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   63.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   63.2. Definition
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#methods">
+     63.2.1. Methods
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fields">
+     63.2.2. Fields
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#uml-class-diagrams">
+     63.2.3. UML class diagrams
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   63.3. Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rectangles">
+     63.3.1. Rectangles
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classes-not-objects">
+     63.3.2. Classes not objects
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#instance-method-accessing-another-instance">
+       63.3.2.1. Instance method accessing another instance
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#static-method-accessing-an-instance">
+       63.3.2.2. Static method accessing an instance
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
-   65.1. Exercises
+   63.4. Exercises
   </a>
  </li>
 </ul>
@@ -1130,19 +1290,599 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="access-modifiers-basic">
-<span id="access-modifiers"></span><h1><span class="section-number">65. </span>Access modifiers (basic).<a class="headerlink" href="#access-modifiers-basic" title="Permalink to this headline">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="access-modifiers">
+<span id="id1"></span><h1><span class="section-number">63. </span>Access modifiers<a class="headerlink" href="#access-modifiers" title="Permalink to this headline">#</a></h1>
+<section id="motivation">
+<h2><span class="section-number">63.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
+<p>Now that we’ve talked about both <a class="reference internal" href="fields.html"><span class="doc std std-doc">instance fields</span></a> and <a class="reference internal" href="instance-methods.html"><span class="doc std std-doc">instance methods</span></a> we’re finally ready to meaningfully talk about access modifiers.
+Remember how we said that <code class="docutils literal notranslate"><span class="pre">public</span></code> fields “break encapsulation” or “violate the principle of information hiding”?</p>
+<p>We said that we should hide data inside objects so that others cannot reach into our objects and change the data on our behalf.
+Data should be encapsulated inside objects.
+Data is, what we call, an “implementation detail” that should be <code class="docutils literal notranslate"><span class="pre">private</span></code>.</p>
+</section>
+<section id="definition">
+<h2><span class="section-number">63.2. </span>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">#</a></h2>
+<p>We use access modifiers to modify the accessibility of static and instance <a class="reference internal" href="fields.html"><span class="doc std std-doc">fields</span></a>, static and instance <a class="reference internal" href="properties.html"><span class="doc std std-doc">properties</span></a> as well as and <a class="reference internal" href="static-methods.html"><span class="doc std std-doc">static</span></a> and <a class="reference internal" href="instance-methods.html"><span class="doc std std-doc">instance methods</span></a>.
+Accessibility is also sometimes referred to as “visibility” or “protection level”.
+The accessibility level essentially determines whether or not we can access something from outside of it.</p>
+<p>We’ll talk about access modifiers in relation to the class members fields and methods in this chapter.
+Using access modifiers with properties is something that we’ll discuss directly in the chapter on access modifiers.</p>
+<p>You can also use access modifiers to modify the accessibility of classes, records, and structs but that’s not something we’ll discuss here.</p>
+<p>There are three basic access modifiers that we’ll discuss in this book: <code class="docutils literal notranslate"><span class="pre">public</span></code>, <code class="docutils literal notranslate"><span class="pre">private</span></code>, and <code class="docutils literal notranslate"><span class="pre">protected</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span></code> means accessible by whoever has access to the class.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">private</span></code> means accessible <em>only</em> from within the class itself.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">protected</span></code> means accessible <em>only</em> from within the class itself <em>and</em> any of its <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">subclasses</span></a>.</p></li>
+</ul>
+<p>It is important to understand that we are talking about from what <em>classes</em> a member is accessible from.
+We’re not talking about from what <em>objects</em> a member is accessible from.</p>
+<p>If for example we say that a field called <code class="docutils literal notranslate"><span class="pre">name</span></code> is <code class="docutils literal notranslate"><span class="pre">private</span></code> in a class called <code class="docutils literal notranslate"><span class="pre">Person</span></code> then that doesn’t mean that any given person only ever can access its own name.
+It can access its own name but it can also access the name of any other person that we’ve passed it.</p>
+<p>Think about it this way: The class <code class="docutils literal notranslate"><span class="pre">Person</span></code> <em>knows about</em> the idea of <code class="docutils literal notranslate"><span class="pre">name</span></code> and hence can access the <code class="docutils literal notranslate"><span class="pre">name</span></code> field on any object that it has access to.
+Outside of the class <code class="docutils literal notranslate"><span class="pre">Person</span></code> however, we have no idea about the existence of the field <code class="docutils literal notranslate"><span class="pre">name</span></code> since that field has been marked as <code class="docutils literal notranslate"><span class="pre">private</span></code>.
+We’ll talk more about this caveat in the examples section of this chapter.</p>
+<p>Since we have yet to discuss <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a> we cannot discuss the modifier <code class="docutils literal notranslate"><span class="pre">protected</span></code> in detail, so we’ll return to that in a <a class="reference internal" href="advanced-access-modifiers.html"><span class="doc std std-doc">later chapter</span></a>.</p>
+<section id="methods">
+<h3><span class="section-number">63.2.1. </span>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">#</a></h3>
+<p>Let’s talk about methods first since its easier.
+To change the accessibility of an <a class="reference internal" href="instance-methods.html"><span class="doc std std-doc">instance method</span></a> we simply add an access modifier before the data type in our type signature.
+In the case of <a class="reference internal" href="static-methods.html"><span class="doc std std-doc">static methods</span></a> we simply add an access modifier before the <code class="docutils literal notranslate"><span class="pre">static</span></code> keyword.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">class</span><span class="o">-</span><span class="n">identifier</span><span class="o">&gt;</span>
+<span class="p">{</span>
+  <span class="o">&lt;</span><span class="n">access</span><span class="o">-</span><span class="n">modifier</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">static</span><span class="p">]</span> <span class="o">&lt;</span><span class="k">return</span><span class="o">-</span><span class="nb">type</span><span class="o">&gt;</span> <span class="p">([</span><span class="o">&lt;</span><span class="n">param1</span><span class="o">-</span><span class="nb">type</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">param1</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span>
+  <span class="p">{</span>
+    <span class="p">[</span><span class="n">method</span><span class="o">-</span><span class="n">body</span><span class="p">]</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
 </div>
+<p>Notice for example how the method <code class="docutils literal notranslate"><span class="pre">sizeString</span></code> is marked as <code class="docutils literal notranslate"><span class="pre">private</span></code> in the example below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Width</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Print</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">sizeString</span><span class="p">());</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">sizeString</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">$&quot;{this.Width} x {this.Height}&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-2312.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.16:1024/", "http://127.0.0.1:1024/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '2312.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+</section>
+<section id="fields">
+<h3><span class="section-number">63.2.2. </span>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">#</a></h3>
+<p>In the case of <a class="reference internal" href="properties.html"><span class="doc std std-doc">properties</span></a>, which we will talk about soon, we divide the problem of accessibility into the sub-problems of setting and getting a value.
+The set accessibility and the get accessibility can be controlled independently.
+For fields however we change both the set and get accessibility at the same time.</p>
+<p>To change the accessibility of a field we simply add an access modifier before the data type in our definition of the field.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">class</span><span class="o">-</span><span class="n">identifier</span><span class="o">&gt;</span>
+<span class="p">{</span>
+  <span class="o">&lt;</span><span class="n">access</span><span class="o">-</span><span class="n">modifier</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">static</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">field</span><span class="o">-</span><span class="nb">type</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">field</span><span class="o">-</span><span class="n">identifier</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We’ll give an example of <code class="docutils literal notranslate"><span class="pre">private</span></code> fields in the examples section of this chapter.</p>
+</section>
+<section id="uml-class-diagrams">
+<h3><span class="section-number">63.2.3. </span>UML class diagrams<a class="headerlink" href="#uml-class-diagrams" title="Permalink to this headline">#</a></h3>
+<p>In UML class diagrams we use the following symbols to denote different levels of accessibility.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">+</span></code> for <code class="docutils literal notranslate"><span class="pre">public</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-</span></code> for <code class="docutils literal notranslate"><span class="pre">private</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span></code> for <code class="docutils literal notranslate"><span class="pre">protected</span></code>.</p></li>
+</ul>
+<p>So if we’ve got a class called <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> and it has two <code class="docutils literal notranslate"><span class="pre">private</span></code> fields we might depict it like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌────────────────┐
+│   Rectangle    │
+├────────────────┤
+│ - Width : int  │
+│ - Height : int │
+├────────────────┤
+└────────────────┘
+</pre></div>
+</div>
+</section>
+</section>
+<section id="examples">
+<h2><span class="section-number">63.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
+<section id="rectangles">
+<h3><span class="section-number">63.3.1. </span>Rectangles<a class="headerlink" href="#rectangles" title="Permalink to this headline">#</a></h3>
+<p>Remember how we worked with the fields <code class="docutils literal notranslate"><span class="pre">Width</span></code> and <code class="docutils literal notranslate"><span class="pre">Height</span></code> in the class <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>?
+Remember how we said that they “break encapsulation”?
+If we were to make them <code class="docutils literal notranslate"><span class="pre">private</span></code> instead of <code class="docutils literal notranslate"><span class="pre">public</span></code> we would simply replace the latter keyword with the former.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3,15): warning CS0414: The field &#39;Rectangle.width&#39; is assigned but its value is never used
+
+(4,15): warning CS0414: The field &#39;Rectangle.height&#39; is assigned but its value is never used
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We’ve renamed the variables so that their names start with a lowercase letter since they are now private.
+As we’ve mentioned before, the convention in C# is to let <code class="docutils literal notranslate"><span class="pre">public</span></code> members have names that start with an uppercase letter, and <code class="docutils literal notranslate"><span class="pre">private</span></code> members have names that start with a lowercase letter.</p>
+</div>
+<p>In C#, fields are <code class="docutils literal notranslate"><span class="pre">private</span></code> by default, so if we omit the access modifier altogether the fields would also be <code class="docutils literal notranslate"><span class="pre">private</span></code>.
+So the code below has the same effect as the code above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3,7): warning CS0414: The field &#39;Rectangle.width&#39; is assigned but its value is never used
+
+(4,7): warning CS0414: The field &#39;Rectangle.height&#39; is assigned but its value is never used
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice how the compiler is now giving us a warning.
+The warning is saying that we’ve defined the two variables <code class="docutils literal notranslate"><span class="pre">width</span></code> and <code class="docutils literal notranslate"><span class="pre">height</span></code> but that they aren’t used anywhere.
+The compiler is basically trying to tell us that our program is pointless.</p>
+<p>Why didn’t we get this error before?
+Home come changing the accessibility of these fields to <code class="docutils literal notranslate"><span class="pre">private</span></code> caused the compiler to suddenly be concerned about our program being pointless?
+In the chapter on <a class="reference internal" href="fields.html"><span class="doc std std-doc">fields</span></a> the compiler warned us that the fields would be initialized to the default value for the type <code class="docutils literal notranslate"><span class="pre">int</span></code> but it never accused us of writing a pointless program.</p>
+<p>The difference lies in that the accessibility now is <code class="docutils literal notranslate"><span class="pre">private</span></code>.
+If the fields are <code class="docutils literal notranslate"><span class="pre">private</span></code> then their values can <em>only</em> be set and retrieved from instance and static members in this same class.
+But since the <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class, as we’ve defined it above, has no other members, then it will be impossible to change the values of our fields or to extract the value from them from the outside.
+Hence, the fields serves no purpose.</p>
+<p>Have a look at what happens if we try to access the fields from the outside.</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Rectangle</span><span class="w"> </span><span class="n">rect</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">();</span><span class="w"></span>
+<span class="n">rect</span><span class="p">.</span><span class="n">width</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">10</span><span class="p">;</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">rect</span><span class="p">.</span><span class="n">width</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2,6): error CS0122: &#39;Rectangle.width&#39; is inaccessible due to its protection level
+
+(3,24): error CS0122: &#39;Rectangle.width&#39; is inaccessible due to its protection level
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We get two compiler errors and they actually explain exactly what’s wrong.
+<code class="docutils literal notranslate"><span class="pre">width</span></code>, for example, is “inaccessible due to its protection level”.
+We get one error for line 2 above and one for line 3.
+One error for when we try to set the value and one error for when we try to get it.</p>
+<p>So now we’ve truly encapsulated the notions of <code class="docutils literal notranslate"><span class="pre">width</span></code> and <code class="docutils literal notranslate"><span class="pre">height</span></code> in the concept of <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>.
+But how in the world are we going to be able to do anything useful with them if we can’t access them.
+Well, this is where <a class="reference internal" href="instance-methods.html"><span class="doc std std-doc">instance methods</span></a> that we just learned about (or properties but we’ll talk about that later) come in to play.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetWidth</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">width</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">width</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetHeight</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">height</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">height</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">height</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Print</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{width} x {height}&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>No more compiler errors.
+Can we use this class?
+Indeed we can.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Rectangle</span><span class="w"> </span><span class="n">rect</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">();</span><span class="w"></span>
+<span class="n">rect</span><span class="p">.</span><span class="n">SetWidth</span><span class="p">(</span><span class="m">20</span><span class="p">);</span><span class="w"></span>
+<span class="n">rect</span><span class="p">.</span><span class="n">SetHeight</span><span class="p">(</span><span class="m">10</span><span class="p">);</span><span class="w"></span>
+<span class="n">rect</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20 x 10
+</pre></div>
+</div>
+</div>
+</div>
+<p>Is it all a win or have we lost something?
+Well, since we’ve made the fields <code class="docutils literal notranslate"><span class="pre">private</span></code> we can no longer use the object initializer syntax.
+But in the chapter on <a class="reference internal" href="properties.html"><span class="doc std std-doc">properties</span></a> you’ll see how we can get that ability back and in the chapter on <a class="reference internal" href="constructors.html"><span class="doc std std-doc">constructors</span></a> you’ll see why we should prefer constructors over object initializers much of the time.</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Rectangle</span><span class="w"> </span><span class="n">rect</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1,36): error CS0122: &#39;Rectangle.width&#39; is inaccessible due to its protection level
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Why is this a win?
+Doesn’t the new version of <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> seem more complicated than the old?
+Wasn’t it more useful before?
+Well, the new implementation follows the principle of information hiding.
+It doesn’t break encapsulation.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>By making the fields <code class="docutils literal notranslate"><span class="pre">private</span></code> we’ve encapsulated them and made the class easier to change without breaking other code.</p>
+</div>
+<p>Another way to say this is that we’ve “hidden what might vary”.
+Yet another way is that we’ve hidden “implementation details”.
+The fact that the width and height of a rectangle is modeled using the data type <code class="docutils literal notranslate"><span class="pre">int</span></code> is what we would call an implementation detail.
+It’s irrelevant to the fact that we’re trying to model rectangles.</p>
+<p>Let’s say that we in the future realize that we want to implement a new method called <code class="docutils literal notranslate"><span class="pre">Half</span></code> which itself could be implemented in terms of the method <code class="docutils literal notranslate"><span class="pre">Scale</span></code> that we <a class="reference internal" href="instance-methods.html#rectangle-scale"><span class="std std-ref">built before</span></a> if the <code class="docutils literal notranslate"><span class="pre">Scale</span></code> method supported non-integers.
+So let’s instead rewrite the <code class="docutils literal notranslate"><span class="pre">Scale</span></code> method so that it takes a <code class="docutils literal notranslate"><span class="pre">double</span></code>.</p>
+<p>This means that if we pass <code class="docutils literal notranslate"><span class="pre">0.5</span></code> to the method <code class="docutils literal notranslate"><span class="pre">Scale</span></code> then the rectangle should be halved.
+However, if our rectangle, for example, has size <span class="math notranslate nohighlight">\((5,5)\)</span> then the new size should be <span class="math notranslate nohighlight">\((2.5, 2.5)\)</span>.
+But we’ve modeled the width and height as fields of type <code class="docutils literal notranslate"><span class="pre">int</span></code>.
+Is this going to be a costly change?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w">  </span><span class="c1">// Changed.</span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="c1">// Changed.</span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetWidth</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">width</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">width</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetHeight</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">height</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">height</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">height</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Scale</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">multiplier</span><span class="p">)</span><span class="w">  </span><span class="c1">//</span>
+<span class="w">  </span><span class="p">{</span><span class="w">                                      </span><span class="c1">//</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">width</span><span class="w"> </span><span class="p">*=</span><span class="w"> </span><span class="n">multiplier</span><span class="p">;</span><span class="w">            </span><span class="c1">// New method.</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">height</span><span class="w"> </span><span class="p">*=</span><span class="w"> </span><span class="n">multiplier</span><span class="p">;</span><span class="w">           </span><span class="c1">//</span>
+<span class="w">  </span><span class="p">}</span><span class="w">                                      </span><span class="c1">//</span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Print</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{width} x {height}&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>No, the change is <em>not</em> going to break a lot of other things.
+Since the fields are properly encapsulated this implementation detail is trivial to change.
+Notice how, beyond adding the new method, we only had to change the type of our instance fields from <code class="docutils literal notranslate"><span class="pre">int</span></code> to <code class="docutils literal notranslate"><span class="pre">double</span></code>.
+Nothing else had to change.</p>
+<p>Does the code that uses the class <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> have to change?
+No, because, what we will learn to refer to as, the “public interface” of the type <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> has not actually changed.
+Beyond the fact that we added a new instance method.
+The only thing that changed was an implementation detail.</p>
+<p>All code that used objects of type <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> should keep working just like it did before.
+What would have happened if we had not encapsulated the <code class="docutils literal notranslate"><span class="pre">Width</span></code> and <code class="docutils literal notranslate"><span class="pre">Height</span></code> fields but instead exposed them publicly and then changed the data type of them from <code class="docutils literal notranslate"><span class="pre">int</span></code> to <code class="docutils literal notranslate"><span class="pre">double</span></code>?
+Any code that interacted with rectangles might have had to change since it might have been working with values of type <code class="docutils literal notranslate"><span class="pre">int</span></code>, while objects of type <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> now wants us to give them and yields values of type <code class="docutils literal notranslate"><span class="pre">double</span></code>.</p>
+</section>
+<section id="classes-not-objects">
+<h3><span class="section-number">63.3.2. </span>Classes not objects<a class="headerlink" href="#classes-not-objects" title="Permalink to this headline">#</a></h3>
+<p>Remember how we said that the accessibility determines what <em>class</em> has access to a given member, not what <em>object</em> has access to it?
+Let’s take two examples to drive this point home.</p>
+<section id="instance-method-accessing-another-instance">
+<h4><span class="section-number">63.3.2.1. </span>Instance method accessing another instance<a class="headerlink" href="#instance-method-accessing-another-instance" title="Permalink to this headline">#</a></h4>
+<p>Have a look at the class below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetName</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Greet</span><span class="w"> </span><span class="p">(</span><span class="n">Person</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Hello {other.name}, my name is {name}.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’re defining a class called <code class="docutils literal notranslate"><span class="pre">Person</span></code> with a <code class="docutils literal notranslate"><span class="pre">private</span></code> field called <code class="docutils literal notranslate"><span class="pre">name</span></code>.
+The person class has two public instance methods.
+One allows us to set the name of a person and the other allows us to greet another person.</p>
+<p>This second method is the interesting one since it takes another object as input and wants to access both our name and that other persons name.
+Is that possible even though the field <code class="docutils literal notranslate"><span class="pre">name</span></code> is marked as being <code class="docutils literal notranslate"><span class="pre">private</span></code>?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Person</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">();</span><span class="w"></span>
+<span class="n">Person</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">();</span><span class="w"></span>
+
+<span class="n">p1</span><span class="p">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;Jane&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">p2</span><span class="p">.</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;John&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="n">p1</span><span class="p">.</span><span class="n">Greet</span><span class="p">(</span><span class="n">p2</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello John, my name is Jane.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Indeed, it is possible.
+Why?
+Because the field <code class="docutils literal notranslate"><span class="pre">name</span></code> is only private to the class <code class="docutils literal notranslate"><span class="pre">Person</span></code> not to any one specific object of type <code class="docutils literal notranslate"><span class="pre">Person</span></code>.
+If you are defining the method in the class <code class="docutils literal notranslate"><span class="pre">Person</span></code> then you have access to the <code class="docutils literal notranslate"><span class="pre">name</span></code> field.</p>
+</section>
+<section id="static-method-accessing-an-instance">
+<h4><span class="section-number">63.3.2.2. </span>Static method accessing an instance<a class="headerlink" href="#static-method-accessing-an-instance" title="Permalink to this headline">#</a></h4>
+<p>Let’s take another example, but let’s this time use a static method.
+Have a look at this class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Circle</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">radius</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">Circle</span><span class="w"> </span><span class="nf">MakeCircle</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">radius</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Circle</span><span class="w"> </span><span class="n">circle</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Circle</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">circle</span><span class="p">.</span><span class="n">radius</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">radius</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">circle</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Print</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Circle with radius: &quot;</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="n">radius</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’re defining a class called <code class="docutils literal notranslate"><span class="pre">Circle</span></code> which has a <code class="docutils literal notranslate"><span class="pre">private</span></code> field called <code class="docutils literal notranslate"><span class="pre">radius</span></code>.
+There is no public instance method that allows us to set the radius of an object of type <code class="docutils literal notranslate"><span class="pre">Circle</span></code>.
+There is however a public instance method that allows us to print a circle.
+Then there is a <code class="docutils literal notranslate"><span class="pre">public</span></code> <code class="docutils literal notranslate"><span class="pre">static</span></code> method called <code class="docutils literal notranslate"><span class="pre">MakeCircle</span></code> that takes a radius and returns us an object of type <code class="docutils literal notranslate"><span class="pre">Circle</span></code>.
+Is it really possible for that static method to set the radius of the circle?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Circle</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Circle</span><span class="p">.</span><span class="n">MakeCircle</span><span class="p">(</span><span class="m">12</span><span class="p">);</span><span class="w"></span>
+<span class="n">c1</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Circle with radius: 12
+</pre></div>
+</div>
+</div>
+</div>
+<p>Yes it is.
+The static method is defined <em>in</em> the class <code class="docutils literal notranslate"><span class="pre">Circle</span></code> and consequently it has access to the field even though the field is marked as <code class="docutils literal notranslate"><span class="pre">private</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When we’ve learned about <a class="reference internal" href="constructors.html"><span class="doc std std-doc">constructors</span></a> we don’t need to write <code class="docutils literal notranslate"><span class="pre">static</span></code> methods like <code class="docutils literal notranslate"><span class="pre">MakeCircle</span></code> anymore.
+However, you might want to know that constructors solve basically the same problem as we solved with this ´static´ method.
+So if you understand how this static method works, then you’re very close to understanding how constructors work.</p>
+</div>
+</section>
+</section>
+</section>
 <section id="exercises">
-<h2><span class="section-number">65.1. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">63.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
 <div class="exercise admonition" id="chapters/basic-access-modifiers-exercise-0">
 
-<p class="admonition-title"><span class="caption-number">Exercise 65.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 63.1 </span></p>
 <section id="exercise-content">
 <p>What is the difference between <code class="docutils literal notranslate"><span class="pre">public</span></code> and <code class="docutils literal notranslate"><span class="pre">private</span></code>?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/basic-access-modifiers-exercise-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 63.2 </span></p>
+<section id="exercise-content">
+<p>What do we mean when we say that <code class="docutils literal notranslate"><span class="pre">public</span></code> fields “break encapsulation” or “violate the principle of information hiding”?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/basic-access-modifiers-exercise-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 63.3 </span></p>
+<section id="exercise-content">
+<p>Redo all the coding exercises in the chapter on <a class="reference internal" href="instance-methods.html"><span class="doc std std-doc">instance methods</span></a> and make sure that your solutions work <em>even</em> after you’ve changed the accessibility of all fields to <code class="docutils literal notranslate"><span class="pre">private</span></code>.
+In some cases you will need to adapt your solutions.
+This is a very important exercise.</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/basic-access-modifiers-exercise-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 63.4 </span></p>
+<section id="exercise-content">
+<p>Does the following code compile?
+Why or why not?</p>
+<div class="cell tag_raises-exception tag_remove-output tag_remove-stderr docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetName</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Greeter</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Greet</span><span class="w"> </span><span class="p">(</span><span class="n">Person</span><span class="w"> </span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="n">p2</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Hello {p1.name}, I am {p2.name}&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/basic-access-modifiers-exercise-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 63.5 </span></p>
+<section id="exercise-content">
+<p>Does the following code compile?
+Why or why not?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetName</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Greet</span><span class="w"> </span><span class="p">(</span><span class="n">Person</span><span class="w"> </span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="n">p2</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Hello {p1.name}, I am {p2.name}&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/basic-access-modifiers-exercise-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 63.6 </span></p>
+<section id="exercise-content">
+<p>We’ve said that <code class="docutils literal notranslate"><span class="pre">private</span></code> means that the member is accessible within the same class not merely within the same object.
+Write your own code example to show what this means.</p>
 </section>
 </div>
 </section>
@@ -1157,16 +1897,16 @@ title="Print to PDF"
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            kernelName: "python3",
+            kernelName: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
 
               </div>
               
@@ -1175,17 +1915,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="properties.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="instance-methods.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">64. </span>Properties</p>
+            <p class="prev-next-title"><span class="section-number">62. </span>Instance methods</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="extension-methods.html" title="next page">
+    <a class='right-next' id="next-link" href="constructors.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">66. </span>Extension methods</p>
+        <p class="prev-next-title"><span class="section-number">64. </span>Constructors</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
