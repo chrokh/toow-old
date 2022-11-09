@@ -14,6 +14,10 @@ kernelspec:
 
 % TODO: Benefits are very similar to partial application when we send in data through the constructor. Our data depends on the state of the object. Being able to store some data in an instance and then use objects of the same type interchangably at runtime. For example instantiating caesar ciphers with multiple different steps, passing them around, and then switching between them.
 
+%- Principle: Encapsulation / Information hiding (coupling, hide what changes)
+%    - <https://stackoverflow.com/questions/13913174/what-are-the-differences-between-information-hiding-and-encapsulation>
+%- Principle: The state space of a type should equal the state space of whatever domain concept it is modeling.
+
 
 
 ## Motivation
