@@ -12,6 +12,8 @@ kernelspec:
 
 % TODO: Also talk about how exceptions derive from eachother so that we can capture more general or specific exceptions?
 
+% TODO: Should rewriting of vowels from static factory methods to subtypes be explained in text or should it be exercise? It is now an exercise. Another case of that example is that of Emails from the same chapter (constructors).
+
 (polymorphism)=
 # Subtype polymorphism
 
@@ -604,6 +606,8 @@ As you will come to learn, subtype polymorphism is at the heart of almost all ob
 
 ## Exercises
 
+% TODO: Redo exercise {numref}`ex:single-format-phone-numbers` but for multiple formats. Polymorphic method is perhaps `string AsString()`?
+
 
 ```{exercise}
 If type `A` is a subset of type `B` then we would say that the set that models type `B` *includes* the set that models type `A`.
@@ -735,8 +739,36 @@ Why is it important that the signature of constructors can vary freely between s
 When we treat a subtype as a supertype, meaning when we let the compile-time type be the supertype, why can't we call methods that are only defined in the subtype?
 ```
 
-```{exercise}
-Rewrite the class `Vowel` that you wrote in {numref}`ex:constructors:vowel` so that each vowel is modeled by its own subtype of `IVowel`.
+```{exercise-start}
+```
+Remember the class `Vowel` that we wrote when discsusing [private constructors](constructors:private)?
+It looked something like this:
+```{code-cell}
+:tags: [hide-input]
+class Vowel
+{
+  private char letter;
+
+  // Private constructor
+  private Vowel (char letter, bool upper)
+    => this.letter = upper
+      ? Char.ToUpper(letter)
+      : Char.ToLower(letter);
+
+  // Public static factory methods
+  public static Vowel MakeA(bool upper) => new Vowel('A', upper);
+  public static Vowel MakeE(bool upper) => new Vowel('E', upper);
+  public static Vowel MakeI(bool upper) => new Vowel('I', upper);
+  public static Vowel MakeO(bool upper) => new Vowel('O', upper);
+  public static Vowel MakeU(bool upper) => new Vowel('U', upper);
+  public static Vowel MakeY(bool upper) => new Vowel('Y', upper);
+
+  public char ToChar() => letter;
+}
+```
+Rewrite the class so that each vowel is its own subtype of `IVowel`.
+When you are done you should no longer need the static factory methods but you should still catch all errors related to trying to create a vowel from a non-vowel character at compile-time.
+```{exercise-end}
 ```
 
 
