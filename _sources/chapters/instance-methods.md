@@ -11,6 +11,7 @@ kernelspec:
 ---
 
 %- TODO: Also: void
+%- TODO: Use `AsString` instead of `Print` to avoid encouraging the habit of coupling to the console. Just mention that we want to call it `ToString` but we can't without warnings since we have to learn about inheritance first.
 
 
 % TODO: Usually verbs. Or implied verbs as discussed in procedures.
@@ -180,6 +181,7 @@ Any given object does not have any information about any other object's width or
 It only knows its own and that's what it prints.
 
 
+(keyword:this)=
 ### Keyword `this`
 
 What about the keyword `this` that was used in the implementation of the instance method `Print` of the `Rectangle` class.

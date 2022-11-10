@@ -345,6 +345,7 @@ Because the field `name` is only private to the class `Person` not to any one sp
 If you are defining the method in the class `Person` then you have access to the `name` field.
 
 
+(static-factory-methods)=
 #### Static method accessing an instance
 
 Let's take another example, but let's this time use a static method.
@@ -385,6 +386,12 @@ The static method is defined *in* the class `Circle` and consequently it has acc
 When we've learned about [constructors](constructors) we don't need to write `static` methods like `MakeCircle` anymore.
 However, you might want to know that constructors solve basically the same problem as we solved with this ´static´ method.
 So if you understand how this static method works, then you're very close to understanding how constructors work.
+```
+
+```{note}
+The method `MakeCircle` is what we would call a "static factory method".
+It's a `static` method that we can call in order to get objects of some type.
+In this case the type is `Circle`.
 ```
 
 

@@ -17,6 +17,7 @@ Work in progress.
 ```
 
 % TODO: Mention drawback of only one spot for inheritance. Referenced from chapter on Liskov.
+%- Base keyword!! Both in constructor context and beyond.
 
 
 ## Motivation

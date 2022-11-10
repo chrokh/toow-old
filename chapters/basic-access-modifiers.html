@@ -1356,7 +1356,7 @@ In the case of <a class="reference internal" href="static-methods.html"><span cl
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2315.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2352.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1401,12 +1401,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.213:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.113:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2315.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2352.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1515,9 +1515,9 @@ If we were to make them <code class="docutils literal notranslate"><span class="
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4,15): warning CS0414: The field &#39;Rectangle.height&#39; is assigned but its value is never used
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3,15): warning CS0414: The field &#39;Rectangle.width&#39; is assigned but its value is never used
 
-(3,15): warning CS0414: The field &#39;Rectangle.width&#39; is assigned but its value is never used
+(4,15): warning CS0414: The field &#39;Rectangle.height&#39; is assigned but its value is never used
 </pre></div>
 </div>
 </div>
@@ -1540,9 +1540,9 @@ So the code below has the same effect as the code above.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4,7): warning CS0414: The field &#39;Rectangle.height&#39; is assigned but its value is never used
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3,7): warning CS0414: The field &#39;Rectangle.width&#39; is assigned but its value is never used
 
-(3,7): warning CS0414: The field &#39;Rectangle.width&#39; is assigned but its value is never used
+(4,7): warning CS0414: The field &#39;Rectangle.height&#39; is assigned but its value is never used
 </pre></div>
 </div>
 </div>
@@ -1749,7 +1749,7 @@ Because the field <code class="docutils literal notranslate"><span class="pre">n
 If you are defining the method in the class <code class="docutils literal notranslate"><span class="pre">Person</span></code> then you have access to the <code class="docutils literal notranslate"><span class="pre">name</span></code> field.</p>
 </section>
 <section id="static-method-accessing-an-instance">
-<h4><span class="section-number">63.3.2.2. </span>Static method accessing an instance<a class="headerlink" href="#static-method-accessing-an-instance" title="Permalink to this headline">#</a></h4>
+<span id="static-factory-methods"></span><h4><span class="section-number">63.3.2.2. </span>Static method accessing an instance<a class="headerlink" href="#static-method-accessing-an-instance" title="Permalink to this headline">#</a></h4>
 <p>Let’s take another example, but let’s this time use a static method.
 Have a look at this class.</p>
 <div class="cell docutils container">
@@ -1797,6 +1797,12 @@ The static method is defined <em>in</em> the class <code class="docutils literal
 <p>When we’ve learned about <a class="reference internal" href="constructors.html"><span class="doc std std-doc">constructors</span></a> we don’t need to write <code class="docutils literal notranslate"><span class="pre">static</span></code> methods like <code class="docutils literal notranslate"><span class="pre">MakeCircle</span></code> anymore.
 However, you might want to know that constructors solve basically the same problem as we solved with this ´static´ method.
 So if you understand how this static method works, then you’re very close to understanding how constructors work.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The method <code class="docutils literal notranslate"><span class="pre">MakeCircle</span></code> is what we would call a “static factory method”.
+It’s a <code class="docutils literal notranslate"><span class="pre">static</span></code> method that we can call in order to get objects of some type.
+In this case the type is <code class="docutils literal notranslate"><span class="pre">Circle</span></code>.</p>
 </div>
 </section>
 </section>

@@ -185,6 +185,7 @@ And it is that single object that we've mutated.
 Hopefully you remember this behavior of reference types from back when we discussed [arrays](arrays)?
 
 
+(fields-default)=
 ### Initialization
 
 We can initialize an instance field, just like we initialize a regular variable.

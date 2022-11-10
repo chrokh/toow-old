@@ -1348,7 +1348,7 @@ One is called <code class="docutils literal notranslate"><span class="pre">Width
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2985.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3041.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1393,12 +1393,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.213:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.113:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2985.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3041.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1577,7 +1577,7 @@ And it is that single object that we’ve mutated.</p>
 <p>Hopefully you remember this behavior of reference types from back when we discussed <a class="reference internal" href="arrays.html"><span class="doc std std-doc">arrays</span></a>?</p>
 </section>
 <section id="initialization">
-<h3><span class="section-number">61.2.4. </span>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">#</a></h3>
+<span id="fields-default"></span><h3><span class="section-number">61.2.4. </span>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">#</a></h3>
 <p>We can initialize an instance field, just like we initialize a regular variable.
 Whenever we create an instance of the class, all instance field initializers are run.
 We haven’t talked about <a class="reference internal" href="constructors.html"><span class="doc std std-doc">constructors</span></a> yet, but since instance fields, in C#, are initialized <em>before</em> the constructor runs, we can use the constructor to override any values we’ve set in the initializers.
