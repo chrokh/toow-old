@@ -12,6 +12,10 @@ kernelspec:
 
 # Concrete constructed object composition
 
+%- Learn Mermaid in order to generate UML diagrams?
+%  * https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.dotnet-interactive-vscode
+%  * https://mermaid-js.github.io/mermaid/#/
+
 ```{warning}
 Work in progress.
 ```

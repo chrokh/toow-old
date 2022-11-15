@@ -12,6 +12,7 @@ kernelspec:
 
 # Constructors
 
+% TODO: UML class diagrams.
 % TODO: Benefits are very similar to partial application when we send in data through the constructor. Our data depends on the state of the object. Being able to store some data in an instance and then use objects of the same type interchangably at runtime. For example instantiating caesar ciphers with multiple different steps, passing them around, and then switching between them.
 
 %- Principle: Encapsulation / Information hiding (coupling, hide what changes)
