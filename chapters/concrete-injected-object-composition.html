@@ -1242,10 +1242,6 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="concrete-injected-object-composition">
 <h1><span class="section-number">69. </span>Concrete injected object composition<a class="headerlink" href="#concrete-injected-object-composition" title="Permalink to this headline">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
-</div>
 <div class="info admonition">
 <p class="admonition-title">Prerequisites</p>
 <p>In this chapter we’re exploring the object composition abstraction level that we refer to as “concrete injected object composition”. Please have a look at the chapter <a class="reference internal" href="object-composition.html#object-composition-abstraction-levels"><span class="std std-ref">object composition</span></a> if you have not already.</p>
@@ -1254,7 +1250,7 @@ title="Print to PDF"
 <h2><span class="section-number">69.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
 <p>When we move from <em>constructed</em> to <em>injected</em> object composition we gain run-time modifiability of which object is being composed.
 We gain the ability to change which object is composed into the composing object at run-time, instead of just at compile-time.
-This is a form of “<a class="reference internal" href="dependency-inversion-principle.html"><span class="doc std std-doc">dependency injection</span></a>”.</p>
+This is a form of “<span class="xref myst">dependency injection</span>”.</p>
 <p>What does this mean?
 Think back to the ciphers that we built in the chapter on <a class="reference internal" href="concrete-constructed-object-composition.html"><span class="doc std std-doc">concrete constructed object composition</span></a>.
 Remember how <code class="docutils literal notranslate"><span class="pre">FlipFlopCaesarCipher</span></code> had to expose all constructor parameters of <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code>, the object that it constructed.
@@ -1347,7 +1343,7 @@ It composes our <code class="docutils literal notranslate"><span class="pre">Cae
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2600.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2835.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1392,12 +1388,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.1.38:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.34:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2600.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2835.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1498,7 +1494,7 @@ In other words, the old two lines have been replaced with this:</p>
 <span class="k">this</span><span class="p">.</span><span class="n">flop</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">flop</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Instead of saying which particular <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> object we will use, and instead of requiring that users of this class pass whatever parameters we need to pass on to the <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> cwe simply state that to run this method you must also provide a <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> object.</p>
+<p>Instead of saying which particular <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> object we will use, and instead of requiring that users of this class pass whatever parameters we need to pass on to the instantiation of our <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code>s we simply state that to instantiate the <code class="docutils literal notranslate"><span class="pre">FlipFlopCaesarCipher</span></code> class you <em>must</em> provide two <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> objects.</p>
 <p>So how do we use this updated class?
 Let’s try it out by passing two objects of type <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> upon instantiation.</p>
 <div class="cell docutils container">
@@ -1507,12 +1503,12 @@ Let’s try it out by passing two objects of type <code class="docutils literal 
 <span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">CaesarCipher</span><span class="p">(</span><span class="m">1</span><span class="p">),</span><span class="w"></span>
 <span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">CaesarCipher</span><span class="p">(-</span><span class="m">1</span><span class="p">));</span><span class="w"></span>
 
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;AABBCC&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;AA  BB  CC&quot;</span><span class="p">));</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BZCADB
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BZ  CA  DB
 </pre></div>
 </div>
 </div>
@@ -1521,37 +1517,40 @@ Let’s try it out by passing two objects of type <code class="docutils literal 
 <p class="admonition-title">Important</p>
 <p>Instead of instantiating the dependency ourselves, we simply parameterize a method or a constructor so that callers can pass the dependency.</p>
 </div>
-<p>Importantly, the class <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> itself does <em>not</em> have to change at all.
+<p>Importantly, the composed class <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> itself does <em>not</em> have to change at all.
 Even though we’ve moved from <em>construction</em> to <em>injection</em> we can leave the code the same.
-The main program however will have to change since the way we use our building blocks have changed.
-We would now use our classes like this:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">FlipFlopCaesarCipher</span><span class="w"> </span><span class="n">cipher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FlipFlopCaesarCipher</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">CaesarCipher</span><span class="p">(</span><span class="m">10</span><span class="p">),</span><span class="w"></span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">CaesarCipher</span><span class="p">(</span><span class="m">3</span><span class="p">));</span><span class="w"></span>
-
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;AABBCC&quot;</span><span class="p">));</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KDLEMF
-</pre></div>
-</div>
-</div>
-</div>
+Why?
+Because we changed the class which has a reference to another class, not the referenced class.</p>
 </section>
 <section id="generalizing">
 <span id="concrete-injected-object-composition-examples-general-flip-flop"></span><h3><span class="section-number">69.3.2. </span>Generalizing<a class="headerlink" href="#generalizing" title="Permalink to this headline">#</a></h3>
 <p>At this point you might already have realized that the <code class="docutils literal notranslate"><span class="pre">FlipFlopCaesarCipher</span></code> actually has very little to do with the encoding-decoding idea.
 Our current abstraction accepts any two objects of type <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> which means that we can send any two instances of it.
 They don’t have to be arranged in a encode/decode fashion.</p>
-<p>Pretty cool stuff right?
-But hold your horses.
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">FlipFlopCaesarCipher</span><span class="w"> </span><span class="n">cipher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FlipFlopCaesarCipher</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">CaesarCipher</span><span class="p">(</span><span class="m">10</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">CaesarCipher</span><span class="p">(</span><span class="m">3</span><span class="p">));</span><span class="w"></span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;AA  BB  CC&quot;</span><span class="p">));</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KD  LE  MF
+</pre></div>
+</div>
+</div>
+</div>
+<p>Pretty cool stuff right?</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>But hold your horses and think about it.
 The basic idea of a flip flop cipher doesn’t even have anything to do with a Caesar cipher at all.
 In the chapter on <span class="xref myst">abstract injected object composition</span> we’ll see how we can generalize beyond Caesar ciphers.
 But to do that we need to learn about <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype polymorphism</span></a> first.</p>
+</div>
 </section>
 </section>
 <section id="discussion">
@@ -1592,45 +1591,41 @@ Refactor the code so that the two <code class="docutils literal notranslate"><sp
 
 <p class="admonition-title"><span class="caption-number">Exercise 69.2 </span></p>
 <section id="exercise-content">
-<p>Compare your solutions to <a class="reference internal" href="concrete-constructed-object-composition.html#ex:concrete-constructed-object-composition:leet"><span class="std std-numref">Exercise 68.2</span></a> and <a class="reference internal" href="#ex:concrete-injected-object-composition:leet"><span class="std std-numref">Exercise 69.1</span></a>.
-Use your own words to explain what we have gained, in terms of maintainability, by moving from concrete object <em>construction</em> to concrete object <em>injection</em>.</p>
+<p>Write a class called <code class="docutils literal notranslate"><span class="pre">PositionWiseCaesarCipher</span></code> that takes an array of Caesar ciphers as input.
+When encoding, you should apply the 1st cipher (at index 0) to the first letter, the 2nd cipher to the 2nd letter, and so forth.
+If we run out of ciphers we simply “cycle” and start again from the first cipher.</p>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/concrete-injected-object-composition-exercise-2">
 
 <p class="admonition-title"><span class="caption-number">Exercise 69.3 </span></p>
 <section id="exercise-content">
-<p>Write a class called <code class="docutils literal notranslate"><span class="pre">PositionWiseCaesarCipher</span></code> that takes an array of Caesar ciphers as input.
-When encoding, you should apply the 1st cipher (at index 0) to the first letter, the 2nd cipher to the 2nd letter, and so forth.
-If we run out of ciphers we simply “cycle” and start again from the first cipher.</p>
+<p>Compare your solutions to <a class="reference internal" href="concrete-constructed-object-composition.html#ex:concrete-constructed-object-composition:leet"><span class="std std-numref">Exercise 68.2</span></a> and <a class="reference internal" href="#ex:concrete-injected-object-composition:leet"><span class="std std-numref">Exercise 69.1</span></a>.
+Use your own words to explain what we have gained, in terms of maintainability, by moving from concrete object <em>construction</em> to concrete object <em>injection</em>.</p>
 </section>
 </div>
 <div class="exercise admonition" id="ex:concrete-injected-object-composition:example">
 
 <p class="admonition-title"><span class="caption-number">Exercise 69.4 </span></p>
 <section id="exercise-content">
-<p>What is concrete injected object composition?
-Give your own example and explain it in your own words.</p>
+<ol class="simple">
+<li><p>What is concrete injected object composition?</p></li>
+<li><p>Give your own example and explain it in your own words.</p></li>
+<li><p>Implement your envisaged example in code.</p></li>
+</ol>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/concrete-injected-object-composition-exercise-4">
 
 <p class="admonition-title"><span class="caption-number">Exercise 69.5 </span></p>
 <section id="exercise-content">
-<p>Implement the example you envisioned in <a class="reference internal" href="#ex:concrete-injected-object-composition:example"><span class="std std-numref">Exercise 69.4</span></a> in code.</p>
+<p>What is the difference between concrete <em>constructed</em> and <em>injected</em> object composition?
+Give your own examples and explain it in your own words.</p>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/concrete-injected-object-composition-exercise-5">
 
 <p class="admonition-title"><span class="caption-number">Exercise 69.6 </span></p>
-<section id="exercise-content">
-<p>What is the difference between concrete <em>constructed</em> and <em>injected</em> object composition?
-Give your own examples and explain it in your own words.</p>
-</section>
-</div>
-<div class="exercise admonition" id="chapters/concrete-injected-object-composition-exercise-6">
-
-<p class="admonition-title"><span class="caption-number">Exercise 69.7 </span></p>
 <section id="exercise-content">
 <p>Why is concrete constructed object composition problematic?</p>
 <p><em>Hint: Constructor arguments.</em></p>

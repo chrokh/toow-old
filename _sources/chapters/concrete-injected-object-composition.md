@@ -12,10 +12,6 @@ kernelspec:
 
 # Concrete injected object composition
 
-```{warning}
-Work in progress.
-```
-
 ```{admonition} Prerequisites
 :class: info
 In this chapter we’re exploring the object composition abstraction level that we refer to as "concrete injected object composition". Please have a look at the chapter [object composition](object-composition:abstraction-levels) if you have not already.
@@ -27,7 +23,7 @@ In this chapter we’re exploring the object composition abstraction level that 
 
 When we move from *constructed* to *injected* object composition we gain run-time modifiability of which object is being composed.
 We gain the ability to change which object is composed into the composing object at run-time, instead of just at compile-time.
-This is a form of "[dependency injection](dependency-inversion-principle)".
+This is a form of "[dependency injection](dependency-injection)".
 
 What does this mean?
 Think back to the ciphers that we built in the chapter on [concrete constructed object composition](concrete-constructed-object-composition).
@@ -184,7 +180,7 @@ this.flip = flip;
 this.flop = flop;
 ```
 
-Instead of saying which particular `CaesarCipher` object we will use, and instead of requiring that users of this class pass whatever parameters we need to pass on to the `CaesarCipher` cwe simply state that to run this method you must also provide a `CaesarCipher` object.
+Instead of saying which particular `CaesarCipher` object we will use, and instead of requiring that users of this class pass whatever parameters we need to pass on to the instantiation of our `CaesarCipher`s we simply state that to instantiate the `FlipFlopCaesarCipher` class you *must* provide two `CaesarCipher` objects.
 
 So how do we use this updated class?
 Let's try it out by passing two objects of type `CaesarCipher` upon instantiation.
@@ -194,25 +190,17 @@ var cipher = new FlipFlopCaesarCipher(
     new CaesarCipher(1),
     new CaesarCipher(-1));
 
-Console.WriteLine(cipher.Encode("AABBCC"));
+Console.WriteLine(cipher.Encode("AA  BB  CC"));
 ```
 
 ```{important}
 Instead of instantiating the dependency ourselves, we simply parameterize a method or a constructor so that callers can pass the dependency.
 ```
 
-Importantly, the class `CaesarCipher` itself does *not* have to change at all.
+Importantly, the composed class `CaesarCipher` itself does *not* have to change at all.
 Even though we've moved from *construction* to *injection* we can leave the code the same.
-The main program however will have to change since the way we use our building blocks have changed.
-We would now use our classes like this:
-
-```{code-cell} csharp
-FlipFlopCaesarCipher cipher = new FlipFlopCaesarCipher(
-    new CaesarCipher(10),
-    new CaesarCipher(3));
-
-Console.WriteLine(cipher.Encode("AABBCC"));
-```
+Why?
+Because we changed the class which has a reference to another class, not the referenced class.
 
 (concrete-injected-object-composition:examples:general-flip-flop)=
 ### Generalizing
@@ -221,11 +209,22 @@ At this point you might already have realized that the `FlipFlopCaesarCipher` ac
 Our current abstraction accepts any two objects of type `CaesarCipher` which means that we can send any two instances of it.
 They don't have to be arranged in a encode/decode fashion.
 
+```{code-cell} csharp
+FlipFlopCaesarCipher cipher = new FlipFlopCaesarCipher(
+    new CaesarCipher(10),
+    new CaesarCipher(3));
+
+Console.WriteLine(cipher.Encode("AA  BB  CC"));
+```
+
 Pretty cool stuff right?
-But hold your horses.
+
+```{tip}
+But hold your horses and think about it.
 The basic idea of a flip flop cipher doesn't even have anything to do with a Caesar cipher at all.
 In the chapter on [abstract injected object composition](abstract-injected-object-compsition) we'll see how we can generalize beyond Caesar ciphers.
 But to do that we need to learn about [subtype polymorphism](subtype-polymorphism) first.
+```
 
 
 ## Discussion
@@ -283,24 +282,21 @@ Refactor the code so that the two `LeetCipher`s are *injected* through the const
 ````
 
 ```{exercise}
-Compare your solutions to {numref}`ex:concrete-constructed-object-composition:leet` and {numref}`ex:concrete-injected-object-composition:leet`.
-Use your own words to explain what we have gained, in terms of maintainability, by moving from concrete object *construction* to concrete object *injection*.
-```
-
-```{exercise}
 Write a class called `PositionWiseCaesarCipher` that takes an array of Caesar ciphers as input.
 When encoding, you should apply the 1st cipher (at index 0) to the first letter, the 2nd cipher to the 2nd letter, and so forth.
 If we run out of ciphers we simply "cycle" and start again from the first cipher.
 ```
 
 ```{exercise}
-:label: ex:concrete-injected-object-composition:example
-What is concrete injected object composition?
-Give your own example and explain it in your own words.
+Compare your solutions to {numref}`ex:concrete-constructed-object-composition:leet` and {numref}`ex:concrete-injected-object-composition:leet`.
+Use your own words to explain what we have gained, in terms of maintainability, by moving from concrete object *construction* to concrete object *injection*.
 ```
 
 ```{exercise}
-Implement the example you envisioned in {numref}`ex:concrete-injected-object-composition:example` in code.
+:label: ex:concrete-injected-object-composition:example
+1. What is concrete injected object composition?
+2. Give your own example and explain it in your own words.
+3. Implement your envisaged example in code.
 ```
 
 ```{exercise}

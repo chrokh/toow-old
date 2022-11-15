@@ -1117,6 +1117,18 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#examples">
    67.3. Examples
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stars">
+     67.3.1. Stars
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#towers-of-hanoi">
+     67.3.2. Towers of Hanoi
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
@@ -1168,6 +1180,18 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#examples">
    67.3. Examples
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stars">
+     67.3.1. Stars
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#towers-of-hanoi">
+     67.3.2. Towers of Hanoi
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
@@ -1186,10 +1210,6 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="object-composition">
 <h1><span class="section-number">67. </span>Object composition<a class="headerlink" href="#object-composition" title="Permalink to this headline">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
-</div>
 <section id="motivation">
 <h2><span class="section-number">67.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
 <p><a class="reference internal" href="method-composition.html"><span class="doc std std-doc">Composition</span></a> is the act of combining simple things into more complex things in order to solve complex problems.
@@ -1207,28 +1227,39 @@ So if all we know is that object <code class="docutils literal notranslate"><spa
 <p>If object <code class="docutils literal notranslate"><span class="pre">a</span></code> has a field or property that contains an object of type <code class="docutils literal notranslate"><span class="pre">b</span></code> then we say that <code class="docutils literal notranslate"><span class="pre">a</span></code> “has-a” <code class="docutils literal notranslate"><span class="pre">b</span></code>.
 We say that <code class="docutils literal notranslate"><span class="pre">a</span></code> is composed with <code class="docutils literal notranslate"><span class="pre">b</span></code>.
 We refer to <code class="docutils literal notranslate"><span class="pre">a</span></code> as the composing object and <code class="docutils literal notranslate"><span class="pre">b</span></code> as the composed object.</p>
-<figure class="align-default" id="fig-object-composition-object-diagram">
-<img alt="https://via.placeholder.com/700x200?text=Image+coming+soon" src="https://via.placeholder.com/700x200?text=Image+coming+soon" />
-<figcaption>
-<p><span class="caption-number">Fig. 67.1 </span><span class="caption-text">Object composition is a binary directed relationship between two objects. In this figure <code class="docutils literal notranslate"><span class="pre">a</span></code> “has-a” <code class="docutils literal notranslate"><span class="pre">b</span></code>.</span><a class="headerlink" href="#fig-object-composition-object-diagram" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
 <p>The objects involved in a composition could be of the same type or of different types.
 While we call it “object composition”, in a class based object oriented language, we define compositions on the class level.
-So the terms “composition” and “has a” is also used on the type level.
-This means that if we define a type <code class="docutils literal notranslate"><span class="pre">A</span></code> such that it has an instance field of type <code class="docutils literal notranslate"><span class="pre">B</span></code> then we would say that <code class="docutils literal notranslate"><span class="pre">A</span></code> has-a <code class="docutils literal notranslate"><span class="pre">B</span></code> and we would refer to this as object composition.</p>
+So the terms “composition” and “has-a” is also used on the type level.
+This means that if we define a type <code class="docutils literal notranslate"><span class="pre">A</span></code> such that it has an instance field or property of type <code class="docutils literal notranslate"><span class="pre">B</span></code> then we would say that <code class="docutils literal notranslate"><span class="pre">A</span></code> has-a <code class="docutils literal notranslate"><span class="pre">B</span></code> and we would refer to this as object composition.</p>
 <section id="uml-association">
 <h3><span class="section-number">67.2.1. </span>UML association<a class="headerlink" href="#uml-association" title="Permalink to this headline">#</a></h3>
-<p>In UML class diagrams we refer to object composition as “association” and we draw it using an arrow as in <a class="reference internal" href="#fig-object-composition-class-diagram"><span class="std std-numref">Fig. 67.2</span></a>.
+<p>In UML class diagrams we refer to object composition as “association” and we draw it using an arrow shaped as in <a class="reference internal" href="#fig-uml-class-diagram-association-arrow"><span class="std std-numref">Fig. 67.1</span></a>.
 The arrow is pointing from the type that has a reference to the type that it has a reference to.
-In the case of <a class="reference internal" href="algorithms.html#towers-of-hanoi"><span class="std std-ref">Towers of Hanoi</span></a>, <code class="docutils literal notranslate"><span class="pre">Rod</span></code> is pointing towards <code class="docutils literal notranslate"><span class="pre">Disk</span></code> since <code class="docutils literal notranslate"><span class="pre">Rod</span></code> may have references to <code class="docutils literal notranslate"><span class="pre">Disk</span></code>s.
-Understanding how to use has-a arrows is critical for understanding more complex topics such as <a class="reference internal" href="design-patterns.html"><span class="doc std std-doc">design patterns</span></a> and helps in understanding simpler topics such as dependency injection.</p>
-<figure class="align-default" id="fig-object-composition-class-diagram">
-<img alt="https://via.placeholder.com/700x200?text=Image+coming+soon" src="https://via.placeholder.com/700x200?text=Image+coming+soon" />
+In the case of <a class="reference internal" href="algorithms.html#towers-of-hanoi"><span class="std std-ref">Towers of Hanoi</span></a>, <code class="docutils literal notranslate"><span class="pre">Rod</span></code> is pointing towards <code class="docutils literal notranslate"><span class="pre">Disk</span></code> since <code class="docutils literal notranslate"><span class="pre">Rod</span></code> may have references to <code class="docutils literal notranslate"><span class="pre">Disk</span></code>s.</p>
+<figure class="align-default" id="fig-uml-class-diagram-association-arrow">
+<a class="reference internal image-reference" href="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Uml_classes_en.svg/800px-Uml_classes_en.svg.png"><img alt="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Uml_classes_en.svg/800px-Uml_classes_en.svg.png" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Uml_classes_en.svg/800px-Uml_classes_en.svg.png" style="width: 300px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 67.2 </span><span class="caption-text">Composing two classes means that they are in a directed has-a relationship with each other where objects of one type will have a reference to objects of the other type but not necessarily the other way around. Given this diagram, <code class="docutils literal notranslate"><span class="pre">Rod</span></code> has <code class="docutils literal notranslate"><span class="pre">Disk</span></code> but the reverse is not true.</span><a class="headerlink" href="#fig-object-composition-class-diagram" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 67.1 </span><span class="caption-text">In UML class diagram notation, object composition is called “association” and is depicted using a solid line with a line arrow head.
+The arrow points from the composing object to the composed.
+[<a class="reference external" href="https://en.wikipedia.org/wiki/Class_diagram">Image source</a>].</span><a class="headerlink" href="#fig-uml-class-diagram-association-arrow" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Later, we will learn about another relationship, that we call “is-a”.
+Understanding the difference between “has-a” and “is-a” is crucial for understanding simpler topics such as <span class="xref myst">dependency injection</span> and more complex topics such as <a class="reference internal" href="design-patterns.html"><span class="doc std std-doc">design patterns</span></a>.</p>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌──────────────────────────┐      ┌─────────────────┐
+│            Rod           │      │      Disk       │
+├──────────────────────────┤      ├─────────────────┤
+│ - disks : Disk[]         ├─────&gt;│ + Color : Color │
+├──────────────────────────┤      ├─────────────────┤
+│ + Add (disk:Disk) : void │      │                 │
+│ + Sub (disk:Disk) : void │      │                 │
+└──────────────────────────┘      └─────────────────┘
+</pre></div>
+</div>
+<p>Composing two classes means that they are in a directed has-a relationship with each other where objects of one type will have a reference to objects of the other type but not necessarily the other way around. Given the diagram above, <code class="docutils literal notranslate"><span class="pre">Rod</span></code> has <code class="docutils literal notranslate"><span class="pre">Disk</span></code> but the reverse is not true.</p>
 <p>UML divides the concept of association into two types that they call “aggregation” and “composition”.
 Unfortunately the term “composition” in UML class diagrams doesn’t mean the same thing as “object composition” that we’re discussing here.
 Fortunately, we will not discuss association aggregation and association composition in this book so hopefully we can leave this confusion behind.</p>
@@ -1245,7 +1276,7 @@ Consequently, the term “composition” does not mean the same thing in the con
 </section>
 <section id="abstraction-levels">
 <span id="object-composition-abstraction-levels"></span><h3><span class="section-number">67.2.2. </span>Abstraction levels<a class="headerlink" href="#abstraction-levels" title="Permalink to this headline">#</a></h3>
-<p>We’re going to talk about four types, let’s call them, “abstraction levels” of object composition.
+<p>We’re going to talk about four kinds of, let’s call them, “abstraction levels” of object composition.
 I like to call these levels:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="concrete-constructed-object-composition.html"><span class="doc std std-doc"><strong>Concrete constructed</strong> object composition</span></a>.</p></li>
@@ -1313,8 +1344,19 @@ Do not go gentle in to that good night.</p>
 </section>
 <section id="examples">
 <h2><span class="section-number">67.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
-<p>We could for example say that the type <code class="docutils literal notranslate"><span class="pre">Player</span></code> has a <code class="docutils literal notranslate"><span class="pre">Position</span></code>, or that <code class="docutils literal notranslate"><span class="pre">Animal</span></code> has a <code class="docutils literal notranslate"><span class="pre">Behavior</span></code>.
-Remember the <a class="reference internal" href="algorithms.html#towers-of-hanoi"><span class="std std-ref">Towers of Hanoi</span></a>?
+<p>We could for example say that the type <code class="docutils literal notranslate"><span class="pre">Player</span></code> has a <code class="docutils literal notranslate"><span class="pre">Position</span></code>, or that <code class="docutils literal notranslate"><span class="pre">Animal</span></code> has a <code class="docutils literal notranslate"><span class="pre">Behavior</span></code>.</p>
+<section id="stars">
+<h3><span class="section-number">67.3.1. </span>Stars<a class="headerlink" href="#stars" title="Permalink to this headline">#</a></h3>
+<p>We’ve talked a lot about geometric shapes.
+Think about a six-pointed star.
+A six-pointed star can be created by overlaying one triangle over another.
+The second triangle must be rotated 180 degrees and vertically translated.</p>
+<p>A six-point star can thus be seen as a composition of two triangles.
+We could define a class called <code class="docutils literal notranslate"><span class="pre">Star</span></code> which <em>has</em> two instance fields of type <code class="docutils literal notranslate"><span class="pre">Triangle</span></code>.</p>
+</section>
+<section id="towers-of-hanoi">
+<h3><span class="section-number">67.3.2. </span>Towers of Hanoi<a class="headerlink" href="#towers-of-hanoi" title="Permalink to this headline">#</a></h3>
+<p>Remember the <a class="reference internal" href="algorithms.html#towers-of-hanoi"><span class="std std-ref">Towers of Hanoi</span></a>?
 We might build a system where <code class="docutils literal notranslate"><span class="pre">Rod</span></code> has a <code class="docutils literal notranslate"><span class="pre">Disk</span></code>.
 So, on the type level, types have “has-a”-relationships with other types.
 But as we instantiate objects, our has-a relationships on the type level are turned into has-a relationships on the object level.
@@ -1348,6 +1390,7 @@ You stick the disk onto the rod, so the rod <em>has</em> the disk.</p>
 </tr>
 </tbody>
 </table>
+</section>
 </section>
 <section id="exercises">
 <h2><span class="section-number">67.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
