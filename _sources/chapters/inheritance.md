@@ -245,6 +245,13 @@ childAsParent.HiddenMethod();
 ```
 
 
+(inheritance:uml)=
+### UML class diagrams
+
+```{danger}
+Coming soon.
+```
+
 
 % Example: Get rid of the foreach? Or is this perhaps not a great solution?
 

@@ -1155,33 +1155,38 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#notation">
+     71.2.2. Notation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#substitutability">
-     71.2.2. Substitutability
+     71.2.3. Substitutability
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#upcasting-and-downcasting">
+     71.2.4. Upcasting and downcasting
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#nominal-subtyping">
-     71.2.3. Nominal subtyping
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#notation">
-     71.2.4. Notation
+     71.2.5. Nominal subtyping
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#dynamic-dispatch">
-     71.2.5. Dynamic dispatch
+     71.2.6. Dynamic dispatch
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#constructors">
-     71.2.6. Constructors
+     71.2.7. Constructors
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#beyond-inclusion">
-     71.2.7. Beyond inclusion
+     71.2.8. Beyond inclusion
     </a>
    </li>
   </ul>
@@ -1268,33 +1273,38 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#notation">
+     71.2.2. Notation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#substitutability">
-     71.2.2. Substitutability
+     71.2.3. Substitutability
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#upcasting-and-downcasting">
+     71.2.4. Upcasting and downcasting
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#nominal-subtyping">
-     71.2.3. Nominal subtyping
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#notation">
-     71.2.4. Notation
+     71.2.5. Nominal subtyping
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#dynamic-dispatch">
-     71.2.5. Dynamic dispatch
+     71.2.6. Dynamic dispatch
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#constructors">
-     71.2.6. Constructors
+     71.2.7. Constructors
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#beyond-inclusion">
-     71.2.7. Beyond inclusion
+     71.2.8. Beyond inclusion
     </a>
    </li>
   </ul>
@@ -1358,10 +1368,6 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="subtype-polymorphism">
 <span id="polymorphism"></span><h1><span class="section-number">71. </span>Subtype polymorphism<a class="headerlink" href="#subtype-polymorphism" title="Permalink to this headline">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
-</div>
 <section id="motivation">
 <h2><span class="section-number">71.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
 <p>The time has come to talk about subtype polymorphism.
@@ -1387,7 +1393,7 @@ In a coming chapter on <a class="reference internal" href="object-type-conversio
 Finally, we will also talk about parametric polymorphism in the chapter on <a class="reference internal" href="generics.html"><span class="doc std std-doc">generics</span></a> since this is what the C# implementation of the concept is called.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>When someone just says “polymorphism” in the context of a discussion around object oriented programming they are most likely referring to subtype polymorphism.</p>
+<p>When someone just says “polymorphism” in the context of object oriented programming then they are most likely referring to <em>subtype polymorphism</em>.</p>
 </div>
 </section>
 <section id="definition">
@@ -1428,51 +1434,8 @@ The terminology is summarized in <a class="reference internal" href="#tbl-subtyp
 </tbody>
 </table>
 </section>
-<section id="substitutability">
-<h3><span class="section-number">71.2.2. </span>Substitutability<a class="headerlink" href="#substitutability" title="Permalink to this headline">#</a></h3>
-<p>This idea of being able to use some type instead of another is known as “substitutability”.
-We’ll talk more about what ought to be substitutable for what in the chapter on <a class="reference internal" href="liskov-substitution-principle.html#liskov-substitution-principle"><span class="std std-ref">Liskov’s substitution principle</span></a>.
-In general however, this means that the <em>state and behavior</em> of any subtype must be a legal state and behavior of its supertype.</p>
-<p>Assume that the two types <code class="docutils literal notranslate"><span class="pre">Cat</span></code> and <code class="docutils literal notranslate"><span class="pre">Dog</span></code> are subtypes of <code class="docutils literal notranslate"><span class="pre">Animal</span></code>.
-Inversely, <code class="docutils literal notranslate"><span class="pre">Animal</span></code> is a supertype of both <code class="docutils literal notranslate"><span class="pre">Cat</span></code> and <code class="docutils literal notranslate"><span class="pre">Dog</span></code>.
-This means that any value of type <code class="docutils literal notranslate"><span class="pre">Cat</span></code> and any value of type <code class="docutils literal notranslate"><span class="pre">Dog</span></code> must at all times be legal states and behaviors given our definition of <code class="docutils literal notranslate"><span class="pre">Animal</span></code>.
-In other words, all dogs and all cats must at all times, with no exceptions, behave like animals.
-If this condition is satisfied then we are free to declare that <code class="docutils literal notranslate"><span class="pre">Dog</span></code> and <code class="docutils literal notranslate"><span class="pre">Cat</span></code> are subtypes of <code class="docutils literal notranslate"><span class="pre">Animal</span></code>.</p>
-<p>Remember how we, way back in the chapter on <a class="reference internal" href="data-types.html#run-time-and-compile-time-types"><span class="std std-ref">data types</span></a>, said that the type on the left doesn’t necessarily have to be the same as the type on the right?
-Or in other words, how the compile-time type doesn’t necessarily have to be the same as the run-time type.
-Well, let’s unpack that statement now.
-Have a look at this code:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Animal</span><span class="w"> </span><span class="n">a1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cat</span><span class="p">();</span><span class="w"></span>
-<span class="n">Animal</span><span class="w"> </span><span class="n">a2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span><span class="p">();</span><span class="w"></span>
-</pre></div>
-</div>
-<p>The left-hand type, the compile-time type, of both variables is <code class="docutils literal notranslate"><span class="pre">Animal</span></code>.
-However, the right-hand type, the run-time type, is <code class="docutils literal notranslate"><span class="pre">Cat</span></code> for one of the variables and <code class="docutils literal notranslate"><span class="pre">Dog</span></code> for the other.
-For this code to compile <code class="docutils literal notranslate"><span class="pre">Cat</span></code> and <code class="docutils literal notranslate"><span class="pre">Dog</span></code> must both be subtypes of <code class="docutils literal notranslate"><span class="pre">Animal</span></code>.</p>
-<p>Let’s generalize.
-A run-time type can be used if the run-time type is the same as the expected compile-time type or if the run-time type is a subtype of the compile-time type.
-In other words, whenever we state that a certain compile-time type is expected we can use values that at run-time have exactly that type or any subtype of that type.</p>
-</section>
-<section id="nominal-subtyping">
-<h3><span class="section-number">71.2.3. </span>Nominal subtyping<a class="headerlink" href="#nominal-subtyping" title="Permalink to this headline">#</a></h3>
-<p>Remember how we, in the chapter on <a class="reference internal" href="type-systems.html"><span class="doc std std-doc">type systems</span></a>, discussed that a type system is either nominal, structural or some combination of the two.
-If a type system is nominal, then subtyping is determined based on the fact that we declare that it is.
-In a structural type system however, subtyping is determined on the basis of the structure of different types.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>C# is a nominally typed language, and hence implements nominal subtyping.
-A subtype is a subtype if we nominally declare that it is.</p>
-</div>
-<p>Unfortunately, the existence of <a class="reference internal" href="basic-exceptions.html#exceptions"><span class="std std-ref">exceptions</span></a> means that it is quite simple to nominally declare that something is a subtype yet structurally violate the rules of, what is known as, “behavioral subtyping”.
-More on this in the chapter on the <a class="reference internal" href="liskov-substitution-principle.html#liskov-substitution-principle"><span class="std std-ref">Liskov substitution principle</span></a> (LSP).</p>
-<p>Type systems that implement structural subtyping often need to deal with whether or not to support both “width subtyping” and “depth subtyping”.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p>The static type checker <a class="reference external" href="https://flow.org">Flow</a> for the language JavaScript is an example of a type system that supports both depth subtyping and width subtyping.</p>
-</div>
-</section>
 <section id="notation">
-<h3><span class="section-number">71.2.4. </span>Notation<a class="headerlink" href="#notation" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">71.2.2. </span>Notation<a class="headerlink" href="#notation" title="Permalink to this headline">#</a></h3>
 <p>So how do we declare one type a subtype of another type?
 Well, in C#, and many other object oriented langauges, there are usually two ways.
 A subtype relationship can be established by either:</p>
@@ -1488,8 +1451,8 @@ In this chapter we will focus on how to create subtype relationships by means of
 Where the subtype is on the left and the supertype is on the right.
 In C# however we tend to use the same symbol as for <a class="reference internal" href="interfaces.html"><span class="doc std std-doc">interface</span></a> implementation and <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a>, namely colon (<code class="docutils literal notranslate"><span class="pre">:</span></code>).
 The subtype is still on the left, and the supertype on the right.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Cat</span> <span class="p">:</span> <span class="n">Animal</span>
-<span class="n">Dog</span> <span class="p">:</span> <span class="n">Animal</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Cat</span> <span class="p">:</span> <span class="n">IAnimal</span>
+<span class="n">Dog</span> <span class="p">:</span> <span class="n">IAnimal</span>
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -1498,54 +1461,32 @@ The subtype is still on the left, and the supertype on the right.</p>
 While a subtype can be created by means of inheritance it can also be created by means of interface implementation.</p>
 </div>
 </section>
-<section id="dynamic-dispatch">
-<span id="id2"></span><h3><span class="section-number">71.2.5. </span>Dynamic dispatch<a class="headerlink" href="#dynamic-dispatch" title="Permalink to this headline">#</a></h3>
-<p>But what does all this matter you ask?
-Why would I want to “treat” cats and dogs as animals instead of as cats and dogs?
-Well, the answer lies in something known as “dynamic dispatch”.</p>
-<p>By declaring that <code class="docutils literal notranslate"><span class="pre">Cat</span></code> and <code class="docutils literal notranslate"><span class="pre">Dog</span></code> both implement the interface <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code> we can use <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code> as the compile-time type.
-Importantly we can call whatever methods and access whatever properties the type <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code> declares.
-However, we can do this without having to care at all about which particular implementation of <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code> we happen to get at runtime.
-As long as whatever members we’re accessing are defined in <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code> then we are guaranteed that these members will be available in all subtypes of <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code>.</p>
-<p>Before leaving the section on dynamic dispatch I should also mention that most languages that implement dynamic dispatch by means of subtype polymorphism provide us with <em>single</em> dynamic dispatch.
-This means that the implementation that is executed depends on the run-time type of one variable.
-We will learn about <em>multiple</em> dynamic dispatch in the chapters on <a class="reference internal" href="visitor-pattern.html"><span class="doc std std-doc">visitor pattern</span></a> and <a class="reference internal" href="pattern-matching.html"><span class="doc std std-doc">pattern matching</span></a>.</p>
-</section>
-<section id="constructors">
-<h3><span class="section-number">71.2.6. </span>Constructors<a class="headerlink" href="#constructors" title="Permalink to this headline">#</a></h3>
-<p>It is important to understand that subtype polymorphism doesn’t require constructors to have any particular signature.
-As we will see in the chapter on <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a>, inheriting from a class will force you to call one of the base classes constructor (albeit possibly implicitly) but you’re nevertheless able to define your own constructors in the subclass.
-In the case of interfaces we’re only demanding that implementors define some public instance members.
-The constructors can consequently vary wildly between different implementations of an interface.</p>
-</section>
-<section id="beyond-inclusion">
-<h3><span class="section-number">71.2.7. </span>Beyond inclusion<a class="headerlink" href="#beyond-inclusion" title="Permalink to this headline">#</a></h3>
-<p>In the chapter on <a class="reference internal" href="interfaces.html"><span class="doc std std-doc">interfaces</span></a> and here we’ve emphasized the importance of letting the supertype be the <a class="reference internal" href="sets.html#intersection"><span class="std std-ref">intersection</span></a> of all the subtypes, not the <a class="reference internal" href="sets.html#union"><span class="std std-ref">union</span></a> of them.
-Otherwise we would force subtypes to provide implementations for members they have no sensible implementation for.
-This is a path that leads to a sea of run-time errors.
-So let us agree to stray away before it is too late.</p>
-<p>Why would you get the idea that you should put members that are exclusive to some set of subtypes in the supertype?
-Well, when we treat something as it’s supertype then we can <em>only</em> access whatever members are defined in that supertype.
-It doesn’t matter what additional members might exist in the subtype.
-We only know about what’s in the compile-time type.</p>
-<div class="cell docutils container">
+<section id="substitutability">
+<h3><span class="section-number">71.2.3. </span>Substitutability<a class="headerlink" href="#substitutability" title="Permalink to this headline">#</a></h3>
+<p>This idea of being able to use some type instead of another is known as “substitutability”.
+We’ll talk more about what ought to be substitutable for what in the chapter on <a class="reference internal" href="liskov-substitution-principle.html#liskov-substitution-principle"><span class="std std-ref">Liskov’s substitution principle</span></a>.
+In general however, this means that the <em>state and behavior</em> of any subtype must be a legal state and behavior of its supertype.</p>
+<p>Assume that the two types <code class="docutils literal notranslate"><span class="pre">Cat</span></code> and <code class="docutils literal notranslate"><span class="pre">Dog</span></code> are subtypes of <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code>.
+Inversely, <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code> is a supertype of both <code class="docutils literal notranslate"><span class="pre">Cat</span></code> and <code class="docutils literal notranslate"><span class="pre">Dog</span></code>.
+This means that any value of type <code class="docutils literal notranslate"><span class="pre">Cat</span></code> and any value of type <code class="docutils literal notranslate"><span class="pre">Dog</span></code> must at all times be legal states and behaviors given our definition of <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code>.
+In other words, all dogs and all cats must at all times, with no exceptions, behave like animals.
+If this condition is satisfied then we are free to declare that <code class="docutils literal notranslate"><span class="pre">Dog</span></code> and <code class="docutils literal notranslate"><span class="pre">Cat</span></code> are subtypes of <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code>.</p>
+<p>Remember how we, way back in the chapter on <a class="reference internal" href="data-types.html#run-time-and-compile-time-types"><span class="std std-ref">data types</span></a>, said that the type on the left doesn’t necessarily have to be the same as the type on the right?
+Or in other words, how the compile-time type doesn’t necessarily have to be the same as the run-time type.
+Well, let’s unpack that statement now.
+Have a look at this code:</p>
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">Generalization</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">void</span><span class="w"> </span><span class="nf">SharedMethod</span><span class="w"> </span><span class="p">();</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Specialization</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Generalization</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SharedMethod</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">UniqueMethod</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IAnimal</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Cat</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IAnimal</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Dog</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IAnimal</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-4138.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-4081.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1590,12 +1531,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.34:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.76:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '4138.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '4081.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1651,6 +1592,233 @@ else {
     </script>
 </div></div></div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IAnimal</span><span class="w"> </span><span class="n">a1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cat</span><span class="p">();</span><span class="w"></span>
+<span class="n">IAnimal</span><span class="w"> </span><span class="n">a2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The left-hand type, the compile-time type, of both variables is <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code>.
+However, the right-hand type, the run-time type, is <code class="docutils literal notranslate"><span class="pre">Cat</span></code> for one of the variables and <code class="docutils literal notranslate"><span class="pre">Dog</span></code> for the other.
+For this code to compile <code class="docutils literal notranslate"><span class="pre">Cat</span></code> and <code class="docutils literal notranslate"><span class="pre">Dog</span></code> must both be subtypes of <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code>.</p>
+<p>Let’s generalize.
+A run-time type can be used if the run-time type is the same as the expected compile-time type or if the run-time type is a subtype of the compile-time type.
+In other words, whenever we state that a certain compile-time type is expected we can use values that at run-time have exactly that type or any subtype of that type.</p>
+</section>
+<section id="upcasting-and-downcasting">
+<h3><span class="section-number">71.2.4. </span>Upcasting and downcasting<a class="headerlink" href="#upcasting-and-downcasting" title="Permalink to this headline">#</a></h3>
+<p>The process of using a subtype where a supertype is expected is known as “upcasting”.
+Upcasting can in an object oriented language usually be performed without any explicit <a class="reference internal" href="object-type-conversions.html"><span class="doc std std-doc">type conversions</span></a>.
+Below is an example of upcasting.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IAnimal</span><span class="w"> </span><span class="n">animal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cat</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The process of using a supertype where a subtype is expected is known as “downcasting”.
+Downcasting in an object oriented language usually requires an explicit <a class="reference internal" href="object-type-conversions.html"><span class="doc std std-doc">type conversion</span></a>.
+Below are two examples of downcasting where we are using two different syntaxes to explicitly cast from the supertype to a subtype.</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Remember that the type of the variable `animal` is `IAnimal`.</span>
+<span class="n">Cat</span><span class="w"> </span><span class="n">cat1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">animal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">Cat</span><span class="p">;</span><span class="w"></span>
+<span class="n">Cat</span><span class="w"> </span><span class="n">cat2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">Cat</span><span class="p">)</span><span class="n">animal</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">Dog</span><span class="w"> </span><span class="n">dog1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">animal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">Dog</span><span class="p">;</span><span class="w"></span>
+<span class="n">Dog</span><span class="w"> </span><span class="n">dog2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">Dog</span><span class="p">)</span><span class="n">animal</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>System.InvalidCastException: Unable to cast object of type &#39;Cat&#39; to type &#39;Dog&#39;.
+   at Submission#6.&lt;&lt;Initialize&gt;&gt;d__0.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.CodeAnalysis.Scripting.ScriptExecutionState.RunSubmissionsAsync[TResult](ImmutableArray`1 precedingExecutors, Func`2 currentExecutor, StrongBox`1 exceptionHolderOpt, Func`2 catchExceptionOpt, CancellationToken cancellationToken)
+   at Submission#6.&lt;&lt;Initialize&gt;&gt;d__0.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.CodeAnalysis.Scripting.ScriptExecutionState.RunSubmissionsAsync[TResult](ImmutableArray`1 precedingExecutors, Func`2 currentExecutor, StrongBox`1 exceptionHolderOpt, Func`2 catchExceptionOpt, CancellationToken cancellationToken)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The difference between the two casting syntaxes is that one returns <code class="docutils literal notranslate"><span class="pre">null</span></code> if the conversion is unsuccessful and the other throws an exception.
+More on that in the chapter on <a class="reference internal" href="object-type-conversions.html"><span class="doc std std-doc">object type conversions</span></a>.</p>
+<p>The variable <code class="docutils literal notranslate"><span class="pre">dog1</span></code> will contain <code class="docutils literal notranslate"><span class="pre">null</span></code> and the last line is what causes the run-time exception.</p>
+<p>Why is the conversion from <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code> to <code class="docutils literal notranslate"><span class="pre">Cat</span></code> successful when the conversion to <code class="docutils literal notranslate"><span class="pre">Dog</span></code> is not?
+Upcasting is always safe because subtypes can always be treated as their supertypes.
+Downcasting is however <strong>not necessarily safe</strong>.
+Downcasting <em>only</em> works if the run-time type that we happen to have on the right-hand side actually <em>is</em> substitutable for the compile-time type on the left-hand side.</p>
+<p>In the case above, we were allowed to treat our object as an object of type <code class="docutils literal notranslate"><span class="pre">Cat</span></code> since the run-time type of our object actually happened to be <code class="docutils literal notranslate"><span class="pre">Cat</span></code>.
+We were however not able to treat our object as an object of type <code class="docutils literal notranslate"><span class="pre">Dog</span></code> since the run-time type <code class="docutils literal notranslate"><span class="pre">Dog</span></code> is <em>not</em> substitutable for <code class="docutils literal notranslate"><span class="pre">Cat</span></code>.</p>
+<p>Perhaps you remember that in the chapter on <a class="reference internal" href="data-types.html#run-time-and-compile-time-types"><span class="std std-ref">data types</span></a> we mentioned that any instance of a class in C# can be assigned to a variable of type <code class="docutils literal notranslate"><span class="pre">object</span></code>?
+The reason that this works is that all classes in C# are implicitly made subtypes of the type <code class="docutils literal notranslate"><span class="pre">object</span></code>.
+Specifically, this happens through the mechanism of <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a> which we’ll talk about very soon.
+Assigning an instance of a class to a variable of type <code class="docutils literal notranslate"><span class="pre">object</span></code> is consequently yet another example of “upcasting”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">object</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Mnemonic</p>
+<p>Here’s a good memonic for remembering the difference between upcasting and downcasting.
+When we’re visualizing a subtype relationship between two types using UML class diagrams (see the UML section in the chapter on <a class="reference internal" href="interfaces.html#interfaces-uml"><span class="std std-ref">interfaces</span></a> or <a class="reference internal" href="inheritance.html#inheritance-uml"><span class="std std-ref">inheritance</span></a>) is to remember that, when visualizing, we usually draw the supertype above the suptype.</p>
+<p>Upcasting refers to the process of treating an object of the type below as an object of the type above.
+Downcasting refers to the process of treating an object of the type above as an object of the type below.
+In upcasting we’re converting “up”.
+In downcasting we’re converting “down”.</p>
+</div>
+</section>
+<section id="nominal-subtyping">
+<h3><span class="section-number">71.2.5. </span>Nominal subtyping<a class="headerlink" href="#nominal-subtyping" title="Permalink to this headline">#</a></h3>
+<p>Remember how we, in the chapter on <a class="reference internal" href="type-systems.html"><span class="doc std std-doc">type systems</span></a>, discussed that a type system is either nominal, structural or some combination of the two.
+If a type system is nominal, then subtyping is determined based on the fact that we declare that it is.
+In a structural type system however, subtyping is determined on the basis of the structure of different types.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>C# is a nominally typed language, and hence implements nominal subtyping.
+A subtype is a subtype if we nominally declare that it is.</p>
+</div>
+<p>Unfortunately, the existence of <a class="reference internal" href="basic-exceptions.html#exceptions"><span class="std std-ref">exceptions</span></a> means that it is quite simple to nominally declare that something is a subtype yet structurally violate the rules of, what is known as, “behavioral subtyping”.
+More on this in the chapter on the <a class="reference internal" href="liskov-substitution-principle.html#liskov-substitution-principle"><span class="std std-ref">Liskov substitution principle</span></a> (LSP).</p>
+<p>Type systems that implement structural subtyping often need to deal with whether or not to support both “width subtyping” and “depth subtyping”.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The static type checker <a class="reference external" href="https://flow.org">Flow</a> for the language JavaScript is an example of a type system that supports both depth subtyping and width subtyping.</p>
+</div>
+</section>
+<section id="dynamic-dispatch">
+<span id="id2"></span><h3><span class="section-number">71.2.6. </span>Dynamic dispatch<a class="headerlink" href="#dynamic-dispatch" title="Permalink to this headline">#</a></h3>
+<p>But what does all this matter you ask?
+Why would I want to “treat” cats and dogs as animals instead of as cats and dogs?
+Well, the answer lies in something known as “dynamic dispatch”.</p>
+<p>By declaring that <code class="docutils literal notranslate"><span class="pre">Cat</span></code> and <code class="docutils literal notranslate"><span class="pre">Dog</span></code> both implement the interface <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code> we can use <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code> as the compile-time type.
+Importantly we can call whatever methods and access whatever properties the type <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code> declares.
+However, we can do this without having to care at all about which particular implementation of <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code> we happen to get at runtime.
+As long as whatever members we’re accessing are defined in <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code> then we are guaranteed that these members will be available in all subtypes of <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code>.</p>
+<p>Before leaving the section on dynamic dispatch I should also mention that most languages that implement dynamic dispatch by means of subtype polymorphism provide us with <em>single</em> dynamic dispatch.
+This means that the implementation that is executed depends on the run-time type of one variable.
+We will learn about <em>multiple</em> dynamic dispatch in the chapters on <a class="reference internal" href="visitor-pattern.html"><span class="doc std std-doc">visitor pattern</span></a> and <a class="reference internal" href="pattern-matching.html"><span class="doc std std-doc">pattern matching</span></a>.</p>
+</section>
+<section id="constructors">
+<h3><span class="section-number">71.2.7. </span>Constructors<a class="headerlink" href="#constructors" title="Permalink to this headline">#</a></h3>
+<p>It is important to understand that subtype polymorphism doesn’t require constructors to have any particular signature.
+As we will see in the chapter on <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a>, inheriting from a class will force you to call one of the base classes constructors (albeit possibly implicitly) but you’re nevertheless able to define your own constructors in the subclass.
+In the case of interfaces we’re only demanding that implementors define some public instance members.
+The constructors can consequently vary wildly between different implementations of an interface.</p>
+<p>Consider, for example, how the constructor of the class <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> and the constructor of <code class="docutils literal notranslate"><span class="pre">Circle</span></code> have different parameter lists even though both classes implement the same interface and thus are subtypes of that interface.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IShape</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">Width</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">Area</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IShape</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Width</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Area</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">get</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Width</span><span class="w"> </span><span class="p">*</span><span class="w"> </span><span class="n">Height</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">set</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Width</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="n">Sqrt</span><span class="p">(</span><span class="k">value</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Rectangle</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">height</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Width</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">width</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Height</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">height</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Circle</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IShape</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Radius</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Diameter</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">get</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Radius</span><span class="w"> </span><span class="p">*</span><span class="w"> </span><span class="m">2</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">set</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Radius</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">value</span><span class="w"> </span><span class="p">/</span><span class="w"> </span><span class="m">2</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Width</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">get</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Diameter</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">set</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Diameter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">value</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">get</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Diameter</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">set</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Diameter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">value</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Area</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">get</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="n">PI</span><span class="w"> </span><span class="p">*</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="n">Pow</span><span class="p">(</span><span class="n">Radius</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">set</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Radius</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="n">Sqrt</span><span class="p">(</span><span class="n">Area</span><span class="w"> </span><span class="p">/</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="n">PI</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Circle</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">radius</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Radius</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">radius</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IShape</span><span class="w"> </span><span class="n">shape1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Circle</span><span class="p">(</span><span class="m">10</span><span class="p">);</span><span class="w"></span>
+<span class="n">IShape</span><span class="w"> </span><span class="n">shape2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="beyond-inclusion">
+<h3><span class="section-number">71.2.8. </span>Beyond inclusion<a class="headerlink" href="#beyond-inclusion" title="Permalink to this headline">#</a></h3>
+<p>In the chapter on <a class="reference internal" href="interfaces.html"><span class="doc std std-doc">interfaces</span></a> and here we’ve emphasized the importance of letting the supertype be the <a class="reference internal" href="sets.html#intersection"><span class="std std-ref">intersection</span></a> of all the subtypes, not the <a class="reference internal" href="sets.html#union"><span class="std std-ref">union</span></a> of them.
+Otherwise we would force subtypes to provide implementations for members they have no sensible implementation for.
+This is a path that leads to a sea of run-time errors.
+So let us agree to stray away before it is too late.</p>
+<p>Why would you get the idea that you should put members that are exclusive to some set of subtypes in the supertype?
+Well, when we treat something as it’s supertype then we can <em>only</em> access whatever members are defined in that supertype.
+It doesn’t matter what additional members might exist in the subtype.
+We only know about what’s in the compile-time type.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">Generalization</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">void</span><span class="w"> </span><span class="nf">SharedMethod</span><span class="w"> </span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Specialization</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Generalization</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SharedMethod</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">UniqueMethod</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Specialization</span><span class="w"> </span><span class="n">special</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Specialization</span><span class="p">();</span><span class="w"></span>
@@ -1695,10 +1863,10 @@ However, let us dispense with that practicality for a moment so that we can deep
 \mathbb{Z} \subset \mathbb{Q} \quad \quad \quad
 \mathbb{Q} \subset \mathbb{R}
 \]</div>
-<figure class="align-default" id="id5">
+<figure class="align-default" id="id8">
 <a class="reference internal image-reference" href="https://upload.wikimedia.org/wikipedia/commons/1/17/Number-systems.svg"><img alt="https://upload.wikimedia.org/wikipedia/commons/1/17/Number-systems.svg" height="200" src="https://upload.wikimedia.org/wikipedia/commons/1/17/Number-systems.svg" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 71.1 </span><span class="caption-text">Illustration of how real numbers (<span class="math notranslate nohighlight">\(\mathbb{R}\)</span>) include rational numbers (<span class="math notranslate nohighlight">\(\mathbb{Q}\)</span>), which include integers (<span class="math notranslate nohighlight">\(\mathbb{Z}\)</span>), which include natural numbers (<span class="math notranslate nohighlight">\(\mathbb{N}\)</span>). [<a class="reference external" href="https://en.wikipedia.org/wiki/Real_number#/media/File:Number-systems.svg">Image source</a>].</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 71.1 </span><span class="caption-text">Illustration of how real numbers (<span class="math notranslate nohighlight">\(\mathbb{R}\)</span>) include rational numbers (<span class="math notranslate nohighlight">\(\mathbb{Q}\)</span>), which include integers (<span class="math notranslate nohighlight">\(\mathbb{Z}\)</span>), which include natural numbers (<span class="math notranslate nohighlight">\(\mathbb{N}\)</span>). [<a class="reference external" href="https://en.wikipedia.org/wiki/Real_number#/media/File:Number-systems.svg">Image source</a>].</span><a class="headerlink" href="#id8" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>If we’re talking about types then it would be quite reasonable to design a type system where the natural numbers (<code class="docutils literal notranslate"><span class="pre">Natural</span></code>) is a subtype of integers (<code class="docutils literal notranslate"><span class="pre">Integer</span></code>), which is a subtype of rational numbers (<code class="docutils literal notranslate"><span class="pre">Rational</span></code>), which is a subtype of real numbers (<code class="docutils literal notranslate"><span class="pre">Real</span></code>).
@@ -1983,7 +2151,7 @@ Of course, since reversing a string twice takes us back to the original string w
 </div>
 </div>
 </div>
-<p>Finally, let’s see if pass the Caeasar cipher class to the method that encodes single characters twice.</p>
+<p>Finally, let’s see what happens if we pass an object of type <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> to the method that encodes single characters twice.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">encodeCharTwice</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CaesarCipher</span><span class="p">(</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
@@ -1998,9 +2166,9 @@ Of course, since reversing a string twice takes us back to the original string w
 </div>
 <p>Both methods seem to work.
 Pretty neat right?</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Not only do these two methods work for all current implementations of our interfaces, but they will also work <em>for all future implementations</em>.</p>
+<div class="admonition-key-point admonition">
+<p class="admonition-title">Key point</p>
+<p>Not only do these two methods work for all current implementations of our interfaces, but they will also work <strong>for all future implementations</strong> of the interface.</p>
 </div>
 <p>We can just keep on adding new classes and the methods <code class="docutils literal notranslate"><span class="pre">encodeStringTwice</span></code> and <code class="docutils literal notranslate"><span class="pre">encodeCharTwice</span></code> will work for all these classes so long as we make sure that they implement the appropriate interface.</p>
 <p>This is subtype polymorphism and dynamic dispatch.
@@ -2025,12 +2193,19 @@ In the context of addition, the number <span class="math notranslate nohighlight
 <p>Does the <code class="docutils literal notranslate"><span class="pre">encodeTwice</span></code> method work for instances of type <code class="docutils literal notranslate"><span class="pre">NoCipher</span></code> as well?
 Yes, of course.</p>
 <p>Welcome to the powerful world of subtype polymorphism.</p>
+<figure class="margin align-default" id="id9">
+<img alt="https://images-na.ssl-images-amazon.com/images/I/51ttgxwzArL._SY445_SX342_QL70_ML2_.jpg" src="https://images-na.ssl-images-amazon.com/images/I/51ttgxwzArL._SY445_SX342_QL70_ML2_.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 71.2 </span><span class="caption-text">“Refactoring: Improving the design of existing code” <span id="id4">[<a class="reference internal" href="bibliography.html#id8" title="M. Fowler. Refactoring: Improving the Design of Existing Code. Addison-Wesley object technology series. Addison-Wesley, 1999. ISBN 9780201485677. URL: http://amazon.christopherokhravi.com?id=0201485672.">Fowler, 1999</a>]</span>.</span><a class="headerlink" href="#id9" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="replace-conditional-with-polymorphism">
-<span id="id4"></span><h3><span class="section-number">71.3.6. </span>Replace conditional with polymorphism<a class="headerlink" href="#replace-conditional-with-polymorphism" title="Permalink to this headline">#</a></h3>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
+<span id="id5"></span><h3><span class="section-number">71.3.6. </span>Replace conditional with polymorphism<a class="headerlink" href="#replace-conditional-with-polymorphism" title="Permalink to this headline">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This section will <em>not</em> be completed in the year 2022.
+Please see the Preface, Foreword, and Chapter 2 of <span id="id6">Fowler [<a class="reference internal" href="bibliography.html#id8" title="M. Fowler. Refactoring: Improving the Design of Existing Code. Addison-Wesley object technology series. Addison-Wesley, 1999. ISBN 9780201485677. URL: http://amazon.christopherokhravi.com?id=0201485672.">1999</a>]</span> or the newer edition <span id="id7">Fowler [<a class="reference internal" href="bibliography.html#id9" title="M. Fowler. Refactoring: Improving the Design of Existing Code. Addison-Wesley Signature Series. Pearson Education, 2018. ISBN 9780134757704. URL: http://amazon.christopherokhravi.com?id=0134757599.">2018</a>]</span>.</p>
 </div>
 </section>
 </section>
@@ -2047,14 +2222,68 @@ We’re only scratching the surface of the usefulness of subtype polymorphism.</
 
 <p class="admonition-title"><span class="caption-number">Exercise 71.1 </span></p>
 <section id="exercise-content">
-<p>If type <code class="docutils literal notranslate"><span class="pre">A</span></code> is a subset of type <code class="docutils literal notranslate"><span class="pre">B</span></code> then we would say that the set that models type <code class="docutils literal notranslate"><span class="pre">B</span></code> <em>includes</em> the set that models type <code class="docutils literal notranslate"><span class="pre">A</span></code>.
-If we call the sets <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> then we could write: <span class="math notranslate nohighlight">\(A \subset B\)</span>.
-What does it mean that <span class="math notranslate nohighlight">\(A\)</span> <em>includes</em> <span class="math notranslate nohighlight">\(B\)</span>?</p>
+<p>Assume that you have the following interface.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IShape</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">Width</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">Area</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">void</span><span class="w"> </span><span class="nf">Scale</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">factor</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Write three classes <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>, <code class="docutils literal notranslate"><span class="pre">RightTriangle</span></code>, and <code class="docutils literal notranslate"><span class="pre">Circle</span></code> that all implement the interface <code class="docutils literal notranslate"><span class="pre">IShape</span></code>.
+When you’re done, you should be able to run the following code and get the same result.</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IShape</span><span class="p">[]</span><span class="w"> </span><span class="n">shapes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IShape</span><span class="p">[]</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">RightTriangle</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Circle</span><span class="p">(</span><span class="m">2</span><span class="p">),</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">IShape</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">shapes</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">shape</span><span class="p">.</span><span class="n">Area</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">shape</span><span class="p">.</span><span class="n">Scale</span><span class="p">(</span><span class="m">10</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;W={shape.Width}, H={shape.Height}, A={shape.Area}&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>W=5, H=2, A=10
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>W=4, H=2, A=4
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>W=4, H=4, A=12.566370614359172
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 71.2 </span></p>
+<section id="exercise-content">
+<p>If type <code class="docutils literal notranslate"><span class="pre">A</span></code> is a subset of type <code class="docutils literal notranslate"><span class="pre">B</span></code> then we would say that the set that models type <code class="docutils literal notranslate"><span class="pre">B</span></code> <em>includes</em> the set that models type <code class="docutils literal notranslate"><span class="pre">A</span></code>.
+If we call the sets <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> then we could write: <span class="math notranslate nohighlight">\(A \subset B\)</span>.
+What does it mean that <span class="math notranslate nohighlight">\(A\)</span> <em>includes</em> <span class="math notranslate nohighlight">\(B\)</span>?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 71.3 </span></p>
 <section id="exercise-content">
 <p>Assume that you have the following code:</p>
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">Animal</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
@@ -2082,9 +2311,9 @@ What does it mean that <span class="math notranslate nohighlight">\(A\)</span> <
 </div>
 </section>
 </div>
-<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-2">
+<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-3">
 
-<p class="admonition-title"><span class="caption-number">Exercise 71.3 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 71.4 </span></p>
 <section id="exercise-content">
 <p>Which of the following types (if any) are supported by the method <code class="docutils literal notranslate"><span class="pre">encodeCharTwice</span></code>?</p>
 <ol class="simple">
@@ -2097,7 +2326,7 @@ What does it mean that <span class="math notranslate nohighlight">\(A\)</span> <
 </div>
 <div class="exercise admonition" id="ex:subtype-polymorphism:encodeNTimes">
 
-<p class="admonition-title"><span class="caption-number">Exercise 71.4 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 71.5 </span></p>
 <section id="exercise-content">
 <p>Write a method with the following signature:</p>
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="w"> </span><span class="nf">encodeNTimes</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">IStringToStringCipher</span><span class="w"> </span><span class="n">cipher</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">times</span><span class="p">);</span><span class="w"></span>
@@ -2137,18 +2366,18 @@ The parameter <code class="docutils literal notranslate"><span class="pre">input
 </div>
 </section>
 </div>
-<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-4">
+<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-5">
 
-<p class="admonition-title"><span class="caption-number">Exercise 71.5 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 71.6 </span></p>
 <section id="exercise-content">
-<p>Is it possible to pass the class <code class="docutils literal notranslate"><span class="pre">LeetCipher</span></code> that you wrote in <a class="reference internal" href="interfaces.html#ex:interfaces:leet"><span class="std std-numref">Exercise 70.4</span></a> to the method <code class="docutils literal notranslate"><span class="pre">encodeNTimes</span></code> that you wrote in <a class="reference internal" href="#ex:subtype-polymorphism:encodeNTimes"><span class="std std-numref">Exercise 71.4</span></a>?
+<p>Is it possible to pass the class <code class="docutils literal notranslate"><span class="pre">LeetCipher</span></code> that you wrote in <a class="reference internal" href="interfaces.html#ex:interfaces:leet"><span class="std std-numref">Exercise 70.4</span></a> to the method <code class="docutils literal notranslate"><span class="pre">encodeNTimes</span></code> that you wrote in <a class="reference internal" href="#ex:subtype-polymorphism:encodeNTimes"><span class="std std-numref">Exercise 71.5</span></a>?
 Why or why not?
 If not, can we make it possible?</p>
 </section>
 </div>
 <div class="exercise admonition" id="ex:subtype-polymorphism-own-types">
 
-<p class="admonition-title"><span class="caption-number">Exercise 71.6 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 71.7 </span></p>
 <section id="exercise-content">
 <p>Come up with your own example of inclusion/subtying that involves at least three sets/types.
 Explain why all members of each subtype is also a member of it’s supertype.</p>
@@ -2156,10 +2385,10 @@ Explain why all members of each subtype is also a member of it’s supertype.</p
 </div>
 <div class="exercise admonition" id="ex:subtype-polymorphism-implement-own-types">
 
-<p class="admonition-title"><span class="caption-number">Exercise 71.7 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 71.8 </span></p>
 <section id="exercise-content">
 <ol class="simple">
-<li><p>Write an interface that unifies the three types you designed in <a class="reference internal" href="#ex:subtype-polymorphism-own-types"><span class="std std-numref">Exercise 71.6</span></a>.</p></li>
+<li><p>Write an interface that unifies the three types you designed in <a class="reference internal" href="#ex:subtype-polymorphism-own-types"><span class="std std-numref">Exercise 71.7</span></a>.</p></li>
 <li><p>Declare at least one method/property to the interface.</p></li>
 <li><p>All methods that the interface declares must make sense in all the implementations of the interface.</p></li>
 <li><p>Write a class for each of the three types and make them implementations of the interface.</p></li>
@@ -2167,39 +2396,39 @@ Explain why all members of each subtype is also a member of it’s supertype.</p
 </ol>
 </section>
 </div>
-<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-7">
-
-<p class="admonition-title"><span class="caption-number">Exercise 71.8 </span></p>
-<section id="exercise-content">
-<p>Start with the code you wrote in <a class="reference internal" href="#ex:subtype-polymorphism-implement-own-types"><span class="std std-numref">Exercise 71.7</span></a>.
-Write a static method that (1) takes at least one argument whose type is the interface you’ve defined and (2) calls a method or accesses a property that’s defined in that interface.</p>
-</section>
-</div>
 <div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-8">
 
 <p class="admonition-title"><span class="caption-number">Exercise 71.9 </span></p>
 <section id="exercise-content">
-<p>Give an example of <em>subtype polymorphism</em> and <em>single dynamic dispatch</em> in code.
-Use code comments when necessary to get your point across.</p>
+<p>Start with the code you wrote in <a class="reference internal" href="#ex:subtype-polymorphism-implement-own-types"><span class="std std-numref">Exercise 71.8</span></a>.
+Write a static method that (1) takes at least one argument whose type is the interface you’ve defined and (2) calls a method or accesses a property that’s defined in that interface.</p>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-9">
 
 <p class="admonition-title"><span class="caption-number">Exercise 71.10 </span></p>
 <section id="exercise-content">
-<p>Why is it important that the signature of constructors can vary freely between subtypes?</p>
+<p>Give an example of <em>subtype polymorphism</em> and <em>single dynamic dispatch</em> in code.
+Use code comments when necessary to get your point across.</p>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-10">
 
 <p class="admonition-title"><span class="caption-number">Exercise 71.11 </span></p>
 <section id="exercise-content">
-<p>When we treat a subtype as a supertype, meaning when we let the compile-time type be the supertype, why can’t we call methods that are only defined in the subtype?</p>
+<p>Why is it important that the signature of constructors can vary freely between subtypes?</p>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-11">
 
 <p class="admonition-title"><span class="caption-number">Exercise 71.12 </span></p>
+<section id="exercise-content">
+<p>When we treat a subtype as a supertype, meaning when we let the compile-time type be the supertype, why can’t we call methods that are only defined in the subtype?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-12">
+
+<p class="admonition-title"><span class="caption-number">Exercise 71.13 </span></p>
 <section id="exercise-content">
 <p>Remember the class <code class="docutils literal notranslate"><span class="pre">Vowel</span></code> that we wrote when discsusing <a class="reference internal" href="constructors.html#constructors-private"><span class="std std-ref">private constructors</span></a>?
 It looked something like this:</p>
@@ -2233,9 +2462,9 @@ It looked something like this:</p>
 When you are done you should no longer need the static factory methods but you should still catch all errors related to trying to create a vowel from a non-vowel character at compile-time.</p>
 </section>
 </div>
-<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-12">
+<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-13">
 
-<p class="admonition-title"><span class="caption-number">Exercise 71.13 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 71.14 </span></p>
 <section id="exercise-content">
 <p>Write a bunch of classes that can be used to model time in seconds, minutes, and hours.
 Make sure that your code behaves according to the usage example below.</p>

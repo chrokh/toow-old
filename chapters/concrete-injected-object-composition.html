@@ -1343,7 +1343,7 @@ It composes our <code class="docutils literal notranslate"><span class="pre">Cae
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2835.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2800.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1388,12 +1388,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.34:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.76:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2835.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2800.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1520,7 +1520,7 @@ Let’s try it out by passing two objects of type <code class="docutils literal 
 <p>Importantly, the composed class <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> itself does <em>not</em> have to change at all.
 Even though we’ve moved from <em>construction</em> to <em>injection</em> we can leave the code the same.
 Why?
-Because we changed the class which has a reference to another class, not the referenced class.</p>
+Because we changed the class which references another class, not the referenced class.</p>
 </section>
 <section id="generalizing">
 <span id="concrete-injected-object-composition-examples-general-flip-flop"></span><h3><span class="section-number">69.3.2. </span>Generalizing<a class="headerlink" href="#generalizing" title="Permalink to this headline">#</a></h3>

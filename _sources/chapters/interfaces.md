@@ -12,10 +12,6 @@ kernelspec:
 
 # Interfaces
 
-```{warning}
-Work in progress.
-```
-
 The word "interface" is, in object oriented programming commonly used to mean two different but related things.
 
 1. A contract or an abstraction.
@@ -69,16 +65,18 @@ It is the contract between the screw and the screwdriver.
 Screw manufacturers make sure that their screw heads adhere to a standardized drive type.
 Similarly, screwdriver manufacturers make sure that their screwdrivers adhere to a standardized drive type.
 
-%TODO:  https://cribmode.com/wp-content/uploads/2022/01/screw-chart-jan042022-768x396.jpg.webp
-```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
+%TODO: Replace image
+```{figure} https://images.unsplash.com/photo-1597424216809-3ba9864aeb18?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80
 :name: fig:screws-nuts-and-screwdrivers
+:height: 300px
 
-The same type of screw driver can be used with many types of screws.
+The same type of screw driver can be used with many types of screws. [Image will be replaced soon.] [[Image source](https://unsplash.com/photos/uOIvZYZ3PwA).]
 ```
 
 This separation between interface and implementation has immense benefits.
 For one we don't have to buy a new screwdriver every time we buy a new screw.
 In programming we refer to this as [reusability](reusability).
+
 But also, it means that we don't have to coordinate between screw manufacturers, bolt manufacturers, and screwdrive manufacturers.
 In programming we refer to this as [modifiability](modifiability).
 We'll talk more about both reusability and modifiability in the chapter on [maintainability](maintainability).
@@ -133,7 +131,7 @@ Well there are three public instance members:
 2. The property `int Y`.
 3. The instance method `void Translate (int x, int y)`.
 
-These public instance members are what we would call the "interface" of the class.
+These public instance members are what we would call the "interface", or sometimes the "public interface", of the class `Coordinate`.
 
 
 ### The keyword
@@ -152,13 +150,13 @@ interface ICoordinate
 ```
 
 ```{note}
-In C# the letter `I` is often prepended to the name of an interface.
+In C# the letter `I` is conventionally prepended to the name of an interface.
 So instead of naming an interface `Collection` we would name it `ICollection`.
 This is purely a convention and serves no technical purpose.
-Choose whether you want to stick to this convention or not and then stick to your decision within a code base.
+It is however uncommon to find code that doesn't respect this convention.
 ```
 
-Remember how we said that interfaces only define compile-time types and hence cannot be instantiated.
+Remember how we said that interfaces only define compile-time types and hence cannot be instantiated?
 If we try to instantiate an interface we get an error.
 
 ```{code-cell} csharp
@@ -238,13 +236,17 @@ This means that we can now declare a variable with the compile-time type `ICoord
 ICoordinate coord = new Coordinate(0, 0);
 ```
 
-Notice how the compile-time type on the left is an interface (or generally: an abstraction) while the run-time type on the right is a concrete class.
+Remember how we [way back](run-time-and-compile-time-types) said that the compile-time type and the run-time type don't necessarily have to be the same?
+Remember how we said that we would see cases of that later?
+
+Have a look at the assignment statement above.
+The compile-time type on the left is an interface (or generally: an abstraction) while the run-time type on the right is a concrete class.
 Why this is useful and what we can do with this is something that we'll deal with in the chapter on [subtype polymorphism](subtype-polymorphism).
 
 
 ### Implementing multiple interfaces
 
-Before we move on we should mention that you can implement multiple interfaces by simply separating them with commas.
+Before we move on we should mention that a class can implement multiple interfaces by simply separating them with commas.
 Let's say that we want to split our previous interface into the two interfaces `IPositionable` and `ITranslatable`.
 
 ```{code-cell} csharp
@@ -260,31 +262,103 @@ interface ITranslatable
 }
 ```
 
-Given that we leave our definition of `Coordinate` intact we can now declare our class an implementation of any combination of these three interfaces.
-The following two classes are therefore both entirely valid.
+Have a look at the two classes below that both implement the two interfaces above.
 
 ```{code-cell} csharp
-class Point : IPositionable, ITranslatable
+class Line : IPositionable, ITranslatable
 {
   public int X { get; set; }
   public int Y { get; set; }
   public void Translate (int x, int y) { X += x; Y += y; }
 }
 
-class Position : IPositionable, ITranslatable, ICoordinate
+class Square : IPositionable, ITranslatable
 {
   public int X { get; set; }
   public int Y { get; set; }
   public void Translate (int x, int y) { X += x; Y += y; }
+  public int Size { get; set; }
 }
 ```
 
-Also, note that it's entirely fine for the interfaces to "overlap".
-Meaning that multiple interfaces demand that a member with the same signature exists.
+```{tip}
+Interfaces with fewer members have, in theory, more potential possible implementations.
+```
+
+
+### Overlapping interfaces
+
+If a class implements multiple interfaces that all require a member with the same signature then implementation of the member in the class is used for all the interfaces.
+We can think of this as that the interfaces are "overlapping":
+This is why the following code works.
+
+```{code-cell}
+interface IShape
+{
+  double Width { get; set; }
+  double Height { get; set; }
+  int Edges { get; }
+}
+
+interface IQuadrilateral
+{
+  double Width { get; set; }
+  double Height { get; set; }
+}
+
+public class Rectangle : IShape, IQuadrilateral
+{
+  public double Width { get; set; }
+  public double Height { get; set; }
+  public int Edges { get; } = 4;
+}
+```
+
+If you, in C#, want to distinguish the implementation of a member for one interface from an implementation of a member with the same name for another interface then you must use "explicit interface implementations".
+This is not something we're going to discuss in this book so I advise you to have a look at the [official documentation](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/explicit-interface-implementation) if you want to know more about this.
+However, it would look something like the code below.
+
+```{code-cell}
+public class Rectangle : IShape, IQuadrilateral
+{
+  double IQuadrilateral.Width { get; set; }
+  double IQuadrilateral.Height { get; set; }
+
+  double IShape.Width { get; set; }
+  double IShape.Height { get; set; }
+
+  public int Edges { get; } = 4;
+}
+```
+
+One downside of using explicit interface implementations in the case above is that these members are no longer publically accessible on objects whose compile-time type is `Rectangle`.
+Consequently the following code generates a compile-time error.
+
+```{code-cell}
+:tags: [raises-exception]
+Rectangle rect = new Rectangle();
+rect.Width = 10;
+```
+
+The methods are however accessible when we choose to treat objects of type `Rectangle` as either `IQuadrilateral` or `IShape`.
+So the following code does not generate a compile-time error.
+
+```{code-cell}
+IShape shape = new Rectangle();
+shape.Width = 10;
+
+IShape quadrilateral = new Rectangle();
+quadrilateral.Width = 10;
+```
+
+Since we have yet to talk about subtype polymorphism it is understandable if you find this section a tad confusing.
+If that is the case, then I highly recommend that you move on and come back to this section after you have groked subtype polymorphism.
 
 
 
-### UML class diagram notation
+
+(interfaces:uml)=
+### UML class diagrams
 
 In UML class diagram notation, interface implementation is called "realization" and is depicted using a dashed line with a hollow arrow head.
 The arrow points from the implementation to the interface.
@@ -299,7 +373,129 @@ The arrow points from the implementation to the interface.
 [[Image source](https://en.wikipedia.org/wiki/Class_diagram)].
 ```
 
+```
+┌─────────────────────────┐
+│      <<interface>>      │
+│         IShape          │
+├─────────────────────────┤
+│ + <get> Width : double  │
+│ + <set> Width : double  │
+│ + <get> Height : double │
+│ + <set> Height : double │
+├─────────────────────────┤
+│                         │
+│                         │
+└─────────────────────────┘
+            Δ
+            ╎
+            ╎
+            ╎
+┌─────────────────────────┐
+│        Rectangle        │
+├─────────────────────────┤
+│ + <get> Width : double  │
+│ + <set> Width : double  │
+│ + <get> Height : double │
+│ + <set> Height : double │
+├─────────────────────────┤
+│                         │
+│                         │
+└─────────────────────────┘
+```
+
 ## Examples
+
+### Shapes
+
+Let's start off with something simple.
+Let's define an interface called `IShape` with some properties.
+
+```{code-cell}
+interface IShape
+{
+  double Width { get; set; }
+  double Height { get; set; }
+  double Area { get; set; }
+}
+```
+
+What are some possible implementations of the interface `IShape`?
+Well how about a perfect circle and a rectangle?
+Notice how the classes that implement the interface can define additional members, beyond what the interface demands.
+
+```{code-cell}
+:tags: [hide-input]
+class Square : IShape
+{
+  public double Side { get; set; }
+
+  public double Width
+  {
+    get => Side;
+    set => Side = value;
+  }
+
+  public double Height
+  {
+    get => Side;
+    set => Side = value;
+  }
+
+  public double Area
+  {
+    get => Side*Side;
+    set => Side = Math.Sqrt(value);
+  }
+
+  public Square (double side)
+    => Side = side;
+}
+```
+
+```{code-cell}
+:tags: [hide-input]
+class Circle : IShape
+{
+  public double Radius { get; set; }
+
+  public double Diameter
+  {
+    get => Radius * 2;
+    set => Radius = value / 2;
+  }
+
+  public double Width
+  {
+    get => Diameter;
+    set => Diameter = value;
+   }
+
+  public double Height {
+    get => Diameter;
+    set => Diameter = value;
+  }
+
+  public double Area
+  {
+    get => Math.PI * Math.Pow(Radius, 2);
+    set => Radius = Math.Sqrt(Area / Math.PI);
+  }
+
+  public Circle (double radius)
+    => Radius = radius;
+}
+```
+
+Can we now assign objects of type `Square` or `Circle` where values of type `IShape` is expected?
+Yes we can.
+Why we would do this is something that we'll discuss in the chapter on [subtype polymorphism](subtype-polymorphism).
+
+```{code-cell}
+IShape shape1 = new Square(1);
+IShape shape2 = new Circle(0.5);
+```
+
+
 
 (interfaces:ciphers)=
 ### Cipher interfaces
@@ -313,9 +509,10 @@ The class names of the ciphers we've seen so far are:
 4. `CaesarCipher`
 5. `FlipFlopCaesarCipher`
 
-Since we have multiple overloads for the `Encode` method in these interfaces a naive first thought might be to implement the following interface:
+Since we have multiple overloads for the `Encode` method in these interfaces a naive (and incorrect!) first thought might be to implement the following interface:
 
-```csharp
+```{code-cell}
+:tags: [raises-exception]
 interface ICipher
 {
   char Encode (char input);
@@ -327,16 +524,24 @@ interface ICipher
 That covers all the overloads of these classes.
 Importantly however, this is the [union](union), not the [intersection](intersection).
 It is the "sum" of all overloads, not the overloads that all of them happen to implement.
-Interfaces however should express members that all its implementors *share*.
+Interfaces however should express members that all its implementers *share*.
 Interfaces should express the intersection of members.
 
-As an example, the `RobbersCipher`, as we've talked about before, cannot possibly implement an encoding method that takes a `char` and returns a `char`.
+Note that it also gives us a compiler error, since we're trying to define two overloads of `Encode` that both take `char` as input but returns different output.
+As we learned in the chapter on [overloading](overloading), this is not allowed.
+
+But why do we want both an `Encode` method that returns a `char` and an `Encode` method that returns a `string`?
+Well, we've talked about this before.
+Remember how the `RobbersCipher` cannot implement an encoding method that takes a `char` and returns a `char`.
 Why?
 Because that's fundamentally not part of the specification of the Robber's cipher.
 The smallest unit that a Robber's cipher encoding can return is a `string`.
 Because if you are asked to encode a consonant then you must return three characters.
 If you are passed `L` and `o` is used as the vowel, then you must return `LoL`.
 There's just no way around it.
+
+However, some other ciphers, such as the `CaesarCipher`, *can* convert single characters to single characters.
+And since it would be useful to know that we've been returned only a single character we'd prefer to return values of type `char` rather than `string`.
 
 %This is also in line with a design principle known as the [interface segration principle](interface-segregation-principle) which we will discuss in a later chapter.
 
@@ -362,17 +567,17 @@ interface ICharToStringCipher
 }
 ```
 
-By the way.
+```{note}
 Feeling upset about the fact that this is so verbose and that we need to have three different interfaces?
-This too feels like duplication.
 You have every right to be upset and your hunch is right.
 Good on you!
 When we get to the chapters on [generics](generics) we'll be able merge all three interfaces into one.
+```
 
 
 ### Cipher implementations
 
-Let's now make the ciphers actually implement the interfaces.
+Let's now make the ciphers actually implement all interfaces that they can.
 
 ```{code-cell} csharp
 :tags: [hide-input]
@@ -562,10 +767,7 @@ What does this mean?
 1. Define your own interface.
 2. Write a class that implements that interface.
 3. Declare a variable whose compile-time type is your interface, and whose run-time type is your class.
-```
-
-```{exercise}
-Draw a UML class diagram of the program that you built in {numref}`ex:interfaces`.
+4. Draw a UML class diagram of your interface and your class or classes.
 ```
 
 
