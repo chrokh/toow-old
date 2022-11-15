@@ -1,8 +1,7 @@
 # Type conversions (of objects)
 
-
 ```{warning}
-Work in progress.
+Will be published in 2023.
 ```
 
 %- https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/types/casting-and-type-conversions

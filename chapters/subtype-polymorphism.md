@@ -17,9 +17,6 @@ kernelspec:
 (polymorphism)=
 # Subtype polymorphism
 
-```{warning}
-Work in progress.
-```
 
 % TODO: Move intro to its own chapter. So that we don't have to talk about other types of polymorphism in the chapter on subtype polymorphism.
 
@@ -52,7 +49,7 @@ In a coming chapter on [object type conversions](object-type-conversions) we wil
 Finally, we will also talk about parametric polymorphism in the chapter on [generics](generics) since this is what the C# implementation of the concept is called.
 
 ```{tip}
-When someone just says "polymorphism" in the context of a discussion around object oriented programming they are most likely referring to subtype polymorphism.
+When someone just says "polymorphism" in the context of object oriented programming then they are most likely referring to *subtype polymorphism*.
 ```
 
 
@@ -91,35 +88,130 @@ The terminology is summarized in {numref}`tbl:subtype-supertype-terminology`.
 | Base type | Derived type |
 ```
 
+### Notation
+
+So how do we declare one type a subtype of another type?
+Well, in C#, and many other object oriented langauges, there are usually two ways.
+A subtype relationship can be established by either:
+
+1. [Interface implementation](interfaces), or
+2. [Inheritance](inheritance).
+
+If type `A` implements the `interface` defined by type `B` then `A` is considered a subtype of `B`.
+If type `A` inherits from the class or abstract class `B` then `A` is a subtype of `B`.
+
+We'll explore how to create subtype relationships by means of inheritance in the chapter on [inheritance](inheritance).
+In this chapter we will focus on how to create subtype relationships by means of interfaces.
+
+Notationally you will often find the less-than-sign (`<`) being used to denote subtyping.
+Where the subtype is on the left and the supertype is on the right.
+In C# however we tend to use the same symbol as for [interface](interfaces) implementation and [inheritance](inheritance), namely colon (`:`).
+The subtype is still on the left, and the supertype on the right.
+
+```
+Cat : IAnimal
+Dog : IAnimal
+```
+
+```{warning}
+If you happen to already be familiar with [inheritance](inheritance) it is important to realize that subtype does not *necessarily* mean subclass.
+While a subtype can be created by means of inheritance it can also be created by means of interface implementation.
+```
+
 ### Substitutability
 
 This idea of being able to use some type instead of another is known as "substitutability".
 We'll talk more about what ought to be substitutable for what in the chapter on [Liskov's substitution principle](liskov-substitution-principle).
 In general however, this means that the *state and behavior* of any subtype must be a legal state and behavior of its supertype.
 
-Assume that the two types `Cat` and `Dog` are subtypes of `Animal`.
-Inversely, `Animal` is a supertype of both `Cat` and `Dog`.
-This means that any value of type `Cat` and any value of type `Dog` must at all times be legal states and behaviors given our definition of `Animal`.
+Assume that the two types `Cat` and `Dog` are subtypes of `IAnimal`.
+Inversely, `IAnimal` is a supertype of both `Cat` and `Dog`.
+This means that any value of type `Cat` and any value of type `Dog` must at all times be legal states and behaviors given our definition of `IAnimal`.
 In other words, all dogs and all cats must at all times, with no exceptions, behave like animals.
-If this condition is satisfied then we are free to declare that `Dog` and `Cat` are subtypes of `Animal`.
+If this condition is satisfied then we are free to declare that `Dog` and `Cat` are subtypes of `IAnimal`.
 
 Remember how we, way back in the chapter on [data types](run-time-and-compile-time-types), said that the type on the left doesn't necessarily have to be the same as the type on the right?
 Or in other words, how the compile-time type doesn't necessarily have to be the same as the run-time type.
 Well, let's unpack that statement now.
 Have a look at this code:
 
-```csharp
-Animal a1 = new Cat();
-Animal a2 = new Dog();
+```{code-cell}
+:tags: [hide-input]
+interface IAnimal { }
+class Cat : IAnimal { }
+class Dog : IAnimal { }
 ```
 
-The left-hand type, the compile-time type, of both variables is `Animal`.
+```{code-cell}
+IAnimal a1 = new Cat();
+IAnimal a2 = new Dog();
+```
+
+The left-hand type, the compile-time type, of both variables is `IAnimal`.
 However, the right-hand type, the run-time type, is `Cat` for one of the variables and `Dog` for the other.
-For this code to compile `Cat` and `Dog` must both be subtypes of `Animal`.
+For this code to compile `Cat` and `Dog` must both be subtypes of `IAnimal`.
 
 Let's generalize.
 A run-time type can be used if the run-time type is the same as the expected compile-time type or if the run-time type is a subtype of the compile-time type.
 In other words, whenever we state that a certain compile-time type is expected we can use values that at run-time have exactly that type or any subtype of that type.
+
+
+### Upcasting and downcasting
+
+The process of using a subtype where a supertype is expected is known as "upcasting".
+Upcasting can in an object oriented language usually be performed without any explicit [type conversions](object-type-conversions).
+Below is an example of upcasting.
+
+```{code-cell}
+IAnimal animal = new Cat();
+```
+
+The process of using a supertype where a subtype is expected is known as "downcasting".
+Downcasting in an object oriented language usually requires an explicit [type conversion](object-type-conversions).
+Below are two examples of downcasting where we are using two different syntaxes to explicitly cast from the supertype to a subtype.
+
+```{code-cell}
+:tags: [raises-exception]
+// Remember that the type of the variable `animal` is `IAnimal`.
+Cat cat1 = animal as Cat;
+Cat cat2 = (Cat)animal;
+
+Dog dog1 = animal as Dog;
+Dog dog2 = (Dog)animal;
+```
+
+The difference between the two casting syntaxes is that one returns `null` if the conversion is unsuccessful and the other throws an exception.
+More on that in the chapter on [object type conversions](object-type-conversions).
+
+The variable `dog1` will contain `null` and the last line is what causes the run-time exception.
+
+Why is the conversion from `IAnimal` to `Cat` successful when the conversion to `Dog` is not?
+Upcasting is always safe because subtypes can always be treated as their supertypes.
+Downcasting is however **not necessarily safe**.
+Downcasting *only* works if the run-time type that we happen to have on the right-hand side actually *is* substitutable for the compile-time type on the left-hand side.
+
+In the case above, we were allowed to treat our object as an object of type `Cat` since the run-time type of our object actually happened to be `Cat`.
+We were however not able to treat our object as an object of type `Dog` since the run-time type `Dog` is *not* substitutable for `Cat`.
+
+Perhaps you remember that in the chapter on [data types](run-time-and-compile-time-types) we mentioned that any instance of a class in C# can be assigned to a variable of type `object`?
+The reason that this works is that all classes in C# are implicitly made subtypes of the type `object`.
+Specifically, this happens through the mechanism of [inheritance](inheritance) which we'll talk about very soon.
+Assigning an instance of a class to a variable of type `object` is consequently yet another example of "upcasting".
+
+```{code-cell}
+object obj = new Dog();
+```
+
+```{admonition} Mnemonic
+:class: tip
+Here's a good memonic for remembering the difference between upcasting and downcasting.
+When we're visualizing a subtype relationship between two types using UML class diagrams (see the UML section in the chapter on [interfaces](interfaces:uml) or [inheritance](inheritance:uml)) is to remember that, when visualizing, we usually draw the supertype above the suptype.
+
+Upcasting refers to the process of treating an object of the type below as an object of the type above.
+Downcasting refers to the process of treating an object of the type above as an object of the type below.
+In upcasting we're converting "up".
+In downcasting we're converting "down".
+```
 
 
 ### Nominal subtyping
@@ -152,36 +244,6 @@ The static type checker [Flow](https://flow.org) for the language JavaScript is 
 % TODO: "In 1990, Cook, et al., proved that inheritance is not subtyping in structurally-typed OO languages.[2]" https://en.wikipedia.org/wiki/Structural_type_system
 
 
-### Notation
-
-So how do we declare one type a subtype of another type?
-Well, in C#, and many other object oriented langauges, there are usually two ways.
-A subtype relationship can be established by either:
-
-1. [Interface implementation](interfaces), or
-2. [Inheritance](inheritance).
-
-If type `A` implements the `interface` defined by type `B` then `A` is considered a subtype of `B`.
-If type `A` inherits from the class or abstract class `B` then `A` is a subtype of `B`.
-
-We'll explore how to create subtype relationships by means of inheritance in the chapter on [inheritance](inheritance).
-In this chapter we will focus on how to create subtype relationships by means of interfaces.
-
-Notationally you will often find the less-than-sign (`<`) being used to denote subtyping.
-Where the subtype is on the left and the supertype is on the right.
-In C# however we tend to use the same symbol as for [interface](interfaces) implementation and [inheritance](inheritance), namely colon (`:`).
-The subtype is still on the left, and the supertype on the right.
-
-```
-Cat : Animal
-Dog : Animal
-```
-
-```{warning}
-If you happen to already be familiar with [inheritance](inheritance) it is important to realize that subtype does not *necessarily* mean subclass.
-While a subtype can be created by means of inheritance it can also be created by means of interface implementation.
-```
-
 (dynamic-dispatch)=
 ### Dynamic dispatch
 
@@ -202,9 +264,81 @@ We will learn about *multiple* dynamic dispatch in the chapters on [visitor patt
 ### Constructors
 
 It is important to understand that subtype polymorphism doesn't require constructors to have any particular signature.
-As we will see in the chapter on [inheritance](inheritance), inheriting from a class will force you to call one of the base classes constructor (albeit possibly implicitly) but you're nevertheless able to define your own constructors in the subclass.
+As we will see in the chapter on [inheritance](inheritance), inheriting from a class will force you to call one of the base classes constructors (albeit possibly implicitly) but you're nevertheless able to define your own constructors in the subclass.
 In the case of interfaces we're only demanding that implementors define some public instance members.
 The constructors can consequently vary wildly between different implementations of an interface.
+
+Consider, for example, how the constructor of the class `Rectangle` and the constructor of `Circle` have different parameter lists even though both classes implement the same interface and thus are subtypes of that interface.
+
+```{code-cell}
+interface IShape
+{
+  double Width { get; set; }
+  double Height { get; set; }
+  double Area { get; set; }
+}
+```
+
+```{code-cell}
+:tags: [hide-input]
+class Rectangle : IShape
+{
+  public double Width { get; set; }
+
+  public double Height { get; set; }
+
+  public double Area
+  {
+    get => Width * Height;
+    set => Width = Height = Math.Sqrt(value);
+  }
+
+  public Rectangle (double width, double height)
+  {
+    Width = width;
+    Height = height;
+  }
+}
+```
+
+```{code-cell}
+:tags: [hide-input]
+class Circle : IShape
+{
+  public double Radius { get; set; }
+
+  public double Diameter
+  {
+    get => Radius * 2;
+    set => Radius = value / 2;
+  }
+
+  public double Width
+  {
+    get => Diameter;
+    set => Diameter = value;
+   }
+
+  public double Height {
+    get => Diameter;
+    set => Diameter = value;
+  }
+
+  public double Area
+  {
+    get => Math.PI * Math.Pow(Radius, 2);
+    set => Radius = Math.Sqrt(Area / Math.PI);
+  }
+
+  public Circle (double radius)
+    => Radius = radius;
+}
+```
+
+```{code-cell}
+IShape shape1 = new Circle(10);
+IShape shape2 = new Rectangle(5, 2);
+```
 
 
 ### Beyond inclusion
@@ -537,7 +671,7 @@ Of course, since reversing a string twice takes us back to the original string w
 Console.WriteLine( encodeStringTwice(new ReverseCipher(), "backwards") );
 ```
 
-Finally, let's see if pass the Caeasar cipher class to the method that encodes single characters twice.
+Finally, let's see what happens if we pass an object of type `CaesarCipher` to the method that encodes single characters twice.
 
 ```{code-cell} csharp
 Console.WriteLine( encodeCharTwice(new CaesarCipher(1), 'A') );
@@ -546,8 +680,8 @@ Console.WriteLine( encodeCharTwice(new CaesarCipher(1), 'A') );
 Both methods seem to work.
 Pretty neat right?
 
-```{important}
-Not only do these two methods work for all current implementations of our interfaces, but they will also work *for all future implementations*.
+```{admonition} Key point
+Not only do these two methods work for all current implementations of our interfaces, but they will also work **for all future implementations** of the interface.
 ```
 
 We can just keep on adding new classes and the methods `encodeStringTwice` and `encodeCharTwice` will work for all these classes so long as we make sure that they implement the appropriate interface.
@@ -582,12 +716,22 @@ Yes, of course.
 
 Welcome to the powerful world of subtype polymorphism.
 
+```{figure} https://images-na.ssl-images-amazon.com/images/I/51ttgxwzArL._SY445_SX342_QL70_ML2_.jpg
+---
+figclass: margin
+---
+"Refactoring: Improving the design of existing code" {cite:p}`fowler1999`.
+```
+
+% TODO:
 (replace-conditional-with-polymorphism)=
 ### Replace conditional with polymorphism
 
-```{warning}
-Work in progress.
+```{note}
+This section will *not* be completed in the year 2022.
+Please see the Preface, Foreword, and Chapter 2 of {cite:t}`fowler1999` or the newer edition {cite:t}`fowler2018`.
 ```
+
 
 
 ## Discussion
@@ -607,6 +751,125 @@ As you will come to learn, subtype polymorphism is at the heart of almost all ob
 ## Exercises
 
 % TODO: Redo exercise {numref}`ex:single-format-phone-numbers` but for multiple formats. Polymorphic method is perhaps `string AsString()`?
+
+
+```{exercise-start}
+```
+Assume that you have the following interface.
+```{code-cell}
+interface IShape
+{
+  double Width { get; set; }
+  double Height { get; set; }
+  double Area { get; }
+  void Scale (int factor);
+}
+```
+Write three classes `Rectangle`, `RightTriangle`, and `Circle` that all implement the interface `IShape`.
+When you're done, you should be able to run the following code and get the same result.
+```{code-cell}
+:tags: [remove-input]
+class Rectangle : IShape
+{
+  public double Width { get; set; }
+
+  public double Height { get; set; }
+
+  public double Area
+  {
+    get => Width * Height;
+    set => Width = Height = Math.Sqrt(value);
+  }
+
+  public Rectangle (double width, double height)
+  {
+    Width = width;
+    Height = height;
+  }
+
+  public void Scale (int factor)
+  {
+    Width *= 2;
+    Height *= 2;
+  }
+}
+
+class Circle : IShape
+{
+  public double Radius { get; set; }
+
+  public double Diameter
+  {
+    get => Radius * 2;
+    set => Radius = value / 2;
+  }
+
+  public double Width
+  {
+    get => Diameter;
+    set => Diameter = value;
+   }
+
+  public double Height {
+    get => Diameter;
+    set => Diameter = value;
+  }
+
+  public double Area
+  {
+    get => Math.PI * Math.Pow(Radius, 2);
+    set => Radius = Math.Sqrt(Area / Math.PI);
+  }
+
+  public Circle (double radius)
+    => Radius = radius;
+
+  public void Scale (int factor)
+    => Diameter *= 2;
+}
+
+class RightTriangle : IShape
+{
+  public double Width { get; set; }
+
+  public double Height { get; set; }
+
+  public double Area
+  {
+    get => Width * Height / 2;
+  }
+
+  public RightTriangle (double width, double height)
+  {
+    Width = width;
+    Height = height;
+  }
+
+  public void Scale (int factor)
+  {
+    Width *= 2;
+    Height *= 2;
+  }
+}
+```
+```{code-cell}
+IShape[] shapes = new IShape[]
+{
+  new Rectangle(5, 2),
+  new RightTriangle(4, 2),
+  new Circle(2),
+};
+
+foreach (IShape shape in shapes)
+{
+  if (shape.Area < 1)
+    shape.Scale(10);
+  Console.WriteLine($"W={shape.Width}, H={shape.Height}, A={shape.Area}");
+}
+```
+```{exercise-end}
+```
+
 
 
 ```{exercise}

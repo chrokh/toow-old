@@ -357,7 +357,8 @@ If that is the case, then I highly recommend that you move on and come back to t
 
 
 
-### UML class diagram notation
+(interfaces:uml)=
+### UML class diagrams
 
 In UML class diagram notation, interface implementation is called "realization" and is depicted using a dashed line with a hollow arrow head.
 The arrow points from the implementation to the interface.
@@ -453,7 +454,7 @@ class Square : IShape
 
 ```{code-cell}
 :tags: [hide-input]
-class PerfectCircle : IShape
+class Circle : IShape
 {
   public double Radius { get; set; }
 
@@ -480,18 +481,18 @@ class PerfectCircle : IShape
     set => Radius = Math.Sqrt(Area / Math.PI);
   }
 
-  public PerfectCircle (double radius)
+  public Circle (double radius)
     => Radius = radius;
 }
 ```
 
 Can we now assign objects of type `Square` or `Circle` where values of type `IShape` is expected?
 Yes we can.
-Why we would do this is something that we'll discuss in the chapter on subtype polymorphism.
+Why we would do this is something that we'll discuss in the chapter on [subtype polymorphism](subtype-polymorphism).
 
 ```{code-cell}
 IShape shape1 = new Square(1);
-IShape shape2 = new PerfectCircle(0.5);
+IShape shape2 = new Circle(0.5);
 ```
 
 
