@@ -252,6 +252,10 @@ See the class `Pear` in the figure below for an example.
 
 Above: Two models of classes using a more informal UML class diagram syntax.
 
+```{note}
+If you want more formal information on UML class diagrams I recommend the [specification](https://www.omg.org/spec/UML/2.5.1/PDF).
+```
+
 
 
 

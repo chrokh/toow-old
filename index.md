@@ -132,12 +132,12 @@ If you appreciate what I do here, there are three ways to help.
 
 ## Technicalities
 
-The code in this book is written in C# 10 which means that you need at least .NET 6.
-Earlier versions of .NET did, for example, not support what is known as top-level statements so if you are following an earlier version of .NET and want to follow along with the examples in this book you might have to adapt them.
-Please refer to the [documentation](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/configure-language-version) for more information on versions.
+The code in this book is written in C# 11 which means that you need at least .NET 7.
+Some earlier versions did, for example, not support what is known as top-level statements, the `required` keyword, or expression-bodied members, so if you are using an earlier version and want to follow along with the examples in this book you might have to adapt the examples.
+Please refer to the [documentation](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/configure-language-version) for more information on what version of the language C# is used when you're targeting a given .NET version.
 
 ```{warning}
-Use C# 10 and .NET 6 to follow along with the code in this book.
+Use C# 11 and .NET 7 to follow along with the code in this book.
 ```
 
 This book does not cover how to install .NET and a text editor or what is known as an Integrated Development Environment (IDE).
