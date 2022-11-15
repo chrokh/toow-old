@@ -501,8 +501,8 @@ Let's throw that instance method into the diagram for good measure.
 │ + Width : int                          │
 │ + Height : int                         │
 ├────────────────────────────────────────┤
-│ + Scale (int width, int height) : void │
-│ + Scale (int multiplier) : void        │
+│ + Scale (width:int, height:int) : void │
+│ + Scale (multiplier:int) : void        │
 │ + Print () : void                      │
 │ + Area () : int                        │
 └────────────────────────────────────────┘

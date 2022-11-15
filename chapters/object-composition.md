@@ -1,9 +1,5 @@
 # Object composition
 
-```{warning}
-Work in progress.
-```
-
 ## Motivation
 
 [Composition](method-composition) is the act of combining simple things into more complex things in order to solve complex problems.
@@ -23,31 +19,60 @@ If object `a` has a field or property that contains an object of type `b` then w
 We say that `a` is composed with `b`.
 We refer to `a` as the composing object and `b` as the composed object.
 
-```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
-:name: fig:object-composition-object-diagram
-
-Object composition is a binary directed relationship between two objects. In this figure `a` "has-a" `b`.
-```
+% TODO: ADD FIGURE
+%``{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
+%:name: fig:object-composition-object-diagram
+%
+%Object composition is a binary directed relationship between two objects. In this figure `a` "has-a" `b`.
+%``
 
 The objects involved in a composition could be of the same type or of different types.
 While we call it "object composition", in a class based object oriented language, we define compositions on the class level.
-So the terms "composition" and "has a" is also used on the type level.
-This means that if we define a type `A` such that it has an instance field of type `B` then we would say that `A` has-a `B` and we would refer to this as object composition.
+So the terms "composition" and "has-a" is also used on the type level.
+This means that if we define a type `A` such that it has an instance field or property of type `B` then we would say that `A` has-a `B` and we would refer to this as object composition.
 
 
 ### UML association
 
-In UML class diagrams we refer to object composition as "association" and we draw it using an arrow as in {numref}`fig:object-composition-class-diagram`.
+In UML class diagrams we refer to object composition as "association" and we draw it using an arrow shaped as in {numref}`fig:uml-class-diagram-association-arrow`.
 The arrow is pointing from the type that has a reference to the type that it has a reference to.
 In the case of [Towers of Hanoi](towers-of-hanoi), `Rod` is pointing towards `Disk` since `Rod` may have references to `Disk`s.
-Understanding how to use has-a arrows is critical for understanding more complex topics such as [design patterns](design-patterns) and helps in understanding simpler topics such as dependency injection.
 
-% Rod -> Disk
-```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
-:name: fig:object-composition-class-diagram
+% TODO: REPLACE IMAGE!!
+```{figure} https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Uml_classes_en.svg/800px-Uml_classes_en.svg.png
+:name: fig:uml-class-diagram-association-arrow
+:width: 300
 
-Composing two classes means that they are in a directed has-a relationship with each other where objects of one type will have a reference to objects of the other type but not necessarily the other way around. Given this diagram, `Rod` has `Disk` but the reverse is not true.
+In UML class diagram notation, object composition is called "association" and is depicted using a solid line with a line arrow head.
+The arrow points from the composing object to the composed.
+[[Image source](https://en.wikipedia.org/wiki/Class_diagram)].
 ```
+
+```{warning}
+Later, we will learn about another relationship, that we call "is-a".
+Understanding the difference between "has-a" and "is-a" is crucial for understanding simpler topics such as [dependency injection](dependency-injection) and more complex topics such as [design patterns](design-patterns).
+```
+
+```
+┌──────────────────────────┐      ┌─────────────────┐
+│            Rod           │      │      Disk       │
+├──────────────────────────┤      ├─────────────────┤
+│ - disks : Disk[]         ├─────>│ + Color : Color │
+├──────────────────────────┤      ├─────────────────┤
+│ + Add (disk:Disk) : void │      │                 │
+│ + Sub (disk:Disk) : void │      │                 │
+└──────────────────────────┘      └─────────────────┘
+```
+
+Composing two classes means that they are in a directed has-a relationship with each other where objects of one type will have a reference to objects of the other type but not necessarily the other way around. Given the diagram above, `Rod` has `Disk` but the reverse is not true.
+
+%% Rod -> Disk
+% TODO: UML class diagram
+%``{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
+%:name: fig:object-composition-class-diagram
+%
+%Composing two classes means that they are in a directed has-a relationship with each other where objects of one type will have a reference to objects of the other type but not necessarily the other way around. Given this diagram, `Rod` has `Disk` but the reverse is not true.
+%``
 
 UML divides the concept of association into two types that they call "aggregation" and "composition".
 Unfortunately the term "composition" in UML class diagrams doesn't mean the same thing as "object composition" that we're discussing here.
@@ -67,7 +92,7 @@ If you want to learn more about the UML class diagram concepts aggregation and c
 (object-composition:abstraction-levels)=
 ### Abstraction levels
 
-We're going to talk about four types, let's call them, "abstraction levels" of object composition.
+We're going to talk about four kinds of, let's call them, "abstraction levels" of object composition.
 I like to call these levels:
 %They are numbered so that the level of [indirection](indirection) and [modularity](maintainability) increases.
 
@@ -156,6 +181,21 @@ Do not go gentle in to that good night.
 ## Examples
 
 We could for example say that the type `Player` has a `Position`, or that `Animal` has a `Behavior`.
+
+
+### Stars
+
+We've talked a lot about geometric shapes.
+Think about a six-pointed star.
+A six-pointed star can be created by overlaying one triangle over another.
+The second triangle must be rotated 180 degrees and vertically translated.
+
+A six-point star can thus be seen as a composition of two triangles.
+We could define a class called `Star` which *has* two instance fields of type `Triangle`.
+
+
+### Towers of Hanoi
+
 Remember the [Towers of Hanoi](towers-of-hanoi)?
 We might build a system where `Rod` has a `Disk`.
 So, on the type level, types have "has-a"-relationships with other types.

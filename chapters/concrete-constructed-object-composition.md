@@ -16,10 +16,6 @@ kernelspec:
 %  * https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.dotnet-interactive-vscode
 %  * https://mermaid-js.github.io/mermaid/#/
 
-```{warning}
-Work in progress.
-```
-
 ```{admonition} Prerequisites
 :class: info
 In this chapter we're exploring the simplest level of object composition.
