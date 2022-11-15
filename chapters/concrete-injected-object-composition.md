@@ -200,7 +200,7 @@ Instead of instantiating the dependency ourselves, we simply parameterize a meth
 Importantly, the composed class `CaesarCipher` itself does *not* have to change at all.
 Even though we've moved from *construction* to *injection* we can leave the code the same.
 Why?
-Because we changed the class which has a reference to another class, not the referenced class.
+Because we changed the class which references another class, not the referenced class.
 
 (concrete-injected-object-composition:examples:general-flip-flop)=
 ### Generalizing
