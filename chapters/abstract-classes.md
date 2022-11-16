@@ -164,6 +164,86 @@ What is an abstract method? Why are they useful?
 Why is it useful to be allowed to define an abstract class without any abstract members?
 ```
 
+
+```{exercise-start}
+```
+Write an abstract class called `Shape` which corresponds to the class depicted in the UML class diagram below.
+```
+┌────────────────────────────────┐
+│           Shape                │
+├────────────────────────────────┤
+│ + <get> Width : double         │
+│ + <set> Width : double         │
+│ + <get> Height : double        │
+│ + <set> Height : double        │
+│ + <get> Area : double          │
+├────────────────────────────────┤
+│ + Scale (factor:double) : void │
+└────────────────────────────────┘
+```
+Then write three classes called `Rectangle`, `Square`, `Circle` that all inherit from `Shape`.
+Strive to override as few methods as possible.
+
+When you are done, you should be able to run the following code and get the same result.
+```{code-cell}
+:tags: [remove-input]
+abstract class Shape
+{
+  public virtual double Width { get; set; }
+  public virtual double Height { get; set; }
+  public abstract double Area { get; }
+  public virtual void Scale (double factor)
+  {
+    Width *= factor;
+    Height *= factor;
+  }
+}
+
+class RightTriangle : Shape
+{
+  public override double Area
+  {
+    get => Width * Height / 2;
+  }
+}
+
+class Rectangle : Shape
+{
+  public override double Area
+  {
+    get => Width * Height;
+  }
+}
+
+class Oval : Shape
+{
+  public override double Area
+  {
+    get => Math.PI * Width * Height;
+  }
+}
+```
+```{code-cell}
+Shape[] shapes = new Shape[] {
+  new Rectangle() { Width=2, Height=1 },
+  new RightTriangle() { Width=3, Height=1 },
+  new Oval() { Width=0.5, Height=0.5 }
+};
+
+double before = 0;
+double after = 0;
+foreach (Shape shape in shapes)
+{
+  before += shape.Area;
+  shape.Scale(2);
+  after += shape.Area;
+}
+Console.WriteLine($"Area increased by: {after / before}");
+```
+```{exercise-end}
+```
+
+
 ```{exercise}
 1. Come up with your own example of where using an abstract class with abstract methods would make sense.
 2. Motivate why using an abstract class makes sense in words.
