@@ -12,20 +12,17 @@ kernelspec:
 
 # Inheritance
 
-```{warning}
-Work in progress.
-```
-
 % TODO: Mention drawback of only one spot for inheritance. Referenced from chapter on Liskov.
 %- Base keyword!! Both in constructor context and beyond.
+%- Fragile base class. Example: Abstract class Shape which defines a Scale method that multiplies width and height with factor. This breaks if a subclass of Shape like Circle changes both Width and Height in response to a change in one of them.
 
 
 ## Motivation
 
 Inheritance, in object oriented languages, tend to serve two purposes.
 
-1. Inheritance is a mechanism that allows a subtype to either inherit or [override](overriding) instance members from its supertype.
-2. Inheritance causes the subtype to be substitutable for the supertype in the sense of subtype polymorphism.
+1. Inheriting the Inheritance is a mechanism that allows a subtype to either inherit or [override](overriding) instance members from its supertype. This can be thought of as inheriting the implementation and is sometimes called "implementation inheritance".
+2. Inheritance causes the subtype to be substitutable for the supertype in the sense of subtype polymorphism. This can be thought of as inheriting the type and is sometimes called "interface inheritance".
 
 We have already discussed the benefits of subtype polymorphism in the chapters on [interfaces](interfaces) and [subtype polymorphism](subtype-polymorphism).
 We have thus already dealt with the second point above, and will in this chapter therefore mostly focus on the first.
@@ -46,10 +43,11 @@ Inheritance must *not* blindly be used for *code reuse* without respecting the r
 Inheritance is a binary directed relationship between two (possibly [abstract](abstract-classes)) classes or [interfaces](interface-inheritance).
 Similar to the terminology used in [subtype polymorphism](subtype-polymorphism) we refer to the two parties as sub/child/derived class/type and super/parent/base class/type.
 The subclass inherits both type and members from its superclass.
-We'll discuss abstract classes in a separate chapter.
+We'll discuss [abstract classes](abstract-classes) in a separate chapter.
 
 To declare that a class is a subclass of another class in C# we use the same syntax as we use when declaring that the class implements some [interface](interfaces).
 In other words, we write a colon (`:`) after the class name and then the name of the superclass.
+
 In the example below, we declare that the class `Child` inherits from the class `Parent`.
 
 ```{code-cell} csharp
@@ -67,7 +65,7 @@ We do however declare that the subclass inherits from a superclass which does co
 ```{code-cell} csharp
 class Parent
 {
-  public void ParentMethod ()
+  public void InheritedMethod ()
     => Console.WriteLine("Implemented in parent.");
 }
 
@@ -78,14 +76,14 @@ Since the superclass defines an instance method we can of course call that insta
 
 ```{code-cell} csharp
 Parent parent = new Parent();
-parent.ParentMethod();
+parent.InheritedMethod();
 ```
 
-However, since the subclass inherits from that superclass we can also call that instance method on all instances of the subclass.
+However, since the subclass *inherits* from that superclass we can also call that instance method on all instances of the subclass.
 
 ```{code-cell} csharp
 Child child = new Child(); // Note that this is the subtype!
-child.ParentMethod();
+child.InheritedMethod();
 ```
 
 
@@ -103,18 +101,20 @@ Note how the compile-time type is the general type, while the run-time type is t
 Parent child = new Child();
 ```
 
+Of course, the compiler still allows us to invoke the instance method `InheritedMethod` since it's defined in `Parent` and our compile-time type is `Parent`.
+
+```{code-cell}
+child.InheritedMethod();
+```
+
 
 ### Overriding
 
 We've established that a subclass inherits all members from its superclass.
-However, if a member in the superclass is marked as `virtual` then it is possible for the subclass to `override` that implementation.
+However, if an [instance method](instance-methods) or [instance property](properties) in the superclass is marked as `virtual` then it is possible for the subclass to `override` that implementation.
 Meaning, it is possible for the subclass to define its own specialized implementation for that member to use instead of the one defined by the superclass.
 
 Starting from the same code as above, let's rewrite it so that the instance method in the superclass is marked as `virtual` so that we can `override` it in the subclass.
-
-```{tip}
-When overriding, what implementation is executed is determined by the *run-time type*.
-```
 
 ```{code-cell} csharp
 class Parent
@@ -157,6 +157,11 @@ But, this is the entire point of overriding.
 Due to subtype polymorphism you can then treat all subclasses of the same superclass interchangibly, but whenever you call a method marked as `virtual` that has been overridden in the subclass then the specialized method in the subclass is the one that's being executed.
 This behavior is also summarized in {numref}`tbl:inheritance:override`.
 
+```{tip}
+When overriding, which implementation is executed is determined by the *run-time type* and not the compile-time type.
+This behavior was discussed in the chapter on [subtype polymorphism](subtype-polymorphism).
+```
+
 Remember, when overriding, what implementation to run is determined by the run-time type.
 
 ```{list-table} What implementation is executed depends on the run-time type in the case of overriding and the compile-time type in the case of hiding.
@@ -191,7 +196,8 @@ In Java, instance methods are virtual unless otherwise specified.
 
 ### Hiding
 
-Before moving on we need to talk about a concept that isn't actually only related to inheritance, namely method hiding.
+Before moving on we need to talk about a feature that isn't actually only related to inheritance but often comes up when we fail to remember to use the keyword `override`.
+That feautre is "method hiding".
 Let's say we have a method in a subclass with the same signature as one in the superclass and we mark the method in the subclass as `new` rather than `override`.
 In this case we are *not* using overriding.
 Instead we are using what is known as "hiding".
@@ -200,7 +206,7 @@ We say that the method in the subclass "hides" the method in the superclass.
 In {numref}`tbl:inheritance:override` you can see how hiding is different from overriding.
 
 ```{tip}
-When hiding, what implementation is executed is determined by the *compile-time type*.
+When hiding, which implementation is executed is determined by the *compile-time type* and not the run-time type.
 ```
 
 Let's go through all the same examples as before.
@@ -248,10 +254,66 @@ childAsParent.HiddenMethod();
 (inheritance:uml)=
 ### UML class diagrams
 
-```{danger}
-Coming soon.
+In UML class diagram notation, inheritance is called "generalization" and is depicted using a solid line with a hollow arrow head.
+The arrow points from the subclass to the superclass.
+
+% TODO: REPLACE IMAGE!!
+```{figure} https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Uml_classes_en.svg/800px-Uml_classes_en.svg.png
+:name: fig:uml-class-diagram-realization
+:width: 300
+
+In UML class diagram notation, inheritance is called "generalization" and is depicted using a solid line with a hollow arrow head.
+The arrow points from the implementation to the interface.
+[[Image source](https://en.wikipedia.org/wiki/Class_diagram)].
 ```
 
+In the diagram below we are saying that the class `Oval` inherits from the class `Shape`.
+We're also saying that it overrides the two properties `Width` and `Height` but inherits (without overriding) the method `Scale`.
+The class `Oval` also defines two additional properties of its own, namely `Radius` and `Diameter`.
+
+```
+┌────────────────────────────────┐
+│           Shape                │
+├────────────────────────────────┤
+│ + <get> Width : double         │
+│ + <set> Width : double         │
+│ + <get> Height : double        │
+│ + <set> Height : double        │
+├────────────────────────────────┤
+│ + Scale (factor:double) : void │
+└────────────────────────────────┘
+                Δ
+                │
+                │
+                │
+┌────────────────────────────────┐
+│             Oval               │
+├────────────────────────────────┤
+│ + <get> ^Width : double        │
+│ + <set> ^Width : double        │
+│ + <get> ^Height : double       │
+│ + <set> ^Height : double       │
+│ + <get> Radius : double        │
+│ + <set> Radius : double        │
+│ + <get> Diameter : double      │
+│ + <set> Diameter : double      │
+├────────────────────────────────┤
+│                                │
+└────────────────────────────────┘
+```
+
+Subclasses are conventionally drawn "below" superclasses.
+
+Whether or not to include (meaning: repeat) the inherited members in the subclass varies depending on who you ask.
+Remember that we had this same discussion in the chapter on interfaces?
+A common suggestion, and the choice we have made above, is however to, out of those members that also appear in the superclass, only mention those that override (or hide) members from the superclass.
+
+To be able to tell overriding apart from hiding, some prepend the caret symbol (`^`) to the name of the member to indicate that it has been overridden as opposed to hidden.
+
+```{tip}
+Pick a syntax and stick to it.
+Consistency is key.
+```
 
 % Example: Get rid of the foreach? Or is this perhaps not a great solution?
 
@@ -571,19 +633,15 @@ class Number : IAddable
 
 
 ## Exercises
+% TODO: NEEDS CODING EXERCISES!
 
 ```{exercise}
-What is inheritance?
+What is *inheritance*?
 Use your own words, give an example, and then implement that example.
 ```
 
 ```{exercise}
-What is an abstract class?
-Use your own words, give an example, and then implement that example.
-```
-
-```{exercise}
-What is overriding?
+What is *overriding*?
 Use your own words, give an example, and then implement that example.
 ```
 
@@ -591,6 +649,86 @@ Use your own words, give an example, and then implement that example.
 What is the difference between *overriding*, *overloading*, and *hiding*?
 Explain in words and then show the difference by means of an example.
 ```
+
+```{exercise-start}
+```
+Write an abstract class called `Shape` which corresponds to the class depicted in the UML class diagram below.
+```
+┌────────────────────────────────┐
+│           Shape                │
+├────────────────────────────────┤
+│ + <get> Width : double         │
+│ + <set> Width : double         │
+│ + <get> Height : double        │
+│ + <set> Height : double        │
+│ + <get> Area : double          │
+├────────────────────────────────┤
+│ + Scale (factor:double) : void │
+└────────────────────────────────┘
+```
+Then write three classes called `Rectangle`, `Square`, `Circle` that all inherit from `Shape`.
+Strive to override as few methods as possible.
+
+When you are done, you should be able to run the following code and get the same result.
+```{code-cell}
+:tags: [remove-input]
+abstract class Shape
+{
+  public virtual double Width { get; set; }
+  public virtual double Height { get; set; }
+  public abstract double Area { get; }
+  public virtual void Scale (double factor)
+  {
+    Width *= factor;
+    Height *= factor;
+  }
+}
+
+class RightTriangle : Shape
+{
+  public override double Area
+  {
+    get => Width * Height / 2;
+  }
+}
+
+class Rectangle : Shape
+{
+  public override double Area
+  {
+    get => Width * Height;
+  }
+}
+
+class Oval : Shape
+{
+  public override double Area
+  {
+    get => Math.PI * Width * Height;
+  }
+}
+```
+```{code-cell}
+Shape[] shapes = new Shape[] {
+  new Rectangle() { Width=2, Height=1 },
+  new RightTriangle() { Width=3, Height=1 },
+  new Oval() { Width=0.5, Height=0.5 }
+};
+
+double before = 0;
+double after = 0;
+foreach (Shape shape in shapes)
+{
+  before += shape.Area;
+  shape.Scale(2);
+  after += shape.Area;
+}
+Console.WriteLine($"Area increased by: {after / before}");
+```
+```{exercise-end}
+```
+
+
 
 ```{exercise}
 Can the class `ReverseCipher` inherit from `CharWiseCipher`?

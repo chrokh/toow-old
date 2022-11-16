@@ -1286,16 +1286,12 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="inheritance">
 <h1><span class="section-number">72. </span>Inheritance<a class="headerlink" href="#inheritance" title="Permalink to this headline">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
-</div>
 <section id="motivation">
 <h2><span class="section-number">72.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
 <p>Inheritance, in object oriented languages, tend to serve two purposes.</p>
 <ol class="simple">
-<li><p>Inheritance is a mechanism that allows a subtype to either inherit or <a class="reference internal" href="overriding.html"><span class="doc std std-doc">override</span></a> instance members from its supertype.</p></li>
-<li><p>Inheritance causes the subtype to be substitutable for the supertype in the sense of subtype polymorphism.</p></li>
+<li><p>Inheriting the Inheritance is a mechanism that allows a subtype to either inherit or <a class="reference internal" href="overriding.html"><span class="doc std std-doc">override</span></a> instance members from its supertype. This can be thought of as inheriting the implementation and is sometimes called “implementation inheritance”.</p></li>
+<li><p>Inheritance causes the subtype to be substitutable for the supertype in the sense of subtype polymorphism. This can be thought of as inheriting the type and is sometimes called “interface inheritance”.</p></li>
 </ol>
 <p>We have already discussed the benefits of subtype polymorphism in the chapters on <a class="reference internal" href="interfaces.html"><span class="doc std std-doc">interfaces</span></a> and <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype polymorphism</span></a>.
 We have thus already dealt with the second point above, and will in this chapter therefore mostly focus on the first.
@@ -1313,10 +1309,10 @@ Whenever we declare that a subclass inherits from a superclass, then we are alwa
 <p>Inheritance is a binary directed relationship between two (possibly <a class="reference internal" href="abstract-classes.html"><span class="doc std std-doc">abstract</span></a>) classes or <span class="xref myst">interfaces</span>.
 Similar to the terminology used in <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype polymorphism</span></a> we refer to the two parties as sub/child/derived class/type and super/parent/base class/type.
 The subclass inherits both type and members from its superclass.
-We’ll discuss abstract classes in a separate chapter.</p>
+We’ll discuss <a class="reference internal" href="abstract-classes.html"><span class="doc std std-doc">abstract classes</span></a> in a separate chapter.</p>
 <p>To declare that a class is a subclass of another class in C# we use the same syntax as we use when declaring that the class implements some <a class="reference internal" href="interfaces.html"><span class="doc std std-doc">interface</span></a>.
-In other words, we write a colon (<code class="docutils literal notranslate"><span class="pre">:</span></code>) after the class name and then the name of the superclass.
-In the example below, we declare that the class <code class="docutils literal notranslate"><span class="pre">Child</span></code> inherits from the class <code class="docutils literal notranslate"><span class="pre">Parent</span></code>.</p>
+In other words, we write a colon (<code class="docutils literal notranslate"><span class="pre">:</span></code>) after the class name and then the name of the superclass.</p>
+<p>In the example below, we declare that the class <code class="docutils literal notranslate"><span class="pre">Child</span></code> inherits from the class <code class="docutils literal notranslate"><span class="pre">Parent</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Parent</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
@@ -1327,7 +1323,7 @@ In the example below, we declare that the class <code class="docutils literal no
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3351.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3102.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1372,12 +1368,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.76:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.137:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3351.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3102.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1443,7 +1439,7 @@ We do however declare that the subclass inherits from a superclass which does co
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Parent</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">ParentMethod</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">InheritedMethod</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
 <span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Implemented in parent.&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 
@@ -1456,7 +1452,7 @@ We do however declare that the subclass inherits from a superclass which does co
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Parent</span><span class="w"> </span><span class="n">parent</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Parent</span><span class="p">();</span><span class="w"></span>
-<span class="n">parent</span><span class="p">.</span><span class="n">ParentMethod</span><span class="p">();</span><span class="w"></span>
+<span class="n">parent</span><span class="p">.</span><span class="n">InheritedMethod</span><span class="p">();</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -1466,11 +1462,11 @@ We do however declare that the subclass inherits from a superclass which does co
 </div>
 </div>
 </div>
-<p>However, since the subclass inherits from that superclass we can also call that instance method on all instances of the subclass.</p>
+<p>However, since the subclass <em>inherits</em> from that superclass we can also call that instance method on all instances of the subclass.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Child</span><span class="w"> </span><span class="n">child</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Child</span><span class="p">();</span><span class="w"> </span><span class="c1">// Note that this is the subtype!</span>
-<span class="n">child</span><span class="p">.</span><span class="n">ParentMethod</span><span class="p">();</span><span class="w"></span>
+<span class="n">child</span><span class="p">.</span><span class="n">InheritedMethod</span><span class="p">();</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -1496,17 +1492,26 @@ Note how the compile-time type is the general type, while the run-time type is t
 </div>
 </div>
 </div>
+<p>Of course, the compiler still allows us to invoke the instance method <code class="docutils literal notranslate"><span class="pre">InheritedMethod</span></code> since it’s defined in <code class="docutils literal notranslate"><span class="pre">Parent</span></code> and our compile-time type is <code class="docutils literal notranslate"><span class="pre">Parent</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">child</span><span class="p">.</span><span class="n">InheritedMethod</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Implemented in parent.
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="overriding">
 <h3><span class="section-number">72.2.3. </span>Overriding<a class="headerlink" href="#overriding" title="Permalink to this headline">#</a></h3>
 <p>We’ve established that a subclass inherits all members from its superclass.
-However, if a member in the superclass is marked as <code class="docutils literal notranslate"><span class="pre">virtual</span></code> then it is possible for the subclass to <code class="docutils literal notranslate"><span class="pre">override</span></code> that implementation.
+However, if an <a class="reference internal" href="instance-methods.html"><span class="doc std std-doc">instance method</span></a> or <a class="reference internal" href="properties.html"><span class="doc std std-doc">instance property</span></a> in the superclass is marked as <code class="docutils literal notranslate"><span class="pre">virtual</span></code> then it is possible for the subclass to <code class="docutils literal notranslate"><span class="pre">override</span></code> that implementation.
 Meaning, it is possible for the subclass to define its own specialized implementation for that member to use instead of the one defined by the superclass.</p>
 <p>Starting from the same code as above, let’s rewrite it so that the instance method in the superclass is marked as <code class="docutils literal notranslate"><span class="pre">virtual</span></code> so that we can <code class="docutils literal notranslate"><span class="pre">override</span></code> it in the subclass.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>When overriding, what implementation is executed is determined by the <em>run-time type</em>.</p>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Parent</span><span class="w"></span>
@@ -1571,6 +1576,11 @@ Unsurprising.</p>
 But, this is the entire point of overriding.
 Due to subtype polymorphism you can then treat all subclasses of the same superclass interchangibly, but whenever you call a method marked as <code class="docutils literal notranslate"><span class="pre">virtual</span></code> that has been overridden in the subclass then the specialized method in the subclass is the one that’s being executed.
 This behavior is also summarized in <a class="reference internal" href="#tbl-inheritance-override"><span class="std std-numref">Table 72.1</span></a>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When overriding, which implementation is executed is determined by the <em>run-time type</em> and not the compile-time type.
+This behavior was discussed in the chapter on <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype polymorphism</span></a>.</p>
+</div>
 <p>Remember, when overriding, what implementation to run is determined by the run-time type.</p>
 <table class="table" id="tbl-inheritance-override">
 <caption><span class="caption-number">Table 72.1 </span><span class="caption-text">What implementation is executed depends on the run-time type in the case of overriding and the compile-time type in the case of hiding.</span><a class="headerlink" href="#tbl-inheritance-override" title="Permalink to this table">#</a></caption>
@@ -1614,7 +1624,8 @@ In Java, instance methods are virtual unless otherwise specified.</p>
 </section>
 <section id="hiding">
 <h3><span class="section-number">72.2.4. </span>Hiding<a class="headerlink" href="#hiding" title="Permalink to this headline">#</a></h3>
-<p>Before moving on we need to talk about a concept that isn’t actually only related to inheritance, namely method hiding.
+<p>Before moving on we need to talk about a feature that isn’t actually only related to inheritance but often comes up when we fail to remember to use the keyword <code class="docutils literal notranslate"><span class="pre">override</span></code>.
+That feautre is “method hiding”.
 Let’s say we have a method in a subclass with the same signature as one in the superclass and we mark the method in the subclass as <code class="docutils literal notranslate"><span class="pre">new</span></code> rather than <code class="docutils literal notranslate"><span class="pre">override</span></code>.
 In this case we are <em>not</em> using overriding.
 Instead we are using what is known as “hiding”.
@@ -1622,7 +1633,7 @@ We say that the method in the subclass “hides” the method in the superclass.
 <p>In <a class="reference internal" href="#tbl-inheritance-override"><span class="std std-numref">Table 72.1</span></a> you can see how hiding is different from overriding.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>When hiding, what implementation is executed is determined by the <em>compile-time type</em>.</p>
+<p>When hiding, which implementation is executed is determined by the <em>compile-time type</em> and not the run-time type.</p>
 </div>
 <p>Let’s go through all the same examples as before.
 This time however we will mark the method as <code class="docutils literal notranslate"><span class="pre">new</span></code> in the subclass.
@@ -1691,9 +1702,58 @@ Remember, when hiding, what implementation to run is determined by the compile-t
 </section>
 <section id="uml-class-diagrams">
 <span id="inheritance-uml"></span><h3><span class="section-number">72.2.5. </span>UML class diagrams<a class="headerlink" href="#uml-class-diagrams" title="Permalink to this headline">#</a></h3>
-<div class="admonition danger">
-<p class="admonition-title">Danger</p>
-<p>Coming soon.</p>
+<p>In UML class diagram notation, inheritance is called “generalization” and is depicted using a solid line with a hollow arrow head.
+The arrow points from the subclass to the superclass.</p>
+<figure class="align-default" id="fig-uml-class-diagram-realization">
+<a class="reference internal image-reference" href="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Uml_classes_en.svg/800px-Uml_classes_en.svg.png"><img alt="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Uml_classes_en.svg/800px-Uml_classes_en.svg.png" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Uml_classes_en.svg/800px-Uml_classes_en.svg.png" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 72.1 </span><span class="caption-text">In UML class diagram notation, inheritance is called “generalization” and is depicted using a solid line with a hollow arrow head.
+The arrow points from the implementation to the interface.
+[<a class="reference external" href="https://en.wikipedia.org/wiki/Class_diagram">Image source</a>].</span><a class="headerlink" href="#fig-uml-class-diagram-realization" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In the diagram below we are saying that the class <code class="docutils literal notranslate"><span class="pre">Oval</span></code> inherits from the class <code class="docutils literal notranslate"><span class="pre">Shape</span></code>.
+We’re also saying that it overrides the two properties <code class="docutils literal notranslate"><span class="pre">Width</span></code> and <code class="docutils literal notranslate"><span class="pre">Height</span></code> but inherits (without overriding) the method <code class="docutils literal notranslate"><span class="pre">Scale</span></code>.
+The class <code class="docutils literal notranslate"><span class="pre">Oval</span></code> also defines two additional properties of its own, namely <code class="docutils literal notranslate"><span class="pre">Radius</span></code> and <code class="docutils literal notranslate"><span class="pre">Diameter</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌────────────────────────────────┐
+│           Shape                │
+├────────────────────────────────┤
+│ + &lt;get&gt; Width : double         │
+│ + &lt;set&gt; Width : double         │
+│ + &lt;get&gt; Height : double        │
+│ + &lt;set&gt; Height : double        │
+├────────────────────────────────┤
+│ + Scale (factor:double) : void │
+└────────────────────────────────┘
+                Δ
+                │
+                │
+                │
+┌────────────────────────────────┐
+│             Oval               │
+├────────────────────────────────┤
+│ + &lt;get&gt; ^Width : double        │
+│ + &lt;set&gt; ^Width : double        │
+│ + &lt;get&gt; ^Height : double       │
+│ + &lt;set&gt; ^Height : double       │
+│ + &lt;get&gt; Radius : double        │
+│ + &lt;set&gt; Radius : double        │
+│ + &lt;get&gt; Diameter : double      │
+│ + &lt;set&gt; Diameter : double      │
+├────────────────────────────────┤
+│                                │
+└────────────────────────────────┘
+</pre></div>
+</div>
+<p>Subclasses are conventionally drawn “below” superclasses.</p>
+<p>Whether or not to include (meaning: repeat) the inherited members in the subclass varies depending on who you ask.
+Remember that we had this same discussion in the chapter on interfaces?
+A common suggestion, and the choice we have made above, is however to, out of those members that also appear in the superclass, only mention those that override (or hide) members from the superclass.</p>
+<p>To be able to tell overriding apart from hiding, some prepend the caret symbol (<code class="docutils literal notranslate"><span class="pre">^</span></code>) to the name of the member to indicate that it has been overridden as opposed to hidden.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Pick a syntax and stick to it.
+Consistency is key.</p>
 </div>
 </section>
 </section>
@@ -2051,7 +2111,7 @@ In addition to this however, the interface also inherits from the other interfac
 
 <p class="admonition-title"><span class="caption-number">Exercise 72.1 </span></p>
 <section id="exercise-content">
-<p>What is inheritance?
+<p>What is <em>inheritance</em>?
 Use your own words, give an example, and then implement that example.</p>
 </section>
 </div>
@@ -2059,7 +2119,7 @@ Use your own words, give an example, and then implement that example.</p>
 
 <p class="admonition-title"><span class="caption-number">Exercise 72.2 </span></p>
 <section id="exercise-content">
-<p>What is an abstract class?
+<p>What is <em>overriding</em>?
 Use your own words, give an example, and then implement that example.</p>
 </section>
 </div>
@@ -2067,16 +2127,59 @@ Use your own words, give an example, and then implement that example.</p>
 
 <p class="admonition-title"><span class="caption-number">Exercise 72.3 </span></p>
 <section id="exercise-content">
-<p>What is overriding?
-Use your own words, give an example, and then implement that example.</p>
+<p>What is the difference between <em>overriding</em>, <em>overloading</em>, and <em>hiding</em>?
+Explain in words and then show the difference by means of an example.</p>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/inheritance-exercise-3">
 
 <p class="admonition-title"><span class="caption-number">Exercise 72.4 </span></p>
 <section id="exercise-content">
-<p>What is the difference between <em>overriding</em>, <em>overloading</em>, and <em>hiding</em>?
-Explain in words and then show the difference by means of an example.</p>
+<p>Write an abstract class called <code class="docutils literal notranslate"><span class="pre">Shape</span></code> which corresponds to the class depicted in the UML class diagram below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌────────────────────────────────┐
+│           Shape                │
+├────────────────────────────────┤
+│ + &lt;get&gt; Width : double         │
+│ + &lt;set&gt; Width : double         │
+│ + &lt;get&gt; Height : double        │
+│ + &lt;set&gt; Height : double        │
+│ + &lt;get&gt; Area : double          │
+├────────────────────────────────┤
+│ + Scale (factor:double) : void │
+└────────────────────────────────┘
+</pre></div>
+</div>
+<p>Then write three classes called <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>, <code class="docutils literal notranslate"><span class="pre">Square</span></code>, <code class="docutils literal notranslate"><span class="pre">Circle</span></code> that all inherit from <code class="docutils literal notranslate"><span class="pre">Shape</span></code>.
+Strive to override as few methods as possible.</p>
+<p>When you are done, you should be able to run the following code and get the same result.</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Shape</span><span class="p">[]</span><span class="w"> </span><span class="n">shapes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Shape</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Width</span><span class="p">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">Height</span><span class="p">=</span><span class="m">1</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">RightTriangle</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Width</span><span class="p">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">Height</span><span class="p">=</span><span class="m">1</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Oval</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Width</span><span class="p">=</span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">Height</span><span class="p">=</span><span class="m">0.5</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">before</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+<span class="kt">double</span><span class="w"> </span><span class="n">after</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Shape</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">shapes</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">before</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">shape</span><span class="p">.</span><span class="n">Area</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">shape</span><span class="p">.</span><span class="n">Scale</span><span class="p">(</span><span class="m">2</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">after</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">shape</span><span class="p">.</span><span class="n">Area</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Area increased by: {after / before}&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Area increased by: 4
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/inheritance-exercise-4">

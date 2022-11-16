@@ -88,6 +88,10 @@ The terminology is summarized in {numref}`tbl:subtype-supertype-terminology`.
 | Base type | Derived type |
 ```
 
+%``{warning}
+%It is common to use the terms "parent" and "child" when discussing subtyping. However, the relationship between a parent type and a child type bears little resemblance to the biological relationship between parent and child.
+%``
+
 ### Notation
 
 So how do we declare one type a subtype of another type?
@@ -160,10 +164,11 @@ In other words, whenever we state that a certain compile-time type is expected w
 
 The process of using a subtype where a supertype is expected is known as "upcasting".
 Upcasting can in an object oriented language usually be performed without any explicit [type conversions](object-type-conversions).
-Below is an example of upcasting.
+The code below gives two examples of upcasting.
 
 ```{code-cell}
-IAnimal animal = new Cat();
+IAnimal animal1 = new Cat();
+IAnimal animal2 = new Dog();
 ```
 
 The process of using a supertype where a subtype is expected is known as "downcasting".
@@ -204,7 +209,7 @@ object obj = new Dog();
 
 ```{admonition} Mnemonic
 :class: tip
-Here's a good memonic for remembering the difference between upcasting and downcasting.
+How to remember which is which of upcasting and downcasting?
 When we're visualizing a subtype relationship between two types using UML class diagrams (see the UML section in the chapter on [interfaces](interfaces:uml) or [inheritance](inheritance:uml)) is to remember that, when visualizing, we usually draw the supertype above the suptype.
 
 Upcasting refers to the process of treating an object of the type below as an object of the type above.
@@ -255,6 +260,10 @@ By declaring that `Cat` and `Dog` both implement the interface `IAnimal` we can 
 Importantly we can call whatever methods and access whatever properties the type `IAnimal` declares.
 However, we can do this without having to care at all about which particular implementation of `IAnimal` we happen to get at runtime.
 As long as whatever members we're accessing are defined in `IAnimal` then we are guaranteed that these members will be available in all subtypes of `IAnimal`.
+
+```{tip}
+Which implementation is executed is determined by the *run-time type* not the compile-time type.
+```
 
 Before leaving the section on dynamic dispatch I should also mention that most languages that implement dynamic dispatch by means of subtype polymorphism provide us with *single* dynamic dispatch.
 This means that the implementation that is executed depends on the run-time type of one variable.
@@ -387,6 +396,14 @@ We'll talk about this a bit more when we get to the chapter on the design princi
 As long as the subtype is behaviorally substitutable for the supertype, we're fione.
 But, be sure to only put things in the supertype that actually are implementable for all conceivable subtypes.
 
+```{tip}
+What members the compiler allows us to invoke is determined by the compile-time type and *not* the run-time type.
+```
+
+
+%``{tip} % TODO: Half-truth. What would be an example of when this doesn't work?
+%What members can successfully be invoked at run-time is determined by the run-time type because then it matters what we actually have an implementation for.
+%``
 
 
 
@@ -642,6 +659,10 @@ The fact that the type implements `IStringToStringCipher` means that we can be c
 The actual implementation of `Encode` that will be run depends on what the run-time type we happen to have.
 This is the dynamic dispatch.
 The implementation is "late-bound".
+
+```{tip}
+Which implementation is executed is determined by the *run-time type* not the compile-time type.
+```
 
 Let's look at an example.
 How about the idea of running the encoding method of a cipher twice?
@@ -1036,6 +1057,7 @@ When you are done you should no longer need the static factory methods but you s
 
 
 ```{exercise-start}
+:label: ex:subtype-polymorphism:time
 ```
 Write a bunch of classes that can be used to model time in seconds, minutes, and hours.
 Make sure that your code behaves according to the usage example below.

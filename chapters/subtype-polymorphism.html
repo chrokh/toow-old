@@ -1486,7 +1486,7 @@ Have a look at this code:</p>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-4081.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3854.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1531,12 +1531,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.76:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.137:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '4081.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3854.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1611,10 +1611,11 @@ In other words, whenever we state that a certain compile-time type is expected w
 <h3><span class="section-number">71.2.4. </span>Upcasting and downcasting<a class="headerlink" href="#upcasting-and-downcasting" title="Permalink to this headline">#</a></h3>
 <p>The process of using a subtype where a supertype is expected is known as “upcasting”.
 Upcasting can in an object oriented language usually be performed without any explicit <a class="reference internal" href="object-type-conversions.html"><span class="doc std std-doc">type conversions</span></a>.
-Below is an example of upcasting.</p>
+The code below gives two examples of upcasting.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IAnimal</span><span class="w"> </span><span class="n">animal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cat</span><span class="p">();</span><span class="w"></span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IAnimal</span><span class="w"> </span><span class="n">animal1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cat</span><span class="p">();</span><span class="w"></span>
+<span class="n">IAnimal</span><span class="w"> </span><span class="n">animal2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span><span class="p">();</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -1634,13 +1635,16 @@ Below are two examples of downcasting where we are using two different syntaxes 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>System.InvalidCastException: Unable to cast object of type &#39;Cat&#39; to type &#39;Dog&#39;.
-   at Submission#6.&lt;&lt;Initialize&gt;&gt;d__0.MoveNext()
---- End of stack trace from previous location ---
-   at Microsoft.CodeAnalysis.Scripting.ScriptExecutionState.RunSubmissionsAsync[TResult](ImmutableArray`1 precedingExecutors, Func`2 currentExecutor, StrongBox`1 exceptionHolderOpt, Func`2 catchExceptionOpt, CancellationToken cancellationToken)
-   at Submission#6.&lt;&lt;Initialize&gt;&gt;d__0.MoveNext()
---- End of stack trace from previous location ---
-   at Microsoft.CodeAnalysis.Scripting.ScriptExecutionState.RunSubmissionsAsync[TResult](ImmutableArray`1 precedingExecutors, Func`2 currentExecutor, StrongBox`1 exceptionHolderOpt, Func`2 catchExceptionOpt, CancellationToken cancellationToken)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2,12): error CS0103: The name &#39;animal&#39; does not exist in the current context
+
+(3,17): error CS0103: The name &#39;animal&#39; does not exist in the current context
+
+(5,12): error CS0103: The name &#39;animal&#39; does not exist in the current context
+
+(6,17): error CS0103: The name &#39;animal&#39; does not exist in the current context
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -1667,7 +1671,7 @@ Assigning an instance of a class to a variable of type <code class="docutils lit
 </div>
 <div class="tip admonition">
 <p class="admonition-title">Mnemonic</p>
-<p>Here’s a good memonic for remembering the difference between upcasting and downcasting.
+<p>How to remember which is which of upcasting and downcasting?
 When we’re visualizing a subtype relationship between two types using UML class diagrams (see the UML section in the chapter on <a class="reference internal" href="interfaces.html#interfaces-uml"><span class="std std-ref">interfaces</span></a> or <a class="reference internal" href="inheritance.html#inheritance-uml"><span class="std std-ref">inheritance</span></a>) is to remember that, when visualizing, we usually draw the supertype above the suptype.</p>
 <p>Upcasting refers to the process of treating an object of the type below as an object of the type above.
 Downcasting refers to the process of treating an object of the type above as an object of the type below.
@@ -1702,6 +1706,10 @@ Well, the answer lies in something known as “dynamic dispatch”.</p>
 Importantly we can call whatever methods and access whatever properties the type <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code> declares.
 However, we can do this without having to care at all about which particular implementation of <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code> we happen to get at runtime.
 As long as whatever members we’re accessing are defined in <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code> then we are guaranteed that these members will be available in all subtypes of <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Which implementation is executed is determined by the <em>run-time type</em> not the compile-time type.</p>
+</div>
 <p>Before leaving the section on dynamic dispatch I should also mention that most languages that implement dynamic dispatch by means of subtype polymorphism provide us with <em>single</em> dynamic dispatch.
 This means that the implementation that is executed depends on the run-time type of one variable.
 We will learn about <em>multiple</em> dynamic dispatch in the chapters on <a class="reference internal" href="visitor-pattern.html"><span class="doc std std-doc">visitor pattern</span></a> and <a class="reference internal" href="pattern-matching.html"><span class="doc std std-doc">pattern matching</span></a>.</p>
@@ -1848,6 +1856,10 @@ An even other way of saying this is it is possible that it is a <em>part</em> of
 <p>We’ll talk about this a bit more when we get to the chapter on the design principle known as the <a class="reference internal" href="liskov-substitution-principle.html#liskov-substitution-principle"><span class="std std-ref">liskov substitution principle</span></a>.
 As long as the subtype is behaviorally substitutable for the supertype, we’re fione.
 But, be sure to only put things in the supertype that actually are implementable for all conceivable subtypes.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>What members the compiler allows us to invoke is determined by the compile-time type and <em>not</em> the run-time type.</p>
+</div>
 </section>
 </section>
 <section id="examples">
@@ -2107,6 +2119,10 @@ The fact that the type implements <code class="docutils literal notranslate"><sp
 The actual implementation of <code class="docutils literal notranslate"><span class="pre">Encode</span></code> that will be run depends on what the run-time type we happen to have.
 This is the dynamic dispatch.
 The implementation is “late-bound”.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Which implementation is executed is determined by the <em>run-time type</em> not the compile-time type.</p>
+</div>
 <p>Let’s look at an example.
 How about the idea of running the encoding method of a cipher twice?
 Let’s define two simple <a class="reference internal" href="methods.html#local-functions"><span class="std std-ref">local functions</span></a>.
@@ -2462,7 +2478,7 @@ It looked something like this:</p>
 When you are done you should no longer need the static factory methods but you should still catch all errors related to trying to create a vowel from a non-vowel character at compile-time.</p>
 </section>
 </div>
-<div class="exercise admonition" id="chapters/subtype-polymorphism-exercise-13">
+<div class="exercise admonition" id="ex:subtype-polymorphism:time">
 
 <p class="admonition-title"><span class="caption-number">Exercise 71.14 </span></p>
 <section id="exercise-content">

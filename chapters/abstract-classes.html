@@ -1288,7 +1288,7 @@ This time we’ll call the class <code class="docutils literal notranslate"><spa
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2305.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2058.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1333,12 +1333,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.76:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.137:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2305.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2058.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1496,6 +1496,65 @@ Since they already have implementations for <code class="docutils literal notran
 
 <p class="admonition-title"><span class="caption-number">Exercise 73.4 </span></p>
 <section id="exercise-content">
+<p>Write an abstract class called <code class="docutils literal notranslate"><span class="pre">Shape</span></code> which corresponds to the class depicted in the UML class diagram below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌────────────────────────────────┐
+│           Shape                │
+├────────────────────────────────┤
+│ + &lt;get&gt; Width : double         │
+│ + &lt;set&gt; Width : double         │
+│ + &lt;get&gt; Height : double        │
+│ + &lt;set&gt; Height : double        │
+│ + &lt;get&gt; Area : double          │
+├────────────────────────────────┤
+│ + Scale (factor:double) : void │
+└────────────────────────────────┘
+</pre></div>
+</div>
+<p>Then write three classes called <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>, <code class="docutils literal notranslate"><span class="pre">Square</span></code>, <code class="docutils literal notranslate"><span class="pre">Circle</span></code> that all inherit from <code class="docutils literal notranslate"><span class="pre">Shape</span></code>.
+Strive to override as few methods as possible.</p>
+<p>When you are done, you should be able to run the following code and get the same result.</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Shape</span><span class="p">[]</span><span class="w"> </span><span class="n">shapes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Shape</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Width</span><span class="p">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">Height</span><span class="p">=</span><span class="m">1</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">RightTriangle</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Width</span><span class="p">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">Height</span><span class="p">=</span><span class="m">1</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Oval</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Width</span><span class="p">=</span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">Height</span><span class="p">=</span><span class="m">0.5</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">before</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+<span class="kt">double</span><span class="w"> </span><span class="n">after</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Shape</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">shapes</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">before</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">shape</span><span class="p">.</span><span class="n">Area</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">shape</span><span class="p">.</span><span class="n">Scale</span><span class="p">(</span><span class="m">2</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">after</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">shape</span><span class="p">.</span><span class="n">Area</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Area increased by: {after / before}&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Area increased by: 4
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/abstract-classes-exercise-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 73.5 </span></p>
+<section id="exercise-content">
+<p>Start with your solution to <a class="reference internal" href="subtype-polymorphism.html#ex:subtype-polymorphism:time"><span class="std std-numref">Exercise 71.14</span></a>.
+Can you use an abstract base class instead of an interface to eliminate further duplication?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/abstract-classes-exercise-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 73.6 </span></p>
+<section id="exercise-content">
 <ol class="simple">
 <li><p>Come up with your own example of where using an abstract class with abstract methods would make sense.</p></li>
 <li><p>Motivate why using an abstract class makes sense in words.</p></li>
@@ -1503,9 +1562,9 @@ Since they already have implementations for <code class="docutils literal notran
 </ol>
 </section>
 </div>
-<div class="exercise admonition" id="chapters/abstract-classes-exercise-4">
+<div class="exercise admonition" id="chapters/abstract-classes-exercise-6">
 
-<p class="admonition-title"><span class="caption-number">Exercise 73.5 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 73.7 </span></p>
 <section id="exercise-content">
 <p>Start from the code you wrote in <a class="reference internal" href="inheritance.html#inheritance:exercises:chartostringsubstitutioncipher"><span class="std std-numref">Exercise 72.7</span></a>.
 Mark both the superclass and the method with the signature <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">Encode</span> <span class="pre">(char</span> <span class="pre">input)</span></code> as <code class="docutils literal notranslate"><span class="pre">abstract</span></code>.</p>
