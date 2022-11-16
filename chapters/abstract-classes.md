@@ -245,6 +245,12 @@ Console.WriteLine($"Area increased by: {after / before}");
 
 
 ```{exercise}
+Start with your solution to {numref}`ex:subtype-polymorphism:time`.
+Can you use an abstract base class instead of an interface to eliminate further duplication?
+```
+
+
+```{exercise}
 1. Come up with your own example of where using an abstract class with abstract methods would make sense.
 2. Motivate why using an abstract class makes sense in words.
 3. Implement your example in code.

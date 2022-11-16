@@ -373,35 +373,48 @@ The arrow points from the implementation to the interface.
 [[Image source](https://en.wikipedia.org/wiki/Class_diagram)].
 ```
 
+In the diagram below we are saying that the class `Circle` is implementing the interface `IShape`.
+We're saying that it implements all the members of `IShape` but we are also adding some additional members not present in `IShape`.
+
 ```
-┌─────────────────────────┐
-│      <<interface>>      │
-│         IShape          │
-├─────────────────────────┤
-│ + <get> Width : double  │
-│ + <set> Width : double  │
-│ + <get> Height : double │
-│ + <set> Height : double │
-├─────────────────────────┤
-│                         │
-│                         │
-└─────────────────────────┘
-            Δ
-            ╎
-            ╎
-            ╎
-┌─────────────────────────┐
-│        Rectangle        │
-├─────────────────────────┤
-│ + <get> Width : double  │
-│ + <set> Width : double  │
-│ + <get> Height : double │
-│ + <set> Height : double │
-├─────────────────────────┤
-│                         │
-│                         │
-└─────────────────────────┘
+┌────────────────────────────────┐
+│         <<interface>>          │
+│            IShape              │
+├────────────────────────────────┤
+│ + <get> Width : double         │
+│ + <set> Width : double         │
+│ + <get> Height : double        │
+│ + <set> Height : double        │
+├────────────────────────────────┤
+│ + Scale (factor:double) : void │
+└────────────────────────────────┘
+               Δ
+               ╎
+               ╎
+               ╎
+┌────────────────────────────────┐
+│            Circle              │
+├────────────────────────────────┤
+│ + <get> Radius : double        │
+│ + <set> Radius : double        │
+│ + <get> Diameter : double      │
+│ + <set> Diameter : double      │
+├────────────────────────────────┤
+│                                │
+└────────────────────────────────┘
 ```
+
+Implementations are conventionally drawn "below" interfaces.
+
+Whether or not to include (meaning: repeat) the members of the interface in the implementation varies depending on who you ask.
+Here we have opted to follow the praxis of not repeating the members since the omission leads to no loss of information.
+If `Circle` truly implements the interface `IShape` then it must *by definition* implement all its members.
+
+```{tip}
+Pick a syntax and stick to it.
+Consistency is key.
+```
+
 
 ## Examples
 
