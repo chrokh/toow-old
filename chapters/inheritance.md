@@ -195,6 +195,8 @@ In Java, instance methods are virtual unless otherwise specified.
 
 
 ### Hiding
+%- Not overriding ("new" modifier)
+%- Called shadowing?
 
 Before moving on we need to talk about a feature that isn't actually only related to inheritance but often comes up when we fail to remember to use the keyword `override`.
 That feautre is "method hiding".
