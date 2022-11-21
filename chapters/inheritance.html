@@ -1163,8 +1163,18 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constructor-chaining">
+     72.2.5. Constructor chaining
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#accessing-base-members">
+     72.2.6. Accessing base members
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#uml-class-diagrams">
-     72.2.5. UML class diagrams
+     72.2.7. UML class diagrams
     </a>
    </li>
   </ul>
@@ -1175,13 +1185,18 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sequences">
+     72.3.1. Sequences
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#characterwise-ciphers">
-     72.3.1. Characterwise ciphers
+     72.3.2. Characterwise ciphers
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#interface-inheritance">
-     72.3.2. Interface inheritance
+     72.3.3. Interface inheritance
     </a>
    </li>
   </ul>
@@ -1241,8 +1256,18 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constructor-chaining">
+     72.2.5. Constructor chaining
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#accessing-base-members">
+     72.2.6. Accessing base members
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#uml-class-diagrams">
-     72.2.5. UML class diagrams
+     72.2.7. UML class diagrams
     </a>
    </li>
   </ul>
@@ -1253,13 +1278,18 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sequences">
+     72.3.1. Sequences
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#characterwise-ciphers">
-     72.3.1. Characterwise ciphers
+     72.3.2. Characterwise ciphers
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#interface-inheritance">
-     72.3.2. Interface inheritance
+     72.3.3. Interface inheritance
     </a>
    </li>
   </ul>
@@ -1285,7 +1315,7 @@ title="Print to PDF"
 <h2><span class="section-number">72.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
 <p>Inheritance, in object oriented languages, tend to serve two purposes.</p>
 <ol class="simple">
-<li><p>Inheriting the Inheritance is a mechanism that allows a subtype to either inherit or <a class="reference internal" href="overriding.html"><span class="doc std std-doc">override</span></a> instance members from its supertype. This can be thought of as inheriting the implementation and is sometimes called “implementation inheritance”.</p></li>
+<li><p>Inheriting the Inheritance is a mechanism that allows a subtype to either inherit or <a class="reference internal" href="#overriding"><span class="std std-ref">override</span></a> instance members from its supertype. This can be thought of as inheriting the implementation and is sometimes called “implementation inheritance”.</p></li>
 <li><p>Inheritance causes the subtype to be substitutable for the supertype in the sense of subtype polymorphism. This can be thought of as inheriting the type and is sometimes called “interface inheritance”.</p></li>
 </ol>
 <p>We have already discussed the benefits of subtype polymorphism in the chapters on <a class="reference internal" href="interfaces.html"><span class="doc std std-doc">interfaces</span></a> and <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype polymorphism</span></a>.
@@ -1318,7 +1348,7 @@ In other words, we write a colon (<code class="docutils literal notranslate"><sp
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3242.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3148.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1363,12 +1393,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.30:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.56:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3242.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3148.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1502,7 +1532,7 @@ Note how the compile-time type is the general type, while the run-time type is t
 </div>
 </section>
 <section id="overriding">
-<h3><span class="section-number">72.2.3. </span>Overriding<a class="headerlink" href="#overriding" title="Permalink to this headline">#</a></h3>
+<span id="id1"></span><h3><span class="section-number">72.2.3. </span>Overriding<a class="headerlink" href="#overriding" title="Permalink to this headline">#</a></h3>
 <p>We’ve established that a subclass inherits all members from its superclass.
 However, if an <a class="reference internal" href="instance-methods.html"><span class="doc std std-doc">instance method</span></a> or <a class="reference internal" href="properties.html"><span class="doc std std-doc">instance property</span></a> in the superclass is marked as <code class="docutils literal notranslate"><span class="pre">virtual</span></code> then it is possible for the subclass to <code class="docutils literal notranslate"><span class="pre">override</span></code> that implementation.
 Meaning, it is possible for the subclass to define its own specialized implementation for that member to use instead of the one defined by the superclass.</p>
@@ -1618,7 +1648,7 @@ In Java, instance methods are virtual unless otherwise specified.</p>
 </div>
 </section>
 <section id="hiding">
-<h3><span class="section-number">72.2.4. </span>Hiding<a class="headerlink" href="#hiding" title="Permalink to this headline">#</a></h3>
+<span id="id2"></span><h3><span class="section-number">72.2.4. </span>Hiding<a class="headerlink" href="#hiding" title="Permalink to this headline">#</a></h3>
 <p>Before moving on we need to talk about a feature that isn’t actually only related to inheritance but often comes up when we fail to remember to use the keyword <code class="docutils literal notranslate"><span class="pre">override</span></code>.
 That feautre is “method hiding”.
 Let’s say we have a method in a subclass with the same signature as one in the superclass and we mark the method in the subclass as <code class="docutils literal notranslate"><span class="pre">new</span></code> rather than <code class="docutils literal notranslate"><span class="pre">override</span></code>.
@@ -1695,9 +1725,122 @@ Remember, when hiding, what implementation to run is determined by the compile-t
 </div>
 </div>
 </section>
+<section id="constructor-chaining">
+<h3><span class="section-number">72.2.5. </span>Constructor chaining<a class="headerlink" href="#constructor-chaining" title="Permalink to this headline">#</a></h3>
+<p>Remember the concept of <span class="xref myst">constructor chaining</span>?
+We said that a constructor can call another constructor by using the keyword <code class="docutils literal notranslate"><span class="pre">this</span></code>.
+In that chapter we also mentioned that when we get to inheritance we will also discuss the keyword <code class="docutils literal notranslate"><span class="pre">base</span></code>.</p>
+<p>The keyword <code class="docutils literal notranslate"><span class="pre">base</span></code>, works just like the keyword <code class="docutils literal notranslate"><span class="pre">this</span></code> in that it can be used for two purposes.
+It can be used for constructor chaining.
+In other words it can be used to call a constructor in the base class (hence the name “base”) from a constructor in a derived class.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If the superclass does not define a parameterless constructor then any subclass of the superclass must define how to instantiate the superclass’s constructor by using the keyword <code class="docutils literal notranslate"><span class="pre">base</span></code>.</p>
+</div>
+<p>Notice how the code below causes a compiler error.</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Parent</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Parent</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Instantiated with &quot;</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="n">x</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Parent</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(7,7): error CS7036: There is no argument given that corresponds to the required formal parameter &#39;x&#39; of &#39;Parent.Parent(int)&#39;
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Why do we get a compiler error?
+Because in order to know how to construct the <code class="docutils literal notranslate"><span class="pre">Child</span></code> we must also know how to construct the <code class="docutils literal notranslate"><span class="pre">Parent</span></code>.</p>
+<p>In the code below we’ve added two constructors that both call the <code class="docutils literal notranslate"><span class="pre">base</span></code> constructor and that both would, on their own, be enough to get rid of that compiler error.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Parent</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Parent</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Instantiated with &quot;</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="n">x</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Parent</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Child</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Child</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>It now compiles.
+Whenever we run any of the constructors of the subclass a constructor in the superclass is now also run.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Child</span><span class="w"> </span><span class="n">child1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Child</span><span class="p">();</span><span class="w"></span>
+<span class="n">Child</span><span class="w"> </span><span class="n">child2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Child</span><span class="p">(</span><span class="m">5</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Instantiated with 10
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Instantiated with 5
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="accessing-base-members">
+<h3><span class="section-number">72.2.6. </span>Accessing base members<a class="headerlink" href="#accessing-base-members" title="Permalink to this headline">#</a></h3>
+<p>Just like you can use the keyword <code class="docutils literal notranslate"><span class="pre">this</span></code> to access other members in the object itself, you can use the keyword <code class="docutils literal notranslate"><span class="pre">base</span></code> to access other members in the superclass.</p>
+<p>This is of course particularly useful in the case of hiding.
+Meaning when we have an instance member in the subclass with the same signature as a member in the superclass but want to explicitly call the one in the superclass.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Parent</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Method</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Called method in parent.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Parent</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Method</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">base</span><span class="p">.</span><span class="n">Method</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Child</span><span class="w"> </span><span class="n">child</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Child</span><span class="p">();</span><span class="w"></span>
+<span class="n">child</span><span class="p">.</span><span class="n">Method</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Called method in parent.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Just like in the case of <code class="docutils literal notranslate"><span class="pre">this</span></code>, the keyword <code class="docutils literal notranslate"><span class="pre">base</span></code> refers to an object which means that we can pass around that value like any other value.</p>
+</section>
 <section id="uml-class-diagrams">
-<span id="inheritance-uml"></span><h3><span class="section-number">72.2.5. </span>UML class diagrams<a class="headerlink" href="#uml-class-diagrams" title="Permalink to this headline">#</a></h3>
-<p>In UML class diagram notation, inheritance is called “generalization” and is depicted using a solid line with a hollow arrow head.
+<span id="inheritance-uml"></span><h3><span class="section-number">72.2.7. </span>UML class diagrams<a class="headerlink" href="#uml-class-diagrams" title="Permalink to this headline">#</a></h3>
+<p>In UML class diagram notation, inheritance is called “generalization” (or sometimes simply “inheritance”) and is depicted using a solid line with a hollow arrow head.
 The arrow points from the subclass to the superclass.</p>
 <figure class="align-default" id="fig-uml-class-diagram-realization">
 <a class="reference internal image-reference" href="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Uml_classes_en.svg/800px-Uml_classes_en.svg.png"><img alt="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Uml_classes_en.svg/800px-Uml_classes_en.svg.png" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Uml_classes_en.svg/800px-Uml_classes_en.svg.png" style="width: 300px;" /></a>
@@ -1707,55 +1850,227 @@ The arrow points from the implementation to the interface.
 [<a class="reference external" href="https://en.wikipedia.org/wiki/Class_diagram">Image source</a>].</span><a class="headerlink" href="#fig-uml-class-diagram-realization" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>In the diagram below we are saying that the class <code class="docutils literal notranslate"><span class="pre">Oval</span></code> inherits from the class <code class="docutils literal notranslate"><span class="pre">Shape</span></code>.
-We’re also saying that it overrides the two properties <code class="docutils literal notranslate"><span class="pre">Width</span></code> and <code class="docutils literal notranslate"><span class="pre">Height</span></code> but inherits (without overriding) the method <code class="docutils literal notranslate"><span class="pre">Scale</span></code>.
-The class <code class="docutils literal notranslate"><span class="pre">Oval</span></code> also defines two additional properties of its own, namely <code class="docutils literal notranslate"><span class="pre">Radius</span></code> and <code class="docutils literal notranslate"><span class="pre">Diameter</span></code>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌────────────────────────────────┐
-│           Shape                │
-├────────────────────────────────┤
-│ + &lt;get&gt; Width : double         │
-│ + &lt;set&gt; Width : double         │
-│ + &lt;get&gt; Height : double        │
-│ + &lt;set&gt; Height : double        │
-├────────────────────────────────┤
-│ + Scale (factor:double) : void │
-└────────────────────────────────┘
-                Δ
-                │
-                │
-                │
-┌────────────────────────────────┐
-│             Oval               │
-├────────────────────────────────┤
-│ + &lt;get&gt; ^Width : double        │
-│ + &lt;set&gt; ^Width : double        │
-│ + &lt;get&gt; ^Height : double       │
-│ + &lt;set&gt; ^Height : double       │
-│ + &lt;get&gt; Radius : double        │
-│ + &lt;set&gt; Radius : double        │
-│ + &lt;get&gt; Diameter : double      │
-│ + &lt;set&gt; Diameter : double      │
-├────────────────────────────────┤
-│                                │
-└────────────────────────────────┘
+<p>In the diagram below we have four classes:
+<code class="docutils literal notranslate"><span class="pre">Sequence</span></code>, <code class="docutils literal notranslate"><span class="pre">SkipSequence</span></code>, <code class="docutils literal notranslate"><span class="pre">EvenSequence</span></code>, and <code class="docutils literal notranslate"><span class="pre">OddSequence</span></code>.
+The two classes <code class="docutils literal notranslate"><span class="pre">EvenSequence</span></code> and <code class="docutils literal notranslate"><span class="pre">OddSequence</span></code> inherits from the class <code class="docutils literal notranslate"><span class="pre">SkipSequence</span></code> which in turn inherits from the class <code class="docutils literal notranslate"><span class="pre">Sequence</span></code>.</p>
+<p>We’ll discuss the this example more in the <a class="reference internal" href="#inheritance-sequences"><span class="std std-ref">examples section</span></a> where we’ll also look at the corresponding code.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>     ┌───────────────────────────────────────┐
+     │                Sequence               │
+     ├───────────────────────────────────────┤
+     │                                       │
+     ├───────────────────────────────────────┤
+     │ + Sequence (initial : int) : Sequence │
+     │ + int Current ()                      │
+     │ + void Next ()                        │
+     │ + int[] Take (int n)                  │
+     └───────────────────────────────────────┘
+                 Δ
+                 │
+                 │
+     ┌─────────────────────────────────────────┐
+     │               SkipSequence              │
+     ├─────────────────────────────────────────┤
+     ├─────────────────────────────────────────┤
+     │ + SkipSequence (int initial, int skips) │
+     │ + int ^GetNext ()                       │
+     └─────────────────────────────────────────┘
+                       Δ  Δ
+                 ┌─────┘  └─────────────────────────┐
+                 │                                  │
+┌──────────────────────────────────┐  ┌────────────────────────────────┐
+│           EvenSequence           │  │          OddSequence           │
+├──────────────────────────────────┤  ├────────────────────────────────┤
+├──────────────────────────────────┤  ├────────────────────────────────┤
+│ + EvenSequence () : EvenSequence │  │ + OddSequence () : OddSequence │
+└──────────────────────────────────┘  └────────────────────────────────┘
 </pre></div>
 </div>
 <p>Subclasses are conventionally drawn “below” superclasses.</p>
 <p>Whether or not to include (meaning: repeat) the inherited members in the subclass varies depending on who you ask.
 Remember that we had this same discussion in the chapter on interfaces?
 A common suggestion, and the choice we have made above, is however to, out of those members that also appear in the superclass, only mention those that override (or hide) members from the superclass.</p>
-<p>To be able to tell overriding apart from hiding, some prepend the caret symbol (<code class="docutils literal notranslate"><span class="pre">^</span></code>) to the name of the member to indicate that it has been overridden as opposed to hidden.</p>
+<p>To be able to tell <a class="reference internal" href="#overriding"><span class="std std-ref">overriding</span></a> apart from <a class="reference internal" href="#hiding"><span class="std std-ref">hiding</span></a>, some prepend the caret symbol (<code class="docutils literal notranslate"><span class="pre">^</span></code>) to the name of the member to indicate that it has been overridden as opposed to hidden.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Pick a syntax and stick to it.
 Consistency is key.</p>
 </div>
+<p>In the example above we have overriden the implementation of <code class="docutils literal notranslate"><span class="pre">GetNext</span></code> in the class <code class="docutils literal notranslate"><span class="pre">SkipSequence</span></code>.
+The class also defines its own constructor but beyond that, the implementation of all other members are inherited.
+The classes <code class="docutils literal notranslate"><span class="pre">EvenSequence</span></code> and <code class="docutils literal notranslate"><span class="pre">OddSequence</span></code> define their own constructors and then inherit the implementation of all other members without overriding any of them.</p>
 </section>
 </section>
 <section id="examples">
 <h2><span class="section-number">72.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
+<section id="sequences">
+<span id="inheritance-sequences"></span><h3><span class="section-number">72.3.1. </span>Sequences<a class="headerlink" href="#sequences" title="Permalink to this headline">#</a></h3>
+<p>Let’s talk about infinite number sequences.
+What is an infinite number sequence?
+Well, the natural numbers starting from 1 is one and incrementing all the way to infinity (or the maximum value for <code class="docutils literal notranslate"><span class="pre">int</span></code> in practical terms) is a sequence.
+Two other sequences are those of odd and even numbers.
+A more complex sequence would be for example the Fibonacci sequence which says that the next number is the sum of the two preceeding numbers.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This might seem a bit esoteric at the moment, but once we’ve learned about <a class="reference internal" href="generics.html"><span class="doc std std-doc">generics</span></a> you will see how this generalizes to sequences of any type.
+Then, when we get to <a class="reference internal" href="design-patterns.html"><span class="doc std std-doc">design patterns</span></a>, you will see how this is the core idea of the <a class="reference internal" href="iterator-pattern.html"><span class="doc std std-doc">iterator pattern</span></a>.</p>
+</div>
+<p>Let’s define a base class that models the series of integers that moves in increments of <code class="docutils literal notranslate"><span class="pre">1</span></code>.
+We’ll let the initial number (meaning the starting point) be set via the constructor and then we’ll add instance methods for getting the current number, the next number, and one method that returns an array of numbers which moves the incrementor forward multiple times and returns each number generated along the way.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Sequence</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Sequence</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">initial</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">initial</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">Current</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">i</span><span class="p">++;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="nf">Take</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">nums</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="n">n</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">++)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Current</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="n">Next</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">nums</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Great, so we’ve got a basic sequence now.
+Let’s try it out to make sure that it works.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Initialize sequence.</span>
+<span class="n">Sequence</span><span class="w"> </span><span class="n">seq</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Sequence</span><span class="p">(</span><span class="m">5</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// Take 10 elements.</span>
+<span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">seq</span><span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// Print the elements.</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">));</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s build some subclasses that inherits from this base class.
+Let’s start with a sequence that skips every <code class="docutils literal notranslate"><span class="pre">n</span></code> number.
+What number is <code class="docutils literal notranslate"><span class="pre">n</span></code>?
+Let’s make that a parameter of the constructor that we call <code class="docutils literal notranslate"><span class="pre">skip</span></code>.
+Let’s call this sequence a <code class="docutils literal notranslate"><span class="pre">SkipSequence</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SkipSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">skip</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">SkipSequence</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">initial</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">skip</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span><span class="n">initial</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">skip</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">skip</span><span class="w"> </span><span class="p">&gt;=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="n">skip</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">base</span><span class="p">.</span><span class="n">Next</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">=</span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">&lt;</span><span class="n">skip</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">++)</span><span class="w"></span>
+<span class="w">      </span><span class="k">base</span><span class="p">.</span><span class="n">Next</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are two important things to notice in the example above.</p>
+<ol class="simple">
+<li><p>The constructor of the subclass is calling the constructor of the superclass by using the <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword. Remember this from <span class="xref myst">constructor chaining</span>?</p></li>
+<li><p>The instance method <code class="docutils literal notranslate"><span class="pre">Next</span></code> is overriding the implementation of the superclass.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Sequence</span><span class="w"> </span><span class="n">tensSeq</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SkipSequence</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">);</span><span class="w"></span>
+
+<span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">tens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tensSeq</span><span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">);</span><span class="w"></span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tens</span><span class="p">));</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1, 11, 21, 31, 41, 51, 61, 71, 81, 91
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s now build the even and odd sequences.
+If these inherit from the class <code class="docutils literal notranslate"><span class="pre">SkipSequence</span></code> then we don’t need to worry about changing the implementation of <code class="docutils literal notranslate"><span class="pre">Next</span></code>.
+Instead, we just need to make sure that we start on an even or odd number (depending on which class we are talking about) and that we set the parameter <code class="docutils literal notranslate"><span class="pre">skip</span></code> to <code class="docutils literal notranslate"><span class="pre">2</span></code>.
+We can do all that by using simple constructor chaining and calling base.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">EvenSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">SkipSequence</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">EvenSequence</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">OddSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">SkipSequence</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">OddSequence</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Sequence</span><span class="w"> </span><span class="n">evenSeq</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EvenSequence</span><span class="p">();</span><span class="w"></span>
+<span class="n">Sequence</span><span class="w"> </span><span class="n">oddSeq</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OddSequence</span><span class="p">();</span><span class="w"></span>
+
+<span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">evens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">evenSeq</span><span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">);</span><span class="w"></span>
+<span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">odds</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">oddSeq</span><span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">);</span><span class="w"></span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">evens</span><span class="p">));</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">odds</span><span class="p">));</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The implementation is a bit awkward but we’ll rewrite this implementation after we have learned about the <code class="docutils literal notranslate"><span class="pre">protected</span></code> modifier in the chapter on <a class="reference internal" href="advanced-access-modifiers.html"><span class="doc std std-doc">advanced access modifiers</span></a>.
+It will then be slightly less awkward, albeit still quite awkward.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Why did I choose such an awkward example?
+Because I have searched far and wide and the more I look, the more I get convinved that there are no good examples of inheritance where the base class is not abstract or where the whole thing is not <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">better</span></a> modeled with <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">composition over inheritance</span></a></p>
+<p>However, just because all I’ve seen is white swans, doesn’t prove that there are no black swans, so if you ever come across a good example, I would love it if you would let me know.</p>
+</div>
+</section>
 <section id="characterwise-ciphers">
-<span id="inheritance-examples-characterwise"></span><h3><span class="section-number">72.3.1. </span>Characterwise ciphers<a class="headerlink" href="#characterwise-ciphers" title="Permalink to this headline">#</a></h3>
+<span id="inheritance-examples-characterwise"></span><h3><span class="section-number">72.3.2. </span>Characterwise ciphers<a class="headerlink" href="#characterwise-ciphers" title="Permalink to this headline">#</a></h3>
 <p>Remember how we’ve been unable to get rid of the duplicated <code class="docutils literal notranslate"><span class="pre">foreach</span></code> loop present in all the <a class="reference internal" href="methods.html#methods-substitution-ciphers"><span class="std std-ref">substitution ciphers</span></a>.
 The only solution for  this that we’ve seen so far was given in the chapter on <a class="reference internal" href="methods.html#methods-substitution-ciphers"><span class="std std-ref">methods</span></a>.
 In that chapter I suggested that without some form of polymorphism we often have to resort to turning part of our algorithms into data in order to keep increasing abstraction and thus remove duplication.</p>
@@ -2037,7 +2352,7 @@ Same kind of drill here.</p>
 It works.</p>
 </section>
 <section id="interface-inheritance">
-<h3><span class="section-number">72.3.2. </span>Interface inheritance<a class="headerlink" href="#interface-inheritance" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">72.3.3. </span>Interface inheritance<a class="headerlink" href="#interface-inheritance" title="Permalink to this headline">#</a></h3>
 <p>Remember how we said that an interface can inherit from another interface?
 Let me show you an example of that before we move on.
 Let’s say that we’ve got an interface called <code class="docutils literal notranslate"><span class="pre">IIncrementable</span></code> which requires that whoever implements declares an instance method with the signature <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">Inc</span> <span class="pre">()</span></code>.</p>
@@ -2130,64 +2445,13 @@ Explain in words and then show the difference by means of an example.</p>
 
 <p class="admonition-title"><span class="caption-number">Exercise 72.4 </span></p>
 <section id="exercise-content">
-<p>Write an abstract class called <code class="docutils literal notranslate"><span class="pre">Shape</span></code> which corresponds to the class depicted in the UML class diagram below.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌────────────────────────────────┐
-│           Shape                │
-├────────────────────────────────┤
-│ + &lt;get&gt; Width : double         │
-│ + &lt;set&gt; Width : double         │
-│ + &lt;get&gt; Height : double        │
-│ + &lt;set&gt; Height : double        │
-│ + &lt;get&gt; Area : double          │
-├────────────────────────────────┤
-│ + Scale (factor:double) : void │
-└────────────────────────────────┘
-</pre></div>
-</div>
-<p>Then write three classes called <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>, <code class="docutils literal notranslate"><span class="pre">Square</span></code>, <code class="docutils literal notranslate"><span class="pre">Circle</span></code> that all inherit from <code class="docutils literal notranslate"><span class="pre">Shape</span></code>.
-Strive to override as few methods as possible.</p>
-<p>When you are done, you should be able to run the following code and get the same result.</p>
-<div class="cell tag_remove-input docutils container">
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Shape</span><span class="p">[]</span><span class="w"> </span><span class="n">shapes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Shape</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Width</span><span class="p">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">Height</span><span class="p">=</span><span class="m">1</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">RightTriangle</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Width</span><span class="p">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">Height</span><span class="p">=</span><span class="m">1</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Oval</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Width</span><span class="p">=</span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">Height</span><span class="p">=</span><span class="m">0.5</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
-<span class="p">};</span><span class="w"></span>
-
-<span class="kt">double</span><span class="w"> </span><span class="n">before</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
-<span class="kt">double</span><span class="w"> </span><span class="n">after</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
-<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Shape</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">shapes</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">before</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">shape</span><span class="p">.</span><span class="n">Area</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">shape</span><span class="p">.</span><span class="n">Scale</span><span class="p">(</span><span class="m">2</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="n">after</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">shape</span><span class="p">.</span><span class="n">Area</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Area increased by: {after / before}&quot;</span><span class="p">);</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Area increased by: 4
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</div>
-<div class="exercise admonition" id="chapters/inheritance-exercise-4">
-
-<p class="admonition-title"><span class="caption-number">Exercise 72.5 </span></p>
-<section id="exercise-content">
 <p>Can the class <code class="docutils literal notranslate"><span class="pre">ReverseCipher</span></code> inherit from <code class="docutils literal notranslate"><span class="pre">CharWiseCipher</span></code>?
 Why or why not?</p>
 </section>
 </div>
 <div class="exercise admonition" id="ex:inheritance:robbers-cipher-charwisecipher">
 
-<p class="admonition-title"><span class="caption-number">Exercise 72.6 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 72.5 </span></p>
 <section id="exercise-content">
 <p>Can the class <code class="docutils literal notranslate"><span class="pre">RobbersCipher</span></code> inherit from <code class="docutils literal notranslate"><span class="pre">CharWiseCipher</span></code>?
 Why or why not?</p>
@@ -2196,24 +2460,24 @@ Why or why not?</p>
 </div>
 <div class="exercise admonition" id="inheritance:exercises:chartostringsubstitutioncipher">
 
-<p class="admonition-title"><span class="caption-number">Exercise 72.7 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 72.6 </span></p>
 <section id="exercise-content">
-<p>Think about your answer to <a class="reference internal" href="#ex:inheritance:robbers-cipher-charwisecipher"><span class="std std-numref">Exercise 72.6</span></a> and use our implementation of <code class="docutils literal notranslate"><span class="pre">CharWiseCipher</span></code> (which perhaps should be called <code class="docutils literal notranslate"><span class="pre">CharToCharSubstitutionCipher</span></code>) as inspiration for the following exercise.</p>
+<p>Think about your answer to <a class="reference internal" href="#ex:inheritance:robbers-cipher-charwisecipher"><span class="std std-numref">Exercise 72.5</span></a> and use our implementation of <code class="docutils literal notranslate"><span class="pre">CharWiseCipher</span></code> (which perhaps should be called <code class="docutils literal notranslate"><span class="pre">CharToCharSubstitutionCipher</span></code>) as inspiration for the following exercise.</p>
 <p>Write a class called <code class="docutils literal notranslate"><span class="pre">CharToStringSubstitutionCipher</span></code> that implements the interfaces <code class="docutils literal notranslate"><span class="pre">ICharToStringCipher</span></code> and <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code>.
 <code class="docutils literal notranslate"><span class="pre">RobbersCipher</span></code> should inherit from this new class in a way that makes it possible to remove the method with the signature <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">Encode</span> <span class="pre">(string</span> <span class="pre">input)</span></code> from <code class="docutils literal notranslate"><span class="pre">RobbersCipher</span></code>.</p>
 </section>
 </div>
-<div class="exercise admonition" id="chapters/inheritance-exercise-7">
+<div class="exercise admonition" id="chapters/inheritance-exercise-6">
 
-<p class="admonition-title"><span class="caption-number">Exercise 72.8 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 72.7 </span></p>
 <section id="exercise-content">
 <p>Can an interface inherit from multiple interfaces?
 Try it.</p>
 </section>
 </div>
-<div class="exercise admonition" id="chapters/inheritance-exercise-8">
+<div class="exercise admonition" id="chapters/inheritance-exercise-7">
 
-<p class="admonition-title"><span class="caption-number">Exercise 72.9 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 72.8 </span></p>
 <section id="exercise-content">
 <p>Can we introduce an interface that inherits from all our three cipher interfaces?
 What would such an interface mean?
