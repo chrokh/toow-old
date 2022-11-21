@@ -155,6 +155,10 @@ op += Print2;
 (func-and-action)=
 ### Built-in delegate types
 
+% TODO: Also Predicate<T>.
+% TODO: Also discuss how e.g. Predicate<T> is not implicitly convertible to Func<T,bool> even though it in theory should. This helps in understanding why you might want to define your own delegates.
+% TODO: Why not always use built-in? https://stackoverflow.com/questions/4482613/creating-delegates-manually-vs-using-action-func-delegates
+
 .NET has a few built-in delegate types.
 Most notable are the `Action` and `Func` types.
 I say types not type, because there are versions of the types defined for parameter list lengths from 0 all the way up to 16 parameters.

@@ -924,6 +924,15 @@ What would such an interface mean?
 How is it useful?
 ```
 
+```{exercise}
+Start with the class `Sequence` that we wrote in this chapter.
+Write your own subclass of the class `Sequence` that implements the [Triangular number sequence](https://en.wikipedia.org/wiki/Triangular_number).
+```
+
+```{exercise}
+Start with the class `Sequence` that we wrote in this chapter.
+Write your own subclass of the class `Sequence` that implements the [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_number).
+```
 
 
 

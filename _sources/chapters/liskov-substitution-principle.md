@@ -5,6 +5,8 @@
 Work in progress.
 ```
 
+% TODO: Circle-ellipse problem is a great example and very important since it is so common. Use it! https://en.wikipedia.org/wiki/Circle–ellipse_problem
+
 ## Motivation
 
 When writing programs in a language with a type system that supports subtyping it is of vital importance that all of our subtypes respect the rules that are set by their supertypes.
