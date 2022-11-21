@@ -288,7 +288,7 @@ class Circle
     get => radius;
     set
     {
-      if (value >= 0)
+      if (value <= 0)
         throw new ArgumentException("Radius must be greater than 0.");
       radius = value;
     }
