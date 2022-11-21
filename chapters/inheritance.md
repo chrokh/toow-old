@@ -108,6 +108,8 @@ child.InheritedMethod();
 ```
 
 
+
+(overriding)=
 ### Overriding
 
 We've established that a subclass inherits all members from its superclass.
@@ -194,6 +196,7 @@ In Java, instance methods are virtual unless otherwise specified.
 
 
 
+(hiding)=
 ### Hiding
 %- Not overriding ("new" modifier)
 %- Called shadowing?
@@ -253,10 +256,101 @@ childAsParent.HiddenMethod();
 ```
 
 
+### Constructor chaining
+
+Remember the concept of [constructor chaining](constructor-chaining)?
+We said that a constructor can call another constructor by using the keyword `this`.
+In that chapter we also mentioned that when we get to inheritance we will also discuss the keyword `base`.
+
+The keyword `base`, works just like the keyword `this` in that it can be used for two purposes.
+It can be used for constructor chaining.
+In other words it can be used to call a constructor in the base class (hence the name "base") from a constructor in a derived class.
+
+% TODO: Give example of how subclass runs superclasses constructor using Console.WriteLine in the base.
+
+```{important}
+If the superclass does not define a parameterless constructor then any subclass of the superclass must define how to instantiate the superclass's constructor by using the keyword `base`.
+```
+
+Notice how the code below causes a compiler error.
+
+```{code-cell} csharp
+:tags: [raises-exception]
+class Parent
+{
+  public Parent (int x)
+    => Console.WriteLine("Instantiated with " + x);
+}
+
+class Child : Parent { }
+```
+
+Why do we get a compiler error?
+Because in order to know how to construct the `Child` we must also know how to construct the `Parent`.
+
+In the code below we've added two constructors that both call the `base` constructor and that both would, on their own, be enough to get rid of that compiler error.
+
+```{code-cell}
+class Parent
+{
+  public Parent (int x)
+    => Console.WriteLine("Instantiated with " + x);
+}
+
+class Child : Parent
+{
+  public Child ()
+    : base(10) { }
+
+  public Child (int x)
+    : base(x) { }
+}
+```
+
+It now compiles.
+Whenever we run any of the constructors of the subclass a constructor in the superclass is now also run.
+
+```{code-cell}
+Child child1 = new Child();
+Child child2 = new Child(5);
+```
+
+
+### Accessing base members
+
+Just like you can use the keyword `this` to access other members in the object itself, you can use the keyword `base` to access other members in the superclass.
+
+This is of course particularly useful in the case of hiding.
+Meaning when we have an instance member in the subclass with the same signature as a member in the superclass but want to explicitly call the one in the superclass.
+
+
+```{code-cell}
+class Parent
+{
+  public void Method ()
+    => Console.WriteLine("Called method in parent.");
+}
+
+class Child : Parent
+{
+  public new void Method ()
+    => base.Method();
+}
+```
+
+```{code-cell}
+Child child = new Child();
+child.Method();
+```
+
+Just like in the case of `this`, the keyword `base` refers to an object which means that we can pass around that value like any other value.
+
+
+
 (inheritance:uml)=
 ### UML class diagrams
 
-In UML class diagram notation, inheritance is called "generalization" and is depicted using a solid line with a hollow arrow head.
+In UML class diagram notation, inheritance is called "generalization" (or sometimes simply "inheritance") and is depicted using a solid line with a hollow arrow head.
 The arrow points from the subclass to the superclass.
 
 % TODO: REPLACE IMAGE!!
@@ -269,39 +363,42 @@ The arrow points from the implementation to the interface.
 [[Image source](https://en.wikipedia.org/wiki/Class_diagram)].
 ```
 
-In the diagram below we are saying that the class `Oval` inherits from the class `Shape`.
-We're also saying that it overrides the two properties `Width` and `Height` but inherits (without overriding) the method `Scale`.
-The class `Oval` also defines two additional properties of its own, namely `Radius` and `Diameter`.
+In the diagram below we have four classes:
+`Sequence`, `SkipSequence`, `EvenSequence`, and `OddSequence`.
+The two classes `EvenSequence` and `OddSequence` inherits from the class `SkipSequence` which in turn inherits from the class `Sequence`.
+
+We'll discuss the this example more in the [examples section](inheritance:sequences) where we'll also look at the corresponding code.
 
 ```
-┌────────────────────────────────┐
-│           Shape                │
-├────────────────────────────────┤
-│ + <get> Width : double         │
-│ + <set> Width : double         │
-│ + <get> Height : double        │
-│ + <set> Height : double        │
-├────────────────────────────────┤
-│ + Scale (factor:double) : void │
-└────────────────────────────────┘
-                Δ
-                │
-                │
-                │
-┌────────────────────────────────┐
-│             Oval               │
-├────────────────────────────────┤
-│ + <get> ^Width : double        │
-│ + <set> ^Width : double        │
-│ + <get> ^Height : double       │
-│ + <set> ^Height : double       │
-│ + <get> Radius : double        │
-│ + <set> Radius : double        │
-│ + <get> Diameter : double      │
-│ + <set> Diameter : double      │
-├────────────────────────────────┤
-│                                │
-└────────────────────────────────┘
+     ┌───────────────────────────────────────┐
+     │                Sequence               │
+     ├───────────────────────────────────────┤
+     │                                       │
+     ├───────────────────────────────────────┤
+     │ + Sequence (initial : int) : Sequence │
+     │ + int Current ()                      │
+     │ + void Next ()                        │
+     │ + int[] Take (int n)                  │
+     └───────────────────────────────────────┘
+                 Δ
+                 │
+                 │
+     ┌─────────────────────────────────────────┐
+     │               SkipSequence              │
+     ├─────────────────────────────────────────┤
+     ├─────────────────────────────────────────┤
+     │ + SkipSequence (int initial, int skips) │
+     │ + int ^GetNext ()                       │
+     └─────────────────────────────────────────┘
+                       Δ  Δ
+                 ┌─────┘  └─────────────────────────┐
+                 │                                  │
+┌──────────────────────────────────┐  ┌────────────────────────────────┐
+│           EvenSequence           │  │          OddSequence           │
+├──────────────────────────────────┤  ├────────────────────────────────┤
+├──────────────────────────────────┤  ├────────────────────────────────┤
+│ + EvenSequence () : EvenSequence │  │ + OddSequence () : OddSequence │
+└──────────────────────────────────┘  └────────────────────────────────┘
 ```
 
 Subclasses are conventionally drawn "below" superclasses.
@@ -310,12 +407,16 @@ Whether or not to include (meaning: repeat) the inherited members in the subclas
 Remember that we had this same discussion in the chapter on interfaces?
 A common suggestion, and the choice we have made above, is however to, out of those members that also appear in the superclass, only mention those that override (or hide) members from the superclass.
 
-To be able to tell overriding apart from hiding, some prepend the caret symbol (`^`) to the name of the member to indicate that it has been overridden as opposed to hidden.
+To be able to tell [overriding](overriding) apart from [hiding](hiding), some prepend the caret symbol (`^`) to the name of the member to indicate that it has been overridden as opposed to hidden.
 
 ```{tip}
 Pick a syntax and stick to it.
 Consistency is key.
 ```
+
+In the example above we have overriden the implementation of `GetNext` in the class `SkipSequence`.
+The class also defines its own constructor but beyond that, the implementation of all other members are inherited.
+The classes `EvenSequence` and `OddSequence` define their own constructors and then inherit the implementation of all other members without overriding any of them.
 
 % Example: Get rid of the foreach? Or is this perhaps not a great solution?
 
@@ -329,7 +430,145 @@ Consistency is key.
 
 ## Examples
 
-%### TODO: Example that's not template method
+(inheritance:sequences)=
+### Sequences
+
+Let's talk about infinite number sequences.
+What is an infinite number sequence?
+Well, the natural numbers starting from 1 is one and incrementing all the way to infinity (or the maximum value for `int` in practical terms) is a sequence.
+Two other sequences are those of odd and even numbers.
+A more complex sequence would be for example the Fibonacci sequence which says that the next number is the sum of the two preceeding numbers.
+
+```{note}
+This might seem a bit esoteric at the moment, but once we've learned about [generics](generics) you will see how this generalizes to sequences of any type.
+Then, when we get to [design patterns](design-patterns), you will see how this is the core idea of the [iterator pattern](iterator-pattern).
+```
+
+Let's define a base class that models the series of integers that moves in increments of `1`.
+We'll let the initial number (meaning the starting point) be set via the constructor and then we'll add instance methods for getting the current number, the next number, and one method that returns an array of numbers which moves the incrementor forward multiple times and returns each number generated along the way.
+
+% TODO: Need chapter on command query separation. That should also be linked here.
+
+```{code-cell}
+class Sequence
+{
+  private int i;
+
+  public Sequence (int initial)
+    => i = initial;
+
+  public virtual int Current ()
+    => i;
+
+  public virtual void Next()
+    => i++;
+
+  public virtual int[] Take (int n)
+  {
+    int[] nums = new int[n];
+    for (int i=0; i<nums.Length; i++)
+    {
+      nums[i] = Current();
+      Next();
+    }
+    return nums;
+  }
+}
+```
+
+Great, so we've got a basic sequence now.
+Let's try it out to make sure that it works.
+
+```{code-cell}
+// Initialize sequence.
+Sequence seq = new Sequence(5);
+
+// Take 10 elements.
+int[] output = seq.Take(10);
+
+// Print the elements.
+Console.WriteLine(String.Join(", ", output));
+```
+
+Now let's build some subclasses that inherits from this base class.
+Let's start with a sequence that skips every `n` number.
+What number is `n`?
+Let's make that a parameter of the constructor that we call `skip`.
+Let's call this sequence a `SkipSequence`.
+
+```{code-cell}
+class SkipSequence : Sequence
+{
+  int skip;
+
+  public SkipSequence (int initial, int skip)
+    : base(initial)
+      => this.skip = (skip >= 0) ? skip : 0;
+
+  public override void Next()
+  {
+    base.Next();
+    for (int i=1; i<skip; i++)
+      base.Next();
+  }
+}
+```
+
+There are two important things to notice in the example above.
+
+1. The constructor of the subclass is calling the constructor of the superclass by using the `base` keyword. Remember this from [constructor chaining](constructor-chaining)?
+2. The instance method `Next` is overriding the implementation of the superclass.
+
+```{code-cell}
+Sequence tensSeq = new SkipSequence(1, 10);
+
+int[] tens = tensSeq.Take(10);
+
+Console.WriteLine(String.Join(", ", tens));
+```
+
+Let's now build the even and odd sequences.
+If these inherit from the class `SkipSequence` then we don't need to worry about changing the implementation of `Next`.
+Instead, we just need to make sure that we start on an even or odd number (depending on which class we are talking about) and that we set the parameter `skip` to `2`.
+We can do all that by using simple constructor chaining and calling base.
+
+```{code-cell}
+class EvenSequence : SkipSequence
+{
+  public EvenSequence ()
+    : base(0, 1) { }
+}
+
+class OddSequence : SkipSequence
+{
+  public OddSequence ()
+    : base(1, 1) { }
+}
+```
+
+```{code-cell}
+Sequence evenSeq = new EvenSequence();
+Sequence oddSeq  = new OddSequence();
+
+int[] evens = evenSeq.Take(10);
+int[] odds = oddSeq.Take(10);
+
+Console.WriteLine(String.Join(", ", evens));
+Console.WriteLine(String.Join(", ", odds));
+```
+
+```{warning}
+The implementation is a bit awkward but we'll rewrite this implementation after we have learned about the `protected` modifier in the chapter on [advanced access modifiers](advanced-access-modifiers).
+It will then be slightly less awkward, albeit still quite awkward.
+```
+
+```{warning}
+Why did I choose such an awkward example?
+Because I have searched far and wide and the more I look, the more I get convinved that there are no good examples of inheritance where the base class is not abstract or where the whole thing is not [better](maintainability) modeled with [composition over inheritance](composition-over-inheritance)
+
+However, just because all I've seen is white swans, doesn't prove that there are no black swans, so if you ever come across a good example, I would love it if you would let me know.
+```
+
 
 (inheritance:examples:characterwise)=
 ### Characterwise ciphers
@@ -651,85 +890,6 @@ Use your own words, give an example, and then implement that example.
 What is the difference between *overriding*, *overloading*, and *hiding*?
 Explain in words and then show the difference by means of an example.
 ```
-
-```{exercise-start}
-```
-Write an abstract class called `Shape` which corresponds to the class depicted in the UML class diagram below.
-```
-┌────────────────────────────────┐
-│           Shape                │
-├────────────────────────────────┤
-│ + <get> Width : double         │
-│ + <set> Width : double         │
-│ + <get> Height : double        │
-│ + <set> Height : double        │
-│ + <get> Area : double          │
-├────────────────────────────────┤
-│ + Scale (factor:double) : void │
-└────────────────────────────────┘
-```
-Then write three classes called `Rectangle`, `Square`, `Circle` that all inherit from `Shape`.
-Strive to override as few methods as possible.
-
-When you are done, you should be able to run the following code and get the same result.
-```{code-cell}
-:tags: [remove-input]
-abstract class Shape
-{
-  public virtual double Width { get; set; }
-  public virtual double Height { get; set; }
-  public abstract double Area { get; }
-  public virtual void Scale (double factor)
-  {
-    Width *= factor;
-    Height *= factor;
-  }
-}
-
-class RightTriangle : Shape
-{
-  public override double Area
-  {
-    get => Width * Height / 2;
-  }
-}
-
-class Rectangle : Shape
-{
-  public override double Area
-  {
-    get => Width * Height;
-  }
-}
-
-class Oval : Shape
-{
-  public override double Area
-  {
-    get => Math.PI * Width * Height;
-  }
-}
-```
-```{code-cell}
-Shape[] shapes = new Shape[] {
-  new Rectangle() { Width=2, Height=1 },
-  new RightTriangle() { Width=3, Height=1 },
-  new Oval() { Width=0.5, Height=0.5 }
-};
-
-double before = 0;
-double after = 0;
-foreach (Shape shape in shapes)
-{
-  before += shape.Area;
-  shape.Scale(2);
-  after += shape.Area;
-}
-Console.WriteLine($"Area increased by: {after / before}");
-```
-```{exercise-end}
-```
-
 
 
 ```{exercise}
