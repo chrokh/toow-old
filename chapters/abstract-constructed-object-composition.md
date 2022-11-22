@@ -12,6 +12,8 @@ kernelspec:
 
 # Abstract constructed object composition
 
+% TODO: Skip sequence (first discussed in the chapter on Inheritance, but then also Abstract classes) can usefully be implemented by holding a reference to a Sequence that you progress twice. This way you can skip in any sequence.
+
 ```{warning}
 Work in progress.
 ```
