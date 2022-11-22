@@ -160,6 +160,7 @@ A run-time type can be used if the run-time type is the same as the expected com
 In other words, whenever we state that a certain compile-time type is expected we can use values that at run-time have exactly that type or any subtype of that type.
 
 
+(upcasting-and-downcasting)=
 ### Upcasting and downcasting
 
 The process of using a subtype where a supertype is expected is known as "upcasting".
@@ -175,20 +176,49 @@ The process of using a supertype where a subtype is expected is known as "downca
 Downcasting in an object oriented language usually requires an explicit [type conversion](object-type-conversions).
 Below are two examples of downcasting where we are using two different syntaxes to explicitly cast from the supertype to a subtype.
 
-```{code-cell}
-:tags: [raises-exception]
-// Remember that the type of the variable `animal` is `IAnimal`.
-Cat cat1 = animal as Cat;
-Cat cat2 = (Cat)animal;
-
-Dog dog1 = animal as Dog;
-Dog dog2 = (Dog)animal;
-```
-
 The difference between the two casting syntaxes is that one returns `null` if the conversion is unsuccessful and the other throws an exception.
 More on that in the chapter on [object type conversions](object-type-conversions).
 
-The variable `dog1` will contain `null` and the last line is what causes the run-time exception.
+Let's assume that we've got a variable whose compile-time type is `IAnimal` but that references an object whose runtime-type is `Cat`.
+
+```{code-cell}
+IAnimal animal = new Cat();
+```
+
+Since the run-time type actually is a `Cat`, we should be able to downcast from the type `IAnimal` to the type `Cat`.
+
+```{code-cell}
+// Downcasting to Cat with null on failure.
+Cat cat1 = animal as Cat;
+
+// Downcasting to Cat with exception on failure.
+Cat cat2 = (Cat)animal;
+
+Console.WriteLine(cat1);
+Console.WriteLine(cat2);
+```
+
+Ok, so that worked.
+Let's now try to downcast from the type `IAnimal` to the type `Dog`.
+This should not work since the run-time type of our object actually is `Cat` and `Cat` is not convertible to `Dog`.
+
+If we use the syntax that gives us `null` on a failed conversion then we expect to get `null`.
+Indeed we do.
+
+```{code-cell}
+// Downcasting to Dog with null on failure.
+Dog dog1 = animal as Dog;
+Console.WriteLine(dog1 == null);
+```
+
+If we use the syntax that throws an exception on a failed conversion then we expect to get an exception.
+Indeed we do.
+
+```{code-cell}
+:tags: [raises-exception]
+// Downcasting to Dog with exception on failure.
+Dog dog2 = (Dog)animal;
+```
 
 Why is the conversion from `IAnimal` to `Cat` successful when the conversion to `Dog` is not?
 Upcasting is always safe because subtypes can always be treated as their supertypes.
