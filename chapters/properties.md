@@ -669,7 +669,7 @@ Console.WriteLine(circ.Radius);
 
 ```{exercise}
 :label: ex:properties:square
-Write a class called `Square` and give it the properties `Width`, `Height`, `Area`, `Circumference`, and `Side`.
+Write a class called `Square` and give it the properties `Width`, `Height`, `Area`, `Perimeter`, and `Side`.
 All the properties should have `get` and `set` accessors.
 
 Remember to make use of calculated properties to avoid allowing a `set` accessor put an object of type `Square` in a state which violates the rules of a square (namely that all sides are the same length).
@@ -677,7 +677,7 @@ Remember to make use of calculated properties to avoid allowing a `set` accessor
 
 ```{exercise}
 :label: ex:properties:equilateral-triangle
-Write a class called `EquilateralTriangle` and give it the properties `Width`, `Height`, `Area`, `Circumference`, and `Side`.
+Write a class called `EquilateralTriangle` and give it the properties `Width`, `Height`, `Area`, `Perimeter`, and `Side`.
 
 When computing the width and height of a triangle, you can assume that one of the sides are perfectly parallel with the x-axis.
 
