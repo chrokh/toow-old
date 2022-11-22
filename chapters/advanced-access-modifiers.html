@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>74. Access modifiers (advanced) &#8212; The Object Oriented Way (DRAFT)</title>
+    <title>73. Advanced access modifiers &#8212; The Object Oriented Way (DRAFT)</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="75. Type conversions (of objects)" href="object-type-conversions.html" />
-    <link rel="prev" title="73. Abstract classes" href="abstract-classes.html" />
+    <link rel="next" title="74. Abstract classes" href="abstract-classes.html" />
+    <link rel="prev" title="72. Inheritance" href="inheritance.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -610,14 +610,14 @@ const thebe_selector_output = ".output, .cell_output"
    72. ★ Inheritance
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="abstract-classes.html">
-   73. ★ Abstract classes
-  </a>
- </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   74. Access modifiers (advanced)
+   73. ★ Advanced access modifiers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="abstract-classes.html">
+   74. ★ Abstract classes
   </a>
  </li>
  <li class="toctree-l1">
@@ -992,6 +992,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/chrokh/the-oo-way/main?urlpath=tree/docs/chapters/advanced-access-modifiers.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -1026,6 +1055,23 @@ title="Open an issue"
   </button>
   <div class="menu-dropdown__content">
     <ul>
+      <li>
+        <a href="../_sources/chapters/advanced-access-modifiers.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
       <li>
         <a href="../_sources/chapters/advanced-access-modifiers.md"
    class="headerbtn"
@@ -1064,23 +1110,108 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   73.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   73.2. Definition
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#uml-class-diagrams">
+     73.2.1. UML class diagrams
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   73.3. Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sequences">
+     73.3.1. Sequences
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Access modifiers (advanced)</h1>
+                <h1>Advanced access modifiers</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   73.1. Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definition">
+   73.2. Definition
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#uml-class-diagrams">
+     73.2.1. UML class diagrams
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   73.3. Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sequences">
+     73.3.1. Sequences
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -1088,12 +1219,209 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="access-modifiers-advanced">
-<h1><span class="section-number">74. </span>Access modifiers (advanced)<a class="headerlink" href="#access-modifiers-advanced" title="Permalink to this headline">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="advanced-access-modifiers">
+<h1><span class="section-number">73. </span>Advanced access modifiers<a class="headerlink" href="#advanced-access-modifiers" title="Permalink to this headline">#</a></h1>
+<section id="motivation">
+<h2><span class="section-number">73.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
+<p>When discussing the <a class="reference internal" href="basic-access-modifiers.html"><span class="doc std std-doc">basic access modifiers</span></a> <code class="docutils literal notranslate"><span class="pre">public</span></code> and <code class="docutils literal notranslate"><span class="pre">private</span></code> we mentioned that many object oriented languages have another modifier known as <code class="docutils literal notranslate"><span class="pre">protected</span></code>.
+More specifically, if a language supports <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a> it probably also supports the access modifier <code class="docutils literal notranslate"><span class="pre">protected</span></code>.</p>
+<p>Why another modifier?
+Well, remember how <code class="docutils literal notranslate"><span class="pre">private</span></code> members only are accessible from wihtin the class they are defined in?
+The introduction of <code class="docutils literal notranslate"><span class="pre">protected</span></code> stems from the realization that in a language that supports <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a> you might also want members that are private within a given inheritance hierarchy.</p>
+</section>
+<section id="definition">
+<h2><span class="section-number">73.2. </span>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">#</a></h2>
+<p>Let’s recap the definitions that we gave in the chapter on <a class="reference internal" href="basic-access-modifiers.html"><span class="doc std std-doc">basic access modififers</span></a>?</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span></code> means accessible by whoever has access to the class.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">private</span></code> means accessible <em>only</em> from within the class itself.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">protected</span></code> means accessible <em>only</em> from within the class itself <em>and</em> any of its <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">subclasses</span></a>.</p></li>
+</ul>
+<p>A <code class="docutils literal notranslate"><span class="pre">protected</span></code> member is therefore like a <code class="docutils literal notranslate"><span class="pre">private</span></code> member except that it is <code class="docutils literal notranslate"><span class="pre">private</span></code> to the whole inheritance hierarchy below the type in which it is defined.</p>
+<section id="uml-class-diagrams">
+<h3><span class="section-number">73.2.1. </span>UML class diagrams<a class="headerlink" href="#uml-class-diagrams" title="Permalink to this headline">#</a></h3>
+<p>In UML class diagrams we use the symbol <code class="docutils literal notranslate"><span class="pre">#</span></code> to denote <code class="docutils literal notranslate"><span class="pre">protected</span></code>.</p>
+</section>
+</section>
+<section id="examples">
+<h2><span class="section-number">73.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
+<section id="sequences">
+<h3><span class="section-number">73.3.1. </span>Sequences<a class="headerlink" href="#sequences" title="Permalink to this headline">#</a></h3>
+<p>Let’s keep working with the sequences that we defined in the chapter on <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a>.
+In the superclass <code class="docutils literal notranslate"><span class="pre">Sequence</span></code> we marked the <code class="docutils literal notranslate"><span class="pre">get</span></code> accessor of the property <code class="docutils literal notranslate"><span class="pre">Current</span></code> as <code class="docutils literal notranslate"><span class="pre">public</span></code> but the <code class="docutils literal notranslate"><span class="pre">set</span></code> accessor as <code class="docutils literal notranslate"><span class="pre">private</span></code>.
+Now that we know that we should hide <a class="reference internal" href="objects.html#encapsulation"><span class="std std-ref">implementation</span></a> details in object oriented programming, it makes sense to encapsulate the write rights to the <code class="docutils literal notranslate"><span class="pre">Current</span></code> property.
+If we change the accessibility of the <code class="docutils literal notranslate"><span class="pre">set</span></code> accessor to <code class="docutils literal notranslate"><span class="pre">protected</span></code> we are suddenly able to access that property in all subclasses of <code class="docutils literal notranslate"><span class="pre">Sequence</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Sequence</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Current</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">protected</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Sequence</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">initial</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Current</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">initial</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Current</span><span class="p">++;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="nf">Take</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">nums</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="n">n</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">++)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Current</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">Next</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">nums</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-2452.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.186:1024/", "http://127.0.0.1:1024/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '2452.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>I don’t want to argue that this is a better solution in terms of <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a> than what we had before.
+What I would say however is that changing a piece of data from being <code class="docutils literal notranslate"><span class="pre">public</span></code> to being <code class="docutils literal notranslate"><span class="pre">protected</span></code> would mean that we are hiding more information.
+That is a good thing.
+At least the data is not public.
+However, we didn’t actually change data that was marked as <code class="docutils literal notranslate"><span class="pre">public</span></code> to <code class="docutils literal notranslate"><span class="pre">protected</span></code>, we changed something that was <code class="docutils literal notranslate"><span class="pre">private</span></code> to <code class="docutils literal notranslate"><span class="pre">protected</span></code>.
+This does indeed feel like a step in the wrong direction.</p>
+<p>So why did we do this?
+Well, some subclasses are pretty awkard (and sometimes even impossible) to implement without having access to (or duplicating) the encapsulated data that is being used in the superclass.
+Remember the awkward implementation of the instance method <code class="docutils literal notranslate"><span class="pre">Next</span></code> in the class <code class="docutils literal notranslate"><span class="pre">SkipSequence</span></code> in the chapter on <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a>?
+As discussed there, we could have avoided the problem by simply overriding the property <code class="docutils literal notranslate"><span class="pre">Current</span></code>.
+However, since our goal was reuse, we wanted to reuse as much as possible.</p>
+<p>Remember how we discussed that there are two reasons for using <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a>.
+Subtype polymorphism, and code reuse.
+If all you want is subtype polymorphism then you should use interfaces.
+If however we also want code reuse then we better dang well get some code reuse out of our classes.
+Otherwise it’s all a sham.</p>
+<p>Let’s have a look at how we could simplify the code for the class <code class="docutils literal notranslate"><span class="pre">SkipSequence</span></code> if the <code class="docutils literal notranslate"><span class="pre">set</span></code> accessor of the property <code class="docutils literal notranslate"><span class="pre">Current</span></code> in the superclass is marked as <code class="docutils literal notranslate"><span class="pre">protected</span></code> instead of <code class="docutils literal notranslate"><span class="pre">private</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SkipSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">skip</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">SkipSequence</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">initial</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">skip</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span><span class="n">initial</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">skip</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">skip</span><span class="w"> </span><span class="p">&gt;=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="n">skip</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">Current</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">skip</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1105,16 +1433,16 @@ title="Print to PDF"
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            kernelName: "python3",
+            kernelName: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
 
               </div>
               
@@ -1123,17 +1451,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="abstract-classes.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="inheritance.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">73. </span>Abstract classes</p>
+            <p class="prev-next-title"><span class="section-number">72. </span>Inheritance</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="object-type-conversions.html" title="next page">
+    <a class='right-next' id="next-link" href="abstract-classes.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">75. </span>Type conversions (of objects)</p>
+        <p class="prev-next-title"><span class="section-number">74. </span>Abstract classes</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

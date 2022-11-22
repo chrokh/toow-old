@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="73. Abstract classes" href="abstract-classes.html" />
+    <link rel="next" title="73. Advanced access modifiers" href="advanced-access-modifiers.html" />
     <link rel="prev" title="71. Subtype polymorphism" href="subtype-polymorphism.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -611,13 +611,13 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="abstract-classes.html">
-   73. ★ Abstract classes
+  <a class="reference internal" href="advanced-access-modifiers.html">
+   73. ★ Advanced access modifiers
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="advanced-access-modifiers.html">
-   74. Access modifiers (advanced)
+  <a class="reference internal" href="abstract-classes.html">
+   74. ★ Abstract classes
   </a>
  </li>
  <li class="toctree-l1">
@@ -1348,7 +1348,7 @@ In other words, we write a colon (<code class="docutils literal notranslate"><sp
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3124.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3345.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1393,12 +1393,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.69:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.186:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3124.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3345.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1860,13 +1860,14 @@ The two classes <code class="docutils literal notranslate"><span class="pre">Eve
      │                                       │
      ├───────────────────────────────────────┤
      │ + Sequence (initial : int) : Sequence │
-     │ + int Current ()                      │
+     │ + &lt;&lt;get&gt;&gt; int Current                 │
+     │ - &lt;&lt;set&gt;&gt; int Current                 │
      │ + void Next ()                        │
      │ + int[] Take (int n)                  │
      └───────────────────────────────────────┘
-                 Δ
-                 │
-                 │
+                         Δ
+                         │
+                         │
      ┌─────────────────────────────────────────┐
      │               SkipSequence              │
      ├─────────────────────────────────────────┤
@@ -1920,23 +1921,20 @@ We’ll let the initial number (meaning the starting point) be set via the const
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Sequence</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Current</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 
 <span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Sequence</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">initial</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">initial</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">Current</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
-<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Current</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">initial</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span><span class="w"></span>
-<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">i</span><span class="p">++;</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Current</span><span class="p">++;</span><span class="w"></span>
 
 <span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="nf">Take</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"></span>
 <span class="w">  </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">nums</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="n">n</span><span class="p">];</span><span class="w"></span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">++)</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Current</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Current</span><span class="p">;</span><span class="w"></span>
 <span class="w">      </span><span class="n">Next</span><span class="p">();</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">nums</span><span class="p">;</span><span class="w"></span>
@@ -1998,6 +1996,11 @@ Let’s call this sequence a <code class="docutils literal notranslate"><span cl
 <li><p>The constructor of the subclass is calling the constructor of the superclass by using the <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword. Remember this from <span class="xref myst">constructor chaining</span>?</p></li>
 <li><p>The instance method <code class="docutils literal notranslate"><span class="pre">Next</span></code> is overriding the implementation of the superclass.</p></li>
 </ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>To avoid the awkward implementation of the instance method <code class="docutils literal notranslate"><span class="pre">Next</span></code> we could of course just also have overridden the property <code class="docutils literal notranslate"><span class="pre">Current</span></code>.
+We’re doing it this way just to illustrate how you can reuse code from the superclass.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Sequence</span><span class="w"> </span><span class="n">tensSeq</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SkipSequence</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">);</span><span class="w"></span>
@@ -2065,7 +2068,8 @@ It will then be slightly less awkward, albeit still quite awkward.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Why did I choose such an awkward example?
-Because I have searched far and wide and the more I look, the more I get convinved that there are no good examples of inheritance where the base class is not abstract or where the whole thing is not <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">better</span></a> modeled with <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">composition over inheritance</span></a></p>
+Because I have searched far and wide and the more I look, the more I get convinved that there are no good examples of inheritance where the base class is not abstract or where the whole thing is not <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">better</span></a> modeled with <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">composition over inheritance</span></a>.</p>
+<p>In the case of C#, you can even choose to combine interfaces and <a class="reference internal" href="extension-methods.html#extension-methods"><span class="std std-ref">extension methods</span></a> but we’ll cover that much later.</p>
 <p>However, just because all I’ve seen is white swans, doesn’t prove that there are no black swans, so if you ever come across a good example, I would love it if you would let me know.</p>
 </div>
 </section>
@@ -2484,7 +2488,7 @@ What would such an interface mean?
 How is it useful?</p>
 </section>
 </div>
-<div class="exercise admonition" id="chapters/inheritance-exercise-8">
+<div class="exercise admonition" id="ex:inheritance:triangular">
 
 <p class="admonition-title"><span class="caption-number">Exercise 72.9 </span></p>
 <section id="exercise-content">
@@ -2492,7 +2496,9 @@ How is it useful?</p>
 Write your own subclass of the class <code class="docutils literal notranslate"><span class="pre">Sequence</span></code> that implements the <a class="reference external" href="https://en.wikipedia.org/wiki/Triangular_number">Triangular number sequence</a>.</p>
 </section>
 </div>
-<div class="exercise admonition" id="chapters/inheritance-exercise-9">
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="exercise admonition" id="ex:inheritance:fibonacci">
 
 <p class="admonition-title"><span class="caption-number">Exercise 72.10 </span></p>
 <section id="exercise-content">
@@ -2537,10 +2543,10 @@ Write your own subclass of the class <code class="docutils literal notranslate">
             <p class="prev-next-title"><span class="section-number">71. </span>Subtype polymorphism</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="abstract-classes.html" title="next page">
+    <a class='right-next' id="next-link" href="advanced-access-modifiers.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">73. </span>Abstract classes</p>
+        <p class="prev-next-title"><span class="section-number">73. </span>Advanced access modifiers</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

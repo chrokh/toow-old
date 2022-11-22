@@ -376,13 +376,14 @@ We'll discuss the this example more in the [examples section](inheritance:sequen
      │                                       │
      ├───────────────────────────────────────┤
      │ + Sequence (initial : int) : Sequence │
-     │ + int Current ()                      │
+     │ + <<get>> int Current                 │
+     │ - <<set>> int Current                 │
      │ + void Next ()                        │
      │ + int[] Take (int n)                  │
      └───────────────────────────────────────┘
-                 Δ
-                 │
-                 │
+                         Δ
+                         │
+                         │
      ┌─────────────────────────────────────────┐
      │               SkipSequence              │
      ├─────────────────────────────────────────┤
@@ -452,23 +453,20 @@ We'll let the initial number (meaning the starting point) be set via the constru
 ```{code-cell}
 class Sequence
 {
-  private int i;
+  public virtual int Current { get; private set; }
 
   public Sequence (int initial)
-    => i = initial;
-
-  public virtual int Current ()
-    => i;
+    => Current = initial;
 
   public virtual void Next()
-    => i++;
+    => Current++;
 
   public virtual int[] Take (int n)
   {
     int[] nums = new int[n];
     for (int i=0; i<nums.Length; i++)
     {
-      nums[i] = Current();
+      nums[i] = Current;
       Next();
     }
     return nums;
@@ -519,6 +517,11 @@ There are two important things to notice in the example above.
 1. The constructor of the subclass is calling the constructor of the superclass by using the `base` keyword. Remember this from [constructor chaining](constructor-chaining)?
 2. The instance method `Next` is overriding the implementation of the superclass.
 
+```{warning}
+To avoid the awkward implementation of the instance method `Next` we could of course just also have overridden the property `Current`.
+We're doing it this way just to illustrate how you can reuse code from the superclass.
+```
+
 ```{code-cell}
 Sequence tensSeq = new SkipSequence(1, 10);
 
@@ -564,7 +567,9 @@ It will then be slightly less awkward, albeit still quite awkward.
 
 ```{warning}
 Why did I choose such an awkward example?
-Because I have searched far and wide and the more I look, the more I get convinved that there are no good examples of inheritance where the base class is not abstract or where the whole thing is not [better](maintainability) modeled with [composition over inheritance](composition-over-inheritance)
+Because I have searched far and wide and the more I look, the more I get convinved that there are no good examples of inheritance where the base class is not abstract or where the whole thing is not [better](maintainability) modeled with [composition over inheritance](composition-over-inheritance).
+
+In the case of C#, you can even choose to combine interfaces and [extension methods](extension-methods) but we'll cover that much later.
 
 However, just because all I've seen is white swans, doesn't prove that there are no black swans, so if you ever come across a good example, I would love it if you would let me know.
 ```
@@ -925,11 +930,34 @@ How is it useful?
 ```
 
 ```{exercise}
+:label: ex:inheritance:triangular
 Start with the class `Sequence` that we wrote in this chapter.
 Write your own subclass of the class `Sequence` that implements the [Triangular number sequence](https://en.wikipedia.org/wiki/Triangular_number).
 ```
 
+```{code-cell}
+:tags: [remove-input]
+class Triangular : Sequence
+{
+  int n = 0;
+
+  public Triangular ()
+    : base(0) { }
+
+  public override int Current
+  {
+    get => (n * (n + 1)) / 2;
+  }
+
+  public override void Next()
+  {
+    n++;
+  }
+}
+```
+
 ```{exercise}
+:label: ex:inheritance:fibonacci
 Start with the class `Sequence` that we wrote in this chapter.
 Write your own subclass of the class `Sequence` that implements the [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_number).
 ```
