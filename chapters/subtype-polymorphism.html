@@ -1207,7 +1207,7 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
+    <a class="reference internal nav-link" href="#id4">
      71.3.4. Dynamic dispatch
     </a>
    </li>
@@ -1325,7 +1325,7 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
+    <a class="reference internal nav-link" href="#id4">
      71.3.4. Dynamic dispatch
     </a>
    </li>
@@ -1481,7 +1481,7 @@ Have a look at this code:</p>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-4109.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3925.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1526,12 +1526,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.186:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.131:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '4109.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3925.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1603,7 +1603,7 @@ A run-time type can be used if the run-time type is the same as the expected com
 In other words, whenever we state that a certain compile-time type is expected we can use values that at run-time have exactly that type or any subtype of that type.</p>
 </section>
 <section id="upcasting-and-downcasting">
-<h3><span class="section-number">71.2.4. </span>Upcasting and downcasting<a class="headerlink" href="#upcasting-and-downcasting" title="Permalink to this headline">#</a></h3>
+<span id="id2"></span><h3><span class="section-number">71.2.4. </span>Upcasting and downcasting<a class="headerlink" href="#upcasting-and-downcasting" title="Permalink to this headline">#</a></h3>
 <p>The process of using a subtype where a supertype is expected is known as “upcasting”.
 Upcasting can in an object oriented language usually be performed without any explicit <a class="reference internal" href="object-type-conversions.html"><span class="doc std std-doc">type conversions</span></a>.
 The code below gives two examples of upcasting.</p>
@@ -1618,35 +1618,79 @@ The code below gives two examples of upcasting.</p>
 <p>The process of using a supertype where a subtype is expected is known as “downcasting”.
 Downcasting in an object oriented language usually requires an explicit <a class="reference internal" href="object-type-conversions.html"><span class="doc std std-doc">type conversion</span></a>.
 Below are two examples of downcasting where we are using two different syntaxes to explicitly cast from the supertype to a subtype.</p>
-<div class="cell tag_raises-exception docutils container">
+<p>The difference between the two casting syntaxes is that one returns <code class="docutils literal notranslate"><span class="pre">null</span></code> if the conversion is unsuccessful and the other throws an exception.
+More on that in the chapter on <a class="reference internal" href="object-type-conversions.html"><span class="doc std std-doc">object type conversions</span></a>.</p>
+<p>Let’s assume that we’ve got a variable whose compile-time type is <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code> but that references an object whose runtime-type is <code class="docutils literal notranslate"><span class="pre">Cat</span></code>.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Remember that the type of the variable `animal` is `IAnimal`.</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IAnimal</span><span class="w"> </span><span class="n">animal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cat</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since the run-time type actually is a <code class="docutils literal notranslate"><span class="pre">Cat</span></code>, we should be able to downcast from the type <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code> to the type <code class="docutils literal notranslate"><span class="pre">Cat</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Downcasting to Cat with null on failure.</span>
 <span class="n">Cat</span><span class="w"> </span><span class="n">cat1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">animal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">Cat</span><span class="p">;</span><span class="w"></span>
+
+<span class="c1">// Downcasting to Cat with exception on failure.</span>
 <span class="n">Cat</span><span class="w"> </span><span class="n">cat2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">Cat</span><span class="p">)</span><span class="n">animal</span><span class="p">;</span><span class="w"></span>
 
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cat1</span><span class="p">);</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cat2</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Submission#3+Cat
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Submission#3+Cat
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ok, so that worked.
+Let’s now try to downcast from the type <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code> to the type <code class="docutils literal notranslate"><span class="pre">Dog</span></code>.
+This should not work since the run-time type of our object actually is <code class="docutils literal notranslate"><span class="pre">Cat</span></code> and <code class="docutils literal notranslate"><span class="pre">Cat</span></code> is not convertible to <code class="docutils literal notranslate"><span class="pre">Dog</span></code>.</p>
+<p>If we use the syntax that gives us <code class="docutils literal notranslate"><span class="pre">null</span></code> on a failed conversion then we expect to get <code class="docutils literal notranslate"><span class="pre">null</span></code>.
+Indeed we do.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Downcasting to Dog with null on failure.</span>
 <span class="n">Dog</span><span class="w"> </span><span class="n">dog1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">animal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">Dog</span><span class="p">;</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">dog1</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="k">null</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we use the syntax that throws an exception on a failed conversion then we expect to get an exception.
+Indeed we do.</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Downcasting to Dog with exception on failure.</span>
 <span class="n">Dog</span><span class="w"> </span><span class="n">dog2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">Dog</span><span class="p">)</span><span class="n">animal</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2,12): error CS0103: The name &#39;animal&#39; does not exist in the current context
-
-(3,17): error CS0103: The name &#39;animal&#39; does not exist in the current context
-
-(5,12): error CS0103: The name &#39;animal&#39; does not exist in the current context
-
-(6,17): error CS0103: The name &#39;animal&#39; does not exist in the current context
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>System.InvalidCastException: Unable to cast object of type &#39;Cat&#39; to type &#39;Dog&#39;.
+   at Submission#9.&lt;&lt;Initialize&gt;&gt;d__0.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.CodeAnalysis.Scripting.ScriptExecutionState.RunSubmissionsAsync[TResult](ImmutableArray`1 precedingExecutors, Func`2 currentExecutor, StrongBox`1 exceptionHolderOpt, Func`2 catchExceptionOpt, CancellationToken cancellationToken)
+   at Submission#9.&lt;&lt;Initialize&gt;&gt;d__0.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.CodeAnalysis.Scripting.ScriptExecutionState.RunSubmissionsAsync[TResult](ImmutableArray`1 precedingExecutors, Func`2 currentExecutor, StrongBox`1 exceptionHolderOpt, Func`2 catchExceptionOpt, CancellationToken cancellationToken)
 </pre></div>
 </div>
 </div>
 </div>
-<p>The difference between the two casting syntaxes is that one returns <code class="docutils literal notranslate"><span class="pre">null</span></code> if the conversion is unsuccessful and the other throws an exception.
-More on that in the chapter on <a class="reference internal" href="object-type-conversions.html"><span class="doc std std-doc">object type conversions</span></a>.</p>
-<p>The variable <code class="docutils literal notranslate"><span class="pre">dog1</span></code> will contain <code class="docutils literal notranslate"><span class="pre">null</span></code> and the last line is what causes the run-time exception.</p>
 <p>Why is the conversion from <code class="docutils literal notranslate"><span class="pre">IAnimal</span></code> to <code class="docutils literal notranslate"><span class="pre">Cat</span></code> successful when the conversion to <code class="docutils literal notranslate"><span class="pre">Dog</span></code> is not?
 Upcasting is always safe because subtypes can always be treated as their supertypes.
 Downcasting is however <strong>not necessarily safe</strong>.
@@ -1693,7 +1737,7 @@ More on this in the chapter on the <a class="reference internal" href="liskov-su
 </div>
 </section>
 <section id="dynamic-dispatch">
-<span id="id2"></span><h3><span class="section-number">71.2.6. </span>Dynamic dispatch<a class="headerlink" href="#dynamic-dispatch" title="Permalink to this headline">#</a></h3>
+<span id="id3"></span><h3><span class="section-number">71.2.6. </span>Dynamic dispatch<a class="headerlink" href="#dynamic-dispatch" title="Permalink to this headline">#</a></h3>
 <p>But what does all this matter you ask?
 Why would I want to “treat” cats and dogs as animals instead of as cats and dogs?
 Well, the answer lies in something known as “dynamic dispatch”.</p>
@@ -1870,10 +1914,10 @@ However, let us dispense with that practicality for a moment so that we can deep
 \mathbb{Z} \subset \mathbb{Q} \quad \quad \quad
 \mathbb{Q} \subset \mathbb{R}
 \]</div>
-<figure class="align-default" id="id8">
+<figure class="align-default" id="id9">
 <a class="reference internal image-reference" href="https://upload.wikimedia.org/wikipedia/commons/1/17/Number-systems.svg"><img alt="https://upload.wikimedia.org/wikipedia/commons/1/17/Number-systems.svg" height="200" src="https://upload.wikimedia.org/wikipedia/commons/1/17/Number-systems.svg" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 71.1 </span><span class="caption-text">Illustration of how real numbers (<span class="math notranslate nohighlight">\(\mathbb{R}\)</span>) include rational numbers (<span class="math notranslate nohighlight">\(\mathbb{Q}\)</span>), which include integers (<span class="math notranslate nohighlight">\(\mathbb{Z}\)</span>), which include natural numbers (<span class="math notranslate nohighlight">\(\mathbb{N}\)</span>). [<a class="reference external" href="https://en.wikipedia.org/wiki/Real_number#/media/File:Number-systems.svg">Image source</a>].</span><a class="headerlink" href="#id8" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 71.1 </span><span class="caption-text">Illustration of how real numbers (<span class="math notranslate nohighlight">\(\mathbb{R}\)</span>) include rational numbers (<span class="math notranslate nohighlight">\(\mathbb{Q}\)</span>), which include integers (<span class="math notranslate nohighlight">\(\mathbb{Z}\)</span>), which include natural numbers (<span class="math notranslate nohighlight">\(\mathbb{N}\)</span>). [<a class="reference external" href="https://en.wikipedia.org/wiki/Real_number#/media/File:Number-systems.svg">Image source</a>].</span><a class="headerlink" href="#id9" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>If we’re talking about types then it would be quite reasonable to design a type system where the natural numbers (<code class="docutils literal notranslate"><span class="pre">Natural</span></code>) is a subtype of integers (<code class="docutils literal notranslate"><span class="pre">Integer</span></code>), which is a subtype of rational numbers (<code class="docutils literal notranslate"><span class="pre">Rational</span></code>), which is a subtype of real numbers (<code class="docutils literal notranslate"><span class="pre">Real</span></code>).
@@ -2102,8 +2146,8 @@ Well because <code class="docutils literal notranslate"><span class="pre">Vowel<
 The interface <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code> knows absolutely nothing about vowels.
 Only one of the bazillion different possible implementations of <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code>, namely <code class="docutils literal notranslate"><span class="pre">RobbersCipher</span></code>, happens to know about vowels.</p>
 </section>
-<section id="id3">
-<h3><span class="section-number">71.3.4. </span>Dynamic dispatch<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<section id="id4">
+<h3><span class="section-number">71.3.4. </span>Dynamic dispatch<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
 <p>But what do we even gain from this?
 Well, this means that we can use all concrete types that implement the same interface interchangably.
 It means that we can write code that depends on <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code> instead of any particular class.</p>
@@ -2204,19 +2248,19 @@ In the context of addition, the number <span class="math notranslate nohighlight
 <p>Does the <code class="docutils literal notranslate"><span class="pre">encodeTwice</span></code> method work for instances of type <code class="docutils literal notranslate"><span class="pre">NoCipher</span></code> as well?
 Yes, of course.</p>
 <p>Welcome to the powerful world of subtype polymorphism.</p>
-<figure class="margin align-default" id="id9">
+<figure class="margin align-default" id="id10">
 <img alt="https://images-na.ssl-images-amazon.com/images/I/51ttgxwzArL._SY445_SX342_QL70_ML2_.jpg" src="https://images-na.ssl-images-amazon.com/images/I/51ttgxwzArL._SY445_SX342_QL70_ML2_.jpg" />
 <figcaption>
-<p><span class="caption-number">Fig. 71.2 </span><span class="caption-text">“Refactoring: Improving the design of existing code” <span id="id4">[<a class="reference internal" href="bibliography.html#id8" title="M. Fowler. Refactoring: Improving the Design of Existing Code. Addison-Wesley object technology series. Addison-Wesley, 1999. ISBN 9780201485677. URL: http://amazon.christopherokhravi.com?id=0201485672.">Fowler, 1999</a>]</span>.</span><a class="headerlink" href="#id9" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 71.2 </span><span class="caption-text">“Refactoring: Improving the design of existing code” <span id="id5">[<a class="reference internal" href="bibliography.html#id8" title="M. Fowler. Refactoring: Improving the Design of Existing Code. Addison-Wesley object technology series. Addison-Wesley, 1999. ISBN 9780201485677. URL: http://amazon.christopherokhravi.com?id=0201485672.">Fowler, 1999</a>]</span>.</span><a class="headerlink" href="#id10" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="replace-conditional-with-polymorphism">
-<span id="id5"></span><h3><span class="section-number">71.3.6. </span>Replace conditional with polymorphism<a class="headerlink" href="#replace-conditional-with-polymorphism" title="Permalink to this headline">#</a></h3>
+<span id="id6"></span><h3><span class="section-number">71.3.6. </span>Replace conditional with polymorphism<a class="headerlink" href="#replace-conditional-with-polymorphism" title="Permalink to this headline">#</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This section will <em>not</em> be completed in the year 2022.
-Please see the Preface, Foreword, and Chapter 2 of <span id="id6">Fowler [<a class="reference internal" href="bibliography.html#id8" title="M. Fowler. Refactoring: Improving the Design of Existing Code. Addison-Wesley object technology series. Addison-Wesley, 1999. ISBN 9780201485677. URL: http://amazon.christopherokhravi.com?id=0201485672.">1999</a>]</span> or the newer edition <span id="id7">Fowler [<a class="reference internal" href="bibliography.html#id9" title="M. Fowler. Refactoring: Improving the Design of Existing Code. Addison-Wesley Signature Series. Pearson Education, 2018. ISBN 9780134757704. URL: http://amazon.christopherokhravi.com?id=0134757599.">2018</a>]</span>.</p>
+Please see the Preface, Foreword, and Chapter 2 of <span id="id7">Fowler [<a class="reference internal" href="bibliography.html#id8" title="M. Fowler. Refactoring: Improving the Design of Existing Code. Addison-Wesley object technology series. Addison-Wesley, 1999. ISBN 9780201485677. URL: http://amazon.christopherokhravi.com?id=0201485672.">1999</a>]</span> or the newer edition <span id="id8">Fowler [<a class="reference internal" href="bibliography.html#id9" title="M. Fowler. Refactoring: Improving the Design of Existing Code. Addison-Wesley Signature Series. Pearson Education, 2018. ISBN 9780134757704. URL: http://amazon.christopherokhravi.com?id=0134757599.">2018</a>]</span>.</p>
 </div>
 </section>
 </section>
