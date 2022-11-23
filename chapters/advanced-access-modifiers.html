@@ -1159,7 +1159,17 @@ title="Print to PDF"
      73.3.1. Sequences
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#filtered-sequences">
+     73.3.2. Filtered sequences
+    </a>
+   </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   73.4. Exercises
+  </a>
  </li>
 </ul>
 
@@ -1207,7 +1217,17 @@ title="Print to PDF"
      73.3.1. Sequences
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#filtered-sequences">
+     73.3.2. Filtered sequences
+    </a>
+   </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   73.4. Exercises
+  </a>
  </li>
 </ul>
 
@@ -1247,18 +1267,26 @@ The introduction of <code class="docutils literal notranslate"><span class="pre"
 <h2><span class="section-number">73.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
 <section id="sequences">
 <h3><span class="section-number">73.3.1. </span>Sequences<a class="headerlink" href="#sequences" title="Permalink to this headline">#</a></h3>
-<p>Let’s keep working with the sequences that we defined in the chapter on <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a>.
-In the superclass <code class="docutils literal notranslate"><span class="pre">Sequence</span></code> we marked the <code class="docutils literal notranslate"><span class="pre">get</span></code> accessor of the property <code class="docutils literal notranslate"><span class="pre">Current</span></code> as <code class="docutils literal notranslate"><span class="pre">public</span></code> but the <code class="docutils literal notranslate"><span class="pre">set</span></code> accessor as <code class="docutils literal notranslate"><span class="pre">private</span></code>.
-Now that we know that we should hide <a class="reference internal" href="objects.html#encapsulation"><span class="std std-ref">implementation</span></a> details in object oriented programming, it makes sense to encapsulate the write rights to the <code class="docutils literal notranslate"><span class="pre">Current</span></code> property.
-If we change the accessibility of the <code class="docutils literal notranslate"><span class="pre">set</span></code> accessor to <code class="docutils literal notranslate"><span class="pre">protected</span></code> we are suddenly able to access that property in all subclasses of <code class="docutils literal notranslate"><span class="pre">Sequence</span></code>.</p>
+<p>Remember how, in the chapter on <a class="reference internal" href="inheritance.html#inheritance-sequences"><span class="std std-ref">inheritance</span></a>, we defined a bunch of sequences.
+Remember how had two main “styles” of writing our algorithms?
+One one hand we could write our algorithms as formulas (such as in the case of the square series) and on the other as filters (such as in the case of the palindromic sequence).</p>
+<p>In the cases where we overrode the <code class="docutils literal notranslate"><span class="pre">Current</span></code> method we always had to introduce our own instance field that we were able to set the current value to.
+This happened because the <code class="docutils literal notranslate"><span class="pre">set</span></code> accessor of the property <code class="docutils literal notranslate"><span class="pre">Current</span></code> was marked as <code class="docutils literal notranslate"><span class="pre">private</span></code> in the superclass <code class="docutils literal notranslate"><span class="pre">Sequence</span></code>.
+In other words, subclasses did not have access to the setter even if they overrode the property.</p>
+<p>Why did we not just make the <code class="docutils literal notranslate"><span class="pre">set</span></code> accessor <code class="docutils literal notranslate"><span class="pre">public</span></code>?
+Because of <a class="reference internal" href="objects.html#information-hiding"><span class="std std-ref">information hiding</span></a>.
+We don’t want others to be able to at will change the current value of a sequence.
+Why?
+Well what if we have an <code class="docutils literal notranslate"><span class="pre">EvenSequence</span></code> and someone changes the value to <code class="docutils literal notranslate"><span class="pre">3</span></code>?</p>
+<p>Let’s now change the access modifier of the <code class="docutils literal notranslate"><span class="pre">set</span></code> accessor to <code class="docutils literal notranslate"><span class="pre">protected</span></code>.
+This will allow us to implement some sequences as formulas without having to override the <code class="docutils literal notranslate"><span class="pre">Current</span></code> property.
+Why?
+Because all subclasses of <code class="docutils literal notranslate"><span class="pre">Sequence</span></code> will now have write-access to that property.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Sequence</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Current</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">protected</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Sequence</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">initial</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Current</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">initial</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span><span class="w"></span>
 <span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Current</span><span class="p">++;</span><span class="w"></span>
@@ -1280,7 +1308,7 @@ If we change the accessibility of the <code class="docutils literal notranslate"
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2268.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2534.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1325,12 +1353,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.131:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.69:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2268.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2534.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1393,34 +1421,232 @@ At least the data is not public.
 However, we didn’t actually change data that was marked as <code class="docutils literal notranslate"><span class="pre">public</span></code> to <code class="docutils literal notranslate"><span class="pre">protected</span></code>, we changed something that was <code class="docutils literal notranslate"><span class="pre">private</span></code> to <code class="docutils literal notranslate"><span class="pre">protected</span></code>.
 This does indeed feel like a step in the wrong direction.</p>
 <p>So why did we do this?
-Well, some subclasses are pretty awkard (and sometimes even impossible) to implement without having access to (or duplicating) the encapsulated data that is being used in the superclass.
-Remember the awkward implementation of the instance method <code class="docutils literal notranslate"><span class="pre">Next</span></code> in the class <code class="docutils literal notranslate"><span class="pre">SkipSequence</span></code> in the chapter on <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a>?
-As discussed there, we could have avoided the problem by simply overriding the property <code class="docutils literal notranslate"><span class="pre">Current</span></code>.
-However, since our goal was reuse, we wanted to reuse as much as possible.</p>
+Well, our goal here was code reuse and code reuse will certainly be higher now.
+But is it a win?
+I don’t know.
+As you might have understood by now, I’m in the camp that favors composition over inheritance.
+But we’ll talk more about how that applies here when we get to the chapters on abstract <a class="reference internal" href="abstract-constructed-object-composition.html"><span class="doc std std-doc">constructed</span></a> and <a class="reference internal" href="abstract-injected-object-composition.html"><span class="doc std std-doc">injected</span></a> composition.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>Remember how we discussed that there are two reasons for using <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a>.
 Subtype polymorphism, and code reuse.
 If all you want is subtype polymorphism then you should use interfaces.
-If however we also want code reuse then we better dang well get some code reuse out of our classes.
-Otherwise it’s all a sham.</p>
-<p>Let’s have a look at how we could simplify the code for the class <code class="docutils literal notranslate"><span class="pre">SkipSequence</span></code> if the <code class="docutils literal notranslate"><span class="pre">set</span></code> accessor of the property <code class="docutils literal notranslate"><span class="pre">Current</span></code> in the superclass is marked as <code class="docutils literal notranslate"><span class="pre">protected</span></code> instead of <code class="docutils literal notranslate"><span class="pre">private</span></code>.</p>
+If however we also want code reuse then we better dang well get some code reuse out of our classes.</p>
+</div>
+<p>Let’s first rewrite the class <code class="docutils literal notranslate"><span class="pre">StepSequence</span></code>.
+The implemenation is the same as before except that we now don’t have to override the property <code class="docutils literal notranslate"><span class="pre">Current</span></code> since we can both <code class="docutils literal notranslate"><span class="pre">get</span></code> and <code class="docutils literal notranslate"><span class="pre">set</span></code> it in subclasses.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SkipSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="w"></span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">StepSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">skip</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">steps</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">SkipSequence</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">initial</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">skip</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span><span class="n">initial</span><span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">skip</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">skip</span><span class="w"> </span><span class="p">&gt;=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="n">skip</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">StepSequence</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">steps</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">:</span><span class="w"> </span><span class="k">this</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">StepSequence</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">steps</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">initial</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">steps</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">steps</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">Current</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">initial</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
 <span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span><span class="w"></span>
-<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">Current</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">skip</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Current</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">steps</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StepSequence</span><span class="p">(</span><span class="m">10</span><span class="p">).</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">)));</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0, 10, 20, 30, 40, 50, 60, 70, 80, 90
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s now try <code class="docutils literal notranslate"><span class="pre">EvenSequence</span></code> and <code class="docutils literal notranslate"><span class="pre">OddSequence</span></code>.
+The implementation is really quite trivial now that we have write-access to the property <code class="docutils literal notranslate"><span class="pre">Current</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">EvenSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Current</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">2</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EvenSequence</span><span class="p">().</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">)));</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0, 2, 4, 6, 8, 10, 12, 14, 16, 18
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">OddSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">OddSequence</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Current</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Current</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">2</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OddSequence</span><span class="p">().</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">)));</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1, 3, 5, 7, 9, 11, 13, 15, 17, 19
+</pre></div>
+</div>
+</div>
+</div>
+<p>Before moving on, let me just say that moving to a <code class="docutils literal notranslate"><span class="pre">protected</span></code> <code class="docutils literal notranslate"><span class="pre">set</span></code> accessor of the property <code class="docutils literal notranslate"><span class="pre">Current</span></code> doesn’t really affect our implementation of <code class="docutils literal notranslate"><span class="pre">SquareSequence</span></code>.
+Because in that subclass we want to keep track of which number we are at currently and then generate the number when asked, rather than storing the actual number itself.
+Have a look at the folded code below.
+It’s the same as before.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SquareSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Current</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">get</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="p">*</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w"> </span><span class="p">/</span><span class="w"> </span><span class="m">2</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">n</span><span class="p">++;</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
+<section id="filtered-sequences">
+<span id="protected-sequences"></span><h3><span class="section-number">73.3.2. </span>Filtered sequences<a class="headerlink" href="#filtered-sequences" title="Permalink to this headline">#</a></h3>
+<p>Let’s now talk about the other way that we were expressing sequences in the chapter on <a class="reference internal" href="inheritance.html#inheritance-sequences"><span class="std std-ref">inheritance</span></a>?
+When we expressed them as filters applied to a sequence.</p>
+<p>Remember the discussion on how the recursive implementation of the method <code class="docutils literal notranslate"><span class="pre">Next</span></code> was duplicated across subclasses of <code class="docutils literal notranslate"><span class="pre">Sequence</span></code> when we tried to express our sequences as filtered sequences?
+Would it be possible to eliminate that duplication using yet another type that we could inherit from?
+Sure, we could introduce another class that we might call <code class="docutils literal notranslate"><span class="pre">FilteredSequence</span></code> that has a <code class="docutils literal notranslate"><span class="pre">virtual</span> <span class="pre">protected</span></code> instance method that returns a <code class="docutils literal notranslate"><span class="pre">bool</span></code>.
+This method acts as the filter and by overriding this method we can provide the filter for that particular sequence.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">FilteredSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Current</span><span class="p">++;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(!</span><span class="n">IsValid</span><span class="p">())</span><span class="w"></span>
+<span class="w">      </span><span class="n">Next</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">protected</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">IsValid</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">true</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FilteredSequence</span><span class="p">().</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">)));</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s first reimplement <code class="docutils literal notranslate"><span class="pre">PalindromicSequence</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">PalindromicSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">FilteredSequence</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">protected</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">IsValid</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Current</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">&lt;</span><span class="n">number</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">++)</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">number</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="p">!=</span><span class="w"> </span><span class="n">number</span><span class="p">[</span><span class="n">number</span><span class="p">.</span><span class="n">Length</span><span class="w"> </span><span class="p">-</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">-</span><span class="w"> </span><span class="m">1</span><span class="p">])</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PalindromicSequence</span><span class="p">().</span><span class="n">Take</span><span class="p">(</span><span class="m">20</span><span class="p">)));</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33, 44, 55, 66, 77, 88, 99, 101
+</pre></div>
+</div>
+</div>
+</div>
+<p>Pretty neat.
+Now we only had to override the method <code class="docutils literal notranslate"><span class="pre">IsValid</span></code> and the rest was inherited.
+Let’s try the <code class="docutils literal notranslate"><span class="pre">SquareSequence</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SquareSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">FilteredSequence</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">protected</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">IsValid</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">Math</span><span class="p">.</span><span class="n">Sqrt</span><span class="p">(</span><span class="n">Current</span><span class="p">)</span><span class="w"> </span><span class="p">*</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">Math</span><span class="p">.</span><span class="n">Sqrt</span><span class="p">(</span><span class="n">Current</span><span class="p">)</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="n">Current</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SquareSequence</span><span class="p">().</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">)));</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0, 1, 4, 9, 16, 25, 36, 49, 64, 81
+</pre></div>
+</div>
+</div>
+</div>
+<p>Same thing.
+All we had to override was the method <code class="docutils literal notranslate"><span class="pre">IsValid</span></code>.</p>
+</section>
+</section>
+<section id="exercises">
+<h2><span class="section-number">73.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Work in progress.</p>
+</div>
 </section>
 </section>
 

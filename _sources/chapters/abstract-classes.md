@@ -60,33 +60,44 @@ In UML class diagrams, the standard is to denote abstract members using italic t
 
 ## Examples
 
-### Sequences
+### Incrementing sequences
 
-Remember the hierarchy of sequences that we built in the chapter on [inheritance](inheritance)?
+Remember the hierarchy of sequences that we built in the chapter on [inheritance](inheritance:sequences) and refined in the chapter on [access modifiers](protected:sequences)?
 We never really discussed it, but it was quite awkward that the base class was called `Sequence` even though it was evidently modeling the sequence of incrementing integers.
+We should probably have called it `IncrementingSequence`.
 
-However, since a non-abstract base class must have an implementation for all instance members we were left having to choose one sequence to act as the base class.
+But, what if we wanted to implement a series of decrementing integers?
+In the chapter on [access modifiers](protected:sequences) we marked the `set` accessor of the property `Current` as `protected` which means that subclasses now has write-access.
+This means that, in theory, we could actually write a subclass of `IncrementingSequence` that decrements.
 
-This means that we have to choose between calling the base class `Sequence` and `IntSequence`.
-The former is not an excellent representation for the implementation that we have while the latter is not an excellent name for a base class.
-We will discuss the rules of "behavioral subtyping" in the chapter on [Liskov substitution principle](liskov-substitution-principle).
-However, the consequence of thinking of the base class as the sequence of incrementing integers is that all subtypes of `Sequence` now must be specializations of that sequence that don't violate the rules of that sequence.
-What if, for example, we also want to model decrementing sequences?
-The condition is too restrictive.
+There's something that just feels pretty off about that idea.
+When we have discussed the rules of "behavioral subtyping" in the chapter on [Liskov substitution principle](liskov-substitution-principle) you will have a formal way of discsusing why this idea is wrong.
+In short, the principle states that any subtype must be able to use at any point where its supertype is expected.
+If we use a decrementing sequence, where an incrementing one is expected, then we are violating this principle.
 
-What's the alternative?
-Well, remember how I in the chapter on [inheritance](inheritance) said that I personally have yet to come across a case of inheritance that isn't more elegantly solved using interfaces and composition?
-If you've seen that then you know where my sympathies lie.
-The base type should be an interface.
+%This means that we have to choose between calling the base class `Sequence` and `IntSequence`.
+%The former is not an excellent representation for the implementation that we have while the latter is not an excellent name for a base class.
+%We will discuss the rules of "behavioral subtyping" in the chapter on [Liskov substitution principle](liskov-substitution-principle).
+%However, the consequence of thinking of the base class as the sequence of incrementing integers is that all subtypes of `Sequence` now must be specializations of that sequence that don't violate the rules of that sequence.
+%What if, for example, we also want to model decrementing sequences?
+%The condition is too restrictive.
 
-But, since we should never dismiss something without first fully understanding how sit works and what we can do with it, let's force ourselves to keep using inheritance.
-Using an abstract base class is much better than using a concrete base class in the case of our sequnce hierarchy.
+%What's the alternative?
+%Well, remember how I in the chapter on [inheritance](inheritance) said that I personally have yet to come across a case of inheritance that isn't more elegantly solved using interfaces and composition?
+%If you've seen that then you know where my sympathies lie.
+%The base type should be an interface.
+%
+%But, since we should never dismiss something without first fully understanding how sit works and what we can do with it, let's force ourselves to keep using inheritance.
+%Using an abstract base class is much better than using a concrete base class in the case of our sequnce hierarchy.
+%
+%By making the base class abstract we are guaranteed that there will be no instances of that class.
+%This in turn means that we don't have to worry about specifying both the interface (in the abstract sense of the word) *and* the implementation for all memebrs of the superclass.
+%This means that we can choose to specify only the interface where we want to leave the implementation very open, and conversely actually provide an implementation where that implementation makes sense in the superclass.
 
-By making the base class abstract we are guaranteed that there will be no instances of that class.
-This in turn means that we don't have to worry about specifying both the interface (in the abstract sense of the word) *and* the implementation for all memebrs of the superclass.
-This means that we can choose to specify only the interface where we want to leave the implementation very open, and conversely actually provide an implementation where that implementation makes sense in the superclass.
-
-Here's an example of how we might write that class in C#.
+What's the alterantive?
+Well, what if we didn't provide a base implementation for the method `Next` at all?
+What if we make the superclass abstract and simply mark the method `Next` as `abstract`.
+Have a look at the code below.
 
 ```{code-cell}
 abstract class Sequence
@@ -108,10 +119,6 @@ abstract class Sequence
 }
 ```
 
-```{note}
-Notice how we changed the [access modifier](advanced-access-modifiers) of the current number to `protected` so that we can set its value not only from the superclass but also from any subclass of the superclass.
-```
-
 Can we now instantiate the superclass?
 No, it's now abstract.
 
@@ -121,78 +128,112 @@ Sequence sub = new Sequence();
 ```
 
 Does the fact that we've now made the superclass abstract affect the classes that inherit from the superclass in any way?
-Well, some of them, like `SkipSequence` had their implementation defined in terms of the superclasse's method `Next`.
-But now that the method `Next` is abstract the class `SkipSequence` must provide its own implementation.
-
-I'll explain why I've renamed the class from `SkipSequence` to `StepSequence` in a moment, but let's first look at the implementation.
+Well, any subclass that depended on the base method `Next` will no longer compile.
+One possible solution to this problem is to simply reintroduce the idea of an incrementing sequence by creating another subclass of `Sequence`.
+Have a look at the class below.
 
 ```{code-cell}
-class StepSequence : Sequence
+class IncrementingSequence : Sequence
 {
-  int step;
+  public override void Next ()
+    => Current++;
+}
+```
 
-  public StepSequence (int initial, int step)
+```{code-cell}
+Console.WriteLine(String.Join(", ", new IncrementingSequence().Take(10)));
+```
+
+How do these classes help us?
+Well, two classes that no longer compile, after we've marked the method `Next` as `abstract` in the superclass `Sequence`, are `PalindromicSequence` and `FilteredSequence`.
+However the former only fails to work because the latter fails to work.
+So how do we rewrite the `FilteredSequence`?
+Well, now that we've introduced the class `IncrementingSequence` we've got a replacement that behaves like our old non-abstract implementation of the superclass `Sequence`.
+So we can get both `FilteredSequence` and by extension `PalindromicSequence` to work again by simply saying that `FilteredSequence` inherits from `IncrementingSequence`.
+
+In the code snippet below the implementation of `FilteredSequence` remains the same.
+The only thing that has changed is that it inherits from `IncrementingSequence` instead of from `Sequence`.
+
+```{code-cell}
+class FilteredSequence : IncrementingSequence
+{
+  public override void Next()
   {
-    base.Current = initial;
-    this.step = step;
+    Current++;
+    if (!IsValid())
+      Next();
   }
 
-  public override void Next()
-    => base.Current += this.step;
+  protected virtual bool IsValid ()
+    => true;
 }
 ```
+
+```{code-cell}
+Console.WriteLine(String.Join(", ", new FilteredSequence().Take(10)));
+```
+
+The implementation of `PalindromicSequence` can remain the same.
+
+```{code-cell}
+:tags: [hide-input]
+class PalindromicSequence : FilteredSequence
+{
+  protected override bool IsValid ()
+  {
+    string number = Current.ToString();
+    for (int i=0; i<number.Length; i++)
+      if (number[i] != number[number.Length - i - 1])
+        return false;
+    return true;
+  }
+}
+```
+
+```{code-cell}
+Console.WriteLine(String.Join(", ", new PalindromicSequence().Take(20)));
+```
+
+
+
+### Decrementing sequences
 
 Remember how we said that letting the superclass model incrementing sequences was too restrictive?
-Well, now that we've got a more general superclass, the implementation of `StepSequence`, which replaces `SkipSequence`, is both simpler and more general then what we had before.
+Well, now that we've got a more general superclass, and a subclass that models the notion of an incrementing sequence it is trivial to see how we would implement a decrementing sequence.
 
-The class `StepSequence` models the idea of incrementing, decrementing, and skipping all at once.
-If we wanted specific types for those concepts so that we couldn't accidentally get passed a decrementing sequence when we expected an incrementing one we trivially introduce those types.
+%TODO: THIS IS THE MAJOR LEAP THAT'S GOING TO TAKE US INTO COMPOSITION SINCE WE HAVE TO DUPLICATE ALL SEQUENCE VARIATIONS. WHERE DO I START INTRODUCING THIS?
 
 ```{code-cell}
-class IncrementingSequence : StepSequence
+class DecrementingSequence : Sequence
 {
-  public IncrementingSequence (int initial)
-    : base(initial, 1) { }
-}
-
-class DecrementingSequence : StepSequence
-{
-  public DecrementingSequence (int initial)
-    : base(initial, 1) { }
-}
-
-class SkipSequence : StepSequence
-{
-  public SkipSequence (int initial, int skips)
-    : base(initial, skipsToSteps(skips)) { }
-
-  private static int skipsToSteps (int skips)
-    => skips > 0 ? skips + 1 : 0;
+  public override void Next ()
+    => Current--;
 }
 ```
 
-Let's try it out to make sure that they work.
-
 ```{code-cell}
-IncrementingSequence seq = new IncrementingSequence(5); // Initialize sequence.
-int[] output = seq.Take(10); // Take 10 elements.
-Console.WriteLine(String.Join(", ", output)); // Print the elements.
+Console.WriteLine(String.Join(", ", new DecrementingSequence().Take(10)));
 ```
 
-```{code-cell}
-DecrementingSequence seq = new DecrementingSequence(5); // Initialize sequence.
-int[] output = seq.Take(10); // Take 10 elements.
-Console.WriteLine(String.Join(", ", output)); // Print the elements.
-```
+Ok, seems to work.
+But wait a minute.
+What if we want to implement a decrementing palindromic sequence?
+Do we really have to write two classes everytime we want to have an algorithm that filters numbers in a number sequence?
+No, we don't have to.
 
-```{code-cell}
-SkipSequence seq = new SkipSequence(2, 1); // Initialize sequence.
-int[] output = seq.Take(10); // Take 10 elements.
-Console.WriteLine(String.Join(", ", output)); // Print the elements.
-```
+The more we model our numbers this way, the more obvious it becomes that the cause of our problems is our use of inheritance.
+Later we will discuss the design principle known as [composition over inheritance](composition-over-inheritance).
+But already now, are we starting to see why it exists.
+There are cracks in the foundation of inheritance.
+It just isn't as useful for code reuse as composition is.
 
-But wait a minute, what about a `SkipSequence` that skips in a negative sequences?
-Don't worry, we'll get to that when we get to [abstract composition](abstract-constructed-object-composition).
+We'll keep working with our sequences in the chapters on abstract [constructed](abstract-constructed:sequences) and [injected](abstract-injected:sequences) composition.
+
+
+
+
+
+%#### Limitations of inheritance
 
 
 
@@ -398,3 +439,57 @@ Can you use an abstract base class instead of an interface to eliminate further 
 Start from the code you wrote in {numref}`inheritance:exercises:chartostringsubstitutioncipher`.
 Mark both the superclass and the method with the signature `string Encode (char input)` as `abstract`.
 ```
+
+
+
+
+
+%The class `StepSequence` models the idea of incrementing, decrementing, and skipping all at once.
+%If we wanted specific types for those concepts so that we couldn't accidentally get passed a decrementing sequence when we expected an incrementing one we trivially introduce those types.
+%
+%```{code-cell}
+%class IncrementingSequence : StepSequence
+%{
+%  public IncrementingSequence (int initial)
+%    : base(initial, 1) { }
+%}
+%
+%class DecrementingSequence : StepSequence
+%{
+%  public DecrementingSequence (int initial)
+%    : base(initial, 1) { }
+%}
+%
+%class SkipSequence : StepSequence
+%{
+%  public SkipSequence (int initial, int skips)
+%    : base(initial, skipsToSteps(skips)) { }
+%
+%  private static int skipsToSteps (int skips)
+%    => skips > 0 ? skips + 1 : 0;
+%}
+%```
+%
+%Let's try it out to make sure that they work.
+%
+%```{code-cell}
+%IncrementingSequence seq = new IncrementingSequence(5); // Initialize sequence.
+%int[] output = seq.Take(10); // Take 10 elements.
+%Console.WriteLine(String.Join(", ", output)); // Print the elements.
+%```
+%
+%```{code-cell}
+%DecrementingSequence seq = new DecrementingSequence(5); // Initialize sequence.
+%int[] output = seq.Take(10); // Take 10 elements.
+%Console.WriteLine(String.Join(", ", output)); // Print the elements.
+%```
+%
+%```{code-cell}
+%SkipSequence seq = new SkipSequence(2, 1); // Initialize sequence.
+%int[] output = seq.Take(10); // Take 10 elements.
+%Console.WriteLine(String.Join(", ", output)); // Print the elements.
+%```
+%
+%But wait a minute, what about a `SkipSequence` that skips in a negative sequences?
+%Don't worry, we'll get to that when we get to [abstract composition](abstract-constructed-object-composition).
+

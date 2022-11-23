@@ -63,6 +63,20 @@ Meaning, must be an [interface](interfaces) or an [abstract class](abstract-clas
 
 ## Examples
 
+(abstract-injected:sequences)=
+### Sequences
+
+```{note}
+Work in progress.
+```
+
+### Random cipher
+
+```{note}
+Work in progress.
+```
+
+
 ### Substitution ciphers
 
 Let's replace [inheritance](inheritance) with composition.

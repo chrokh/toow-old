@@ -1188,6 +1188,28 @@ title="Print to PDF"
     <a class="reference internal nav-link" href="#sequences">
      72.3.1. Sequences
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#step-sequence">
+       72.3.1.1. Step sequence
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#evens-and-odds">
+       72.3.1.2. Evens and odds
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#palindromic-numbers">
+       72.3.1.3. Palindromic numbers
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#square-numbers">
+       72.3.1.4. Square numbers
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#characterwise-ciphers">
@@ -1202,8 +1224,13 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discussion">
+   72.4. Discussion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
-   72.4. Exercises
+   72.5. Exercises
   </a>
  </li>
 </ul>
@@ -1281,6 +1308,28 @@ title="Print to PDF"
     <a class="reference internal nav-link" href="#sequences">
      72.3.1. Sequences
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#step-sequence">
+       72.3.1.1. Step sequence
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#evens-and-odds">
+       72.3.1.2. Evens and odds
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#palindromic-numbers">
+       72.3.1.3. Palindromic numbers
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#square-numbers">
+       72.3.1.4. Square numbers
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#characterwise-ciphers">
@@ -1295,8 +1344,13 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discussion">
+   72.4. Discussion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
-   72.4. Exercises
+   72.5. Exercises
   </a>
  </li>
 </ul>
@@ -1348,7 +1402,7 @@ In other words, we write a colon (<code class="docutils literal notranslate"><sp
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3186.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3449.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1393,12 +1447,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.131:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.69:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3186.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3449.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1905,31 +1959,28 @@ The classes <code class="docutils literal notranslate"><span class="pre">EvenSeq
 <h2><span class="section-number">72.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
 <section id="sequences">
 <span id="inheritance-sequences"></span><h3><span class="section-number">72.3.1. </span>Sequences<a class="headerlink" href="#sequences" title="Permalink to this headline">#</a></h3>
-<p>Let’s talk about infinite number sequences.
-What is an infinite number sequence?
+<p>Let’s talk about number sequences.
+What is a number sequence?
 Well, the natural numbers starting from 1 is one and incrementing all the way to infinity (or the maximum value for <code class="docutils literal notranslate"><span class="pre">int</span></code> in practical terms) is a sequence.
 Two other sequences are those of odd and even numbers.
-A more complex sequence would be for example the Fibonacci sequence which says that the next number is the sum of the two preceeding numbers.</p>
+A more complex sequence would be for example the Fibonacci sequence which says that the next number is the sum of the two preceding numbers.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This might seem a bit esoteric at the moment, but once we’ve learned about <a class="reference internal" href="generics.html"><span class="doc std std-doc">generics</span></a> you will see how this generalizes to sequences of any type.
 Then, when we get to <a class="reference internal" href="design-patterns.html"><span class="doc std std-doc">design patterns</span></a>, you will see how this is the core idea of the <a class="reference internal" href="iterator-pattern.html"><span class="doc std std-doc">iterator pattern</span></a>.</p>
 </div>
-<p>Let’s define a base class that models the series of integers that moves in increments of <code class="docutils literal notranslate"><span class="pre">1</span></code>.
-We’ll let the initial number (meaning the starting point) be set via the constructor and then we’ll add instance methods for getting the current number, the next number, and one method that returns an array of numbers which moves the incrementor forward multiple times and returns each number generated along the way.</p>
+<p>Let’s start by defining a superclass, called <code class="docutils literal notranslate"><span class="pre">Sequence</span></code>, that simply models the sequence of incrementing integers starting from the number <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<p>Have a look at the implementation below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Sequence</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Current</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Sequence</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">initial</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Current</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">initial</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Current</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span><span class="w"></span>
 <span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">Current</span><span class="p">++;</span><span class="w"></span>
 
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="nf">Take</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="nf">Take</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"></span>
 <span class="w">  </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">nums</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="n">n</span><span class="p">];</span><span class="w"></span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">++)</span><span class="w"></span>
@@ -1944,12 +1995,24 @@ We’ll let the initial number (meaning the starting point) be set via the const
 </div>
 </div>
 </div>
-<p>Great, so we’ve got a basic sequence now.
+<p>The class <code class="docutils literal notranslate"><span class="pre">Sequence</span></code> defines one property and two instance methods.</p>
+<p>The property <code class="docutils literal notranslate"><span class="pre">Current</span></code> is of type <code class="docutils literal notranslate"><span class="pre">int</span></code>, holds the current number of the sequence, and is initialized to <code class="docutils literal notranslate"><span class="pre">0</span></code>.
+Its <code class="docutils literal notranslate"><span class="pre">get</span></code> accessor is <code class="docutils literal notranslate"><span class="pre">public</span></code> while its <code class="docutils literal notranslate"><span class="pre">set</span></code> accessor is <code class="docutils literal notranslate"><span class="pre">private</span></code>.
+It</p>
+<p>The first instance method is called <code class="docutils literal notranslate"><span class="pre">Next</span></code> and it simply increments the <code class="docutils literal notranslate"><span class="pre">Current</span></code> number by <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<p>Note that we’ve marked both the property <code class="docutils literal notranslate"><span class="pre">Current</span></code> and the instance method <code class="docutils literal notranslate"><span class="pre">Next</span></code> with the keyword <code class="docutils literal notranslate"><span class="pre">virtual</span></code>.
+This is because we want it possible to override these members in subclasses so that the subclasses in question can implement their actual sequences.</p>
+<p>Note that since the <code class="docutils literal notranslate"><span class="pre">set</span></code> accessor of the property <code class="docutils literal notranslate"><span class="pre">Current</span></code> is marked as <code class="docutils literal notranslate"><span class="pre">private</span></code> it is not overridable.
+Subclasses will not have access to the <code class="docutils literal notranslate"><span class="pre">set</span></code> accessor and will thus interpret the property <code class="docutils literal notranslate"><span class="pre">Current</span></code> as a read-only property that is marked as <code class="docutils literal notranslate"><span class="pre">virtual</span></code>.</p>
+<p>The second instance method is called <code class="docutils literal notranslate"><span class="pre">Take</span></code> and it takes an integer called <code class="docutils literal notranslate"><span class="pre">n</span></code> representing the number of numbers that we want from the sequence.
+It calls <code class="docutils literal notranslate"><span class="pre">Next</span></code> on the sequence <code class="docutils literal notranslate"><span class="pre">n</span></code> times and puts the value of <code class="docutils literal notranslate"><span class="pre">Current</span></code> in, after each call to next, in an array that it then returns.
+In other words, the method <code class="docutils literal notranslate"><span class="pre">Take</span></code> simply returns the next <code class="docutils literal notranslate"><span class="pre">n</span></code> numbers from the sequence in an array while also moving the sequence that many steps.</p>
+<p>Ok, so we’ve got a basic sequence now.
 Let’s try it out to make sure that it works.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Initialize sequence.</span>
-<span class="n">Sequence</span><span class="w"> </span><span class="n">seq</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Sequence</span><span class="p">(</span><span class="m">5</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Instantiate sequence.</span>
+<span class="n">Sequence</span><span class="w"> </span><span class="n">seq</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Sequence</span><span class="p">();</span><span class="w"></span>
 
 <span class="c1">// Take 10 elements.</span>
 <span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">seq</span><span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">);</span><span class="w"></span>
@@ -1960,30 +2023,32 @@ Let’s try it out to make sure that it works.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0, 1, 2, 3, 4, 5, 6, 7, 8, 9
 </pre></div>
 </div>
 </div>
 </div>
-<p>Now let’s build some subclasses that inherits from this base class.
-Let’s start with a sequence that skips every <code class="docutils literal notranslate"><span class="pre">n</span></code> number.
-What number is <code class="docutils literal notranslate"><span class="pre">n</span></code>?
-Let’s make that a parameter of the constructor that we call <code class="docutils literal notranslate"><span class="pre">skip</span></code>.
-Let’s call this sequence a <code class="docutils literal notranslate"><span class="pre">SkipSequence</span></code>.</p>
+<p>Seems to work.
+Let’s now define some subclasses of this sequence that reuses code from the superclass.</p>
+<section id="step-sequence">
+<h4><span class="section-number">72.3.1.1. </span>Step sequence<a class="headerlink" href="#step-sequence" title="Permalink to this headline">#</a></h4>
+<p>Let’s define a subclass called <code class="docutils literal notranslate"><span class="pre">StepSequence</span></code> that models the series of integers that moves in increments of <code class="docutils literal notranslate"><span class="pre">steps</span></code>.
+In other words, it specializes the class <code class="docutils literal notranslate"><span class="pre">Sequence</span></code> by saying that every time it moves to the next number we may move multiple steps.</p>
+<p>We’re now going to look at two ways of writing this class as a subclass of <code class="docutils literal notranslate"><span class="pre">Sequence</span></code>.
+Let’s start by reusing as much code as possible.
+Here’s the class.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SkipSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="w"></span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">StepSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">skip</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">steps</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">SkipSequence</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">initial</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">skip</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span><span class="n">initial</span><span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">skip</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">skip</span><span class="w"> </span><span class="p">&gt;=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="n">skip</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">StepSequence</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">steps</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">steps</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">steps</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span><span class="w"></span>
 <span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">base</span><span class="p">.</span><span class="n">Next</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">=</span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">&lt;</span><span class="n">skip</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">++)</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">&lt;</span><span class="n">steps</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">++)</span><span class="w"></span>
 <span class="w">      </span><span class="k">base</span><span class="p">.</span><span class="n">Next</span><span class="p">();</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
@@ -1991,48 +2056,129 @@ Let’s call this sequence a <code class="docutils literal notranslate"><span cl
 </div>
 </div>
 </div>
-<p>There are two important things to notice in the example above.</p>
-<ol class="simple">
-<li><p>The constructor of the subclass is calling the constructor of the superclass by using the <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword. Remember this from <span class="xref myst">constructor chaining</span>?</p></li>
-<li><p>The instance method <code class="docutils literal notranslate"><span class="pre">Next</span></code> is overriding the implementation of the superclass.</p></li>
-</ol>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>To avoid the awkward implementation of the instance method <code class="docutils literal notranslate"><span class="pre">Next</span></code> we could of course just also have overridden the property <code class="docutils literal notranslate"><span class="pre">Current</span></code>.
-We’re doing it this way just to illustrate how you can reuse code from the superclass.</p>
-</div>
+<p>Let’s try it out to make sure that it works and then let’s discuss it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Sequence</span><span class="w"> </span><span class="n">tensSeq</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SkipSequence</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">);</span><span class="w"></span>
-
-<span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">tens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tensSeq</span><span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">);</span><span class="w"></span>
-
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tens</span><span class="p">));</span><span class="w"></span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">StepSequence</span><span class="w"> </span><span class="n">seq</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StepSequence</span><span class="p">(</span><span class="m">2</span><span class="p">);</span><span class="w"></span>
+<span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">seq</span><span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">);</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">));</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1, 11, 21, 31, 41, 51, 61, 71, 81, 91
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0, 2, 4, 6, 8, 10, 12, 14, 16, 18
 </pre></div>
 </div>
 </div>
 </div>
-<p>Let’s now build the even and odd sequences.
-If these inherit from the class <code class="docutils literal notranslate"><span class="pre">SkipSequence</span></code> then we don’t need to worry about changing the implementation of <code class="docutils literal notranslate"><span class="pre">Next</span></code>.
-Instead, we just need to make sure that we start on an even or odd number (depending on which class we are talking about) and that we set the parameter <code class="docutils literal notranslate"><span class="pre">skip</span></code> to <code class="docutils literal notranslate"><span class="pre">2</span></code>.
-We can do all that by using simple constructor chaining and calling base.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">EvenSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">SkipSequence</span><span class="w"></span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">StepSequence</span><span class="w"> </span><span class="n">seq</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StepSequence</span><span class="p">(</span><span class="m">10</span><span class="p">);</span><span class="w"></span>
+<span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">seq</span><span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">);</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">));</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0, 10, 20, 30, 40, 50, 60, 70, 80, 90
+</pre></div>
+</div>
+</div>
+</div>
+<p>Seems to work, but let’s now talk about why.</p>
+<p>It works because we’re <a class="reference internal" href="#overriding"><span class="std std-ref">overriding</span></a> the instance method <code class="docutils literal notranslate"><span class="pre">Next</span></code> with an implementation that calls the instance method <code class="docutils literal notranslate"><span class="pre">Next</span></code> in the superclass as many times as defined by the instance field <code class="docutils literal notranslate"><span class="pre">steps</span></code>.
+Notice how we’re making use of the keyword <code class="docutils literal notranslate"><span class="pre">base</span></code> to differentiate between <code class="docutils literal notranslate"><span class="pre">Next</span></code> as defined in <code class="docutils literal notranslate"><span class="pre">StepSequence</span></code> and as defined in its parent <code class="docutils literal notranslate"><span class="pre">Sequence</span></code>.</p>
+<p>What about code reuse?
+Well, we’ve reused the property <code class="docutils literal notranslate"><span class="pre">Current</span></code> and the instance method <code class="docutils literal notranslate"><span class="pre">Take</span></code>.</p>
+<p>Alright, so we said that there are at least two ways of doing this.
+What’s the other way?
+Well, we could also decide to ignore the way that the superclass implements <code class="docutils literal notranslate"><span class="pre">Next</span></code> and <code class="docutils literal notranslate"><span class="pre">Current</span></code> altogether and simply write our own implementation.
+Have a look at the code below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">StepSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">EvenSequence</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
-<span class="w">    </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">steps</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">StepSequence</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">steps</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">steps</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">steps</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Current</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">get</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">steps</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This implementation works just like the other.
+However, in this implementation we’ve reused less code from the superclass.
+Why?
+Because we’ve also overridden the property <code class="docutils literal notranslate"><span class="pre">Current</span></code>.</p>
+</section>
+<section id="evens-and-odds">
+<h4><span class="section-number">72.3.1.2. </span>Evens and odds<a class="headerlink" href="#evens-and-odds" title="Permalink to this headline">#</a></h4>
+<p>Let’s build something a bit more complex.
+How about sequences that generate even and odd numbers?</p>
+<p>Interestingly, both the sequence of even numbers and that of odd numbers move in increments of 2.
+So to model, for example, the sequence of even numbers we must figure out how to start on an even number and then consistently increment by 2.</p>
+<p>Again, we find multiple ways of implementing these classes.
+Let’s first talk about how we would implement them as subclasses of <code class="docutils literal notranslate"><span class="pre">StepSequence</span></code>.
+If these inherit from the class <code class="docutils literal notranslate"><span class="pre">StepSequence</span></code> then we don’t need to worry about changing the implementation of <code class="docutils literal notranslate"><span class="pre">Next</span></code>.
+Instead, we just need to make sure that we start on an even or odd number (depending on which class we are talking about) and that we set the parameter <code class="docutils literal notranslate"><span class="pre">steps</span></code> to <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p>
+<p>Unfortunately that requires to add a constructor to the implementation of <code class="docutils literal notranslate"><span class="pre">StepSequence</span></code> so that we can control the starting number.
+Have a look at the code below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Updated implementation.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">StepSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">current</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">steps</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">StepSequence</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">steps</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">:</span><span class="w"> </span><span class="k">this</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">StepSequence</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">steps</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">initial</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">steps</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">steps</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">current</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">initial</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Current</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">get</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">current</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="n">steps</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>We’re going to talk about the design principle known as <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">composition over inheritance</span></a> at length.
+Had we used composition instead of inheritance to solve this problem we would not have been forced to change the <code class="docutils literal notranslate"><span class="pre">StepSequence</span></code> class at all.
+We’ll discuss this further in the chapters on <a class="reference internal" href="abstract-constructed-object-composition.html"><span class="doc std std-doc">abstract constructed</span></a> and <a class="reference internal" href="abstract-injected-object-composition.html"><span class="doc std std-doc">abstract injected object composition</span></a>.</p>
+</div>
+<p>With our redefined version of <code class="docutils literal notranslate"><span class="pre">StepSequence</span></code> that allows us to start a sequence at a number that we choose we are ready to subclass it in order to implement even and odd sequences.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">EvenSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">StepSequence</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">EvenSequence</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">OddSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">SkipSequence</span><span class="w"></span>
+<span class="k">class</span><span class="w"> </span><span class="nc">OddSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">StepSequence</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">OddSequence</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
-<span class="w">    </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">OddSequence</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
@@ -2040,8 +2186,8 @@ We can do all that by using simple constructor chaining and calling base.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Sequence</span><span class="w"> </span><span class="n">evenSeq</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EvenSequence</span><span class="p">();</span><span class="w"></span>
-<span class="n">Sequence</span><span class="w"> </span><span class="n">oddSeq</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OddSequence</span><span class="p">();</span><span class="w"></span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">EvenSequence</span><span class="w"> </span><span class="n">evenSeq</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EvenSequence</span><span class="p">();</span><span class="w"></span>
+<span class="n">OddSequence</span><span class="w"> </span><span class="n">oddSeq</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OddSequence</span><span class="p">();</span><span class="w"></span>
 
 <span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">evens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">evenSeq</span><span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">);</span><span class="w"></span>
 <span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">odds</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">oddSeq</span><span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">);</span><span class="w"></span>
@@ -2052,26 +2198,223 @@ We can do all that by using simple constructor chaining and calling base.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0, 2, 4, 6, 8, 10, 12, 14, 16, 18
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1, 3, 5, 7, 9, 11, 13, 15, 17, 19
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again, we said that we would talk about two ways to build these sequences.
+One other way of building a sequence of even numbers and one of odds is to again simply override not only the method <code class="docutils literal notranslate"><span class="pre">Next</span></code> but also the property <code class="docutils literal notranslate"><span class="pre">Current</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Alterantive implementation.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">EvenSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Current</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">get</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">current</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">2</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EvenSequence</span><span class="p">().</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">)));</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0, 2, 4, 6, 8, 10, 12, 14, 16, 18
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Alterantive implementation.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">OddSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Current</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">get</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">current</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="p">+=</span><span class="w"> </span><span class="m">2</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OddSequence</span><span class="p">().</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">)));</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1, 3, 5, 7, 9, 11, 13, 15, 17, 19
+</pre></div>
+</div>
+</div>
+</div>
+<p>These too work just fine, but once again we’re reusing less and overriding more.
+At some point it will be pointless to keep using inheritance instead of composition.</p>
+</section>
+<section id="palindromic-numbers">
+<h4><span class="section-number">72.3.1.3. </span>Palindromic numbers<a class="headerlink" href="#palindromic-numbers" title="Permalink to this headline">#</a></h4>
+<p>Let’s now have a look at a sequence which isn’t so trivial.
+How about the sequence of palindromic numbers?
+A palindrome is a string whose value remains the same when reversed.
+A palindromic number is a number that behaves like a palindrome when treated like a string.
+Some examples of palindromic numbers include <code class="docutils literal notranslate"><span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">11</span></code>, <code class="docutils literal notranslate"><span class="pre">505</span></code>, and <code class="docutils literal notranslate"><span class="pre">110011</span></code>.</p>
+<p>The class below is called <code class="docutils literal notranslate"><span class="pre">PalindromicSequence</span></code> and implements this idea.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">PalindromicSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">base</span><span class="p">.</span><span class="n">Next</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(!</span><span class="n">isPalindromic</span><span class="p">())</span><span class="w"></span>
+<span class="w">      </span><span class="n">Next</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">isPalindromic</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Current</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">&lt;</span><span class="n">number</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="p">++)</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">number</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="p">!=</span><span class="w"> </span><span class="n">number</span><span class="p">[</span><span class="n">number</span><span class="p">.</span><span class="n">Length</span><span class="w"> </span><span class="p">-</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">-</span><span class="w"> </span><span class="m">1</span><span class="p">])</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There’s probably more efficient ways of implementing this algorithm but I’ve opted for this way since it is fairly readable in the context.</p>
+</div>
+<p>Notice how the overridden implementation of the instance method is <a class="reference internal" href="recursion.html#recursion"><span class="std std-ref">recursive</span></a>.
+It calls <code class="docutils literal notranslate"><span class="pre">base.Next</span></code> and then calls itself again unless the number we have found is a palindrome.
+The method could also have been written non-recursively, using <a class="reference internal" href="iteration.html"><span class="doc std std-doc">iteration</span></a>, like this:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">do</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">base</span><span class="p">.</span><span class="n">Next</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(!</span><span class="n">isPalindromic</span><span class="p">());</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Also note how we opted to inherit from <code class="docutils literal notranslate"><span class="pre">Sequence</span></code> and not from <code class="docutils literal notranslate"><span class="pre">StepSequence</span></code> since the palindrome finding algorithm that we’ve implemented must move in increments of <code class="docutils literal notranslate"><span class="pre">1</span></code> when looking for the next palindrome.</p>
+<p>Let’s try it out to make sure that it works.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">PalindromicSequence</span><span class="w"> </span><span class="n">sequence</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PalindromicSequence</span><span class="p">();</span><span class="w"></span>
+<span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sequence</span><span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">);</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">));</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0, 1, 2, 3, 4, 5, 6, 7, 8, 9
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+</div>
+</div>
+</section>
+<section id="square-numbers">
+<h4><span class="section-number">72.3.1.4. </span>Square numbers<a class="headerlink" href="#square-numbers" title="Permalink to this headline">#</a></h4>
+<p>Let’s do one final sequence before we move on.
+Here’s something that’s quite different from what we’ve seen so far.
+How about the sequence of square numbers?</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">n</span></code>:th number in the sequence of squares is simply defined as <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">*</span> <span class="pre">n</span></code>.
+Ideally we’d like to use that formula rather than having to step through each number and check whether that number happens to be a <code class="docutils literal notranslate"><span class="pre">square</span></code> number.
+Have a look at the implementation below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SquareSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Current</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">get</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="p">*</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w"> </span><span class="p">/</span><span class="w"> </span><span class="m">2</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">n</span><span class="p">++;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The implementation is a bit awkward but we’ll rewrite this implementation after we have learned about the <code class="docutils literal notranslate"><span class="pre">protected</span></code> modifier in the chapter on <a class="reference internal" href="advanced-access-modifiers.html"><span class="doc std std-doc">advanced access modifiers</span></a>.
-It will then be slightly less awkward, albeit still quite awkward.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">SquareSequence</span><span class="w"> </span><span class="n">sequence</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SquareSequence</span><span class="p">();</span><span class="w"></span>
+<span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sequence</span><span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">);</span><span class="w"></span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">));</span><span class="w"></span>
+</pre></div>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Why did I choose such an awkward example?
-Because I have searched far and wide and the more I look, the more I get convinved that there are no good examples of inheritance where the base class is not abstract or where the whole thing is not <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">better</span></a> modeled with <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">composition over inheritance</span></a>.</p>
-<p>In the case of C#, you can even choose to combine interfaces and <a class="reference internal" href="extension-methods.html#extension-methods"><span class="std std-ref">extension methods</span></a> but we’ll cover that much later.</p>
-<p>However, just because all I’ve seen is white swans, doesn’t prove that there are no black swans, so if you ever come across a good example, I would love it if you would let me know.</p>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0, 1, 3, 6, 10, 15, 21, 28, 36, 45
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the implementation above, we’re only reusing the method <code class="docutils literal notranslate"><span class="pre">Take</span></code>.
+The rest has been overridden.
+Had we not overridden <code class="docutils literal notranslate"><span class="pre">Current</span></code> we would have had to write a much more complicated algorithm.
+Have a look at the alternative solution below.</p>
+<div class="cell docutils container" id="sequence-recursive-duplication">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SquareSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">base</span><span class="p">.</span><span class="n">Next</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(!</span><span class="n">isSquare</span><span class="p">())</span><span class="w"></span>
+<span class="w">      </span><span class="n">Next</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">isSquare</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">Math</span><span class="p">.</span><span class="n">Sqrt</span><span class="p">(</span><span class="n">Current</span><span class="p">)</span><span class="w"> </span><span class="p">*</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">Math</span><span class="p">.</span><span class="n">Sqrt</span><span class="p">(</span><span class="n">Current</span><span class="p">)</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="n">Current</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SquareSequence</span><span class="p">().</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">)));</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0, 1, 4, 9, 16, 25, 36, 49, 64, 81
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition-key-takeaway admonition">
+<p class="admonition-title">Key takeaway</p>
+<p>In the latter case we tried to reuse more code by allowing ourselves use a less efficient algorithm we <em>still</em> ended up having to duplicate code.
+Notice how the implementation of the recursive method <code class="docutils literal notranslate"><span class="pre">Next</span></code> in <code class="docutils literal notranslate"><span class="pre">SquareSequence</span></code> essentially is the same as the implementation of <code class="docutils literal notranslate"><span class="pre">Next</span></code> in <code class="docutils literal notranslate"><span class="pre">PalindromicSequence</span></code>.
+We’ll return to this discussion in <code class="xref std std-numref docutils literal notranslate"><span class="pre">filtered-sequences-and-inheritance</span></code>.</p>
+</div>
+</section>
 </section>
 <section id="characterwise-ciphers">
 <span id="inheritance-examples-characterwise"></span><h3><span class="section-number">72.3.2. </span>Characterwise ciphers<a class="headerlink" href="#characterwise-ciphers" title="Permalink to this headline">#</a></h3>
@@ -2419,8 +2762,17 @@ In addition to this however, the interface also inherits from the other interfac
 </div>
 </section>
 </section>
+<section id="discussion">
+<h2><span class="section-number">72.4. </span>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">#</a></h2>
+<p>If you find the examples in this chapter awkward, you’re not alone.
+I do too.</p>
+<p>I have searched far and wide and the more I look, the more I get convinced that there are no good examples of inheritance where the base class is not abstract or where the whole thing is not <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">better</span></a> modeled with <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">composition over inheritance</span></a>.</p>
+<p>In the case of C#, you can even choose to combine interfaces and <a class="reference internal" href="extension-methods.html#extension-methods"><span class="std std-ref">extension methods</span></a> but we’ll cover that much later.</p>
+<p>However, just because all I’ve seen is white swans, doesn’t prove that there are no black swans, so if you ever come across a good example, I would really, really, really appreciate it if you would let me know.
+Because I for one have given up on inheritance, just like I have given up on <a class="reference internal" href="../index.html#why-oo"><span class="std std-ref">object oriented programming</span></a>.</p>
+</section>
 <section id="exercises">
-<h2><span class="section-number">72.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">72.5. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
 <div class="exercise admonition" id="chapters/inheritance-exercise-0">
 
 <p class="admonition-title"><span class="caption-number">Exercise 72.1 </span></p>
@@ -2497,6 +2849,14 @@ Write your own subclass of the class <code class="docutils literal notranslate">
 </section>
 </div>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(6,7): error CS1729: &#39;Sequence&#39; does not contain a constructor that takes 1 arguments
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="exercise admonition" id="ex:inheritance:fibonacci">
 

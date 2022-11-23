@@ -1143,8 +1143,18 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sequences">
+     76.2.1. Sequences
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random-cipher">
+     76.2.2. Random cipher
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#cipher-identification">
-     76.2.1. Cipher identification
+     76.2.3. Cipher identification
     </a>
    </li>
   </ul>
@@ -1184,8 +1194,18 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sequences">
+     76.2.1. Sequences
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random-cipher">
+     76.2.2. Random cipher
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#cipher-identification">
-     76.2.1. Cipher identification
+     76.2.3. Cipher identification
     </a>
    </li>
   </ul>
@@ -1207,27 +1227,37 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="abstract-constructed-object-composition">
 <h1><span class="section-number">76. </span>Abstract constructed object composition<a class="headerlink" href="#abstract-constructed-object-composition" title="Permalink to this headline">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
-</div>
 <div class="info admonition">
 <p class="admonition-title">Prerequisites</p>
 <p>In this chapter we’re exploring the object composition abstraction level that we refer to as “abstract constructed object composition”. Please have a look at the chapter <a class="reference internal" href="object-composition.html#object-composition-abstraction-levels"><span class="std std-ref">object composition</span></a> if you have not already.</p>
 </div>
 <section id="motivation">
 <h2><span class="section-number">76.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
-<p>If an object composition is constructed then that means that the composing object is the one who instantiates the composed.
-If the object composition is abstract then that means that the compile-time type of the constructed object is abstract.</p>
-<p>We mean “abstract” in the sense of “abstraction”, which means an <a class="reference internal" href="interfaces.html"><span class="doc std std-doc">interface</span></a> or an <a class="reference internal" href="abstract-classes.html"><span class="doc std std-doc">abstract class</span></a>.</p>
+<p>If an object composition is <em>constructed</em> then that means that the composing object is the one who <em>instantiates</em> (think: calls the constructor of) the composed.
+If the object composition is <em>abstract</em> then that means that the <em>compile-time type</em> of the constructed object is <em>abstract</em>.</p>
+<p>We use the term “abstract” in the sense of an “abstraction”, which means an <a class="reference internal" href="interfaces.html"><span class="doc std std-doc">interface</span></a> or an <a class="reference internal" href="abstract-classes.html"><span class="doc std std-doc">abstract class</span></a>.</p>
 <p>So, abstract constructed object composition only makes sense if we want to use the power of subtype polymorphism within a class but don’t want to let others outside choose what object or objects from that subtyping hierarchy we use.</p>
 </section>
 <section id="examples">
 <h2><span class="section-number">76.2. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
+<section id="sequences">
+<span id="abstract-constructed-sequences"></span><h3><span class="section-number">76.2.1. </span>Sequences<a class="headerlink" href="#sequences" title="Permalink to this headline">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Work in progress.</p>
+</div>
+</section>
+<section id="random-cipher">
+<h3><span class="section-number">76.2.2. </span>Random cipher<a class="headerlink" href="#random-cipher" title="Permalink to this headline">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Work in progress.</p>
+</div>
+</section>
+<section id="cipher-identification">
+<h3><span class="section-number">76.2.3. </span>Cipher identification<a class="headerlink" href="#cipher-identification" title="Permalink to this headline">#</a></h3>
 <p>Let’s be honest.
 I have a really hard time coming up with examples of this that don’t also somehow include abstract injected object composition in one form or another.</p>
-<section id="cipher-identification">
-<h3><span class="section-number">76.2.1. </span>Cipher identification<a class="headerlink" href="#cipher-identification" title="Permalink to this headline">#</a></h3>
 <p>Nevertheless, how about a cipher that determines what cipher to use based on what cipher it thinks has been used to encode some other string.</p>
 <p>Let’s assume that we have the following code that we’ve written in previous chapters.</p>
 <div class="cell tag_hide-input docutils container">
@@ -1312,7 +1342,7 @@ I have a really hard time coming up with examples of this that don’t also some
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2150.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2414.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1357,12 +1387,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.131:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.69:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2150.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2414.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`

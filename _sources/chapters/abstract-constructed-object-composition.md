@@ -12,11 +12,7 @@ kernelspec:
 
 # Abstract constructed object composition
 
-% TODO: Skip sequence (first discussed in the chapter on Inheritance, but then also Abstract classes) can usefully be implemented by holding a reference to a Sequence that you progress twice. This way you can skip in any sequence.
-
-```{warning}
-Work in progress.
-```
+%**TODO: Skip sequence (first discussed in the chapter on Inheritance, but then also Abstract classes) can usefully be implemented by holding a reference to a Sequence that you progress twice. This way you can skip in any sequence. Carry this example over to injection chapter.**
 
 ```{admonition} Prerequisites
 :class: info
@@ -29,21 +25,99 @@ In this chapter we’re exploring the object composition abstraction level that 
 %I would be so bold as to suggest that it is quite uncommon that we find ourselves in a position where abstract constructed object composition is a useful solution.
 
 %Let's think about it.
-If an object composition is constructed then that means that the composing object is the one who instantiates the composed.
-If the object composition is abstract then that means that the compile-time type of the constructed object is abstract.
+If an object composition is *constructed* then that means that the composing object is the one who *instantiates* (think: calls the constructor of) the composed.
+If the object composition is *abstract* then that means that the *compile-time type* of the constructed object is *abstract*.
 
-We mean "abstract" in the sense of "abstraction", which means an [interface](interfaces) or an [abstract class](abstract-classes).
+We use the term "abstract" in the sense of an "abstraction", which means an [interface](interfaces) or an [abstract class](abstract-classes).
 
 So, abstract constructed object composition only makes sense if we want to use the power of subtype polymorphism within a class but don't want to let others outside choose what object or objects from that subtyping hierarchy we use.
 
 
 ## Examples
 
+%### Sequences
+%
+%Remember the example of number sequences from the chapters on [inheritance](inheritance), and [abstract classes](abstract-classes)?
+%We ended up with an abstract superclass called `Sequence`:
+%
+%```{code-cell}
+%:tags: [hide-input]
+%abstract class Sequence
+%{
+%  public virtual int Current { get; protected set; }
+%
+%  public abstract void Next();
+%
+%  public virtual int[] Take (int n)
+%  {
+%    int[] nums = new int[n];
+%    for (int i=0; i<nums.Length; i++)
+%    {
+%      nums[i] = Current;
+%      Next();
+%    }
+%    return nums;
+%  }
+%}
+%```
+%
+%We then wrote a subclass of `Sequence` called `StepSequence` which moves in steps as defined by some variable that we might call the step size.
+%
+%```{code-cell}
+%:tags: [hide-input]
+%class StepSequence : Sequence
+%{
+%  int step;
+%
+%  public StepSequence (int initial, int step)
+%  {
+%    base.Current = initial;
+%    this.step = step;
+%  }
+%
+%  public override void Next()
+%    => base.Current += this.step;
+%}
+%```
+%
+%Since the step size can be either positive or negative the type models both incrementing and decrementing sequences.
+%
+%```{code-cell}
+%StepSequence inc = new StepSequence(1, 1);
+%int[] output = inc.Take(10);
+%Console.WriteLine(String.Join(", ", output));
+%```
+%
+%```{code-cell}
+%StepSequence dec = new StepSequence(10, -1);
+%int[] output = inc.Take(10);
+%Console.WriteLine(String.Join(", ", output));
+%```
+%
+%In the chapter on [abstract classes](abstract-classes) we then tried to reimplement a sequence that we had implemented before called `SkipSequence` that skipped every `n` elements.
+
+
+
+(abstract-constructed:sequences)=
+### Sequences
+
+```{note}
+Work in progress.
+```
+
+
+### Random cipher
+
+```{note}
+Work in progress.
+```
+
+
+### Cipher identification
+
 Let's be honest.
 I have a really hard time coming up with examples of this that don't also somehow include abstract injected object composition in one form or another.
 %I would be so bold as to suggest that it is quite uncommon that we find ourselves in a position where abstract constructed object composition is a very useful solution.
-
-### Cipher identification
 
 Nevertheless, how about a cipher that determines what cipher to use based on what cipher it thinks has been used to encode some other string.
 

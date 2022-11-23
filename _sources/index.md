@@ -156,6 +156,7 @@ Meaning that they run inside a Command Line Interpretor (CLI) such as `bash` or 
 Don't worry if not all of this makes sense yet.
 
 
+(why-oo)=
 ## Why object oriented
 
 It is my belief that most programmers will eventually switch to [functional programming](paradigms) unless artificial intelligence (AI) manages to replace us all before.

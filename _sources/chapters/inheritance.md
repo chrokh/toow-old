@@ -434,34 +434,33 @@ The classes `EvenSequence` and `OddSequence` define their own constructors and t
 (inheritance:sequences)=
 ### Sequences
 
-Let's talk about infinite number sequences.
-What is an infinite number sequence?
+% TODO: We're discussing two ideas at once. Filtered sequences and sequences that can be implemented. Let's separate the two into two sections. I will probably have built these classes already in earlier chapters anyway. Just like with ciphers. HARMONIZE BOTH UNDER THE SAME SUPERCLASS?
+% TODO: Adding constructors that take parameters makes the expressing the subclasses much harder. This is not a problem with interfaces.
+
+Let's talk about number sequences.
+What is a number sequence?
 Well, the natural numbers starting from 1 is one and incrementing all the way to infinity (or the maximum value for `int` in practical terms) is a sequence.
 Two other sequences are those of odd and even numbers.
-A more complex sequence would be for example the Fibonacci sequence which says that the next number is the sum of the two preceeding numbers.
+A more complex sequence would be for example the Fibonacci sequence which says that the next number is the sum of the two preceding numbers.
 
 ```{note}
 This might seem a bit esoteric at the moment, but once we've learned about [generics](generics) you will see how this generalizes to sequences of any type.
 Then, when we get to [design patterns](design-patterns), you will see how this is the core idea of the [iterator pattern](iterator-pattern).
 ```
 
-Let's define a base class that models the series of integers that moves in increments of `1`.
-We'll let the initial number (meaning the starting point) be set via the constructor and then we'll add instance methods for getting the current number, the next number, and one method that returns an array of numbers which moves the incrementor forward multiple times and returns each number generated along the way.
+Let's start by defining a superclass, called `Sequence`, that simply models the sequence of incrementing integers starting from the number `0`.
 
-% TODO: Need chapter on command query separation. That should also be linked here.
+Have a look at the implementation below.
 
 ```{code-cell}
 class Sequence
 {
-  public virtual int Current { get; private set; }
-
-  public Sequence (int initial)
-    => Current = initial;
+  public virtual int Current { get; private set; } = 0;
 
   public virtual void Next()
     => Current++;
 
-  public virtual int[] Take (int n)
+  public int[] Take (int n)
   {
     int[] nums = new int[n];
     for (int i=0; i<nums.Length; i++)
@@ -474,12 +473,30 @@ class Sequence
 }
 ```
 
-Great, so we've got a basic sequence now.
+The class `Sequence` defines one property and two instance methods.
+
+The property `Current` is of type `int`, holds the current number of the sequence, and is initialized to `0`.
+Its `get` accessor is `public` while its `set` accessor is `private`.
+It
+
+The first instance method is called `Next` and it simply increments the `Current` number by `1`.
+
+Note that we've marked both the property `Current` and the instance method `Next` with the keyword `virtual`.
+This is because we want it possible to override these members in subclasses so that the subclasses in question can implement their actual sequences.
+
+Note that since the `set` accessor of the property `Current` is marked as `private` it is not overridable.
+Subclasses will not have access to the `set` accessor and will thus interpret the property `Current` as a read-only property that is marked as `virtual`.
+
+The second instance method is called `Take` and it takes an integer called `n` representing the number of numbers that we want from the sequence.
+It calls `Next` on the sequence `n` times and puts the value of `Current` in, after each call to next, in an array that it then returns.
+In other words, the method `Take` simply returns the next `n` numbers from the sequence in an array while also moving the sequence that many steps.
+
+Ok, so we've got a basic sequence now.
 Let's try it out to make sure that it works.
 
 ```{code-cell}
-// Initialize sequence.
-Sequence seq = new Sequence(5);
+// Instantiate sequence.
+Sequence seq = new Sequence();
 
 // Take 10 elements.
 int[] output = seq.Take(10);
@@ -488,70 +505,157 @@ int[] output = seq.Take(10);
 Console.WriteLine(String.Join(", ", output));
 ```
 
-Now let's build some subclasses that inherits from this base class.
-Let's start with a sequence that skips every `n` number.
-What number is `n`?
-Let's make that a parameter of the constructor that we call `skip`.
-Let's call this sequence a `SkipSequence`.
+Seems to work.
+Let's now define some subclasses of this sequence that reuses code from the superclass.
+
+#### Step sequence
+
+Let's define a subclass called `StepSequence` that models the series of integers that moves in increments of `steps`.
+In other words, it specializes the class `Sequence` by saying that every time it moves to the next number we may move multiple steps.
+
+We're now going to look at two ways of writing this class as a subclass of `Sequence`.
+Let's start by reusing as much code as possible.
+Here's the class.
 
 ```{code-cell}
-class SkipSequence : Sequence
+class StepSequence : Sequence
 {
-  int skip;
+  private int steps;
 
-  public SkipSequence (int initial, int skip)
-    : base(initial)
-      => this.skip = (skip >= 0) ? skip : 0;
+  public StepSequence (int steps)
+    => this.steps = steps;
 
   public override void Next()
   {
-    base.Next();
-    for (int i=1; i<skip; i++)
+    for (int i=0; i<steps; i++)
       base.Next();
   }
 }
 ```
 
-There are two important things to notice in the example above.
+Let's try it out to make sure that it works and then let's discuss it.
 
-1. The constructor of the subclass is calling the constructor of the superclass by using the `base` keyword. Remember this from [constructor chaining](constructor-chaining)?
-2. The instance method `Next` is overriding the implementation of the superclass.
+```{code-cell}
+StepSequence seq = new StepSequence(2);
+int[] output = seq.Take(10);
+Console.WriteLine(String.Join(", ", output));
+```
+
+```{code-cell}
+StepSequence seq = new StepSequence(10);
+int[] output = seq.Take(10);
+Console.WriteLine(String.Join(", ", output));
+```
+
+Seems to work, but let's now talk about why.
+
+It works because we're [overriding](overriding) the instance method `Next` with an implementation that calls the instance method `Next` in the superclass as many times as defined by the instance field `steps`.
+Notice how we're making use of the keyword `base` to differentiate between `Next` as defined in `StepSequence` and as defined in its parent `Sequence`.
+
+What about code reuse?
+Well, we've reused the property `Current` and the instance method `Take`.
+
+Alright, so we said that there are at least two ways of doing this.
+What's the other way?
+Well, we could also decide to ignore the way that the superclass implements `Next` and `Current` altogether and simply write our own implementation.
+Have a look at the code below.
+
+```{code-cell}
+class StepSequence : Sequence
+{
+  private int n = 0;
+  private int steps;
+
+  public StepSequence (int steps)
+    => this.steps = steps;
+
+  public override int Current
+  {
+    get => n;
+  }
+
+  public override void Next()
+    => n += steps;
+}
+```
+
+This implementation works just like the other.
+However, in this implementation we've reused less code from the superclass.
+Why?
+Because we've also overridden the property `Current`.
+
+
+
+% TODO: Need chapter on command query separation. That should also be linked here.
+
+
+
+
+#### Evens and odds
+
+Let's build something a bit more complex.
+How about sequences that generate even and odd numbers?
+
+Interestingly, both the sequence of even numbers and that of odd numbers move in increments of 2.
+So to model, for example, the sequence of even numbers we must figure out how to start on an even number and then consistently increment by 2.
+
+Again, we find multiple ways of implementing these classes.
+Let's first talk about how we would implement them as subclasses of `StepSequence`.
+If these inherit from the class `StepSequence` then we don't need to worry about changing the implementation of `Next`.
+Instead, we just need to make sure that we start on an even or odd number (depending on which class we are talking about) and that we set the parameter `steps` to `2`.
+
+Unfortunately that requires to add a constructor to the implementation of `StepSequence` so that we can control the starting number.
+Have a look at the code below.
+
+```{code-cell}
+// Updated implementation.
+class StepSequence : Sequence
+{
+  private int current;
+  private int steps;
+
+  public StepSequence (int steps)
+    : this(steps, 0) { }
+
+  public StepSequence (int steps, int initial)
+  {
+    this.steps = steps;
+    this.current = initial;
+  }
+
+  public override int Current
+  {
+    get => current;
+  }
+
+  public override void Next()
+    => current += steps;
+}
+```
 
 ```{warning}
-To avoid the awkward implementation of the instance method `Next` we could of course just also have overridden the property `Current`.
-We're doing it this way just to illustrate how you can reuse code from the superclass.
+We're going to talk about the design principle known as [composition over inheritance](composition-over-inheritance) at length.
+Had we used composition instead of inheritance to solve this problem we would not have been forced to change the `StepSequence` class at all.
+We'll discuss this further in the chapters on [abstract constructed](abstract-constructed-object-composition) and [abstract injected object composition](abstract-injected-object-composition).
 ```
 
-```{code-cell}
-Sequence tensSeq = new SkipSequence(1, 10);
-
-int[] tens = tensSeq.Take(10);
-
-Console.WriteLine(String.Join(", ", tens));
-```
-
-Let's now build the even and odd sequences.
-If these inherit from the class `SkipSequence` then we don't need to worry about changing the implementation of `Next`.
-Instead, we just need to make sure that we start on an even or odd number (depending on which class we are talking about) and that we set the parameter `skip` to `2`.
-We can do all that by using simple constructor chaining and calling base.
+With our redefined version of `StepSequence` that allows us to start a sequence at a number that we choose we are ready to subclass it in order to implement even and odd sequences.
 
 ```{code-cell}
-class EvenSequence : SkipSequence
+class EvenSequence : StepSequence
 {
-  public EvenSequence ()
-    : base(0, 1) { }
+  public EvenSequence () : base(2) { }
 }
 
-class OddSequence : SkipSequence
+class OddSequence : StepSequence
 {
-  public OddSequence ()
-    : base(1, 1) { }
+  public OddSequence () : base(2, 1) { }
 }
 ```
 
 ```{code-cell}
-Sequence evenSeq = new EvenSequence();
-Sequence oddSeq  = new OddSequence();
+EvenSequence evenSeq = new EvenSequence();
+OddSequence oddSeq  = new OddSequence();
 
 int[] evens = evenSeq.Take(10);
 int[] odds = oddSeq.Take(10);
@@ -560,19 +664,174 @@ Console.WriteLine(String.Join(", ", evens));
 Console.WriteLine(String.Join(", ", odds));
 ```
 
-```{warning}
-The implementation is a bit awkward but we'll rewrite this implementation after we have learned about the `protected` modifier in the chapter on [advanced access modifiers](advanced-access-modifiers).
-It will then be slightly less awkward, albeit still quite awkward.
+Again, we said that we would talk about two ways to build these sequences.
+One other way of building a sequence of even numbers and one of odds is to again simply override not only the method `Next` but also the property `Current`.
+
+```{code-cell}
+// Alterantive implementation.
+class EvenSequence : Sequence
+{
+  private int current = 0;
+
+  public override int Current
+  {
+    get => current;
+  }
+
+  public override void Next ()
+    => current += 2;
+}
 ```
 
-```{warning}
-Why did I choose such an awkward example?
-Because I have searched far and wide and the more I look, the more I get convinved that there are no good examples of inheritance where the base class is not abstract or where the whole thing is not [better](maintainability) modeled with [composition over inheritance](composition-over-inheritance).
-
-In the case of C#, you can even choose to combine interfaces and [extension methods](extension-methods) but we'll cover that much later.
-
-However, just because all I've seen is white swans, doesn't prove that there are no black swans, so if you ever come across a good example, I would love it if you would let me know.
+```{code-cell}
+Console.WriteLine(String.Join(", ", new EvenSequence().Take(10)));
 ```
+
+```{code-cell}
+// Alterantive implementation.
+class OddSequence : Sequence
+{
+  private int current = 1;
+
+  public override int Current
+  {
+    get => current;
+  }
+
+  public override void Next ()
+    => current += 2;
+}
+```
+
+```{code-cell}
+Console.WriteLine(String.Join(", ", new OddSequence().Take(10)));
+```
+
+These too work just fine, but once again we're reusing less and overriding more.
+At some point it will be pointless to keep using inheritance instead of composition.
+
+
+#### Palindromic numbers
+
+Let's now have a look at a sequence which isn't so trivial.
+How about the sequence of palindromic numbers?
+A palindrome is a string whose value remains the same when reversed.
+A palindromic number is a number that behaves like a palindrome when treated like a string.
+Some examples of palindromic numbers include `2`, `11`, `505`, and `110011`.
+
+The class below is called `PalindromicSequence` and implements this idea.
+
+```{code-cell}
+class PalindromicSequence : Sequence
+{
+  public override void Next ()
+  {
+    base.Next();
+    if (!isPalindromic())
+      Next();
+  }
+
+  private bool isPalindromic ()
+  {
+    string number = Current.ToString();
+    for (int i=0; i<number.Length; i++)
+      if (number[i] != number[number.Length - i - 1])
+        return false;
+    return true;
+  }
+}
+```
+
+```{note}
+There's probably more efficient ways of implementing this algorithm but I've opted for this way since it is fairly readable in the context.
+```
+
+Notice how the overridden implementation of the instance method is [recursive](recursion).
+It calls `base.Next` and then calls itself again unless the number we have found is a palindrome.
+The method could also have been written non-recursively, using [iteration](iteration), like this:
+
+```csharp
+do {
+  base.Next();
+} while (!isPalindromic());
+```
+
+Also note how we opted to inherit from `Sequence` and not from `StepSequence` since the palindrome finding algorithm that we've implemented must move in increments of `1` when looking for the next palindrome.
+
+Let's try it out to make sure that it works.
+
+```{code-cell}
+PalindromicSequence sequence = new PalindromicSequence();
+int[] output = sequence.Take(10);
+Console.WriteLine(String.Join(", ", output));
+```
+
+
+#### Square numbers
+
+Let's do one final sequence before we move on.
+Here's something that's quite different from what we've seen so far.
+How about the sequence of square numbers?
+
+The `n`:th number in the sequence of squares is simply defined as `n * n`.
+Ideally we'd like to use that formula rather than having to step through each number and check whether that number happens to be a `square` number.
+Have a look at the implementation below.
+
+```{code-cell}
+class SquareSequence : Sequence
+{
+  int n = 0;
+
+  public override int Current
+  {
+    get => (n * (n + 1)) / 2;
+  }
+
+  public override void Next()
+    => n++;
+}
+```
+
+```{code-cell}
+SquareSequence sequence = new SquareSequence();
+int[] output = sequence.Take(10);
+Console.WriteLine(String.Join(", ", output));
+```
+
+In the implementation above, we're only reusing the method `Take`.
+The rest has been overridden.
+Had we not overridden `Current` we would have had to write a much more complicated algorithm.
+Have a look at the alternative solution below.
+
+(sequence-recursive-duplication)=
+```{code-cell}
+class SquareSequence : Sequence
+{
+  public override void Next()
+  {
+    base.Next();
+    if (!isSquare())
+      Next();
+  }
+
+  private bool isSquare ()
+    => (int)Math.Sqrt(Current) * (int)Math.Sqrt(Current) == Current;
+}
+```
+
+```{code-cell}
+Console.WriteLine(String.Join(", ", new SquareSequence().Take(10)));
+```
+
+```{admonition} Key takeaway
+In the latter case we tried to reuse more code by allowing ourselves use a less efficient algorithm we *still* ended up having to duplicate code.
+Notice how the implementation of the recursive method `Next` in `SquareSequence` essentially is the same as the implementation of `Next` in `PalindromicSequence`.
+We'll return to this discussion in {numref}`filtered-sequences-and-inheritance`.
+```
+
+
+
+
 
 
 (inheritance:examples:characterwise)=
@@ -876,6 +1135,19 @@ class Number : IAddable
   public void Add (int y) => x += y;
 }
 ```
+
+
+## Discussion
+
+If you find the examples in this chapter awkward, you're not alone.
+I do too.
+
+I have searched far and wide and the more I look, the more I get convinced that there are no good examples of inheritance where the base class is not abstract or where the whole thing is not [better](maintainability) modeled with [composition over inheritance](composition-over-inheritance).
+
+In the case of C#, you can even choose to combine interfaces and [extension methods](extension-methods) but we'll cover that much later.
+
+However, just because all I've seen is white swans, doesn't prove that there are no black swans, so if you ever come across a good example, I would really, really, really appreciate it if you would let me know.
+Because I for one have given up on inheritance, just like I have given up on [object oriented programming](why-oo).
 
 
 ## Exercises

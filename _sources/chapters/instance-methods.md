@@ -12,6 +12,7 @@ kernelspec:
 
 %- TODO: Also: void
 %- TODO: Use `AsString` instead of `Print` to avoid encouraging the habit of coupling to the console. Just mention that we want to call it `ToString` but we can't without warnings since we have to learn about inheritance first.
+%- TODO: Must also discuss default parameters. In the context of instance methods and in constructors.
 
 
 % TODO: Usually verbs. Or implied verbs as discussed in procedures.
