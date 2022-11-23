@@ -1402,7 +1402,7 @@ In other words, we write a colon (<code class="docutils literal notranslate"><sp
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3449.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3331.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1447,12 +1447,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.69:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.1.220:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3449.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3331.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1905,39 +1905,37 @@ The arrow points from the implementation to the interface.
 </figcaption>
 </figure>
 <p>In the diagram below we have four classes:
-<code class="docutils literal notranslate"><span class="pre">Sequence</span></code>, <code class="docutils literal notranslate"><span class="pre">SkipSequence</span></code>, <code class="docutils literal notranslate"><span class="pre">EvenSequence</span></code>, and <code class="docutils literal notranslate"><span class="pre">OddSequence</span></code>.
-The two classes <code class="docutils literal notranslate"><span class="pre">EvenSequence</span></code> and <code class="docutils literal notranslate"><span class="pre">OddSequence</span></code> inherits from the class <code class="docutils literal notranslate"><span class="pre">SkipSequence</span></code> which in turn inherits from the class <code class="docutils literal notranslate"><span class="pre">Sequence</span></code>.</p>
-<p>We’ll discuss the this example more in the <a class="reference internal" href="#inheritance-sequences"><span class="std std-ref">examples section</span></a> where we’ll also look at the corresponding code.</p>
+<code class="docutils literal notranslate"><span class="pre">Sequence</span></code>, <code class="docutils literal notranslate"><span class="pre">PalindromicSequence</span></code>, <code class="docutils literal notranslate"><span class="pre">EvenSequence</span></code>, and <code class="docutils literal notranslate"><span class="pre">OddSequence</span></code>.
+The three latter classes all inherit from the class <code class="docutils literal notranslate"><span class="pre">Sequence</span></code>.</p>
+<p>We’ll discuss the this example more in the <a class="reference internal" href="#inheritance-sequences"><span class="std std-ref">examples section</span></a> where we’ll also look at similar code.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>     ┌───────────────────────────────────────┐
      │                Sequence               │
      ├───────────────────────────────────────┤
      │                                       │
      ├───────────────────────────────────────┤
-     │ + Sequence (initial : int) : Sequence │
-     │ + &lt;&lt;get&gt;&gt; int Current                 │
-     │ - &lt;&lt;set&gt;&gt; int Current                 │
-     │ + void Next ()                        │
-     │ + int[] Take (int n)                  │
+     │ + &lt;&lt;get&gt;&gt; Current : int               │
+     │ - &lt;&lt;set&gt;&gt; Current : int               │
+     │ + Next () : void                      │
+     │ + Take (int n) : int[]                │
      └───────────────────────────────────────┘
-                         Δ
-                         │
-                         │
-     ┌─────────────────────────────────────────┐
-     │               SkipSequence              │
-     ├─────────────────────────────────────────┤
-     ├─────────────────────────────────────────┤
-     │ + SkipSequence (int initial, int skips) │
-     │ + int ^GetNext ()                       │
-     └─────────────────────────────────────────┘
-                       Δ  Δ
-                 ┌─────┘  └─────────────────────────┐
-                 │                                  │
-┌──────────────────────────────────┐  ┌────────────────────────────────┐
-│           EvenSequence           │  │          OddSequence           │
-├──────────────────────────────────┤  ├────────────────────────────────┤
-├──────────────────────────────────┤  ├────────────────────────────────┤
-│ + EvenSequence () : EvenSequence │  │ + OddSequence () : OddSequence │
-└──────────────────────────────────┘  └────────────────────────────────┘
+                   Δ   Δ   Δ
+           ┌───────┘   │   └─────┐
+           │           │         │
+┌───────────────────┐  │  ┌───────────────────┐
+│    EvenSequence   │  │  │     OddSequence   │
+├───────────────────┤  │  ├───────────────────┤
+├───────────────────┤  │  ├───────────────────┤
+│ + ^Next () : void │  │  │ + ^Next () : void │
+└───────────────────┘  │  └───────────────────┘
+                       │
+             ┌─────────────────────┐
+             │ PalindromicSequence │
+             ├─────────────────────┤
+             ├─────────────────────┤
+             │ + ^Next () : void   │
+             └─────────────────────┘
+
+
 </pre></div>
 </div>
 <p>Subclasses are conventionally drawn “below” superclasses.</p>
@@ -1950,9 +1948,8 @@ A common suggestion, and the choice we have made above, is however to, out of th
 <p>Pick a syntax and stick to it.
 Consistency is key.</p>
 </div>
-<p>In the example above we have overriden the implementation of <code class="docutils literal notranslate"><span class="pre">GetNext</span></code> in the class <code class="docutils literal notranslate"><span class="pre">SkipSequence</span></code>.
-The class also defines its own constructor but beyond that, the implementation of all other members are inherited.
-The classes <code class="docutils literal notranslate"><span class="pre">EvenSequence</span></code> and <code class="docutils literal notranslate"><span class="pre">OddSequence</span></code> define their own constructors and then inherit the implementation of all other members without overriding any of them.</p>
+<p>In the example above we have overriden the implementation of <code class="docutils literal notranslate"><span class="pre">Next</span></code> in all subclasses of <code class="docutils literal notranslate"><span class="pre">Sequence</span></code>.
+All other members are inherited.</p>
 </section>
 </section>
 <section id="examples">
