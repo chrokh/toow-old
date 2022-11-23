@@ -364,42 +364,39 @@ The arrow points from the implementation to the interface.
 ```
 
 In the diagram below we have four classes:
-`Sequence`, `SkipSequence`, `EvenSequence`, and `OddSequence`.
-The two classes `EvenSequence` and `OddSequence` inherits from the class `SkipSequence` which in turn inherits from the class `Sequence`.
+`Sequence`, `PalindromicSequence`, `EvenSequence`, and `OddSequence`.
+The three latter classes all inherit from the class `Sequence`.
 
-We'll discuss the this example more in the [examples section](inheritance:sequences) where we'll also look at the corresponding code.
-
+We'll discuss the this example more in the [examples section](inheritance:sequences) where we'll also look at similar code.
 ```
      ┌───────────────────────────────────────┐
      │                Sequence               │
      ├───────────────────────────────────────┤
      │                                       │
      ├───────────────────────────────────────┤
-     │ + Sequence (initial : int) : Sequence │
-     │ + <<get>> int Current                 │
-     │ - <<set>> int Current                 │
-     │ + void Next ()                        │
-     │ + int[] Take (int n)                  │
+     │ + <<get>> Current : int               │
+     │ - <<set>> Current : int               │
+     │ + Next () : void                      │
+     │ + Take (int n) : int[]                │
      └───────────────────────────────────────┘
-                         Δ
-                         │
-                         │
-     ┌─────────────────────────────────────────┐
-     │               SkipSequence              │
-     ├─────────────────────────────────────────┤
-     ├─────────────────────────────────────────┤
-     │ + SkipSequence (int initial, int skips) │
-     │ + int ^GetNext ()                       │
-     └─────────────────────────────────────────┘
-                       Δ  Δ
-                 ┌─────┘  └─────────────────────────┐
-                 │                                  │
-┌──────────────────────────────────┐  ┌────────────────────────────────┐
-│           EvenSequence           │  │          OddSequence           │
-├──────────────────────────────────┤  ├────────────────────────────────┤
-├──────────────────────────────────┤  ├────────────────────────────────┤
-│ + EvenSequence () : EvenSequence │  │ + OddSequence () : OddSequence │
-└──────────────────────────────────┘  └────────────────────────────────┘
+                   Δ   Δ   Δ
+           ┌───────┘   │   └─────┐
+           │           │         │
+┌───────────────────┐  │  ┌───────────────────┐
+│    EvenSequence   │  │  │     OddSequence   │
+├───────────────────┤  │  ├───────────────────┤
+├───────────────────┤  │  ├───────────────────┤
+│ + ^Next () : void │  │  │ + ^Next () : void │
+└───────────────────┘  │  └───────────────────┘
+                       │
+             ┌─────────────────────┐
+             │ PalindromicSequence │
+             ├─────────────────────┤
+             ├─────────────────────┤
+             │ + ^Next () : void   │
+             └─────────────────────┘
+
+
 ```
 
 Subclasses are conventionally drawn "below" superclasses.
@@ -415,9 +412,8 @@ Pick a syntax and stick to it.
 Consistency is key.
 ```
 
-In the example above we have overriden the implementation of `GetNext` in the class `SkipSequence`.
-The class also defines its own constructor but beyond that, the implementation of all other members are inherited.
-The classes `EvenSequence` and `OddSequence` define their own constructors and then inherit the implementation of all other members without overriding any of them.
+In the example above we have overriden the implementation of `Next` in all subclasses of `Sequence`.
+All other members are inherited.
 
 % Example: Get rid of the foreach? Or is this perhaps not a great solution?
 
@@ -510,6 +506,7 @@ Let's now define some subclasses of this sequence that reuses code from the supe
 
 #### Step sequence
 
+% TODO: Steps are an unnecessary complication. Remove this section and stick to the sequences that are depicted in the UML diagram earlier in this chapter.
 Let's define a subclass called `StepSequence` that models the series of integers that moves in increments of `steps`.
 In other words, it specializes the class `Sequence` by saying that every time it moves to the next number we may move multiple steps.
 
