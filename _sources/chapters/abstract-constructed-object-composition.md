@@ -105,23 +105,223 @@ So, abstract constructed object composition only makes sense if we want to use t
 Work in progress.
 ```
 
+% TODO: Perhaps a RandomSequenceFactory is a good example? Can give forward reference to factory method pattern chapter and this isn't better solved using injection since we cannot inject and reuse the same sequence over and over again. Because they have state! This is great EXCEPT FOR THAT IT ISN'T ACTUALLY AN EXAMPLE OF COMPOSITION SINCE WE IMMEDIATELY RETURN THE OBJECTS! SOLUTION: I should simply rename all these four concepts so that we talk about ABSTRACT INJECTED ASSOCIATION instead of object composition. That is more flexible and UML association seems to mean exactly what we mean. All forms of type A has a relationship with type B. This is probably wrong. See mail discussion on the subject.
+
+%``{code-cell}
+%:tags: [hide-input]
+%abstract class Sequence
+%{
+%  public virtual int Current { get; protected set; }
+%
+%  public abstract void Next();
+%
+%  public virtual int[] Take (int n)
+%  {
+%    int[] nums = new int[n];
+%    for (int i=0; i<nums.Length; i++)
+%    {
+%      nums[i] = Current;
+%      Next();
+%    }
+%    return nums;
+%  }
+%}
+%``
+%
+%``{code-cell}
+%:tags: [hide-input]
+%class IncrementingSequence : Sequence
+%{
+%  public override void Next ()
+%    => Current++;
+%}
+%
+%class DecrementingSequence : Sequence
+%{
+%  public override void Next ()
+%    => Current--;
+%}
+%``
+%
+%``{code-cell}
+%class RandomSequenceFactory
+%{
+%  public Sequence Next ()
+%}
+%``
+
 
 ### Random cipher
-
-```{note}
-Work in progress.
-```
-
-
-### Cipher identification
 
 Let's be honest.
 I have a really hard time coming up with examples of this that don't also somehow include abstract injected object composition in one form or another.
 %I would be so bold as to suggest that it is quite uncommon that we find ourselves in a position where abstract constructed object composition is a very useful solution.
 
-Nevertheless, how about a cipher that determines what cipher to use based on what cipher it thinks has been used to encode some other string.
+Nevertheless, let's build a cipher that, upon instantiation, randomly chooses between two different ciphers.
+Let's call it `RandomCipher`.
 
-Let's assume that we have the following code that we've written in previous chapters.
+Writing this cipher without using [subtype polymorphism](subtype-polymorphism) would be awkward, since we would have to meaninglessly duplicate code.
+However, since we can treat concrete ciphers as if they were of the same abstract type, we can write our implementation once, and it will work for both ciphers.
+
+```{warning}
+A better solution to this problem would of course be to use [abstract injected](abstract-injected:random-cipher) instead of abstract constructed object composition but let's take it one step at a time.
+```
+
+Let's first bring in some of our cipher interfaces, and our two concrete ciphers `CaesarCipher` and `LeetCipher`.
+
+```{code-cell}
+:tags: [hide-input]
+interface ICharToCharCipher
+{
+  char Encode (char input);
+}
+
+interface IStringToStringCipher
+{
+  string Encode (string input);
+}
+```
+
+```{code-cell} csharp
+:tags: [hide-input]
+class CaesarCipher : ICharToCharCipher, IStringToStringCipher
+{
+  int steps;
+
+  public CaesarCipher (int steps)
+    => this.steps = steps;
+
+  public char Encode (char input)
+  {
+    string alphabet = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
+    int i = alphabet.IndexOf(Char.ToUpper(input));
+    int newIndex = (i + steps) % alphabet.Length;
+    if (i != -1)
+    {
+      if (newIndex < 0)
+        newIndex += alphabet.Length;
+
+      if (Char.IsLower(input))
+        return Char.ToLower(alphabet[newIndex]);
+      else
+        return alphabet[newIndex];
+    }
+    return input;
+  }
+
+  public string Encode (string input)
+  {
+    string output = "";
+    foreach (char letter in input)
+      output += Encode(letter);
+    return output;
+  }
+}
+```
+
+```{code-cell} csharp
+:tags: [hide-input]
+class LeetCipher : IStringToStringCipher, ICharToCharCipher
+{
+  public char Encode (char input)
+  {
+    switch (input)
+    {
+      case 'L': return '1'; case '1': return 'L';
+      case 'A': return '4'; case '4': return 'A';
+      case 'O': return '0'; case '0': return 'O';
+      case 'T': return '7'; case '7': return 'T';
+      case 'E': return '3'; case '3': return 'E';
+      default: return input;
+    }
+  }
+
+  public string Encode (string input)
+  {
+    string output = "";
+    foreach (char c in input)
+      output += Encode(c);
+    return output;
+  }
+}
+```
+
+Now let's build a `RandomCipher` that randomly chooses between using a `CaesarCipher` with `steps` set to `1` and a `LeetCipher`.
+Since we want to use the same cipher during the lifetime of a `RandomCipher` object, we will pick the cipher in the constructor.
+
+```{code-cell}
+class RandomCipher : IStringToStringCipher, ICharToCharCipher
+{
+  ICharToCharCipher cipher;
+
+  public RandomCipher ()
+  {
+    Random rng = new Random();
+    if (rng.NextDouble() > 0.5)
+      cipher = new CaesarCipher(1);
+    else
+      cipher = new LeetCipher();
+  }
+
+  public char Encode (char input)
+    => cipher.Encode(input);
+
+  public string Encode (string input)
+  {
+    string output = "";
+    foreach (char letter in input)
+      output += Encode(letter);
+    return output;
+  }
+}
+```
+
+Let's now create a bunch of instances of type `RandomCipher` and call `Encode` on them to see if it seems like its behaving randomly.
+
+```{code-cell}
+// Set the number of iterations we want to run.
+int iterations = 20;
+
+// Prepare output array.
+string[] outputs = new string[20];
+
+// Instantiate ciphers, call encode, and store result in output array.
+for (int i=0; i<iterations; i++)
+  outputs[i] = new RandomCipher().Encode("LEET");
+
+// Print all outputs, separated by commas.
+Console.WriteLine(String.Join(", ", outputs));
+```
+
+Looks pretty random to me.
+
+Let's break down the example.
+Why is this an example of object composition?
+Because `RandomCipher` has an instance field of type `ICharToCharCipher` so we would say `RandomCipher` has-a `ICharToCharCipher`.
+
+Why do we say that it's an *abstract* object composition?
+Because the *composed* type is an abstraction.
+Concretely, we can see that the compile-time type of the instance field called `cipher` is `ICharToCharCipher`.
+Interfaces and abstract classes are abstractions.
+
+Why do we say that it's a *constructed* object composition?
+Because the object of the *composing* type is the one who *constructs* (meaning instantiates) the object of the *composed* type.
+Concretely, because we can see that we are actually instantiating both `CaesarCipher` and `LeetCipher` using the `new` operator in the constructor of `RandomCipher`.
+
+
+
+### Cipher identification
+
+Let's write another cipher in the same vein as the cipher that randomly chose a cipher.
+How about a cipher that determines what cipher to use based on what cipher it thinks has been used to encode some other string.
+
+```{note}
+It is less obvious how this example could be solved better using [abstract injected](abstract-injected-object-composition) object composition as oppsoed to abstract constructed.
+So in a sense, this is an example that, when compared to the example of `RandomCipher`, better illustrates why we in the odd case might want to use abstract constructed object composition.
+```
+
+Let's first bring in our cipher interfaces and the three concrete classes `RobbersCipher`, `LeetCipher`, and `ReverseCipher`.
+All that is code that we've worked with in previous chapters.
 
 ```{code-cell} csharp
 :tags: [hide-input]
@@ -139,7 +339,10 @@ interface ICharToStringCipher
 {
   string Encode (char input);
 }
+```
 
+```{code-cell} csharp
+:tags: [hide-input]
 class RobbersCipher : ICharToStringCipher, IStringToStringCipher
 {
   private char vowel;
@@ -164,7 +367,10 @@ class RobbersCipher : ICharToStringCipher, IStringToStringCipher
     return output;
   }
 }
+```
 
+```{code-cell} csharp
+:tags: [hide-input]
 class LeetCipher : IStringToStringCipher, ICharToCharCipher
 {
   public char Encode (char input)
@@ -188,7 +394,10 @@ class LeetCipher : IStringToStringCipher, ICharToCharCipher
     return output;
   }
 }
+```
 
+```{code-cell} csharp
+:tags: [hide-input]
 class ReverseCipher : IStringToStringCipher
 {
   public string Encode (string input)
