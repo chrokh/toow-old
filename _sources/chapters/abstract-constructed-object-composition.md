@@ -309,6 +309,15 @@ Because the object of the *composing* type is the one who *constructs* (meaning 
 Concretely, because we can see that we are actually instantiating both `CaesarCipher` and `LeetCipher` using the `new` operator in the constructor of `RandomCipher`.
 
 
+```{seealso}
+Determining what kind of object to create based on some information is a common problem and is usually solved by means of the [design pattern](design-patterns) called the [factory method pattern](factory-method-pattern).
+We will talk about that pattern in its own chapter.
+In short though, and in line with the [single responsibility principle](single-responsibility-principle), the basic idea is that an object that determines what other object to *create*, should not also be responsible for *using* that object after it has been created.
+
+In other words, the `RandomCipher` (as well as the `AutoCipher` that we'll look at in the next example) should not *both* determine what object to create *and* expose an `Encode`-method that will delegate to the created object.
+Instead, it should just return the object.
+```
+
 
 ### Cipher identification
 
@@ -461,15 +470,6 @@ Nevertheless, the code above provides an example of abstract constructed object 
 It is *abstract* because the compile-time type of the private instance field `cipher` is `IStringToStringCipher`, namely an abstraction.
 It is *constructed* because the variable is instantiated from within the composing object, namely `AutoCipher`.
 Specifically we are referring to the three lines in the constructor that instantiate different ciphers and assign them to the instance field `cipher`.
-
-```{seealso}
-Determining what kind of object to create based on some information is a common problem and is usually solved by means of [factory method pattern](factory-method-pattern).
-We will talk about that pattern in its own chapter.
-In short though, and in line with the [single responsibility principle](single-responsibility-principle), the basic idea is that an object that determines what other object to *create*, should not *also* be responsible for *using* that object after it has been created.
-
-In other words, the `AutoCipher` should not *both* determine what object to create *and* expose an `Encode`-method that will delegate to the created object.
-Instead, it should just return the object.
-```
 
 % TODO: EXAMPLE: Like the incremeneting caesar cipher but use two ciphers and tik-tok between them. Lets' call it a FlipFlopCipher. Then we can do both the abstract version of this and the abstract version of IncrementingCipher when we get to injected abstract.
 

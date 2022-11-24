@@ -1277,7 +1277,7 @@ However, since we can treat concrete ciphers as if they were of the same abstrac
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2300.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2272.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1322,12 +1322,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.242:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.0.21:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2300.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2272.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1502,7 +1502,7 @@ Since we want to use the same cipher during the lifetime of a <code class="docut
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MFFU, 1337, 1337, MFFU, 1337, 1337, MFFU, MFFU, 1337, 1337, MFFU, 1337, MFFU, 1337, 1337, 1337, 1337, 1337, 1337, 1337
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MFFU, 1337, MFFU, 1337, 1337, MFFU, MFFU, 1337, 1337, 1337, MFFU, 1337, MFFU, MFFU, MFFU, MFFU, 1337, 1337, MFFU, MFFU
 </pre></div>
 </div>
 </div>
@@ -1518,6 +1518,14 @@ Interfaces and abstract classes are abstractions.</p>
 <p>Why do we say that it’s a <em>constructed</em> object composition?
 Because the object of the <em>composing</em> type is the one who <em>constructs</em> (meaning instantiates) the object of the <em>composed</em> type.
 Concretely, because we can see that we are actually instantiating both <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> and <code class="docutils literal notranslate"><span class="pre">LeetCipher</span></code> using the <code class="docutils literal notranslate"><span class="pre">new</span></code> operator in the constructor of <code class="docutils literal notranslate"><span class="pre">RandomCipher</span></code>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Determining what kind of object to create based on some information is a common problem and is usually solved by means of the <a class="reference internal" href="design-patterns.html"><span class="doc std std-doc">design pattern</span></a> called the <a class="reference internal" href="factory-method-pattern.html"><span class="doc std std-doc">factory method pattern</span></a>.
+We will talk about that pattern in its own chapter.
+In short though, and in line with the <a class="reference internal" href="single-responsibility-principle.html"><span class="doc std std-doc">single responsibility principle</span></a>, the basic idea is that an object that determines what other object to <em>create</em>, should not also be responsible for <em>using</em> that object after it has been created.</p>
+<p>In other words, the <code class="docutils literal notranslate"><span class="pre">RandomCipher</span></code> (as well as the <code class="docutils literal notranslate"><span class="pre">AutoCipher</span></code> that we’ll look at in the next example) should not <em>both</em> determine what object to create <em>and</em> expose an <code class="docutils literal notranslate"><span class="pre">Encode</span></code>-method that will delegate to the created object.
+Instead, it should just return the object.</p>
+</div>
 </section>
 <section id="cipher-identification">
 <h3><span class="section-number">76.2.3. </span>Cipher identification<a class="headerlink" href="#cipher-identification" title="Permalink to this headline">#</a></h3>
@@ -1691,14 +1699,6 @@ Nevertheless, the code above provides an example of abstract constructed object 
 <p>It is <em>abstract</em> because the compile-time type of the private instance field <code class="docutils literal notranslate"><span class="pre">cipher</span></code> is <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code>, namely an abstraction.
 It is <em>constructed</em> because the variable is instantiated from within the composing object, namely <code class="docutils literal notranslate"><span class="pre">AutoCipher</span></code>.
 Specifically we are referring to the three lines in the constructor that instantiate different ciphers and assign them to the instance field <code class="docutils literal notranslate"><span class="pre">cipher</span></code>.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p>Determining what kind of object to create based on some information is a common problem and is usually solved by means of <a class="reference internal" href="factory-method-pattern.html"><span class="doc std std-doc">factory method pattern</span></a>.
-We will talk about that pattern in its own chapter.
-In short though, and in line with the <a class="reference internal" href="single-responsibility-principle.html"><span class="doc std std-doc">single responsibility principle</span></a>, the basic idea is that an object that determines what other object to <em>create</em>, should not <em>also</em> be responsible for <em>using</em> that object after it has been created.</p>
-<p>In other words, the <code class="docutils literal notranslate"><span class="pre">AutoCipher</span></code> should not <em>both</em> determine what object to create <em>and</em> expose an <code class="docutils literal notranslate"><span class="pre">Encode</span></code>-method that will delegate to the created object.
-Instead, it should just return the object.</p>
-</div>
 </section>
 </section>
 <section id="exercises">

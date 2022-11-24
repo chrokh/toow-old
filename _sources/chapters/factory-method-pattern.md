@@ -16,6 +16,10 @@ kernelspec:
 Work in progress.
 ```
 
+% TODO: Add example: RandomCipherFactory.
+% TODO: Add example: RandomSequenceFactory.
+% TODO: Is it possible to meaningfully express: RandomFactory<T> that uses other factories to for example generate random ciphers and random sequences while still allowing injection. This means you would have to create a constant factory for each type that you want to be able to create. But this doesn't really seem like a net-net win does it?
+
 ## Motivation
 
 The purpose of the factory method pattern is to allow objects to create new objects without being concerned about what subtypes to create nor how to actually create them.
