@@ -1,3 +1,15 @@
+---
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  display_name: csharp
+  language: .net-csharp
+  name: .net-csharp
+---
+
 # Generic type parameters
 
 ```{warning}
@@ -189,4 +201,26 @@ Assume that we declare two type parameters, let's call them `T1` and `T2` within
 ```{exercise}
 In your own words, give an example of a type parameter that could be used in a generic type or a generic method.
 In other words, where could you make use of the type parameter?
+```
+
+```{exercise-start}
+```
+Consider the code example below.
+```{code-cell}
+interface IPair<T1,T2>
+{
+  public T1 Item1 { get; set; }
+  public T2 Item2 { get; set; }
+}
+
+class Pair<T> : IPair<T, T>
+{
+  public T Item1 { get; set; }
+  public T Item2 { get; set; }
+}
+```
+Why are we allowed to use the type argument `T` twice on the right side of the colon in the definition of the class `Pair<T>`?
+Had we tried to use the type parameter `T` twice on the left side of the colon we would have gotten a compiler error.
+Why?
+```{exercise-end}
 ```
