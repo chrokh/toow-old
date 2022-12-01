@@ -1011,6 +1011,19 @@ Console.WriteLine($"{output1} {output2}");
 In {numref}`ex:fields:point` we wrote a class called `Point` and a local method called `printPoint` that could print the coordinates of objects of type `Point`.
 
 Rewrite the class `Point` so that `Print` is now an instance method on the `Point` class itself.
+
+Your solution should look something like the following.
+```{code-cell}
+class Point
+{
+  // Your code here...
+
+  public void Print ()
+  {
+    // Your code here...
+  }
+}
+```
 When you're done, you should be able to run the following code and get the same result.
 ```{code-cell} csharp
 :tags: [remove-input]
@@ -1046,6 +1059,19 @@ It then treated the coordinates of the first `Point` as a delta that should be a
 Let's now forget about the array but instead implement the idea of altering an object of type `Point` by passing it another object of type `Point` that will serve as the delta.
 
 Start from the code you wrote in {numref}`ex:instance-methods:point-print`.
+
+Your solution should look something like the following.
+```{code-cell}
+class Point
+{
+  // ...
+
+  public void Print ()
+  {
+    // Your code here...
+  }
+}
+```
 
 When you're done, you should be able to run the following code and get the same result.
 ```{code-cell}
@@ -1093,10 +1119,88 @@ foreach (Point point in points)
 ```
 Start from the code you wrote in {numref}`ex:instance-methods:delta`.
 
-Add another instance method to the class `Point` that has the signature `Point[] AddTo (Point[] points)`.
-The method should treat the object as the delta and then apply itself, via the `Add` method, to all the points in the array.
+Add another instance method to the class `Point` that has the signature `Point AddTo (Point other)`.
+The method should treat the object as the delta and then apply itself, via the `Add` method, to the `Point` given as an argument.
 
-In other words, we're solving the same problem we solved in {numref}`ex:fields:delta` but this time with instance methods.
+In other words, while `Add` adds another point to `this`, the method `AddTo` adds `this` to another `Point`.
+In other words, we're letting the object upon which we call the method `AddTo` serve as the delta while we let the object being passed in as an argument serve as the object that is to be changed.
+
+Your solution should look something like the following.
+```{code-cell}
+class Point
+{
+  // ...
+
+  public void AddTo (Point other)
+  {
+    // Your code here...
+  }
+}
+```
+When you're done, you should be able to run the following code and get the same result.
+```{code-cell}
+:tags: [remove-input]
+class Point
+{
+  public int X = 0;
+  public int Y = 0;
+  public int Z = 0;
+
+  public void Print ()
+    => Console.WriteLine($"{{X={X}, Y={Y}, Z={Z}}}");
+
+  public void Add (Point other)
+  {
+    X += other.X;
+    Y += other.Y;
+    Z += other.Z;
+  }
+
+  public void AddTo (Point other)
+    => other.Add(this);
+}
+```
+```{code-cell}
+Point point = new Point() { X=10, Y=20, Z=30 };
+Point delta = new Point() { X=1, Y=2, Z=3 };
+
+delta.AddTo(point);
+point.Print();
+```
+```{hint}
+:class: dropdown
+In this solution you should pass `this` as an argument to the instance method `Add`.
+```
+```{exercise-end}
+```
+
+
+
+
+```{exercise-start}
+:label: ex:instance-methods:point-this-array
+```
+Start from the code you wrote in {numref}`ex:instance-methods:point-this`.
+
+Add an overload of the instance method `AddTo` in the class `Point` with the signature `void AddTo (Point[] points)`.
+
+The method should treat the object as the delta and then apply itself, via the `Add` method, to all the points in the array.
+In other words, the two versions of `AddTo` does the same thing but one adds itself to a single point while the other adds itself to multiple points.
+
+In even other words, we're solving the same problem we solved in {numref}`ex:fields:delta` but this time with instance methods.
+
+Your solution should look something like the following.
+```{code-cell}
+class Point
+{
+  // Your code here...
+
+  public void AddTo (Point[] points)
+  {
+    // Your code here...
+  }
+}
+```
 
 When you're done, you should be able to run the following code and get the same result.
 ```{code-cell}
@@ -1117,11 +1221,10 @@ class Point
     Z += other.Z;
   }
 
-  public Point[] AddTo (Point[] points)
+  public void AddTo (Point[] points)
   {
     foreach (Point point in points)
       point.Add(this);
-    return points;
   }
 }
 ```
@@ -1148,7 +1251,7 @@ In this solution you should pass `this` as an argument to the instance method `A
 
 
 ```{exercise}
-Draw a UML class diagram of the class `Point` as defined in {numref}`ex:instance-methods:point-this`.
+Draw a UML class diagram of the class `Point` as defined in {numref}`ex:instance-methods:point-this-array`.
 Remember to include all fields and operations.
 ```
 

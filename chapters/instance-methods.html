@@ -1428,7 +1428,7 @@ It was a simple class with two <code class="docutils literal notranslate"><span 
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3536.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3418.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -1473,12 +1473,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.21:1024/", "http://127.0.0.1:1024/"])
+    probeAddresses(["http://10.1.1.216:1024/", "http://127.0.0.1:1024/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3536.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3418.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -2257,7 +2257,7 @@ Like in the example below:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average steps: 116
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average steps: 105
 </pre></div>
 </div>
 </div>
@@ -2370,8 +2370,24 @@ The code first instantiates a cipher and then encodes both a <code class="docuti
 <p class="admonition-title"><span class="caption-number">Exercise 62.8 </span></p>
 <section id="exercise-content">
 <p>In <a class="reference internal" href="fields.html#ex:fields:point"><span class="std std-numref">Exercise 61.7</span></a> we wrote a class called <code class="docutils literal notranslate"><span class="pre">Point</span></code> and a local method called <code class="docutils literal notranslate"><span class="pre">printPoint</span></code> that could print the coordinates of objects of type <code class="docutils literal notranslate"><span class="pre">Point</span></code>.</p>
-<p>Rewrite the class <code class="docutils literal notranslate"><span class="pre">Point</span></code> so that <code class="docutils literal notranslate"><span class="pre">Print</span></code> is now an instance method on the <code class="docutils literal notranslate"><span class="pre">Point</span></code> class itself.
-When you’re done, you should be able to run the following code and get the same result.</p>
+<p>Rewrite the class <code class="docutils literal notranslate"><span class="pre">Point</span></code> so that <code class="docutils literal notranslate"><span class="pre">Print</span></code> is now an instance method on the <code class="docutils literal notranslate"><span class="pre">Point</span></code> class itself.</p>
+<p>Your solution should look something like the following.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Point</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// Your code here...</span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Print</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Your code here...</span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When you’re done, you should be able to run the following code and get the same result.</p>
 <div class="cell tag_remove-input docutils container">
 </div>
 <div class="cell docutils container">
@@ -2403,6 +2419,22 @@ When you’re done, you should be able to run the following code and get the sam
 It then treated the coordinates of the first <code class="docutils literal notranslate"><span class="pre">Point</span></code> as a delta that should be applied to all points in the array.</p>
 <p>Let’s now forget about the array but instead implement the idea of altering an object of type <code class="docutils literal notranslate"><span class="pre">Point</span></code> by passing it another object of type <code class="docutils literal notranslate"><span class="pre">Point</span></code> that will serve as the delta.</p>
 <p>Start from the code you wrote in <a class="reference internal" href="#ex:instance-methods:point-print"><span class="std std-numref">Exercise 62.8</span></a>.</p>
+<p>Your solution should look something like the following.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Point</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// ...</span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Print</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Your code here...</span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>When you’re done, you should be able to run the following code and get the same result.</p>
 <div class="cell tag_remove-input docutils container">
 </div>
@@ -2443,9 +2475,76 @@ It then treated the coordinates of the first <code class="docutils literal notra
 <p class="admonition-title"><span class="caption-number">Exercise 62.10 </span></p>
 <section id="exercise-content">
 <p>Start from the code you wrote in <a class="reference internal" href="#ex:instance-methods:delta"><span class="std std-numref">Exercise 62.9</span></a>.</p>
-<p>Add another instance method to the class <code class="docutils literal notranslate"><span class="pre">Point</span></code> that has the signature <code class="docutils literal notranslate"><span class="pre">Point[]</span> <span class="pre">AddTo</span> <span class="pre">(Point[]</span> <span class="pre">points)</span></code>.
-The method should treat the object as the delta and then apply itself, via the <code class="docutils literal notranslate"><span class="pre">Add</span></code> method, to all the points in the array.</p>
-<p>In other words, we’re solving the same problem we solved in <a class="reference internal" href="fields.html#ex:fields:delta"><span class="std std-numref">Exercise 61.10</span></a> but this time with instance methods.</p>
+<p>Add another instance method to the class <code class="docutils literal notranslate"><span class="pre">Point</span></code> that has the signature <code class="docutils literal notranslate"><span class="pre">Point</span> <span class="pre">AddTo</span> <span class="pre">(Point</span> <span class="pre">other)</span></code>.
+The method should treat the object as the delta and then apply itself, via the <code class="docutils literal notranslate"><span class="pre">Add</span></code> method, to the <code class="docutils literal notranslate"><span class="pre">Point</span></code> given as an argument.</p>
+<p>In other words, while <code class="docutils literal notranslate"><span class="pre">Add</span></code> adds another point to <code class="docutils literal notranslate"><span class="pre">this</span></code>, the method <code class="docutils literal notranslate"><span class="pre">AddTo</span></code> adds <code class="docutils literal notranslate"><span class="pre">this</span></code> to another <code class="docutils literal notranslate"><span class="pre">Point</span></code>.
+In other words, we’re letting the object upon which we call the method <code class="docutils literal notranslate"><span class="pre">AddTo</span></code> serve as the delta while we let the object being passed in as an argument serve as the object that is to be changed.</p>
+<p>Your solution should look something like the following.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Point</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// ...</span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">AddTo</span><span class="w"> </span><span class="p">(</span><span class="n">Point</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Your code here...</span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When you’re done, you should be able to run the following code and get the same result.</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Point</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Point</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">X</span><span class="p">=</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">=</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">Z</span><span class="p">=</span><span class="m">30</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
+<span class="n">Point</span><span class="w"> </span><span class="n">delta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Point</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">X</span><span class="p">=</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">Z</span><span class="p">=</span><span class="m">3</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
+
+<span class="n">delta</span><span class="p">.</span><span class="n">AddTo</span><span class="p">(</span><span class="n">point</span><span class="p">);</span><span class="w"></span>
+<span class="n">point</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{X=11, Y=22, Z=33}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="dropdown admonition hint">
+<p class="admonition-title">Hint</p>
+<p>In this solution you should pass <code class="docutils literal notranslate"><span class="pre">this</span></code> as an argument to the instance method <code class="docutils literal notranslate"><span class="pre">Add</span></code>.</p>
+</div>
+</section>
+</div>
+<div class="exercise admonition" id="ex:instance-methods:point-this-array">
+
+<p class="admonition-title"><span class="caption-number">Exercise 62.11 </span></p>
+<section id="exercise-content">
+<p>Start from the code you wrote in <a class="reference internal" href="#ex:instance-methods:point-this"><span class="std std-numref">Exercise 62.10</span></a>.</p>
+<p>Add an overload of the instance method <code class="docutils literal notranslate"><span class="pre">AddTo</span></code> in the class <code class="docutils literal notranslate"><span class="pre">Point</span></code> with the signature <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">AddTo</span> <span class="pre">(Point[]</span> <span class="pre">points)</span></code>.</p>
+<p>The method should treat the object as the delta and then apply itself, via the <code class="docutils literal notranslate"><span class="pre">Add</span></code> method, to all the points in the array.
+In other words, the two versions of <code class="docutils literal notranslate"><span class="pre">AddTo</span></code> does the same thing but one adds itself to a single point while the other adds itself to multiple points.</p>
+<p>In even other words, we’re solving the same problem we solved in <a class="reference internal" href="fields.html#ex:fields:delta"><span class="std std-numref">Exercise 61.10</span></a> but this time with instance methods.</p>
+<p>Your solution should look something like the following.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Point</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// Your code here...</span>
+
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">AddTo</span><span class="w"> </span><span class="p">(</span><span class="n">Point</span><span class="p">[]</span><span class="w"> </span><span class="n">points</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Your code here...</span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>When you’re done, you should be able to run the following code and get the same result.</p>
 <div class="cell tag_remove-input docutils container">
 </div>
@@ -2483,11 +2582,11 @@ The method should treat the object as the delta and then apply itself, via the <
 </div>
 </section>
 </div>
-<div class="exercise admonition" id="chapters/instance-methods-exercise-10">
+<div class="exercise admonition" id="chapters/instance-methods-exercise-11">
 
-<p class="admonition-title"><span class="caption-number">Exercise 62.11 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 62.12 </span></p>
 <section id="exercise-content">
-<p>Draw a UML class diagram of the class <code class="docutils literal notranslate"><span class="pre">Point</span></code> as defined in <a class="reference internal" href="#ex:instance-methods:point-this"><span class="std std-numref">Exercise 62.10</span></a>.
+<p>Draw a UML class diagram of the class <code class="docutils literal notranslate"><span class="pre">Point</span></code> as defined in <a class="reference internal" href="#ex:instance-methods:point-this-array"><span class="std std-numref">Exercise 62.11</span></a>.
 Remember to include all fields and operations.</p>
 </section>
 </div>

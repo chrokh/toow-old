@@ -688,6 +688,41 @@ The constructed generic type should be constructed from one of the generic types
 ```
 
 
+```{exercise-start}
+```
+Write a generic class called `Repeater<T>` that takes an element of type `T` in its constructor and exposes an instance method with the signature `T[] Repeat (int times)`.
+The instance method returns a new array of a length equal to `times` where every position contains the element passed through the constructor.
+
+When you are done, you should be able to run the following code and get the same result.
+
+```{code-cell}
+class Repeater<T>
+{
+  T elem;
+
+  public Repeater (T elem)
+    => this.elem = elem;
+
+  public T[] Repeat (int times)
+  {
+    T[] xs = new T[times];
+    for (int i=0; i<times; i++)
+      xs[i] = elem;
+    return xs;
+  }
+}
+```
+
+```{code-cell}
+Repeater<string> repeater = new Repeater<string>("Echo");
+string[] output = repeater.Repeat(5);
+Console.WriteLine(String.Join(", ", output));
+```
+```{exercise-end}
+```
+
+
+
 
 
 
