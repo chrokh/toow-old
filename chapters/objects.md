@@ -98,6 +98,8 @@ When you're done reading this book, it will.
 (information-hiding)=
 ### Encapsulation
 
+% TODO: Needs much more emphasis on the "hide what might change" part rather than the "hide what others should not be allowed to change" part. Also emphasize the ability to "insert code before and after in order to validate" part (example: increment by one).
+
 Objects mix methods and data in order to hide the data that belongs to a particular object so that other objects cannot accidentally change it.
 This is known as "encapsulation" or "information hiding".
 

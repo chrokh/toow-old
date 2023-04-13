@@ -306,6 +306,8 @@ class Person
 (constructor-overloading)=
 ### Overloading
 
+% TODO: Add example where one constructor takes another Rectangle. In order to emphaize that different types also means that signatures are different.
+
 Constructors are [overloadable](overloading).
 This is known as "constructor overloading" and means that we can define multiple constructors that differ in their parameter lists and have different implementations.
 This is very useful since it, for example, allows us to define types that can be instantiated in very different ways.

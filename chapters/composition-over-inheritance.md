@@ -16,6 +16,8 @@ kernelspec:
 Work in progress.
 ```
 
+% TODO: Maintainability: With inheritance you might get modularity and some amount of reusability. But with composition you can get that same modularity along with more reusability.
+
 ## Examples
 
 (composition-over-inheritance:examples:ducks)=

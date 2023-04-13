@@ -382,6 +382,9 @@ IShape shape2 = new Rectangle(5, 2);
 
 ### Beyond inclusion
 
+% TODO: Add exercises on "beyond inclusion".
+% --> Anta att vi behandlar en subtyp som en supertyp (d.v.s. att vi låter "compile-time type" vara supertypen). Förklara i egna ord varför det är möjligt eller varför det är omöjligt att anropa en metod som är deklarerad och definierad i subtypen men ej i supertypen. Tillhandahåll ett exempel på detta (i ord eller pseudokod). Variation: Explain what would make it possible to and what would make it impossible to? I.e. requires overriding not hiding. Could be multiple choice.
+
 In the chapter on [interfaces](interfaces) and here we've emphasized the importance of letting the supertype be the [intersection](intersection) of all the subtypes, not the [union](union) of them.
 Otherwise we would force subtypes to provide implementations for members they have no sensible implementation for.
 This is a path that leads to a sea of run-time errors.

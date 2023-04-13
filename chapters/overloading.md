@@ -24,6 +24,9 @@ Work in progress.
 
 ## Examples
 
+% TODO: PrintArray for arrays of different types.
+% TODO: Example showing that return types can vary.
+
 (overloading:examples:robbers)=
 ### Robber's cipher
 

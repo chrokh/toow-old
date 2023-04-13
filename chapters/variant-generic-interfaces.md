@@ -354,6 +354,30 @@ class Box<T> : IBox<T>
 ```
 
 
+```{exercise-start}
+```
+Assume that we have the following types.
+```{code-cell}
+class Box<T>
+{
+  public T Item { get; set; }
+}
+
+interface IAnimal { }
+class Cat : IAnimal { }
+class Dog : IAnimal { }
+```
+Disregard the fact that C# only support the variance keywords `in` and `out` on interfaces for a moment.
+Keeping variance and compile-time [type safety](type-safety) in mind, why is it important that the example below does not compile?
+
+```{code-cell}
+:tags: [raises-exception]
+Box<IAnimal> box = new Box<Cat>();
+```
+```{exercise-end}
+```
+
+
 
 % Example of variance could be the Predicate interface from an exercise in the chapter on [abstract inject object composition](abstract-injected-object-composition:exercises:predicates). The variant type is always fed in, but never out.
 
