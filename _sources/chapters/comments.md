@@ -1,6 +1,8 @@
 (comments)=
 # Comments
 
+% TODO: XML-comments. Give syntax for XML comments for specific things like methods in specific chapters like methods.
+
 Comments are annotations that document code.
 Most source languages and some markup languages support comments.
 They exist so that we, as humans, can explain to ourself and our fellow humans what, we are doing, and why we are doing it.

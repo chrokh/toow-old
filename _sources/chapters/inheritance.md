@@ -112,6 +112,8 @@ child.InheritedMethod();
 (overriding)=
 ### Overriding
 
+% TODO: Give example of overriding and overloading operating at the same time. Overriding some but not all overloads for example. Overloading = implementation determined by parameters. Overriding = implementation determined by run-time type of callee.
+
 We've established that a subclass inherits all members from its superclass.
 However, if an [instance method](instance-methods) or [instance property](properties) in the superclass is marked as `virtual` then it is possible for the subclass to `override` that implementation.
 Meaning, it is possible for the subclass to define its own specialized implementation for that member to use instead of the one defined by the superclass.

@@ -391,6 +391,8 @@ If you are interested in testability, and already know a tiny bit about testing,
 
 ## Example
 
+% TODO: Add narrative in LEGO example where you can explain modularity as the ability to change any particular feature by replacing a particular brick on the spacecraft. How can you have high modularity with low reusability? Well, what if the studs of each individual brick in the model is placed in a different location so that all bricks in the model are unique. A brick type is a class and any given brick an object. Compare this to only using a few types of bricks. Reusability would in the latter case be high. It might seem odd to suggest that all bricks would be unique but then you introduce the DUPLO example. In that case, all bricks in the set are of unique types.
+
 ```{figure} https://www.lego.com/cdn/cs/set/assets/blt95f3ee09ff3a70a7/10944.png?fit=bounds&format=webply&quality=80&width=800&height=800&dpr=1.5
 :figclass: margin
 :name: fig:duplo-space-shuttle
@@ -568,6 +570,7 @@ Explain each of them in your own words.
 How could it possible to have a high level of modularity while also having a low level of reusability?
 Why could such a system problematic?
 ```
+% TODO: If modularity promotes allowing changes that don't cascade wouldn't this promote repeating oneself? Is the antidote to that to improve reusability?
 
 ```{exercise}
 How could it possible to have a high level of modularity while also having a low level of analysability?

@@ -81,7 +81,7 @@ Fortunately, we will not discuss association aggregation and association composi
 ```{important}
 Object composition correspond to the UML class diagram term known as "association".
 One form of association is composition.
-Consequently, the term "composition" does not mean the same thing in the context of UML class diagrams as in the context of object oriented programming.
+Unfortunately, the term "composition" does not mean the same thing in the context of UML class diagrams as in the context of object oriented programming.
 ```
 
 ```{seealso}

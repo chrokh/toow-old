@@ -22,17 +22,6 @@ Browse the table of contents, or use the search box.
 6. Why object orientation ought to eventually be replaced by functional programming.
 
 
-```{admonition} Work in progress
-:class: warning
-This book is a *draft* that I'm in the process of writing.
-Only the chapter titles marked with a star (★) in the table of contents contain some useful content.
-```
-
-```{admonition} Errata
-:class: note
-If you find errors or have suggestions you are more than welcome to [submit an issue](https://github.com/chrokh/the-oo-way/issues/new) in the book's repository on GitHub or reach out to me via email at christopher.okhravi@gmail.com.
-```
-
 
 ## Why this book
 
@@ -49,6 +38,39 @@ There's far too much ground to cover to get bogged down by such details.
 
 It should be noted that many of the ideas in this book are not *only* related to object-oriented programming but apply to multiple paradigms.
 Think of it this way: This book contains all the ideas that I argue are useful to know if you want to become a top level object oriented programmer.
+
+
+(why-oo)=
+## Why object oriented
+
+It is my belief that most programmers will eventually switch to [functional programming](paradigms) unless artificial intelligence (AI) manages to replace us all before.
+Why do I believe this?
+Because I hold that the functional programming paradigm is superior to that of object oriented programming.
+
+Why do I believe that functional programming is superior?
+Because concepts such as higher order functions, currying, pattern matching, algebraic data types, and parametric polymorphism are at the heart of functional programming.
+The object oriented concepts of classes and subtype polymorphism are simply not powerful enough in comparison.
+Mixing data and methods, a key tenant in object oriented programming, is simply not a great idea.
+
+So why bother learning an object oriented language?
+Well, we're not there yet.
+Object oriented programming is by no means dead, and C# is very much alive and is a very popular language in industry.
+
+Moreover, C# is a multi-paradigm language so many problems are easier to solve today because C# has borrowed ideas from the functional paradigm.
+We'll talk about [lambdas](lambdas), [LINQ](linq), [pattern matching](pattern-matching), and [parametric polymorphism/generics](generics) much later.
+
+Nevertheless, part of the reason that I publish this work online for free is that I hope to contribute to the eventual death of object oriented programming.
+Object orientation was a fun exercise, but it's time to move on.
+
+However, the only way we can learn to not repeat the mistakes of history is by understanding our history.
+So by learning all the ins and outs of object oriented programming I hope that you too will become a subscriber to the idea that objects and subtype polymorphism is not powerful enough.
+
+But don't despair.
+Subtype polymorphism is both powerful and very interesting.
+It all depends on what you compare it to.
+Welcome to the magical world of programming.
+Down the rabbit hole we go.
+
 
 
 ## About the author
@@ -92,12 +114,12 @@ It is not complicated and you, yes you, will understand.
 %To enable the creation of a private community, please consider [supporting my work](https://patreon.com/christopherokhravi).
 
 
-## Video lectures
-
-Eventually I will release video lectures for each chapter in this book.
-Feel free to subscribe to my [YouTube channel](https://youtube.com/c/christopherokhravi) and hit the bell to be notified when this happens.
-
-To enable the production of video lectures, please consider [supporting my work](https://patreon.com/christopherokhravi).
+%## Video lectures
+%
+%Eventually I will release video lectures for each chapter in this book.
+%Feel free to subscribe to my [YouTube channel](https://youtube.com/c/christopherokhravi) and hit the bell to be notified when this happens.
+%
+%To enable the production of video lectures, please consider [supporting my work](https://patreon.com/christopherokhravi).
 
 
 %## Audiobook
@@ -107,7 +129,7 @@ To enable the production of video lectures, please consider [supporting my work]
 %To enable the production of an audiobook, please consider [supporting my work](https://patreon.com/christopherokhravi).
 
 
-## Free book
+## Free
 
 I am publishing this book online for free because object oriented programming has been around for so long that it's time to make sure everyone has free access to these ideas.
 If you believe in my mission then I truly appreciate if you [support my work on Patreon](https://patreon.com/christopherokhravi).
@@ -121,13 +143,13 @@ If you are reading this as a student of Uppsala University then most of the link
 If studying at a different university, do check whether your library has a similar arrangement.
 
 
-## Contributions
-
-If you appreciate what I do here, there are three ways to help.
-
-1. Share the book with a friend or on social media.
-2. Submit feedback via [GitHub](https://github.com/chrokh/the-oo-way/issues/new).
-3. Send your donation via [Patreon](https://patreon.com/christopherokhravi).
+%## Contributions
+%
+%If you appreciate what I do here, there are three ways to help.
+%
+%1. Share the book with a friend or on social media.
+%2. Submit feedback via [GitHub](https://github.com/chrokh/the-oo-way/issues/new).
+%3. Send your donation via [Patreon](https://patreon.com/christopherokhravi).
 
 
 ## Technicalities
@@ -156,38 +178,21 @@ Meaning that they run inside a Command Line Interpretor (CLI) such as `bash` or 
 Don't worry if not all of this makes sense yet.
 
 
-(why-oo)=
-## Why object oriented
 
-It is my belief that most programmers will eventually switch to [functional programming](paradigms) unless artificial intelligence (AI) manages to replace us all before.
-Why do I believe this?
-Because I hold that the functional programming paradigm is superior to that of object oriented programming.
+```{admonition} Work in progress
+:class: warning
+This book is a *draft* that I'm in the process of writing.
+```
 
-Why do I believe that functional programming is superior?
-Because concepts such as higher order functions, currying, pattern matching, algebraic data types, and parametric polymorphism are at the heart of functional programming.
-The object oriented concepts of classes and subtype polymorphism are simply not powerful enough in comparison.
-Mixing data and methods, a key tenant in object oriented programming, is simply not a great idea.
+```{admonition} Errata
+:class: note
+If you find errors or have suggestions, please [submit an issue](https://github.com/chrokh/the-oo-way/issues/new) or send me an [email](christopher.okhravi@gmail.com).
+```
 
-So why bother learning an object oriented language?
-Well, we're not there yet.
-Object oriented programming is by no means dead, and C# is very much alive and is a very popular language in industry.
-
-Moreover, C# is a multi-paradigm language so many problems are easier to solve today because C# has borrowed ideas from the functional paradigm.
-We'll talk about [lambdas](lambdas), [LINQ](linq), [pattern matching](pattern-matching), and [parametric polymorphism/generics](generics) much later.
-
-Nevertheless, part of the reason that I publish this work online for free is that I hope to contribute to the eventual death of object oriented programming.
-Object orientation was a fun exercise, but it's time to move on.
-
-However, the only way we can learn to not repeat the mistakes of history is by understanding our history.
-So by learning all the ins and outs of object oriented programming I hope that you too will become a subscriber to the idea that objects and subtype polymorphism is not powerful enough.
-
-But don't despair.
-Subtype polymorphism is both powerful and very interesting.
-It all depends on what you compare it to.
-Welcome to the magical world of programming.
-Down the rabbit hole we go.
-
-
+```{admonition} Credits
+:class: note
+This book was written together with Chat GPT and most images are generated by Midjourney.
+```
 
 ## Overview
 
@@ -289,7 +294,9 @@ Why didn't I discover Christopher's videos earlier in my life??
 
 -->
 
-## Privacy
 
+```{admonition} Privacy
+:class: warning
 By using this site you accept that we store cookies on your device that are sent to Google Analytics.
+```
 

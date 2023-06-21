@@ -70,6 +70,65 @@ Meaning, must be an [interface](interfaces) or an [abstract class](abstract-clas
 Work in progress.
 ```
 
+%```{code-cell}
+%interface ISequence
+%{
+%  int Current { get; }
+%  void Next();
+%}
+%
+%class SequenceHandler
+%{
+%  public SequenceHandler (ISequence sequence)
+%    => this.sequence = sequence;
+%
+%  public int[] Take (int n)
+%  {
+%    int[] nums = new int[n];
+%    for (int i=0; i<nums.Length; i++)
+%    {
+%      nums[i] = sequence.Current;
+%      sequence.Next();
+%    }
+%    return nums;
+%  }
+%
+%  public void Next (int n)
+%  {
+%    for (int i=0; i<nums.Length; i++)
+%      sequence.Next();
+%  }
+%}
+%
+%class IncrementingSequence : Sequence
+%{
+%  public override void Next ()
+%    => Current++;
+%}
+%
+%class FilteredSequence : Sequence
+%{
+%  ISequence sequence;
+%  ISequenceFilter filter;
+%
+%  public FilteredSequence (ISequence sequence, ISequenceFilter filter)
+%  {
+%    this.sequence = sequence;
+%    this.filter = filter;
+%  }
+%
+%  public override void Next()
+%  {
+%    Current++;
+%    if (!filter.Check())
+%      Next();
+%  }
+%}
+%```
+
+
+
+(abstract-injected:random-cipher)=
 ### Random cipher
 
 ```{note}

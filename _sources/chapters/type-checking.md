@@ -13,6 +13,7 @@ kernelspec:
 
 # Type-checking
 
+% TODO: "When the compiler accepts a program's types, we say that that program type checks." (Execute Program)
 % TODO: Must use terminology static/compile-time type safety.
 
 As we briefly saw in the chapter on [Errors](errors), type checking is an activity performed by the compiler.
