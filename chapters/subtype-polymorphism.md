@@ -1315,3 +1315,20 @@ Illegal states should not be representable.
 %Put this book on your shelf as a reference.
 %It's a classic.
 %```
+
+
+%### Type-safe single dynamic dispatch
+%
+%
+%```{figure} https://m.media-amazon.com/images/I/41-sN-mzwKL._SX381_BO1,204,203,200_.jpg
+%:figclass: margin
+%
+%[Clean Architecture, by Robert C. Martin](http://amazon.christopherokhravi.com?id=0134494164).
+%```
+%
+%There's nothing magical, mystical, or philosophical about object oriented programming.
+%Some authors, like Robert C. Martin (see for example {cite:t}`martin2017`), argues that the mixing of methods and data isn't unique to object oriented programming.
+%Instead, the argument is that object oriented programming is just a way of giving us [single dynamic dispatch](dynamic-dispatch) by means of [subtype polymorphism](subtype-polymorphism) without loosing [static type-safety](type-safety).
+%In other words, that the defining feature of object oriented languages is that it makes subtype polymorphism type safe at compile-time.
+%If that sentence doesn't make any sense to you, don't worry.
+%When you're done reading this book, it will.
