@@ -36,4 +36,11 @@ Work in progress.
 %
 %```{exercise}
 %In what way is C# not a purely object oriented language?
-%```
+
+
+
+%We'll talk a bit more about the {doc}`imperative programming paradigm<paradigms>` later but for now we should realize that in the imperative paradigm, we execute our programs line by line and that future lines may *change* what was said in previous lines.
+%But in mathematics (and in the functional paradigm), we state what is true without order of execution.
+%This mathematical way of thinking where there is no order of execution is reflected in the declarative paradigm where you will find functional and logic programming.
+%Don't worry if this isn't entirely clear, we'll get back to it in the chapter on {doc}`paradigms`.
+%%```

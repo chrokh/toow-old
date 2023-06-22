@@ -103,22 +103,28 @@ pre {
 
 
 /* Output code */
-.output .highlight pre {
+.highlight-output .highlight,
+.cell
+.output .highlight pre { /* Should actually be on the .highlight not the pre */
   background: #222;
   border: 0;
   /*border-left: .6rem solid rgb(230,101,129);*/
   border-left: .6rem solid #999;
 }
+.highlight-output .highlight pre,
+.highlight-output .highlight pre span,
 .cell_output .highlight pre,
 .cell_output .highlight pre span {
   color: #fff;
 }
+.traceback { display: none !important; } /* Hide traceback when using raises-exception */
 
 /* Input code */
 div.cell_input {
   border: 0 !important;
 }
-.highlight {
+.highlight-csharp .highlight,
+.highlight-bash .highlight {
   border: 0;
   border-left: .6rem solid rgb(0, 176, 255) !important;
   border-radius: .2rem !important;
@@ -131,3 +137,4 @@ div.cell_input {
 .highlight-bash pre span {
   color: #fff !important;
 }
+
