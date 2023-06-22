@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="3. Compilation" href="compilation.html" /><link rel="prev" title="1. Syntax" href="syntax.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Type signatures - The Object Oriented Way</title>
+        <title>2. Hello world - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -164,9 +164,9 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul>
+  <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="syntax.html">1. Syntax</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hello-world.html">2. Hello world</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">2. Hello world</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compilation.html">3. Compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="execution.html">4. Execution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpretation.html">5. Interpretation</a></li>
@@ -309,12 +309,37 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="type-signatures">
-<h1>Type signatures<a class="headerlink" href="#type-signatures" title="Permalink to this heading">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="hello-world">
+<h1><span class="section-number">2. </span>Hello world<a class="headerlink" href="#hello-world" title="Permalink to this heading">#</a></h1>
+<p>Think of writing your first program as saying your first word. It’s a profound moment, a starting point for countless conversations with your computer. In programming, that first word is usually “Hello, World!”</p>
+<figure class="align-default">
+<img alt="https://media.discordapp.net/attachments/1118630713084870736/1121367396259745902/chrokh_an_illustration_of_a_baby_speaking_into_a_microphone_pin_12c6390e-e19d-46d8-b1d5-b6553f99233f.png?width=2700&amp;height=1350" src="https://media.discordapp.net/attachments/1118630713084870736/1121367396259745902/chrokh_an_illustration_of_a_baby_speaking_into_a_microphone_pin_12c6390e-e19d-46d8-b1d5-b6553f99233f.png?width=2700&amp;height=1350" />
+</figure>
+<p>To start our conversation in C#, we’ll use a tool called Visual Studio. Ensure you’ve installed it and follow these steps to create your first C# Console project:</p>
+<ol class="arabic simple">
+<li><p>Open Visual Studio and select “Create a new project”.</p></li>
+<li><p>In the project template screen, select “Console App (.NET)” and click “Next”.</p></li>
+<li><p>Name your Project and Solution “Hello World”, choose a location to save your project, and click “Next”.</p></li>
+<li><p>Ensure that the target framework is <strong>.NET 7.0</strong> and “Do not use top-level statements” is <strong>unchecked</strong>. Then, click “Create”.</p></li>
+<li><p>After the project is created, you’ll see a file named “Program.cs” opened in the editor with the following lines:</p></li>
+</ol>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// See https://aka.ms/new-console-template for more information</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="p">);</span>
+</pre></div>
 </div>
+<p>This is your first C# program! It was generated automatically when you created your project.</p>
+<p>The first line is a comment, which is a note for programmers and is ignored by the C# compiler. The link leads to more information about the new console project structure.</p>
+<p>The second line is a statement that calls the WriteLine method of the Console class, which prints the phrase “Hello, World!” to the terminal.</p>
+<p>To run your program, simply click the green “Play” button in the toolbar, or navigate to “Debug” in the top menu and select “Start Debugging”. This action compiles your code into a language your computer understands and then executes it. Don’t worry about the details for now; we’ll dive into this process in the upcoming chapters.</p>
+<p>If you find that the terminal window opens and immediately closes after running your program, it’s because your terminal is set to close when the program finishes executing. A simple workaround is to add <code class="docutils literal notranslate"><span class="pre">Console.ReadKey();</span></code> after the <code class="docutils literal notranslate"><span class="pre">WriteLine</span></code> statement, like this:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// See https://aka.ms/new-console-template for more information</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">ReadKey</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This extra line of code tells your program to wait for a keypress before closing the terminal window, which causes the window to remain open.</p>
+<p>Before leaving this chapter, let’s try to change the message that the program prints. Currently, your program prints <code class="docutils literal notranslate"><span class="pre">Hello,</span> <span class="pre">World!</span></code>. Can you change the program so that it prints a different message of your choice?</p>
+<p>Congratulations on writing and running your first program! This might feel like a small step, but it’s the start of a grand journey into the world of programming. In the next chapter, we’ll begin to uncover the magic that transforms your code into an application your computer can run. Exciting times ahead!</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -341,8 +366,26 @@
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="compilation.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title"><span class="section-number">3. </span>Compilation</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="syntax.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title"><span class="section-number">1. </span>Syntax</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
