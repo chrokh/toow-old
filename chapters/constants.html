@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="109. Debugging" href="debugging.html" /><link rel="prev" title="107. Business logic" href="business-logic.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="10. Data types" href="data-types.html" /><link rel="prev" title="8. Variables" href="variables.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>108. Business objects - The Object Oriented Way</title>
+        <title>9. Constants - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -173,7 +173,7 @@
 <li class="toctree-l1"><a class="reference internal" href="comments.html">6. Comments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="values.html">7. Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">8. Variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="constants.html">9. Constants</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">9. Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data-types.html">10. Data types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="expressions.html">11. Expressions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statements.html">12. Statements</a></li>
@@ -272,7 +272,7 @@
 <li class="toctree-l1"><a class="reference internal" href="abstraction.html">105. Abstraction / Modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="indirection.html">106. Indirection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="business-logic.html">107. Business logic</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">108. Business objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="business-objects.html">108. Business objects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="debugging.html">109. Debugging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reading.html">110. Suggested reading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bibliography.html">111. Bibliography</a></li>
@@ -310,12 +310,156 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="business-objects">
-<h1><span class="section-number">108. </span>Business objects<a class="headerlink" href="#business-objects" title="Permalink to this heading">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="constants">
+<h1><span class="section-number">9. </span>Constants<a class="headerlink" href="#constants" title="Permalink to this heading">#</a></h1>
+<p>When we introduced variables in the previous chapter, we emphasized how flexible they are. They can be assigned a value, then reassigned a different value at any time. This ability to change, or mutability, is part of what makes variables so powerful. But sometimes, this flexibility isn’t what we want. In some situations, we want to set a value once and ensure that it never changes. This is where constants come in.</p>
+<figure class="align-default" id="id1">
+<img alt="https://media.discordapp.net/attachments/1118630713084870736/1121469118856577024/chrokh_a_simple_and_flat_illustration_of_a_glass_jar_with_a_pad_a71fd77f-c504-4d4a-8c1b-03aaf88bcfd0.png?width=1268&amp;height=634" src="https://media.discordapp.net/attachments/1118630713084870736/1121469118856577024/chrokh_a_simple_and_flat_illustration_of_a_glass_jar_with_a_pad_a71fd77f-c504-4d4a-8c1b-03aaf88bcfd0.png?width=1268&amp;height=634" />
+<figcaption>
+<p><span class="caption-number">Fig. 9.1 </span><span class="caption-text">A constant is a variable whose value cannot be reassigned, like a jar whose content cannot be replaced.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In C#, the keyword <code class="docutils literal notranslate"><span class="pre">const</span></code> is used to declare a constant. A constant is similar to a variable in that it represents a value. However, once a constant is assigned a value, that value cannot be changed. This is why it’s called a “constant”.</p>
+<p>Consider this example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">HoursInDay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">24</span><span class="p">;</span>
+</pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-2725.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.1.24:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '2725.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>Here, we declare a constant named <code class="docutils literal notranslate"><span class="pre">HoursInDay</span></code> and assign it the value <code class="docutils literal notranslate"><span class="pre">24</span></code>. This value represents the number of hours in a day - a fact that isn’t going to change. If we try to assign a new value to <code class="docutils literal notranslate"><span class="pre">HoursInDay</span></code> later in our code, we’ll get a compile-time error.</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">HoursInDay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">23</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1,1): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In essence, declaring a value as a constant is like making a promise to the compiler that this value will not change. If you try to break this promise, the compiler won’t let you get away with it.</p>
+<p>Now, here’s a subtle yet important point to understand: constants in C# are immutable, meaning that you cannot change the value of the constant, but this does <strong>not</strong> mean the “value” that the constant is pointing to cannot change.</p>
+<p>Let’s use the analogy of shelves of jars containing items.
+If a jar is marked as a constant and we put a bag of apples in the jar, this only means that we cannot swap the bag of apples for another bag of apples.
+If the jar is marked as constant, then we cannot reassign its item.</p>
+<p>However, being a constant doesn”t mean that the contents of the bag can’t change. The apples in the bag might still rot over time. This is permissible because we’re not changing the bag itself, just what’s inside it. The bag of apples inside the jar will always be the same bag, but the contents of that bag, the apples might change.</p>
+<p>In programming terms, we could say that the variable (the jar) is constant, but the value it points to (the bag of apples) can still be modified under certain conditions. However, exploring these conditions requires understanding more advanced topics such as <a class="reference internal" href="value-and-reference-semantics.html#value-and-reference-semantics"><span class="std std-ref">reference types and value types</span></a>, which we will delve into in later chapters. For now, the key takeaway is that constants in C# cannot be <strong>reassigned</strong> once they’ve been initialized, but depending on what they’re holding, the content might still change.</p>
+<p>And with this understanding of constants, you’ve taken another step into the realm of C#. The journey continues, so let’s move on to the next chapter.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -327,38 +471,38 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            name: "python3",
+            name: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="debugging.html">
+          <a class="next-page" href="data-types.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">109. </span>Debugging</div>
+                <div class="title"><span class="section-number">10. </span>Data types</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="business-logic.html">
+          <a class="prev-page" href="variables.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">107. </span>Business logic</div>
+                <div class="title"><span class="section-number">8. </span>Variables</div>
                 
               </div>
             </a>
