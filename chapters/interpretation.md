@@ -1,39 +1,21 @@
 # Interpretation
 
-An interpreter takes a program written in some input language and translates whatever chunks of the program it needs to some output language and executes that chunk.
-A [compiler](compilation) translates programs written in some input language to programs written in some output language.
-An interpreter differs in two important respects.
-First, it doesn't just translate to the output language, it also executes the resulting code.
-Second, it doesn't translate the whole program in one go.
-Instead, it translates whatever portions it needs to keep executing the program.
+Now that you know about how C# programs are compiled and executed, let's explore a different way that code can be turned into action. Have you ever heard of interpreted languages, like JavaScript or Python? These languages follow a different process from C#'s compile-and-run system, called interpretation.
 
-```{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
-:name: fig:interpretation
-An interpreter interprets code written in one language and translates it to another and executes it on the fly.
+In programming, there are two primary ways to convert the code you write into something your computer can understand: compilation, which we've already covered, and interpretation. Both serve the same purpose – translating human-friendly code into computer-understandable instructions – but they go about it in slightly different ways.
+
+When we compile a program, like in C#, the code is translated ahead of time before it runs. The compiler takes our human-friendly C# code and transforms it into an intermediate language, and then the .NET runtime converts this intermediate code into machine code during the program execution. But an interpreter works differently.
+
+Imagine you have a friend who doesn't speak your language, and a translator is facilitating your conversation. A compiler is like a translator who first listens to your entire story and then retells it to your friend in their language. But an interpreter? An interpreter is like a translator who translates each sentence immediately after you say it. This real-time translation is what happens with interpreted languages.
+
+```{figure} https://media.discordapp.net/attachments/1118630713084870736/1121389767259590746/chrokh_an_oil_painting_of_a_pianist_with_sheet_music_in_the_bac_b08bab0e-e78c-4955-b184-66891197bf88.png
+
+An interpreter is like a pianist that reads sheet music and translates it into key presses on the fly.
 ```
 
-As you might have guessed, running a program through an interpreter is slower than running a program that's already been compiled.
-It's like the difference between trying to communicate with someone through a translator versus communicating with someone who speaks your native tongue.
+When a program written in an interpreted language like JavaScript or Python runs, it is read and executed line by line in real-time, with no separate compilation step. The interpreter reads a line of code, translates it into machine language, and executes it right then and there.
 
-Note that interpreters still have to convert your code to machine code.
-In the end it's all binary.
-However, when you're running your program through an interpreter you never get so see that binary (or low level intermediate) file.
-Because the full file never exists.
-The interpreter translates your program in chunks.
+There's a trade-off to this approach. One advantage is that it allows for more flexibility, since you can modify your program on the fly and see the effects immediately without needing to recompile. However, it also means that all errors, even those that could have been caught during the compilation stage in a language like C#, will only appear at runtime when the specific line of faulty code is interpreted.
 
-It is important to realize that since we haven't checked for errors before we start running the program we have zero guarantees that the program is error free.
-It might in fact contain any number of syntax and/or semantic errors and we will not know about them until we reach the code chunks containing those errors.
-We have discussed run-time errors in the chapter on [execution](execution) and will discuss it a bit further in the chapter on [errors](errors).
+While C# is not an interpreted language, it's beneficial to understand the concept of interpretation. It shows another facet of how programming languages can function, broadens your understanding of programming paradigms, and will help you if you ever work with or switch to an interpreted language.
 
-Examples of languages that are usually interpreted as opposed to compiled include Python, JavaScript and Ruby.
-
-```{exercise}
-What is an interpreter and how does it contrast to compilers?
-```
-
-%TODO: Different ways of using interpreters:
-%At an oversimplified level, there are three main ways to run programs:
-%
-%1. If you have a *compiler* for your language then you can run the compiler and pass it your source code. The compiler will produce an executable file which you then can run at your discretion.
-%2. If you have an *interpreter* then you can run the interpreter and pass it your source code. The interpreter will compile a portion of your program and start running it while it makes sure to compile whatever portions of your program it needs on the fly.
-%3. You might have a compiler that produces an executable file which embeds the interpreter or calls to the interpreter in the resulting program. In this case you would run the resulting program after the first compilation and the interpreter will take over from there.
