@@ -4,7 +4,7 @@ Understanding syntax is the first step towards writing correct and meaningful pr
 Programming languages are designed with specific syntaxes that dictate how programs should be written. Just as different spoken languages have distinct grammar rules, different programming languages have different syntax rules.
 %Without following the rules of a programming language we cannot write a program.
 
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1121020783129530438/chrokh_a_simple_LEGO_model_of_a_single_propeller_airplane_white_0464d2ac-1d4a-4521-a2a2-5550de4b68b0.png?width=2422&height=1358
+```{figure} https://media.discordapp.net/attachments/1118630713084870736/1121383593621585930/chrokh_a_simple_LEGO_model_of_a_single_propeller_airplane_white_29fac128-7005-4f46-97de-179c667a5026.png
 
 Just like LEGO pieces fit together in certain ways, the tokens of a programming language have to be assembled in accordance with the rules of that language.
 ```
