@@ -5,14 +5,14 @@ As you embark on your coding journey, you'll quickly realize that writing code i
 
 Comments are like notes to yourself and to others reading your code. They're written in plain English (or whatever human language you prefer) and are ignored by the compiler. That is, they don't affect how your program runs. In programming parlance, we say that the compiler "ignores" or "skips" comments. They're purely there for human benefit.
 
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1121393734827901028/chrokh_An_oil_painting_of_a_confused_young_man_scratching_his_h_97bcacb1-f20d-49c6-8ccc-30576646689c.png
+```{figure} https://media.discordapp.net/attachments/1118630713084870736/1121421780649791488/chrokh_A_simple_and_flat_illustration_of_a_confused_person_scra_002b3059-844e-4e6b-8054-bb046a5b22e5.png?width=2700&height=1350
 
-Understanding code you wrote a week ago (let alone something someone else wrote) is a suprisingly difficult task.
+Understanding code that you (let alone someone else) wrote a week ago is not trivial.
 ```
 
 In C#, we can write comments in two ways: single-line comments and multi-line or block comments.
 
-A single-line comment begins with two forward slashes //, and everything following those slashes on the same line is a comment.
+A single-line comment begins with two forward slashes `//,` and everything following those slashes on the same line is a comment.
 
 ```csharp
 // This is a single-line comment
