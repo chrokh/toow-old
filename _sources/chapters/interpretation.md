@@ -8,7 +8,8 @@ When we compile a program, like in C#, the code is translated ahead of time befo
 
 Imagine you have a friend who doesn't speak your language, and a translator is facilitating your conversation. A compiler is like a translator who first listens to your entire story and then retells it to your friend in their language. But an interpreter? An interpreter is like a translator who translates each sentence immediately after you say it. This real-time translation is what happens with interpreted languages.
 
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1121389767259590746/chrokh_an_oil_painting_of_a_pianist_with_sheet_music_in_the_bac_b08bab0e-e78c-4955-b184-66891197bf88.png
+%https://media.discordapp.net/attachments/1118630713084870736/1121389767259590746/chrokh_an_oil_painting_of_a_pianist_with_sheet_music_in_the_bac_b08bab0e-e78c-4955-b184-66891197bf88.png
+```{figure} https://media.discordapp.net/attachments/1118630713084870736/1121417167129288725/chrokh_An_art_deco_illustration_of_a_pianist_pink_blue_light_bl_56b3cca9-eb2b-4d93-9bfd-2030eac972e3.png?width=2700&height=1350
 
 An interpreter is like a pianist that reads sheet music and translates it into key presses on the fly.
 ```

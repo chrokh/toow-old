@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="6. Comments" href="comments.html" /><link rel="prev" title="4. Execution" href="execution.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>5. Interpretation - The Object Oriented Way</title>
+        <title>Billion dollar mistake - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -164,12 +164,12 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul class="current">
+  <ul>
 <li class="toctree-l1"><a class="reference internal" href="syntax.html">1. Syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hello-world.html">2. Hello world</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compilation.html">3. Compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="execution.html">4. Execution</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">5. Interpretation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpretation.html">5. Interpretation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="comments.html">6. Comments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="values.html">7. Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">8. Variables</a></li>
@@ -309,21 +309,39 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="interpretation">
-<h1><span class="section-number">5. </span>Interpretation<a class="headerlink" href="#interpretation" title="Permalink to this heading">#</a></h1>
-<p>Now that you know about how C# programs are compiled and executed, let’s explore a different way that code can be turned into action. Have you ever heard of interpreted languages, like JavaScript or Python? These languages follow a different process from C#’s compile-and-run system, called interpretation.</p>
-<p>In programming, there are two primary ways to convert the code you write into something your computer can understand: compilation, which we’ve already covered, and interpretation. Both serve the same purpose – translating human-friendly code into computer-understandable instructions – but they go about it in slightly different ways.</p>
-<p>When we compile a program, like in C#, the code is translated ahead of time before it runs. The compiler takes our human-friendly C# code and transforms it into an intermediate language, and then the .NET runtime converts this intermediate code into machine code during the program execution. But an interpreter works differently.</p>
-<p>Imagine you have a friend who doesn’t speak your language, and a translator is facilitating your conversation. A compiler is like a translator who first listens to your entire story and then retells it to your friend in their language. But an interpreter? An interpreter is like a translator who translates each sentence immediately after you say it. This real-time translation is what happens with interpreted languages.</p>
-<figure class="align-default" id="id1">
-<img alt="https://media.discordapp.net/attachments/1118630713084870736/1121417167129288725/chrokh_An_art_deco_illustration_of_a_pianist_pink_blue_light_bl_56b3cca9-eb2b-4d93-9bfd-2030eac972e3.png?width=2700&amp;height=1350" src="https://media.discordapp.net/attachments/1118630713084870736/1121417167129288725/chrokh_An_art_deco_illustration_of_a_pianist_pink_blue_light_bl_56b3cca9-eb2b-4d93-9bfd-2030eac972e3.png?width=2700&amp;height=1350" />
-<figcaption>
-<p><span class="caption-number">Fig. 5.1 </span><span class="caption-text">An interpreter is like a pianist that reads sheet music and translates it into key presses on the fly.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>When a program written in an interpreted language like JavaScript or Python runs, it is read and executed line by line in real-time, with no separate compilation step. The interpreter reads a line of code, translates it into machine language, and executes it right then and there.</p>
-<p>There’s a trade-off to this approach. One advantage is that it allows for more flexibility, since you can modify your program on the fly and see the effects immediately without needing to recompile. However, it also means that all errors, even those that could have been caught during the compilation stage in a language like C#, will only appear at runtime when the specific line of faulty code is interpreted.</p>
-<p>While C# is not an interpreted language, it’s beneficial to understand the concept of interpretation. It shows another facet of how programming languages can function, broadens your understanding of programming paradigms, and will help you if you ever work with or switch to an interpreted language.</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="billion-dollar-mistake">
+<h1>Billion dollar mistake<a class="headerlink" href="#billion-dollar-mistake" title="Permalink to this heading">#</a></h1>
+<blockquote class="epigraph">
+<div><p>I call it my billion-dollar mistake.</p>
+<p class="attribution">—Tony Hoare, on the invention of <code class="docutils literal notranslate"><span class="pre">null</span></code> [<a class="reference external" href="https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/">TODO REF</a>]</p>
+</div></blockquote>
+<p>Prior to (<a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/csharp/nullable-references">C# 8.0</a>), data types all <a class="reference internal" href="value-and-reference-semantics.html#value-and-reference-semantics"><span class="std std-ref">reference types</span></a> were, what is known as, “nullable”.
+This meant that <code class="docutils literal notranslate"><span class="pre">null</span></code> was considered a valid value of all reference types.
+We will discuss this further in the chapter on <a class="reference internal" href="data-types.html"><span class="doc">Data types</span></a>, <code class="docutils literal notranslate"><span class="pre">null</span></code>.
+Let’s, for example, say that you’ve got a <code class="docutils literal notranslate"><span class="pre">string</span></code>, meaning a sequence of characters, but that your string is nullable.
+The compiler isn’t actually guaranteeing that you have a <code class="docutils literal notranslate"><span class="pre">string</span></code>, it is guaranteeing that you either have a <code class="docutils literal notranslate"><span class="pre">string</span></code>, or you have the absence of one (meaning <code class="docutils literal notranslate"><span class="pre">null</span></code>).</p>
+<p>On the type level there is no way of ensuring that you only take a particular path through the program if you actually have a string.
+We’ll talk more about <code class="docutils literal notranslate"><span class="pre">null</span></code> and nullable reference types in the chapter on <a class="reference internal" href="nothingness.html"><span class="doc std std-doc">nothingness</span></a>.
+But the short story is that we used to have to resort to tons and tons of run-time checks to make sure that our programs don’t crash as a consequence of <code class="docutils literal notranslate"><span class="pre">null</span></code> values.</p>
+<p>It is understandable if the example below doesn’t make sense since we haven’t yet talked about neither <a class="reference internal" href="selection.html"><span class="doc std std-doc">selection</span></a> nor the <a class="reference internal" href="operators.html"><span class="doc std std-doc">equality operator</span></a>.
+However, just to give you an idea of what we’re talking about.
+The existance of <code class="docutils literal notranslate"><span class="pre">null</span></code> means that we have to scatter tons of checks like the one below throughout our whole code base.
+Not ideal as you might suspect.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">myString</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
+<span class="w">  </span><span class="c1">// Don&#39;t do the thing since we don&#39;t have a value.</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="c1">// Do the thing since we have a value.</span>
+</pre></div>
+</div>
+<p>As already mentioned, this is the source of much pain and suffering.
+Tony Hoare is often credited with the invention of <code class="docutils literal notranslate"><span class="pre">null</span></code> but has apologized for it.</p>
+<div class="exercise admonition" id="chapters/billion-dollar-mistake-exercise-0">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>How do we denote the absence of a value?</p>
+</section>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -350,26 +368,8 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="comments.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title"><span class="section-number">6. </span>Comments</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="execution.html">
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title"><span class="section-number">4. </span>Execution</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">

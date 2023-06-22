@@ -311,94 +311,141 @@
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="values">
 <h1><span class="section-number">7. </span>Values<a class="headerlink" href="#values" title="Permalink to this heading">#</a></h1>
-<p>Let’s now talk about values and literals.
-We’ve already seen statements that print to screen without discussing or explaining it in any further detail.
-We’ll talk about what <a class="reference internal" href="statements.html"><span class="doc">Statements</span></a> are in a future chapter, but for now, consider the following statement:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello world&quot;</span><span class="p">);</span>
+<p>Programming, at its heart, is about manipulating data. In the world of programming, we often use the term “values” to refer to these pieces of data. A value could be a number, a piece of text, a true or false statement, and many other things.</p>
+<p>In C#, when we write a number like 5, a piece of text like <code class="docutils literal notranslate"><span class="pre">&quot;Hello,</span> <span class="pre">World!&quot;</span></code>, or a Boolean value like <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>, we’re writing a value. You can think of values as the raw material that our programs work with. The values we write in our programs are called “literals” because their meaning is literally what we write.</p>
+<figure class="align-default">
+<img alt="https://media.discordapp.net/attachments/1118630713084870736/1121423479594557452/chrokh_A_symmetic_grid_of_simple_and_flat_illustrations_of_gems_857f5065-72e5-4975-9cf5-7e7bd1eef6fe.png?width=2700&amp;height=1350" src="https://media.discordapp.net/attachments/1118630713084870736/1121423479594557452/chrokh_A_symmetic_grid_of_simple_and_flat_illustrations_of_gems_857f5065-72e5-4975-9cf5-7e7bd1eef6fe.png?width=2700&amp;height=1350" />
+</figure>
+<p>In addition to numbers, text, and Boolean values, there’s another kind of value that we need to talk about: <code class="docutils literal notranslate"><span class="pre">null</span></code>. This value represents the absence of a value. It’s a way of saying “nothing” or “no value.” Here’s a fun fact: the inventor of <code class="docutils literal notranslate"><span class="pre">null</span></code>, Tony Hoare, has referred to it as his “billion-dollar mistake” because of the numerous errors and crashes it has caused in programs over the years. That said, <code class="docutils literal notranslate"><span class="pre">null</span></code> is a concept we have to live with in many programming languages, including C#, and therefore it’s crucial to understand.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="m">5</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
 </pre></div>
 </div>
-<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">Hello world</span>
-</pre></div>
 </div>
-<p>When executed, the program will run the statement and print the <code class="docutils literal notranslate"><span class="pre">string</span></code> <code class="docutils literal notranslate"><span class="pre">&quot;Hello</span> <span class="pre">world&quot;</span></code> to screen.
-<code class="docutils literal notranslate"><span class="pre">string</span></code> is a data type, and we’ll talk about <a class="reference internal" href="data-types.html"><span class="doc">Data types</span></a> in a separate chapter but for now you can think of it this way:
-All values have types.
-Meaning that everything is a <em>kind</em> of thing.
-One <em>kind</em> of thing that values can be is <code class="docutils literal notranslate"><span class="pre">string</span></code>.
-A <code class="docutils literal notranslate"><span class="pre">string</span></code> is a sequence of characters.</p>
-<p>Let’s look at another value.
-How about the numbers <code class="docutils literal notranslate"><span class="pre">42</span></code> and <code class="docutils literal notranslate"><span class="pre">3.14</span></code>?</p>
-<p>While we haven’t talked about <a class="reference internal" href="static-methods.html"><span class="doc">Methods</span></a> yet, <code class="docutils literal notranslate"><span class="pre">WriteLine</span></code> is a method.
-It is a method that is <a class="reference internal" href="overloading.html"><span class="doc">Overloaded</span></a> so that it can accept values of multiple different types.
-This means that we can run the method with the <code class="docutils literal notranslate"><span class="pre">string</span></code> <code class="docutils literal notranslate"><span class="pre">&quot;Hello</span> <span class="pre">world&quot;</span></code> as well as with the Integer <code class="docutils literal notranslate"><span class="pre">42</span></code> and with the Double <code class="docutils literal notranslate"><span class="pre">3.14</span></code>.</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="m">42</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="m">3.14</span><span class="p">);</span>
-</pre></div>
-</div>
-<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">42</span>
-<span class="go">3.14</span>
-</pre></div>
-</div>
-<p>When we call the method <code class="docutils literal notranslate"><span class="pre">WriteLine</span></code> and pass the arguments <code class="docutils literal notranslate"><span class="pre">&quot;Hello</span> <span class="pre">world&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">42</span></code>, and <code class="docutils literal notranslate"><span class="pre">3.14</span></code> we are using what’s known as value “literals”.
-We are constructing these values out of thin air.
-You can speak any integer, double, or string into existence.
-This is true for all types that have a special literals syntax.
-Types that don’t have a syntax for literals must be constructed and we’ll get to this in the chapter on <a class="reference internal" href="constructors.html"><span class="doc">Constructors</span></a>.</p>
-<p>If I speak the value <code class="docutils literal notranslate"><span class="pre">42</span></code> into existence twice you might ask yourself whether these two values are the same or not.
-If you write a program that asks whether <code class="docutils literal notranslate"><span class="pre">42</span></code> is equal to <code class="docutils literal notranslate"><span class="pre">42</span></code> and prints the result you will see that they indeed are the same, since we get the answer <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="m">42</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">42</span><span class="w"> </span><span class="p">);</span>
-</pre></div>
-</div>
-<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">True</span>
-</pre></div>
-</div>
-<p>By the way, the type of <code class="docutils literal notranslate"><span class="pre">True</span></code> is Boolean.
-You might recall this type from the chapter on <a class="reference internal" href="sets.html"><span class="doc">Sets</span></a>.
-The double-equal sign symbol (<code class="docutils literal notranslate"><span class="pre">==</span></code>) is an <a class="reference internal" href="operators.html"><span class="doc">Operator</span></a> and <code class="docutils literal notranslate"><span class="pre">42</span> <span class="pre">==</span> <span class="pre">42</span></code> is an <a class="reference internal" href="expressions.html"><span class="doc">Expression</span></a>.
-We’ll get to all these things soon but I’m just giving you some terminology now for context but I’m just giving you the correct terminology in passing.</p>
-<p>The reason I wanted to highlight that <code class="docutils literal notranslate"><span class="pre">42</span></code> is equal to <code class="docutils literal notranslate"><span class="pre">42</span></code> is that this is <strong>not always</strong> the case.
-The reason that the values are the same in this case is that integers have <a class="reference internal" href="value-and-reference-semantics.html"><span class="doc">value type semantics</span></a>.
-It’s too soon to talk about that, but I just wanted you to beware that just because two values look like they are exactly the same doesn’t mean that they actually are.</p>
-<div class="exercise admonition" id="chapters/values-exercise-0">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-4282.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
 
-<p class="admonition-title"><span class="caption-number">Exercise 7.1 </span></p>
-<section id="exercise-content">
-<p>Give an example of a value.</p>
-</section>
-</div>
-<p>Before we move on to the next chapter I want to show you that there’s one special value that’s the source of much pain and suffering in programming.
-This value denotes the absence of a value and is in C# known as <code class="docutils literal notranslate"><span class="pre">null</span></code>, but is in some other languages known as <code class="docutils literal notranslate"><span class="pre">nil</span></code>.</p>
-<blockquote class="epigraph">
-<div><p>I call it my billion-dollar mistake.</p>
-<p class="attribution">—Tony Hoare, on the invention of <code class="docutils literal notranslate"><span class="pre">null</span></code> [<a class="reference external" href="https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/">TODO REF</a>]</p>
-</div></blockquote>
-<p>Prior to (<a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/csharp/nullable-references">C# 8.0</a>), data types all <a class="reference internal" href="value-and-reference-semantics.html#value-and-reference-semantics"><span class="std std-ref">reference types</span></a> were, what is known as, “nullable”.
-This meant that <code class="docutils literal notranslate"><span class="pre">null</span></code> was considered a valid value of all reference types.
-We will discuss this further in the chapter on <a class="reference internal" href="data-types.html"><span class="doc">Data types</span></a>, <code class="docutils literal notranslate"><span class="pre">null</span></code>.
-Let’s, for example, say that you’ve got a <code class="docutils literal notranslate"><span class="pre">string</span></code>, meaning a sequence of characters, but that your string is nullable.
-The compiler isn’t actually guaranteeing that you have a <code class="docutils literal notranslate"><span class="pre">string</span></code>, it is guaranteeing that you either have a <code class="docutils literal notranslate"><span class="pre">string</span></code>, or you have the absence of one (meaning <code class="docutils literal notranslate"><span class="pre">null</span></code>).</p>
-<p>On the type level there is no way of ensuring that you only take a particular path through the program if you actually have a string.
-We’ll talk more about <code class="docutils literal notranslate"><span class="pre">null</span></code> and nullable reference types in the chapter on <a class="reference internal" href="nothingness.html"><span class="doc std std-doc">nothingness</span></a>.
-But the short story is that we used to have to resort to tons and tons of run-time checks to make sure that our programs don’t crash as a consequence of <code class="docutils literal notranslate"><span class="pre">null</span></code> values.</p>
-<p>It is understandable if the example below doesn’t make sense since we haven’t yet talked about neither <a class="reference internal" href="selection.html"><span class="doc std std-doc">selection</span></a> nor the <a class="reference internal" href="operators.html"><span class="doc std std-doc">equality operator</span></a>.
-However, just to give you an idea of what we’re talking about.
-The existance of <code class="docutils literal notranslate"><span class="pre">null</span></code> means that we have to scatter tons of checks like the one below throughout our whole code base.
-Not ideal as you might suspect.</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">myString</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
-<span class="w">  </span><span class="c1">// Don&#39;t do the thing since we don&#39;t have a value.</span>
-<span class="k">else</span>
-<span class="w">  </span><span class="c1">// Do the thing since we have a value.</span>
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.198:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '4282.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
 </pre></div>
 </div>
-<p>As already mentioned, this is the source of much pain and suffering.
-Tony Hoare is often credited with the invention of <code class="docutils literal notranslate"><span class="pre">null</span></code> but has apologized for it.</p>
-<div class="exercise admonition" id="chapters/values-exercise-1">
-
-<p class="admonition-title"><span class="caption-number">Exercise 7.2 </span></p>
-<section id="exercise-content">
-<p>How do we denote the absence of a value?</p>
-</section>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, World!
+</pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the code above, <code class="docutils literal notranslate"><span class="pre">5</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Hello,</span> <span class="pre">World!&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">true</span></code> are all literal values. The <code class="docutils literal notranslate"><span class="pre">Console.WriteLine</span></code> method prints the value we give it to the console.</p>
+<p>It’s also worth noting that every value has a type, which determines what kind of data it represents and what operations can be performed on it. We’ll dive deeper into <a class="reference internal" href="data-types.html"><span class="doc std std-doc">data types</span></a> in a later chapter. For now, just remember that values are the fundamental pieces of data that our programs manipulate.</p>
+<p>In the next chapter, we’ll take a step forward and learn about “variables”, which allow us to store and manipulate these values in more complex ways. Until then, keep exploring!</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -410,16 +457,16 @@ Tony Hoare is often credited with the invention of <code class="docutils literal
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            name: "python3",
+            name: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
         </article>
       </div>
       <footer>

@@ -22,6 +22,21 @@ Work in progress.
 % As we will see in later chapters static methods, instance methods, and constructors can all be overloaded.
 
 
+%While we haven't talked about {doc}`Methods<static-methods>` yet, `WriteLine` is a method.
+%It is a method that is {doc}`Overloaded<overloading>` so that it can accept values of multiple different types.
+%This means that we can run the method with the `string` `"Hello world"` as well as with the Integer `42` and with the Double `3.14`.
+%
+%```csharp
+%Console.WriteLine(42);
+%Console.WriteLine(3.14);
+%```
+%
+%```output
+%42
+%3.14
+%```
+
+
 ## Examples
 
 % TODO: PrintArray for arrays of different types.
