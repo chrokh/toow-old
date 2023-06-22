@@ -28,10 +28,12 @@ Just like forgetting a period in the end of a sentence would equate to a grammat
 
 Understanding how to interpret and solve syntax errors is an essential skill for programmers.
 
-When dealing with [compiled](compilation) languages, syntax errors are detected, at, what is known as, compile-time.
-When dealing with [interpreted](interpretation) languages, syntax errors are detected at, what is known as, run-time.
-This essentially means that in compiled languages we get to know about syntax errors without having to run the program.
-More on this later.
+%In [compiled](compilation) languages, syntax errors are detected, at, what is known as, compile-time.
+%In [interpreted](interpretation) languages, syntax errors are detected at, what is known as, run-time.
+%This essentially means that in compiled languages we get to know about syntax errors without having to run the program.
+%More on this later.
+
+In the next chapter we will write our first program. You're off to a great start, let's keep going.
 
 ```{exercise}
 What is syntax?
