@@ -18,6 +18,11 @@ In this chapter we're giving a brief overview of the document types that we'll d
 % https://maximilianocontieri.com/software-engineering-great-quotes
 
 
+%In the chapter on {doc}`documentation` we discussed four types of documents:
+%requirements, design, technical, and end-user documents.
+%Code comments can be used for any of these four purposes.
+%Whether comments *should* be used for all four is a different question.
+
 
 %## Requirements documents
 %
