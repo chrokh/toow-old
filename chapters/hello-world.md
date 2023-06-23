@@ -12,14 +12,16 @@ kernelspec:
 
 # Hello world
 
-6
 Think of writing your first program as saying your first word. It's a profound moment, a starting point for countless conversations with your computer. In programming, that first word is usually "Hello, World!"
 
 %https://media.discordapp.net/attachments/1118630713084870736/1121352394454872104/chrokh_an_illustration_of_a_baby_speaking_into_a_microphone_8b6183c9-6680-437d-ae58-b6cff4098a00.png?width=2422&height=1358
 %https://media.discordapp.net/attachments/1118630713084870736/1121355527608356964/chrokh_an_illustration_of_a_happy_baby_speaking_into_a_micropho_59809871-589a-4aa4-a2a3-9c1e81457dc8.png?width=2700&height=1350
 %https://media.discordapp.net/attachments/1118630713084870736/1121353002993856512/chrokh_an_illustration_of_a_baby_and_a_microphone_32bf9db1-b834-44e2-b3a5-1eb2083b7ea8.png?width=2422&height=1358
 %https://media.discordapp.net/attachments/1118630713084870736/1121367396259745902/chrokh_an_illustration_of_a_baby_speaking_into_a_microphone_pin_12c6390e-e19d-46d8-b1d5-b6553f99233f.png?width=2700&height=1350
+
 ```{figure} https://media.discordapp.net/attachments/1118630713084870736/1121391240424980601/chrokh_an_oil_painting_of_a_baby_speaking_into_a_microphone_exp_d3b27104-696c-4f67-b482-463f4c387e2e.png
+
+'Hello, World!' - The first output of a new coder, like a baby's first words.
 ```
 
 To start our conversation in C#, we'll use a tool called Visual Studio. Ensure you've installed it and follow these steps to create your first C# Console project:
