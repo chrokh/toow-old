@@ -39,9 +39,9 @@ Now, here's a subtle yet important point to understand: constants in C# are immu
 
 Let's use the analogy of shelves of jars containing items.
 If a jar is marked as a constant and we put a bag of apples in the jar, this only means that we cannot swap the bag of apples for another bag of apples.
-If the jar is marked as constant, then we cannot reassign its item.
+It only means that we cannot replace the item in the jar.
 
-However, being a constant doesn"t mean that the contents of the bag can't change. The apples in the bag might still rot over time. This is permissible because we're not changing the bag itself, just what's inside it. The bag of apples inside the jar will always be the same bag, but the contents of that bag, the apples might change.
+However, it doesn't mean that the item in the jar itself cannot change. The apples in the bag might still rot over time. This is permissible because we're not changing the bag itself, just what's inside it. The bag of apples inside the jar will always be the same bag, but the contents of that bag, the apples might change.
 
 In programming terms, we could say that the variable (the jar) is constant, but the value it points to (the bag of apples) can still be modified under certain conditions. However, exploring these conditions requires understanding more advanced topics such as [reference types and value types](value-and-reference-semantics), which we will delve into in later chapters. For now, the key takeaway is that constants in C# cannot be **reassigned** once they've been initialized, but depending on what they're holding, the content might still change.
 

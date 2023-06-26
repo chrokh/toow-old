@@ -440,6 +440,117 @@ What members the compiler allows us to invoke is determined by the compile-time 
 
 
 
+
+%#### Literal values and run-time and compile-time type
+%
+%In the chapter on [Values](values) we saw how `"Hello world"`, `42`, and `3.14` are all examples of literal values.
+%But what types of values are these?
+%Let's invoke the `GetType` method to find what the run-time type such objects are.
+%
+%```{code-cell}
+%Console.WriteLine( "Hello world".GetType() );
+%```
+%
+%The value `"Hello world"` is a `String`.
+%Let's try with a number.
+%
+%```{code-cell}
+%Console.WriteLine( 42.GetType() );
+%```
+%
+%The value `42` is an integer, more specifically of the type `Int32`.
+%Remember that `int` is an alias for `Int32`.
+%Let's try with a decimal number.
+%
+%```{code-cell}
+%Console.WriteLine( (3.14).GetType() );
+%```
+%
+%Ok so a decimal number literal is of type `Double`.
+%
+%The method `GetType()` is an [instance method](instance-methods) that we can [invoke](static-methods) on [objects](objects) to see what run-time type they have.
+%A lot of new words here.
+%Don't worry, we'll explain everything in due time.
+%For now, just note that it is possible to check what the run-time type is of any object by invoking the `GetType()` method.
+%More on both instance methods and objects in future chapters.
+%We invoke the method using something known as "dot notation" which we also will discuss later.
+%
+%```{code-cell}
+%Console.WriteLine( "A".GetType()  );
+%```
+%```{code-cell}
+%Console.WriteLine( 420.GetType()  );
+%```
+%```{code-cell}
+%Console.WriteLine( 3.14.GetType() );
+%```
+%
+%When calling `GetType` on `"hello world"`, `42`, and `3.14` we can see that their types are `String`, `Int32`, and `Double`, respectively.
+%
+%
+%```{note}
+%Note that there are aliases for a bunch of the basic types of C#.
+%This mean that the type `string` is the same type as `String`.
+%
+%| Alias    | Type      |
+%| :--      | :--       |
+%| `string` | `String`  |
+%| `int`    | `Int32`   |
+%| `bool`   | `Boolean` |
+%| `double` | `Double`  |
+%
+%More on aliases in the chapters on [data types](data-types) and [namespaces](namespaces).
+%
+%You can find a table of more aliases [in the documentation](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types).
+%The aliases are, [according to the documentation](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/strings/), preferred since we don't have to explicitly include the namespace `System` to have access to them.
+%```
+
+%(run-time-and-compile-time-types)=
+%#### Run-time and compile-time types
+%
+%% TODO: Clarify this more based on: https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/#compile-time-type-and-run-time-type
+%
+%Remember how we've previously distinguished between the left-hand side and the right-hand side?
+%We've learned that variables are on the left and values are on the right.
+%Well, the data type on the left-hand side is referred to as the compile-time type, while the data type on the right is referred to as the run-time type.
+%For now you can think of it as that the type on the right determines what type a value actually is of while the type on the left determines what what we're "treating" the type as.
+%
+%To understand this business of the type on the left and the type on the right being different we first have to understand [subtype polymorphism](subtype-polymorphism) which is a topic for a much later chapter.
+%But for now you can think of it this way:
+%Types can form a subtype hierarchy or inheritance hierarchy where a type can be "treated" as any of the supertypes or parent types that it inherits from.
+%When we say "treat something of type $X$ as something of type $Y$" we mean that the run-time type is $X$ but the compile-time type is $Y$.
+%
+%This is all premature, but if you're really wanting an example then here's one.
+%All objects in C# inherit from the type `object` which means that they can be "treated as" being of type `object` instead of being treated as the type they actually are.
+%One such object is the type `string`.
+%Consider the code below:
+%
+%```{code-cell}
+%string message1 = "This is a string.";
+%object message2 = "This is a string.";
+%```
+%
+%The run-time type of both variables is `string` but the compile-time type of the first line is `string` while the second is `object`.
+%We can visually verify that this statement is true in terms of the compile-time type being different since we can see that we've used `string` on the left-hand side in the first case and `object` in the second, but how do we verify the run-time type?
+%Well, for one, it's the same literal in both cases.
+%But if we're not satisfied with that answer, we can invoke the instance method `GetType` to check that the run-time type of both variables indeed is `string`.
+%
+%```{code-cell}
+%Console.WriteLine(message1.GetType());
+%Console.WriteLine(message2.GetType());
+%```
+%
+%But we'll get back to this much later so don't worry if it's confusing.
+%
+%In this chapter we will only see explicit data types on the left and literals or other variables on the right.
+%So we don't explicitly specify the right-hand types, or the run-time types, in this chapter.
+%When we get to the chapter on [classes](classes) you will start to see explicit types on the right-hand side.
+%When we get to the chapter on [subtype polymorphism](subtype-polymorphism) you will start to see how the types on the right and left doesn't necessarily have to be the same.
+%
+%Simplistically, the compile-time type is used for all actions at compile-time, while the run-time type is used for all actions at run-time.
+
+
+
 ## Examples
 
 ### Numbers

@@ -15,6 +15,38 @@ kernelspec:
 % - Arity
 
 
+
+
+
+%(operations)=
+%### Operations (from old data types chapter)
+%
+%We said that a data type defines a set of values and a set of allowed operations that can be performed on these values.
+%Why operations?
+%Because a data type is not useful if there's nothing we can do with it.
+%Think about it.
+%What's the point of having a value that we can't do anything with?
+%
+%There are a few different ways of defining operations in C#.
+%[Local functions](local-functions) are invoked by simply issuing the name of the function, [static](static-methods) and [instance](instance-methods) methods are invoked using dot notation, and finally we have operators like for example arithmetic addition.
+%Which syntax we use to invoke the method depends on how the operation is defined.
+%
+%%If it's been defined as a (static or instance) method then we use dot notation.
+%%If it's been defined as an operator then we use operator notation.
+%%If it's a local function, then we simply issue the name of the method.
+%
+%%We'll more about dot notation in the chapters on [static](static-methods) and [instance methods](instance-methods) while we'll talk more about operators in the chapter on [operators](operators).
+%%Perhaps confusingly, both dot notation and operators is used in what's known as [expressions](expressions) but we'll talk more about that in it's own chapter.
+%
+%It's premature to talk about all of this since we yet to talk about methods in detail
+%So we'll talk more about all these different kinds in their own chapters.
+%However I want to make two points before we leave this chapter.
+%First I want to exemplify what it means when we say that types support operations.
+%Second, I want to emphasize that we can also always think about an operation itself as having a data type.
+%Again, we'll talk much more about this later so don't get bogged down by too many details.
+
+
+
 (local-functions)=
 # Methods
 
