@@ -13,6 +13,8 @@ kernelspec:
 # Selection
 
 
+%- TODO: Remember to use the term "selection statement" since we didn't use that term in the Statements chapter.
+
 ## Motivation
 
 If all programs were linear, programming would not be very useful.

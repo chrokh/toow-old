@@ -28,6 +28,11 @@ You declare a variable with a specific data type like this:
 
 Understanding data types in programming is like understanding different categories of things in real life. For instance, there are different categories for vehicles like cars, bikes, trucks, each with their unique characteristics and purposes.
 
+```{figure} https://media.discordapp.net/attachments/1118630713084870736/1122848983853842593/chrokh_a_simple_flat_illustration_of_a_pile_of_screws_and_a_pil_c4d2da9b-5c65-422d-b52a-3545417c2027.png?width=2700&height=1180
+
+If you want me to give you a bolt but I give you a nut then I've misunderstood the type of thing that you need. A data type captures the idea that things can be of different types.
+```
+
 You declare [variables](variable) with specific data types like this:
 
 ```{code-cell}

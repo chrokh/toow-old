@@ -12,6 +12,8 @@ kernelspec:
 
 # Iteration
 
+%- TODO: Remember to use the term "iteration statement" since we didn't use that term in the Statements chapter.
+
 %- while
 %- for
 %- foreach

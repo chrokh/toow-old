@@ -7,6 +7,7 @@
 - Concatenation
 - `+=`
 - Right or left associativity of operators.
+- Top-level statements
 
 # TODO
 
