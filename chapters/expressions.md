@@ -38,27 +38,30 @@ Here, `5 + 3` is an expression. The computer evaluates the expression, adds up t
 Console.WriteLine(totalMarbles);
 ```
 
+```{figure} https://media.discordapp.net/attachments/1118630713084870736/1122877227554578487/chrokh_a_simple_flat_illustration_of_two_piles_of_stones_e7781358-73ae-4b03-8b0a-437972dd1ed1.png?width=1440&height=629
+
+Just like we can sum the number of rocks in two piles we can sum the contents of two variables through an expression using the addition operator.
+```
+
 We can also involve variables in our expressions.
 
 ```{code-cell}
-int redMarbles = 2;
-int blueMarbles = 4;
-int greenMarbles = 10;
-
-int marbleSum = redMarbles + blueMarbles + greenMarbles;
+int leftPile = 5;
+int rightPile = 4;
+int totalStones = leftPile + rightPile;
 ```
 
-Here, we have four expressions.
-The first three are literals (`2`, `4`, and `10`).
-On the last last however, we have an arithmetic expression: `redMarbles + blueMarbles + greenMarbles`. When this line of code is executed, the computer evaluates the expression, and the resulting value (the sum of the three variables) is stored in `marbleSum`.
+Here, we have three expressions.
+The first two are literals (`5` and `4`).
+On the last last line however, we have an arithmetic expression: `leftPile + rightPile`. When this line of code is executed, the computer evaluates the expression, and the resulting value (the sum of the two variables) is stored in the variable `totalStones`.
 
 ```{code-cell}
-Console.WriteLine(marbleSum);
+Console.WriteLine(totalStones);
 ```
 
 However, expressions in programming can be much more powerful and complex than just adding a few numbers together. They can involve various operations, functions, and more. We'll dive deeper into this in the following chapters.
 
-What's important to understand is that every expression in C# (and most other programming languages) evaluates to a value and that value has a [type](data-types). This type can be any data types: `int`, `bool`, `char`, `string`, and so on.
+What's important to understand is that every expression in C# (and most other programming languages) evaluates to a value and that value has a [type](data-types). This value can be of any data type.
 
 Expressions are a fundamental building block of any program. They allow you to manipulate data, perform calculations, check conditions, and much more. In the next chapter, we'll introduce the concept of operators, which will enable us to create more complex and interesting expressions. So stay tuned!
 
