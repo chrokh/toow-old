@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="17. Precedence" href="precedence.html" /><link rel="prev" title="15. Logical operators" href="logical-operators.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Dependency injection - The Object Oriented Way</title>
+        <title>16. Assignment operator - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -164,7 +164,7 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul>
+  <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="syntax.html">1. Syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hello-world.html">2. Hello world</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compilation.html">3. Compilation</a></li>
@@ -180,7 +180,7 @@
 <li class="toctree-l1"><a class="reference internal" href="equality-operators.html">13. Equality operators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="relational-operators.html">14. Relational operators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logical-operators.html">15. Logical operators</a></li>
-<li class="toctree-l1"><a class="reference internal" href="assignment-operator.html">16. Assignment operator</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">16. Assignment operator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="precedence.html">17. Precedence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="associativity.html">18. Associativity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statements.html">19. Statements</a></li>
@@ -317,8 +317,23 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="dependency-injection">
-<h1>Dependency injection<a class="headerlink" href="#dependency-injection" title="Permalink to this heading">#</a></h1>
+          <section class="tex2jax_ignore mathjax_ignore" id="assignment-operator">
+<h1><span class="section-number">16. </span>Assignment operator<a class="headerlink" href="#assignment-operator" title="Permalink to this heading">#</a></h1>
+<p>asd
+As we’ve already seen in previous chapters, the assignment operator <code class="docutils literal notranslate"><span class="pre">=</span></code> plays a crucial role in C#. It is the operator that allows us to assign values to our variables. However, the assignment operator has a few more facets worth discussing.</p>
+<p>At its core, the assignment operator is used to assign the value of its right-hand operand to its left-hand operand. For instance:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">numberOfMarbles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>In this example, <code class="docutils literal notranslate"><span class="pre">5</span></code> is assigned to <code class="docutils literal notranslate"><span class="pre">numberOfMarbles</span></code>. This means that the variable <code class="docutils literal notranslate"><span class="pre">numberOfMarbles</span></code> now holds the value <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p>
+<p>Something to bear in mind is that the assignment operator is ‘right-associative’. This means that when there are multiple assignment operators in a single statement, they are evaluated from right to left. Let’s see an example:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>In this code snippet, all three variables <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>, and <code class="docutils literal notranslate"><span class="pre">c</span></code> will end up holding the value <code class="docutils literal notranslate"><span class="pre">10</span></code>. Here’s how it works: first, <code class="docutils literal notranslate"><span class="pre">10</span></code> is assigned to <code class="docutils literal notranslate"><span class="pre">c</span></code>. Then, this assigned value is assigned to <code class="docutils literal notranslate"><span class="pre">b</span></code> whose assigned value is then assigned to <code class="docutils literal notranslate"><span class="pre">a</span></code>. The right-associativity of the assignment operator ensures this cascade of assignments works correctly. If we explicitly add parenthases it looks like this: <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">(b</span> <span class="pre">=</span> <span class="pre">(c</span> <span class="pre">=</span> <span class="pre">10))</span></code>.</p>
+<p>One more interesting aspect of the assignment operator is that it’s not just about assigning values - it also returns a value. Specifically, the assignment operator <code class="docutils literal notranslate"><span class="pre">=</span></code> returns the value that was assigned. This is why it’s possible to do multiple assignments in one line, like in the example above.</p>
+<p>It’s important to note that the assignment operator is distinct from the <a class="reference internal" href="equality-operators.html"><span class="doc std std-doc">equality operator</span></a> <code class="docutils literal notranslate"><span class="pre">==,</span></code> which we’ve discussed in a previous chapter. While they might look similar, they serve very different purposes. The assignment operator <code class="docutils literal notranslate"><span class="pre">=</span></code> assigns a value to a variable, while the equality operator <code class="docutils literal notranslate"><span class="pre">==</span></code> checks if two values are equal.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -345,8 +360,26 @@
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="precedence.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title"><span class="section-number">17. </span>Precedence</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="logical-operators.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title"><span class="section-number">15. </span>Logical operators</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
