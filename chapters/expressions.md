@@ -4,6 +4,8 @@
 Work in progress.
 ```
 
+%- Literals
+
 %- Tie back to how we talked about expressions in {doc}`variables`.
 
 %In this section we've said that the *variable* goes on the left-hand side while the *value* goes on the right.
