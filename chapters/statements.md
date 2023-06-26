@@ -5,6 +5,9 @@
 Work in progress.
 ```
 
+
+%In this chapter, we'll tie together everything we've learned about expressions and operators to look at statements, the building blocks of our programs.
+
 %- https://docs.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/program-building-blocks#statements
 %- Declaration statements
 %- Assignment statements
