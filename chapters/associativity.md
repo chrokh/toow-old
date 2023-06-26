@@ -1,5 +1,18 @@
 # Associativity
 
+In addition to [precedence](precedence), operators have another property called 'associativity', which comes into play when operators with the same precedence appear in an expression.
+Associativity is the order in which operators of the same precedence are processed.
+
+- Left-associative operators are evaluated from left to right.
+- Right-associative operators are evaluated from right to left.
+
+Almost all operators in C# are left-associative, meaning that operations are performed from left to right. For example, the expression `5 - 3 - 1` yields `1` and not `3`. Because subtraction is left-associative, the expression is computed as `(5 - 3) - 1` and not `5 - (3 - 1)`.
+
+However, there are some operators in C# that are right-associative, that is, they group from right to left. A notable example is the assignment operator `=`. In an expression like `a = b = 5`, the operation proceeds from right to left, i.e., `a = (b = 5)`. Here, `b` is first assigned the value `5`, and then `a` is assigned the value of `b`, which is now `5`. So, both `a` and `b` end up with the value `5`.
+
+Understanding precedence and associativity is crucial to understanding how expressions involving multiple operators are evaluated in C#. As a developer, it allows you to write and read code more accurately.
+
+
 %## Assignment operator
 %In this section we've said that the *variable* goes on the left-hand side while the *value* goes on the right.
 %In truth, the right-hand side can actually be any {doc}`expression<expressions>` that evaluates to a value.
