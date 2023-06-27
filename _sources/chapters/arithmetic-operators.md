@@ -1,3 +1,15 @@
+---
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  display_name: csharp
+  language: .net-csharp
+  name: .net-csharp
+---
+
 # Arithmetic operators
 
 In the previous chapter, you've seen how expressions can produce values. You've also seen that these expressions can include something more than just literal values or variables. They can include symbols like `+` which performs an operation on the values. These symbols are called "operators".

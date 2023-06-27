@@ -337,8 +337,136 @@
 </figcaption>
 </figure>
 <p>Here are some examples:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">marbleCount1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">marbleCount2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">marbleCount1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">marbleCount2</span><span class="p">;</span><span class="w">      </span><span class="c1">// 15</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">marbleCount2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">marbleCount1</span><span class="p">;</span><span class="w">     </span><span class="c1">// 5</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">marbleCount1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">marbleCount2</span><span class="p">;</span><span class="w">  </span><span class="c1">// 50</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">quotient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">marbleCount2</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">marbleCount1</span><span class="p">;</span><span class="w"> </span><span class="c1">// 2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-2449.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.219:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '2449.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
 <p>However, the modulo operator (<code class="docutils literal notranslate"><span class="pre">%</span></code>) might be less familiar to you. This operator calculates the remainder of a division operation. For instance, if you divide <code class="docutils literal notranslate"><span class="pre">10</span></code> by <code class="docutils literal notranslate"><span class="pre">3</span></code>, the quotient is <code class="docutils literal notranslate"><span class="pre">3</span></code> and the remainder is <code class="docutils literal notranslate"><span class="pre">1</span></code>. The modulo operation gives you this remainder.</p>
 <p>Here’s how you might use the modulo operator:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">leftoverMarbles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">marbleCount2</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">marbleCount1</span><span class="p">;</span><span class="w"> </span><span class="c1">// 0, because 10 divided by 5 has no remainder.</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>You might for example use the modulo operator to determine whether a number is even or odd (a number is even if it gives a remainder of <code class="docutils literal notranslate"><span class="pre">0</span></code> when divided by <code class="docutils literal notranslate"><span class="pre">2</span></code>).</p>
 <p>These arithmetic operators allow you to perform basic mathematical operations on your data. By combining these with other concepts, like variables and expressions, you can start to perform complex operations and calculations in your code.</p>
 </section>
@@ -352,16 +480,16 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            name: "python3",
+            name: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
         </article>
       </div>
       <footer>
