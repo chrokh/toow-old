@@ -21,8 +21,6 @@ Browse the table of contents, or use the search box.
 5. How design patterns reveal **inherent limitations** of object oriented languages.
 6. Why object orientation ought to eventually be replaced by functional programming.
 
-
-
 ## Why this book
 
 In this book we unapologetically untangle everything that needs to be untangled to establish a *useful* understanding of object oriented programming.
@@ -71,7 +69,10 @@ It all depends on what you compare it to.
 Welcome to the magical world of programming.
 Down the rabbit hole we go.
 
-
+```{admonition} Top tip
+:class: tip
+Use arrow keys to navigate between chapters.
+```
 
 ## About the author
 
