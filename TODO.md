@@ -8,6 +8,7 @@
 - `+=`
 - Right or left associativity of operators.
 - Top-level statements
+- Static typing and type systems?
 
 # TODO
 
