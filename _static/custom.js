@@ -25,14 +25,14 @@ document.addEventListener('DOMContentLoaded', function() {
   // Find the first list item that contains the currentTitle
   var currentTocItem = findListItemByText(currentTitle);
 
-  // Scroll the sidebar-scroll div to make the currentTocItem appear in the top third
+  // Scroll the sidebar-sticky div to make the currentTocItem appear in the top third
   if (currentTocItem) {
-    var sidebarScrollDiv = document.querySelector('.sidebar-scroll');
-    var sidebarHeight = sidebarScrollDiv.offsetHeight;
+    var sidebarStickyDiv = document.querySelector('.sidebar-sticky');
+    var sidebarHeight = sidebarStickyDiv.offsetHeight;
     var listItemTopOffset = currentTocItem.offsetTop;
-    var topThirdHeight = sidebarHeight / 3;
-    var scrollToY = listItemTopOffset - (2 * topThirdHeight);
-    sidebarScrollDiv.scrollTop = scrollToY;
+    var topFourthHeight = sidebarHeight / 4;
+    var scrollToY = listItemTopOffset - topFourthHeight;
+    sidebarStickyDiv.scrollTop = scrollToY;
   }
 });
 
