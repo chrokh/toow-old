@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="21. Type-checking" href="type-checking.html" /><link rel="prev" title="19. Statements" href="statements.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="21. Type checking" href="type-checking.html" /><link rel="prev" title="19. Statements" href="statements.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
         <title>20. Type inference - The Object Oriented Way</title>
@@ -185,7 +185,7 @@
 <li class="toctree-l1"><a class="reference internal" href="associativity.html">18. Associativity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statements.html">19. Statements</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">20. Type inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="type-checking.html">21. Type-checking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-checking.html">21. Type checking</a></li>
 <li class="toctree-l1"><a class="reference internal" href="semantics.html">22. Semantics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="type-systems.html">23. Type systems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="type-hierarchies.html">24. Type hierarchies</a></li>
@@ -319,6 +319,169 @@
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="type-inference">
 <h1><span class="section-number">20. </span>Type inference<a class="headerlink" href="#type-inference" title="Permalink to this heading">#</a></h1>
+<p>As we venture deeper into the world of C#, there’s a handy tool we need to discuss: the <code class="docutils literal notranslate"><span class="pre">var</span></code> keyword. This allows us to declare a variable without having to <em>explicitly</em> state its type. This is known as “type inference”.</p>
+<p>With type inference, the compiler determines the type of the variable at compile-time based on the type of its value. Let’s look at a few examples:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">numberOfMarbles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">;</span><span class="w">  </span><span class="c1">// int</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Cherries&quot;</span><span class="p">;</span><span class="w">   </span><span class="c1">// string</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">isJarFull</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span><span class="w">     </span><span class="c1">// bool</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-4539.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.1.2:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '4539.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>In these lines of code, we’re not explicitly stating the type of each variable. Instead, we’re using the var keyword.
+In C#, these variables are called ‘implicitly typed local variables’.
+Once the code is compiled, <code class="docutils literal notranslate"><span class="pre">numberOfMarbles</span></code> becomes an <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">label</span></code> is understood to be a <code class="docutils literal notranslate"><span class="pre">string</span></code>, and <code class="docutils literal notranslate"><span class="pre">isJarFull</span></code> is a <code class="docutils literal notranslate"><span class="pre">bool</span></code>.</p>
+<figure class="align-default" id="id1">
+<img alt="https://media.discordapp.net/attachments/1118630713084870736/1123175050258952283/chrokh_a_flat_illustration_of_a_native_american_chief_looking_i_ff5ca62e-ada5-4aec-adad-e0361447aa3f.png?width=2700&amp;height=1180" src="https://media.discordapp.net/attachments/1118630713084870736/1123175050258952283/chrokh_a_flat_illustration_of_a_native_american_chief_looking_i_ff5ca62e-ada5-4aec-adad-e0361447aa3f.png?width=2700&amp;height=1180" />
+<figcaption>
+<p><span class="caption-number">Fig. 20.1 </span><span class="caption-text">By using the <code class="docutils literal notranslate"><span class="pre">var</span></code> keyword we instruct the compiler to infer the type of the variable from the expression on the right-hand side of the initialization statement.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The <code class="docutils literal notranslate"><span class="pre">var</span></code> keyword can make your code cleaner and easier to read, particularly when dealing with complex types. But remember, the variable must be initialized at the time of declaration when using <code class="docutils literal notranslate"><span class="pre">var</span></code>, and the assigned value should not be <code class="docutils literal notranslate"><span class="pre">null</span></code>. This is because the compiler needs to infer the type from the assigned value. For example, this will not compile:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">something</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1,5): error CS0818: Implicitly-typed variables must be initialized
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Also, once a value is assigned to a variable declared with <code class="docutils literal notranslate"><span class="pre">var</span></code>, the variable’s type cannot be changed. It still has a type, albeit implicitly. If you try to assign a value of a different type later, you’ll receive a compile-time error:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">numberOfMarbles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">;</span><span class="w"> </span><span class="c1">// int</span>
+<span class="n">numberOfMarbles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Five&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2,19): error CS0029: Cannot implicitly convert type &#39;string&#39; to &#39;int&#39;
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, because <code class="docutils literal notranslate"><span class="pre">numberOfMarbles</span></code> is inferred to be of type <code class="docutils literal notranslate"><span class="pre">int</span></code> at the time of its initialization, it cannot then be assigned a <code class="docutils literal notranslate"><span class="pre">string</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">var</span></code> keyword gives you a way to let the compiler do the work of figuring out the types of your variables for you. It’s a powerful tool in your C# toolbox, enabling cleaner and more streamlined code. In the upcoming chapters, we will encounter scenarios where <code class="docutils literal notranslate"><span class="pre">var</span></code> proves particularly beneficial in enhancing code readability and maintainability.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -330,16 +493,16 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            name: "python3",
+            name: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
         </article>
       </div>
       <footer>
@@ -350,7 +513,7 @@
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">21. </span>Type-checking</div>
+                <div class="title"><span class="section-number">21. </span>Type checking</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Billion dollar mistake - The Object Oriented Way</title>
+        <title>Runtime type - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -317,39 +317,8 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="billion-dollar-mistake">
-<h1>Billion dollar mistake<a class="headerlink" href="#billion-dollar-mistake" title="Permalink to this heading">#</a></h1>
-<blockquote class="epigraph">
-<div><p>I call it my billion-dollar mistake.</p>
-<p class="attribution">—Tony Hoare, on the invention of <code class="docutils literal notranslate"><span class="pre">null</span></code> [<a class="reference external" href="https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/">TODO REF</a>]</p>
-</div></blockquote>
-<p>Prior to (<a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/csharp/nullable-references">C# 8.0</a>), data types all <a class="reference internal" href="value-and-reference-semantics.html#value-and-reference-semantics"><span class="std std-ref">reference types</span></a> were, what is known as, “nullable”.
-This meant that <code class="docutils literal notranslate"><span class="pre">null</span></code> was considered a valid value of all reference types.
-We will discuss this further in the chapter on <a class="reference internal" href="data-types.html"><span class="doc">Data types</span></a>, <code class="docutils literal notranslate"><span class="pre">null</span></code>.
-Let’s, for example, say that you’ve got a <code class="docutils literal notranslate"><span class="pre">string</span></code>, meaning a sequence of characters, but that your string is nullable.
-The compiler isn’t actually guaranteeing that you have a <code class="docutils literal notranslate"><span class="pre">string</span></code>, it is guaranteeing that you either have a <code class="docutils literal notranslate"><span class="pre">string</span></code>, or you have the absence of one (meaning <code class="docutils literal notranslate"><span class="pre">null</span></code>).</p>
-<p>On the type level there is no way of ensuring that you only take a particular path through the program if you actually have a string.
-We’ll talk more about <code class="docutils literal notranslate"><span class="pre">null</span></code> and nullable reference types in the chapter on <a class="reference internal" href="nothingness.html"><span class="doc std std-doc">nothingness</span></a>.
-But the short story is that we used to have to resort to tons and tons of run-time checks to make sure that our programs don’t crash as a consequence of <code class="docutils literal notranslate"><span class="pre">null</span></code> values.</p>
-<p>It is understandable if the example below doesn’t make sense since we haven’t yet talked about neither <a class="reference internal" href="selection.html"><span class="doc std std-doc">selection</span></a> nor the <span class="xref myst">equality operator</span>.
-However, just to give you an idea of what we’re talking about.
-The existance of <code class="docutils literal notranslate"><span class="pre">null</span></code> means that we have to scatter tons of checks like the one below throughout our whole code base.
-Not ideal as you might suspect.</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">myString</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
-<span class="w">  </span><span class="c1">// Don&#39;t do the thing since we don&#39;t have a value.</span>
-<span class="k">else</span>
-<span class="w">  </span><span class="c1">// Do the thing since we have a value.</span>
-</pre></div>
-</div>
-<p>As already mentioned, this is the source of much pain and suffering.
-Tony Hoare is often credited with the invention of <code class="docutils literal notranslate"><span class="pre">null</span></code> but has apologized for it.</p>
-<div class="exercise admonition" id="chapters/billion-dollar-mistake-exercise-0">
-
-<p class="admonition-title"></p>
-<section id="exercise-content">
-<p>How do we denote the absence of a value?</p>
-</section>
-</div>
+          <section class="tex2jax_ignore mathjax_ignore" id="runtime-type">
+<h1>Runtime type<a class="headerlink" href="#runtime-type" title="Permalink to this heading">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
