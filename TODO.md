@@ -1,16 +1,17 @@
 # The new todo list
 
-- When to introduce the meaning of "keyword"?
+- `+=`, `++`
+- `Write` not `WriteLine` => Hello world chapter?
+- String interpolation + concatenation
+- When to introduce the meaning of "keyword"? Introduced in syntax chapter no?
 - When to discuss that variables are [initialized to default value](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/variables)?
 - When do I discuss the different [types of variables](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/variables#928-local-variables)?
 - Truncation (int x = 10/3)?
-- `+=`
 - Right or left associativity of operators.
 - Top-level statements
 - Static typing and type systems?
 - Semantics
 - Paradigm
-- String interpolation + concatenation
 
 # TODO
 
