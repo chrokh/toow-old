@@ -316,10 +316,250 @@
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="arrays">
 <h1><span class="section-number">27. </span>Arrays<a class="headerlink" href="#arrays" title="Permalink to this heading">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
+<p>In many situations, you might find yourself needing to work with a collection of values that all share the same data type. For instance, if you wanted to store a sequence of names of all your cats, it would be impractical to create a separate variable for each of these values. This is where arrays come in.</p>
+<p>An array in C# is a data structure that allows you to store multiple values of the same data type. All elements in the array share a common name, and each individual element can be accessed by an index, which is an integer representing its position within the array.</p>
+<p>You declare an array by specifying its type, followed by square brackets, and then the array name. For example, to declare an array of strings:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">names</span><span class="p">;</span>
+</pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-2530.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.139:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '2530.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>In this case, <code class="docutils literal notranslate"><span class="pre">names</span></code> is an array that will contain strings. However, this declaration doesn’t actually create an array, it only declares a variable that can hold an array. To create an array, you use the <code class="docutils literal notranslate"><span class="pre">new</span></code> keyword followed by the data type, and then in square brackets, you specify the number of elements that the array should contain:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">string</span><span class="p">[</span><span class="m">10</span><span class="p">];</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This creates an array that can hold <code class="docutils literal notranslate"><span class="pre">10</span></code> strings, and assigns this array to the <code class="docutils literal notranslate"><span class="pre">names</span></code> variable. Now you can assign values at different positions in the array:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">names</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Fluffy&quot;</span><span class="p">;</span>
+<span class="n">names</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Whiskers&quot;</span><span class="p">;</span>
+<span class="c1">// and so on...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In many cases, you’ll know the values you want to put in an array at the time you create it. C# provides a shorthand, called ‘collection initializers’, which lets you create the array and assign elements in a single statement.
+Here’s a code example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Fluffy&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Whiskers&quot;</span><span class="w"> </span><span class="p">};</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This creates an array, initializes it with the given values, and assigns it to the variable.</p>
+<p>Arrays are zero-indexed in C#, which means the first element is at index <code class="docutils literal notranslate"><span class="pre">0</span></code>, the second element is at index <code class="docutils literal notranslate"><span class="pre">1</span></code>, and so on.</p>
+<p>To access the elements of an array, you use the name of the variable containing the array followed by the index of the element in square brackets:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="w"> </span><span class="n">name1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">names</span><span class="p">[</span><span class="m">0</span><span class="p">];</span><span class="w"> </span><span class="c1">// Access the element at index 0.</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">name1</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fluffy
+</pre></div>
+</div>
+</div>
+</div>
+<p>It’s essential to be mindful of the length of an array in C#. If you attempt to access an array element at an index that doesn’t exist, C# will throw an <code class="docutils literal notranslate"><span class="pre">IndexOutOfRangeException</span></code>. This type of error occurs when your code tries to access an element at an index that is less than zero or greater than or equal to the length of the array. Always ensure that your index falls within the valid range for the array to avoid this exception. We’ll talk more about <a class="reference internal" href="basic-exceptions.html#exceptions"><span class="std std-ref">exceptions</span></a> in a coming chapter.</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">names</span><span class="p">[</span><span class="m">11</span><span class="p">];</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at Submission#8.&lt;&lt;Initialize&gt;&gt;d__0.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.CodeAnalysis.Scripting.ScriptExecutionState.RunSubmissionsAsync[TResult](ImmutableArray`1 precedingExecutors, Func`2 currentExecutor, StrongBox`1 exceptionHolderOpt, Func`2 catchExceptionOpt, CancellationToken cancellationToken)
+   at Submission#8.&lt;&lt;Initialize&gt;&gt;d__0.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.CodeAnalysis.Scripting.ScriptExecutionState.RunSubmissionsAsync[TResult](ImmutableArray`1 precedingExecutors, Func`2 currentExecutor, StrongBox`1 exceptionHolderOpt, Func`2 catchExceptionOpt, CancellationToken cancellationToken)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Before you’ve added values to your array, all positions are assigned the default value for the data type of which the array stores elements of.
+For example, if you create an array of integers (<code class="docutils literal notranslate"><span class="pre">int[]</span></code>), all positions in the array are initially filled with <code class="docutils literal notranslate"><span class="pre">0</span></code> because that is the default value for integers. Similarly, an array of booleans (<code class="docutils literal notranslate"><span class="pre">bool[]</span></code>) is initialized with <code class="docutils literal notranslate"><span class="pre">false</span></code>, and an array of arrays is filled with <code class="docutils literal notranslate"><span class="pre">null</span></code>. Here’s a code example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="m">5</span><span class="p">];</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">numbers</span><span class="p">[</span><span class="m">3</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this code, an array of integers named <code class="docutils literal notranslate"><span class="pre">numbers</span></code> is created with a length of <code class="docutils literal notranslate"><span class="pre">5</span></code>. Since no specific values are provided, all elements in the numbers array are initialized with the default value for integers, which is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<p>Often, when working with arrays, you want to perform some operation based on each element.
+For instance, you might want to print all the names to the console.
+Luckily, we’ve already learned about <a class="reference internal" href="iteration.html"><span class="doc std std-doc">iteration</span></a>.
+We can use a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop to solve this problem:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">names</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span><span class="w"> </span><span class="n">index</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">index</span><span class="p">]);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fluffy
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Whiskers
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this example, <code class="docutils literal notranslate"><span class="pre">names.Length</span></code> invokes the <code class="docutils literal notranslate"><span class="pre">Length</span></code> property of the array which gives the number of elements in the array.
+We’ll talk more about properties in a later chapter.</p>
+<p>A simpler way to solve the same problem is to use a <code class="docutils literal notranslate"><span class="pre">foreach</span></code> loop.
+A <code class="docutils literal notranslate"><span class="pre">foreach</span></code> loop in C# iterates over a collection, like an array. For each element in the collection, it executes a block of code. The <code class="docutils literal notranslate"><span class="pre">foreach</span></code> statement defines a local variable for the current element. Here’s how you could use a <code class="docutils literal notranslate"><span class="pre">foreach</span></code> loop to print all the names:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">names</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fluffy
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Whiskers
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this code, <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">name</span></code> declares a variable that will hold each element of the <code class="docutils literal notranslate"><span class="pre">names</span></code> array, one at a time. The <code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">names</span></code> part specifies the collection to iterate over. The <code class="docutils literal notranslate"><span class="pre">Console.WriteLine(name);</span></code> part is the block that’s being executed for each element.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">foreach</span></code> loop is simpler and more readable than the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop when you want to work with each element in a collection and you don’t need to know the index of the current element. However, if you need to know the position of the current element within the collection, or if you want to change the elements of the collection, you’ll need to use a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop or some other method.</p>
+<p>That’s a basic introduction to arrays in C#. As we move on, we’ll see more complex uses of arrays and other types of collections.
+It should be noted that there are very few legitimate reasons to use arrays these days. Instead we use modern data types like generic lists. More on that in a future chapter.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -331,16 +571,16 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            name: "python3",
+            name: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
         </article>
       </div>
       <footer>
