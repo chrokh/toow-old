@@ -4,11 +4,13 @@
 - When to discuss that variables are [initialized to default value](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/variables)?
 - When do I discuss the different [types of variables](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/variables#928-local-variables)?
 - Truncation (int x = 10/3)?
-- Concatenation
 - `+=`
 - Right or left associativity of operators.
 - Top-level statements
 - Static typing and type systems?
+- Semantics
+- Paradigm
+- String interpolation + concatenation
 
 # TODO
 

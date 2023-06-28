@@ -12,6 +12,8 @@ kernelspec:
 
 # Objects
 
+% - When to introduce instance methods on String like .IndexOf?
+
 
 ## Motivation
 
