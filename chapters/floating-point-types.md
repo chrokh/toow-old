@@ -14,6 +14,10 @@ kernelspec:
 
 In previous chapters, we explored integral types like int which can only hold whole numbers. But what if you need to represent a number with a fraction, like `3.14` or `0.99`? That's where floating-point types come into play.
 
+```{figure} https://media.discordapp.net/attachments/1118630713084870736/1123218846254370867/chrokh_a_simple_flat_illustration_of_a_ruler_78310718-214a-49af-8bb2-28a2513d0b8a.png?width=2700&height=1180
+
+```
+
 In C#, there are three kinds of floating-point types:
 
 - `double`
@@ -40,6 +44,11 @@ Console.WriteLine(result);  // But the output will be 0.30000000000000004
 ```
 
 So, always be careful when comparing floating-point numbers for equality. A better approach is to check if the absolute difference between the two numbers is within a small tolerance.
+
+```csharp
+result == 0.3                    // false
+result <= 0.31 && result >= 0.29 // true
+```
 
 The `decimal` type is a high-precision floating point type designed specifically for financial and monetary calculations where precision is paramount. The `decimal` type can accurately represent up to 28-29 significant digits. It has a smaller range than both `float` and `double`.
 
