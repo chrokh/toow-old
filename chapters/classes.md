@@ -39,6 +39,13 @@ In a prototype based object oriented language you define an object that serves a
 That object can then be cloned in order to create new instances of the same type.
 ```
 
+%https://media.discordapp.net/attachments/1118630713084870736/1120651120440787065/chrokh_An_explision_diagram_of_a_red_SUV_8d14d91a-269f-4555-9900-f4249e5263c3.png?width=868&height=868
+```{figure} https://media.discordapp.net/attachments/1118630713084870736/1124016439276347514/chrokh_a_blueprint_of_a_Land_Rover_Defender_0baad270-43ca-49d7-b3fc-8d92bd6e89ab.png?width=1440&height=629
+:figclass: margin
+
+A class called 'Car' might have properties like 'color' and 'model' and methods like 'start' and 'stop'.
+```
+
 
 ## Definition
 
