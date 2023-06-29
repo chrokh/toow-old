@@ -45,6 +45,22 @@ Console.WriteLine(original[0]);
 
 In the above example, when we modify `copy`, we're also modifying `original` because they're both pointing to the same location in memory. This concept is crucial to understand when we're passing around reference types.
 
+Another important point about reference semantics is that the equality operator (`==`) checks for reference equality and not value equality. This means that `==` checks whether the two references point to the same object in memory, not whether the values of the objects are equivalent. Let's look at an example:
+
+```{code-cell}
+int[] arr1 = { 10, 20, 30 };
+int[] arr2 = { 10, 20, 30 };
+Console.WriteLine(arr1 == arr2);
+```
+
+In this example, the two arrays are identical. However, since they are two distinct arrays, meaning two different points in memory, the equality operator returns `false` if we ask whether they are equal. Compare this to the case above where two variables are references to the same value.
+
+```{code-cell}
+int[] original = {1, 2, 3, 4, 5};
+int[] copy = original;
+Console.WriteLine(copy == original);
+```
+
 %When you pass a reference type to a method, it is the reference to the object that gets passed, not a new object. Any changes made to the object within the method will affect the original object.
 %
 %void ModifyArray(int[] arr)
@@ -59,7 +75,8 @@ In the above example, when we modify `copy`, we're also modifying `original` bec
 %In the above example, the ModifyArray function modifies the original numbers array because arr holds a reference to the same array.
 
 ```{note}
-Strings in C# are also reference types, but they behave a bit differently due to their immutability, meaning once a `string` is created, it cannot be changed. Any operation that appears to modify a `string` actually creates a new `string`.
+Strings in C# are an exception to the rule. String is a reference type that has value type semantics.
+%Strings in C# are also reference types, but they behave a bit differently due to their immutability, meaning once a `string` is created, it cannot be changed. Any operation that appears to modify a `string` actually creates a new `string`. Strings are an exception because they are a reference type with value type semantics.
 ```
 
 All reference types in C# also include the special default value: `null`. This value represents the absence of any object or value. You can assign `null` to any variable of a reference type. This is an important aspect of reference types and it allows you to explicitly express the absence of a value.
