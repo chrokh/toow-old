@@ -5,6 +5,7 @@
 - String interpolation + concatenation
 - String methods such as `.Length` (must come before reference types chapter).
 - When to introduce the meaning of "keyword"? Introduced in syntax chapter no?
+- Syntactic sugar. The term. Used in e.g. fields.
 - DRY? Before functions? After iteration?
 - When to discuss that variables are [initialized to default value](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/variables)?
 - When do I discuss the different [types of variables](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/variables#928-local-variables)?

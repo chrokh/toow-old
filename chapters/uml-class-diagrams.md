@@ -78,3 +78,51 @@ Above: Two models of classes using a more informal UML class diagram syntax.
 If you want more formal information on UML class diagrams I recommend the [specification](https://www.omg.org/spec/UML/2.5.1/PDF).
 ```
 
+
+### Fields
+
+In UML class diagrams, instance fields are modeled by what UML calls "attributes".
+Remember how, in the chapter on [classes](classes), we discussed how a type in a UML class diagram is drawn as a rectangle that's divided into three sections.
+See the left class in the figure below for a reminder of what the UML class diagram syntax looks like.
+
+The second section lists attributes, and the third lists operations.
+Instance fields in C# (as well as [properties](properties) which we'll talk about soon) are represented as attributes in UML class diagrams.
+
+The `Rectangle` class would, in a UML class diagram, be represented as the right class in the figure below.
+
+```
+┌────────────────────┐   ┌────────────────────┐
+│ <class identifier> │   │     Rectangle      │
+├────────────────────┤   ├────────────────────┤
+│                    │   │ Width : int        │
+│    <attributes>    │   │ Height : int       │
+│                    │   │                    │
+├────────────────────┤   ├────────────────────┤
+│                    │   │                    │
+│    <operations>    │   │                    │
+│                    │   │                    │
+└────────────────────┘   └────────────────────┘
+```
+
+Notice how, when listing an attribute we also write out the type of the attribute.
+In the chapter on [classes](classes:uml) we mentioned that UML class diagrams are often draw with a varying level of informality.
+As such, the data types of attributes are often omitted if the situtation doesn't require them in order to explain whatever it is we're trying to explain.
+
+Since the instance fields of the class `Rectangle` are marked as `public` we should actually also add a plus sign (`+`) before the name of the field.
+In UML class diagrams, this is known as the "visibility" of the class member.
+But more on this in the chapter on [access modifiers](access-modifiers).
+And again, depending on the level of informality, visibility is often omitted.
+
+```
+┌────────────────┐
+│   Rectangle    │
+├────────────────┤
+│ + Width : int  │
+│ + Height : int │
+├────────────────┤
+│                │
+│                │
+└────────────────┘
+```
+
+
