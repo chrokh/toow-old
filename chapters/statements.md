@@ -53,7 +53,7 @@ An expression statement is a type of statement that contains an expression. But 
 Remember, while all expression statements contain expressions, not all expressions can serve as statements on their own. Expressions used in this way perform an action and often change the state of the program, like modifying a variable or outputting a value.
 %Similarly, if you have a method Display() and you call it as Display();, this is a method call expression that serves as an expression statement.
 
-Finally, a block statement, or a block, is a group of statements that are executed sequentially. It is written between opening and closing curly braces `{` `}`.
+Finally, a block statement, or a block, is a group of statements that are executed sequentially. It is written between opening and closing curly brackets `{` `}`.
 
 ```csharp
 {

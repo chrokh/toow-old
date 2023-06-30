@@ -1,4 +1,4 @@
-# Static variables
+# Static fields
 
 ```{warning}
 Work in progress.

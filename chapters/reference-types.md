@@ -102,3 +102,18 @@ int length = middleName.Length;
 In a later chapter, we'll discuss `null` safety and techniques for handling potential `null` values in your code, including the use of 'null static analysis', a feature introduced in C# 8.0. This feature helps you avoid `null` related bugs by providing compile-time warnings about potential `NullReferenceException` risks.
 
 In the next chapter, we will contrast the behavior of reference types that of value types. Understanding the difference between reference types and value types is critical for programming in C#.
+
+
+%Think of it as if both variables are pointing to the same piece of memory in the machine.
+%Remember how we, in the chapter on [value and reference semantics](value-and-reference-semantics), discussed how weird it would be if numbers followed reference semantics.
+%Two instances of the number `3` would not be considered equal if they were not also pointing to the same object in memory.
+%Reference semantics are quite unintuitive when it comes to some types, which is why the simple types are value types.
+%
+%For more complex types however, the reference semantics is slightly more intuitive.
+%Two cats are only the same cat if they actually are the same cat.
+%Once you've constructed a cat, there's only a single solitary instance of that cat.
+%Any other new cat that you construct could not possibly be the same cat.
+%
+%Think about real life.
+%If two identical twin kittens are born then it doesn't matter how "identical" they are.
+%They are fundamentally not the same kitten.

@@ -35,7 +35,10 @@ For example, if we have a 'Car' class with properties like 'color' and 'model' a
 
 Let's take one more example.
 A robot vacuum might have properties like 'BatteryLevel', and methods like 'MoveForward', 'RotateLeft', 'RotateRight', 'Start', and 'ReturnHome'.
+It is important to understand that objects might be, what we call, 'mutable'.
+When we, for example, call the instance method 'RotateLeft' on a robot object then the state of that object, the data inside the object, actually changes.
 
+%https://media.discordapp.net/attachments/1118630713084870736/1124047885634392074/chrokh_a_simple_flat_illustration_of_a_robot_vacuum_7904121d-d4ae-43d2-9608-55e2a5351156.png?width=1440&height=629
 ```{figure} https://media.discordapp.net/attachments/1118630713084870736/1124021918706708550/chrokh_an_illustration_of_a_robot_vacuum_7678e374-6079-44d7-bf3a-c8e2543fa21a.png?width=1440&height=629
 :figclass: margin
 

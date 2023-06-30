@@ -1,0 +1,80 @@
+# UML class diagrams
+## Classes
+
+In this book we make heavy use of UML class diagrams.
+When reasoning about object oriented design nothing is really quite as efficient as using UML class diagrams.
+Even if only informally.
+Having a good understanding of UML class diagram notation is essential if we are to be able to eventually understand object oriented [design patterns](design-patterns).
+
+We'll discuss the syntax of UML class diagrams in every chapter where we're covering a concept that's also possible to model using UML class diagram syntax.
+
+For now, it's enough to know that to depict a class in a UML class diagram, we draw a rectangle with three sections.
+See the figure below.
+
+```
+┌────────────────────┐
+│ <class identifier> │
+├────────────────────┤
+│                    │
+│    <attributes>    │
+│                    │
+├────────────────────┤
+│                    │
+│    <operations>    │
+│                    │
+└────────────────────┘
+```
+
+
+In the smaller top section we write the name of the class.
+In the middle section we write the attributes of the class.
+In the bottom section we write the operations of the class.
+Attributes are essentially instance variables (which in C# means that they are either instance [fields](fields) or instance [properties](properties)).
+Operations on the other hand are essentially [instance methods](instance-methods).
+We'll talk about these more in their respective chapters.
+The attributes and members of a class are together referred to as the "members" of the class.
+
+Consider for example the two classes `Apple` and `Pear` as defined below.
+
+```{code-cell}
+class Apple { }
+class Pear { }
+```
+
+To depict these classes using UML class diagram notation we would draw like this:
+
+```
+┌─────────────────────┐   ┌────────────────────┐
+│        Apple        │   │        Pear        │
+├─────────────────────┤   ├────────────────────┤
+│                     │   │                    │
+│                     │   │                    │
+├─────────────────────┤   ├────────────────────┤
+│                     │   │                    │
+│                     │   │                    │
+└─────────────────────┘   └────────────────────┘
+```
+
+UML class diagrams are often, just like with math, used with a tad of informality with the purpose of not bogging down the user with too many details.
+Consequently you will often find that a class is depicted without the line between attributes and operations.
+See the class `Apple` in the figure below for an example.
+
+If the members are not relevant for the sake of the argument that's trying to be made, you'll sometimes even find that they're even omitted altogether.
+See the class `Pear` in the figure below for an example.
+
+```
+┌─────────────────────┐   ┌────────────────────┐
+│        Apple        │   │                    │
+├─────────────────────┤   │                    │
+│                     │   │        Pear        │
+│                     │   │                    │
+│                     │   │                    │
+└─────────────────────┘   └────────────────────┘
+```
+
+Above: Two models of classes using a more informal UML class diagram syntax.
+
+```{note}
+If you want more formal information on UML class diagrams I recommend the [specification](https://www.omg.org/spec/UML/2.5.1/PDF).
+```
+
