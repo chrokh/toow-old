@@ -469,3 +469,401 @@ printPointArray(makeIncrementingPoints(5, 10, initial));
 %  int[] position;
 %}
 %```
+
+
+
+## Instance methods
+
+%```{exercise}
+%In your own words, explain how instance methods are different from static methods.
+%```
+%
+%```{exercise}
+%What do we mean when we say that public fields "break" encapsulation?
+%```
+%
+%
+%```{exercise}
+%Can you *overload* an instance method by just varying the *return type*?
+%Why or why not?
+%```
+%
+%```{exercise}
+%Can you *overload* an instance method by just varying a single *parameter name*?
+%Why or why not?
+%```
+%
+%```{exercise}
+%Can you *overload* an instance method by just varying a single *parameter type*?
+%Why or why not?
+%```
+%
+%
+%
+%
+%```{exercise-start}
+%```
+%Write a class called `ReverseCipher` which expose a public instance method with the following signature:
+%
+%```csharp
+%string Encode (string input);
+%```
+%
+%The method should implement the Reverse cipher that we worked with in the chapter on [static methods](static-methods:examples:reverse).
+%The method should implement the Reverse cipher that we defined in the chapter on [algorithms](reverse-cipher).
+%
+%When you are done, you should be able to run the following code and get the corrseponding output.
+%
+%```{code-cell} csharp
+%:tags: [remove-input]
+%class ReverseCipher
+%{
+%  public string Encode (string input)
+%  {
+%    string output = "";
+%    for (int i=input.Length-1; i>=0; i--)
+%      output += input[i];
+%    return output;
+%  }
+%}
+%```
+%
+%```{code-cell} csharp
+%ReverseCipher reverser = new ReverseCipher();
+%Console.WriteLine(reverser.Encode("Hello"));
+%```
+%```{exercise-end}
+%```
+%
+%
+%
+%```{exercise-start}
+%:label: ex:instance-methods:leet
+%```
+%Write a class called `LeetCipher` which expose two overloaded public instance methods with the following signatures:
+%
+%```csharp
+%string Encode (string input);
+%char Encode (char input);
+%```
+%
+%Both methods should encode the input into [Leetspeak](leet-language) and then return the result.
+%
+%```{code-cell} csharp
+%:tags: [remove-input]
+%class LeetCipher
+%{
+%  public char Encode (char input)
+%  {
+%    switch (input)
+%    {
+%      case 'L': return '1';
+%      case '1': return 'L';
+%      case 'A': return '4';
+%      case '4': return 'A';
+%      case 'O': return '0';
+%      case '0': return 'O';
+%      case 'T': return '7';
+%      case '7': return 'T';
+%      case 'E': return '3';
+%      case '3': return 'E';
+%      default: return input;
+%    }
+%  }
+%
+%  public string Encode (string input)
+%  {
+%    string output = "";
+%    foreach (char c in input)
+%      output += Encode(c);
+%    return output;
+%  }
+%}
+%```
+%
+%When you are done you should be able to run the following code and get the corresponding output.
+%The code first instantiates a cipher and then encodes both a `string` and a `char` and prints the results.
+%
+%```{code-cell} csharp
+%LeetCipher leet = new LeetCipher();
+%
+%string output1 = leet.Encode("LEET");
+%char output2 = leet.Encode('E');
+%
+%Console.WriteLine($"{output1} {output2}");
+%```
+%```{exercise-end}
+%```
+%
+%
+%
+%
+%```{exercise-start}
+%:label: ex:instance-methods:point-print
+%```
+%In {numref}`ex:fields:point` we wrote a class called `Point` and a local method called `printPoint` that could print the coordinates of objects of type `Point`.
+%
+%Rewrite the class `Point` so that `Print` is now an instance method on the `Point` class itself.
+%
+%Your solution should look something like the following.
+%```{code-cell}
+%class Point
+%{
+%  // Your code here...
+%
+%  public void Print ()
+%  {
+%    // Your code here...
+%  }
+%}
+%```
+%When you're done, you should be able to run the following code and get the same result.
+%```{code-cell} csharp
+%:tags: [remove-input]
+%class Point
+%{
+%  public int X = 0;
+%  public int Y = 0;
+%  public int Z = 0;
+%
+%  public void Print ()
+%    => Console.WriteLine($"{{X={X}, Y={Y}, Z={Z}}}");
+%}
+%```
+%```{code-cell}
+%Point p1 = new Point() { X=10, Y=20, Z=30 };
+%Point p2 = new Point() { X=1,  Y=2,  Z=3 };
+%
+%p1.Print();
+%p2.Print();
+%```
+%```{exercise-end}
+%```
+%
+%
+%
+%
+%```{exercise-start}
+%:label: ex:instance-methods:delta
+%```
+%In {numref}`ex:fields:delta` we defined a local function that took an object of type `Point` and an array of points.
+%It then treated the coordinates of the first `Point` as a delta that should be applied to all points in the array.
+%
+%Let's now forget about the array but instead implement the idea of altering an object of type `Point` by passing it another object of type `Point` that will serve as the delta.
+%
+%Start from the code you wrote in {numref}`ex:instance-methods:point-print`.
+%
+%Your solution should look something like the following.
+%```{code-cell}
+%class Point
+%{
+%  // ...
+%
+%  public void Print ()
+%  {
+%    // Your code here...
+%  }
+%}
+%```
+%
+%When you're done, you should be able to run the following code and get the same result.
+%```{code-cell}
+%:tags: [remove-input]
+%class Point
+%{
+%  public int X = 0;
+%  public int Y = 0;
+%  public int Z = 0;
+%
+%  public void Print ()
+%    => Console.WriteLine($"{{X={X}, Y={Y}, Z={Z}}}");
+%
+%  public void Add (Point other)
+%  {
+%    X += other.X;
+%    Y += other.Y;
+%    Z += other.Z;
+%  }
+%}
+%```
+%```{code-cell}
+%Point[] points = new Point[] {
+%  new Point() { X=10, Y=20, Z=30 },
+%  new Point() { X=100, Y=200, Z=300 },
+%  new Point() { X=1000, Y=2000, Z=3000 }
+%};
+%
+%Point delta = new Point() { X=1, Y=2, Z=3 };
+%
+%foreach (Point point in points)
+%{
+%  point.Add(delta);
+%  point.Print();
+%}
+%```
+%```{exercise-end}
+%```
+%
+%
+%
+%
+%```{exercise-start}
+%:label: ex:instance-methods:point-this
+%```
+%Start from the code you wrote in {numref}`ex:instance-methods:delta`.
+%
+%Add another instance method to the class `Point` that has the signature `Point AddTo (Point other)`.
+%The method should treat the object as the delta and then apply itself, via the `Add` method, to the `Point` given as an argument.
+%
+%In other words, while `Add` adds another point to `this`, the method `AddTo` adds `this` to another `Point`.
+%In other words, we're letting the object upon which we call the method `AddTo` serve as the delta while we let the object being passed in as an argument serve as the object that is to be changed.
+%
+%Your solution should look something like the following.
+%```{code-cell}
+%class Point
+%{
+%  // ...
+%
+%  public void AddTo (Point other)
+%  {
+%    // Your code here...
+%  }
+%}
+%```
+%When you're done, you should be able to run the following code and get the same result.
+%```{code-cell}
+%:tags: [remove-input]
+%class Point
+%{
+%  public int X = 0;
+%  public int Y = 0;
+%  public int Z = 0;
+%
+%  public void Print ()
+%    => Console.WriteLine($"{{X={X}, Y={Y}, Z={Z}}}");
+%
+%  public void Add (Point other)
+%  {
+%    X += other.X;
+%    Y += other.Y;
+%    Z += other.Z;
+%  }
+%
+%  public void AddTo (Point other)
+%    => other.Add(this);
+%}
+%```
+%```{code-cell}
+%Point point = new Point() { X=10, Y=20, Z=30 };
+%Point delta = new Point() { X=1, Y=2, Z=3 };
+%
+%delta.AddTo(point);
+%point.Print();
+%```
+%```{hint}
+%:class: dropdown
+%In this solution you should pass `this` as an argument to the instance method `Add`.
+%```
+%```{exercise-end}
+%```
+%
+%
+%
+%
+%```{exercise-start}
+%:label: ex:instance-methods:point-this-array
+%```
+%Start from the code you wrote in {numref}`ex:instance-methods:point-this`.
+%
+%Add an overload of the instance method `AddTo` in the class `Point` with the signature `void AddTo (Point[] points)`.
+%
+%The method should treat the object as the delta and then apply itself, via the `Add` method, to all the points in the array.
+%In other words, the two versions of `AddTo` does the same thing but one adds itself to a single point while the other adds itself to multiple points.
+%
+%In even other words, we're solving the same problem we solved in {numref}`ex:fields:delta` but this time with instance methods.
+%
+%Your solution should look something like the following.
+%```{code-cell}
+%class Point
+%{
+%  // Your code here...
+%
+%  public void AddTo (Point[] points)
+%  {
+%    // Your code here...
+%  }
+%}
+%```
+%
+%When you're done, you should be able to run the following code and get the same result.
+%```{code-cell}
+%:tags: [remove-input]
+%class Point
+%{
+%  public int X = 0;
+%  public int Y = 0;
+%  public int Z = 0;
+%
+%  public void Print ()
+%    => Console.WriteLine($"{{X={X}, Y={Y}, Z={Z}}}");
+%
+%  public void Add (Point other)
+%  {
+%    X += other.X;
+%    Y += other.Y;
+%    Z += other.Z;
+%  }
+%
+%  public void AddTo (Point[] points)
+%  {
+%    foreach (Point point in points)
+%      point.Add(this);
+%  }
+%}
+%```
+%```{code-cell}
+%Point[] points = new Point[] {
+%  new Point() { X=10, Y=20, Z=30 },
+%  new Point() { X=100, Y=200, Z=300 },
+%  new Point() { X=1000, Y=2000, Z=3000 }
+%};
+%
+%Point delta = new Point() { X=1, Y=2, Z=3 };
+%delta.AddTo(points);
+%
+%foreach (Point point in points)
+%  point.Print();
+%```
+%```{hint}
+%:class: dropdown
+%In this solution you should pass `this` as an argument to the instance method `Add`.
+%```
+%```{exercise-end}
+%```
+%
+%
+%
+%```{exercise}
+%Draw a UML class diagram of the class `Point` as defined in {numref}`ex:instance-methods:point-this-array`.
+%Remember to include all fields and operations.
+%```
+%
+%
+%
+%
+%
+%%```{exercise-start}
+%%```
+%%Start with the classes you wrote in {numref}`ex:first-classes`.
+%%What does the following code print?
+%%Why is this the output that we get?
+%%
+%%```{code-cell}
+%%Apple f1 = new Apple();
+%%Pear f2 = new Pear();
+%%Console.WriteLine(f1);
+%%Console.WriteLine(f2);
+%%```
+%%```{exercise-end}
+%%```
+%

@@ -1,11 +1,16 @@
 # The new todo list
 
+- Note about RTFM very early on.
+- `void` in Methods chapter.
 - `+=`, `++`
+- Syntactic sugar. The term. Used in e.g. fat arrows. Suggestion: Right before ++ += ?
 - `Write` not `WriteLine` => Hello world chapter?
+- Target-typed new expressions: `Car car = new()`.
 - String interpolation + concatenation
 - String methods such as `.Length` (must come before reference types chapter).
+- Examples of instance methods that you can call on objects
+- String methods such as IndexOf, Substring, etc. Must have talked about overloading before. Should this simply be a chapter on reading the documentation of classes?
 - When to introduce the meaning of "keyword"? Introduced in syntax chapter no?
-- Syntactic sugar. The term. Used in e.g. fields.
 - DRY? Before functions? After iteration?
 - When to discuss that variables are [initialized to default value](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/variables)?
 - When do I discuss the different [types of variables](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/variables#928-local-variables)?
@@ -103,3 +108,5 @@ class CaesarCipher : ICipher<char,char>
   }
 }
 ```
+
+- Benefits of constructors are very similar to partial application when we send in data through the constructor. Our data depends on the state of the object. Being able to store some data in an instance and then use objects of the same type interchangably at runtime. For example instantiating caesar ciphers with multiple different steps, passing them around, and then switching between them.

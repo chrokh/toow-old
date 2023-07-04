@@ -14,6 +14,8 @@ kernelspec:
 
 %In a program, data often needs to persist beyond the lifetime of a single method call, and needs to be accessible across different methods within a class. This is where fields come into play, as they allow us to store and manipulate data within the context of an object.
 
+Fields provide a mechanism for storing the state or data of an object. Without them, our objects would lack any kind of internal storage to hold their individual characteristics or properties. For instance, imagine trying to represent a `Car` without being able to store details such as its `Model`, `Color` or `Speed`. It would be like trying to describe a car without referring to any of its unique features! With fields, we can store these pieces of information directly within our objects, giving them the ability to represent complex entities with multiple characteristics. This makes our code more representative of the real world, and thereby more intuitive and easier to work with.
+
 We've said that objects bundle of state and behavior. Fields are used to hold state. They are variables that hold the data of the object and can be accessed and manipulated by the methods within and outside the class.
 In some languages, fields are called 'instance variables', which helps us understand that that they are variables that belong to an instance.
 
@@ -48,15 +50,6 @@ Now our car objects have different models. We can 'get' the values like this:
 Console.WriteLine(car1.Model);
 Console.WriteLine(car2.Model);
 ```
-
-With C#, there's a more concise way to create instances and set the values of their fields in a single line using the syntactic sugar known as 'object initializers'. Creating and assigning models to our `Car` objects can be done as follows:
-
-```{code-cell}
-Car car1 = new Car { Model = "Tesla Roadster" };
-Car car2 = new Car { Model = "Rivian R1S" };
-```
-
-This syntax allows us to initialize the Model field during the instantiation of our `Car` objects, making the code more compact and readable. We can then get the values the same way as before. Please note that this works only with `public` fields.
 
 Fields can be of any type including built-in types (like `int`, `string`, etc.), custom types (like a class you've defined), or complex types (like arrays or delegates).
 
@@ -97,10 +90,6 @@ Console.WriteLine(unknown.Model);
 ```
 
 As we saw in the chapter on access modifiers, members can also be `private`. If a field is marked as `private`, it can only be accessed within the same class. This is part of the important idea of [encapsulation](encapsulation) but we'll get back to that later.
-
-```{note}
-In C#, the naming conventions for fields depend on their access modifiers. Public fields typically start with a capital letter (PascalCase), such as `Model` or `Color`. Private fields, on the other hand, often begin with lowercase letter (camelCase), such as `model` or `color`. These conventions are not enforced by the language, but they are widely accepted best practices in the C# community.
-```
 
 To access a private field outside of the class, you need to use methods or properties, which we'll talk about next.
 

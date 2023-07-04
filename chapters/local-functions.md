@@ -19,7 +19,6 @@ kernelspec:
 
 %In C#, a function is a block of code designed to perform a particular task. Functions are the building blocks of readable, maintainable, and reusable code. A function typically takes some inputs, performs some processing, and can return a result.
 
-
 Programming is all about breaking down complex tasks into smaller, manageable parts. Divide and conquer. One way we accomplish this is through the use of methods.
 Methods is a key building block in writing maintainable code. They allow us to write code once and reuse it in multiple places, making our programs less redundant.
 
@@ -140,22 +139,4 @@ A 'local method' in C# is a method that's declared inside another method. In the
 We will explain this in further detail in future chapters.
 ```
 
-
-## Fat arrow
-
-If the body of a method consists of a single expression, it can be written in a more compact form using the "expression-bodied members" syntax of C#. This syntax uses the `=>` symbol (often called 'fat arrow') to define the method. Let's take a look at an example:
-
-```{code-cell}
-int MakeGreeting(string name) => $"Hello, {name}!";
-```
-
-```{code-cell}
-Console.WriteLine(MakeGreeting("World"));
-```
-
-Since the body of the method `MakeGreeting` that we wrote earlier only consists of a single expression, we can rewrite it using "fat arrow" syntax.
-Note that, there's no need to use the `return` keyword.
-The result of the expression after the `=>` symbol is automatically returned.
-
-This syntax provides a concise way to define methods, especially those that perform simple, single-line tasks. It's particularly useful when defining a large number of simple methods, as it can significantly reduce the amount of code needed.
 
