@@ -20,6 +20,10 @@ By default, types are `internal` and members are `private`.
 These are the access modifiers you get if you don't choose one yourself.
 ```
 
+```{note}
+In C#, the naming conventions for members depend on their access modifiers. Public members typically start with a capital letter (PascalCase), such as `Color` or `Start()`. Private members, on the other hand, often begin with lowercase letter (camelCase), such as `color` or `start()`. These conventions are not enforced by the language, but they are widely accepted best practices in the C# community.
+```
+
 ## Public
 
 The `public` keyword is an access modifier for types and type members. Public access is the most permissive access level. There are no restrictions on accessing public members, whether it is a class or class members.

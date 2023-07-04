@@ -1,0 +1,655 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+
+    <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
+        <title>Instance methods - The Object Oriented Way</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">The Object Oriented Way</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">The Object Oriented Way</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/syntax.html">1. Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/hello-world.html">2. Hello world</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/compilation.html">3. Compilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/execution.html">4. Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/interpretation.html">5. Interpretation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/comments.html">6. Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/values.html">7. Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/variables.html">8. Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/constants.html">9. Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/data-types.html">10. Data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/expressions.html">11. Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/arithmetic-operators.html">12. Arithmetic operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/equality-operators.html">13. Equality operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/relational-operators.html">14. Relational operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/logical-operators.html">15. Logical operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/assignment-operator.html">16. Assignment operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/precedence.html">17. Precedence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/associativity.html">18. Associativity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/statements.html">19. Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/type-inference.html">20. Type inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/type-checking.html">21. Type checking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/floating-point-types.html">22. Floating-point types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/enumeration-types.html">23. Enumeration types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/selection-statements.html">24. Selection statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/selection-expressions.html">25. Selection expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/iteration.html">26. Iteration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/arrays.html">27. Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/reference-types.html">28. Reference types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/value-types.html">29. Value types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/local-functions.html">30. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/fat-arrows.html">31. Fat arrows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/recursion.html">32. Recursion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/objects.html">33. Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/classes.html">34. Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/access-modifiers.html">35. Access modifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/fields.html">36. Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/constructors.html">37. Constructors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/the-this-keyword.html">38. The <code class="docutils literal notranslate"><span class="pre">this</span></code> keyword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/instance-methods.html">39. Instance methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/properties.html">40. Properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/object-initializers.html">41. Object initializers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/instance-method-overloading.html">42. Instance method overloading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/static-classes.html">43. Static classes (Modules)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/static-methods.html">44. Static methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/static-fields.html">45. Static fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/static-constructors.html">46. Static constructors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/extension-methods.html">47. Extension methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/object-composition.html">48. Object composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/concrete-constructed-object-composition.html">49. Concrete constructed object composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/concrete-injected-object-composition.html">50. Concrete injected object composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/interfaces.html">51. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/subtype-polymorphism.html">52. Subtype polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/inheritance.html">53. Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/advanced-access-modifiers.html">54. Advanced access modifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/abstract-classes.html">55. Abstract classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/object-type-conversions.html">56. Type conversions (of objects)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/abstract-constructed-object-composition.html">57. Abstract constructed object composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/abstract-injected-object-composition.html">58. Abstract injected object composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/variance.html">59. Variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/liskov-substitution-principle.html">60. Liskov substitution principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/generics.html">61. Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/generic-type-parameters.html">62. Generic type parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/generic-types.html">63. Generic types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/generic-methods.html">64. Generic methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/type-parameter-constraints.html">65. Type parameter constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/variant-generic-interfaces.html">66. Variant generic interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/design-principles.html">67. Design principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/types-over-tests.html">68. Types over tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/single-responsibility-principle.html">69. Single responsibility principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/interface-segregation-principle.html">70. Interface segregation principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/deep-classes.html">71. Deep classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/define-errors-out-of-existence.html">72. Define errors out of existence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/open-closed-principle.html">73. Open-closed principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/dependency-inversion-principle.html">74. Dependency inversion principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/composition-over-inheritance.html">75. Composition over inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/design-patterns.html">76. Design patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/strategy-pattern.html">77. Strategy pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/null-object-pattern.html">78. Null object pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/bridge-pattern.html">79. Bridge pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/delegates.html">80. Delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/observer-pattern.html">81. Observer pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/events.html">82. Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/adapter-pattern.html">83. Adapter pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/factory-method-pattern.html">84. Factory method pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/composite-pattern.html">85. Composite pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/state-pattern.html">86. State pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/iterator-pattern.html">87. Iterator pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/visitor-pattern.html">88. Visitor pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/pattern-matching.html">89. Pattern matching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/lambdas.html">90. Lambdas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/linq.html">91. LINQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/abstraction.html">92. Abstraction / Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/indirection.html">93. Indirection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/business-logic.html">94. Business logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/business-objects.html">95. Business objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/debugging.html">96. Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/reading.html">97. Suggested reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/bibliography.html">98. Bibliography</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section class="tex2jax_ignore mathjax_ignore" id="instance-methods">
+<h1>Instance methods<a class="headerlink" href="#instance-methods" title="Permalink to this heading">#</a></h1>
+<section id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this heading">#</a></h2>
+<p>By using <code class="docutils literal notranslate"><span class="pre">public</span></code> instance fields we are violating the pricinple of “<a class="reference internal" href="objects-old.html#information-hiding"><span class="std std-ref">information hiding</span></a>”.
+We are breaking encapsulation.
+We discussed this problem in the chapter on <a class="reference internal" href="fields.html"><span class="doc std std-doc">fields</span></a> and said that we need to learn more in order to move from <code class="docutils literal notranslate"><span class="pre">public</span></code> to <code class="docutils literal notranslate"><span class="pre">private</span></code>.
+Now it’s time for more.
+Enter “instance methods” and the ability to send <a class="reference internal" href="objects-old.html#message-passing"><span class="std std-ref">messages</span></a> to objects.</p>
+<p>We’ve said that objects “mix” data <em>and</em> methods.
+We’ve started talking about what it means for an object to contain <em>data</em> but we have not yet talked about what it means for an object to contain <em>methods</em>.
+That’s what we’re talking about in this chapter.</p>
+</section>
+<section id="definition">
+<h2>Definition<a class="headerlink" href="#definition" title="Permalink to this heading">#</a></h2>
+<p>Instance methods are at the end of the day <span class="xref myst">methods</span>.
+Luckily, we’ve already talked about methods so this should be easy.
+A method has a <em>name</em>, a return type, and a parameter list including types and names.
+This is what we call the signature of the method.</p>
+<p>Many chapters ago, we discussed the notion of <span class="xref myst">static methods</span>.
+Static methods are also defined in classes but they are merely methods that are “namespaced” to the name of the class.
+Instance methods are however methods that are executed in the context of the instance upon which we’ve called the method.</p>
+<p>What does “in the context of” mean?
+The difference between <span class="xref myst">static methods</span> and instance methods is essentially the same difference as the difference between <span class="xref myst">static variables</span> and instance variables.
+Let’s dive in to the details to unpack this.</p>
+<section id="declaration">
+<h3>Declaration<a class="headerlink" href="#declaration" title="Permalink to this heading">#</a></h3>
+<p>In the snippet below we define an instance method where the return type is <code class="docutils literal notranslate"><span class="pre">void</span></code> (1), the method name is <code class="docutils literal notranslate"><span class="pre">Scale</span></code> (2), and the parameter list only contains a single parameter which is <code class="docutils literal notranslate"><span class="pre">(int</span> <span class="pre">factor)</span></code> (3).
+The first (and only) parameter type is <code class="docutils literal notranslate"><span class="pre">int</span></code> (4) and the first (and only) parameter name is <code class="docutils literal notranslate"><span class="pre">factor</span></code> (5).
+Finally the method body is empty (<code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">}</span></code>) (6).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Rectangle</span>
+<span class="p">{</span>
+                     <span class="n">_____3_______</span>
+          <span class="n">_1__</span> <span class="n">__2__</span>  <span class="n">_4_</span>  <span class="n">___5__</span>
+   <span class="n">public</span> <span class="n">void</span> <span class="n">Scale</span> <span class="p">(</span><span class="nb">int</span>  <span class="n">factor</span><span class="p">)</span>
+   <span class="p">{</span>
+     <span class="o">...</span> <span class="mi">6</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>So what makes this an instance method rather than a static method or local function?
+Well, in C# it’s the fact that we’ve defined the method directly within a class and that we’ve not added the modifier <code class="docutils literal notranslate"><span class="pre">static</span></code> before the return type.</p>
+<p>So what’s different about an instance method when compared to say a <span class="xref myst">static method</span> or a <a class="reference internal" href="../chapters/methods-old.html#local-functions"><span class="std std-ref">local function</span></a>?</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Instance methods are defined in classes, but they are executed in the context of an <em>instance</em> of the class rather than in the context of the class itself.
+Static methods are, in contrast, executed in the context of the class.</p>
+</div>
+<p>What do we mean when we say that the method is executed within the context of an <em>instance</em> of the class and not the class itself?
+Well, think about how instance <a class="reference internal" href="fields.html"><span class="doc std std-doc">fields</span></a> work.
+It’s the same deal here.
+When we’re setting a value to or getting a value from a field then we are setting or getting a value to or from a field on a particular object.
+Not on all objects at once.
+Not on the class, but on instances of the class.
+It’s the same thing with instance methods.
+When we’re calling a method then the body of the method will be executed within the context of the instance we called it upon.</p>
+<p>Remember the class <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> from the chapter on <a class="reference internal" href="fields.html"><span class="doc std std-doc">fields</span></a>?
+Let’s use that as a first example.
+We’ll dive in to all the details one by one in a moment.
+In the chapter on fields the class looked something like the code below.
+It was a simple class with two <code class="docutils literal notranslate"><span class="pre">public</span></code> instance fields of type <code class="docutils literal notranslate"><span class="pre">int</span></code> called <code class="docutils literal notranslate"><span class="pre">Width</span></code> and <code class="docutils literal notranslate"><span class="pre">Height</span></code>.</p>
+<p>In the chapter on <a class="reference internal" href="fields.html"><span class="doc std std-doc">fields</span></a> we then defined a <span class="xref myst">local method</span> with the signature <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">printRectangle</span> <span class="pre">(Rectangle</span> <span class="pre">rect)</span></code>.
+This method took objects of type <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> as input and produced nothing as output.
+The “<span class="xref myst">side-effect</span>” of running the method was however that the width and height of the rectangle was printed to screen.</p>
+<p>Why are we talking about that method now if it was a local method?
+Because now it’s time to redefine that method as an instance method.
+When we redefine it as an instance method it will no longer be a method that takes a <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> as input and returns <code class="docutils literal notranslate"><span class="pre">void</span></code> as input.
+Instead it will be a method that’s callable <em>“on”</em> objects of type <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>.</p>
+<p>Let’s add the method but let’s only call it <code class="docutils literal notranslate"><span class="pre">Print</span></code> this time.
+Why not <code class="docutils literal notranslate"><span class="pre">PrintRectangle</span></code>?
+Because, since it’s now an instance method that will be called on objects of type <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> it is more obvious that what it prints is the object itself.</p>
+<p>The print method is now an instance method that when executed, will be executed within the context of a given instance of type <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>.
+Pay special attention to how we’ve replaced the variable <code class="docutils literal notranslate"><span class="pre">rect</span></code> with the keyword <code class="docutils literal notranslate"><span class="pre">this</span></code>.
+We’ll discuss that keyword more in moment, but in short it is an explicit reference to the object itself.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you’re confused about the fat arrow <code class="docutils literal notranslate"><span class="pre">=&gt;</span></code> then don’t be.
+This is just the <a class="reference internal" href="../chapters/methods-old.html#expression-bodied-members"><span class="std std-ref">expression-bodied members</span></a> syntax that we’ve discussed earlier.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you’re wondering what the keyword <code class="docutils literal notranslate"><span class="pre">this</span></code> means, don’t worry, we’ll talk about it in just a moment.</p>
+</div>
+</section>
+<section id="invocation">
+<h3>Invocation<a class="headerlink" href="#invocation" title="Permalink to this heading">#</a></h3>
+<p>So how do we call an instance method?
+Well, first we need to get a hold of an instance, and then we simply invoke the method using <span class="xref myst">dot notation</span>.
+And when we invoke it we of course must pass whatever arguments the method demands.</p>
+<p>Let’s invoke the instance method <code class="docutils literal notranslate"><span class="pre">Print</span></code> that we defined in the class <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>.</p>
+<p>Notice how we’re no longer passing any arguments to the printing method.
+We’re simply invoking the instance method <code class="docutils literal notranslate"><span class="pre">Print</span></code> on the object and since that object knows its own width and height it knows what to print.
+Any given object does not have any information about any other object’s width or height.
+It only knows its own and that’s what it prints.</p>
+</section>
+<section id="keyword-this">
+<span id="id1"></span><h3>Keyword <code class="docutils literal notranslate"><span class="pre">this</span></code><a class="headerlink" href="#keyword-this" title="Permalink to this heading">#</a></h3>
+<p>What about the keyword <code class="docutils literal notranslate"><span class="pre">this</span></code> that was used in the implementation of the instance method <code class="docutils literal notranslate"><span class="pre">Print</span></code> of the <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class.
+What is it and what does it do?</p>
+<p>When the code in the body of an instance method is being executed, then that code is being executed in the context of the object on which it was invoked.
+The keyword <code class="docutils literal notranslate"><span class="pre">this</span></code> refers to the object itself.</p>
+<p>In that particular example we don’t actually need the keyword <code class="docutils literal notranslate"><span class="pre">this</span></code>.
+We could just as well, simply, have written <code class="docutils literal notranslate"><span class="pre">Width</span></code> instead of <code class="docutils literal notranslate"><span class="pre">this.Width</span></code>.
+I only chose to use the keyword <code class="docutils literal notranslate"><span class="pre">this</span></code> in order to force us to have this discussion and to hopefully improve clarity.</p>
+<p>What do we mean when we say that we don’t necessarily “need” the <code class="docutils literal notranslate"><span class="pre">this</span></code> keyword?
+We mean that we don’t need it because there is <em>no ambiguity</em>.
+What do we mean when we say that there is “no ambiguity”?
+We mean that the variables <code class="docutils literal notranslate"><span class="pre">Width</span></code> and <code class="docutils literal notranslate"><span class="pre">Height</span></code>, for example, are both only defined in one place that’s in scope in the body of the instance method.</p>
+<p>If however we had named the constructor parameters <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code>, meaning in uppercase then there would be ambiguity.</p>
+<p>What’s an example where we have ambiguity?
+We’ll get to see some more commonly occurring examples of when such ambiguity arises in the chapter on <a class="reference internal" href="constructors.html"><span class="doc std std-doc">constructors</span></a>.</p>
+<p>But let’s devise a slightly more contrived example now.
+Let’s define an instance method called <code class="docutils literal notranslate"><span class="pre">Scale</span></code> that takes two parameters called <code class="docutils literal notranslate"><span class="pre">Width</span></code> and <code class="docutils literal notranslate"><span class="pre">Height</span></code>.
+The method multiplies the current width and height with the scalars that we’ve passed in.</p>
+<div class="admonition note" id="rectangle-scale">
+<p class="admonition-title">Note</p>
+<p>Why do I say that this is a “contrived” example?
+Because local and <code class="docutils literal notranslate"><span class="pre">private</span></code> variables in C# are customarily given names that start with lowercase letters.
+So an implementation of this method would probably actually have the signature <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">Scale</span> <span class="pre">(int</span> <span class="pre">width,</span> <span class="pre">int</span> <span class="pre">height)</span></code>.</p>
+</div>
+<p>How does the <code class="docutils literal notranslate"><span class="pre">Scale</span></code> method work?
+Well, it’s an instance method, so we call it on an instance using dot notation but this time we also need to pass arguments.</p>
+<p>But let’s get back to discussing the keyword <code class="docutils literal notranslate"><span class="pre">this</span></code>.
+Why do we need to use that keyword in the definition of the instance method <code class="docutils literal notranslate"><span class="pre">Scale</span></code>?</p>
+<p>Think about it.
+What would happen if we say <code class="docutils literal notranslate"><span class="pre">Width</span> <span class="pre">*=</span> <span class="pre">Width</span></code>?
+As we know from the chapter on <span class="xref myst">operators</span> the expression is shorthand for <code class="docutils literal notranslate"><span class="pre">Width</span> <span class="pre">=</span> <span class="pre">Width</span> <span class="pre">*</span> <span class="pre">Width</span></code>.
+So in other words, we are multiplying the input width with itself and storing it in the local variable <code class="docutils literal notranslate"><span class="pre">Width</span></code> that we passed in as an argument.
+It would behave like this:</p>
+<p>Notice how even after we’ve called the <code class="docutils literal notranslate"><span class="pre">Scale</span></code> method on our object, its dimensions remains whatever we set it to at the start.
+This is <em>not</em> the behavior that we intended to achieve.
+If we’re going to name the parameters of the <code class="docutils literal notranslate"><span class="pre">Print</span></code> method <code class="docutils literal notranslate"><span class="pre">Width</span></code> and <code class="docutils literal notranslate"><span class="pre">Height</span></code> then we must use the keyword <code class="docutils literal notranslate"><span class="pre">this</span></code> to disambiguate between those variables and the instance fields with the same names.</p>
+<p>In the code below we’ve rewritten the code for <code class="docutils literal notranslate"><span class="pre">BadRectangle</span></code> so that it makes use of the <code class="docutils literal notranslate"><span class="pre">this</span></code> keyword.
+With this change, the code behaves as expected again.</p>
+<p>Of course, as we mentioned before, even though the above code works as expected, it is unconventional to name parameters with an initial capital letter.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In C# it is convention to name local and instance or static <code class="docutils literal notranslate"><span class="pre">private</span></code> variables and methods with an initial lowercase letter, while <code class="docutils literal notranslate"><span class="pre">public</span></code> instance and static variables and methods are named with an initial uppercase letter.
+A field is thus conventionally named <code class="docutils literal notranslate"><span class="pre">Width</span></code> if it’s <code class="docutils literal notranslate"><span class="pre">public</span></code> but <code class="docutils literal notranslate"><span class="pre">width</span></code> if it’s <code class="docutils literal notranslate"><span class="pre">private</span></code>.</p>
+</div>
+<p>One final point about <code class="docutils literal notranslate"><span class="pre">this</span></code> before we move on.
+You might have already figured this out but since the keyword <code class="docutils literal notranslate"><span class="pre">this</span></code> points to the object itself, then it must have a type.
+If it’s an object then that object must be of a type.
+What is that type?
+The type is the same as the class in which it is used.
+So, when we use the <code class="docutils literal notranslate"><span class="pre">this</span></code> keyword in the instance method <code class="docutils literal notranslate"><span class="pre">Scale</span></code> in the class <code class="docutils literal notranslate"><span class="pre">GoodRectangle</span></code> then the type of object that we get when saying <code class="docutils literal notranslate"><span class="pre">this</span></code> is of type <code class="docutils literal notranslate"><span class="pre">GoodRectangle</span></code>.</p>
+</section>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
+<p>Let’s look at some more examples.</p>
+<section id="rectangles">
+<h3>Rectangles<a class="headerlink" href="#rectangles" title="Permalink to this heading">#</a></h3>
+<p>So far we’ve only looked at instance methods that return <code class="docutils literal notranslate"><span class="pre">void</span></code>.
+But of course instance methods can return values of any type.
+Let’s define an instance method called <code class="docutils literal notranslate"><span class="pre">Area</span></code> for the class <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> that we’ve worked with in this chapter.
+As you might expect the method computes the area and returns it.</p>
+<p>Since both the width and the height of the rectangle are stored as integers then we know that the returned area will be an integer.</p>
+<p>How does the instance method work?
+Simple, when we call the instance method <code class="docutils literal notranslate"><span class="pre">Area</span></code> on an instance of type <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> then the method checks what the <code class="docutils literal notranslate"><span class="pre">Width</span></code> and <code class="docutils literal notranslate"><span class="pre">Height</span></code> is of that object, multiplies them, and return the result.</p>
+</section>
+<section id="string-manipulation">
+<h3>String manipulation<a class="headerlink" href="#string-manipulation" title="Permalink to this heading">#</a></h3>
+<p>We’ve talked about the type <code class="docutils literal notranslate"><span class="pre">string</span></code>.
+The type <code class="docutils literal notranslate"><span class="pre">string</span></code> defines many instance methods.
+In C# we can always find what instance methods a given type supports in the <a class="reference external" href="https://learn.microsoft.com/en-us/dotnet/api/system.string?view=net-6.0">documentation</a>.
+Let’s look at a few simple operations here though so that we can practice using instance methods.</p>
+<section id="contains">
+<h4>Contains<a class="headerlink" href="#contains" title="Permalink to this heading">#</a></h4>
+<p>One instance method that objects of type <code class="docutils literal notranslate"><span class="pre">string</span></code> implement is <code class="docutils literal notranslate"><span class="pre">Contains</span></code>.
+The instance method <code class="docutils literal notranslate"><span class="pre">Contains</span></code> accepts an argument of type <code class="docutils literal notranslate"><span class="pre">string</span></code> and returns a boolean that represents whether the <code class="docutils literal notranslate"><span class="pre">string</span></code> instance contains the <code class="docutils literal notranslate"><span class="pre">string</span></code> passed as an argument anywhere.</p>
+</section>
+<section id="indexof">
+<h4>IndexOf<a class="headerlink" href="#indexof" title="Permalink to this heading">#</a></h4>
+<p>Another instance method available on strings is the method <code class="docutils literal notranslate"><span class="pre">IndexOf</span></code>.
+This instance method too takes a parameter of type <code class="docutils literal notranslate"><span class="pre">string</span></code> and checks whether the second <code class="docutils literal notranslate"><span class="pre">string</span></code> can be found in the first.
+If a match is found it doesn’t however merely return <code class="docutils literal notranslate"><span class="pre">true</span></code>.
+Instead it returns the index in the <code class="docutils literal notranslate"><span class="pre">string</span></code> where we will find the start of the <code class="docutils literal notranslate"><span class="pre">string</span></code> that it found.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">string</span></code> that we were looking for could not be found in the <code class="docutils literal notranslate"><span class="pre">string</span></code> that we are searching in then the instance method returns <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p>
+</section>
+<section id="substring">
+<h4>Substring<a class="headerlink" href="#substring" title="Permalink to this heading">#</a></h4>
+<p>Another useful instance method that objects of type <code class="docutils literal notranslate"><span class="pre">string</span></code> supports is the method known as <code class="docutils literal notranslate"><span class="pre">Substring</span></code>.
+The method extracts a part of <code class="docutils literal notranslate"><span class="pre">string</span></code>.
+We refer to a part of a string as a “substring” which is why the method is named as such.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In .NET there are often multiple overloads of any given method.
+Just like when we’re trying to figure out what methods are defined by some type, we should resort to <a class="reference external" href="https://learn.microsoft.com/en-us/dotnet/api/system.string.substring?view=net-6.0#overloads">the documentation</a> to figure out what overloads are available of any given method.</p>
+</div>
+<p>One overload of the method <code class="docutils literal notranslate"><span class="pre">Substring</span></code> takes two parameters of type <code class="docutils literal notranslate"><span class="pre">int</span></code>.
+The first <code class="docutils literal notranslate"><span class="pre">int</span></code> specifies from which index we should start extracting characters, and the second <code class="docutils literal notranslate"><span class="pre">int</span></code> specifies how many characters we should extract.</p>
+</section>
+</section>
+<section id="robber-s-language">
+<h3>Robber’s language<a class="headerlink" href="#robber-s-language" title="Permalink to this heading">#</a></h3>
+<p>Let’s get back to our good old language games and ciphers.
+We are now ready to convert the static class <code class="docutils literal notranslate"><span class="pre">RobbersCipher</span></code> from the chapter on <a class="reference internal" href="../chapters/overloading.html#overloading-examples-robbers"><span class="std std-ref">overloading</span></a> to a regular class where all methods are instance methods.</p>
+<p>Notice how we’ve massively simplified the code that checks whether the character that we’ve been passed is a vowel or not.
+This is possible since we now know about instance methods and since we now know about the instance method <code class="docutils literal notranslate"><span class="pre">Contains</span></code> that objects of type <code class="docutils literal notranslate"><span class="pre">string</span></code> supports.</p>
+<p>Primo!
+But does it work?
+How do we use it?
+Well, first off we need to create an instance of the <code class="docutils literal notranslate"><span class="pre">RobbersCipher</span></code> class.
+If we want to, we can use object initializers to change the <code class="docutils literal notranslate"><span class="pre">Vowel</span></code> that the instance will be using when encoding.</p>
+<p>Then we can simply call the <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method any number of times that we want.</p>
+</section>
+<section id="caesar-cipher">
+<span id="caesar-encode"></span><h3>Caesar cipher<a class="headerlink" href="#caesar-cipher" title="Permalink to this heading">#</a></h3>
+<p>Let’s now do something a bit more complex.
+We’ve learned enough skills to be able to do a <a class="reference internal" href="../chapters/algorithms.html#caesar-cipher"><span class="std std-ref">Caesar Cipher</span></a>.</p>
+<p>Similar to the other ciphers that we’ve built we’ll solve it by writing two overloaded methods.
+One that takes an input <code class="docutils literal notranslate"><span class="pre">string</span></code> and one that takes an input <code class="docutils literal notranslate"><span class="pre">char</span></code>.
+The method that takes a <code class="docutils literal notranslate"><span class="pre">string</span></code> will call the other method for each of its constitutent characters and concatenate the resulting encoded <code class="docutils literal notranslate"><span class="pre">string</span></code>.</p>
+<p>Beyond the input, we ought to accept an additional parameter that we could call <code class="docutils literal notranslate"><span class="pre">steps</span></code>.
+This parameter is of type <code class="docutils literal notranslate"><span class="pre">int</span></code> and determines how many steps forward or backwards in the alphabet we should take when encoding data.</p>
+<p>Here’s what the class would look like:</p>
+<p>Let’s check if it works as expected.</p>
+<p>Ok, it seems to work.</p>
+</section>
+<section id="random-walk">
+<h3>Random walk<a class="headerlink" href="#random-walk" title="Permalink to this heading">#</a></h3>
+<p>Let’s look at a slightly larger program that solves a more concrete problem.
+Let’s take the problem known as the Drunkard’s Walk from statistics.
+I happen to appreciate the rephrased version called the Drunk Student’s Walk.</p>
+<p>Here’s the story.
+A student has been ingesting way too many alcoholic beverages and is now rendered incapable of walking.
+Seen from above the student is walking on a two-dimensional grid.
+Any time the student attempts to take a step he or she is stumbling in any random direction.
+There are 9 possible moves that the student can make any time he or she attempts to take a step.</p>
+<p>Now we’re asking the following question.
+If we ask this student to stay within a 10x10 square, how many random steps does it <em>on average</em> take before the student exits the 10x10 square.</p>
+<p>Let’s capture the notion of a drunk student as a class and try to use this to solve our problem.
+Try to solve this problem on your own before you study the solution below.
+As always, there are many solutions to this problem.</p>
+<p>You can generate a pseudo random number in C# by first instantiating a single object of type <code class="docutils literal notranslate"><span class="pre">Random</span></code>.
+For the sake of better randomness it is important that you reuse the same <code class="docutils literal notranslate"><span class="pre">Random</span></code> object rather than instantiating new objects of that type.
+To get a random number between <code class="docutils literal notranslate"><span class="pre">-1</span></code> and <code class="docutils literal notranslate"><span class="pre">1</span></code> (inclusive) we would call the method <code class="docutils literal notranslate"><span class="pre">Next</span></code> and pass the numbers <code class="docutils literal notranslate"><span class="pre">-1</span></code> and <code class="docutils literal notranslate"><span class="pre">2</span></code>.
+Like in the example below:</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./old"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Instance methods</a><ul>
+<li><a class="reference internal" href="#motivation">Motivation</a></li>
+<li><a class="reference internal" href="#definition">Definition</a><ul>
+<li><a class="reference internal" href="#declaration">Declaration</a></li>
+<li><a class="reference internal" href="#invocation">Invocation</a></li>
+<li><a class="reference internal" href="#keyword-this">Keyword <code class="docutils literal notranslate"><span class="pre">this</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#rectangles">Rectangles</a></li>
+<li><a class="reference internal" href="#string-manipulation">String manipulation</a><ul>
+<li><a class="reference internal" href="#contains">Contains</a></li>
+<li><a class="reference internal" href="#indexof">IndexOf</a></li>
+<li><a class="reference internal" href="#substring">Substring</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#robber-s-language">Robber’s language</a></li>
+<li><a class="reference internal" href="#caesar-cipher">Caesar cipher</a></li>
+<li><a class="reference internal" href="#random-walk">Random walk</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/custom.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    </body>
+</html>

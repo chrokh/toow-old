@@ -1,5 +1,7 @@
 # UML class diagrams
+
 ## Classes
+
 
 In this book we make heavy use of UML class diagrams.
 When reasoning about object oriented design nothing is really quite as efficient as using UML class diagrams.
@@ -125,4 +127,51 @@ And again, depending on the level of informality, visibility is often omitted.
 └────────────────┘
 ```
 
+
+
+## Constructors
+
+- TODO: UML class diagrams. Specification says use <<Create>> but it's also common to just use the same name and return type as the class.
+
+
+## Instance methods
+
+So how do we capture instance methods in UML class diagram notation.
+Remember how a class in a UML class diagram is divided into three sections (see image below)?
+Well instance methods are, in UML, called "operations".
+Hence, we define them in the third section.
+
+```
+┌────────────────────┐
+│ <class identifier> │
+├────────────────────┤
+│                    │
+│    <attributes>    │
+│                    │
+├────────────────────┤
+│                    │
+│    <operations>    │
+│                    │
+└────────────────────┘
+```
+
+Let's capture the class `Rectangle` with all the instance method that we've defined in this chapter.
+In the examples section in this chapter we will also add another instance method to the `Rectangle` class that is called `Area` and returns an `int`.
+Let's throw that instance method into the diagram for good measure.
+
+```
+┌────────────────────────────────────────┐
+│                Rectangle               │
+├────────────────────────────────────────┤
+│ + Width : int                          │
+│ + Height : int                         │
+├────────────────────────────────────────┤
+│ + Scale (width:int, height:int) : void │
+│ + Scale (multiplier:int) : void        │
+│ + Print () : void                      │
+│ + Area () : int                        │
+└────────────────────────────────────────┘
+```
+
+By now you should start to see how UML class diagrams are quite useful when we need to quickly reason about what a class does.
 

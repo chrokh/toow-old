@@ -46,7 +46,7 @@ Console.WriteLine(numberOfMarbles);
 ```
 
 This statement prints out the value of `numberOfMarbles` to the console.
-It is expression statement not because `numberOfMarbles` is an expression (which it is) but because we're invoking the method `WriteLine` and then terminating the line with semicolon (`;`).
+It is an expression statement not because `numberOfMarbles` is an expression (which it is) but because we're invoking the method `WriteLine` and then terminating the line with semicolon (`;`).
 We'll talk more about methods later.
 
 An expression statement is a type of statement that contains an expression. But not all expressions can be used as expression statements. In C#, the types of expressions that can also be used as statements include method calls, object creation expressions using the `new` keyword (both of which we'll talk about later), and assignments. For instance, the assignment expression `a = 5` can be used as an expression statement by adding a semicolon to the end `a = 5;`.
