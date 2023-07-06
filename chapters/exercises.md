@@ -867,3 +867,88 @@ printPointArray(makeIncrementingPoints(5, 10, initial));
 %%```{exercise-end}
 %%```
 %
+
+
+## Properties
+
+```{exercise}
+What are properties?
+```
+
+```{exercise}
+Sometimes we mark the setter of a property as `private` while the getter is `public`.
+Why is this useful?
+```
+
+```{exercise}
+What is a read-only property in C#?
+What are they useful for?
+```
+
+```{exercise}
+What is an `init` accessor in the context of C# properties?
+What is it useful for?
+```
+
+```{exercise}
+What is the `required` keyword in the context of C# properties?
+What is it useful for?
+```
+
+
+```{exercise-start}
+```
+Assume that we have the following class.
+```{code-cell}
+class Circle
+{
+  private int diameter = 2;
+  public int Diameter
+  {
+    get => Radius * 2;
+    set => diameter = value;
+  }
+  public int Radius
+  {
+    get => Diameter / 2;
+    set => Diameter = value * 2;
+  }
+}
+```
+Which of the following lines causes the program to crash at run-time?
+Why does it crash?
+```csharp
+Circle circ = new Circle() { Diameter = 2 };
+circ.Radius = 1;
+Console.WriteLine(circ.Radius);
+```
+```{exercise-end}
+```
+
+
+```{exercise}
+:label: ex:properties:square
+Write a class called `Square` and give it the properties `Width`, `Height`, `Area`, `Perimeter`, and `Side`.
+All the properties should have `get` and `set` accessors.
+
+Remember to make use of calculated properties to avoid allowing a `set` accessor put an object of type `Square` in a state which violates the rules of a square (namely that all sides are the same length).
+```
+
+```{exercise}
+:label: ex:properties:equilateral-triangle
+Write a class called `EquilateralTriangle` and give it the properties `Width`, `Height`, `Area`, `Perimeter`, and `Side`.
+
+When computing the width and height of a triangle, you can assume that one of the sides are perfectly parallel with the x-axis.
+
+Remember to make use of calculated properties to avoid allowing a `set` accessor put an object of type `Square` in a state which violates the rules of a square (namely that all sides are the same length).
+```
+
+```{exercise}
+Looking at the classes you wrote in {numref}`ex:properties:square` and {numref}`ex:properties:equilateral-triangle`.
+If you were to replace some `set` accessors with `init` accessors, which would you replace and why?
+```
+
+```{exercise}
+Looking at the classes you wrote in {numref}`ex:properties:square` and {numref}`ex:properties:equilateral-triangle`.
+If you were to mark some properties as `required`, which would you mark and why?
+```

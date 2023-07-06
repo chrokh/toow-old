@@ -175,3 +175,38 @@ Let's throw that instance method into the diagram for good measure.
 
 By now you should start to see how UML class diagrams are quite useful when we need to quickly reason about what a class does.
 
+
+## Properties
+
+How do we represent properties in UML class diagram syntax?
+Since UML class diagrams are language independent there is no specific support for the C# specific idea of properties.
+
+Consequently, modelers choose to model them in slightly different ways.
+One such variation, makes use of what UML calls "stereotypes".
+It would look something like the diagram below.
+
+```
+┌────────────────────────────────────────┐
+│                Rectangle               │
+├────────────────────────────────────────┤
+│ + <<get>> Width : int                  │
+│ - <<set>> Width : int                  │
+│ + <<get>> Height : int                 │
+│ - <<set>> Height : int                 │
+│ + <<get>> Area : int                   │
+├────────────────────────────────────────┤
+└────────────────────────────────────────┘
+```
+
+The UML class diagram above would correspond to the following code in C#.
+
+```{code-cell}
+class Rectangle
+{
+  public double Width { get; private set; }
+  public double Height { get; private set; }
+  public double Area { get; }
+}
+```
+
+
