@@ -20,6 +20,7 @@
 - Static typing and type systems?
 - Semantics
 - Paradigm
+- Encapsulate what varies.
 
 # TODO
 

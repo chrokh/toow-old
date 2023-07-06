@@ -1,299 +1,91 @@
+---
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  display_name: csharp
+  language: .net-csharp
+  name: .net-csharp
+---
+
 # Encapsulation
 
-%To illustrate the concept of instance methods, let's use a robot vacuum as an example. Suppose we want to keep track of the robot's battery. We could add a field for this:
-%
-%```{code-cell}
-%class RobotVacuum
-%{
-%    public double Battery = 100;
-%}
-%```
-%
-%Now, suppose that each time we have a robot instance:
-%
-%```{code-cell}
-%RobotVacuum rob = new RobotVacuum();
-%```
-%
-%and suppose that each time time the robot moves we want to reduce the remaining battery life. Without instance methods, we would have to update the `Battery` field directly each time we want to move our robot instance. It would look something like `rob.Battery -= 1`.
-%
-%However, this doesn't give the robot any control over how the update is done.
-%We have to repeat the battery reducing calculation each time we want to move the robot.
-%With instance methods, we can instead encapsulate the behavior and the data to make sure that it's done in the same way every time.
-%We'll talk more about this in the chapter on [encapsulation](encapsulation), but it would look like this:
-%
-%```{code-cell}
-%class RobotVacuum
-%{
-%    public double Battery = 100;
-%
-%    public void MoveForward()
-%    {
-%        Battery -= 1;
-%    }
-%}
-%```
-%
-%Now we have an instance method, `MoveForward`, which reduces the battery each time it is called.
-%This allows us to ensure that the battery is updated in a consistent way every time.
-%
-%We can use this method like so:
-%
-%```{code-cell}
-%RobotVacuum rob = new RobotVacuum();
-%
-%rob.MoveForward();
-%rob.MoveForward();
-%rob.MoveForward();
-%
-%Console.WriteLine(rob.Battery);
-%```
-%
-%The output show the remaining battery life after having moved the robot forward three times.
-%
-%What do we mean when we say that using an instance method allows updates to be done 'consistently'? Suppose that turning the robot reduces the battery by less than moving the robot.
-%
-%```{code-cell}
-%class RobotVacuum
-%{
-%    public double Battery = 100;
-%
-%    public void MoveForward()
-%    {
-%        Battery--;
-%    }
-%
-%    public void TurnRight()
-%    {
-%        Battery -= 0.25;
-%    }
-%
-%    public void TurnLeft()
-%    {
-%        Battery -= 0.25;
-%    }
-%}
-%```
-%
-%Keeping track of how much to reduce the battery each time we move or turn the robot is difficult if we do so in many places in our code.
-%By instead letting the battery be reduced each time we call the `MoveForward`, `TurnLeft`, or `TurnRight` methods we can be sure that the battery will always be decreased by the appropriate amount.
-%
-%
-%```{code-cell}
-%RobotVacuum rob = new RobotVacuum();
-%
-%rob.MoveForward();
-%rob.TurnRight();
-%rob.MoveForward();
-%rob.TurnLeft();
-%rob.MoveForward();
-%
-%Console.WriteLine(rob.Battery);
-%```
-%
-%This is a simple example, but it illustrates the basic concept. Instance methods allow us to define operations that work with an object's data. This leads to code that is easier to understand and maintain, since we can ensure that operations are performed in a consistent way.
+When crafting software, managing complexity is essential.
+In the world of object-oriented programming, we often strive to design our classes to encapsulate complexity. Encapsulation is the practice of hiding the details of how objects work and exposing only what's necessary. This principle forms the bedrock of robust, flexible, and maintainable code.
 
+%It allows us to hide the inner workings of our objects, exposing only what is necessary. Encapsulation is the cornerstone of maintainable object oriented programming.
 
-%
-%```{code-cell}
-%class RobotVacuum
-%{
-%    double battery = 10;
-%
-%    public void MoveForward(int steps)
-%    {
-%        if (CanMove())
-%        {
-%            battery -= steps;
-%            Console.WriteLine($"Moved forward {steps} steps. Remaining battery: {battery}");
-%        }
-%        else
-%        {
-%            Console.WriteLine("battery too low to move forward. Remaining battery: " + battery);
-%        }
-%    }
-%
-%    public void TurnRight()
-%    {
-%        if (CanMove())
-%        {
-%            battery -= 0.25;
-%            Console.WriteLine("Turned right. Remaining battery: " + battery);
-%        }
-%        else
-%        {
-%            Console.WriteLine("Battery too low to turn right. Remaining battery: " + battery);
-%        }
-%    }
-%
-%    public void TurnLeft()
-%    {
-%        if (CanMove())
-%        {
-%            battery -= 0.25;
-%            Console.WriteLine("Turned left. Remaining battery: " + battery);
-%        }
-%        else
-%        {
-%            Console.WriteLine("Battery too low to turn left. Remaining battery: " + battery);
-%        }
-%    }
-%
-%    private bool CanMove()
-%    {
-%        return battery > 5;
-%    }
-%}
-%```
-%
-%```{code-cell}
-%RobotVacuum rob = new RobotVacuum();
-%rob.MoveForward(3);
-%```
+Encapsulation in C# refers to the bundling of data, represented by fields, and methods that act on that data, into a single unit such as a class. More than just a packaging mechanism, encapsulation also involves hiding the internal states and implementation details of an object and providing a clean, accessible way to interact with the object.
 
+Encapsulation is often used synonymously with "information hiding".
+At times and to some people, the two have meant different things.
+Today however, they are both often used to the idea of "hiding your private parts".
 
+```{figure} https://media.discordapp.net/attachments/1118630713084870736/1126365471101427772/chrokh_a_beautiful_illustration_of_a_fantasy_castle_00ec0b22-d61b-4b1f-8d20-60b457401864.png?width=2700&height=1180
 
-%## Private
-%
-%Let's say the robot has a private method for checking whether the battery level is critically low (say, below 5%) before moving. This method will not be accessible outside of the RobotVacuum class, hence we declare it as private.
-%
-%Here's a code snippet illustrating this:
-%
-%```{code-cell}
-%class RobotVacuum
-%{
-%    public double Battery = 100;
-%
-%    public void MoveForward()
-%    {
-%        if (canMove())
-%        {
-%            Battery -= 1;
-%            Console.WriteLine("Moved forward. Remaining battery: " + Battery);
-%        }
-%        else
-%        {
-%            Console.WriteLine("Battery too low to move forward. Remaining battery: " + Battery);
-%        }
-%    }
-%
-%    private bool canMove()
-%        => Battery > 5;
-%}
-%```
-%
-%In this example, the `canMove` method is private and can only be called from within the RobotVacuum class. It's a helper method that encapsulates a specific functionality (checking if the robot can move) that is used by the public method MoveForward. It helps us to keep the public interface of our class clean and simple, and allows us to change the implementation of `canMove` without affecting any external code.
-%
-%```{code-cell}
-%class RobotVacuum
-%{
-%    double battery = 10;
-%
-%    public void MoveForward(int steps)
-%    {
-%        if (CanMove())
-%        {
-%            battery -= steps;
-%            Console.WriteLine($"Moved forward {steps} steps. Remaining battery: {battery}");
-%        }
-%        else
-%        {
-%            Console.WriteLine("battery too low to move forward. Remaining battery: " + battery);
-%        }
-%    }
-%
-%    public void TurnRight()
-%    {
-%        if (CanMove())
-%        {
-%            battery -= 0.25;
-%            Console.WriteLine("Turned right. Remaining battery: " + battery);
-%        }
-%        else
-%        {
-%            Console.WriteLine("Battery too low to turn right. Remaining battery: " + battery);
-%        }
-%    }
-%
-%    public void TurnLeft()
-%    {
-%        if (CanMove())
-%        {
-%            battery -= 0.25;
-%            Console.WriteLine("Turned left. Remaining battery: " + battery);
-%        }
-%        else
-%        {
-%            Console.WriteLine("Battery too low to turn left. Remaining battery: " + battery);
-%        }
-%    }
-%
-%    private bool CanMove()
-%    {
-%        return battery > 5;
-%    }
-%}
-%```
-%
-%```{code-cell}
-%RobotVacuum rob = new RobotVacuum();
-%rob.MoveForward(3);
-%```
-%
+Like a castle with a bridge over a moat, encapsulation only allows access to an object's data via its public methods.
+```
 
+Consider the following `Car` class:
 
-%## Accessibility
-%
-%Recall that class members, including instance methods, can have different [access modifiers](access-modifiers). These modifiers control the accessibility of the method, that is, where it can be accessed from. A `public` instance method can be called from anywhere, while a `private` one can only be called from within the class itself. We will discuss the importance of this in the chapter on [encapsulation](encapsulation).
-%
-%To illustrate these concepts, let's revisit our `RobotVacuum` example. Suppose we have a `RobotVacuum` class that looks like this:
-%
-%```{code-cell}
-%class RobotVacuum
-%{
-%    private double battery = 100;
-%
-%    public void MoveForward(int steps)
-%    {
-%        battery -= steps;
-%    }
-%
-%    public double CheckBattery ()
-%        => battery;
-%}
-%```
-%
-%We can instantiate a `RobotVacuum` object and call its `MoveForward` method, passing the number of `steps` as an argument. The `MoveForward` method uses the `this` keyword to reference the `battery` field of the current instance.
-%
-%```{code-cell}
-%RobotVacuum rob = new RobotVacuum();
-%
-%rob.MoveForward(3);
-%
-%Console.WriteLine(rob.CheckBattery());  // This will output 97
-%```
-%
-%The output shows the remaining battery life after having moved the robot forward three times.
-%
-%Let's add more movements:
-%
-%```{code-cell}
-%rob.MoveForward(2);
-%rob.MoveForward(5);
-%
-%Console.WriteLine(rob.CheckBattery());  // This will output 90
-%```
-%
-%We also have a Charge method, which is private, meaning it can only be called within the RobotVacuum class. Attempting to call it outside of the class would result in a compiler error:
-%
-%```{code-cell}
-%rob.Charge();  // This would result in a compiler error
-%```
-%
-%Finally, our RobotVacuum class includes a CheckBattery method, which uses the "fat arrow" syntax. This is a concise way to write methods that consist of a single line of code:
-%
-%```{code-cell}
-%Console.WriteLine(rob.CheckBattery());  // This will output 90
-%```
-%
-%This simple example illustrates how instance methods can define operations that work with an object's data, accept parameters, use the this keyword, have different access modifiers, and use the "fat arrow" syntax. It gives a taste of the flexibility and power of instance methods in object-oriented programming.
+```{code-cell}
+public class Car
+{
+    private int speed;
+
+    public int GetSpeed()
+        => speed;
+
+    public void Accelerate(int delta)
+    {
+        if (delta < 0)
+            delta = 0; // min
+
+        speed += delta;
+    }
+
+    public void Brake(int delta)
+    {
+        if (delta < 0)
+            delta = 0; // min
+        else if (delta > speed)
+            delta = speed; // max
+
+        speed -= delta;
+    }
+}
+```
+
+In this class, the speed field is marked as `private`, which means it can only be accessed directly within the `Car` class. This is encapsulation in action: we're hiding the `speed` field and providing `public` methods (`Accelerate`, `Brake`, and `GetSpeed`) as the, so called, 'interface' to interact with it.
+We say that we've 'encapsulated' or 'hidden' `speed`.
+
+```{code-cell}
+Car car = new Car();
+car.Accelerate(10);
+car.Accelerate(-10);
+Console.WriteLine(car.GetSpeed());
+```
+
+```{code-cell}
+Car car = new Car();
+car.Accelerate(5);
+car.Brake(12);
+car.Accelerate(2);
+Console.WriteLine(car.GetSpeed());
+```
+
+By hiding the `speed` field, we can ensure that the speed can never be set to an invalid state. We can ensure that acceleration and braking deltas must be positive, and that braking can't exceed the existing speed. These constraints are enforced by the `Accelerate` and `Brake` methods, protecting the `speed` field from inconsistent states.
+
+Since the only way to update the `speed` of a `Car` object is through its public interface we ensure that the speed is always updated 'consistently'.
+Remember, when a member is `private` it is not accessible from the outside.
+
+```{code-cell}
+:tags: [raises-exception]
+Car car = new Car();
+car.speed = 10;
+```
+
+Encapsulation, often used synonymously with "information hiding", is a foundational concept in object-oriented programming. It simplifies the usage of our classes and objects, reduces the likelihood of bugs, and improves code maintainability. As you continue your journey with C#, understanding and applying encapsulation will be vital for keeping your programs alive over time.
+
