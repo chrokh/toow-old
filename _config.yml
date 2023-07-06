@@ -32,7 +32,7 @@ repository:
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 html:
-  google_analytics_id: G-V69WNXD095
+  #google_analytics_id: G-V69WNXD095 (Installed manually instead, see below googletagmanager + static analytics.js file)
   use_issues_button: true
   use_repository_button: false
   use_edit_page_button: false
@@ -40,7 +40,9 @@ html:
 # Sphinx theme and configuration
 sphinx:
   config:
+    html_js_files: [["https://www.googletagmanager.com/gtag/js?id=G-V69WNXD095", {}]]
     bibtex_reference_style: author_year
     html_theme: furo
   extra_extensions:
     - sphinx_exercise
+
