@@ -20,7 +20,7 @@
 - Static typing and type systems?
 - Semantics
 - Paradigm
-- Encapsulate what varies.
+- Encapsulate what varies. (Not discussed in encapsulation chapter. Also note that chapter on Auto-implemented properties say that we will discuss why properties don't always grant sufficient encapsulation. Deal with in same chapter?)
 
 # TODO
 
