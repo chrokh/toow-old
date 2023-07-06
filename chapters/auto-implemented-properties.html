@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="97. Business objects" href="business-objects.html" /><link rel="prev" title="95. Indirection" href="indirection.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="42. Manually implemented properties" href="manually-implemented-properties.html" /><link rel="prev" title="40. Encapsulation" href="encapsulation.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>96. Business logic - The Object Oriented Way</title>
+        <title>41. Auto-implemented properties - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -205,7 +205,7 @@
 <li class="toctree-l1"><a class="reference internal" href="the-this-keyword.html">38. The <code class="docutils literal notranslate"><span class="pre">this</span></code> keyword</a></li>
 <li class="toctree-l1"><a class="reference internal" href="instance-methods.html">39. Instance methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="encapsulation.html">40. Encapsulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="auto-implemented-properties.html">41. Auto-implemented properties</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">41. Auto-implemented properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="manually-implemented-properties.html">42. Manually implemented properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="object-initializers.html">43. Object initializers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="instance-method-overloading.html">44. Instance method overloading</a></li>
@@ -260,7 +260,7 @@
 <li class="toctree-l1"><a class="reference internal" href="linq.html">93. LINQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="abstraction.html">94. Abstraction / Modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="indirection.html">95. Indirection</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">96. Business logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="business-logic.html">96. Business logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="business-objects.html">97. Business objects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="debugging.html">98. Debugging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reading.html">99. Suggested reading</a></li>
@@ -299,12 +299,183 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="business-logic">
-<h1><span class="section-number">96. </span>Business logic<a class="headerlink" href="#business-logic" title="Permalink to this heading">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="auto-implemented-properties">
+<h1><span class="section-number">41. </span>Auto-implemented properties<a class="headerlink" href="#auto-implemented-properties" title="Permalink to this heading">#</a></h1>
+<p>In programming, brevity is a virtue. Auto-implemented properties in C# offer a streamlined approach to encapsulating a class’s data, cutting down on boilerplate code.</p>
+<p>Properties in C# are a sort of combination between fields and methods. They represent a particular piece of a class’s data, but they also have built-in ways to control the access and modification of that data. Auto-implemented properties, provide a shorthand way to declare properties when no additional logic is required in the property accessors.</p>
+<p>Let’s revisit our <code class="docutils literal notranslate"><span class="pre">Car</span></code> class and convert the speed field into an auto-implemented property.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Car</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Speed</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Accelerate</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">delta</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<span class="w">            </span><span class="n">delta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="c1">// min</span>
+
+<span class="w">        </span><span class="n">Speed</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">delta</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Brake</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">delta</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<span class="w">            </span><span class="n">delta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="c1">// min</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="nf">if</span><span class="w"> </span><span class="p">(</span><span class="n">delta</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">Speed</span><span class="p">)</span>
+<span class="w">            </span><span class="n">delta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Speed</span><span class="p">;</span><span class="w"> </span><span class="c1">// max</span>
+
+<span class="w">        </span><span class="n">Speed</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">delta</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-2523.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.59:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '2523.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>In this example, <code class="docutils literal notranslate"><span class="pre">Speed</span></code> is an auto-implemented property. The <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">get;</span> <span class="pre">private</span> <span class="pre">set;</span> <span class="pre">}</span></code> part is a syntax shortcut for a property that can be read by anyone (public get accessor) but can only be modified by methods within the <code class="docutils literal notranslate"><span class="pre">Car</span></code> class (private set accessor). Behind the scenes, C# is creating a hidden, private backing field for storing the property’s value, much like the speed field in our previous examples.
+This means that we no longer need to manually write a public method called <code class="docutils literal notranslate"><span class="pre">GetSpeed</span></code> for object holders to be able to get access to the current speed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Car</span><span class="w"> </span><span class="n">car</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Car</span><span class="p">();</span>
+<span class="n">car</span><span class="p">.</span><span class="n">Accelerate</span><span class="p">(</span><span class="m">10</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">car</span><span class="p">.</span><span class="n">Speed</span><span class="p">);</span><span class="w"> </span><span class="c1">// Possible because get is marked as public.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since we’ve marked the set accessor (also known as setter) of the property as <code class="docutils literal notranslate"><span class="pre">private</span></code> we still cannot set the value of <code class="docutils literal notranslate"><span class="pre">Speed</span></code> from outside the <code class="docutils literal notranslate"><span class="pre">Car</span></code> class.
+In many cases this means that <code class="docutils literal notranslate"><span class="pre">Speed</span></code> is still encapsulated.
+In later chapters we will however discuss why properties don’t always provide sufficient encapsulation.</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Car</span><span class="w"> </span><span class="n">car</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Car</span><span class="p">();</span>
+<span class="n">car</span><span class="p">.</span><span class="n">Speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">;</span><span class="w"> </span><span class="c1">// Not possible because set is marked as private.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2,1): error CS0272: The property or indexer &#39;Car.Speed&#39; cannot be used in this context because the set accessor is inaccessible
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Auto-implemented properties are a powerful feature in C#, enabling you to write less code while preserving the encapsulation principle. As we move forward, we will look at cases where a property needs additional logic, leading us to manually implemented properties.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -316,38 +487,38 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            name: "python3",
+            name: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="business-objects.html">
+          <a class="next-page" href="manually-implemented-properties.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">97. </span>Business objects</div>
+                <div class="title"><span class="section-number">42. </span>Manually implemented properties</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="indirection.html">
+          <a class="prev-page" href="encapsulation.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">95. </span>Indirection</div>
+                <div class="title"><span class="section-number">40. </span>Encapsulation</div>
                 
               </div>
             </a>

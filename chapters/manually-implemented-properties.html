@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="97. Business objects" href="business-objects.html" /><link rel="prev" title="95. Indirection" href="indirection.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="43. Object initializers" href="object-initializers.html" /><link rel="prev" title="41. Auto-implemented properties" href="auto-implemented-properties.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>96. Business logic - The Object Oriented Way</title>
+        <title>42. Manually implemented properties - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -206,7 +206,7 @@
 <li class="toctree-l1"><a class="reference internal" href="instance-methods.html">39. Instance methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="encapsulation.html">40. Encapsulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="auto-implemented-properties.html">41. Auto-implemented properties</a></li>
-<li class="toctree-l1"><a class="reference internal" href="manually-implemented-properties.html">42. Manually implemented properties</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">42. Manually implemented properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="object-initializers.html">43. Object initializers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="instance-method-overloading.html">44. Instance method overloading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="static-classes.html">45. Static classes (Modules)</a></li>
@@ -260,7 +260,7 @@
 <li class="toctree-l1"><a class="reference internal" href="linq.html">93. LINQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="abstraction.html">94. Abstraction / Modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="indirection.html">95. Indirection</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">96. Business logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="business-logic.html">96. Business logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="business-objects.html">97. Business objects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="debugging.html">98. Debugging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reading.html">99. Suggested reading</a></li>
@@ -299,12 +299,168 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="business-logic">
-<h1><span class="section-number">96. </span>Business logic<a class="headerlink" href="#business-logic" title="Permalink to this heading">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="manually-implemented-properties">
+<h1><span class="section-number">42. </span>Manually implemented properties<a class="headerlink" href="#manually-implemented-properties" title="Permalink to this heading">#</a></h1>
+<p>As programmers, we strive for simplicity, but reality can often be complex. When we need to introduce custom logic to our data access, auto-implemented properties might not be enough. For such situations, C# offers us manually implemented properties, a tool to apply any logic we want when getting or setting our properties.</p>
+<p>While auto-implemented properties (which we talked about in the last chapter) are a neat way to quickly encapsulate data, they don’t allow for additional logic during the setting or getting of the property. When you need to control exactly what happens when a property is accessed or modified, manually implemented properties come into play.</p>
+<p>Let’s return to the <code class="docutils literal notranslate"><span class="pre">Car</span></code> class example from last chapter. Remember how we made sure that speed cannot be negative? Let’s also introduce a new rule: the speed of the car cannot exceed 200. Here’s how we could enforce those rules using a manually implemented property:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Car</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Backing field.</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">speed</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Manually implemented property.</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Speed</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Get accessor</span>
+<span class="w">        </span><span class="k">get</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">speed</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Set accessor</span>
+<span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="k">set</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<span class="w">                </span><span class="n">speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
+<span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="nf">if</span><span class="w"> </span><span class="p">(</span><span class="k">value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">200</span><span class="p">)</span>
+<span class="w">                </span><span class="n">speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">200</span><span class="p">;</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span><span class="n">speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">value</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Accelerate</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">delta</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<span class="w">            </span><span class="n">Speed</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">delta</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Brake</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">delta</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">delta</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<span class="w">            </span><span class="n">Speed</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">delta</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-4183.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.59:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '4183.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>In this class, <code class="docutils literal notranslate"><span class="pre">Speed</span></code> is a manually implemented property. We’ve provided our own get and set methods, giving us control over what happens when the Speed property is accessed or modified. This level of control is invaluable when your properties require more than just basic read and write operations.</p>
+<p>Notice how the implementations of the instance methods can be simplified now that some of the logic has been moved to the property.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We’re using <a class="reference internal" href="fat-arrows.html"><span class="doc std std-doc">fat-arrow syntax</span></a> for the get accessor since it can be implemented as a single expression.</p>
+</div>
+<p>Remember that while manually implemented properties offer more control, they also come with increased complexity. It’s essential to balance the use of auto-implemented and manually implemented properties based on your needs.</p>
+<p>In the upcoming chapters, we’ll dive deeper into other object-oriented programming concepts, continually expanding your C# toolkit.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -316,38 +472,38 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            name: "python3",
+            name: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="business-objects.html">
+          <a class="next-page" href="object-initializers.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">97. </span>Business objects</div>
+                <div class="title"><span class="section-number">43. </span>Object initializers</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="indirection.html">
+          <a class="prev-page" href="auto-implemented-properties.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">95. </span>Indirection</div>
+                <div class="title"><span class="section-number">41. </span>Auto-implemented properties</div>
                 
               </div>
             </a>
