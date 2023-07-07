@@ -1,6 +1,5 @@
 # Assignment operator
 
-asd
 As we've already seen in previous chapters, the assignment operator `=` plays a crucial role in C#. It is the operator that allows us to assign values to our variables. However, the assignment operator has a few more facets worth discussing.
 
 At its core, the assignment operator is used to assign the value of its right-hand operand to its left-hand operand. For instance:
