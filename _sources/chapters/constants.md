@@ -12,13 +12,13 @@ kernelspec:
 
 # Constants
 
-When we introduced variables in the previous chapter, we emphasized how flexible they are. They can be assigned a value, then reassigned a different value at any time. This ability to change, or mutability, is part of what makes variables so powerful. But sometimes, this flexibility isn't what we want. In some situations, we want to set a value once and ensure that it never changes. This is where constants come in.
+When we introduced variables we emphasized how flexible they are. They can be assigned a value, then reassigned a different value at any time. This ability to change, or mutability, is part of what makes variables so powerful. But sometimes, this flexibility isn't what we want. In some situations, we want to set a value once and ensure that it never changes. This is where constants come in.
 
 ```{figure} https://media.discordapp.net/attachments/1118630713084870736/1121469118856577024/chrokh_a_simple_and_flat_illustration_of_a_glass_jar_with_a_pad_a71fd77f-c504-4d4a-8c1b-03aaf88bcfd0.png?width=1268&height=634
 A constant is a variable whose value cannot be reassigned, like a jar whose content cannot be replaced.
 ```
 
-In C#, the keyword `const` is used to declare a constant. A constant is similar to a variable in that it represents a value. However, once a constant is assigned a value, that value cannot be changed. This is why it's called a "constant".
+In C#, the keyword `const` is used to declare a constant. A constant is similar to a variable in that it represents a value. However, once a constant is assigned a value, that value cannot be changed. This is why it's called a 'constant'.
 
 Consider this example:
 
@@ -35,15 +35,11 @@ HoursInDay = 23;
 
 In essence, declaring a value as a constant is like making a promise to the compiler that this value will not change. If you try to break this promise, the compiler won't let you get away with it.
 
-Now, here's a subtle yet important point to understand: constants in C# are immutable, meaning that you cannot change the value of the constant, but this does **not** mean the "value" that the constant is pointing to cannot change.
+Constants in C# are not as flexible as variables when it comes to the **types of data** they can hold and the **kind of expressions** they can be assigned. The types of constants can only be of the following: numeric types (like `int`, `double`, and `decimal`), `bool`, `char`, `enum`, and `string`. All the types that can be stored in a `const` are [immutable](immutability).
 
-Let's use the analogy of shelves of jars containing items.
-If a jar is marked as a constant and we put a bag of apples in the jar, this only means that we cannot swap the bag of apples for another bag of apples.
-It only means that we cannot replace the item in the jar.
+What further separates constants from variables is that the expressions assigned to constants need to be **fully evaluated at compile-time**. In other words, the value of a constant must be known and determinable when the code is being compiled. This is why constants are commonly assigned literals, like `const int x = 5;`. However, constants can also be assigned any expressions using simple operators (like arithmetic operators) and constant operands, as long as the expression can be fully evaluated at compile-time. For instance, `const int x = 5 * 5;` is valid because the expression `5 * 5` can be determined at compile-time.
 
-However, it doesn't mean that the item in the jar itself cannot change. The apples in the bag might still rot over time. This is permissible because we're not changing the bag itself, just what's inside it. The bag of apples inside the jar will always be the same bag, but the contents of that bag, the apples might change.
-
-In programming terms, we could say that the variable (the jar) is constant, but the value it points to (the bag of apples) can still be modified under certain conditions. However, exploring these conditions requires understanding more advanced topics such as [reference types and value types](value-and-reference-semantics), which we will delve into in later chapters. For now, the key takeaway is that constants in C# cannot be **reassigned** once they've been initialized, but depending on what they're holding, the content might still change.
+The fact that constants must be compile-time constants means that they cannot be assigned a value that is determined dynamically at runtime. This makes constants an excellent choice when you need a value that is unchanging and known at the time you're writing your code.
 
 And with this understanding of constants, you've taken another step into the realm of C#. The journey continues, so let's move on to the next chapter.
 

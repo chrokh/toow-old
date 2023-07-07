@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="76. Deep classes" href="deep-classes.html" /><link rel="prev" title="74. Single responsibility principle" href="single-responsibility-principle.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="45. Read-only properties" href="read-only-properties.html" /><link rel="prev" title="43. Object initializers" href="object-initializers.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>75. Interface segregation principle - The Object Oriented Way</title>
+        <title>44. Read-only fields - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -141,7 +141,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -208,7 +208,7 @@
 <li class="toctree-l1"><a class="reference internal" href="auto-implemented-properties.html">41. Auto-implemented properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="manually-implemented-properties.html">42. Manually implemented properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="object-initializers.html">43. Object initializers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="read-only-fields.html">44. Read-only fields</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">44. Read-only fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="read-only-properties.html">45. Read-only properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="computed-properties.html">46. Computed properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="instance-method-overloading.html">47. Instance method overloading</a></li>
@@ -239,7 +239,7 @@
 <li class="toctree-l1"><a class="reference internal" href="design-principles.html">72. Design principles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="types-over-tests.html">73. Types over tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="single-responsibility-principle.html">74. Single responsibility principle</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">75. Interface segregation principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface-segregation-principle.html">75. Interface segregation principle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deep-classes.html">76. Deep classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="define-errors-out-of-existence.html">77. Define errors out of existence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="open-closed-principle.html">78. Open-closed principle</a></li>
@@ -296,44 +296,225 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="interface-segregation-principle">
-<h1><span class="section-number">75. </span>Interface segregation principle<a class="headerlink" href="#interface-segregation-principle" title="Permalink to this heading">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
-</div>
-<section id="exercises">
-<h2><span class="section-number">75.1. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
-<div class="exercise admonition" id="chapters/interface-segregation-principle-exercise-0">
+          <section class="tex2jax_ignore mathjax_ignore" id="read-only-fields">
+<h1><span class="section-number">44. </span>Read-only fields<a class="headerlink" href="#read-only-fields" title="Permalink to this heading">#</a></h1>
+<p>When building software, we often encounter values that, once set, should never be changed.
+Read-only fields in C# are fields whose value cannot be changed after its containing object has been created.
+A read-only field must be assigned a value at the time of declaration or in the constructor of the class, and after this, it cannot be changed.</p>
+<p>Imagine, for instance, the identifier of a book, the ISBN number. This number is unique to each book and does not change once assigned. We can represent this as a read-only field.</p>
+<p>Here’s a simple implementation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Book</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">ISBN</span><span class="p">;</span>
 
-<p class="admonition-title"><span class="caption-number">Exercise 75.1 </span></p>
-<section id="exercise-content">
-<p>Explain the interface segregation principle in your own words.</p>
-</section>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Book</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">isbn</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">ISBN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isbn</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
 </div>
-<div class="exercise admonition" id="chapters/interface-segregation-principle-exercise-1">
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-4754.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
 
-<p class="admonition-title"><span class="caption-number">Exercise 75.2 </span></p>
-<section id="exercise-content">
-<p>How does the interface segregation principle relate to the maintainability characteristics that we discussed in the chapter on <a class="reference internal" href="maintainability.html#maintainability-characteristics"><span class="std std-ref">maintainability</span></a>?</p>
-</section>
-</div>
-<div class="exercise admonition" id="chapters/interface-segregation-principle-exercise-2">
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
 
-<p class="admonition-title"><span class="caption-number">Exercise 75.3 </span></p>
-<section id="exercise-content">
-<p>In the chapter on <a class="reference internal" href="interfaces.html#interfaces-ciphers"><span class="std std-ref">interfaces</span></a> we chose to use three interfaces (<code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code>, <code class="docutils literal notranslate"><span class="pre">ICharToStringCipher</span></code>, and <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code>) instead of one (<code class="docutils literal notranslate"><span class="pre">ICipher</span></code>).
-This decision was motivated by the Liskov substitution principle but it could also be motivated by the interface segragation principle.
-Use your own words to explain how.</p>
-</section>
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.159:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '4754.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
 </div>
-</section>
+<p>In the <code class="docutils literal notranslate"><span class="pre">Book</span></code> class, ISBN is a read-only field. Once it is assigned in the constructor, its value cannot be changed. Let’s create an instance of Book:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">book</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Book</span><span class="p">(</span><span class="s">&quot;111&quot;</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">book</span><span class="p">.</span><span class="n">ISBN</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>111
+</pre></div>
+</div>
+</div>
+</div>
+<p>Attempting to modify the <code class="docutils literal notranslate"><span class="pre">ISBN</span></code> field after the object has been constructed would result in a compilation error:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// The following statement does not compile.</span>
+<span class="n">book</span><span class="p">.</span><span class="n">ISBN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;222&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2,1): error CS0191: A readonly field cannot be assigned to (except in a constructor or init-only setter of the type in which the field is defined or a variable initializer)
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This ensures the immutability of ISBN after the Book object is created. Utilizing read-only fields can improve the robustness and predictability of your code, particularly when dealing with values that should remain constant after an object’s instantiation. This can also help other developers understand the design intent that these values should not be altered after they have been set.</p>
+<p>Earlier, we learned about <a class="reference internal" href="constants.html"><span class="doc std std-doc">constants</span></a>, which are immutable values that must be known at compile-time. They are similar to read-only fields, but there’s a key difference: read-only fields can be set at run-time. This allows us to declare read-only fields of any type. Constants on the other hand, only supports a limited set of data types.</p>
+<p>Since the value of a read-only field can be set at run-time (as opposed to having to be set at compile-time like constants) we can assign it any expression.
+This offers flexibility that constants can’t provide.</p>
+<p>However, there’s an important downside that we must remember: while read-only fields in C# are immutable in the sense that you cannot reassign them this does <strong>not</strong> mean the ‘value’ that the read-only field is pointing to cannot change.</p>
+<p>Let’s use the analogy of jars containing items.
+If a jar is marked as read-only and we put a bag of apples in the jar, it only means that we cannot swap the bag of apples for another bag of apples, it doesn’t mean that the bag of apples itself cannot change.</p>
+<p>The apples in the bag might still, for example, rot over time. This is permissible because we’re not replacing the bag with another bag, we’re just changing the contents of it.
+In programming terms, we could say that the variable (the jar) is constant, but the value it points to (the bag of apples) can still be modified under certain conditions.</p>
+<p>Consider the following example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Bag</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">NumberOfMarbles</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Jar</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">Bag</span><span class="w"> </span><span class="n">Bag</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Jar</span><span class="p">(</span><span class="n">Bag</span><span class="w"> </span><span class="n">bag</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Bag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bag</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create a bag with 10 marbles.</span>
+<span class="n">Bag</span><span class="w"> </span><span class="n">bag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Bag</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">NumberOfMarbles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="p">};</span>
+
+<span class="c1">// Create a jar that contains the bag.</span>
+<span class="n">Jar</span><span class="w"> </span><span class="n">jar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Jar</span><span class="p">(</span><span class="n">bag</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Even though Bag is a read-only field, we can change the contents of the bag.</span>
+<span class="n">jar</span><span class="p">.</span><span class="n">Bag</span><span class="p">.</span><span class="n">NumberOfMarbles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this code, you are creating a <code class="docutils literal notranslate"><span class="pre">Bag</span></code> with <code class="docutils literal notranslate"><span class="pre">10</span></code> marbles and placing it in a <code class="docutils literal notranslate"><span class="pre">Jar</span></code>. Now, even though the <code class="docutils literal notranslate"><span class="pre">Bag</span></code> field in the <code class="docutils literal notranslate"><span class="pre">Jar</span></code> is read-only, you can still change the number of marbles in the bag. You do this by using the line <code class="docutils literal notranslate"><span class="pre">jar.Bag.NumberOfMarbles</span> <span class="pre">=</span> <span class="pre">5;</span></code>. The <code class="docutils literal notranslate"><span class="pre">Bag</span></code> field is like the bag of apples in our analogy, and <code class="docutils literal notranslate"><span class="pre">NumberOfMarbles</span></code> represents the contents of the bag. Despite the <code class="docutils literal notranslate"><span class="pre">Bag</span></code> field being read-only, the contents of the bag, i.e., the number of marbles, can still be changed.</p>
+<p>The unique flexibility of read-only fields in C# is very useful but also means that we must be careful not to mistake them for constants.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -345,38 +526,38 @@ Use your own words to explain how.</p>
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            name: "python3",
+            name: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="deep-classes.html">
+          <a class="next-page" href="read-only-properties.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">76. </span>Deep classes</div>
+                <div class="title"><span class="section-number">45. </span>Read-only properties</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="single-responsibility-principle.html">
+          <a class="prev-page" href="object-initializers.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">74. </span>Single responsibility principle</div>
+                <div class="title"><span class="section-number">43. </span>Object initializers</div>
                 
               </div>
             </a>
@@ -398,27 +579,8 @@ Use your own words to explain how.</p>
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">75. Interface segregation principle</a><ul>
-<li><a class="reference internal" href="#exercises">75.1. Exercises</a></li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>

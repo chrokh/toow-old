@@ -82,7 +82,9 @@ Console.WriteLine($"{rectangle.Area} = {rectangle.Length} x {rectangle.Width}");
 
 In this case, after setting the `Area` to `25`, both the `Length` and `Width` have been adjusted to be the square root of the new area (which is `5`).
 
-When using setters in computed properties, it is important to **remember to consider the logical consistency of your model**. For example, setting the area only to then immediately `get` the area should give you the same area back.
+```{important}
+When using setters in computed properties, it is important to **consider the logical consistency of your model**. For example: if you 'set' the area only to then immediately 'get' the area, then you should get back the same area as you set.
+```
 
 %In the upcoming chapters, we will delve deeper into the use of properties in C# and how they can make our code cleaner and more maintainable.
 
