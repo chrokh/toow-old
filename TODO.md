@@ -13,6 +13,7 @@
 - When to introduce the meaning of "keyword"? Introduced in syntax chapter no?
 - DRY? Before functions? After iteration?
 - When to discuss that variables are [initialized to default value](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/variables)?
+    - https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/default-values#default-value-expressions
 - When do I discuss the different [types of variables](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/variables#928-local-variables)?
 - Truncation (int x = 10/3)?
 - Right or left associativity of operators.

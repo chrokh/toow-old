@@ -12,14 +12,16 @@ kernelspec:
 
 # Read-only properties
 
-When building software, we often encounter values that, once set, should never be changed. This immutability can ensure consistency and integrity in our applications. C# provides a way to encapsulate this behavior in our objects using read-only properties.
+In the previous chapter, we introduced read-only fields and discussed how they provide a level of flexibility that constants cannot offer. In this chapter, we'll learn that we can achieve the same effect by using a read-only property, meaning an [auto-implemented property](auto-implemented-properties) that only have a 'get' accessor. It is common practice in C# to use read-only properties instead of read-only fields.
 
 In C#, read-only properties are properties that can only be set at the time of object creation. Once the object is constructed, the value of a read-only property can't be changed.
+Practically, this means that the read-only property must be assigned a value at the time of declaration or in the constructor of the class, and after this, it cannot be changed.
+%Practically, this means that the property value can be set in a constructor or in the property initializer, but not using an [object initializer](object-initializers).
 
 A read-only property in C# is defined like any other property, but with only a get accessor. Without a set accessor, the property becomes read-only, because there's no way to change the value of the property.
 %from outside the class.
 
-Consider a `Book` class, where each book has a unique `ISBN` (International Standard Book Number) that's set when the book is published and can't change afterward. Here's how you might use a read-only property to represent this:
+Consider the `Book` class, from the chapter on [read-only fields](read-only-fields), where each book has a unique and constant `ISBN`. Here's how you might use a read-only property to represent this:
 
 ```{code-cell}
 public class Book
@@ -28,9 +30,7 @@ public class Book
 
     // Initial value can be set upon instantiation or initialization only.
     public Book(string isbn)
-    {
-        ISBN = isbn;
-    }
+        => ISBN = isbn;
 }
 ```
 
@@ -52,6 +52,12 @@ public class Book
 ```
 
 Remember that the intention behind a read-only property is to guarantee that the value remains constant after the object's construction.
+
+```{warning}
+The same dangers that we talked about in the chapter on [read-only fields](read-only-fields) also apply to read-only properties. While read-only *does* mean that the property cannot be reassigned a new value, it *does not* mean that the value it has been assigned *itself* cannot change.
+
+Remember the analogy of a jar with a bag of marbles from the chapter on read-only fields? Even though we cannot replace the bag of marbles with another bag we can change the number of marbles in the bag, without changing the bag.
+```
 
 %As you'll see in the upcoming chapters, C# provides various mechanisms to ensure the immutability and integrity of data, such as read-only fields and the init accessor.
 
