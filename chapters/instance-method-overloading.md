@@ -69,4 +69,5 @@ Remember, method overloading is only possible when the number and/or type of par
 ```
 
 In later chapters we will see more complex examples of overloading. For now, method overloading should be seen as a powerful tool for making your code more readable and hence maintainable.
+In the next chapter we will see how we can overload constructors.
 
