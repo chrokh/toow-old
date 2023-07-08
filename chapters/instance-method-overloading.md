@@ -1,71 +1,72 @@
+---
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  display_name: csharp
+  language: .net-csharp
+  name: .net-csharp
+---
+
 # Instance method overloading
 
-%### Overloading (old from instance methods chapter)
-%
-%Instance methods support [overloading](overloading).
-%Overloading of instance methods is not substantially different from overloading of [static methods](static-methods).
-%As long as two instance methods have different type signatures they can share the same name.
-%
-%Let's take the method `Scale` that we defined before as an example.
-%In our definition of `Scale` we expected a width and a height multiplier.
-%Let's now define an overload of the instance method `Scale` that only expects a single multiplier that we apply to both the width and height.
-%
-%```{code-cell}
-%class Rectangle
-%{
-%  public int Width;
-%  public int Height;
-%
-%  public void Scale (int width, int height)
-%  {
-%    Width *= width;
-%    Height *= height;
-%  }
-%
-%  public void Scale (int factor)
-%  {
-%    Width *= factor;
-%    Height *= factor;
-%  }
-%
-%  public void Print ()
-%    => Console.WriteLine($"{Width} x {Height}");
-%}
-%```
-%
-%Notice how we now have two instance methods called `Scale`.
-%This is allowed since they have different type signatures.
-%
-%Of course, we could have implemented our second `Scale` method in terms of our first.
-%Think about it.
-%Scaling both the width and height with the same multiplier is a special case of scaling width and height with possibly different multipliers.
-%
-%```{code-cell}
-%class Rectangle
-%{
-%  public int Width;
-%  public int Height;
-%
-%  public void Scale (int width, int height)
-%  {
-%    Width *= width;
-%    Height *= height;
-%  }
-%
-%  public void Scale (int factor)
-%    => Scale(factor, factor); // Calls the other overload.
-%
-%  public void Print ()
-%    => Console.WriteLine($"{Width} x {Height}");
-%}
-%```
-%
-%```{note}
-%An instance method can call other instance methods in the same object it is running.
-%This can be done explicitly by using the `this` keyword.
-%%The fact that an instance method in an object may call other instance methods in the same object is known as "open recursion".
-%```
-%
-%```{note}
-%The keyword `this` is in some languages known as `base`.
-%```
+Imagine a calculator: you can use it to add two numbers, but you can also add three, four, or more numbers. The same basic operation, addition, but adapted to different scenarios. In programming, we have a similar concept that enables us to perform similar actions, but with different inputs. This is called 'overloading'.
+
+Instance method overloading allows us to define multiple instance methods with the same name but with different parameters within a class. This enables us to perform similar operations, but with variations based on the input parameters. Method overloading enhances the readability of your code and provides flexibility in how a method can be used.
+
+Consider a `Rectangle` class with instance methods that allow scaling it. Sometimes we may want to scale both width and height equally, other times we may want to scale them differently. Here's how we can overload methods to accommodate both scenarios:
+
+```{code-cell}
+public class Rectangle
+{
+    public double Width { get; private set; }
+    public double Height { get; private set; }
+
+    public Rectangle(double width, double height)
+    {
+        Width = width;
+        Height = height;
+    }
+
+    public void Scale(double factor)
+    {
+        Width *= factor;
+        Height *= factor;
+    }
+
+    public void Scale(double widthFactor, double heightFactor)
+    {
+        Width *= widthFactor;
+        Height *= heightFactor;
+    }
+}
+```
+
+In the `Rectangle` class, we have overloaded the Scale method. The first method takes one parameter, `factor`, and scales both width and height equally. The second method takes two parameters, `widthFactor` and `heightFactor`, and scales the width and height differently.
+
+```{note}
+In the example above we could have simplified the implementation of the first `Scale` method by calling the second with the same `factor` for both width and height, like this: `Scale(factor, factor)`. Calling one overloaded method from another is a commonly occurring pattern.
+```
+
+We can use the overloaded methods like this:
+
+```{code-cell}
+Rectangle rect = new Rectangle(4.0, 5.0);
+
+rect.Scale(2.0);
+Console.WriteLine($"{rect.Width} x {rect.Height}");
+
+rect.Scale(0.5, 1.5);
+Console.WriteLine($"{rect.Width} x {rect.Height}");
+```
+
+In this example, the correct `Scale` method is selected based on the parameters we provide when calling the method. Overloading allows us to use the same method name to carry out different but related operations, improving code clarity and flexibility.
+
+```{note}
+Remember, method overloading is only possible when the number and/or type of parameters differ. Overloaded methods **can't only differ by their return type**.
+```
+
+In later chapters we will see more complex examples of overloading. For now, method overloading should be seen as a powerful tool for making your code more readable and hence maintainable.
+
