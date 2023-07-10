@@ -19,6 +19,7 @@ Work in progress.
 %## Motivation
 %- NASA units example.
 %- Principle: The state space of a type should equal the state space of whatever domain concept it is modeling.
+%- Object integrity mentioned in [required](reqiured-attributes) chapter.
 
 ## Definition
 
