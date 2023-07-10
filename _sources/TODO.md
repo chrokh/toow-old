@@ -8,7 +8,8 @@
 - Target-typed new expressions: `Car car = new()`.
 - String interpolation + concatenation
 - String methods such as `.Length` (must come before reference types chapter).
-- Examples of instance methods that you can call on objects
+- It's not mentioned in Instance Methods chapter that an instance method can call another instance method.
+- Examples of instance methods that you can call on objects. From .NET.
 - String methods such as IndexOf, Substring, etc. Must have talked about overloading before. Should this simply be a chapter on reading the documentation of classes?
 - When to introduce the meaning of "keyword"? Introduced in syntax chapter no?
 - DRY? Before functions? After iteration?

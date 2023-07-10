@@ -1,0 +1,446 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="49. Instance method overloading" href="instance-method-overloading.html" /><link rel="prev" title="47. Required properties and fields" href="required-properties-and-fields.html" />
+
+    <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
+        <title>48. Init-only properties - The Object Oriented Way</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">The Object Oriented Way</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">The Object Oriented Way</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="syntax.html">1. Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hello-world.html">2. Hello world</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compilation.html">3. Compilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="execution.html">4. Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpretation.html">5. Interpretation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="comments.html">6. Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="values.html">7. Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">8. Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-types.html">9. Data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expressions.html">10. Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arithmetic-operators.html">11. Arithmetic operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="equality-operators.html">12. Equality operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="relational-operators.html">13. Relational operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logical-operators.html">14. Logical operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment-operator.html">15. Assignment operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="precedence.html">16. Precedence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="associativity.html">17. Associativity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constants.html">18. Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statements.html">19. Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-inference.html">20. Type inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-checking.html">21. Type checking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="floating-point-types.html">22. Floating-point types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enumeration-types.html">23. Enumeration types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="selection-statements.html">24. Selection statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="selection-expressions.html">25. Selection expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iteration.html">26. Iteration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arrays.html">27. Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference-types.html">28. Reference types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="value-types.html">29. Value types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="local-functions.html">30. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fat-arrows.html">31. Fat arrows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recursion.html">32. Recursion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="objects.html">33. Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">34. Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="access-modifiers.html">35. Access modifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html">36. Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constructors.html">37. Constructors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the-this-keyword.html">38. The <code class="docutils literal notranslate"><span class="pre">this</span></code> keyword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="instance-methods.html">39. Instance methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encapsulation.html">40. Encapsulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auto-implemented-properties.html">41. Auto-implemented properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manually-implemented-properties.html">42. Manually implemented properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="object-initializers.html">43. Object initializers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="read-only-fields.html">44. Read-only fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="read-only-properties.html">45. Read-only properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="computed-properties.html">46. Computed properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="required-properties-and-fields.html">47. Required properties and fields</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">48. Init-only properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="instance-method-overloading.html">49. Instance method overloading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constructor-overloading.html">50. Constructor overloading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static-classes.html">51. Static classes (Modules)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static-methods.html">52. Static methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static-fields.html">53. Static fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static-constructors.html">54. Static constructors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extension-methods.html">55. Extension methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="object-composition.html">56. Object composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concrete-constructed-object-composition.html">57. Concrete constructed object composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concrete-injected-object-composition.html">58. Concrete injected object composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interfaces.html">59. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subtype-polymorphism.html">60. Subtype polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inheritance.html">61. Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced-access-modifiers.html">62. Advanced access modifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="abstract-classes.html">63. Abstract classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="object-type-conversions.html">64. Type conversions (of objects)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="abstract-constructed-object-composition.html">65. Abstract constructed object composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="abstract-injected-object-composition.html">66. Abstract injected object composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variance.html">67. Variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">68. Liskov substitution principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics.html">69. Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-type-parameters.html">70. Generic type parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-types.html">71. Generic types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-methods.html">72. Generic methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">73. Type parameter constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">74. Variant generic interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design-principles.html">75. Design principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types-over-tests.html">76. Types over tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="single-responsibility-principle.html">77. Single responsibility principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface-segregation-principle.html">78. Interface segregation principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deep-classes.html">79. Deep classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="define-errors-out-of-existence.html">80. Define errors out of existence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-closed-principle.html">81. Open-closed principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependency-inversion-principle.html">82. Dependency inversion principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">83. Composition over inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design-patterns.html">84. Design patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strategy-pattern.html">85. Strategy pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="null-object-pattern.html">86. Null object pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bridge-pattern.html">87. Bridge pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="delegates.html">88. Delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observer-pattern.html">89. Observer pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="events.html">90. Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adapter-pattern.html">91. Adapter pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="factory-method-pattern.html">92. Factory method pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="composite-pattern.html">93. Composite pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state-pattern.html">94. State pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iterator-pattern.html">95. Iterator pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visitor-pattern.html">96. Visitor pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pattern-matching.html">97. Pattern matching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lambdas.html">98. Lambdas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linq.html">99. LINQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="abstraction.html">100. Abstraction / Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="indirection.html">101. Indirection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="business-logic.html">102. Business logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="business-objects.html">103. Business objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging.html">104. Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reading.html">105. Suggested reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">106. Bibliography</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section class="tex2jax_ignore mathjax_ignore" id="init-only-properties">
+<h1><span class="section-number">48. </span>Init-only properties<a class="headerlink" href="#init-only-properties" title="Permalink to this heading">#</a></h1>
+<p>We often find ourselves needing to create properties that can be set during the initialization of an object but remain immutable afterwards.
+For instance, consider a <code class="docutils literal notranslate"><span class="pre">Point</span></code> in a two-dimensional space. Once you’ve placed a point at some coordinate, you might not want it to move around.</p>
+<p>Traditionally in C#, to make properties immutable after an object is created, you would have to make them <a class="reference internal" href="read-only-properties.html"><span class="doc std std-doc">read-only</span></a> and then set them in a constructor. However, with the advent of the <code class="docutils literal notranslate"><span class="pre">init</span></code> keyword in C#, we can now create properties that can only be set at the time of object initialization and stay read-only thereafter.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Point</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="n">init</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="n">init</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>With this declaration, you can now set the <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> properties when you create a new <code class="docutils literal notranslate"><span class="pre">Point</span></code>, but you <em>can’t change them afterwards</em>.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Point</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Point</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="p">};</span>
+
+<span class="n">point</span><span class="p">.</span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">(3,1): error CS8852: Init-only property or indexer &#39;Point.X&#39; can only be assigned in an object initializer, or on &#39;this&#39; or &#39;base&#39; in an instance constructor or an &#39;init&#39; accessor.</span>
+</pre></div>
+</div>
+<p>You might be wondering how <code class="docutils literal notranslate"><span class="pre">init</span></code> differs from <code class="docutils literal notranslate"><span class="pre">readonly</span></code>. While both keywords restrict you from modifying the value after initialization, the key difference is that readonly restricts the modification to the constructor only. In contrast, <code class="docutils literal notranslate"><span class="pre">init</span></code> allows the property to be set not only in the constructor but also in the object initializer.</p>
+<p>Remember the <code class="docutils literal notranslate"><span class="pre">required</span></code> keyword from the previous chapter? It works hand-in-hand with <code class="docutils literal notranslate"><span class="pre">init</span></code>. When a property is marked as <code class="docutils literal notranslate"><span class="pre">required</span></code>, it ensures that the property must be given a value when the object is initialized.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Point</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="n">init</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="n">init</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>With this declaration, the compiler ensures that <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> are given a value when a <code class="docutils literal notranslate"><span class="pre">Point</span></code> is created.
+If we fail to initialize all <code class="docutils literal notranslate"><span class="pre">required</span></code> attributes, the code does not compile:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Point</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Point</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="p">};</span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">(1,19): error CS9035: Required member &#39;Point.Y&#39; must be set in the object initializer or attribute constructor. (CS9035)</span>
+</pre></div>
+</div>
+<p>But if we do set all <code class="docutils literal notranslate"><span class="pre">required</span></code> attributes then it does compile.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Point</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Point</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="p">};</span>
+</pre></div>
+</div>
+<p>The init keyword is a powerful addition to C#’s toolbox, allowing us to create immutable objects with minimal and simple syntax. By ensuring the integrity of our objects, it greatly enhances code safety while also contributing to the readability and maintainability of our codebase.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./chapters"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="instance-method-overloading.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title"><span class="section-number">49. </span>Instance method overloading</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="required-properties-and-fields.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title"><span class="section-number">47. </span>Required properties and fields</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://www.googletagmanager.com/gtag/js?id=G-V69WNXD095"></script>
+    <script src="../_static/custom.js"></script>
+    <script src="../_static/analytics.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    </body>
+</html>

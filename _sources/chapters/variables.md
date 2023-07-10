@@ -39,7 +39,7 @@ One important thing to note is the difference between an undeclared variable and
 If a variable called `yourNumber` is undeclared and you try to use it then you will get the following error:
 
 ```output
-The name 'yourNumber' does not exist in the current context
+The name 'yourNumber' does not exist in the current context (CS0103)
 ```
 
 If the variable is unassigned then you will instead get the following error:
