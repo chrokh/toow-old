@@ -2,7 +2,7 @@
 
 - Note about RTFM very early on.
 - `void` in Methods chapter.
-- `+=`, `++`
+- `+=`, `++` (both pre and post increment)
 - Syntactic sugar. The term. Used in e.g. fat arrows. Suggestion: Right before ++ += ?
 - `Write` not `WriteLine` => Hello world chapter?
 - Target-typed new expressions: `Car car = new()`.
