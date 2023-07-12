@@ -64,13 +64,10 @@ Console.WriteLine(gameGrid);
 ```
 
 ```{warning}
-Static fields are essentially 'global state'.
-
 While the static keyword might seem like a simple solution in the short-term, it often leads to code that is **harder to test and maintain** in the long run. By using static, you depart from the core ideas in object oriented programming, like subtype polymorphism. This leads to less flexible and maintainable code.
-
 Additionally, because static members maintain state between calls, they can introduce **unexpected side effects** that can make your code **harder to reason about and test**.
-
-Use static members carefully and remember that there always exists an actually object oriented design that meets your needs.
+Static fields are essentially 'global state'.
+Use static members carefully and remember that there always exists an actually object oriented design that meets your needs. You don't need `static`.
 ```
 
 A static field can also be useful when you want to keep track of data relevant to all instances of a class. For example, if you wanted to keep track of the total number of players in a game, a static field could be used.
