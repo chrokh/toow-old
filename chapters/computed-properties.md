@@ -37,7 +37,19 @@ public class Rectangle
 }
 ```
 
-In this example, `Area` is a computed property. It doesn't store a value itself. Instead, when it's accessed, it calculates the value by multiplying `Length` by `Width` and returns the result. Here's how you could use the `Area` property:
+In this example, `Area` is a computed property. It doesn't store a value itself. Instead, when it's accessed, it calculates the value by multiplying `Length` by `Width` and returns the result.
+Note that if a property only has a `get` accessor whose implementation is a single expression we can simplify by omitting the curly brackets and the `get` keyword. Like this:
+
+```{code-cell}
+public class Rectangle
+{
+    public double Length { get; set; }
+    public double Width { get; set; }
+    public double Area => Length * Width; // Simplified.
+}
+```
+
+Here's how you could use the `Area` property:
 
 ```{code-cell}
 var rectangle = new Rectangle { Length = 5.0, Width = 4.0 };
