@@ -11,6 +11,7 @@
 - It's not mentioned in Instance Methods chapter that an instance method can call another instance method.
 - Examples of instance methods that you can call on objects. From .NET.
 - String methods such as IndexOf, Substring, etc. Must have talked about overloading before. Should this simply be a chapter on reading the documentation of classes?
+- .NET Framework Class Library (FCL). Mentioned in [static methods](static-methods).
 - When to introduce the meaning of "keyword"? Introduced in syntax chapter no?
 - DRY? Before functions? After iteration?
 - When to discuss that variables are [initialized to default value](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/variables)?
@@ -23,6 +24,18 @@
 - Semantics
 - Paradigm
 - Encapsulate what varies. (Not discussed in encapsulation chapter. Also note that chapter on Auto-implemented properties say that we will discuss why properties don't always grant sufficient encapsulation. Deal with in same chapter?)
+- Parallell between subroutine/procedure and static methods? Procedural programming.
+- Method signatures not discussed in chapter on static methods.
+%- Method signature (includes return type in the context of [delegates](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/delegates/), but not in the context of overloading).
+- Early returns. Could be its own chapter? E.g. searching in arrays.
+- Methods are usually verbs. Mention first in local functions chapter?
+- Documentation comments.
+- Show compiler errors when:
+    - calling non-existant method.
+    - calling with wrong number of arguments.
+    - calling with incorrect type of arguments.
+    - using returned value as wrong type.
+- Is string interpolation syntactic sugar for `String.Format`? If so then mention this example in static methods chapter.
 
 # TODO
 
