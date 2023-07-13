@@ -25,7 +25,7 @@ Sometimes, we need to perform operations that don't rely on the state of an indi
 
 
 ```{warning}
-Remember that using static is counter to the core ideas in object oriented programming, like subtype polymorphism, which can make your code less flexible and maintainable. Because static methods don't work on instances, they can't be overridden or used polymorphically. Use static methods judiciously and remember that there's always an object oriented design that could meet your needs.
+Remember that using static is counter to the core ideas in object oriented programming, like subtype polymorphism, and can make your code less flexible and maintainable. Because static methods don't work on instances, they can't be overridden or used polymorphically. Use static methods judiciously and remember that there's always an object oriented design that could meet your needs.
 ```
 
 %{warning}
