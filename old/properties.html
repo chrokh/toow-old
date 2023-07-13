@@ -215,10 +215,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapters/init-only-properties.html">48. Init-only properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/instance-method-overloading.html">49. Instance method overloading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/constructor-overloading.html">50. Constructor overloading</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapters/static-classes.html">51. Static classes (Modules)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapters/static-methods.html">52. Static methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapters/static-fields.html">53. Static fields</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapters/static-constructors.html">54. Static constructors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/static-fields.html">51. Static fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/static-constructors.html">52. Static constructors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/static-methods.html">53. Static methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/static-classes.html">54. Static classes (Modules)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/extension-methods.html">55. Extension methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/object-composition.html">56. Object composition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/concrete-constructed-object-composition.html">57. Concrete constructed object composition</a></li>
@@ -352,7 +352,7 @@ It would look something like the code below.</p>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-5896.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-6083.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -397,12 +397,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.30:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.1.137:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '5896.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '6083.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -1172,6 +1172,24 @@ Why does it crash?</p>
 <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">circ</span><span class="p">.</span><span class="n">Radius</span><span class="p">);</span>
 </pre></div>
 </div>
+</section>
+</div>
+<div class="exercise admonition" id="ex:properties:square">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>Write a class called <code class="docutils literal notranslate"><span class="pre">Square</span></code> and give it the properties <code class="docutils literal notranslate"><span class="pre">Width</span></code>, <code class="docutils literal notranslate"><span class="pre">Height</span></code>, <code class="docutils literal notranslate"><span class="pre">Area</span></code>, <code class="docutils literal notranslate"><span class="pre">Perimeter</span></code>, and <code class="docutils literal notranslate"><span class="pre">Side</span></code>.
+All the properties should have <code class="docutils literal notranslate"><span class="pre">get</span></code> and <code class="docutils literal notranslate"><span class="pre">set</span></code> accessors.</p>
+<p>Remember to make use of calculated properties to avoid allowing a <code class="docutils literal notranslate"><span class="pre">set</span></code> accessor put an object of type <code class="docutils literal notranslate"><span class="pre">Square</span></code> in a state which violates the rules of a square (namely that all sides are the same length).</p>
+</section>
+</div>
+<div class="exercise admonition" id="ex:properties:equilateral-triangle">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>Write a class called <code class="docutils literal notranslate"><span class="pre">EquilateralTriangle</span></code> and give it the properties <code class="docutils literal notranslate"><span class="pre">Width</span></code>, <code class="docutils literal notranslate"><span class="pre">Height</span></code>, <code class="docutils literal notranslate"><span class="pre">Area</span></code>, <code class="docutils literal notranslate"><span class="pre">Perimeter</span></code>, and <code class="docutils literal notranslate"><span class="pre">Side</span></code>.</p>
+<p>When computing the width and height of a triangle, you can assume that one of the sides are perfectly parallel with the x-axis.</p>
+<p>Remember to make use of calculated properties to avoid allowing a <code class="docutils literal notranslate"><span class="pre">set</span></code> accessor put an object of type <code class="docutils literal notranslate"><span class="pre">Square</span></code> in a state which violates the rules of a square (namely that all sides are the same length).</p>
 </section>
 </div>
 <div class="exercise admonition" id="old/properties-exercise-8">

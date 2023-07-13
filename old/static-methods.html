@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Method composition - The Object Oriented Way</title>
+        <title>Static methods - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -141,7 +141,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -299,18 +299,36 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="method-composition">
-<h1>Method composition<a class="headerlink" href="#method-composition" title="Permalink to this heading">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
-</div>
+          <section class="tex2jax_ignore mathjax_ignore" id="static-methods">
+<h1>Static methods<a class="headerlink" href="#static-methods" title="Permalink to this heading">#</a></h1>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
+<section id="reverse-cipher">
+<span id="static-methods-examples-reverse"></span><h3>Reverse cipher<a class="headerlink" href="#reverse-cipher" title="Permalink to this heading">#</a></h3>
+<p>In the chapter on <span class="xref myst">methods</span> we wrote a local function that implemented the reverse cipher.
+Let’s now wrap that code in a public static method defined in a static class.</p>
+<p>Now that we’ve enclosed the method in a static class with a descriptive name, there’s no need anymore to include the name of the cipher (“reverse”) in the method name.
+So, let’s just call the method <code class="docutils literal notranslate"><span class="pre">Encode</span></code>.
+Does it work?
+Yes, it does.</p>
+</section>
+<section id="robber-s-cipher">
+<span id="static-methods-example-robbers"></span><span id="static-methods-examples-robbers"></span><h3>Robber’s cipher<a class="headerlink" href="#robber-s-cipher" title="Permalink to this heading">#</a></h3>
+<p>Let’s now do the same thing to the Robber’s cipher that we wrote in the chapter on <span class="xref myst">methods</span>.
+However, remember that we refactored that method so that the method that encoded input strings called another method that knows how to convert any single character.
+Let’s do the same thing here.</p>
+<p>We’ll create a static class called <code class="docutils literal notranslate"><span class="pre">RobbersCipher</span></code> and we’ll add two public static methods called <code class="docutils literal notranslate"><span class="pre">EncodeChar</span></code> and <code class="docutils literal notranslate"><span class="pre">EncodeString</span></code>.
+If you’re annoyed by these names, then don’t worry, we’ll simplify this when we get to <span class="xref myst">overloading</span>.</p>
+<p>Let’s test the method that encodes single characters to ensure that it still works.</p>
+<p>And then let’s test the method that encodes full strings to ensure that it also still works.</p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -357,8 +375,31 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Static methods</a><ul>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#reverse-cipher">Reverse cipher</a></li>
+<li><a class="reference internal" href="#robber-s-cipher">Robber’s cipher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

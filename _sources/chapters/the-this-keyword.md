@@ -12,7 +12,7 @@ kernelspec:
 
 # The `this` keyword
 
-As we navigate the realm of object-oriented programming in C#, we encounter scenarios where we need a way to refer to the current instance of a class. The `this` keyword serves this purpose, providing a clear and unambiguous way to access the current object's members, enhancing code readability and maintainability.
+As we navigate the realm of object oriented programming in C#, we encounter scenarios where we need a way to refer to the current instance of a class. The `this` keyword serves this purpose, providing a clear and unambiguous way to access the current object's members, enhancing code readability and maintainability.
 
 The `this` keyword in C#, refers to the current instance of the class. It is used inside the class's methods and properties to refer to the fields, methods, or properties of the class.
 

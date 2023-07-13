@@ -215,10 +215,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapters/init-only-properties.html">48. Init-only properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/instance-method-overloading.html">49. Instance method overloading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/constructor-overloading.html">50. Constructor overloading</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapters/static-classes.html">51. Static classes (Modules)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapters/static-methods.html">52. Static methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapters/static-fields.html">53. Static fields</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapters/static-constructors.html">54. Static constructors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/static-fields.html">51. Static fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/static-constructors.html">52. Static constructors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/static-methods.html">53. Static methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapters/static-classes.html">54. Static classes (Modules)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/extension-methods.html">55. Extension methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/object-composition.html">56. Object composition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/concrete-constructed-object-composition.html">57. Concrete constructed object composition</a></li>
@@ -317,7 +317,7 @@ Data is, what we call, an “implementation detail” that should be <code class
 </section>
 <section id="definition">
 <h2>Definition<a class="headerlink" href="#definition" title="Permalink to this heading">#</a></h2>
-<p>We use access modifiers to modify the accessibility of static and instance <a class="reference internal" href="fields.html"><span class="doc std std-doc">fields</span></a>, static and instance <a class="reference internal" href="properties.html"><span class="doc std std-doc">properties</span></a> as well as and <span class="xref myst">static</span> and <a class="reference internal" href="instance-methods.html"><span class="doc std std-doc">instance methods</span></a>.
+<p>We use access modifiers to modify the accessibility of static and instance <a class="reference internal" href="fields.html"><span class="doc std std-doc">fields</span></a>, static and instance <a class="reference internal" href="properties.html"><span class="doc std std-doc">properties</span></a> as well as and <a class="reference internal" href="static-methods.html"><span class="doc std std-doc">static</span></a> and <a class="reference internal" href="instance-methods.html"><span class="doc std std-doc">instance methods</span></a>.
 Accessibility is also sometimes referred to as “visibility” or “protection level”.
 The accessibility level essentially determines whether or not we can access something from outside of it.</p>
 <p>We’ll talk about access modifiers in relation to the class members fields and methods in this chapter.
@@ -341,7 +341,7 @@ We’ll talk more about this caveat in the examples section of this chapter.</p>
 <h3>Methods<a class="headerlink" href="#methods" title="Permalink to this heading">#</a></h3>
 <p>Let’s talk about methods first since its easier.
 To change the accessibility of an <a class="reference internal" href="instance-methods.html"><span class="doc std std-doc">instance method</span></a> we simply add an access modifier before the data type in our type signature.
-In the case of <span class="xref myst">static methods</span> we simply add an access modifier before the <code class="docutils literal notranslate"><span class="pre">static</span></code> keyword.</p>
+In the case of <a class="reference internal" href="static-methods.html"><span class="doc std std-doc">static methods</span></a> we simply add an access modifier before the <code class="docutils literal notranslate"><span class="pre">static</span></code> keyword.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">class</span><span class="o">-</span><span class="n">identifier</span><span class="o">&gt;</span>
 <span class="p">{</span>
   <span class="o">&lt;</span><span class="n">access</span><span class="o">-</span><span class="n">modifier</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">static</span><span class="p">]</span> <span class="o">&lt;</span><span class="k">return</span><span class="o">-</span><span class="nb">type</span><span class="o">&gt;</span> <span class="p">([</span><span class="o">&lt;</span><span class="n">param1</span><span class="o">-</span><span class="nb">type</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">param1</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span>
@@ -371,7 +371,7 @@ In the case of <span class="xref myst">static methods</span> we simply add an ac
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-5678.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-5851.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -416,12 +416,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.30:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.1.137:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '5678.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '5851.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`

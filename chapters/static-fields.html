@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="54. Static constructors" href="static-constructors.html" /><link rel="prev" title="52. Static methods" href="static-methods.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="52. Static constructors" href="static-constructors.html" /><link rel="prev" title="50. Constructor overloading" href="constructor-overloading.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>53. Static fields - The Object Oriented Way</title>
+        <title>51. Static fields - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -215,10 +215,10 @@
 <li class="toctree-l1"><a class="reference internal" href="init-only-properties.html">48. Init-only properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="instance-method-overloading.html">49. Instance method overloading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constructor-overloading.html">50. Constructor overloading</a></li>
-<li class="toctree-l1"><a class="reference internal" href="static-classes.html">51. Static classes (Modules)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="static-methods.html">52. Static methods</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">53. Static fields</a></li>
-<li class="toctree-l1"><a class="reference internal" href="static-constructors.html">54. Static constructors</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">51. Static fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static-constructors.html">52. Static constructors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static-methods.html">53. Static methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static-classes.html">54. Static classes (Modules)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="extension-methods.html">55. Extension methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="object-composition.html">56. Object composition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="concrete-constructed-object-composition.html">57. Concrete constructed object composition</a></li>
@@ -306,11 +306,226 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="static-fields">
-<h1><span class="section-number">53. </span>Static fields<a class="headerlink" href="#static-fields" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">51. </span>Static fields<a class="headerlink" href="#static-fields" title="Permalink to this heading">#</a></h1>
+<p>In object-oriented languages, we usually manage state through instance fields. However, many of these languages also support a (non-object oriented) feature known as ‘static’. In C#, we have ‘static members’ and ‘static classes’, which we will discuss in the upcoming chapters. In this chapter, we will focus on static fields. Unlike instance fields, where each instance of a class has its own copy, a static field is shared across all instances of the class.</p>
+<p>A static field in C# belongs to the class itself, not to any specific instance of the class. That means all instances of the class share the same static field. A change in the value of a static field is reflected across all instances of the class.</p>
+<p>This makes static fields useful for representing data that should be shared among all instances. Let’s consider an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">GameSettings</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">800</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">600</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-5192.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.1.137:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '5192.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>In the above example, <code class="docutils literal notranslate"><span class="pre">GameSettings</span></code> is used to hold configuration data for a game, such as the number of rows and cols in a grid-based game. By marking these fields as <code class="docutils literal notranslate"><span class="pre">static</span></code>, we can access these settings from anywhere in our game code without needing to create an instance of <code class="docutils literal notranslate"><span class="pre">GameSettings</span></code>.</p>
+<p>To access a static field, you use the class name (<code class="docutils literal notranslate"><span class="pre">GameSettings</span></code>), followed by the dot operator (<code class="docutils literal notranslate"><span class="pre">.</span></code>), followed by the static field name (<code class="docutils literal notranslate"><span class="pre">Rows</span></code>, <code class="docutils literal notranslate"><span class="pre">Cols</span></code>). You don’t need to create an instance of the class to access a static field, which makes them especially convenient for shared data like these game settings.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">GameSettings</span><span class="p">.</span><span class="n">Rows</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>800
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since our fields are not <code class="docutils literal notranslate"><span class="pre">readonly</span></code> we could of course also set their values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">GameSettings</span><span class="p">.</span><span class="n">Rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">;</span>
+<span class="n">GameSettings</span><span class="p">.</span><span class="n">Cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s say we’re writing the part of our game that prints an empty game board.  Here’s how we might use our static fields:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Setting the game settings</span>
+<span class="n">GameSettings</span><span class="p">.</span><span class="n">Rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">;</span>
+<span class="n">GameSettings</span><span class="p">.</span><span class="n">Cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">;</span>
+
+<span class="c1">// Initialize the game grid</span>
+<span class="kt">string</span><span class="w"> </span><span class="n">gameGrid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">GameSettings</span><span class="p">.</span><span class="n">Rows</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">GameSettings</span><span class="p">.</span><span class="n">Cols</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">gameGrid</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">&quot;* &quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">gameGrid</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">gameGrid</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>* * * * 
+* * * * 
+* * * * 
+* * * * 
+</pre></div>
+</div>
+</div>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
+<p>While the static keyword might seem like a simple solution in the short-term, it often leads to code that is <strong>harder to test and maintain</strong> in the long run. By using static, you depart from the core ideas in object oriented programming, like subtype polymorphism. This leads to less flexible and maintainable code.
+Additionally, because static members maintain state between calls, they can introduce <strong>unexpected side effects</strong> that can make your code <strong>harder to reason about and test</strong>.
+Static fields are essentially ‘global state’.
+Use static members carefully and remember that there always exists an actually object oriented design that meets your needs. You don’t need <code class="docutils literal notranslate"><span class="pre">static</span></code>.</p>
 </div>
+<p>A static field can also be useful when you want to keep track of data relevant to all instances of a class. For example, if you wanted to keep track of the total number of players in a game, a static field could be used.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Player</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">PlayerCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Player</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">PlayerCount</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this example, each time a new <code class="docutils literal notranslate"><span class="pre">Player</span></code> is created, the constructor increments the <code class="docutils literal notranslate"><span class="pre">PlayerCount</span></code> static field. Since <code class="docutils literal notranslate"><span class="pre">PlayerCount</span></code> is a static field, this count is maintained across all instances of the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class, giving us a running total of how many <code class="docutils literal notranslate"><span class="pre">Player</span></code> objects have been created.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">new</span><span class="w"> </span><span class="nf">Player</span><span class="p">();</span>
+<span class="k">new</span><span class="w"> </span><span class="nf">Player</span><span class="p">();</span>
+<span class="k">new</span><span class="w"> </span><span class="nf">Player</span><span class="p">();</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">Player</span><span class="p">.</span><span class="n">PlayerCount</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<p>Remember, static fields have their values shared across all instances of the class. This makes them incredibly powerful for certain use cases, but it also means you need to be careful when using them. Misusing static fields can lead to problems in your code due to unexpected sharing of state across instances.
+We will discuss the benefits of not using static later.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -322,16 +537,16 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            name: "python3",
+            name: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
         </article>
       </div>
       <footer>
@@ -342,18 +557,18 @@
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">54. </span>Static constructors</div>
+                <div class="title"><span class="section-number">52. </span>Static constructors</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="static-methods.html">
+          <a class="prev-page" href="constructor-overloading.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">52. </span>Static methods</div>
+                <div class="title"><span class="section-number">50. </span>Constructor overloading</div>
                 
               </div>
             </a>

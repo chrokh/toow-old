@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="53. Static fields" href="static-fields.html" /><link rel="prev" title="51. Static classes (Modules)" href="static-classes.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="54. Static classes (Modules)" href="static-classes.html" /><link rel="prev" title="52. Static constructors" href="static-constructors.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>52. Static methods - The Object Oriented Way</title>
+        <title>53. Static methods - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -141,7 +141,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -215,10 +215,10 @@
 <li class="toctree-l1"><a class="reference internal" href="init-only-properties.html">48. Init-only properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="instance-method-overloading.html">49. Instance method overloading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constructor-overloading.html">50. Constructor overloading</a></li>
-<li class="toctree-l1"><a class="reference internal" href="static-classes.html">51. Static classes (Modules)</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">52. Static methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="static-fields.html">53. Static fields</a></li>
-<li class="toctree-l1"><a class="reference internal" href="static-constructors.html">54. Static constructors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static-fields.html">51. Static fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static-constructors.html">52. Static constructors</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">53. Static methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static-classes.html">54. Static classes (Modules)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="extension-methods.html">55. Extension methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="object-composition.html">56. Object composition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="concrete-constructed-object-composition.html">57. Concrete constructed object composition</a></li>
@@ -299,43 +299,30 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="static-methods">
-<span id="blocks"></span><h1><span class="section-number">52. </span>Static methods<a class="headerlink" href="#static-methods" title="Permalink to this heading">#</a></h1>
+<span id="blocks"></span><h1><span class="section-number">53. </span>Static methods<a class="headerlink" href="#static-methods" title="Permalink to this heading">#</a></h1>
+<p>Sometimes, we need to perform operations that don’t rely on the state of an individual object but that are universally applicable. Static methods fulfill this role. Like static fields and static constructors they belong to the class itself, not any individual object of that class. This means we can call them without creating an instance of the class.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
+<p>Remember that using static is counter to the core ideas in object oriented programming, like subtype polymorphism, which can make your code less flexible and maintainable. Because static methods don’t work on instances, they can’t be overridden or used polymorphically. Use static methods judiciously and remember that there’s always an object oriented design that could meet your needs.</p>
 </div>
-<section id="examples">
-<h2><span class="section-number">52.1. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<section id="reverse-cipher">
-<span id="static-methods-examples-reverse"></span><h3><span class="section-number">52.1.1. </span>Reverse cipher<a class="headerlink" href="#reverse-cipher" title="Permalink to this heading">#</a></h3>
-<p>In the chapter on <span class="xref myst">methods</span> we wrote a local function that implemented the reverse cipher.
-Let’s now wrap that code in a public static method defined in a static class.</p>
+<p>You’ve actually already been using static methods throughout this book without necessarily realizing it. The <code class="docutils literal notranslate"><span class="pre">Console.WriteLine</span> <span class="pre">method</span></code>, which we’ve used for outputting information to the console, is a static method. Here’s a quick reminder of its use:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ReverseCipher</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="n">input</span><span class="p">.</span><span class="n">Length</span><span class="o">-</span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&gt;=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">--</span><span class="p">)</span>
-<span class="w">      </span><span class="n">output</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-5070.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-5248.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -380,12 +367,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.30:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.1.137:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '5070.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '5248.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -439,194 +426,118 @@ else {
 }
 
     </script>
-</div></div></div>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, World!
+</pre></div>
 </div>
-<p>Now that we’ve enclosed the method in a static class with a descriptive name, there’s no need anymore to include the name of the cipher (“reverse”) in the method name.
-So, let’s just call the method <code class="docutils literal notranslate"><span class="pre">Encode</span></code>.
-Does it work?
-Yes, it does.</p>
+</div>
+</div>
+<p>In this case, <code class="docutils literal notranslate"><span class="pre">WriteLine</span></code> is a static method belonging to the <code class="docutils literal notranslate"><span class="pre">Console</span></code> class. We don’t have to create an instance of <code class="docutils literal notranslate"><span class="pre">Console</span></code> to use <code class="docutils literal notranslate"><span class="pre">WriteLine</span></code>; instead, we call it directly on the class.</p>
+<p>The .NET Framework Class Library (FCL) provides a large number of useful static methods that you can use in your applications. For instance, the <code class="docutils literal notranslate"><span class="pre">Math</span></code> class, which provides methods and constants for trigonometric, logarithmic, and other mathematical functions. The <code class="docutils literal notranslate"><span class="pre">Pow</span></code> method is one example of a static method from this class. It raises a specified number to the power of another specified number:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span>
-<span class="w">  </span><span class="n">ReverseCipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;detneiro tcejbo ton&quot;</span><span class="p">));</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="n">Pow</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">);</span><span class="w">  </span><span class="c1">// Computes: 2 ^ 3</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>not object oriented
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="robber-s-cipher">
-<span id="static-methods-example-robbers"></span><span id="static-methods-examples-robbers"></span><h3><span class="section-number">52.1.2. </span>Robber’s cipher<a class="headerlink" href="#robber-s-cipher" title="Permalink to this heading">#</a></h3>
-<p>Let’s now do the same thing to the Robber’s cipher that we wrote in the chapter on <span class="xref myst">methods</span>.
-However, remember that we refactored that method so that the method that encoded input strings called another method that knows how to convert any single character.
-Let’s do the same thing here.</p>
-<p>We’ll create a static class called <code class="docutils literal notranslate"><span class="pre">RobbersCipher</span></code> and we’ll add two public static methods called <code class="docutils literal notranslate"><span class="pre">EncodeChar</span></code> and <code class="docutils literal notranslate"><span class="pre">EncodeString</span></code>.
-If you’re annoyed by these names, then don’t worry, we’ll simplify this when we get to <a class="reference internal" href="overloading.html"><span class="doc std std-doc">overloading</span></a>.</p>
+<p>In this code, <code class="docutils literal notranslate"><span class="pre">Math.Pow</span></code> is a static method that takes two arguments: the base and the exponent. It calculates the base raised to the power of the exponent and returns the result. In this case it calculates <code class="docutils literal notranslate"><span class="pre">2</span></code> to the power of <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p>
+<p>Here’s another static method that you’ve proabbly been using without realizing it. The <a class="reference internal" href="syntactic-sugar.html#string-interpolation"><span class="std std-ref">string interpolation</span></a> feature in C# is essentially syntactic sugar for a static method call to <code class="docutils literal notranslate"><span class="pre">String.Format</span></code>. You might write code like:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">RobbersCipher</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;world&quot;</span><span class="p">;</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Hello, {msg}!&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, world!
+</pre></div>
+</div>
+</div>
+</div>
+<p>What’s actually happening under the hood is something akin to:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;world&quot;</span><span class="p">;</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;Hello, {0}!&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, world!
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, static methods are a key part of C# and .NET, and they allow us to use functionality without needing to instantiate an object.
+The key takeaway is that static methods are a fundamental part of the .NET library and are used in many places, even when it might not be immediately obvious.</p>
+<p>Let’s now also write our own static method.
+Consider a simple game where players can score points. We might want to provide a way to calculate the average score across all players. This operation doesn’t depend on a particular player’s state, but rather on a static field representing the total points and total number of players.</p>
+<p>Here’s an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Player</span>
 <span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">EncodeChar</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">vowel</span><span class="p">)</span>
-<span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="sc">&#39;B&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;b&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;C&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;c&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;D&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;d&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;F&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;f&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;G&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;g&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;H&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;h&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;J&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;j&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;K&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;k&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;L&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;l&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;M&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;m&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;N&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;n&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;P&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;p&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;Q&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;q&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;R&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;r&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;S&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;s&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;t&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;V&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;v&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;W&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;w&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;X&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;x&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;Y&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;y&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;Z&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;z&#39;</span>
-<span class="w">      </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">$&quot;{input}{vowel}{input}&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">$&quot;{input}&quot;</span>
-<span class="w">  </span><span class="p">};</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Score</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">EncodeString</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">vowel</span><span class="p">)</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">letter</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
-<span class="w">      </span><span class="n">output</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">EncodeChar</span><span class="w"> </span><span class="p">(</span><span class="n">letter</span><span class="p">,</span><span class="w"> </span><span class="n">vowel</span><span class="p">);</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">totalScore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">totalPlayers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Player</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">        </span><span class="n">totalPlayers</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">AddScore</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">score</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Score</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">score</span><span class="p">;</span>
+<span class="w">        </span><span class="n">totalScore</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">score</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="nf">AverageScore</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">totalPlayers</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="nf">return</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">totalScore</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">totalPlayers</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Let’s test the method that encodes single characters to ensure that it still works.</p>
+<p>In this example, we have a static method called <code class="docutils literal notranslate"><span class="pre">AverageScore</span></code> that calculates and returns the average score of all players. Notice that it doesn’t make sense to tie this method to a specific Player instance, as the operation pertains to all players.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">RobbersCipher</span><span class="p">.</span><span class="n">EncodeChar</span><span class="p">(</span><span class="sc">&#39;d&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="p">));</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">player1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Player</span><span class="p">(</span><span class="s">&quot;Alice&quot;</span><span class="p">);</span>
+<span class="n">player1</span><span class="p">.</span><span class="n">AddScore</span><span class="p">(</span><span class="m">100</span><span class="p">);</span>
+
+<span class="kt">var</span><span class="w"> </span><span class="n">player2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Player</span><span class="p">(</span><span class="s">&quot;Bob&quot;</span><span class="p">);</span>
+<span class="n">player2</span><span class="p">.</span><span class="n">AddScore</span><span class="p">(</span><span class="m">200</span><span class="p">);</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">Player</span><span class="p">.</span><span class="n">AverageScore</span><span class="p">());</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dad
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>150
 </pre></div>
 </div>
 </div>
 </div>
-<p>And then let’s test the method that encodes full strings to ensure that it also still works.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">RobbersCipher</span><span class="p">.</span><span class="n">EncodeString</span><span class="p">(</span><span class="s">&quot;bird&quot;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;o&#39;</span><span class="p">));</span>
-</pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Although it might be tempting to use static methods to perform operations that aren’t tied to specific instances, remember that these operations can still be modeled using an object oriented approach. In our <code class="docutils literal notranslate"><span class="pre">Player</span></code> example, we could create a <code class="docutils literal notranslate"><span class="pre">Game</span></code> class that keeps track of all <code class="docutils literal notranslate"><span class="pre">Player</span></code> instances. The <code class="docutils literal notranslate"><span class="pre">GetTotalScore</span></code> method could then be a part of the <code class="docutils literal notranslate"><span class="pre">Game</span></code> class, accessing the <code class="docutils literal notranslate"><span class="pre">Score</span></code> of each <code class="docutils literal notranslate"><span class="pre">Player</span></code> to compute the total. This approach adheres more closely to object oriented principles and can offer greater flexibility and maintainability in the long run.</p>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bobirordod
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="exercises">
-<h2><span class="section-number">52.2. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
-<div class="exercise admonition" id="chapters/static-methods-exercise-0">
-
-<p class="admonition-title"><span class="caption-number">Exercise 52.1 </span></p>
-<section id="exercise-content">
-<p>Why are static methods useful?</p>
-</section>
-</div>
-<div class="exercise admonition" id="chapters/static-methods-exercise-1">
-
-<p class="admonition-title"><span class="caption-number">Exercise 52.2 </span></p>
-<section id="exercise-content">
-<p>In C#, what is the difference between a <em>static method</em> and a <em>local function</em>?</p>
-</section>
-</div>
-<div class="exercise admonition" id="ex:static-methods-leet">
-
-<p class="admonition-title"><span class="caption-number">Exercise 52.3 </span></p>
-<section id="exercise-content">
-<p>Create a static class called <code class="docutils literal notranslate"><span class="pre">LeetCipher</span></code> and let it contain two static methods called <code class="docutils literal notranslate"><span class="pre">EncodeString</span></code> and <code class="docutils literal notranslate"><span class="pre">EncodeChar</span></code>.
-These methods should essentially contain the code that we wrote in <code class="xref std std-numref docutils literal notranslate"><span class="pre">ex:methods-leet</span></code>.
-In other words, the static methods should implement the leet language and be able to convert strings and individual characters.
-Your static methods should behave according to the usage example below.</p>
-<div class="cell tag_remove-input docutils container">
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">LeetCipher</span><span class="p">.</span><span class="n">EncodeString</span><span class="p">(</span><span class="s">&quot;LEET 101&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1337 LOL
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">LeetCipher</span><span class="p">.</span><span class="n">EncodeChar</span><span class="p">(</span><span class="sc">&#39;E&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</div>
-<div class="exercise admonition" id="ex:static-methods-substitutions">
-
-<p class="admonition-title"><span class="caption-number">Exercise 52.4 </span></p>
-<section id="exercise-content">
-<p>In the chapter on <span class="xref myst">methods</span> we either wrote or discussed the possibility to write four different methods for applying arrays of substitutions to a character or string.
-Let’s now throw them all in a static class that we’ll call <code class="docutils literal notranslate"><span class="pre">SubstitutionCipher</span></code>.</p>
-<p>While we’re at it, we’ll also give them new names that hopefully make it a tad easier to see what method does what.
-If these names drive you crazy then rest assured that we will deal with this when we get to the chapter on <a class="reference internal" href="overloading.html"><span class="doc std std-doc">overloading</span></a>.</p>
-<div class="cell tag_remove-input docutils container">
-</div>
-<p>Implement a static class that looks like this:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">SubstitutionCipher</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="nf">EncodeCharWithCharReplacements</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="p">)[]</span><span class="w"> </span><span class="n">substitutions</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="c1">// ..</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">EncodeCharWithStringReplacements</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="p">)[]</span><span class="w"> </span><span class="n">substitutions</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="c1">// ..</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">EncodeStringWithCharReplacements</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="p">)[]</span><span class="w"> </span><span class="n">substitutions</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="c1">// ..</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">EncodeStringWithStringReplacements</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="p">)[]</span><span class="w"> </span><span class="n">substitutions</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="c1">// ..</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>The static methods of the static class should behave like this:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">leetLike</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="p">)[]</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="p">(</span><span class="sc">&#39;E&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;3&#39;</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="sc">&#39;L&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;1&#39;</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="sc">&#39;O&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
-<span class="kt">var</span><span class="w"> </span><span class="n">robbersLike</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="p">)[]</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="p">(</span><span class="sc">&#39;H&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;HOH&quot;</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="sc">&#39;L&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;LOL&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
-
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">SubstitutionCipher</span><span class="p">.</span><span class="n">EncodeCharWithCharReplacements</span><span class="p">(</span><span class="sc">&#39;L&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">leetLike</span><span class="p">));</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">SubstitutionCipher</span><span class="p">.</span><span class="n">EncodeCharWithStringReplacements</span><span class="p">(</span><span class="sc">&#39;L&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">robbersLike</span><span class="p">));</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">SubstitutionCipher</span><span class="p">.</span><span class="n">EncodeStringWithCharReplacements</span><span class="p">(</span><span class="s">&quot;HELLO&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">leetLike</span><span class="p">));</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">SubstitutionCipher</span><span class="p">.</span><span class="n">EncodeStringWithStringReplacements</span><span class="p">(</span><span class="s">&quot;HELLO&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">robbersLike</span><span class="p">));</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LOL
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>H3110
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HOHELOLLOLO
-</pre></div>
-</div>
-</div>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>We also wrote a method called <code class="docutils literal notranslate"><span class="pre">charCharArrayToCharStringArray</span></code> in <code class="xref std std-numref docutils literal notranslate"><span class="pre">ex:methods-charchar-to-charstring</span></code>.
-Feel free to choose whether to add this as another method to this static class, to inline that code in the appropriate method above, or simply to use more duplication.</p>
-</div>
-</section>
-</div>
-</section>
+<hr class="docutils" />
 </section>
 
     <script type="text/x-thebe-config">
@@ -653,23 +564,23 @@ Feel free to choose whether to add this as another method to this static class, 
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="static-fields.html">
+          <a class="next-page" href="static-classes.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">53. </span>Static fields</div>
+                <div class="title"><span class="section-number">54. </span>Static classes (Modules)</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="static-classes.html">
+          <a class="prev-page" href="static-constructors.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">51. </span>Static classes (Modules)</div>
+                <div class="title"><span class="section-number">52. </span>Static constructors</div>
                 
               </div>
             </a>
@@ -691,32 +602,8 @@ Feel free to choose whether to add this as another method to this static class, 
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">52. Static methods</a><ul>
-<li><a class="reference internal" href="#examples">52.1. Examples</a><ul>
-<li><a class="reference internal" href="#reverse-cipher">52.1.1. Reverse cipher</a></li>
-<li><a class="reference internal" href="#robber-s-cipher">52.1.2. Robber’s cipher</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#exercises">52.2. Exercises</a></li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>

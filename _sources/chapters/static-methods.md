@@ -13,46 +13,121 @@ kernelspec:
 (blocks)=
 # Static methods
 
+Sometimes, we need to perform operations that don't rely on the state of an individual object but that are universally applicable. Static methods fulfill this role. Like static fields and static constructors they belong to the class itself, not any individual object of that class. This means we can call them without creating an instance of the class.
+
+%This chapter introduces static methods and how to define and use them in your C# programs.
+
+%In the previous chapter, we learned about static constructors and how they are used to initialize static fields when a class is first accessed. Now, we're going to examine another feature that uses the static keyword: static methods.
+
+%A static method is a method that belongs to the class itself rather than any object of the class. Static methods are usually used to perform operations that are independent of object state.
+
+%Static methods can only access static members, as they don't have an instance of the class to reference. This can be beneficial for creating utility functions that don't need to operate on instances of classes.
+
+
 ```{warning}
-Work in progress.
+Remember that using static is counter to the core ideas in object oriented programming, like subtype polymorphism, which can make your code less flexible and maintainable. Because static methods don't work on instances, they can't be overridden or used polymorphically. Use static methods judiciously and remember that there's always an object oriented design that could meet your needs.
 ```
 
-% TODO: Dot notation must be explained here. Take text from fields chapter.
+%{warning}
+%While the static keyword might seem like a simple solution in the short-term, it often leads to code that is **harder to test and maintain** in the long run. By using static, you depart from the core ideas in object oriented programming, like subtype polymorphism. This leads to less flexible and maintainable code.
+%Additionally, because static members maintain state between calls, they can introduce **unexpected side effects** that can make your code **harder to reason about and test**.
+%Static fields are essentially 'global state'.
+%Use static members carefully and remember that there always exists an actually object oriented design that meets your needs. You don't need `static`.
 
-%TODO: SIMPLE SUBSTITUTION CIPHERS.
+You've actually already been using static methods throughout this book without necessarily realizing it. The `Console.WriteLine method`, which we've used for outputting information to the console, is a static method. Here's a quick reminder of its use:
 
-%- Example: LEET language. Convert L<=>7 to allow reversibility.
+```{code-cell}
+Console.WriteLine("Hello, World!");
+```
 
-%- Subroutine on Wikipedia
-%- Procedure, hence Procedural programming paradigm.
-%- Static methods in C\#
-%- Method signature (includes return type in the context of [delegates](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/delegates/), but not in the context of overloading).
-%- Parameters/arguments
-%- Return type and value
-%  - In mathematics we say that a function "maps" a certain argument to a certain value, or in other words, a certain input to a certain output. In the imperative programming paradigm however we say that a method "returns" a value. When we define a method we must define what it's, so called, "return type" is. Meaning what the data type is of the values that it returns when we call it.
-%In mathematics we say that a function "maps" a certain argument to a certain value, or in other words, a certain input to a certain output.
-%In the imperative programming paradigm however we say that a method "returns" a value 
-%- Early returns. For example when searching in arrays.
-%- Verbs or implicit verbs where Name would usually get or set name.
-%- Void (a return type)
-%- Parameterization
-%- Documentation comments.
-%- Types of methods
-%  - `WriteLine : String -> void`
-%  - Refer back to [type-checking](type-checking) chapter.
-%  - Show compiler errors when:
-%    - calling non-existant method.
-%    - calling with wrong number of arguments.
-%    - calling with incorrect type of arguments.
-%    - using returned value as wrong type.
-%- Is string interpolation syntactic sugar for `String.Format`?
-%- Exercises
-%  - Write a method that greets a name that you pass.
-%  - Write a method that computes the hypothenuse.
-%  - Write a method that converts a `string?` to a `string`. Tie back to the nullable discussion in the chapter on [data types](data-types).
-%
-%---
-%
+In this case, `WriteLine` is a static method belonging to the `Console` class. We don't have to create an instance of `Console` to use `WriteLine`; instead, we call it directly on the class.
+
+The .NET Framework Class Library (FCL) provides a large number of useful static methods that you can use in your applications. For instance, the `Math` class, which provides methods and constants for trigonometric, logarithmic, and other mathematical functions. The `Pow` method is one example of a static method from this class. It raises a specified number to the power of another specified number:
+
+```{code-cell}
+double result = Math.Pow(2, 3);  // Computes: 2 ^ 3
+Console.WriteLine(result);
+```
+
+In this code, `Math.Pow` is a static method that takes two arguments: the base and the exponent. It calculates the base raised to the power of the exponent and returns the result. In this case it calculates `2` to the power of `3`.
+
+Here's another static method that you've proabbly been using without realizing it. The [string interpolation](string-interpolation) feature in C# is essentially syntactic sugar for a static method call to `String.Format`. You might write code like:
+
+```{code-cell}
+string msg = "world";
+Console.WriteLine($"Hello, {msg}!");
+```
+
+What's actually happening under the hood is something akin to:
+
+```{code-cell}
+string msg = "world";
+Console.WriteLine(String.Format("Hello, {0}!", msg));
+```
+
+As you can see, static methods are a key part of C# and .NET, and they allow us to use functionality without needing to instantiate an object.
+The key takeaway is that static methods are a fundamental part of the .NET library and are used in many places, even when it might not be immediately obvious.
+
+Let's now also write our own static method.
+Consider a simple game where players can score points. We might want to provide a way to calculate the average score across all players. This operation doesn't depend on a particular player's state, but rather on a static field representing the total points and total number of players.
+
+Here's an example:
+
+```{code-cell}
+public class Player
+{
+    public string Name { get; set; }
+    public int Score { get; set; }
+
+    private static int totalScore = 0;
+    private static int totalPlayers = 0;
+
+    public Player(string name)
+    {
+        Name = name;
+        totalPlayers++;
+    }
+
+    public void AddScore(int score)
+    {
+        Score += score;
+        totalScore += score;
+    }
+
+    public static float AverageScore()
+    {
+        if (totalPlayers == 0)
+            return 0;
+        else
+            return (float)totalScore / totalPlayers;
+    }
+}
+```
+
+In this example, we have a static method called `AverageScore` that calculates and returns the average score of all players. Notice that it doesn't make sense to tie this method to a specific Player instance, as the operation pertains to all players.
+
+```{code-cell}
+var player1 = new Player("Alice");
+player1.AddScore(100);
+
+var player2 = new Player("Bob");
+player2.AddScore(200);
+
+Console.WriteLine(Player.AverageScore());
+```
+
+```{warning}
+Although it might be tempting to use static methods to perform operations that aren't tied to specific instances, remember that these operations can still be modeled using an object oriented approach. In our `Player` example, we could create a `Game` class that keeps track of all `Player` instances. The `GetTotalScore` method could then be a part of the `Game` class, accessing the `Score` of each `Player` to compute the total. This approach adheres more closely to object oriented principles and can offer greater flexibility and maintainability in the long run.
+```
+
+%Static methods can also be used for operations that don't involve any state at all.
+
+%In the next chapter, we will learn about static properties, which, like static methods, are members that belong to the class rather than to instances of the class.
+
+
+-----------
+
+
 %- Multiple input types to WriteLine due to overloads.
 %- Console can also be thought of as defining a type with only a single member. Static means that there's only one member.
 %- Sets and functions. Not elegant due to mutation. Still mention it though. It is still valid, but it might also mutate things beyond the in and out. Use bool negation operation (`!`) since it's unary.
@@ -95,226 +170,3 @@ Work in progress.
 
 
 
-## Examples
-
-%### Existing methods
-%
-%Char.ToUpper('x');
-%Char.ToLower('X');
-%Console.WriteLine("hello");
-%String.Format() and string interpolation.
-
-
-(static-methods:examples:reverse)=
-### Reverse cipher
-
-In the chapter on [methods](methods) we wrote a local function that implemented the reverse cipher.
-Let's now wrap that code in a public static method defined in a static class.
-
-```{code-cell} csharp
-static class ReverseCipher
-{
-  public static string Encode (string input)
-  {
-    string output = "";
-    for (int i=input.Length-1; i>=0; i--)
-      output += input[i];
-    return output;
-  }
-}
-```
-
-Now that we've enclosed the method in a static class with a descriptive name, there's no need anymore to include the name of the cipher ("reverse") in the method name.
-So, let's just call the method `Encode`.
-Does it work?
-Yes, it does.
-
-```{code-cell} csharp
-Console.WriteLine(
-  ReverseCipher.Encode("detneiro tcejbo ton"));
-```
-
-
-(static-methods:examples:robbers)=
-(static-methods-example-robbers)=
-### Robber's cipher
-
-Let's now do the same thing to the Robber's cipher that we wrote in the chapter on [methods](methods).
-However, remember that we refactored that method so that the method that encoded input strings called another method that knows how to convert any single character.
-Let's do the same thing here.
-
-We'll create a static class called `RobbersCipher` and we'll add two public static methods called `EncodeChar` and `EncodeString`.
-If you're annoyed by these names, then don't worry, we'll simplify this when we get to [overloading](overloading).
-
-% TODO: Should simplify first Encode by using Char.ToUpper().
-```{code-cell} csharp
-static class RobbersCipher
-{
-  public static string EncodeChar (char input, char vowel)
-    => input switch {
-      'B' or 'b' or 'C' or 'c' or 'D' or 'd' or 'F' or 'f' or 'G' or 'g' or 'H' or 'h' or 'J' or 'j' or 'K' or 'k' or 'L' or 'l' or 'M' or 'm' or 'N' or 'n' or 'P' or 'p' or 'Q' or 'q' or 'R' or 'r' or 'S' or 's' or 'T' or 't' or 'V' or 'v' or 'W' or 'w' or 'X' or 'x' or 'Y' or 'y' or 'Z' or 'z'
-      => $"{input}{vowel}{input}",
-    _ => $"{input}"
-  };
-
-  public static string EncodeString (string input, char vowel)
-  {
-    string output = "";
-    foreach (char letter in input)
-      output += EncodeChar (letter, vowel);
-    return output;
-  }
-}
-```
-
-Let's test the method that encodes single characters to ensure that it still works.
-
-```{code-cell} csharp
-Console.WriteLine(RobbersCipher.EncodeChar('d', 'a'));
-```
-
-And then let's test the method that encodes full strings to ensure that it also still works.
-
-```{code-cell} csharp
-Console.WriteLine(RobbersCipher.EncodeString("bird", 'o'));
-```
-
-
-
-## Exercises
-
-
-```{exercise}
-Why are static methods useful?
-```
-
-
-```{exercise}
-In C#, what is the difference between a *static method* and a *local function*?
-```
-
-
-```{exercise-start}
-:label: ex:static-methods-leet
-```
-Create a static class called `LeetCipher` and let it contain two static methods called `EncodeString` and `EncodeChar`.
-These methods should essentially contain the code that we wrote in {numref}`ex:methods-leet`.
-In other words, the static methods should implement the leet language and be able to convert strings and individual characters.
-Your static methods should behave according to the usage example below.
-
-```{code-cell} csharp
-:tags: [remove-input]
-static class LeetCipher
-{
-  public static char EncodeChar (char input)
-    => input switch {
-      'A' => '4', '4' => 'A',
-      'E' => '3', '3' => 'E',
-      'L' => '1', '1' => 'L',
-      'O' => '0', '0' => 'O',
-      'S' => '5', '5' => 'S',
-      'T' => '7', '7' => 'T',
-      _ => input
-    };
-
-  public static string EncodeString (string input)
-  {
-    string output = "";
-    foreach (char c in input)
-      output += EncodeChar(c);
-    return output;
-  }
-}
-```
-
-```{code-cell} csharp
-Console.WriteLine( LeetCipher.EncodeString("LEET 101") );
-```
-```{code-cell} csharp
-Console.WriteLine( LeetCipher.EncodeChar('E') );
-```
-```{exercise-end}
-```
-
-
-
-
-```{exercise-start}
-:label: ex:static-methods-substitutions
-```
-In the chapter on [methods](methods) we either wrote or discussed the possibility to write four different methods for applying arrays of substitutions to a character or string.
-Let's now throw them all in a static class that we'll call `SubstitutionCipher`.
-
-While we're at it, we'll also give them new names that hopefully make it a tad easier to see what method does what.
-If these names drive you crazy then rest assured that we will deal with this when we get to the chapter on [overloading](overloading).
-
-```{code-cell} csharp
-:tags: [remove-input]
-static class SubstitutionCipher
-{
-  public static char EncodeCharWithCharReplacements (char input, (char, char)[] substitutions)
-  {
-    foreach ((char, char) substitution in substitutions)
-      if (substitution.Item1 == input)
-        return substitution.Item2;
-    return input;
-  }
-
-  public static string EncodeCharWithStringReplacements (char input, (char, string)[] substitutions)
-  {
-    foreach ((char, string) substitution in substitutions)
-      if (substitution.Item1 == input)
-        return substitution.Item2.ToString();
-    return input.ToString();
-  }
-
-  public static string EncodeStringWithCharReplacements (string input, (char, char)[] substitutions)
-  {
-    string output = "";
-    foreach (char c in input)
-      output += EncodeCharWithCharReplacements(c, substitutions);
-    return output;
-  }
-
-  public static string EncodeStringWithStringReplacements (string input, (char, string)[] substitutions)
-  {
-    string output = "";
-    foreach (char c in input)
-      output += EncodeCharWithStringReplacements(c, substitutions);
-    return output;
-  }
-}
-```
-
-Implement a static class that looks like this:
-
-```csharp
-static class SubstitutionCipher
-{
-  public static char EncodeCharWithCharReplacements (char input, (char, char)[] substitutions) => // ..
-  public static string EncodeCharWithStringReplacements (char input, (char, string)[] substitutions) => // ..
-  public static string EncodeStringWithCharReplacements (string input, (char, char)[] substitutions) => // ..
-  public static string EncodeStringWithStringReplacements (string input, (char, string)[] substitutions) => // ..
-}
-```
-
-The static methods of the static class should behave like this:
-
-```{code-cell} csharp
-var leetLike = new (char, char)[] {
-  ('E', '3'), ('L', '1'), ('O', '0') };
-var robbersLike = new (char, string)[] {
-  ('H', "HOH"), ('L', "LOL") };
-
-Console.WriteLine(SubstitutionCipher.EncodeCharWithCharReplacements('L', leetLike));
-Console.WriteLine(SubstitutionCipher.EncodeCharWithStringReplacements('L', robbersLike));
-Console.WriteLine(SubstitutionCipher.EncodeStringWithCharReplacements("HELLO", leetLike));
-Console.WriteLine(SubstitutionCipher.EncodeStringWithStringReplacements("HELLO", robbersLike));
-```
-
-```{tip}
-We also wrote a method called `charCharArrayToCharStringArray` in {numref}`ex:methods-charchar-to-charstring`.
-Feel free to choose whether to add this as another method to this static class, to inline that code in the appropriate method above, or simply to use more duplication.
-```
-```{exercise-end}
-```
