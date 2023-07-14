@@ -1,5 +1,6 @@
 # The new todo list
 
+- Namespace without curlys. [All types in file in same namespace](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/namespaces). In classes chapter?
 - Note about RTFM very early on.
 - `void` in Methods chapter.
 - `+=`, `++` (both pre and post increment)
@@ -36,6 +37,7 @@
     - calling with incorrect type of arguments.
     - using returned value as wrong type.
 - Is string interpolation syntactic sugar for `String.Format`? If so then mention this example in static methods chapter.
+- Scopes. Named scopes. Relates to namespaces. [See e.g.](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/basic-concepts)
 
 # TODO
 
