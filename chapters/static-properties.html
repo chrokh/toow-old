@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="56. Static classes" href="static-classes.html" /><link rel="prev" title="54. Static methods" href="static-methods.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Boxing - The Object Oriented Way</title>
+        <title>55. Static properties - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -164,7 +164,7 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul>
+  <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="syntax.html">1. Syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hello-world.html">2. Hello world</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compilation.html">3. Compilation</a></li>
@@ -219,7 +219,7 @@
 <li class="toctree-l1"><a class="reference internal" href="static-fields.html">52. Static fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="static-constructors.html">53. Static constructors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="static-methods.html">54. Static methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="static-properties.html">55. Static properties</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">55. Static properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="static-classes.html">56. Static classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="top-level-statements.html">57. Top-level statements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="command-line-arguments.html">58. Command line arguments</a></li>
@@ -309,11 +309,166 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="boxing">
-<span id="id1"></span><h1>Boxing<a class="headerlink" href="#boxing" title="Permalink to this heading">#</a></h1>
+          <section class="tex2jax_ignore mathjax_ignore" id="static-properties">
+<h1><span class="section-number">55. </span>Static properties<a class="headerlink" href="#static-properties" title="Permalink to this heading">#</a></h1>
+<p>Just as with instance properties, static properties provide a way to control the access and visibility of a static field. However, there are some key differences: static properties can be <a class="reference internal" href="read-only-properties.html"><span class="doc std std-doc">read-only</span></a> or <a class="reference internal" href="computed-properties.html"><span class="doc std std-doc">computed properties</span></a>, but they don’t support the <code class="docutils literal notranslate"><span class="pre">init</span></code> accessor or the <code class="docutils literal notranslate"><span class="pre">required</span></code> keyword.</p>
+<p>A static property is a property that belongs to the class itself rather than any individual instance of that class. It’s defined by using the <code class="docutils literal notranslate"><span class="pre">static</span></code> keyword before the property name.</p>
+<p>To understand static properties, let’s consider an example from the world of gaming. Suppose you’re developing a game and you have some settings that apply to the entire game, not just one instance or player. These could include settings like the screen width and height, difficulty level, or maximum number of players. Here’s how you might define a <code class="docutils literal notranslate"><span class="pre">GameSettings</span></code> class with a static property:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">GameSettings</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Ultimate Adventure Game&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">ChangeGameName</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-5362.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.88:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '5362.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Name</span></code> property is static, meaning it belongs to the class <code class="docutils literal notranslate"><span class="pre">GameSettings</span></code> itself rather than any specific instance. Its value can be read anywhere in your code using <code class="docutils literal notranslate"><span class="pre">GameSettings.Name</span></code>, but it can only be modified within the <code class="docutils literal notranslate"><span class="pre">GameSettings</span></code> class, thanks to the <code class="docutils literal notranslate"><span class="pre">private</span></code> setter.</p>
+<p>Even though the <code class="docutils literal notranslate"><span class="pre">init</span></code> accessor and <code class="docutils literal notranslate"><span class="pre">required</span></code> keyword are not supported by static properties, you can still create read-only and computed static properties. Here’s an example of a read-only static property:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">GameSettings</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Ultimate Adventure Game&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And here’s an example of a computed static property:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">GameSettings</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">baseDifficulty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">playerModifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Difficulty</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">baseDifficulty</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">playerModifier</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the above example, the <code class="docutils literal notranslate"><span class="pre">Difficulty</span></code> property computes its value based on two other static fields. As the game progresses, you could change the value of <code class="docutils literal notranslate"><span class="pre">playerModifier</span></code> to adjust the difficulty.</p>
+<p>Static properties can be powerful tools for managing global state in your application, but as with all static members, they should be used judiciously to maintain the flexibility and testability of your code.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
+<p>Remember that using static is counter to the core ideas in object oriented programming, like subtype polymorphism, and can make your code less flexible, maintainable, and difficult to test.
+For example, the functionality of the <code class="docutils literal notranslate"><span class="pre">GameSettings</span></code> class could be achieved using a regular class, with non-static members, that we instantiate and pass to objects that need to access the settings.
+This would allow you to use different settings for different parts of your application, which might be useful for testing or to provide user-customization options.
+Use static properties carefully and remember that there’s always an object oriented design that could meet your needs.</p>
 </div>
 </section>
 
@@ -326,23 +481,41 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            name: "python3",
+            name: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="static-classes.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title"><span class="section-number">56. </span>Static classes</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="static-methods.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title"><span class="section-number">54. </span>Static methods</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
