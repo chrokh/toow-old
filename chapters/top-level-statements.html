@@ -311,6 +311,75 @@
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="top-level-statements">
 <h1><span class="section-number">57. </span>Top-level statements<a class="headerlink" href="#top-level-statements" title="Permalink to this heading">#</a></h1>
+<p>Until now, all of the programs we’ve written have used a feature called “top-level statements”. This feature was added to C# to make it easier to get started with coding in C#.</p>
+<p>Consider a simple Hello World program written using top-level statements:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In earlier versions of C#, and even in C# 9.0 and beyond if you choose not to use top-level statements, this program would look like this:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">HelloWorld</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">class</span><span class="w"> </span><span class="nc">Program</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Main</span><span class="p">()</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>As you can see, top-level statements remove a lot of the boilerplate that is required to define a simple program. Instead of having to define a <a class="reference internal" href="namespaces.html"><span class="doc std std-doc">namespace</span></a>, a <a class="reference internal" href="classes.html"><span class="doc std std-doc">class</span></a>, and a <code class="docutils literal notranslate"><span class="pre">Main</span></code> <a class="reference internal" href="static-methods.html"><span class="doc std std-doc">method</span></a>, you can directly write the code that you want to execute.</p>
+<p>The entry point of a C# program is the <code class="docutils literal notranslate"><span class="pre">Main</span></code> method. When you use top-level statements, the C# compiler generates this <code class="docutils literal notranslate"><span class="pre">Main</span></code> method for you. The code that you write is placed inside this <code class="docutils literal notranslate"><span class="pre">Main</span></code> method.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Remember, the code that you’re writing at the top level is still inside a class and a method. It’s just that the C# compiler is doing the work of creating these for you when you use top-level statements.</p>
+</div>
+<p>When using top-level statements, your statements and types are placed in the global namespace rather than any specific namespace.
+So the top-level statement we showed above would be translated into something like this:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Program</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Main</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Program</span></code> is not inside any namespace, so it resides in the global namespace. If you declare other types in the same file as your top-level statements, those types also reside in the global namespace by default, unless you explicitly declare a namespace for them.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Since top-level statements are placed in the global namespace you have to use the <code class="docutils literal notranslate"><span class="pre">using</span></code> directive to import types that you’ve defined in other namespaces.</p>
+</div>
+<p>When you create a new project in an IDE like Visual Studio and choose the option “Do not use top-level statements”, this is the format that your program will be in. This is also the format that you will often see in larger programs and libraries, as it allows for greater organization and structure. However, top-level statements can be a convenient tool for small programs and scripts.</p>
+<figure class="align-default" id="id1">
+<img alt="../_images/do-not-use-top-level-statements.jpg" src="../_images/do-not-use-top-level-statements.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 57.1 </span><span class="caption-text">When you create a new project in Visual Studio you can check a box that causes your generated main program file to not use top-level statements.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>When using top-level statements, the order in which you declare certain elements matters. As a rule of thumb, <code class="docutils literal notranslate"><span class="pre">using</span></code> directives must be declared at the top of the file, followed by any top-level statements, and then type declarations (like classes, structs, or enums). Any attempt to mix this order can lead to a compiler error.</p>
+<p>For example, consider this code:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyClass</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="p">);</span>
+
+<span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">(3,1): Error CS8803: Top-level statements must precede namespace and type declarations.</span>
+<span class="go">(5,1): Error CS1529: A using clause must precede all other elements defined in the namespace except extern alias declarations.</span>
+</pre></div>
+</div>
+<p>If you try to compile this, you’ll receive an error message from the compiler. The <code class="docutils literal notranslate"><span class="pre">using</span></code> directive is not at the top of the file and the <code class="docutils literal notranslate"><span class="pre">Console.WriteLine</span></code> statement appears after the <code class="docutils literal notranslate"><span class="pre">MyClass</span></code> declaration, both of which are violations of the rules.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You must always declare your <code class="docutils literal notranslate"><span class="pre">using</span></code> directives at the top, then your top-level statements, and finally your types.</p>
+</div>
 </section>
 
     <script type="text/x-thebe-config">

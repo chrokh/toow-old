@@ -373,7 +373,7 @@ Here’s a basic <code class="docutils literal notranslate"><span class="pre">Ca
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2671.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2637.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -418,12 +418,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.88:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.21:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2671.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2637.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -483,10 +483,6 @@ else {
 Everything between the first and last curly bracket (<code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></code>) is the ‘body’ of the class.
 This is where we define its members.
 The keyword <code class="docutils literal notranslate"><span class="pre">public</span></code>, appearing before the class name and its members is an ‘access modifier’ and we’ll explain what that is very soon.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The code that is generated for you by Visual Studio might contain a namespace. For the sake of simplicity we’ve removed the namespaces. We’ll talk more about namespaces later on.</p>
-</div>
 <p>Once you’ve defined the class, you can use it to instantiate any number of objects in (for example) your Main method (<code class="docutils literal notranslate"><span class="pre">Program.cs</span></code>) like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -499,6 +495,10 @@ The keyword <code class="docutils literal notranslate"><span class="pre">public<
 <p>These two variables are pointing to objects of type <code class="docutils literal notranslate"><span class="pre">Car</span></code>.
 They are <em>instances</em> of the idea of a car.
 The class is the idea, the blueprint, and objects are embodiments of that idea.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The code that is generated for you by Visual Studio might contain a <a class="reference internal" href="namespaces.html"><span class="doc std std-doc">namespace</span></a>. For the sake of simplicity we’ve removed the namespaces in our class examples. If you keep the namespace, remember that if you want to use the type somewhere else then that place has to either be within the same namespace, or you have to qualify the type (like <code class="docutils literal notranslate"><span class="pre">MyNamespace.Car</span></code>), or import the namespace through the <code class="docutils literal notranslate"><span class="pre">using</span></code> directive (like <code class="docutils literal notranslate"><span class="pre">using</span> <span class="pre">MyNamespace;</span></code>). Refer to the chapter on <a class="reference internal" href="namespaces.html"><span class="doc std std-doc">namespaces</span></a> if you need a reminder.</p>
+</div>
 <p>Since classes define <a class="reference internal" href="reference-types.html"><span class="doc std std-doc">reference types</span></a>, these two objects are not the same, even though they currently seem identical.
 So <code class="docutils literal notranslate"><span class="pre">car1</span> <span class="pre">==</span> <span class="pre">car2</span></code> will evaluate to <code class="docutils literal notranslate"><span class="pre">false</span></code>.
 It is possible to ‘override’ the behavior of the equals operator (<code class="docutils literal notranslate"><span class="pre">==</span></code>) so that the above would return <code class="docutils literal notranslate"><span class="pre">true</span></code>, but we’ll get to that much later.</p>

@@ -112,10 +112,6 @@ Everything between the first and last curly bracket (`{ ... }`) is the 'body' of
 This is where we define its members.
 The keyword `public`, appearing before the class name and its members is an 'access modifier' and we'll explain what that is very soon.
 
-```{note}
-The code that is generated for you by Visual Studio might contain a namespace. For the sake of simplicity we've removed the namespaces. We'll talk more about namespaces later on.
-```
-
 Once you've defined the class, you can use it to instantiate any number of objects in (for example) your Main method (`Program.cs`) like this:
 
 ```{code-cell}
@@ -126,6 +122,10 @@ Car car2 = new Car(); // Creates an object (i.e. a value) of type Car.
 These two variables are pointing to objects of type `Car`.
 They are *instances* of the idea of a car.
 The class is the idea, the blueprint, and objects are embodiments of that idea.
+
+```{note}
+The code that is generated for you by Visual Studio might contain a [namespace](namespaces). For the sake of simplicity we've removed the namespaces in our class examples. If you keep the namespace, remember that if you want to use the type somewhere else then that place has to either be within the same namespace, or you have to qualify the type (like `MyNamespace.Car`), or import the namespace through the `using` directive (like `using MyNamespace;`). Refer to the chapter on [namespaces](namespaces) if you need a reminder.
+```
 
 Since classes define [reference types](reference-types), these two objects are not the same, even though they currently seem identical.
 So `car1 == car2` will evaluate to `false`.
