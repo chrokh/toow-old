@@ -39,6 +39,7 @@
     - using returned value as wrong type.
 - Is string interpolation syntactic sugar for `String.Format`? If so then mention this example in static methods chapter.
 - Scopes. Named scopes. Relates to namespaces. [See e.g.](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/basic-concepts)
+- There's a lot of nuance in the old chapter on subtype polymorphism. Spread it in different places?
 
 ## Smaller todos
 

@@ -29,7 +29,7 @@ An interface defines *what* its implementations should do, not *how* to do it.
 %Interfaces are contracts. They define *what* a class can do, not *how* to do it.
 ```
 
-Let's explain this concept with an example. Imagine you're building a drawing application and you have different shapes, such as rectangles and ovals. Every shape has a width and a height, but the calculation of the area is different for each shape. How can you define a common blueprint for all shapes while still allowing for their individual differences?
+Let's explain this concept with an example. Imagine you're building a drawing application and you have different shapes, such as rectangles and ellipses. Every shape has a width and a height, but the calculation of the area is different for each shape. How can you define a common blueprint for all shapes while still allowing for their individual differences?
 
 This is where interfaces come in handy. We could create an `IShape` interface with `Width`, `Height`, and `Area` properties. The `Area` property is defined differently based on the type of the shape, but every shape, regardless of its specific type, will have an `Area` property. Here's how we might define this interface:
 
@@ -57,10 +57,10 @@ class Rectangle : IShape
 Notice how we say `: IShape` after we declare the class's name.
 This is where we claim to the compiler that the class in question implements the interface `IShape`.
 
-Here's what the implementation of the interface might look for `Oval`?
+Here's what the implementation of the interface might look for `Ellipse`?
 
 ```{code-cell}
-class Oval : IShape
+class Ellipse : IShape
 {
     public double Width { get; set; }
     public double Height { get; set; }
@@ -69,7 +69,7 @@ class Oval : IShape
 }
 ```
 
-With this setup, Rectangle and Oval both follow the `IShape` interface. They promise to have a `Width`, a `Height`, and an `Area` property. However, the calculation of the `Area` differs depending on whether the shape is a rectangle or an oval. Each class provides its own implementation for how to calculate the `Area` based on its particular rules.
+With this setup, Rectangle and Ellipse both follow the `IShape` interface. They promise to have a `Width`, a `Height`, and an `Area` property. However, the calculation of the `Area` differs depending on whether the shape is a rectangle or an ellipse. Each class provides its own implementation for how to calculate the `Area` based on its particular rules.
 
 When we claim that a class implements an interface the compiler will raise an error if the type does not.
 This can be seen below:
@@ -83,11 +83,11 @@ class Triangle : IShape
 
 In the example above, we cannot compile the code until we make the class `Triangle` implement all members of the interface `IShape`.
 
-The true power of interfaces lies in that they enable, so called, subtype polymorphism. This means that we can declare a variable of an interface type, and then assign it an object of any class that implements the interface. Given the types above, this means that we can assign objects of type `Rectangle` or `Oval` to a variable who's type is `IShape`.
+The true power of interfaces lies in that they enable, so called, subtype polymorphism. This means that we can declare a variable of an interface type, and then assign it an object of any class that implements the interface. Given the types above, this means that we can assign objects of type `Rectangle` or `Ellipse` to a variable who's type is `IShape`.
 
 ```{code-cell}
 IShape shape1 = new Rectangle();
-IShape shape2 = new Oval();
+IShape shape2 = new Ellipse();
 ```
 
 This is a powerful aspect of using interfaces and an essential principle of object-oriented programming. However, we will delve into more detail on this in the chapter [subtype polymorphism](subtype-polymorphism).
