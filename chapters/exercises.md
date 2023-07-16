@@ -1091,3 +1091,105 @@ NOTE: All exercises are currently commented out.
 %  - Write a method that greets a name that you pass.
 %  - Write a method that computes the hypothenuse.
 %  - Write a method that converts a `string?` to a `string`. Tie back to the nullable discussion in the chapter on [data types](data-types).
+
+
+
+## Interfaces
+
+%```{exercise}
+%What is the abstract idea of an interface?
+%Come up with your own example in natural language that's different from the example given in this chapter on screws, bolts, and screwdrivers.
+%```
+%
+%```{exercise}
+%Explain the keyword `interface`?
+%```
+%
+%```{exercise}
+%What is the difference between a `class` and an `interface`?
+%```
+%
+%
+%```{exercise-start}
+%:label: ex:interfaces:leet
+%```
+%Rewrite the class `LeetCipher` that you wrote in {numref}`ex:instance-methods:leet` so that it implements the two interfaces `IStringToStringCipher` and `ICharToCharCipher` that we defined earlier in this chapter.
+%
+%```{code-cell} csharp
+%:tags: [remove-input]
+%class LeetCipher : IStringToStringCipher, ICharToCharCipher
+%{
+%  public char Encode (char input)
+%  {
+%    switch (input)
+%    {
+%      case 'L': return '1';
+%      case '1': return 'L';
+%      case 'A': return '4';
+%      case '4': return 'A';
+%      case 'O': return '0';
+%      case '0': return 'O';
+%      case 'T': return '7';
+%      case '7': return 'T';
+%      case 'E': return '3';
+%      case '3': return 'E';
+%      default: return input;
+%    }
+%  }
+%
+%  public string Encode (string input)
+%  {
+%    string output = "";
+%    foreach (char c in input)
+%      output += Encode(c);
+%    return output;
+%  }
+%}
+%```
+%When you are done you should be able to run the following code and get the corresponding output.
+%```{code-cell} csharp
+%// Note how the compile-time and run-time types are different.
+%IStringToStringCipher stringCipher = new LeetCipher();
+%ICharToCharCipher charCipher = new LeetCipher();
+%
+%string output1 = stringCipher.Encode("LEET");
+%char output2 = charCipher.Encode('E');
+%
+%Console.WriteLine($"{output1} {output2}");
+%```
+%```{exercise-end}
+%```
+%
+%
+%```{exercise}
+%Can the class `LeetCipher` of {numref}`ex:interfaces:leet` also implement the interface `ICharToStringCipher`?
+%Why or why not?
+%```
+%
+%```{exercise}
+%Can the class `RobbersCipher` also implement the interface `ICharToCharCipher`?
+%Why or why not?
+%```
+%
+%```{exercise}
+%Rewrite the class `FlipFlopCaesarCipher` from the chapter on [concrete injected object composition](concrete-injected-object-composition) so that it implements all the interfaces from this chapter that you believe that it should implement.
+%Which ones did you choose and which did you not choose?
+%Why?
+%```
+%
+%
+%```{exercise}
+%Does an interface define a "[compile-time type](run-time-and-compile-time-types)", a "[run-time type](run-time-and-compile-time-types)", or both?
+%What does this mean?
+%```
+%
+%```{exercise}
+%:label: ex:interfaces
+%1. Define your own interface.
+%2. Write a class that implements that interface.
+%3. Declare a variable whose compile-time type is your interface, and whose run-time type is your class.
+%4. Draw a UML class diagram of your interface and your class or classes.
+%```
+
+
+

@@ -1,5 +1,6 @@
 # The new todo list
 
+- Static method overloading.
 - Namespace without curlys. [All types in file in same namespace](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/namespaces). In classes chapter?
 - Note about RTFM very early on.
 - `void` in Methods chapter.
