@@ -39,6 +39,11 @@
 - Is string interpolation syntactic sugar for `String.Format`? If so then mention this example in static methods chapter.
 - Scopes. Named scopes. Relates to namespaces. [See e.g.](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/basic-concepts)
 
+## Smaller todos
+
+- The example of a star being a composition of two rotated triangles.
+
+
 # TODO
 
 - IMPORTANT

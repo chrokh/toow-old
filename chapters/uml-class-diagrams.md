@@ -210,3 +210,59 @@ class Rectangle
 ```
 
 
+
+## Association
+
+In UML class diagrams we refer to object composition as "association" and we draw it using an arrow shaped as in {numref}`fig:uml-class-diagram-association-arrow`.
+The arrow is pointing from the type that has a reference to the type that it has a reference to.
+In the case of [Towers of Hanoi](towers-of-hanoi), `Rod` is pointing towards `Disk` since `Rod` may have references to `Disk`s.
+
+% TODO: REPLACE IMAGE!!
+```{figure} https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Uml_classes_en.svg/800px-Uml_classes_en.svg.png
+:name: fig:uml-class-diagram-association-arrow
+:width: 300
+
+In UML class diagram notation, object composition is called "association" and is depicted using a solid line with a line arrow head.
+The arrow points from the composing object to the composed.
+[[Image source](https://en.wikipedia.org/wiki/Class_diagram)].
+```
+
+```{warning}
+Later, we will learn about another relationship, that we call "is-a".
+Understanding the difference between "has-a" and "is-a" is crucial for understanding simpler topics such as [dependency injection](dependency-injection) and more complex topics such as [design patterns](design-patterns).
+```
+
+```
+┌──────────────────────────┐      ┌─────────────────┐
+│            Rod           │      │      Disk       │
+├──────────────────────────┤      ├─────────────────┤
+│ - disks : Disk[]         ├─────>│ + Color : Color │
+├──────────────────────────┤      ├─────────────────┤
+│ + Add (disk:Disk) : void │      │                 │
+│ + Sub (disk:Disk) : void │      │                 │
+└──────────────────────────┘      └─────────────────┘
+```
+
+Composing two classes means that they are in a directed has-a relationship with each other where objects of one type will have a reference to objects of the other type but not necessarily the other way around. Given the diagram above, `Rod` has `Disk` but the reverse is not true.
+
+%% Rod -> Disk
+% TODO: UML class diagram
+%``{figure} https://via.placeholder.com/700x200?text=Image+coming+soon
+%:name: fig:object-composition-class-diagram
+%
+%Composing two classes means that they are in a directed has-a relationship with each other where objects of one type will have a reference to objects of the other type but not necessarily the other way around. Given this diagram, `Rod` has `Disk` but the reverse is not true.
+%``
+
+UML divides the concept of association into two types that they call "aggregation" and "composition".
+Unfortunately the term "composition" in UML class diagrams doesn't mean the same thing as "object composition" that we're discussing here.
+Fortunately, we will not discuss association aggregation and association composition in this book so hopefully we can leave this confusion behind.
+
+```{important}
+Object composition correspond to the UML class diagram term known as "association".
+One form of association is composition.
+Unfortunately, the term "composition" does not mean the same thing in the context of UML class diagrams as in the context of object oriented programming.
+```
+
+```{seealso}
+If you want to learn more about the UML class diagram concepts aggregation and composition, check out the [Wikipedia](https://en.wikipedia.org/wiki/Class_diagram) page on UML class diagrams.
+```
