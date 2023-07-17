@@ -23,9 +23,10 @@ Encapsulation is often used synonymously with "information hiding".
 At times and to some people, the two have meant different things.
 Today however, they are both often used to the idea of "hiding your private parts".
 
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1126471184511422516/chrokh_a_beautiful_illustration_of_a_fantasy_castle_d5bcc806-2ca5-40ce-a9fe-9b912e3405de.png
+%https://cdn.discordapp.com/attachments/1118630713084870736/1126471184511422516/chrokh_a_beautiful_illustration_of_a_fantasy_castle_d5bcc806-2ca5-40ce-a9fe-9b912e3405de.png
+```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1129981211197063218/chrokh_flat_illustration_of_a_LEGO_castle_island_95452a1b-f7d7-45f5-8fa3-5761072bd36c.png
 
-Like a castle with a bridge over a moat, encapsulation only allows access to an object's data via its public methods.
+Like a castle on an island which can only be accessed by landing a boat in the dock, encapsulation only allows access to an object's data via its public methods.
 ```
 
 Consider the following `Car` class:
