@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="66. Abstract classes" href="abstract-classes.html" /><link rel="prev" title="64. Inheritance" href="inheritance.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="64. Inheritance" href="inheritance.html" /><link rel="prev" title="62. Dynamic dispatch" href="dynamic-dispatch.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>65. Overriding - The Object Oriented Way</title>
+        <title>63. Multiple interfaces - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -227,9 +227,9 @@
 <li class="toctree-l1"><a class="reference internal" href="subtype-polymorphism.html">60. Subtype polymorphism</a></li>
 <li class="toctree-l1"><a class="reference internal" href="run-time-type-vs-compile-time-type.html">61. Run-time type vs compile-time type</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dynamic-dispatch.html">62. Dynamic dispatch</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multiple-interfaces.html">63. Multiple interfaces</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">63. Multiple interfaces</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">64. Inheritance</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">65. Overriding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overriding.html">65. Overriding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="abstract-classes.html">66. Abstract classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="everything-is-an-object.html">67. Everything is an object</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interface-inheritance.html">68. Interface inheritance</a></li>
@@ -311,12 +311,275 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="overriding">
-<h1><span class="section-number">65. </span>Overriding<a class="headerlink" href="#overriding" title="Permalink to this heading">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="multiple-interfaces">
+<h1><span class="section-number">63. </span>Multiple interfaces<a class="headerlink" href="#multiple-interfaces" title="Permalink to this heading">#</a></h1>
+<p>In real-world scenarios, things often possess attributes and behaviors that span across multiple domains. A television, for instance, has spatial attributes like position and size, but can also be turned on and off like an electronic device.</p>
+<p>Analogously, in software design, a class may implement multiple interfaces, promising to fulfill several contracts at once. This capability to portray different roles becomes incredibly handy when a class interacts with varied systems or operates in different contexts, each demanding a unique set of behaviors.</p>
+<p>Let’s consider a <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class that implements both <code class="docutils literal notranslate"><span class="pre">IPositionable</span></code> and <code class="docutils literal notranslate"><span class="pre">ISizable</span></code> interfaces.
+The former is an interface for things that have a position, and the latter for things that have a size.
+We can easily image a system where rectangles have both position and size.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IPositionable</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-4224.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.175:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '4224.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ISizable</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">Width</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IPositionable</span><span class="p">,</span><span class="w"> </span><span class="n">ISizable</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Width</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, a single <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> object represents both the position and size attributes. It guarantees to satisfy the contracts laid down by both <code class="docutils literal notranslate"><span class="pre">IPositionable</span></code> and <code class="docutils literal notranslate"><span class="pre">ISizable</span></code> interfaces, thus assuming dual roles depending on the needs of the situation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ISizable</span><span class="w"> </span><span class="n">sizable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">();</span>
+<span class="n">IPositionable</span><span class="w"> </span><span class="n">positionable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition-remember admonition">
+<p class="admonition-title">Remember</p>
+<p>As we learned in the chapter on <span class="xref myst">compile-time types and run-time types</span> we can only access members available on the compile-time type. So we cannot, for example, call <code class="docutils literal notranslate"><span class="pre">Width</span></code> on a variable of type <code class="docutils literal notranslate"><span class="pre">IPositionable</span></code> even if its run-time type happens to be <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>.</p>
+</div>
+<p>But what happens if multiple interfaces demand a member with the same signature?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IPositionable</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="nf">Display</span><span class="p">();</span><span class="w"> </span><span class="c1">// Defined in both interfaces.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ISizable</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="nf">Display</span><span class="p">();</span><span class="w"> </span><span class="c1">// Defined in both interfaces.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IPositionable</span><span class="p">,</span><span class="w"> </span><span class="n">ISizable</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Display</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Displaying Rectangle.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Not a problem. Since both members have the same signatures we simply ensure that the member exists in the class that claims to implement the interfaces and it compiles just fine.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ISizable</span><span class="w"> </span><span class="n">asSizable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">();</span>
+<span class="n">asSizable</span><span class="p">.</span><span class="n">Display</span><span class="p">();</span>
+
+<span class="n">IPositionable</span><span class="w"> </span><span class="n">asPositionable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">();</span>
+<span class="n">asPositionable</span><span class="p">.</span><span class="n">Display</span><span class="p">();</span>
+
+<span class="n">Rectangle</span><span class="w"> </span><span class="n">asRectangle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">();</span>
+<span class="n">asRectangle</span><span class="p">.</span><span class="n">Display</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Displaying Rectangle.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Displaying Rectangle.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Displaying Rectangle.
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you end up with a naming conflict, where multiple interfaces want to use the same method signature but the behavior of these two members should be different we can use, what’s in C# called, ‘explicit interface implementation’. This allows different behaviors based on the interface being invoked.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Ellipse</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IPositionable</span><span class="p">,</span><span class="w"> </span><span class="n">ISizable</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="n">IPositionable</span><span class="p">.</span><span class="n">Display</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Displaying Ellipse as IPositionable.&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="n">ISizable</span><span class="p">.</span><span class="n">Display</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Displaying Ellipse as ISizable.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ISizable</span><span class="w"> </span><span class="n">asSizable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Ellipse</span><span class="p">();</span>
+<span class="n">asSizable</span><span class="p">.</span><span class="n">Display</span><span class="p">();</span>
+
+<span class="n">IPositionable</span><span class="w"> </span><span class="n">asPositionable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Ellipse</span><span class="p">();</span>
+<span class="n">asPositionable</span><span class="p">.</span><span class="n">Display</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Displaying Ellipse as ISizable.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Displaying Ellipse as IPositionable.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice however how we cannot</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Ellipse</span><span class="w"> </span><span class="n">asEllipse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Ellipse</span><span class="p">();</span>
+<span class="n">asEllipse</span><span class="p">.</span><span class="n">Display</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">(2,11): Error CS1061: &#39;Ellipse&#39; does not contain a definition for &#39;Display&#39; and no accessible extension method &#39;Display&#39; accepting a first argument of type &#39;Ellipse&#39; could be found (are you missing a using directive or an assembly reference?)</span>
+</pre></div>
+</div>
+<p>This <code class="docutils literal notranslate"><span class="pre">Ellipse</span></code> class uses explicit interface implementation to distinguish between the <code class="docutils literal notranslate"><span class="pre">Display</span></code> methods of <code class="docutils literal notranslate"><span class="pre">IPositionable</span></code> and <code class="docutils literal notranslate"><span class="pre">ISizable</span></code>. Thus, a single <code class="docutils literal notranslate"><span class="pre">Ellipse</span></code> object can execute different <code class="docutils literal notranslate"><span class="pre">Display</span></code> methods depending on whether it is treated as <code class="docutils literal notranslate"><span class="pre">IPositionable</span></code> or <code class="docutils literal notranslate"><span class="pre">ISizable</span></code>.</p>
+<div class="admonition-key-point admonition">
+<p class="admonition-title">Key point</p>
+<p>A class can implement multiple (possibly overlapping) interfaces, thereby assuming different roles.</p>
+</div>
+<p>Multiple interfaces is the enabler of an important design principle called the <a class="reference internal" href="interface-segregation-principle.html"><span class="doc std std-doc">interface segregation principle</span></a>. We will discuss that in a later chapter, but for now, it is essential to recognize that just like the real-world things, a single class can also play multiple roles.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -328,38 +591,38 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            name: "python3",
+            name: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="abstract-classes.html">
+          <a class="next-page" href="inheritance.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">66. </span>Abstract classes</div>
+                <div class="title"><span class="section-number">64. </span>Inheritance</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="inheritance.html">
+          <a class="prev-page" href="dynamic-dispatch.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">64. </span>Inheritance</div>
+                <div class="title"><span class="section-number">62. </span>Dynamic dispatch</div>
                 
               </div>
             </a>
