@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="22. Floating-point types" href="floating-point-types.html" /><link rel="prev" title="20. Type inference" href="type-inference.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="63. Inheritance" href="inheritance.html" /><link rel="prev" title="61. Run-time type vs compile-time type" href="run-time-type-vs-compile-time-type.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>21. Type checking - The Object Oriented Way</title>
+        <title>62. Dynamic dispatch - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -185,7 +185,7 @@
 <li class="toctree-l1"><a class="reference internal" href="constants.html">18. Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statements.html">19. Statements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="type-inference.html">20. Type inference</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">21. Type checking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-checking.html">21. Type checking</a></li>
 <li class="toctree-l1"><a class="reference internal" href="floating-point-types.html">22. Floating-point types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enumeration-types.html">23. Enumeration types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="selection-statements.html">24. Selection statements</a></li>
@@ -226,7 +226,7 @@
 <li class="toctree-l1"><a class="reference internal" href="interfaces.html">59. Interfaces</a></li>
 <li class="toctree-l1"><a class="reference internal" href="subtype-polymorphism.html">60. Subtype polymorphism</a></li>
 <li class="toctree-l1"><a class="reference internal" href="run-time-type-vs-compile-time-type.html">61. Run-time type vs compile-time type</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dynamic-dispatch.html">62. Dynamic dispatch</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">62. Dynamic dispatch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">63. Inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="overriding.html">64. Overriding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="abstract-classes.html">65. Abstract classes</a></li>
@@ -309,23 +309,46 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="type-checking">
-<h1><span class="section-number">21. </span>Type checking<a class="headerlink" href="#type-checking" title="Permalink to this heading">#</a></h1>
-<p>In the world of programming, correctness is crucial. One important way to ensure this is through a feature known as ‘type checking’. You’ve already met the various data types and learned how each variable we declare is associated with a particular type. But what happens if we try to mix things up a bit and use one type where another is expected? That’s where type checking comes into play.</p>
-<p>Type checking is like the security checkpoint at an airport. Just as the security personnel make sure that only authorized and safe items pass through, the C# compiler ensures that the values assigned to variables and the expressions in the code are all of the correct type. If something doesn’t match, the compiler raises an error and stops the execution of the program.
-This is known as a ‘type error’.</p>
-<p>Think of it like trying to fit a round peg into a square hole—it just won’t work. The peg is like a value in your program, and the hole is the variable or expression expecting a particular type.</p>
-<p>Here’s an example:</p>
-<div class="cell tag_raises-exception docutils container">
+          <section class="tex2jax_ignore mathjax_ignore" id="dynamic-dispatch">
+<h1><span class="section-number">62. </span>Dynamic dispatch<a class="headerlink" href="#dynamic-dispatch" title="Permalink to this heading">#</a></h1>
+<p>In the last chapter we established that the compile-time type of a variable determines what operations you can perform on the variable in your code, whereas the run-time type determines what actual operations occur when your code is executed.
+We said that you loose the ability to perform subtype specific operations when treating the subtype as a supertype, but that you gain the ability to write code that works for all subtypes at the same time. Let’s talk about that benefit.</p>
+<p>Why would it matter that we can treat cats and dogs as animals instead of as cats and dogs?
+Or rectangles and triangles as shapes rather than their respective shapes?
+What do we gain from treating these subtypes as the same supertype?
+The answer is that we gain the ability to do dynamic dispatch.</p>
+<div class="admonition-remember admonition">
+<p class="admonition-title">Remember</p>
+<p>The compile-time type of a variable determines what operations you can perform on the variable in your code, whereas the run-time type determines what actual operations occur when your code is executed.</p>
+</div>
+<p>Dynamic dispatch is a fundamental concept in subtype polymorphism.
+The term ‘dynamic dispatch’ may sound daunting, but it simply refers to the technique of selecting which implementation of a polymorphic operation (method or property) to call at run-time. It’s ‘dynamic’ because the decision is made at run-time, and it’s a ‘dispatch’ because the run-time environment dispatches the method call to the correct method implementation.</p>
+<div class="admonition-key-point admonition">
+<p class="admonition-title">Key point</p>
+<p>Dynamic dispatch is the process by which a call to an interface method (or overridden method) is resolved at run-time, allowing different implementations of a method to be executed depending on the actual type of the object.</p>
+</div>
+<figure class="align-default" id="id1">
+<img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1131076447415587006/chrokh_colorful_oil_painting_of_turntable_97a7b4e9-491b-4c95-8ede-81192586d71d.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1131076447415587006/chrokh_colorful_oil_painting_of_turntable_97a7b4e9-491b-4c95-8ede-81192586d71d.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 62.1 </span><span class="caption-text">Like a turntable changing tunes with different records, dynamic dispatch shifts behavior based on the type of the object it’s interacting with during run-time.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Think of a machine that is designed to throw balls. It doesn’t matter what kind of ball you put into it: a baseball, a tennis ball, a golf ball. The machine doesn’t need to know about the specific type of ball, it just needs to be a ball that it can throw. This is the core concept behind dynamic dispatch: methods can be called based on the run-time type of an object, not its compile-time type.</p>
+<p>Let’s imagine a vending machine that can dispense different kinds of healthy snacks. In programming terms, we have an <code class="docutils literal notranslate"><span class="pre">ISnack</span></code> interface and different classes like <code class="docutils literal notranslate"><span class="pre">Apple</span></code> and <code class="docutils literal notranslate"><span class="pre">Banana</span></code> that implement this interface. Here’s what it might look like:</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">numberOfApples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;five&quot;</span><span class="p">;</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">interface</span><span class="w"> </span><span class="n">ISnack</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">Price</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-5272.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2997.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -375,7 +398,7 @@ function loadDotnetInteractiveApi() {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '5272.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2997.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -429,30 +452,86 @@ else {
 }
 
     </script>
-</div></div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1,22): error CS0029: Cannot implicitly convert type &#39;string&#39; to &#39;int&#39;
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Apple</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ISnack</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Apple&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Price</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="m">1.5</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Banana</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ISnack</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Banana&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Price</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="m">1.0</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>In the above code, we’re trying to assign a <code class="docutils literal notranslate"><span class="pre">string</span></code> value “five” to an integer variable <code class="docutils literal notranslate"><span class="pre">numberOfApples</span></code>. The C# compiler performs a type check and flags an error because a <code class="docutils literal notranslate"><span class="pre">string</span></code> cannot be converted into an integer implicitly.</p>
-<p>If we forget about variables names and values for a moment and only think about types, then we can very easily see why example must produce an error if we think of it like this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="o">=</span> <span class="n">string</span>
+<p>Let’s say that the <code class="docutils literal notranslate"><span class="pre">VendingMachine</span></code> class uses the <code class="docutils literal notranslate"><span class="pre">ISnack</span></code> interface in a method called <code class="docutils literal notranslate"><span class="pre">Dispense</span></code>.
+You pass an argument to the method stating how many items you want, and it tells you how much you must pay.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">VendingMachine</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">ISnack</span><span class="w"> </span><span class="n">snack</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">VendingMachine</span><span class="p">(</span><span class="n">ISnack</span><span class="w"> </span><span class="n">snack</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">snack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">snack</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Dispense</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">quantity</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">totalCost</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">snack</span><span class="p">.</span><span class="n">Price</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">quantity</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;You have to pay {totalCost} BTC for {quantity} {snack.Name}s.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<p>Type checking plays a significant role in writing robust and error-free code. It allows us to catch and fix errors during the compilation stage, before the program is run.</p>
-<p>However, there may be times when you need to convert one type of value into another. C# allows for this as well, using something called ‘type conversion’ or ‘casting’, but more on that in a later chapter. For now, remember that the C# compiler keeps a close eye on the types of your variables and expressions, and isn’t shy about letting you know when something doesn’t add up.</p>
-<p>Type checking at compile-time is one of the features that makes C# a statically typed language.
-The type of every variable and expression is known at compile-time, before the code is run, which is a key aspect of how C# ensures the consistency and reliability of your code.
-Languages that do type checking at run time are known as ‘dynamically typed languages’.</p>
+</div>
+</div>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">VendingMachine</span></code> class might look like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">VendingMachine</span><span class="w"> </span><span class="n">appleMachine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">VendingMachine</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Apple</span><span class="p">());</span>
+<span class="n">VendingMachine</span><span class="w"> </span><span class="n">bananaMachine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">VendingMachine</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Banana</span><span class="p">());</span>
+
+<span class="n">appleMachine</span><span class="p">.</span><span class="n">Dispense</span><span class="p">(</span><span class="m">2</span><span class="p">);</span>
+<span class="n">bananaMachine</span><span class="p">.</span><span class="n">Dispense</span><span class="p">(</span><span class="m">2</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You have to pay 3 BTC for 2 Apples.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You have to pay 2 BTC for 2 Bananas.
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this example, the <code class="docutils literal notranslate"><span class="pre">Dispense</span></code> method takes an integer parameter representing the quantity of snacks the user wants. It then calculates the total cost for the requested quantity, based on the price of the specific snack stocked in the vending machine. This information is then displayed. The type of snack, which affects <strong>the cost calculation, is established at run-time</strong> when we create instances of the <code class="docutils literal notranslate"><span class="pre">VendingMachine</span></code> with different <code class="docutils literal notranslate"><span class="pre">ISnack</span></code> implementations (<code class="docutils literal notranslate"><span class="pre">Apple</span></code> or <code class="docutils literal notranslate"><span class="pre">Banana</span></code>). The cost calculation is not established at compile-time.</p>
+<p>This is a demonstration of dynamic dispatch in action: the specific implementation of <code class="docutils literal notranslate"><span class="pre">ISnack</span></code> isn’t known until run-time, but we can still interact with them polymorphically via the <code class="docutils literal notranslate"><span class="pre">ISnack</span></code> interface. Despite having a single <code class="docutils literal notranslate"><span class="pre">Dispense</span></code> method, different messages can be output depending on the specific type of snack, offering a clear picture of how subtype polymorphism and dynamic dispatch work together.
+This is what we mean when we say that we are ‘treating’ a subtype as a supertype.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The example does not fully illustrate the power of dynamic dispatch and subtype polymorphism. The difference between the <code class="docutils literal notranslate"><span class="pre">Apple</span></code> and <code class="docutils literal notranslate"><span class="pre">Banana</span></code> classes is primarily in the <strong>data</strong> they store (their price), not in their <strong>behavior</strong>.</p>
+<p>The true strength of dynamic dispatch and subtype polymorphism shines when different subtypes vary in their behavior — that is, when they have different <strong>implementations</strong> of the same method. This allows you to write code that operates on a superclass or interface, but which executes different behavior depending on the run-time type of the object.</p>
+<p>In future chapters, we will explore examples where subtypes have significantly different behaviors.
+Remember, the objective here is not just to structure data, but to structure behavior.</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Type-checking exists to enforce a property known as <span class="xref myst">type safety</span>.
-Type safety refers to not allowing the execution of operations that violate the <span class="xref myst">type system</span>.
-Allowing such operations could lead to undefined behavior since their implementation is unspecified.
-C# is believed to be a type-safe language.</p>
+<p>Before leaving the section on dynamic dispatch it should be mentioned that languages that implement dynamic dispatch by means of subtype polymorphism usually provide us with <em>single</em> dynamic dispatch.
+This means that the implementation that is executed depends on the run-time type of one variable.
+We will learn about <em>multiple</em> dynamic dispatch in the chapters on <a class="reference internal" href="visitor-pattern.html"><span class="doc std std-doc">visitor pattern</span></a> and <a class="reference internal" href="pattern-matching.html"><span class="doc std std-doc">pattern matching</span></a>.</p>
 </div>
 </section>
 
@@ -480,23 +559,23 @@ C# is believed to be a type-safe language.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="floating-point-types.html">
+          <a class="next-page" href="inheritance.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">22. </span>Floating-point types</div>
+                <div class="title"><span class="section-number">63. </span>Inheritance</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="type-inference.html">
+          <a class="prev-page" href="run-time-type-vs-compile-time-type.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">20. </span>Type inference</div>
+                <div class="title"><span class="section-number">61. </span>Run-time type vs compile-time type</div>
                 
               </div>
             </a>

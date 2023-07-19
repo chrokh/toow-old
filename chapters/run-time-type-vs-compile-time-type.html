@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="22. Floating-point types" href="floating-point-types.html" /><link rel="prev" title="20. Type inference" href="type-inference.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="62. Dynamic dispatch" href="dynamic-dispatch.html" /><link rel="prev" title="60. Subtype polymorphism" href="subtype-polymorphism.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>21. Type checking - The Object Oriented Way</title>
+        <title>61. Run-time type vs compile-time type - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -185,7 +185,7 @@
 <li class="toctree-l1"><a class="reference internal" href="constants.html">18. Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statements.html">19. Statements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="type-inference.html">20. Type inference</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">21. Type checking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-checking.html">21. Type checking</a></li>
 <li class="toctree-l1"><a class="reference internal" href="floating-point-types.html">22. Floating-point types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enumeration-types.html">23. Enumeration types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="selection-statements.html">24. Selection statements</a></li>
@@ -225,7 +225,7 @@
 <li class="toctree-l1"><a class="reference internal" href="object-composition.html">58. Object composition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interfaces.html">59. Interfaces</a></li>
 <li class="toctree-l1"><a class="reference internal" href="subtype-polymorphism.html">60. Subtype polymorphism</a></li>
-<li class="toctree-l1"><a class="reference internal" href="run-time-type-vs-compile-time-type.html">61. Run-time type vs compile-time type</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">61. Run-time type vs compile-time type</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dynamic-dispatch.html">62. Dynamic dispatch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">63. Inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="overriding.html">64. Overriding</a></li>
@@ -309,23 +309,38 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="type-checking">
-<h1><span class="section-number">21. </span>Type checking<a class="headerlink" href="#type-checking" title="Permalink to this heading">#</a></h1>
-<p>In the world of programming, correctness is crucial. One important way to ensure this is through a feature known as ‘type checking’. You’ve already met the various data types and learned how each variable we declare is associated with a particular type. But what happens if we try to mix things up a bit and use one type where another is expected? That’s where type checking comes into play.</p>
-<p>Type checking is like the security checkpoint at an airport. Just as the security personnel make sure that only authorized and safe items pass through, the C# compiler ensures that the values assigned to variables and the expressions in the code are all of the correct type. If something doesn’t match, the compiler raises an error and stops the execution of the program.
-This is known as a ‘type error’.</p>
-<p>Think of it like trying to fit a round peg into a square hole—it just won’t work. The peg is like a value in your program, and the hole is the variable or expression expecting a particular type.</p>
-<p>Here’s an example:</p>
-<div class="cell tag_raises-exception docutils container">
+          <section class="tex2jax_ignore mathjax_ignore" id="run-time-type-vs-compile-time-type">
+<h1><span class="section-number">61. </span>Run-time type vs compile-time type<a class="headerlink" href="#run-time-type-vs-compile-time-type" title="Permalink to this heading">#</a></h1>
+<p>To understand why subtype polymorphism is important we must understand dynamic dispatch, but to understand dynamic dispatch we must first understand the difference between ‘compile-time types’ and ‘run-time types’.
+Let’s take a closer look at these terms and why they are important.</p>
+<p>In the simplest terms, the compile-time type of a variable is the type that the compiler recognizes when compiling your code. It restricts you to call only those methods and properties on the variable that belong to its compile-time type.
+In contrast, the run-time type of a variable is the actual type of the object that the variable holds during the execution of the program.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The compile-time type of a variable is the type the compiler sees.
+The run-time type is the type that the underlying object actually has.</p>
+</div>
+<figure class="align-default" id="id1">
+<img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1131063698887282788/chrokh_oil_painting_of_bowl_of_different_fruits_d402de4e-b020-49df-89eb-f80b0769460b.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1131063698887282788/chrokh_oil_painting_of_bowl_of_different_fruits_d402de4e-b020-49df-89eb-f80b0769460b.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 61.1 </span><span class="caption-text">Imagine a bowl of various fruits. There are certain actions we can apply to all of them, such as eating. Think of this as the capabilities of the compile-time type. However, each specific fruit type allows for unique interactions, like peeling an apple or squeezing a lemon, which can be thought of as the hidden capabilities of the run-time type.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>For instance, if you have a variable of type <code class="docutils literal notranslate"><span class="pre">IShape</span></code> holding a <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> object, you can only call the methods and properties declared in the <code class="docutils literal notranslate"><span class="pre">IShape</span></code> interface, even though the actual object (i.e., <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>) may have additional methods and properties.</p>
+<p>Let’s assume that <code class="docutils literal notranslate"><span class="pre">IShape</span></code> only demands that its implementors define a property with a getter called <code class="docutils literal notranslate"><span class="pre">Area</span></code> and that <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> defines <code class="docutils literal notranslate"><span class="pre">Area</span></code> but also <code class="docutils literal notranslate"><span class="pre">Width</span></code> and <code class="docutils literal notranslate"><span class="pre">Height</span></code>.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">numberOfApples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;five&quot;</span><span class="p">;</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IShape</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">Area</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-5272.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-4714.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -375,7 +390,7 @@ function loadDotnetInteractiveApi() {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '5272.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '4714.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -429,7 +444,46 @@ else {
 }
 
     </script>
-</div></div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1,22): error CS0029: Cannot implicitly convert type &#39;string&#39; to &#39;int&#39;
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IShape</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Width</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Area</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Width</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Height</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s then declare a variable of type <code class="docutils literal notranslate"><span class="pre">IShape</span></code> but assign it an object of type <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IShape</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now compile code that calls the getter of <code class="docutils literal notranslate"><span class="pre">shape.Area</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shape</span><span class="p">.</span><span class="n">Area</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>But we cannot compile code that calls <code class="docutils literal notranslate"><span class="pre">shape.Width</span></code>.
+Because the compiler only knows that <code class="docutils literal notranslate"><span class="pre">IShape</span></code> contains a get-only property called <code class="docutils literal notranslate"><span class="pre">Area</span></code>.</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">shape</span><span class="p">.</span><span class="n">Width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1,7): error CS1061: &#39;IShape&#39; does not contain a definition for &#39;Width&#39; and no accessible extension method &#39;Width&#39; accepting a first argument of type &#39;IShape&#39; could be found (are you missing a using directive or an assembly reference?)
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
@@ -437,23 +491,26 @@ else {
 </div>
 </div>
 </div>
-<p>In the above code, we’re trying to assign a <code class="docutils literal notranslate"><span class="pre">string</span></code> value “five” to an integer variable <code class="docutils literal notranslate"><span class="pre">numberOfApples</span></code>. The C# compiler performs a type check and flags an error because a <code class="docutils literal notranslate"><span class="pre">string</span></code> cannot be converted into an integer implicitly.</p>
-<p>If we forget about variables names and values for a moment and only think about types, then we can very easily see why example must produce an error if we think of it like this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="o">=</span> <span class="n">string</span>
-</pre></div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>What methods we <em>can</em> call is determined by the <em>compile-time type</em>.</p>
 </div>
-<p>Type checking plays a significant role in writing robust and error-free code. It allows us to catch and fix errors during the compilation stage, before the program is run.</p>
-<p>However, there may be times when you need to convert one type of value into another. C# allows for this as well, using something called ‘type conversion’ or ‘casting’, but more on that in a later chapter. For now, remember that the C# compiler keeps a close eye on the types of your variables and expressions, and isn’t shy about letting you know when something doesn’t add up.</p>
-<p>Type checking at compile-time is one of the features that makes C# a statically typed language.
-The type of every variable and expression is known at compile-time, before the code is run, which is a key aspect of how C# ensures the consistency and reliability of your code.
-Languages that do type checking at run time are known as ‘dynamically typed languages’.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Type-checking exists to enforce a property known as <span class="xref myst">type safety</span>.
-Type safety refers to not allowing the execution of operations that violate the <span class="xref myst">type system</span>.
-Allowing such operations could lead to undefined behavior since their implementation is unspecified.
-C# is believed to be a type-safe language.</p>
+<p>The compile-time type of a variable, as the name suggests, is the type that the compiler sees when it’s compiling your program. It determines what methods and properties the compiler will allow you to call on that variable. If you attempt to use a method or property that isn’t part of the compile-time type, you’ll get a compilation error, even if the actual object at run-time would support that method or property.</p>
+<p>The compile-time type of the variable <code class="docutils literal notranslate"><span class="pre">shape</span></code> is <code class="docutils literal notranslate"><span class="pre">IShape</span></code>. This means that you can only call the methods and properties declared in the <code class="docutils literal notranslate"><span class="pre">IShape</span></code> interface on <code class="docutils literal notranslate"><span class="pre">shape</span></code>, even though it might actually be holding a <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> object that has additional methods.</p>
+<p>In contrast, the run-time type of a variable is the actual type of the object that the variable references at run-time. It can be the same as the compile-time type, but it can also be any <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype</span></a> of the compile-time type.</p>
+<p>Even though the compile-time type of shape is <code class="docutils literal notranslate"><span class="pre">IShape</span></code>, the run-time type is <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>. The shape variable is actually holding a <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> object at run-time.
+This means that the actual implementation of the methods and properties that we invoke come from <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>. We’ll talk more about this in the chapter on <a class="reference internal" href="dynamic-dispatch.html"><span class="doc std std-doc">dynamic dispatch</span></a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Which implementation of the method that is executed is determined by the <em>run-time type</em>.</p>
 </div>
+<p>There’s a trade-off when treating a subtype as its supertype. On one hand, we lose access to the specialized behaviors and properties that the subtype offers, as our reference to the object is now limited to the more general features defined by the supertype. This is akin to focusing on the broader category of ‘fruit’ instead of the specific ‘banana’ or ‘apple’.</p>
+<p>On the other hand, we gain a form of flexibility: our code becomes capable of dealing with any subtype that shares this supertype. This generalization empowers us to write code that’s more versatile and reusable, capable of working with a whole range of objects within the general ‘fruit’ category, rather than being tied to a single specific subtype. So, while we might not be able to access certain specific features, the ability to handle a broader variety of objects can often be a valuable advantage.</p>
+<div class="admonition-key-point admonition">
+<p class="admonition-title">Key point</p>
+<p>The compile-time type of a variable determines what operations you can perform on the variable in your code, whereas the run-time type determines what actual operations occur when your code is executed.</p>
+</div>
+<p>In the future chapters on upcasting and downcasting, we will discuss how we can temporarily regain ‘lost’ information by using techniques like <span class="xref myst">downcasting</span> or the <a class="reference internal" href="visitor-pattern.html"><span class="doc std std-doc">Visitor design pattern</span></a>. But for now, it’s essential to remember that the compile-time type restricts what methods and properties you can call in your code, and it’s the run-time type that determines what actual methods get called when your code runs.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -480,23 +537,23 @@ C# is believed to be a type-safe language.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="floating-point-types.html">
+          <a class="next-page" href="dynamic-dispatch.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">22. </span>Floating-point types</div>
+                <div class="title"><span class="section-number">62. </span>Dynamic dispatch</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="type-inference.html">
+          <a class="prev-page" href="subtype-polymorphism.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">20. </span>Type inference</div>
+                <div class="title"><span class="section-number">60. </span>Subtype polymorphism</div>
                 
               </div>
             </a>
