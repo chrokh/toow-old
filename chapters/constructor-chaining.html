@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="38. Constructors" href="constructors.html" /><link rel="prev" title="36. Access modifiers" href="access-modifiers.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="69. Abstract classes" href="abstract-classes.html" /><link rel="prev" title="67. The base keyword" href="the-base-keyword.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>37. Fields - The Object Oriented Way</title>
+        <title>68. Constructor chaining - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -201,7 +201,7 @@
 <li class="toctree-l1"><a class="reference internal" href="objects.html">34. Objects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classes.html">35. Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="access-modifiers.html">36. Access modifiers</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">37. Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html">37. Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constructors.html">38. Constructors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="the-this-keyword.html">39. The <code class="docutils literal notranslate"><span class="pre">this</span></code> keyword</a></li>
 <li class="toctree-l1"><a class="reference internal" href="instance-methods.html">40. Instance methods</a></li>
@@ -232,7 +232,7 @@
 <li class="toctree-l1"><a class="reference internal" href="overriding.html">65. Overriding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hiding.html">66. Hiding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="the-base-keyword.html">67. The <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword</a></li>
-<li class="toctree-l1"><a class="reference internal" href="constructor-chaining.html">68. Constructor chaining</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">68. Constructor chaining</a></li>
 <li class="toctree-l1"><a class="reference internal" href="abstract-classes.html">69. Abstract classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="everything-is-an-object.html">70. Everything is an object</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interface-inheritance.html">71. Interface inheritance</a></li>
@@ -314,118 +314,8 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="fields">
-<h1><span class="section-number">37. </span>Fields<a class="headerlink" href="#fields" title="Permalink to this heading">#</a></h1>
-<p>Fields provide a mechanism for storing the state or data of an object. Without them, our objects would lack any kind of internal storage to hold their individual characteristics or properties. For instance, imagine trying to represent a <code class="docutils literal notranslate"><span class="pre">Car</span></code> without being able to store details such as its <code class="docutils literal notranslate"><span class="pre">Model</span></code>, <code class="docutils literal notranslate"><span class="pre">Color</span></code> or <code class="docutils literal notranslate"><span class="pre">Speed</span></code>. It would be like trying to describe a car without referring to any of its unique features! With fields, we can store these pieces of information directly within our objects, giving them the ability to represent complex entities with multiple characteristics. This makes our code more representative of the real world, and thereby more intuitive and easier to work with.</p>
-<p>We’ve said that objects bundle of state and behavior. Fields are used to hold state. They are variables that hold the data of the object and can be accessed and manipulated by the methods within and outside the class.
-In some languages, fields are called ‘instance variables’, which helps us understand that that they are variables that belong to an instance.</p>
-<p>Each instance of a class has its own separate set of fields, allowing each object to maintain its unique state. For example, in a <code class="docutils literal notranslate"><span class="pre">Robot</span></code> class, a field <code class="docutils literal notranslate"><span class="pre">BatteryLevel</span></code> might hold the current battery charge of a robot instance. This state can then be used or modified by methods like <code class="docutils literal notranslate"><span class="pre">Charge</span></code> or <code class="docutils literal notranslate"><span class="pre">Move</span></code>, defining the robot’s behavior.</p>
-<p>A field is a variable that is declared directly in a class in C#.
-A field declaration consists of the type followed by the name and ends with a semicolon (<code class="docutils literal notranslate"><span class="pre">;</span></code>). Just like how we declare a variable. Here is an example:</p>
-<div class="cell tag_remove-output docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Car</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Model</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>In this example, we declare a field called <code class="docutils literal notranslate"><span class="pre">Model</span></code> in the <code class="docutils literal notranslate"><span class="pre">Car</span></code> class. We can now create any number of objects of the <code class="docutils literal notranslate"><span class="pre">Car</span></code> class and ‘set’ whatever value we want to their <code class="docutils literal notranslate"><span class="pre">Model</span></code> fields.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Car</span><span class="w"> </span><span class="n">car1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Car</span><span class="p">();</span>
-<span class="n">car1</span><span class="p">.</span><span class="n">Model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Tesla Roadster&quot;</span><span class="p">;</span>
-
-<span class="n">Car</span><span class="w"> </span><span class="n">car2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Car</span><span class="p">();</span>
-<span class="n">car2</span><span class="p">.</span><span class="n">Model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Rivian R1S&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rivian R1S
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now our car objects have different models. We can ‘get’ the values like this:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">car1</span><span class="p">.</span><span class="n">Model</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">car2</span><span class="p">.</span><span class="n">Model</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tesla Roadster
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rivian R1S
-</pre></div>
-</div>
-</div>
-</div>
-<p>Fields can be of any type including built-in types (like <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">string</span></code>, etc.), custom types (like a class you’ve defined), or complex types (like arrays or delegates).</p>
-<div class="cell tag_remove-output docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">CarWash</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Car</span><span class="w"> </span><span class="n">Current</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">CarWash</span><span class="w"> </span><span class="n">wash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CarWash</span><span class="p">();</span>
-<span class="n">wash</span><span class="p">.</span><span class="n">Current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">car1</span><span class="p">;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Fields, by default, take a default value based on their type. Numeric types default to <code class="docutils literal notranslate"><span class="pre">0</span></code>, booleans to <code class="docutils literal notranslate"><span class="pre">false</span></code>, and reference types (which includes strings and custom classes) default to <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Car</span><span class="w"> </span><span class="n">unknown</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Car</span><span class="p">();</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">unknown</span><span class="p">.</span><span class="n">Model</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
-</pre></div>
-</div>
-</div>
-</div>
-<p>Fields can be initialized at the time of declaration or in a constructor. We’ll talk about constructors in its own chapter, but here’s an example of initializing fields at the time of declaration:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Car</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Unknown&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>In the above code, all instances of Car will have the model field initialized to <code class="docutils literal notranslate"><span class="pre">&quot;Unknown&quot;</span></code>, unless explicitly assigned a different value.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Car</span><span class="w"> </span><span class="n">unknown</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Car</span><span class="p">();</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">unknown</span><span class="p">.</span><span class="n">Model</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Unknown
-</pre></div>
-</div>
-</div>
-</div>
-<p>As we saw in the chapter on access modifiers, members can also be <code class="docutils literal notranslate"><span class="pre">private</span></code>. If a field is marked as <code class="docutils literal notranslate"><span class="pre">private</span></code>, it can only be accessed within the same class. This is part of the important idea of <a class="reference internal" href="encapsulation.html"><span class="doc std std-doc">encapsulation</span></a> but we’ll get back to that later.</p>
-<p>To access a private field outside of the class, you need to use methods or properties, which we’ll talk about next.</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="constructor-chaining">
+<h1><span class="section-number">68. </span>Constructor chaining<a class="headerlink" href="#constructor-chaining" title="Permalink to this heading">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
@@ -452,23 +342,23 @@ A field declaration consists of the type followed by the name and ends with a se
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="constructors.html">
+          <a class="next-page" href="abstract-classes.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">38. </span>Constructors</div>
+                <div class="title"><span class="section-number">69. </span>Abstract classes</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="access-modifiers.html">
+          <a class="prev-page" href="the-base-keyword.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">36. </span>Access modifiers</div>
+                <div class="title"><span class="section-number">67. </span>The <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword</div>
                 
               </div>
             </a>

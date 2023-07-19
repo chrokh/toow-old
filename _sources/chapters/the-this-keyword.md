@@ -40,7 +40,7 @@ In this `Car` class, `make` and `color` are instance variables and they have the
 Had we not used the `this` keyword then we would instead have said `make = make` which means that we would have assigned the argument `make` to itself.
 
 The keyword `this` can also be used to call one constructor from another within the same class, a practice known as constructor chaining.
-But we'll talk about this in another chapter.
+But we'll talk about this in a later chapter.
 
 %
 %csharp

@@ -87,6 +87,10 @@ However, since the method `Bark` is only defined in `Dog` and not `Animal` we ca
 animal.Bark();
 ```
 
+```{tip}
+Return to the chapter on [run-time types vs compile-time types](run-time-type-vs-compile-time-type) if the terminology is confusing.
+```
+
 %The `Dog` then has has some own unique behavior with
 %its and adding its unique behavior with the Bark method.
 Since `Animal` is a class we can also of course also instantiate that.
@@ -100,7 +104,7 @@ Animal animal = new Animal() { Name = "Rocky" };
 ```{warning}
 Inheritance is often touted as a mechanism to model real-world relationships. However, viewing real-world relationships as strictly hierarchical, as inheritance suggests, can lead to misunderstandings and overly complicated designs. The world around us is full of complex, cross-cutting relationships that cannot be easily encapsulated within a hierarchy.
 
-Consider the statement "a dog is an animal". While this seems straightforward and easily modeled as a hierarchy (`Dog : Animal`), when we introduce additional facets of reality, like roles (e.g. a pet, a police dog, a stray dog), this hierarchical model quickly becomes convoluted. A dog can be a pet and a police dog at different times or even simultaneously, which doesn't neatly fit into an inheritance hierarchy.
+Consider the statement "a dog is an animal". While this seems straightforward and easily modeled as a hierarchy (`Dog : Animal`), when we introduce additional facets of reality, like roles (e.g. a pet, a police dog, a stray dog), this hierarchical model quickly becomes convoluted. A dog can fulfill roles like a pet, a police dog, or a stray dog, at different times or even simultaneously. These roles do not fit neatly into an inheritance hierarchy.
 %As we progress in our exploration of object-oriented design, remember to challenge the notion of inheritance as a mirror of real-world relationships. It's a tool in our toolbox, but like any tool, it has its place and is not a universal solution.
 ```
 
@@ -111,6 +115,6 @@ While a class can implement multiple interfaces, it can only inherit from a sing
 ```
 
 ```{admonition} Key point
-Inheritance allows a class to inherit the **members and type** of another class. Don't use inheritance unless you want both these things.
-
+Inheritance allows a class to inherit the **members and type** of another class. Use inheritance only if you need both these things.
+```
 
