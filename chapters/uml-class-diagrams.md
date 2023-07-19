@@ -382,3 +382,80 @@ If `Circle` truly implements the interface `IShape` then it must *by definition*
 Pick a syntax and stick to it.
 Consistency is key.
 ```
+
+
+## Inheritance
+
+In UML class diagram notation, inheritance is called "generalization" (or sometimes simply "inheritance") and is depicted using a solid line with a hollow arrow head.
+The arrow points from the subclass to the superclass.
+
+% TODO: REPLACE IMAGE!!
+```{figure} https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Uml_classes_en.svg/800px-Uml_classes_en.svg.png
+:name: fig:uml-class-diagram-realization
+:width: 300
+
+In UML class diagram notation, inheritance is called "generalization" and is depicted using a solid line with a hollow arrow head.
+The arrow points from the implementation to the interface.
+[[Image source](https://en.wikipedia.org/wiki/Class_diagram)].
+```
+
+In the diagram below we have four classes:
+`Sequence`, `PalindromicSequence`, `EvenSequence`, and `OddSequence`.
+The three latter classes all inherit from the class `Sequence`.
+
+We'll discuss the this example more in the [examples section](inheritance:sequences) where we'll also look at similar code.
+```
+     ┌───────────────────────────────────────┐
+     │                Sequence               │
+     ├───────────────────────────────────────┤
+     │                                       │
+     ├───────────────────────────────────────┤
+     │ + <<get>> Current : int               │
+     │ - <<set>> Current : int               │
+     │ + Next () : void                      │
+     │ + Take (int n) : int[]                │
+     └───────────────────────────────────────┘
+                   Δ   Δ   Δ
+           ┌───────┘   │   └─────┐
+           │           │         │
+┌───────────────────┐  │  ┌───────────────────┐
+│    EvenSequence   │  │  │     OddSequence   │
+├───────────────────┤  │  ├───────────────────┤
+├───────────────────┤  │  ├───────────────────┤
+│ + ^Next () : void │  │  │ + ^Next () : void │
+└───────────────────┘  │  └───────────────────┘
+                       │
+             ┌─────────────────────┐
+             │ PalindromicSequence │
+             ├─────────────────────┤
+             ├─────────────────────┤
+             │ + ^Next () : void   │
+             └─────────────────────┘
+
+
+```
+
+Subclasses are conventionally drawn "below" superclasses.
+
+Whether or not to include (meaning: repeat) the inherited members in the subclass varies depending on who you ask.
+Remember that we had this same discussion in the chapter on interfaces?
+A common suggestion, and the choice we have made above, is however to, out of those members that also appear in the superclass, only mention those that override (or hide) members from the superclass.
+
+To be able to tell [overriding](overriding) apart from [hiding](hiding), some prepend the caret symbol (`^`) to the name of the member to indicate that it has been overridden as opposed to hidden.
+
+```{tip}
+Pick a syntax and stick to it.
+Consistency is key.
+```
+
+In the example above we have overriden the implementation of `Next` in all subclasses of `Sequence`.
+All other members are inherited.
+
+% Example: Get rid of the foreach? Or is this perhaps not a great solution?
+
+%- Including abstract classes.
+%- UML class diagram notation.
+%- White-box reuse (as opposed to black-box which is composition) (Gamma et al)
+%- Object type (lowercase is an alias for the same as the uppercase). All classes inherit from object.
+%- Forward ref to Subtype polymorphism
+%- Overriding 
