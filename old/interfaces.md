@@ -357,63 +357,6 @@ If that is the case, then I highly recommend that you move on and come back to t
 
 
 
-(interfaces:uml)=
-### UML class diagrams
-
-In UML class diagram notation, interface implementation is called "realization" and is depicted using a dashed line with a hollow arrow head.
-The arrow points from the implementation to the interface.
-
-% TODO: REPLACE IMAGE!!
-```{figure} https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Uml_classes_en.svg/800px-Uml_classes_en.svg.png
-:name: fig:uml-class-diagram-realization
-:width: 300
-
-In UML class diagram notation, interface implementation is called "realization" and is depicted using a dashed line with a hollow arrow head.
-The arrow points from the implementation to the interface.
-[[Image source](https://en.wikipedia.org/wiki/Class_diagram)].
-```
-
-In the diagram below we are saying that the class `Circle` is implementing the interface `IShape`.
-We're saying that it implements all the members of `IShape` but we are also adding some additional members not present in `IShape`.
-
-```
-┌────────────────────────────────┐
-│         <<interface>>          │
-│            IShape              │
-├────────────────────────────────┤
-│ + <get> Width : double         │
-│ + <set> Width : double         │
-│ + <get> Height : double        │
-│ + <set> Height : double        │
-├────────────────────────────────┤
-│ + Scale (factor:double) : void │
-└────────────────────────────────┘
-               Δ
-               ╎
-               ╎
-               ╎
-┌────────────────────────────────┐
-│            Circle              │
-├────────────────────────────────┤
-│ + <get> Radius : double        │
-│ + <set> Radius : double        │
-│ + <get> Diameter : double      │
-│ + <set> Diameter : double      │
-├────────────────────────────────┤
-│                                │
-└────────────────────────────────┘
-```
-
-Implementations are conventionally drawn "below" interfaces.
-
-Whether or not to include (meaning: repeat) the members of the interface in the implementation varies depending on who you ask.
-Here we have opted to follow the praxis of not repeating the members since the omission leads to no loss of information.
-If `Circle` truly implements the interface `IShape` then it must *by definition* implement all its members.
-
-```{tip}
-Pick a syntax and stick to it.
-Consistency is key.
-```
 
 
 ## Examples
