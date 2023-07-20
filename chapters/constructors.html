@@ -339,7 +339,7 @@
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3018.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3003.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -384,12 +384,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.11:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.135:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3018.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3003.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -445,7 +445,8 @@ else {
     </script>
 </div></div></div>
 </div>
-<p>In the above code, the <code class="docutils literal notranslate"><span class="pre">Car()</span></code> method is the constructor. When we create a new <code class="docutils literal notranslate"><span class="pre">Car</span></code> object, this constructor is called, initializing the <code class="docutils literal notranslate"><span class="pre">Make</span></code> and <code class="docutils literal notranslate"><span class="pre">Color</span></code> fields with the values specified by the constructor body.</p>
+<p>In the above code, the <code class="docutils literal notranslate"><span class="pre">Car()</span></code> method is the constructor. When we create a new <code class="docutils literal notranslate"><span class="pre">Car</span></code> object, this constructor is called, initializing the <code class="docutils literal notranslate"><span class="pre">Make</span></code> and <code class="docutils literal notranslate"><span class="pre">Color</span></code> fields with the values specified by the constructor body.
+The constructor above is called a ‘parameterless constructor’ because it takes no parameters.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Creating an object of the Car class will call the constructor</span>
@@ -506,8 +507,36 @@ Constructors can also take parameters. This allows us to create objects with dif
 </div>
 </div>
 </div>
-<p>A class can have multiple constructors, as long as their parameter lists are different. This is known as constructor overloading, a topic we’ll explore in a future chapter.</p>
-<p>Remember, constructors allow us to control the initial state of our objects, contributing to code that is more predictable and reliable.</p>
+<p>If we don’t define any constructors in our class, the C# compiler provides a parameterless constructor by default. This automatically-provided constructor doesn’t do anything - it has an empty body. But it allows you to create an object of the class.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>As soon as you define a constructor, the C# compiler does <strong>not</strong> automatically add a parameterless constructor.</p>
+</div>
+<p>Since we’ve defined a constructor in the <code class="docutils literal notranslate"><span class="pre">Car</span></code> class above it consequently doesn’t contain a parameterless constructor anymore.
+This means that we cannot instantiate objects without providing the arguments required by the constructor.</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">new</span><span class="w"> </span><span class="nf">Car</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1,5): error CS7036: There is no argument given that corresponds to the required parameter &#39;make&#39; of &#39;Car.Car(string, string)&#39;
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that we get a compiler error in the code above. The error message is telling us that we’re trying to call a constructor that expects two <code class="docutils literal notranslate"><span class="pre">string</span></code> parameters, but we’re not giving it any arguments. Because we’ve defined this constructor, the compiler no longer provides a default parameterless constructor, so it expects us to provide the necessary arguments.</p>
+<p>It should also be mentioned that a class can have multiple constructors, as long as their parameter lists are different. This is known as constructor overloading. But we’ll explore that in a future chapter.</p>
+<div class="admonition-key-point admonition">
+<p class="admonition-title">Key point</p>
+<p>Constructors allow us to control the initial state of our objects, contributing to code that is more predictable and reliable.
+If we don’t specify a constructor, the compiler generates a parameterless constructor for us.</p>
+</div>
+<p>Demanding that all necessary information is passed upon the creation of an object is a very important design idea that we will discuss later in a chapter called <a class="reference internal" href="types-over-tests.html"><span class="doc std std-doc">types over tests</span></a>. Let’s keep going.</p>
 </section>
 
     <script type="text/x-thebe-config">
