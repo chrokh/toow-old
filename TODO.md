@@ -40,6 +40,8 @@
 - Is string interpolation syntactic sugar for `String.Format`? If so then mention this example in static methods chapter.
 - Scopes. Named scopes. Relates to namespaces. [See e.g.](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/basic-concepts)
 - There's a lot of nuance in the old chapter on subtype polymorphism. Spread it in different places?
+- Order of execution: Field initializers vs constructors. Matters?
+- Reading type signatures in C# errors. Like when you say try to instantiate a class that has a constructor that takes parameters, but without passing parameters. `Car.Car(string, string)`.
 
 ## Smaller todos
 

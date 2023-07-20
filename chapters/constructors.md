@@ -34,6 +34,7 @@ public class Car
 ```
 
 In the above code, the `Car()` method is the constructor. When we create a new `Car` object, this constructor is called, initializing the `Make` and `Color` fields with the values specified by the constructor body.
+The constructor above is called a 'parameterless constructor' because it takes no parameters.
 
 ```{code-cell}
 // Creating an object of the Car class will call the constructor
@@ -72,7 +73,28 @@ Console.WriteLine(car.Make);
 Console.WriteLine(car.Color);
 ```
 
-A class can have multiple constructors, as long as their parameter lists are different. This is known as constructor overloading, a topic we'll explore in a future chapter.
+If we don't define any constructors in our class, the C# compiler provides a parameterless constructor by default. This automatically-provided constructor doesn't do anything - it has an empty body. But it allows you to create an object of the class.
 
-Remember, constructors allow us to control the initial state of our objects, contributing to code that is more predictable and reliable.
+```{important}
+As soon as you define a constructor, the C# compiler does **not** automatically add a parameterless constructor.
+```
+
+Since we've defined a constructor in the `Car` class above it consequently doesn't contain a parameterless constructor anymore.
+This means that we cannot instantiate objects without providing the arguments required by the constructor.
+
+```{code-cell}
+:tags: [raises-exception]
+new Car();
+```
+
+Notice that we get a compiler error in the code above. The error message is telling us that we're trying to call a constructor that expects two `string` parameters, but we're not giving it any arguments. Because we've defined this constructor, the compiler no longer provides a default parameterless constructor, so it expects us to provide the necessary arguments.
+
+It should also be mentioned that a class can have multiple constructors, as long as their parameter lists are different. This is known as constructor overloading. But we'll explore that in a future chapter.
+
+```{admonition} Key point
+Constructors allow us to control the initial state of our objects, contributing to code that is more predictable and reliable.
+If we don't specify a constructor, the compiler generates a parameterless constructor for us.
+```
+
+Demanding that all necessary information is passed upon the creation of an object is a very important design idea that we will discuss later in a chapter called [types over tests](types-over-tests). Let's keep going.
 
