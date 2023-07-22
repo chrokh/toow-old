@@ -22,11 +22,18 @@ This separation between interface and implementation has immense benefits. In th
 The same screwdriver can be used for completely different types of screws, so long as the drive style and size is the same. In programming terms, we would say that any given screw type is an implementation of a screw interface.
 ```
 
-An interface in C# is a type that defines a contract. This contract can contain signatures of [methods](instance-methods) and [properties](manually-implemented-properties), as well as [events](events) and [indexers](indexers) which we'll talk about in later chapters. The interface itself, however, does not contain any implementation. It only defines what members a class that implements it should have. Just like a drive style and size only defines how a screw must interface with a screwdriver and vice versa.
+An interface in C# is a type that defines a contract. This contract can contain signatures of [methods](instance-methods) and [properties](manually-implemented-properties), as well as [events](events) and [indexers](indexers) which we'll talk about in later chapters.
+The interface itself, however, does often not contain any implementation.
+It often only defines what members a class that implements it should have. Just like a drive style and size only defines how a screw must interface with a screwdriver and vice versa.
 
 ```{important}
-An interface defines *what* its implementations should do, not *how* to do it.
+An interface usually defines *what* methods and properties a class must have, not *how* these should be implemented.
+It usually defines the *what*, not the *how*.
 %Interfaces are contracts. They define *what* a class can do, not *how* to do it.
+```
+
+```{note}
+An interface can define, so called, [default implementations](interface-default-implementations) of its members but we'll talk about that in a separate chapter. In this chapter we'll only discuss interfaces where the members have no implementation.
 ```
 
 Let's explain this concept with an example. Imagine you're building a drawing application and you have different shapes, such as rectangles and ellipses. Every shape has a width and a height, but the calculation of the area is different for each shape. How can you define a common blueprint for all shapes while still allowing for their individual differences?
@@ -140,7 +147,7 @@ public class Enemy : IDamageable
 }
 ```
 
-Both `Player` and `Enemy` classes implement the `IDamageable` interface but provide different implementations for the `TakeDamage` method. This exemplifies the core principle of interfaces: they allow us to guarantee that a class will have certain members without dictating *how* those members should be implemented.
+Both `Player` and `Enemy` classes implement the `IDamageable` interface but provide different implementations for the `TakeDamage` method. This exemplifies the core principle of interfaces: they allow us to guarantee that a class *will* have certain members without dictating *how* those members should be implemented.
 
 ```{note}
 The term 'interface' is sometimes used in a broader sense. Then, it doesn't refer to the `interface` keyword in C#, but to the idea of a public 'interface' of an object or class. This 'interface' comprises the set of all public members (like methods, properties, and events) that a class provides. They form the 'contract' for interaction that other code can use to interact with objects of that class, without needing to know the details of how these members are implemented.
@@ -150,8 +157,4 @@ In other words, we might talk about the 'interface' of a class, even though the 
 ```
 
 In summary, interfaces are a potent tool for organizing our code and ensuring that our objects can guarantee certain behaviors, regardless of their specific class. They facilitate working with objects in a more flexible and generalized manner, making our code more robust and easier to manage. In the coming chapters you will see that we've only scratched the surface of the power of interfaces.
-
-```{warning}
-Saying the interfaces cannot contain implementations of members is a half-truth. Don't worry about that now though. We'll talk about it later in the chapter on [default interface implementations](default-interface-implementations).
-```
 
