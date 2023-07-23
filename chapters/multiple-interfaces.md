@@ -54,7 +54,7 @@ IPositionable positionable = new Rectangle();
 ```
 
 ```{admonition} Remember
-As we learned in the chapter on [compile-time types and run-time types](compile-time-type-vs-run-time-type) we can only access members available on the compile-time type. So we cannot, for example, call `Width` on a variable of type `IPositionable` even if its run-time type happens to be `Rectangle`.
+As we learned in the chapter on [compile-time types and run-time types](run-time-type-vs-compile-time-type) we can only access members available on the compile-time type. So we cannot, for example, call `Width` on a variable of type `IPositionable` even if its run-time type happens to be `Rectangle`.
 ```
 
 But what happens if multiple interfaces demand a member with the same signature?

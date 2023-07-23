@@ -22,9 +22,11 @@ In contrast, the run-time type of a variable is the actual type of the object th
 %While you might declare a variable who's compile-time type is `Animal`, you might assign it an object of type `Cat`.
 
 ```{tip}
-The compile-time type of a variable is the type the compiler sees.
-The run-time type is the type that the underlying object actually has.
+Run-time type is what it *actually* is, and compile-time type is what we *say* that it is.
 ```
+
+%The compile-time type of a variable is the type the compiler sees.
+%The run-time type is the type that the underlying object actually has.
 
 %{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1131058647380787341/chrokh_vintage_science_poster_of_orange_8e2e6bdc-1aec-496c-bf00-fc0a3d95cba8.png
 %
