@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="72. Everything is an object" href="everything-is-an-object.html" /><link rel="prev" title="70. Abstract classes" href="abstract-classes.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="65. Inheritance" href="inheritance.html" /><link rel="prev" title="63. Multiple interfaces" href="multiple-interfaces.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>71. Interface inheritance - The Object Oriented Way</title>
+        <title>64. Interface default implementations - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -228,14 +228,14 @@
 <li class="toctree-l1"><a class="reference internal" href="run-time-type-vs-compile-time-type.html">61. Run-time type vs compile-time type</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dynamic-dispatch.html">62. Dynamic dispatch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multiple-interfaces.html">63. Multiple interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interface-default-implementations.html">64. Interface default implementations</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">64. Interface default implementations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">65. Inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="overriding.html">66. Overriding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hiding.html">67. Hiding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="the-base-keyword.html">68. The <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constructor-chaining.html">69. Constructor chaining</a></li>
 <li class="toctree-l1"><a class="reference internal" href="abstract-classes.html">70. Abstract classes</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">71. Interface inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface-inheritance.html">71. Interface inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="everything-is-an-object.html">72. Everything is an object</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced-access-modifiers.html">73. Advanced access modifiers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="object-type-conversions.html">74. Type conversions (of objects)</a></li>
@@ -315,242 +315,9 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="interface-inheritance">
-<h1><span class="section-number">71. </span>Interface inheritance<a class="headerlink" href="#interface-inheritance" title="Permalink to this heading">#</a></h1>
-<p>Interfaces not only enable classes to support multiple roles or behaviors, but they also can inherit from one or more other interfaces. This feature provides a way to create hierarchies of related capabilities.
-With interface inheritance we can refine a parent interface’s behavior and even combine multiple parent interfaces.</p>
-<p>We’ll use the interfaces <code class="docutils literal notranslate"><span class="pre">IPositionable</span></code> and <code class="docutils literal notranslate"><span class="pre">ISizable</span></code>, which you might remember from the chapter on <a class="reference internal" href="multiple-interfaces.html"><span class="doc std std-doc">Multiple interfaces</span></a>. In that chapter, we discussed the <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class that implemented both interfaces to represent an object with position and size.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IPositionable</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-<div>
-    <div id='dotnet-interactive-this-cell-3996.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
-        The below script needs to be able to find the current output cell; this is an easy method to get it.
-    </div>
-    <script type='text/javascript'>
-async function probeAddresses(probingAddresses) {
-    function timeout(ms, promise) {
-        return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                reject(new Error('timeout'))
-            }, ms)
-            promise.then(resolve, reject)
-        })
-    }
-
-    if (Array.isArray(probingAddresses)) {
-        for (let i = 0; i < probingAddresses.length; i++) {
-
-            let rootUrl = probingAddresses[i];
-
-            if (!rootUrl.endsWith('/')) {
-                rootUrl = `${rootUrl}/`;
-            }
-
-            try {
-                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
-                    method: 'POST',
-                    cache: 'no-cache',
-                    mode: 'cors',
-                    timeout: 1000,
-                    headers: {
-                        'Content-Type': 'text/plain'
-                    },
-                    body: probingAddresses[i]
-                }));
-
-                if (response.status == 200) {
-                    return rootUrl;
-                }
-            }
-            catch (e) { }
-        }
-    }
-}
-
-function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.15:2048/", "http://127.0.0.1:2048/"])
-        .then((root) => {
-        // use probing to find host url and api resources
-        // load interactive helpers and language services
-        let dotnetInteractiveRequire = require.config({
-        context: '3996.Microsoft.DotNet.Interactive.Http.HttpPort',
-                paths:
-            {
-                'dotnet-interactive': `${root}resources`
-                }
-        }) || require;
-
-            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
-
-            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
-                let paths = {};
-                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
-                
-                let internalRequire = require.config({
-                    context: extensionCacheBuster,
-                    paths: paths,
-                    urlArgs: `cacheBuster=${extensionCacheBuster}`
-                    }) || require;
-
-                return internalRequire
-            };
-        
-            dotnetInteractiveRequire([
-                    'dotnet-interactive/dotnet-interactive'
-                ],
-                function (dotnet) {
-                    dotnet.init(window);
-                },
-                function (error) {
-                    console.log(error);
-                }
-            );
-        })
-        .catch(error => {console.log(error);});
-    }
-
-// ensure `require` is available globally
-if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
-    let require_script = document.createElement('script');
-    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
-    require_script.setAttribute('type', 'text/javascript');
-    
-    
-    require_script.onload = function() {
-        loadDotnetInteractiveApi();
-    };
-
-    document.getElementsByTagName('head')[0].appendChild(require_script);
-}
-else {
-    loadDotnetInteractiveApi();
-}
-
-    </script>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ISizable</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">Width</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now, consider a new interface <code class="docutils literal notranslate"><span class="pre">IDrawable</span></code>, which will require an object to be both positionable and sizable and in addition, to be able to draw itself.</p>
-<p>Here’s how we would define such an interface:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IDrawable</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IPositionable</span><span class="p">,</span><span class="w"> </span><span class="n">ISizable</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="nf">Draw</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Note the syntax: we use the colon (<code class="docutils literal notranslate"><span class="pre">:</span></code>), as we do with <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">class inheritance</span></a> and implementing interfaces, to indicate that <code class="docutils literal notranslate"><span class="pre">IDrawable</span></code> inherits from <code class="docutils literal notranslate"><span class="pre">IPositionable</span></code> and <code class="docutils literal notranslate"><span class="pre">ISizable</span></code>. This means any class that implements <code class="docutils literal notranslate"><span class="pre">IDrawable</span></code> must also implement the members of <code class="docutils literal notranslate"><span class="pre">IPositionable</span></code> and <code class="docutils literal notranslate"><span class="pre">ISizable</span></code>, as well as the <code class="docutils literal notranslate"><span class="pre">Draw</span></code> method defined by <code class="docutils literal notranslate"><span class="pre">IDrawable</span></code> itself.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IDrawable</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Width</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Draw</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Insert drawing logic here.</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Drawing a rectangle at position ({X}, {Y}) with size {Width} x {Height}.&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>When a class implements an interface that inherits from other interfaces, it must provide implementations for all members defined in the entire interface hierarchy.</p>
-</div>
-<p>When we instantiate the <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class, we can treat it as an <code class="docutils literal notranslate"><span class="pre">IDrawable</span></code> and use all the properties and methods that this interface defines:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IDrawable</span><span class="w"> </span><span class="n">drawableRect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">Width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">15</span><span class="w"> </span><span class="p">};</span>
-<span class="n">drawableRect</span><span class="p">.</span><span class="n">Draw</span><span class="p">();</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Drawing a rectangle at position (10, 10) with size 20 x 15.
-</pre></div>
-</div>
-</div>
-</div>
-<p>So, interface inheritance provides a way to define more specialized contracts, making your code more expressive and easier to understand. Like class inheritance, it supports the notion of “is-a” relationships, but between interfaces.</p>
-<div class="admonition-key-point admonition">
-<p class="admonition-title">Key point</p>
-<p>An interface can inherit from one or more other interfaces, leading to a hierarchy of related capabilities that classes can choose to implement.</p>
-</div>
-<p>While an object of the <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class can be treated as an <code class="docutils literal notranslate"><span class="pre">IDrawable</span></code>, it can also be treated as an <code class="docutils literal notranslate"><span class="pre">IPositionable</span></code> or <code class="docutils literal notranslate"><span class="pre">ISizable</span></code>, because these interfaces are part of the inheritance hierarchy of <code class="docutils literal notranslate"><span class="pre">IDrawable</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Rectangle</span><span class="w"> </span><span class="n">rectangle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">Width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">40</span><span class="w"> </span><span class="p">};</span>
-
-<span class="n">IPositionable</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rectangle</span><span class="p">;</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Position: ({0}, {1})&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">pos</span><span class="p">.</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">pos</span><span class="p">.</span><span class="n">Y</span><span class="p">);</span><span class="w"> </span><span class="c1">// Can access X and Y properties</span>
-
-<span class="n">ISizable</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rectangle</span><span class="p">;</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Size: {0}x{1}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">.</span><span class="n">Width</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">.</span><span class="n">Height</span><span class="p">);</span><span class="w"> </span><span class="c1">// Can access Width and Height properties</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Position: (10, 20)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Size: 30x40
-</pre></div>
-</div>
-</div>
-</div>
-<p>However, as we’ve already learned we can only access whatever members have been defined in the <a class="reference internal" href="run-time-type-vs-compile-time-type.html"><span class="doc std std-doc">compile-time type</span></a>.
-So if we treat our objects as one of the interfaces, then we can’t access the members in the other.</p>
-<div class="cell tag_raises-exception docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">pos</span><span class="p">.</span><span class="n">Width</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">size</span><span class="p">.</span><span class="n">X</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1,23): error CS1061: &#39;IPositionable&#39; does not contain a definition for &#39;Width&#39; and no accessible extension method &#39;Width&#39; accepting a first argument of type &#39;IPositionable&#39; could be found (are you missing a using directive or an assembly reference?)
-
-(2,24): error CS1061: &#39;ISizable&#39; does not contain a definition for &#39;X&#39; and no accessible extension method &#39;X&#39; accepting a first argument of type &#39;ISizable&#39; could be found (are you missing a using directive or an assembly reference?)
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Using many smaller interfaces instead of few large ones is an important design principle known as the <a class="reference internal" href="interface-segregation-principle.html"><span class="doc std std-doc">interface segregation principle</span></a>. But we’ll talk more about that later.</p>
-</div>
+          <section class="tex2jax_ignore mathjax_ignore" id="interface-default-implementations">
+<h1><span class="section-number">64. </span>Interface default implementations<a class="headerlink" href="#interface-default-implementations" title="Permalink to this heading">#</a></h1>
+<p>Coming soon.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -562,38 +329,38 @@ So if we treat our objects as one of the interfaces, then we can’t access the 
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: ".net-csharp"
+            mode: "python"
         },
         kernelOptions: {
-            name: ".net-csharp",
+            name: "python3",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = '.net-csharp'</script>
+    <script>kernelName = 'python3'</script>
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="everything-is-an-object.html">
+          <a class="next-page" href="inheritance.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">72. </span>Everything is an object</div>
+                <div class="title"><span class="section-number">65. </span>Inheritance</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="abstract-classes.html">
+          <a class="prev-page" href="multiple-interfaces.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">70. </span>Abstract classes</div>
+                <div class="title"><span class="section-number">63. </span>Multiple interfaces</div>
                 
               </div>
             </a>
