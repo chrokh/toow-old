@@ -43,6 +43,7 @@
 - Order of execution: Field initializers vs constructors. Matters?
 - Reading type signatures in C# errors. Like when you say try to instantiate a class that has a constructor that takes parameters, but without passing parameters. `Car.Car(string, string)`.
 - String.Join used in abstract classes chapter. Introduce where?
+- The Everything is an object chapter must also discuss how classes implicitly inherit from `object`.
 
 ## Smaller todos
 
