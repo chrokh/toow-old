@@ -10,7 +10,7 @@ kernelspec:
   name: .net-csharp
 ---
 
-# Advanced access modifiers
+# Protected access modifier
 
 % TODO: Fragile base class is a great motivation for when you can use `protected`. I've made a todo note about fragile base class somewhere else already. Think: Rectangle, Square, and a public method Scale that fails to work if Square.Width changes both width and height.
 
