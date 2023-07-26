@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="89. Types over tests" href="types-over-tests.html" /><link rel="prev" title="87. Variant generic interfaces" href="variant-generic-interfaces.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="75. Everything is an object" href="everything-is-an-object.html" /><link rel="prev" title="73. Upcasting" href="upcasting.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>88. Design principles - The Object Oriented Way</title>
+        <title>74. Downcasting - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -238,7 +238,7 @@
 <li class="toctree-l1"><a class="reference internal" href="interface-inheritance.html">71. Interface inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="type-conversions.html">72. Type conversions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="upcasting.html">73. Upcasting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="downcasting.html">74. Downcasting</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">74. Downcasting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="everything-is-an-object.html">75. Everything is an object</a></li>
 <li class="toctree-l1"><a class="reference internal" href="advanced-access-modifiers.html">76. Advanced access modifiers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="object-type-conversions.html">77. Type conversions (of objects)</a></li>
@@ -252,7 +252,7 @@
 <li class="toctree-l1"><a class="reference internal" href="generic-methods.html">85. Generic methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">86. Type parameter constraints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">87. Variant generic interfaces</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">88. Design principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design-principles.html">88. Design principles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="types-over-tests.html">89. Types over tests</a></li>
 <li class="toctree-l1"><a class="reference internal" href="single-responsibility-principle.html">90. Single responsibility principle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interface-segregation-principle.html">91. Interface segregation principle</a></li>
@@ -318,11 +318,210 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="design-principles">
-<h1><span class="section-number">88. </span>Design principles<a class="headerlink" href="#design-principles" title="Permalink to this heading">#</a></h1>
+          <section class="tex2jax_ignore mathjax_ignore" id="downcasting">
+<h1><span class="section-number">74. </span>Downcasting<a class="headerlink" href="#downcasting" title="Permalink to this heading">#</a></h1>
+<p>In the previous chapter we treated specific types as more general types. Specifically, we treated apples as fruit. We now turn our attention to the opposite operation, treating fruit as apples, known as downcasting.</p>
+<p>While upcasting involves treating an instance of a subtype as an instance of a supertype, downcasting involves treating an instance of a supertype as an instance of a subtype. Unlike upcasting, downcasting is <em>not always safe</em> and is <em>not implicitly</em> done by the compiler. Why is that?</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Why can I give you an apple if you want a fruit, but I cannot give you a fruit if you want an apple?</p>
+</div>
+<p>Imagine a basket full of different kinds of fruits - apples, bananas, oranges, and more. If we pick up an apple, we can safely say it’s a fruit. That’s upcasting. We’re generalizing the ‘apple’ to ‘fruit’, losing some specific information about the apple, but retaining what’s common to all fruits.</p>
+<p>Now, if we blindly reach into the basket and pick up a fruit, can we always be sure it’s an apple? Definitely not - it could be a banana or an orange! This is the risk we run into with downcasting. We’re trying to treat a general ‘fruit’ as a specific ‘apple’, but there’s no guarantee that the fruit we have is an apple. Sometimes it might be, sometimes it might not. If we happened to pick up an apple, the downcast will succeed. If we happened to pick up something else, like a banana, the downcast will fail.</p>
+<div class="admonition-key-point admonition">
+<p class="admonition-title">Key point</p>
+<p>Downcasting can lead to run-time errors if the actual type of the object doesn’t match the type you’re trying to cast to. It’s not always safe, unlike upcasting, and needs to be done explicitly.</p>
+</div>
+<figure class="align-default" id="id1">
+<img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1131063698887282788/chrokh_oil_painting_of_bowl_of_different_fruits_d402de4e-b020-49df-89eb-f80b0769460b.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1131063698887282788/chrokh_oil_painting_of_bowl_of_different_fruits_d402de4e-b020-49df-89eb-f80b0769460b.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 74.1 </span><span class="caption-text">Imagine a bowl of fruits. If I give you an apple from the bowl, then we can be sure that’s it’s a fruit. But if I blindly reach in and give you a fruit, then we can’t be sure that it’s an apple. Sometimes it will, and sometimes it won’t.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<div class="legend">
+</div>
+</figcaption>
+</figure>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
+<p>Use downcasting sparingly and with great caution.
+Most problems can be effectively solved without resorting to downcasting. The use of downcasting often signifies a design flaw in the application’s architecture. In fact, nearly every piece of code that uses downcasting can be refactored or reimagined in a way that eliminates the need for downcasting altogether. This results in safer and more maintainable code. As we dive deeper into principles of good object-oriented design, you will discover patterns and practices that help us avoid unnecessary downcasting. Remember, just because a tool is available doesn’t mean it’s always the right tool for the job!</p>
+</div>
+<p>Consider the <code class="docutils literal notranslate"><span class="pre">IFruit</span></code>, <code class="docutils literal notranslate"><span class="pre">Apple</span></code>, and <code class="docutils literal notranslate"><span class="pre">Banana</span></code> example from the previous chapter:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IFruit</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="nf">Eat</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-3098.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.15:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '3098.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Apple</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IFruit</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Eat</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Eating an apple.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Banana</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IFruit</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Eat</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Eating a banana.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can upcast an <code class="docutils literal notranslate"><span class="pre">Apple</span></code> or a <code class="docutils literal notranslate"><span class="pre">Banana</span></code> to an <code class="docutils literal notranslate"><span class="pre">IFruit</span></code> without issue:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Apple</span><span class="w"> </span><span class="n">apple</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Apple</span><span class="p">();</span>
+<span class="n">IFruit</span><span class="w"> </span><span class="n">fruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">apple</span><span class="p">;</span><span class="w"> </span><span class="c1">// Upcasting</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>But what if we want to treat the <code class="docutils literal notranslate"><span class="pre">fruit</span></code> not just as any <code class="docutils literal notranslate"><span class="pre">IFruit</span></code>, but specifically as an <code class="docutils literal notranslate"><span class="pre">Apple</span></code>? This is where downcasting comes into play:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Apple</span><span class="w"> </span><span class="n">appleAgain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Apple</span><span class="p">)</span><span class="n">fruit</span><span class="p">;</span><span class="w"> </span><span class="c1">// Downcasting</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With this downcast, we’re telling the compiler to treat the <code class="docutils literal notranslate"><span class="pre">fruit</span></code> as an <code class="docutils literal notranslate"><span class="pre">Apple</span></code>. If the <code class="docutils literal notranslate"><span class="pre">fruit</span></code> actually turns out to be an instance of <code class="docutils literal notranslate"><span class="pre">Apple</span></code>, as it is in this case, then this operation succeeds at run-time and we can use <code class="docutils literal notranslate"><span class="pre">appleAgain</span></code> as an <code class="docutils literal notranslate"><span class="pre">Apple</span></code>.</p>
+<p>However, if the <code class="docutils literal notranslate"><span class="pre">fruit</span></code> turns out to not be an instance of <code class="docutils literal notranslate"><span class="pre">Apple</span></code>, but of some other class implementing <code class="docutils literal notranslate"><span class="pre">IFruit</span></code>, this operation fails and causes a run-time error known as an <code class="docutils literal notranslate"><span class="pre">InvalidCastException</span></code>.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IFruit</span><span class="w"> </span><span class="n">fruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banana</span><span class="p">();</span>
+<span class="n">Apple</span><span class="w"> </span><span class="n">apple</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Apple</span><span class="p">)</span><span class="n">fruit</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">System.InvalidCastException: Unable to cast object of type &#39;Banana&#39; to type &#39;Apple&#39;.</span>
+</pre></div>
+</div>
+<p>The code above throws an <code class="docutils literal notranslate"><span class="pre">InvalidCastException</span></code> because the <code class="docutils literal notranslate"><span class="pre">fruit</span></code> in this case is actually a <code class="docutils literal notranslate"><span class="pre">Banana</span></code>, not an <code class="docutils literal notranslate"><span class="pre">Apple</span></code>, and can thus not be downcast to an <code class="docutils literal notranslate"><span class="pre">Apple</span></code>.</p>
+<p>In both cases however, the code compiles successfully. It compiles because the compiler allows the downcast operation based on the compile-time types involved: <code class="docutils literal notranslate"><span class="pre">Apple</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">IFruit</span></code>. However, at run-time, when the actual type of the object referenced by <code class="docutils literal notranslate"><span class="pre">fruit</span></code> turns out to be <code class="docutils literal notranslate"><span class="pre">Banana</span></code> rather than <code class="docutils literal notranslate"><span class="pre">Apple</span></code>, the downcast operation fails.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There’s a way to check an object’s type before attempting to downcast it, known as <span class="xref myst">type testing</span>, which we’ll discuss in a future chapter. For now, it’s crucial to understand the risks involved in downcasting.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Downcasting, as we’ve seen, can be risky. We are basically trying to regain type information that was intentionally lost through upcasting. This operation may fail at run-time, potentially causing an exception. However, there are safer ways to recover this lost type information without resorting to potentially hazardous downcasting. One of these is using design patterns specifically intended for dealing with such situations, like the <a class="reference internal" href="visitor-pattern.html"><span class="doc std std-doc">Visitor pattern</span></a>.
+The Visitor pattern is one such safer way. It allows us to perform operations on objects based on their actual type. This avoids the risk of run-time errors due to failed downcasting. We’ll discuss the Visitor pattern in more depth in a later chapter.</p>
 </div>
 </section>
 
@@ -335,38 +534,38 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            name: "python3",
+            name: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="types-over-tests.html">
+          <a class="next-page" href="everything-is-an-object.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">89. </span>Types over tests</div>
+                <div class="title"><span class="section-number">75. </span>Everything is an object</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="variant-generic-interfaces.html">
+          <a class="prev-page" href="upcasting.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">87. </span>Variant generic interfaces</div>
+                <div class="title"><span class="section-number">73. </span>Upcasting</div>
                 
               </div>
             </a>

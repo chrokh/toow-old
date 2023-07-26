@@ -28,6 +28,11 @@ Run-time type is what it *actually* is, and compile-time type is what we *say* t
 %The compile-time type of a variable is the type the compiler sees.
 %The run-time type is the type that the underlying object actually has.
 
+```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1132998420001468488/chrokh_tip_of_the_iceberg_c6300c74-9d94-4a05-952f-2b9968cb096f.png
+
+The tip of the iceberg, above the water's surface, is like the compile-time type of an object -- what the compiler can 'see' and verify based on the declared type of a variable. However, beneath the surface lies the vast majority of the iceberg, unseen until run-time. This is like the run-time type of the object behind the variable - the actual type of the object in memory when the program is executed. While the compile-time type provides a limited view of the object, the run-time type reveals its full identity, much like the hidden depth of the iceberg beneath the water's surface.
+```
+
 %{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1131058647380787341/chrokh_vintage_science_poster_of_orange_8e2e6bdc-1aec-496c-bf00-fc0a3d95cba8.png
 %
 %An orange, like an object in programming, has multiple layers. The outer peel can be seen as the compile-time type: it defines what we can directly interact with. The inner flesh, hidden beneath the surface, represents the run-time type: what the object actually is and does.
@@ -35,12 +40,13 @@ Run-time type is what it *actually* is, and compile-time type is what we *say* t
 %%that can be revealed under certain circumstances.
 
 %https://cdn.discordapp.com/attachments/1118630713084870736/1131072251815538738/chrokh_expressive_oil_painting_of_bowl_of_different_fruits_aae3e770-b1b0-463c-a386-e6631a225d30.png
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1131063698887282788/chrokh_oil_painting_of_bowl_of_different_fruits_d402de4e-b020-49df-89eb-f80b0769460b.png
+%``{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1131063698887282788/chrokh_oil_painting_of_bowl_of_different_fruits_d402de4e-b020-49df-89eb-f80b0769460b.png
 
-Imagine a bowl of various fruits. There are certain actions we can apply to all of them, such as eating. Think of this as the capabilities of the compile-time type. However, each specific fruit type allows for unique interactions, like peeling an apple or squeezing a lemon, which can be thought of as the hidden capabilities of the run-time type.
-```
+%Imagine a bowl of various fruits. There are certain actions we can apply to all of them, such as eating. Think of this as the capabilities of the compile-time type. However, each specific fruit type allows for unique interactions, like peeling an apple or squeezing a lemon, which can be thought of as the hidden capabilities of the run-time type.
+%``
 
 For instance, if you have a variable of type `IShape` holding a `Rectangle` object, you can only call the methods and properties declared in the `IShape` interface, even though the actual object (i.e., `Rectangle`) may have additional methods and properties.
+We say that we 'treat' a `Rectangle` as an `IShape`.
 
 %In contrast, the run-time type of a variable is the actual type of the object that the variable holds during the execution of the program. While the compile-time type is `IShape`, the run-time type is `Rectangle`, as it holds a `Rectangle` object.
 
