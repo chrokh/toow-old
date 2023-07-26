@@ -320,46 +320,158 @@
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="everything-is-an-object">
 <h1><span class="section-number">75. </span>Everything is an object<a class="headerlink" href="#everything-is-an-object" title="Permalink to this heading">#</a></h1>
-<p>When trying to learn more about object oriented programming you may have come across the following phrase:</p>
+<p>Delving into the realm of object oriented programming, one phrase you may encounter is:</p>
 <blockquote class="epigraph">
 <div><p>Everything is an object.</p>
 </div></blockquote>
-<p>This is what we referred to when we, earlier in this chapter, called some object oriented languages “pure”.</p>
-<p>When saying that a language such as Smalltalk is a “purely” object oriented language we don’t mean pure in the sense of <span class="xref myst">referential transparency</span>.
-We mean “pure” in the sense that, in the language, everything (or almost everything) is an object.</p>
-<p>We tend to use the word “everything” when talking about how purely object oriented a language is.
-However, it would be more accurate to say something like “all values that you can construct and reference using variables”.</p>
-<p>We haven’t yet talked about <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a> and <a class="reference internal" href="interfaces.html"><span class="doc std std-doc">interfaces</span></a> but another way of saying this is that “all types derive from <code class="docutils literal notranslate"><span class="pre">Object</span></code>”.
-However, this is also only almost true in C#.
-C# is not a purely object object oriented language in the sense that all types derive from <code class="docutils literal notranslate"><span class="pre">Object</span></code>.</p>
-<p>When discussing <span class="xref myst">paradigms</span> we established that C#, like many other contemporary programming languages, is a multi-paradigm language.
-C# contains ideas from procedural, object oriented, as well as functional programming.</p>
-<p>In Java, one problem is, the types that in C# are called built-in value types, or <span class="xref myst">simple types</span>.
-In Java these are known as primitive types and they are not objects, but in C# they actually are.
-So if simple types are objects, then these are not the problem.</p>
-<p>What are the non-object types in C#?
-The non-object types in C# are:</p>
-<ol class="arabic simple">
-<li><p>Pointers</p></li>
-<li><p>Interfaces</p></li>
-<li><p>Open type parameters</p></li>
-</ol>
-<p>You could argue that pointers are an archaic remnant of the procedural days.
-As such, we won’t talk about them here.</p>
-<p>Interfaces however are key to object oriented programming since they (as well as inheritance) enable what is known as <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype polymorphism</span></a>.
-We’ll talk much more about this later.
-Suffice to say however that while interfaces themselves are not objects, any object that implements an interface must (tautologically) be an object because only objects can implement interfaces.</p>
-<p>The same line of reasoning follows with open type parameters.
-Any open type parameter will eventually be replaced by a concrete type that is an object.
-Open type parameters will be discussed in much more detail when we talk about <a class="reference internal" href="generics.html"><span class="doc std std-doc">generic programming</span></a>.</p>
-<p>So, it would be more correct to follow the assertion of Eric Lippert who states that:
-“Every non-pointer type is <em>convertible</em> to object.”</p>
+<p>The degree to which this statement holds true is often used by enthusiasts to gauge the ‘purity’ of an object oriented language. This ‘purity’ does <em>not</em> refer to <span class="xref myst">referential transparency</span> but denotes the extent to which the language embodies the concept of an object. Is <em>everything</em> in the language an object?</p>
+<p>For C#, a more accurate phrasing might be:</p>
 <blockquote class="epigraph">
-<div><p>“Every non-pointer type is <em>convertible</em> to object.”</p>
-<p class="attribution">—<a class="reference external" href="https://docs.microsoft.com/en-gb/archive/blogs/ericlippert/not-everything-derives-from-object">Eric Lippert</a></p>
+<div><p>All values that can be constructed, and referenced using variables are or can be converted into objects.</p>
 </div></blockquote>
-<p>We should however also mention that while an object of a child type can be implicitly converted to its parent class, when value types, such as the simple types like <code class="docutils literal notranslate"><span class="pre">int</span></code>, are converted to objects this causes what is known as <span class="xref myst">boxing</span>.
-More on that later though.</p>
+<p>This implies that in C#, almost every construct that holds a value, is, in essence, an object.</p>
+<p>In C#, this idea stems from the fact that almost all types either, directly or indirectly, implicitly derive from the universal base class <code class="docutils literal notranslate"><span class="pre">Object</span></code> (whose alias is <code class="docutils literal notranslate"><span class="pre">object</span></code>) or can be converted to an object. Let’s illustrate the first case with an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Cat</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="n">Object</span><span class="w"> </span><span class="n">myObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cat</span><span class="p">();</span><span class="w"> </span><span class="c1">// An instance of a class can be upcast to &#39;Object&#39;.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-3372.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.108:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '3372.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>Objects of an arbitrary class that we define ourselves, like the class <code class="docutils literal notranslate"><span class="pre">Cat</span></code> above can be <a class="reference internal" href="upcasting.html"><span class="doc std std-doc">upcast</span></a> into the type <code class="docutils literal notranslate"><span class="pre">Object</span></code>.
+Generally, any instance of any class can be upcast to ‘Object’.</p>
+<p>This is because, in C#, the universal baseclass of all classes is the class <code class="docutils literal notranslate"><span class="pre">Object</span></code>. Practically, think of it like this: whenever you don’t specify that a class inherits from some other class, then that class implicitly inherits from <code class="docutils literal notranslate"><span class="pre">Object</span></code>.</p>
+<p>C# further extends this idea of “object-ness” to built-in value types like <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">bool</span></code>, and others, which can also be treated as objects. This is facilitated by a mechanism known as <span class="xref myst">boxing</span>, where value types are wrapped inside an object, allowing them to participate in object oriented behaviors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span><span class="p">;</span>
+
+<span class="n">Object</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="c1">// Value types can be implicitly converted to &#39;Object&#39;.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So while you strictly wouldn’t say that simple types <em>are</em> objects we could say that they can be implicitly converted into objects.
+Which for all intents and purposes means that we can think of them as being objects.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In some languages, like Smalltalk or Ruby, even classes themselves are objects. In C#, the instances of a class are objects, not the class itself. If we, in regards to C#, say that a class is an object then we mean it in the sense of a cat being an animal. Meaning that the class is a subtype of <code class="docutils literal notranslate"><span class="pre">Object</span></code>.</p>
+</div>
+<p>This makes C# an almost purely object oriented language, with the caveat being a few non-object types, namely: pointers, interfaces, and open type parameters.</p>
+<p>Pointers is an archaic feature borrowed from procedural languages and are not relevant to our object oriented perspective.</p>
+<p>Although <a class="reference internal" href="interfaces.html"><span class="doc std std-doc">Interfaces</span></a> are not objects themselves, any type that implements an interface by definition is an <code class="docutils literal notranslate"><span class="pre">Object</span></code>, since only classes can implement interfaces in C#. As a result, an instance of a class that implements an interface can be treated as an object of that interface type.</p>
+<p>Open type parameters are central to <a class="reference internal" href="generics.html"><span class="doc std std-doc">generic</span></a> programming in C# which we will talk about later. These are placeholder types replaced by concrete types (which are objects) during code execution.</p>
+<p>So while C# indeed is a multi-paradigm language, incorporating principles of procedural, object oriented, and functional programming, it nevertheless strongly leans towards the object oriented side, treating almost all its types as objects.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -371,16 +483,16 @@ More on that later though.</p>
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            name: "python3",
+            name: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
         </article>
       </div>
       <footer>
