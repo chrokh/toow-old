@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="117. Debugging" href="debugging.html" /><link rel="prev" title="115. Business logic" href="business-logic.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="80. Fragile base class problem" href="fragile-base-class-problem.html" /><link rel="prev" title="78. Maintainability" href="maintainability.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>116. Business objects - The Object Oriented Way</title>
+        <title>79. Refactoring - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -141,7 +141,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -234,56 +234,51 @@
 <li class="toctree-l1"><a class="reference internal" href="hiding.html">67. Hiding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="the-base-keyword.html">68. The <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constructor-chaining.html">69. Constructor chaining</a></li>
-<li class="toctree-l1"><a class="reference internal" href="abstract-classes.html">70. Abstract classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interface-inheritance.html">71. Interface inheritance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="type-conversions.html">72. Type conversions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="upcasting.html">73. Upcasting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="downcasting.html">74. Downcasting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="everything-is-an-object.html">75. Everything is an object</a></li>
-<li class="toctree-l1"><a class="reference internal" href="advanced-access-modifiers.html">76. Advanced access modifiers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="object-type-conversions.html">77. Type conversions (of objects)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="abstract-constructed-object-composition.html">78. Abstract constructed object composition</a></li>
-<li class="toctree-l1"><a class="reference internal" href="abstract-injected-object-composition.html">79. Abstract injected object composition</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variance.html">80. Variance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">81. Liskov substitution principle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generics.html">82. Generics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-type-parameters.html">83. Generic type parameters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-types.html">84. Generic types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-methods.html">85. Generic methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">86. Type parameter constraints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">87. Variant generic interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="design-principles.html">88. Design principles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="types-over-tests.html">89. Types over tests</a></li>
-<li class="toctree-l1"><a class="reference internal" href="single-responsibility-principle.html">90. Single responsibility principle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interface-segregation-principle.html">91. Interface segregation principle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="deep-classes.html">92. Deep classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="define-errors-out-of-existence.html">93. Define errors out of existence</a></li>
-<li class="toctree-l1"><a class="reference internal" href="open-closed-principle.html">94. Open-closed principle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dependency-inversion-principle.html">95. Dependency inversion principle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">96. Composition over inheritance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="design-patterns.html">97. Design patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="strategy-pattern.html">98. Strategy pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="null-object-pattern.html">99. Null object pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bridge-pattern.html">100. Bridge pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="delegates.html">101. Delegates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="observer-pattern.html">102. Observer pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="events.html">103. Events</a></li>
-<li class="toctree-l1"><a class="reference internal" href="adapter-pattern.html">104. Adapter pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="factory-method-pattern.html">105. Factory method pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="composite-pattern.html">106. Composite pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="state-pattern.html">107. State pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="iterator-pattern.html">108. Iterator pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="visitor-pattern.html">109. Visitor pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pattern-matching.html">110. Pattern matching</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lambdas.html">111. Lambdas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="linq.html">112. LINQ</a></li>
-<li class="toctree-l1"><a class="reference internal" href="abstraction.html">113. Abstraction / Modeling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="indirection.html">114. Indirection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="business-logic.html">115. Business logic</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">116. Business objects</a></li>
-<li class="toctree-l1"><a class="reference internal" href="debugging.html">117. Debugging</a></li>
-<li class="toctree-l1"><a class="reference internal" href="reading.html">118. Suggested reading</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">119. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="protected.html">70. Protected access modifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="abstract-classes.html">71. Abstract classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface-inheritance.html">72. Interface inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-conversions.html">73. Type conversions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upcasting.html">74. Upcasting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="downcasting.html">75. Downcasting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="everything-is-an-object.html">76. Everything is an object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uml-class-diagrams.html">77. UML class diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintainability.html">78. Maintainability</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">79. Refactoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fragile-base-class-problem.html">80. Fragile base class problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependency-injection.html">81. Dependency injection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">82. Composition over inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variance.html">83. Variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">84. Liskov substitution principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics.html">85. Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-type-parameters.html">86. Generic type parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-types.html">87. Generic types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-methods.html">88. Generic methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">89. Type parameter constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">90. Variant generic interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types-over-tests.html">91. Types over tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="single-responsibility-principle.html">92. Single responsibility principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface-segregation-principle.html">93. Interface segregation principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deep-classes.html">94. Deep classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="define-errors-out-of-existence.html">95. Define errors out of existence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="open-closed-principle.html">96. Open-closed principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependency-inversion-principle.html">97. Dependency inversion principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design-patterns.html">98. Design patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strategy-pattern.html">99. Strategy pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="null-object-pattern.html">100. Null object pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bridge-pattern.html">101. Bridge pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="delegates.html">102. Delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observer-pattern.html">103. Observer pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="events.html">104. Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adapter-pattern.html">105. Adapter pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="factory-method-pattern.html">106. Factory method pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="composite-pattern.html">107. Composite pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state-pattern.html">108. State pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iterator-pattern.html">109. Iterator pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visitor-pattern.html">110. Visitor pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pattern-matching.html">111. Pattern matching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lambdas.html">112. Lambdas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linq.html">113. LINQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">114. Bibliography</a></li>
 </ul>
 
 </div>
@@ -312,18 +307,138 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="business-objects">
-<h1><span class="section-number">116. </span>Business objects<a class="headerlink" href="#business-objects" title="Permalink to this heading">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="refactoring">
+<h1><span class="section-number">79. </span>Refactoring<a class="headerlink" href="#refactoring" title="Permalink to this heading">#</a></h1>
+<section id="motivation">
+<h2><span class="section-number">79.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this heading">#</a></h2>
+<p>Writing software to solve a problem is only half of the challenge.
+Beyond solving the immediate problem, there are two additional challenges.</p>
+<figure class="margin align-default" id="id6">
+<img alt="https://images-na.ssl-images-amazon.com/images/I/51ttgxwzArL._SY445_SX342_QL70_ML2_.jpg" src="https://images-na.ssl-images-amazon.com/images/I/51ttgxwzArL._SY445_SX342_QL70_ML2_.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 79.1 </span><span class="caption-text">“Refactoring: Improving the design of existing code” <span id="id1">[<a class="reference internal" href="bibliography.html#id8" title="M. Fowler. Refactoring: Improving the Design of Existing Code. Addison-Wesley object technology series. Addison-Wesley, 1999. ISBN 9780201485677. URL: http://amazon.christopherokhravi.com?id=0201485672.">Fowler, 1999</a>]</span>.</span><a class="headerlink" href="#id6" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple">
+<li><p>Maintainability.</p></li>
+<li><p>Performance.</p></li>
+</ol>
+<p>In this book we’ve emphasized the importance of writing <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainable</span></a> code.
+But in other contexts, its important to write performant code.
+Performance means taking the space time complexity into consideration.
+Meaning, how fast does the code run (this is the time-part) and how much memory does it use (this is the space-part).</p>
+<p>In this book we are not concerned about performance, but we are concerned about maintainability.
+Regardless of whether you are rewriting your code to improve maintainability or to improve performance, this process is known as “refactoring”.</p>
+</section>
+<section id="definition">
+<h2><span class="section-number">79.2. </span>Definition<a class="headerlink" href="#definition" title="Permalink to this heading">#</a></h2>
+<p>The word “refactoring” is used both as a noun and as a verb.
+In the classic work “Refactoring: Improving the Design of Existing Code” <span id="id2">[<a class="reference internal" href="bibliography.html#id8" title="M. Fowler. Refactoring: Improving the Design of Existing Code. Addison-Wesley object technology series. Addison-Wesley, 1999. ISBN 9780201485677. URL: http://amazon.christopherokhravi.com?id=0201485672.">Fowler, 1999</a>]</span>, Martin Fowler defines the two terms like this:</p>
+<blockquote class="epigraph">
+<div><p>Refactoring (noun): a change made to the internal structure of software to make it easier to understand and cheaper to modify without changing its observable behavior.</p>
+<p>Refactoring (verb): to restructure software by applying a series of refactorings without changing its observable behavior.</p>
+<p class="attribution">—<span id="id3">Fowler [<a class="reference internal" href="bibliography.html#id8" title="M. Fowler. Refactoring: Improving the Design of Existing Code. Addison-Wesley object technology series. Addison-Wesley, 1999. ISBN 9780201485677. URL: http://amazon.christopherokhravi.com?id=0201485672.">1999</a>]</span></p>
+</div></blockquote>
+<p>Notice how Fowler defines the word only in terms of maintainability and not performance.
+Nevertheless, the word “refactoring” is today often used to also refer to performance increasing changes that doesn’t alter observable behavior.</p>
+<p>Notice also how he uses the term “observable behavior”.
+We are changing the software without changing the observable behavior.
+Why does this matter?
+Well, because if we are changing the observable behavior then we are not refactoring.
+If we are changing the observable behavior then we are changing the <span class="xref myst">requirements</span> (and thus the <span class="xref myst">validation</span> and <span class="xref myst">verification</span> criteria) and are essentially writing a new program.</p>
+<p>Of course it happens that requirements change.
+That is the whole reason for discussing <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a>.
+But, the art of refactoring does not allow the changing of requirements.
+To refactor is to rewrite the code so that the observable behavior does not change, while still improving it.
+Either in terms of maintainability or in terms of performance.</p>
+</section>
+<section id="examples">
+<h2><span class="section-number">79.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
+<p>In the classic work “Refactoring: Improving the Design of Existing Code” <span id="id4">[<a class="reference internal" href="bibliography.html#id8" title="M. Fowler. Refactoring: Improving the Design of Existing Code. Addison-Wesley object technology series. Addison-Wesley, 1999. ISBN 9780201485677. URL: http://amazon.christopherokhravi.com?id=0201485672.">Fowler, 1999</a>]</span>, Martin Fowler defines a catalog of 72 refactorings that we often do in object oriented programming.
+They were not inventions of his own, but rather a categorization of refactorings that were already prevelent in the community.</p>
+<p>We haven’t yet learned enough about object oriented programming to talk about all of them.
+Actually, we won’t talk about all of them as refactorings in this book, since many of the refactorings are very mundane.</p>
+<ul class="simple">
+<li><p>Add Parameter</p></li>
+<li><p>Parameterize Method</p></li>
+<li><p>Extract Class</p></li>
+<li><p>Inline Temp</p></li>
+<li><p>Replace Error Code with Exception</p></li>
+<li><p>Rename Method</p></li>
+</ul>
+<p>The first two refactorings I think gives an indication of just how much attention to detail Martin Fowler pays.
+He seems to have strived to really tease out the different reasons for why one wants to perform a particular change.</p>
+<p>In the refactoring known as “add parameter” we essentially find ourselves in a situation where when you want to change a method, you need additional data.
+To get this additional data you simply add another parameter to the method.</p>
+<p>But what is then the refactoring named “parameterize method”?
+Sounds like that’s exactly the same refactoring.
+But no.
+Here Fowler is saying that sometimes you find yourself in a situation where you have multiple methods doing similar things.
+When studying these more closely you conclude that they can actually be merged into a single method if you parameterize what varies.
+What does “parameterize what varies” mean?
+It means taking part of the variation and representing it as data.
+Perhaps you can recall that this is actually something that we’ve already discussed when discussing <span class="xref myst">methods</span>.</p>
+<p>In later later chapters we <em>will</em> talk about a few key refactorings in more detial.
+These ideas have shaped the way we think about what object oriented code ought to look like today.</p>
+<ul class="simple">
+<li><p><span class="xref myst">Replace conditional with polymorphism</span>.</p></li>
+<li><p><a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">Replace inheritance with delegation</span></a> (a.k.a. composition over inheritance).</p></li>
+</ul>
+</section>
+<section id="exercises">
+<h2><span class="section-number">79.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<div class="exercise admonition" id="chapters/refactoring-exercise-0">
+
+<p class="admonition-title"><span class="caption-number">Exercise 79.1 </span></p>
+<section id="exercise-content">
+<p>What is refactoring?</p>
+</section>
 </div>
+<div class="exercise admonition" id="chapters/refactoring-exercise-1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 79.2 </span></p>
+<section id="exercise-content">
+<p>Give an example of a refactoring?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/refactoring-exercise-2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 79.3 </span></p>
+<section id="exercise-content">
+<p>In what sense can the word “refactoring” both be considered a <em>noun</em> and a <em>verb</em>?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/refactoring-exercise-3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 79.4 </span></p>
+<section id="exercise-content">
+<p>Why does refactoring matter?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/refactoring-exercise-4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 79.5 </span></p>
+<section id="exercise-content">
+<p>How can we use refactoring to improve the <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a> of our code?</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/refactoring-exercise-5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 79.6 </span></p>
+<section id="exercise-content">
+<p>In <span id="id5">Fowler [<a class="reference internal" href="bibliography.html#id8" title="M. Fowler. Refactoring: Improving the Design of Existing Code. Addison-Wesley object technology series. Addison-Wesley, 1999. ISBN 9780201485677. URL: http://amazon.christopherokhravi.com?id=0201485672.">1999</a>]</span>, “refactoring” as a noun is defined as
+“a change made to the internal structure of software […] without changing its observable behavior”.
+What does the term “observable behavior” mean?
+Why can’t we just say “without changing the code”?</p>
+</section>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -350,23 +465,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="debugging.html">
+          <a class="next-page" href="fragile-base-class-problem.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">117. </span>Debugging</div>
+                <div class="title"><span class="section-number">80. </span>Fragile base class problem</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="business-logic.html">
+          <a class="prev-page" href="maintainability.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">115. </span>Business logic</div>
+                <div class="title"><span class="section-number">78. </span>Maintainability</div>
                 
               </div>
             </a>
@@ -388,8 +503,30 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">79. Refactoring</a><ul>
+<li><a class="reference internal" href="#motivation">79.1. Motivation</a></li>
+<li><a class="reference internal" href="#definition">79.2. Definition</a></li>
+<li><a class="reference internal" href="#examples">79.3. Examples</a></li>
+<li><a class="reference internal" href="#exercises">79.4. Exercises</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
