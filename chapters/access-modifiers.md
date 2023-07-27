@@ -9,7 +9,7 @@ There are four access modifiers in C#:
 - `internal`.
 - `protected`
 
-Then there's the two more esoteric variations `protected internal` and `private protected`. Here we will only focus on `public`, `private`, and `internal`. We will however discuss `protected` in a later chapter.
+Then there's the two more esoteric variations `protected internal` and `private protected`. Here we will only focus on `public`, `private`, and `internal`. We will however discuss [`protected`](protected) in a later chapter.
 
 %There are four access modifiers in C#: `public`, `private`, `protected`, and `internal`. Then there's the two more esoteric variations `protected internal` and `private protected`. Here we will only focus on `public`, `private`, and `internal`. However, we will discuss `protected` in a later chapter.
 

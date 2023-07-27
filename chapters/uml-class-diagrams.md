@@ -459,3 +459,10 @@ All other members are inherited.
 %- Object type (lowercase is an alias for the same as the uppercase). All classes inherit from object.
 %- Forward ref to Subtype polymorphism
 %- Overriding 
+
+
+## Protected
+
+In UML class diagrams we use the symbol `#` to denote `protected`.
+
+
