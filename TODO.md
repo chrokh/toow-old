@@ -45,6 +45,7 @@
 - String.Join used in abstract classes chapter. Introduce where?
 - The Everything is an object chapter must also discuss how classes implicitly inherit from `object`.
 - Debugging? Debugger in Visual Studio? How to read compiler errors? How to read stack trace upon exceptions?
+- UML Class diagrams multiplicity (p. 34 [specification](https://www.omg.org/spec/UML/2.5.1/PDF)).
 
 ## Smaller todos
 
