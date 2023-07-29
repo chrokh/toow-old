@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="86. Bibliography" href="bibliography.html" /><link rel="prev" title="84. Maintainability" href="maintainability.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="87. Bibliography" href="bibliography.html" /><link rel="prev" title="85. Maintainability" href="maintainability.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>85. Refactoring - The Object Oriented Way</title>
+        <title>86. Refactoring - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -153,7 +153,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
+    <img class="sidebar-logo" src="https://cdn.discordapp.com/attachments/1118630713084870736/1134043079523967067/chrokh_simple_flat_logo_of_bank_vault_purple_pink_blue_purple_m_3ca3faf9-73e1-4b48-b61c-ee3c142e38d3.png" alt="Logo"/>
   </div>
   
   <span class="sidebar-brand-text">The Object Oriented Way</span>
@@ -248,9 +248,10 @@
 <li class="toctree-l1"><a class="reference internal" href="generic-methods.html">81. Generic methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">82. Type parameter constraints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">83. Variant generic interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="maintainability.html">84. Maintainability</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">85. Refactoring</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">86. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uml-class-diagrams.html">84. UML class diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintainability.html">85. Maintainability</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">86. Refactoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">87. Bibliography</a></li>
 </ul>
 
 </div>
@@ -286,15 +287,15 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="refactoring">
-<h1><span class="section-number">85. </span>Refactoring<a class="headerlink" href="#refactoring" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">86. </span>Refactoring<a class="headerlink" href="#refactoring" title="Permalink to this heading">#</a></h1>
 <section id="motivation">
-<h2><span class="section-number">85.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">86.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this heading">#</a></h2>
 <p>Writing software to solve a problem is only half of the challenge.
 Beyond solving the immediate problem, there are two additional challenges.</p>
 <figure class="margin align-default" id="id6">
 <img alt="https://images-na.ssl-images-amazon.com/images/I/51ttgxwzArL._SY445_SX342_QL70_ML2_.jpg" src="https://images-na.ssl-images-amazon.com/images/I/51ttgxwzArL._SY445_SX342_QL70_ML2_.jpg" />
 <figcaption>
-<p><span class="caption-number">Fig. 85.1 </span><span class="caption-text">“Refactoring: Improving the design of existing code” <span id="id1">[<a class="reference internal" href="bibliography.html#id8" title="M. Fowler. Refactoring: Improving the Design of Existing Code. Addison-Wesley object technology series. Addison-Wesley, 1999. ISBN 9780201485677. URL: http://amazon.christopherokhravi.com?id=0201485672.">Fowler, 1999</a>]</span>.</span><a class="headerlink" href="#id6" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 86.1 </span><span class="caption-text">“Refactoring: Improving the design of existing code” <span id="id1">[<a class="reference internal" href="bibliography.html#id8" title="M. Fowler. Refactoring: Improving the Design of Existing Code. Addison-Wesley object technology series. Addison-Wesley, 1999. ISBN 9780201485677. URL: http://amazon.christopherokhravi.com?id=0201485672.">Fowler, 1999</a>]</span>.</span><a class="headerlink" href="#id6" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <ol class="arabic simple">
@@ -309,7 +310,7 @@ Meaning, how fast does the code run (this is the time-part) and how much memory 
 Regardless of whether you are rewriting your code to improve maintainability or to improve performance, this process is known as “refactoring”.</p>
 </section>
 <section id="definition">
-<h2><span class="section-number">85.2. </span>Definition<a class="headerlink" href="#definition" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">86.2. </span>Definition<a class="headerlink" href="#definition" title="Permalink to this heading">#</a></h2>
 <p>The word “refactoring” is used both as a noun and as a verb.
 In the classic work “Refactoring: Improving the Design of Existing Code” <span id="id2">[<a class="reference internal" href="bibliography.html#id8" title="M. Fowler. Refactoring: Improving the Design of Existing Code. Addison-Wesley object technology series. Addison-Wesley, 1999. ISBN 9780201485677. URL: http://amazon.christopherokhravi.com?id=0201485672.">Fowler, 1999</a>]</span>, Martin Fowler defines the two terms like this:</p>
 <blockquote class="epigraph">
@@ -331,7 +332,7 @@ To refactor is to rewrite the code so that the observable behavior does not chan
 Either in terms of maintainability or in terms of performance.</p>
 </section>
 <section id="examples">
-<h2><span class="section-number">85.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">86.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
 <p>In the classic work “Refactoring: Improving the Design of Existing Code” <span id="id4">[<a class="reference internal" href="bibliography.html#id8" title="M. Fowler. Refactoring: Improving the Design of Existing Code. Addison-Wesley object technology series. Addison-Wesley, 1999. ISBN 9780201485677. URL: http://amazon.christopherokhravi.com?id=0201485672.">Fowler, 1999</a>]</span>, Martin Fowler defines a catalog of 72 refactorings that we often do in object oriented programming.
 They were not inventions of his own, but rather a categorization of refactorings that were already prevelent in the community.</p>
 <p>We haven’t yet learned enough about object oriented programming to talk about all of them.
@@ -364,45 +365,45 @@ These ideas have shaped the way we think about what object oriented code ought t
 </ul>
 </section>
 <section id="exercises">
-<h2><span class="section-number">85.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">86.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <div class="exercise admonition" id="chapters/refactoring-exercise-0">
 
-<p class="admonition-title"><span class="caption-number">Exercise 85.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 86.1 </span></p>
 <section id="exercise-content">
 <p>What is refactoring?</p>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/refactoring-exercise-1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 85.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 86.2 </span></p>
 <section id="exercise-content">
 <p>Give an example of a refactoring?</p>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/refactoring-exercise-2">
 
-<p class="admonition-title"><span class="caption-number">Exercise 85.3 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 86.3 </span></p>
 <section id="exercise-content">
 <p>In what sense can the word “refactoring” both be considered a <em>noun</em> and a <em>verb</em>?</p>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/refactoring-exercise-3">
 
-<p class="admonition-title"><span class="caption-number">Exercise 85.4 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 86.4 </span></p>
 <section id="exercise-content">
 <p>Why does refactoring matter?</p>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/refactoring-exercise-4">
 
-<p class="admonition-title"><span class="caption-number">Exercise 85.5 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 86.5 </span></p>
 <section id="exercise-content">
 <p>How can we use refactoring to improve the <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a> of our code?</p>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/refactoring-exercise-5">
 
-<p class="admonition-title"><span class="caption-number">Exercise 85.6 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 86.6 </span></p>
 <section id="exercise-content">
 <p>In <span id="id5">Fowler [<a class="reference internal" href="bibliography.html#id8" title="M. Fowler. Refactoring: Improving the Design of Existing Code. Addison-Wesley object technology series. Addison-Wesley, 1999. ISBN 9780201485677. URL: http://amazon.christopherokhravi.com?id=0201485672.">1999</a>]</span>, “refactoring” as a noun is defined as
 “a change made to the internal structure of software […] without changing its observable behavior”.
@@ -442,7 +443,7 @@ Why can’t we just say “without changing the code”?</p>
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">86. </span>Bibliography</div>
+                <div class="title"><span class="section-number">87. </span>Bibliography</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -453,7 +454,7 @@ Why can’t we just say “without changing the code”?</p>
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">84. </span>Maintainability</div>
+                <div class="title"><span class="section-number">85. </span>Maintainability</div>
                 
               </div>
             </a>
@@ -487,11 +488,11 @@ Why can’t we just say “without changing the code”?</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">85. Refactoring</a><ul>
-<li><a class="reference internal" href="#motivation">85.1. Motivation</a></li>
-<li><a class="reference internal" href="#definition">85.2. Definition</a></li>
-<li><a class="reference internal" href="#examples">85.3. Examples</a></li>
-<li><a class="reference internal" href="#exercises">85.4. Exercises</a></li>
+<li><a class="reference internal" href="#">86. Refactoring</a><ul>
+<li><a class="reference internal" href="#motivation">86.1. Motivation</a></li>
+<li><a class="reference internal" href="#definition">86.2. Definition</a></li>
+<li><a class="reference internal" href="#examples">86.3. Examples</a></li>
+<li><a class="reference internal" href="#exercises">86.4. Exercises</a></li>
 </ul>
 </li>
 </ul>

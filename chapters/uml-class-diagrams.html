@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="36. Access modifiers" href="access-modifiers.html" /><link rel="prev" title="34. Objects" href="objects.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="85. Maintainability" href="maintainability.html" /><link rel="prev" title="83. Variant generic interfaces" href="variant-generic-interfaces.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>35. Classes - The Object Oriented Way</title>
+        <title>84. UML class diagrams - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -141,7 +141,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -199,7 +199,7 @@
 <li class="toctree-l1"><a class="reference internal" href="recursion.html">32. Recursion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="namespaces.html">33. Namespaces</a></li>
 <li class="toctree-l1"><a class="reference internal" href="objects.html">34. Objects</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">35. Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">35. Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="access-modifiers.html">36. Access modifiers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fields.html">37. Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constructors.html">38. Constructors</a></li>
@@ -248,7 +248,7 @@
 <li class="toctree-l1"><a class="reference internal" href="generic-methods.html">81. Generic methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">82. Type parameter constraints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">83. Variant generic interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="uml-class-diagrams.html">84. UML class diagrams</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">84. UML class diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="maintainability.html">85. Maintainability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="refactoring.html">86. Refactoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bibliography.html">87. Bibliography</a></li>
@@ -280,77 +280,86 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="classes">
-<h1><span class="section-number">35. </span>Classes<a class="headerlink" href="#classes" title="Permalink to this heading">#</a></h1>
-<p>We’ve discussed the concept of objects - instances of classes that bundle state and behavior. But where do objects come from? In a class-based language such as C#, they come from classes.</p>
-<p>A class defines a new <a class="reference internal" href="data-types.html"><span class="doc std std-doc">data type</span></a> by specifying a blueprint for creating objects.
-The objects are the values of that type, or members of the set if you will.</p>
-<p>This new data type defines the shape of its objects, in terms of the data they can hold (their state), and the actions they can perform (their behaviors).
-This two things are known as the ‘members’ of the class.</p>
-<figure class="margin align-default" id="id1">
-<img alt="https://media.discordapp.net/attachments/1118630713084870736/1124016439276347514/chrokh_a_blueprint_of_a_Land_Rover_Defender_0baad270-43ca-49d7-b3fc-8d92bd6e89ab.png?width=1440&amp;height=629" src="https://media.discordapp.net/attachments/1118630713084870736/1124016439276347514/chrokh_a_blueprint_of_a_Land_Rover_Defender_0baad270-43ca-49d7-b3fc-8d92bd6e89ab.png?width=1440&amp;height=629" />
-<figcaption>
-<p><span class="caption-number">Fig. 35.1 </span><span class="caption-text">A class is like a ‘blueprint’ for the shape of its objects, in terms of the data they can hold (their state), and the actions they can perform (their behaviors).</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>The most common types of members are:</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="fields.html"><span class="doc std std-doc">Fields</span></a></p></li>
-<li><p><a class="reference internal" href="instance-methods.html"><span class="doc std std-doc">Methods</span></a></p></li>
-<li><p><a class="reference internal" href="constructors.html"><span class="doc std std-doc">Constructors</span></a></p></li>
-<li><p><span class="xref myst">Properties</span></p></li>
-</ul>
-<p>Members can either be, so called ‘instance members’ or they can be ‘static members’. The idea of object oriented programming is tie prefer instance members. We will discuss all the above as instance members in the coming chapters and in a later chapter we will also discuss static members.</p>
-<p>To understand the difference between classes and objects think of the difference between the notion of a number and that of any particular number.
-The idea of a number refers to the set of all numbers.
-But when talking about any particular number we’re talking about a particular member of the set.</p>
-<p>Remember the <code class="docutils literal notranslate"><span class="pre">DateTime</span></code> class we used in the previous chapter? That’s a class, and when we do <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">DateTime(2030,</span> <span class="pre">1,</span> <span class="pre">1)</span></code>, we are creating a new instance of the <code class="docutils literal notranslate"><span class="pre">DateTime</span></code> class.
-The class <code class="docutils literal notranslate"><span class="pre">DateTime</span></code> is the idea of a date and a time, while an instance of the <code class="docutils literal notranslate"><span class="pre">DateTime</span></code> class is an <em>actual</em> and specific date and time.</p>
-<p>Let’s write a simple <code class="docutils literal notranslate"><span class="pre">Car</span></code> class.
-The <code class="docutils literal notranslate"><span class="pre">Car</span></code> class may define fields such as <code class="docutils literal notranslate"><span class="pre">Color</span></code> and <code class="docutils literal notranslate"><span class="pre">Model</span></code>, and instance methods such as <code class="docutils literal notranslate"><span class="pre">Start</span></code> and <code class="docutils literal notranslate"><span class="pre">Stop</span></code>. These properties and methods represent the state and behavior of the <code class="docutils literal notranslate"><span class="pre">Car</span></code> objects.</p>
-<p>In Visual Studio, you can create a new class by following these steps:</p>
-<ol class="arabic simple">
-<li><p>Right-click on your project in the <code class="docutils literal notranslate"><span class="pre">Solution</span> <span class="pre">Explorer</span></code>.</p></li>
-<li><p>Select <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">&gt;</span> <span class="pre">Class...</span></code>.</p></li>
-<li><p>In the <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">New</span> <span class="pre">Item</span></code> dialog box, enter the name of your class (e.g., <code class="docutils literal notranslate"><span class="pre">Car</span></code>) in the <code class="docutils literal notranslate"><span class="pre">Name</span></code> field.</p></li>
-<li><p>Click <code class="docutils literal notranslate"><span class="pre">Add</span></code>.</p></li>
-</ol>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Class names are usually nouns, while method names are usually verbs.</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="uml-class-diagrams">
+<h1><span class="section-number">84. </span>UML class diagrams<a class="headerlink" href="#uml-class-diagrams" title="Permalink to this heading">#</a></h1>
+<p>When reasoning about object oriented design UML class diagrams serve as a particularly efficient tool.
+Even if only informally.
+Having a good understanding of UML class diagram notation is essential if we are to be able to eventually understand object oriented <span class="xref myst">design patterns</span>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>UML class diagrams help visualize the design and structure of a system, allowing us to reason about designs efficiently and without getting bogged down by unnecessary details.</p>
 </div>
-<p>In C#, classes are defined using the class keyword, followed by the name of the class (which should follow PascalCase naming conventions).
-Here’s a basic <code class="docutils literal notranslate"><span class="pre">Car</span></code> class that you can use:</p>
-<div class="cell docutils container">
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://www.omg.org/spec/UML/2.5.1/PDF">UML Class Diagram Specification 2.5.1</a>.</p>
+</div>
+<p>In the UML class diagram below we see a class called <code class="docutils literal notranslate"><span class="pre">Player</span></code> which ‘has’ an <code class="docutils literal notranslate"><span class="pre">IWeapon</span></code> which is an interface. The abstract class <code class="docutils literal notranslate"><span class="pre">Sword</span></code> is an implementation of the interface <code class="docutils literal notranslate"><span class="pre">ISword</span></code> and the classes <code class="docutils literal notranslate"><span class="pre">InvisibleSword</span></code> and <code class="docutils literal notranslate"><span class="pre">WoodenSword</span></code> both inherit from <code class="docutils literal notranslate"><span class="pre">Sword</span></code>. In the diagram we can also see examples of fields (<code class="docutils literal notranslate"><span class="pre">weapon</span></code>), properties (<code class="docutils literal notranslate"><span class="pre">Name</span></code>), access modifiers (<code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">#</span></code>), methods (<code class="docutils literal notranslate"><span class="pre">Attack</span></code>), constructors (<code class="docutils literal notranslate"><span class="pre">Player</span></code>), abstract members (<code class="docutils literal notranslate"><span class="pre">Use</span></code> in <code class="docutils literal notranslate"><span class="pre">Sword</span></code>), and overriding (<code class="docutils literal notranslate"><span class="pre">Use</span></code> in <code class="docutils literal notranslate"><span class="pre">WoodenSword</span></code>).</p>
+<p>The code underlying this system might look something like what we have below.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Car</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IWeapon</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Unknown&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Unknown&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="nf">Use</span><span class="p">();</span>
+<span class="p">}</span>
 
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Start</span><span class="p">()</span>
+<span class="k">public</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Sword</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IWeapon</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">sharpness</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Sharpen</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">sharpness</span><span class="o">++</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Use</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">WoodenSword</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sword</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Use</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Used Wooden Sword with sharpness {sharpness}.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">InvisibleSword</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sword</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Use</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Used Invisible Sword with sharpness {sharpness}.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Player</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">IWeapon</span><span class="w"> </span><span class="n">weapon</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Player</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">IWeapon</span><span class="w"> </span><span class="n">weapon</span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Starting {Color} {Model}.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">weapon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">weapon</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Stop</span><span class="p">()</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Attack</span><span class="p">(</span><span class="n">Player</span><span class="w"> </span><span class="n">other</span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Stopping {Color} {Model}.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{Name}&#39;s turn.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">weapon</span><span class="p">.</span><span class="n">Use</span><span class="p">();</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2286.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-5452.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -400,7 +409,7 @@ function loadDotnetInteractiveApi() {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2286.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '5452.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -456,61 +465,101 @@ else {
     </script>
 </div></div></div>
 </div>
-<p>The name, or identifier, of the class, and hence the data type, is <code class="docutils literal notranslate"><span class="pre">Car</span></code>.
-Everything between the first and last curly bracket (<code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></code>) is the ‘body’ of the class.
-This is where we define its members.
-The keyword <code class="docutils literal notranslate"><span class="pre">public</span></code>, appearing before the class name and its members is an ‘access modifier’ and we’ll explain what that is very soon.</p>
-<p>Once you’ve defined the class, you can use it to instantiate any number of objects in (for example) your Main method (<code class="docutils literal notranslate"><span class="pre">Program.cs</span></code>) like this:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Car</span><span class="w"> </span><span class="n">car1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Car</span><span class="p">();</span><span class="w"> </span><span class="c1">// Creates an object (i.e. a value) of type Car.</span>
-<span class="n">Car</span><span class="w"> </span><span class="n">car2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Car</span><span class="p">();</span><span class="w"> </span><span class="c1">// Creates an object (i.e. a value) of type Car.</span>
-</pre></div>
+<figure class="align-default">
+<img alt="../_images/uml-class-diagram.png" src="../_images/uml-class-diagram.png" />
+</figure>
+<p>Let us now briefly discuss how to model most important object oriented concepts in UML class diagrams one by one. Remember to refer back to the image for visual representations.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>There’s a lot of variation in UML class diagrams that you’ll find in the wild.
+If you’re not following the standard, pick a syntax and stick to it.
+Understandability is key.</p>
 </div>
+<section id="classes">
+<h2><span class="section-number">84.1. </span>Classes<a class="headerlink" href="#classes" title="Permalink to this heading">#</a></h2>
+<p>To depict a class in a UML class diagram we draw a rectangle (known in UML as an ‘entity’) with three sections.
+In the top section we write the ‘identifier’ (meaning the name) of the class.
+In the middle section we write the ‘attributes’ of the class.
+In the bottom section we write the ‘operations’ of the class.</p>
+<p>Attributes are essentially instance variables (which in C# means that they are either instance <a class="reference internal" href="fields.html"><span class="doc std std-doc">fields</span></a> or instance <span class="xref myst">properties</span>).
+Operations on the other hand are <a class="reference internal" href="instance-methods.html"><span class="doc std std-doc">instance methods</span></a>.
+The attributes (instance variables) and operations (instance methods) of a class are collectively referred to as the ‘members’ of the class.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To avoid cluttering the diagram, class members are often omitted, unless they are relevant for the discussion at hand.</p>
 </div>
+</section>
+<section id="fields">
+<h2><span class="section-number">84.2. </span>Fields<a class="headerlink" href="#fields" title="Permalink to this heading">#</a></h2>
+<p>Fields are modeled as attributes. In the second section of an entity we write the name of the field, followed by a colon (<code class="docutils literal notranslate"><span class="pre">:</span></code>) and then the data type of the attribute. See, for example, the <code class="docutils literal notranslate"><span class="pre">sharpness</span></code> field in the <code class="docutils literal notranslate"><span class="pre">Sword</span></code> class.</p>
+</section>
+<section id="access-modifers">
+<h2><span class="section-number">84.3. </span>Access modifers<a class="headerlink" href="#access-modifers" title="Permalink to this heading">#</a></h2>
+<p>We can mark attributes or operations as <code class="docutils literal notranslate"><span class="pre">public</span></code>, <code class="docutils literal notranslate"><span class="pre">private</span></code>, or <code class="docutils literal notranslate"><span class="pre">protected</span></code> by prepending a plus sign (<code class="docutils literal notranslate"><span class="pre">+</span></code>), minus sign (<code class="docutils literal notranslate"><span class="pre">-</span></code>), or hash symbol (<code class="docutils literal notranslate"><span class="pre">#</span></code>), respectively. See, for example, the <code class="docutils literal notranslate"><span class="pre">protected</span></code> field <code class="docutils literal notranslate"><span class="pre">sharpness</span></code> in <code class="docutils literal notranslate"><span class="pre">Sword</span></code> or the <code class="docutils literal notranslate"><span class="pre">private</span></code> field <code class="docutils literal notranslate"><span class="pre">weapon</span></code> in <code class="docutils literal notranslate"><span class="pre">Player</span></code>.</p>
+</section>
+<section id="properties">
+<h2><span class="section-number">84.4. </span>Properties<a class="headerlink" href="#properties" title="Permalink to this heading">#</a></h2>
+<p>Since UML class diagrams are language independent there is no specific support for the C# specific idea of <a class="reference internal" href="auto-implemented-properties.html"><span class="doc std std-doc">properties</span></a>.
+One common way of modeling properties is by means of the <code class="docutils literal notranslate"><span class="pre">«get»</span></code> and <code class="docutils literal notranslate"><span class="pre">«set»</span></code> ‘stereotypes’. We define one UML attribute for the getter and one for the setter and then prepend the appropriate sterotype. See, for example, the <code class="docutils literal notranslate"><span class="pre">Name</span></code> property of the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class.</p>
+</section>
+<section id="instance-methods">
+<h2><span class="section-number">84.5. </span>Instance methods<a class="headerlink" href="#instance-methods" title="Permalink to this heading">#</a></h2>
+<p>Instance methods are modeled as ‘operations’ which means that they are listed in the third section of a box. We can specify both the parameter list of an operation and the return type. See, for example, the <code class="docutils literal notranslate"><span class="pre">Attack</span></code> method in the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class</p>
+</section>
+<section id="constructors">
+<h2><span class="section-number">84.6. </span>Constructors<a class="headerlink" href="#constructors" title="Permalink to this heading">#</a></h2>
+<p>Constructors should, according to the UML specification, be modeled by prepending the <code class="docutils literal notranslate"><span class="pre">«Create»</span></code> ‘stereotype’ to the member. In practice however, we often find diagrams where the constructor is implicit and simply has the same name and return type as the class. See, for example, the <code class="docutils literal notranslate"><span class="pre">Player</span></code> constructor in the diagram.</p>
+</section>
+<section id="composition">
+<h2><span class="section-number">84.7. </span>Composition<a class="headerlink" href="#composition" title="Permalink to this heading">#</a></h2>
+<p>In UML class diagrams we refer to <a class="reference internal" href="object-composition.html"><span class="doc std std-doc">object composition</span></a> as ‘association’ and we draw it using an arrow.
+The arrow points from the subclass to the superclass.
+The arrow is pointing from the type that has a reference (i.e. the ‘composing’ object) to the type that it has a reference to (i.e. the ‘composed’ object).
+We tend to refer to this as ‘has-a’ relationship.
+See, for example, the arrow from the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class to the <code class="docutils literal notranslate"><span class="pre">IWeapon</span></code> interface.
+This refers to the <code class="docutils literal notranslate"><span class="pre">weapon</span></code> field in the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Classes that are in a ‘has-a’ relationship (meaning association) are conventionally drawn next to eachother horizontally, while classes that are in an ‘is-a’ relationship (meaning generalization or realization) are positioned vertically so that the subtype is below the supertype.
+This is a convention and not a rule.</p>
 </div>
-<p>These two variables are pointing to objects of type <code class="docutils literal notranslate"><span class="pre">Car</span></code>.
-They are <em>instances</em> of the idea of a car.
-The class is the idea, the blueprint, and objects are embodiments of that idea.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The code that is generated for you by Visual Studio might contain a <a class="reference internal" href="namespaces.html"><span class="doc std std-doc">namespace</span></a>. For the sake of simplicity we’ve removed the namespaces in our class examples. If you keep the namespace, remember that if you want to use the type somewhere else then that place has to either be within the same namespace, or you have to qualify the type (like <code class="docutils literal notranslate"><span class="pre">MyNamespace.Car</span></code>), or import the namespace through the <code class="docutils literal notranslate"><span class="pre">using</span></code> directive (like <code class="docutils literal notranslate"><span class="pre">using</span> <span class="pre">MyNamespace;</span></code>). Refer to the chapter on <a class="reference internal" href="namespaces.html"><span class="doc std std-doc">namespaces</span></a> if you need a reminder.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>UML divides the concept of association into two types that they call ‘aggregation’ and ‘composition’.
+The term ‘composition’, in UML, does not mean the same thing as <a class="reference internal" href="object-composition.html"><span class="doc std std-doc">object composition</span></a>.
+We won’t discuss the two types of association in detail in this book.
+For more reading, please see the <a class="reference external" href="https://en.wikipedia.org/wiki/Class_diagram">Wikipedia page</a> on UML class diagrams or the <a class="reference external" href="https://www.omg.org/spec/UML/2.5.1/PDF">UML specification</a>.</p>
 </div>
-<p>Since classes define <a class="reference internal" href="reference-types.html"><span class="doc std std-doc">reference types</span></a>, these two objects are not the same, even though they currently seem identical.
-So <code class="docutils literal notranslate"><span class="pre">car1</span> <span class="pre">==</span> <span class="pre">car2</span></code> will evaluate to <code class="docutils literal notranslate"><span class="pre">false</span></code>.
-It is possible to ‘override’ the behavior of the equals operator (<code class="docutils literal notranslate"><span class="pre">==</span></code>) so that the above would return <code class="docutils literal notranslate"><span class="pre">true</span></code>, but we’ll get to that much later.</p>
-<p>You can also set and get the values of the public fields of these objects.
-Let’s set some values so that we can tell the objects apart:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">car1</span><span class="p">.</span><span class="n">Color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Red&quot;</span><span class="p">;</span>
-<span class="n">car2</span><span class="p">.</span><span class="n">Color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Yellow&quot;</span><span class="p">;</span>
-
-<span class="n">car1</span><span class="p">.</span><span class="n">Model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Tesla&quot;</span><span class="p">;</span>
-<span class="n">car2</span><span class="p">.</span><span class="n">Model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Land Rover Defender&quot;</span><span class="p">;</span>
-</pre></div>
+</section>
+<section id="interfaces">
+<h2><span class="section-number">84.8. </span>Interfaces<a class="headerlink" href="#interfaces" title="Permalink to this heading">#</a></h2>
+<p>Interface implementation is, in UML, called ‘realization’ and is depicted using a dashed line with a hollow arrow head.
+The arrow points from the implementation to the interface.
+An interface is an entity but where the ‘classifier’ <code class="docutils literal notranslate"><span class="pre">«interface»</span></code> is added above the identifier.
+See, for example, interface <code class="docutils literal notranslate"><span class="pre">IWeapon</span></code> and its relationship with the abstract class <code class="docutils literal notranslate"><span class="pre">Sword</span></code>.
+Implementations are conventionally drawn ‘below’ interfaces.
+Whether or not to include (meaning: repeat) the members of the interface in the implementation varies depending on who you ask.
+Neither leads to a loss of information since if the implementor implements the interface then it must <em>by definition</em> implement all its members.</p>
+</section>
+<section id="inheritance">
+<h2><span class="section-number">84.9. </span>Inheritance<a class="headerlink" href="#inheritance" title="Permalink to this heading">#</a></h2>
+<p>Inheritance is, in UML, called ‘generalization’ (or sometimes simply ‘inheritance’) and is depicted using a solid line with a hollow arrow head.
+Subclasses are conventionally drawn ‘below’ superclasses.
+To differentiate <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inherited</span></a> or <a class="reference internal" href="overriding.html"><span class="doc std std-doc">overridden</span></a> members apart from <a class="reference internal" href="hiding.html"><span class="doc std std-doc">hidden</span></a> members, inherited or overridden members are either <em>not</em> repeated in the subclass or the caret symbol (<code class="docutils literal notranslate"><span class="pre">^</span></code>) is prepended to their name.
+There is no standard syntax for telling overriding apart from inheriting.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Association (meaning object composition), realization (meaning interface implementation), and generalization (meaning inheritance), are all <strong>directed</strong> relationships.
+For example, just because I consider you my friend, doesn’t mean that you consider yourself mine.
+Similarly, all cats are animals, but not all animals are cats.</p>
 </div>
-</div>
-</div>
-<p>You can of course also invoke any of the public methods that these objects expose.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">car1</span><span class="p">.</span><span class="n">Start</span><span class="p">();</span>
-<span class="n">car2</span><span class="p">.</span><span class="n">Start</span><span class="p">();</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Starting Red Tesla.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Starting Yellow Land Rover Defender.
-</pre></div>
-</div>
-</div>
-</div>
-<p>You should now have some understanding of the difference between classes and objects.
-Don’t worry if it feels like we’re moving to fast. We will talk about classes a lot more in the coming chapters.</p>
+</section>
+<section id="abstract">
+<h2><span class="section-number">84.10. </span>Abstract<a class="headerlink" href="#abstract" title="Permalink to this heading">#</a></h2>
+<p>Abstract classes and members are denoted by writing the classifier in <em>italics</em>.
+If the font does not permit italics, the specification states that we add the textual annotation <code class="docutils literal notranslate"><span class="pre">{abstract}</span></code> after or below.
+See, for example, the abstract class <code class="docutils literal notranslate"><span class="pre">Sword</span></code> and the abstract method <code class="docutils literal notranslate"><span class="pre">Use</span></code>.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -537,23 +586,23 @@ Don’t worry if it feels like we’re moving to fast. We will talk about classe
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="access-modifiers.html">
+          <a class="next-page" href="maintainability.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">36. </span>Access modifiers</div>
+                <div class="title"><span class="section-number">85. </span>Maintainability</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="objects.html">
+          <a class="prev-page" href="variant-generic-interfaces.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">34. </span>Objects</div>
+                <div class="title"><span class="section-number">83. </span>Variant generic interfaces</div>
                 
               </div>
             </a>
@@ -575,8 +624,36 @@ Don’t worry if it feels like we’re moving to fast. We will talk about classe
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">84. UML class diagrams</a><ul>
+<li><a class="reference internal" href="#classes">84.1. Classes</a></li>
+<li><a class="reference internal" href="#fields">84.2. Fields</a></li>
+<li><a class="reference internal" href="#access-modifers">84.3. Access modifers</a></li>
+<li><a class="reference internal" href="#properties">84.4. Properties</a></li>
+<li><a class="reference internal" href="#instance-methods">84.5. Instance methods</a></li>
+<li><a class="reference internal" href="#constructors">84.6. Constructors</a></li>
+<li><a class="reference internal" href="#composition">84.7. Composition</a></li>
+<li><a class="reference internal" href="#interfaces">84.8. Interfaces</a></li>
+<li><a class="reference internal" href="#inheritance">84.9. Inheritance</a></li>
+<li><a class="reference internal" href="#abstract">84.10. Abstract</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
