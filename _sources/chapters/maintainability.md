@@ -1,123 +1,121 @@
 # Maintainability
 
-## Motivation
+What makes a piece of software good? Sure, it solves a problem. It does what it's supposed to do. But a truly good piece of software is much more than just its functionality. It's about how easy it is to change, adapt, and improve over time. It's about how long it takes to find and fix a bug. It's about how easily new features can be added or existing features can be improved. These qualities are all parts of a concept we call 'maintainability'.
 
-```{epigraph}
+```{admonition} important
 How do we provide value today without compromising our ability to provide value in the future?
 ```
 
-Before the advent of agile software development methods it was commonly believed that the cost of change exponentially increases with time.
-The more time you spend in a project, the more stuff you have built, the harder it is to maintain, and the harder it is to change.
-See {numref}`fig:cost-of-change`.
-More stuff equals more problems equals lower speed.
-Seams reasonable right?
-Don't worry, we'll talk about how to mitigate this in a moment.
-
-```{figure} http://agilemodeling.com/images/costOfChangeTraditional.gif
-:name: fig:cost-of-change
-:height: 260px
-
-Before the advent of agile software development methods it was commonly believed that the cost of change exponentially increases with time.
-[Image to be replaced.] [[Source]](http://www.agilemodeling.com/essays/costOfChange.htm)
-```
-
-% TODO: Source for Facebook motto.
-At the same time, software rules the world, and is developed faster than ever before.
-To remain in business you have to adapt to the constant stream of ever changing requirements.
+In today's fast-paced world maintainability is a crucial consideration. Mark Zuckerberg, CEO of Meta (formerly Facebook), famously said, "unless you are breaking stuff, you are not moving fast enough". This mantra captures the ethos of contemporary software development - it is a never-ending cycle of evolution and adaptation to new requirements.
+To remain in business we have to adapt.
 Only the fittest will survive.
 
-%"Move fast and break things" was an internal motto used at Meta (then: Facebook) until 2014.
-Mark Zuckerberg, CEO of Meta (then: Facebook), is reported to have said that "unless you are breaking stuff, you are not moving fast enough" {cite:p}`todo`.
-Allegedly, the phrase, is no longer used as a motto at Meta.
-However, it speaks volumes as to how fast you need to move if you want to eat the competition rather than be eaten.
+%Allegedly, the phrase, is no longer used as a motto at Meta.
+%However, it speaks volumes as to how fast you need to move if you want to eat the competition rather than be eaten.
 
-% TODO: Reference!
-```{epigraph}
-Move fast and break things.
-
--- Interal motto at Facebook until 2014.
-```
-
-Think of it this way.
-Software is more like a service, and less like a product.
-We have to keep rewriting and rewriting to meet the ever-changing needs of our ever-changing customer-base in order to stay ahead of our ever-changing competition.
-You don't write a piece of software and then ship it.
-That model died when the internet became mainstream.
-
-It's like the perfect storm.
-We have to keep rewriting our software to stay in business, but everytime we rewrite it, it becomes harder and harder to change.
+This shift in paradigm has reshaped our understanding of software. Rather than a static product, software has transformed into a dynamic service, continually rewritten to meet the shifting needs of the customer base and stay ahead of the competition.
 
 % TODO: Replace source with real source.
 ```{epigraph}
 The software isn’t finished until the last user is dead.
 
--- Sidney Markowitz [[Source needed](https://maximilianocontieri.com/software-engineering-great-quotes)]
+-- Sidney Markowitz
+%[[Source needed](https://maximilianocontieri.com/software-engineering-great-quotes)]
 ```
 
-When Kent Beck proposed the agile software development method known as eXtreme Programming (XP) he argued that in XP the cost of change curve is flat.
-See {numref}`fig:agile-cost-of-change`.
-A key idea in agile methods is that of short iterations and feedback loops.
-By shipping our software as soon as possible and as often as possible we get the benefit of feedback as soon as possible.
-This idea of releasing early and often is made possibly, partly, by writing software in a way that doesn't require that we rewrite the whole system from scratch every time we're faced with a tiny change request.
+What's worse is that it is surprisingly difficult to figure out what we should even build in the first place. This is perhaps best explained by the classic 'tree swing cartoon' which has been circulating in various versions since the 60's.
+Knowing what to build is often a much harder problem than actually building it.
 
-```{figure} http://agilemodeling.com/images/costOfChangeBeck.gif
-:name: fig:agile-cost-of-change
-:height: 260px
+```{figure} ../images/tree-swing-cartoon.jpg
 
-Authors of some agile methods such as Kent Beck of eXtreme Programming aruged that the cost of change curve can be flattened out.
-[Image to be replaced.] [[Source]](http://www.agilemodeling.com/essays/costOfChange.htm)
+Different people tend to have very different things in mind when describing and building a product. [[Image source]](https://gobackandthrive.wordpress.com/2018/07/08/what-the-customer-wanted/)
 ```
 
-This is not a book on agile methods and there are many ingredients to moving fast in the face of uncertainty.
-However, software quality is certainly one of the ingredients that determine whether we move fast or slow.
+%Think of it this way.
+%Software is more like a service, and less like a product.
+%We have to keep rewriting and rewriting to meet the ever-changing needs of our ever-changing customer-base in order to stay ahead of our ever-changing competition.
+%You don't write a piece of software and then ship it.
+%That model died when the internet became mainstream.
+
+Before the advent of agile software development methods, there was a common belief that the cost of change in software development exponentially increased over time.
+The bigger the project, the more elements it had, the more difficult - and thus, costly - it was to maintain and adapt.
+More stuff equals more problems equals lower speed.
+
+It's like the perfect storm.
+We have to keep rewriting our software to stay in business, but everytime we rewrite it, it becomes harder and harder to change.
+
+However, agile methodologies, like eXtreme Programming (XP) proposed by Kent Beck, have challenged this notion. Agile methods promote short development cycles, continuous feedback, and code that is written to facilitate future changes. These practices help to flatten the 'cost of change' curve, making modifications less costly over time.
+
+%By shipping our software as soon as possible and as often as possible we get the benefit of feedback as soon as possible.
+%This idea of releasing early and often is made possibly, partly, by writing software in a way that doesn't require that we rewrite the whole system from scratch every time we're faced with a tiny change request.
+
+```{figure} ../images/cost-of-change-curves.jpg
+
+Before the advent of agile software development methods it was commonly believed that the cost of change exponentially increases with time (see solid line).
+Authors of some agile methods such as Kent Beck of eXtreme Programming aruged that the cost of change curve can be flattened out (see dashed line).
+The truth probably lies somewhere in between (see purple line).
+[[Image source]](https://www.researchgate.net/publication/312564218_Impact_of_Requirements_Elicitation_Processes_on_Success_of_Information_System_Development_Projects/)
+```
+
+%Maintainability is not just about how easily we can change code but also how we structure it. Interdependencies or coupling between modules can exponentially increase the complexity of changes. By diligently [refactoring](refactoring) code to reduce such coupling, we enhance its maintainability and can better manage the cost of changes.
+
+There are many ways to address move fast in the face of uncertainty, but improving maintainability by focusing on how we write code quality certainly is one.
 How we write our code determines how difficult it is to rewrite it.
-So, if half the game is to be able to rewrite our code as quickly as possible then software quality ought to be immensely important.
+%However, software quality is certainly one of the ingredients that determine whether we move fast or slow.
+%So, if half the game is to be able to rewrite our code as quickly as possible then software quality ought to be immensely important.
 
 ```{important}
 How we write our code determines how difficult it is to change.
 ```
 
-The core problem that makes software difficult to change is known as [coupling](coupling).
-This is a root of much evil that causes the cost of change to grow exponentially.
-We'll talk about coupling in its own chapter but in short the problem is this:
-If all modules are connected to eachother, then everytime we add another module, the number of connections exponentially increases.
-If however, we diligently [refactor](refactoring) to reduce coupling, so that any given module is connected to as few other modules as possible, we improve maintainability and in theory we will be able to "flatten" out the cost of change curve.
+All these considerations underscore the importance of maintainability in modern software development. While we could have focused solely on the 'changeability' of software, this would not be a broad enough view. A well-architected piece of software also needs to be testable to verify and validate its functionality.
+
+Maintainability, therefore, encompasses a broader set of qualities. As per the standards document ISO/IEC 25010:2011, software maintainability is characterized by:
+
+- Modularity
+- Reusability
+- Analysability
+- Modifiability
+- Testability
+
+In the sections that follow, we will briefly explain each of these facets.
+In later chapters we will show different techniques to employ and principles to follow in order to improve these facets.
+%demonstrating how each contributes to creating adaptable, efficient, and high-quality software.
+
+```{admonition} Key point
+To provide value today without compromising our ability to provide more value in the future, we must focus on maintainability which can be understood as: modularity, reusability, analysability, modifiability, and testability.
+```
+
+%The core problem that makes software difficult to change is known as [coupling](coupling).
+%This is a root of much evil that causes the cost of change to grow exponentially.
+%We'll talk about coupling in its own chapter but in short the problem is this:
+%If all modules are connected to eachother, then everytime we add another module, the number of connections exponentially increases.
+%If however, we diligently [refactor](refactoring) to reduce coupling, so that any given module is connected to as few other modules as possible, we improve maintainability and in theory we will be able to "flatten" out the cost of change curve.
 
 % TODO: Coupling figure here.
 
-What would software that supports the fast iterations of agile methods look like?
-Well, I hold that such software is best described as being "maintainable".
-We could have focused on the word "changeable" rather than "maintainable", but that word isn't broad enough.
-Software architecture cannot just merely solve for changeability.
-In order to, for example, [verify](verification) and [validate](validation) that the code actually meets the [requirements](requirements) it must also be testable.
-%Also, in order for
+%What would software that supports the fast iterations of agile methods look like?
+%Well, I hold that such software is best described as being "maintainable".
+%We could have focused on the word "changeable" rather than "maintainable", but that word isn't broad enough.
+%Software architecture cannot just merely solve for changeability.
+%In order to, for example, [verify](verification) and [validate](validation) that the code actually meets the [requirements](requirements) it must also be testable.
 
 %In summary, we are now talking about maintainability because there's a fundamental need for being able to change our programs.
 
-```{important}
-We need to be able to provide value today without compromising our ability to provide more value in the future.
-```
-
 % TODO: MUST TALK MORE ABOUT Premature abstraction!?
-
-
 
 % TODO: What about the other characteristics from here: https://en.wikipedia.org/wiki/Software_design#Design_considerations
 
-(maintainability:characteristics)=
-(maintainability:definition)=
-## Definition
-
-And so we find ourselves staring at the word "maintainability" wondering what it actually means.
-Lucky for us, the standards document ISO/IEC 25010:2011 {cite:p}`todo` has defined "maintainability" in the context of software as being comprised of the following five characteristics.
-
-1. Modularity
-2. Reusability
-3. Analysability
-4. Modifiability
-5. Testability
-
-We will now dissect the characteristics one by one.
+%And so we find ourselves staring at the word "maintainability" wondering what it actually means.
+%Lucky for us, the standards document ISO/IEC 25010:2011 has defined "maintainability" in the context of software as being comprised of the following five characteristics.
+%
+%1. Modularity
+%2. Reusability
+%3. Analysability
+%4. Modifiability
+%5. Testability
+%
+%We will now dissect the characteristics one by one.
 
 
 (modularity)=
@@ -126,17 +124,20 @@ We will now dissect the characteristics one by one.
 ```{epigraph}
 Degree to which a system or computer program is composed of discrete components such that a change to one component has minimal impact on other components.
 
--- {cite:t}`isoiec25010`
+-- ISO/IEC 25010:2011
 ```
-
-When we want to change something in a particular place in our code base, how many other places do we also have to change to make this change happen?
+If we want to change something in a specific part of our code base, how many other areas do we need to adjust for this change to occur?
 This is the question that modularity deals with.
 
-When your code is [tightly coupled](coupling) and monolithic we have to change code in many different places as soon as we want to make a change.
-When code is loosely coupled and modular then a change requires us to change code in very few places.
+In essence, modularity manages software complexity by breaking it down into distinct, loosely coupled components. This design approach allows developers to modify or update a specific part of the system without causing the need for widespread changes, fostering more efficient and less error-prone adaptations.
 
-What are some ways to achieve modularity in software?
-We will talk about all these principles in future chapters, but in short, the idea is to build simple things that can be composed in order to solve complex problems.
+Conversely, software that lacks modularity and is tightly coupled presents challenges when changes need to be implemented. In such instances, modifications can trigger ripple effects across the system, demanding alterations in multiple areas. This interconnectedness can result in increased time, cost, and the potential for errors.
+
+
+%When your code is [tightly coupled](coupling) and monolithic we have to change code in many different places as soon as we want to make a change.
+%When code is loosely coupled and modular then a change requires us to change code in very few places.
+
+%How to achieve modularity will be explored in coming chapters. Essentially however, it surrounds building simple, standalone components which can be composed in order to solve complex problems.
 
 %but here are a few quick notes with forward references.
 %By following the [single responsibility principle](single-responsibility-principle) and the [interface segregation principle](interface-segregation-principle) we avoid putting too many concerns in a single place and organize our code based on "reasons to change".
@@ -150,86 +151,87 @@ We will talk about all these principles in future chapters, but in short, the id
 ```{epigraph}
 Degree to which an asset can be used in more than one system, or in building other assets.
 
--- {cite:t}`isoiec25010`
+-- ISO/IEC 25010:2011
 ```
+
+A high level of modularity does not automatically imply high reusability. If code is not being reused despite its modularity, there may be underlying issues such as code duplication. Ideally, we should strive for fundamental abstractions that enable us to build systems from as few unique components as possible.
 
 %The choice of the word "system" in the quote above is, in my view, quite unfortunate.
 %One might read "another system" as meaning "another product".
 
-In software we have the saying "premature abstraction".
-This saying captures the problem of generalizing code before we have sufficient information to determine what problems we actually will need to solve.
+%What is the point of modularity without reusability?
+%In such a case I would guess that we're still duplicating code.
+%Possibly without realizing it.
+%Think about it.
+%Is modularity even useful if we don't have reusability?
+%Isn't the idea to strive for fundamental abstractions so that we can build our systems from as few abstractions as possible?
 
-```{figure} https://m.media-amazon.com/images/I/51uaWR-TlbL._AC_SY780_.jpg
-:figclass: margin
-:width: 200px
+However, reusability should not be viewed as an end in itself, but rather as a tool. It needs to be economically justifiable; we should aim for reusability when it aligns with the actual reuse potential.
+Striving to make our software solve problems we don't yet need to solve is, arguably, a strategy that will put us out of business.
 
-[Built to sell, by John Warrillow](http://amazon.christopherokhravi.com/?id=1591845823).
-```
+In software development, the term "premature abstraction" captures the pitfalls of generalizing code too early, before the full scope of problems to be solved becomes clear.
+%This saying captures the problem of generalizing code before we have sufficient information to determine what problems we actually will need to solve.
 
-In business, authors like John Warrillow (see for example "Built to sell" {cite:p}`warrillow2011`) have popularized the value of not expanding into too many verticals too soon.
-The argument being that we should create a strong system that sells few products or services before we venture into new verticals which would require an even broader system.
+This idea has parallels in business.
+Authors like John Warrillow (see "[Built to sell](https://geni.us/lXIc)" argue that businesses should develop robust systems for selling a few products or services before branching out into new verticals (which would require an even broader system). For software developers, this suggests a focus on solving current, known problems instead of designing for hypothetical future scenarios.
+What is the point of solving future problems if we can't stay in business by solving our current ones?
 
-For us as software developers, this means that we should refrain from thinking too much about how the code that we write now could be used to solve problems in the future, that we don't yet know if we will face.
-What does it matter that we have software that can solve problems in the future if we our lack of solutions to the problems that we have now take us out of business?
+%``{figure} https://m.media-amazon.com/images/I/51uaWR-TlbL._AC_SY780_.jpg
+%:figclass: margin
+%:width: 140px
+%
+%[Built to sell, by John Warrillow](https://geni.us/lXIc).
+%``
 
-In my reading, we should, in the context of maintainability, interpret "reusability" as possible reusability right now or in the immediate future.
-However, the cost-benefit analysis of possible reuse in the future is not always straight-forward.
-It ought to go something like this:
+%For us as software developers, this means that we should refrain from thinking too much about how the code that we write now could be used to solve problems in the future, that we don't yet know if we will face.
+%What does it matter that we have software that can solve problems in the future if we our lack of solutions to the problems that we have now take us out of business?
 
-```{epigraph}
-The cost of developing an abstraction now must be lower than the present value of the cost of developing that abstraction in the future, multiplied by the probability that we need that abstraction in the first place.
-```
-
-I'm by no means suggesting that we actually ever do this calculation.
-I'm suggesting that when we reason about whether to get out and hunt for an abstraction, our reasoning should follow those general lines.
-The formula is obviously too simplistic.
-For one it doesn't take into account the possible immediate benefits of reusing the abstraction for other purposes now.
-
+%In my reading, we should, in the context of maintainability, interpret "reusability" as possible reusability right now or in the immediate future.
+%However, the cost-benefit analysis of possible reuse in the future is not always straight-forward.
+%It ought to go something like this:
+%
+%The cost of developing an abstraction now must be lower than the present value of the cost of developing that abstraction in the future, multiplied by the probability that we need that abstraction in the first place.
+%
+%I'm by no means suggesting that we actually ever do this calculation.
+%I'm suggesting that when we reason about whether to get out and hunt for an abstraction, our reasoning should follow those general lines.
+%The formula is obviously too simplistic.
+%For one it doesn't take into account the possible immediate benefits of reusing the abstraction for other purposes now.
+%
 %However, when we reason about reuse in the immediate future, the value of being able to reuse a given asset minus the cost of having to write it in a more general way now, must be greater than the cost of simply writing that code later.
-
-So we should *not* use this reusability characteristic to justify increasing the level of abstraction *only* because that abstraction will be useful *once we expand into a new vertical*.
-Striving to make software assets usable across multiple products, that don't already exist is, arguably, a strategy that will put you out of business.
-
-```{epigraph}
-A sparrow in thy hand is better than a thousand sparrows flying.
-
--- Ancient proverb.
-```
-
-```{seealso}
-If you're intrigued by this line of economic reasoning I would recommend that you look into the concept of the [time value of money](https://en.wikipedia.org/wiki/Time_value_of_money).
-This will lead you to understand how to do [Present Value (PV)](https://en.wikipedia.org/wiki/Present_value) calculations which hopefully will forever change how you think about how we should spend our time writing code.
-I also happen to have an informal (albeit old) [video](https://youtu.be/c3kUElWSu5Y) on this topic.
-```
-
-On the flipside, what does it matter if modularity is high if reusability is low?
-In such a case I would guess that we're still duplicating code.
-Possibly without realizing it.
-Think about it.
-Is modularity even useful if we don't have reusability?
-Isn't the idea to strive for fundamental abstractions so that we can build our systems from as few abstractions as possible?
+%
+%``{epigraph}
+%A sparrow in thy hand is better than a thousand sparrows flying.
+%
+%-- Ancient proverb.
+%``
+%
+%``{seealso}
+%If you're intrigued by this line of economic reasoning I would recommend that you look into the concept of the [time value of money](https://en.wikipedia.org/wiki/Time_value_of_money).
+%This will lead you to understand how to do [Present Value (PV)](https://en.wikipedia.org/wiki/Present_value) calculations which hopefully will forever change how you think about how we should spend our time writing code.
+%I also happen to have an informal (albeit old) [video](https://youtu.be/c3kUElWSu5Y) on this topic.
+%``
 
 % TODO: Reintroduce this?
 %Language Integrated Queries ([LINQ](linq)) is a great feature in the .NET framework which I think serves as a great example of high reusability.
 %It's not just about the code being modular in the sense of being isolated from cascading change.
 %It's also about being able to use the same code to solve a wide array of potential problems.
 
-When I did my Ph.D., my supervisor used advise me to: "stick your head in as few guillotines as possible" when writing research papers.
-With this he meant, say as little as you can, because the more you say, the more risk of error you introduce.
-I think this is great advice.
-Do few things, and do them with utter excellence.
-But, make sure that the things you do are so useful that they can be used for lots of other different things.
+%When I did my Ph.D., my supervisor used advise me to: "stick your head in as few guillotines as possible" when writing research papers.
+%With this he meant, say as little as you can, because the more you say, the more risk of error you introduce.
+%I think this is great advice.
+%Do few things, and do them with utter excellence.
+%But, make sure that the things you do are so useful that they can be used for lots of other different things.
 
 % TODO: Reintroduce this?
-%```{seealso}
+%``{seealso}
 %Another prime example of building a small set of small but enormously reusable combinators is the classic work of Simon Peyton Jones {cite:p}`peytonJonesEtAl2000` on the composition of financial contracts.
 %Whenever you start dipping your toes in functional programming I highly recommend that you put this research paper on your todo list.
 %There's also a [video recording](https://www.youtube.com/watch?v=b0zFmWsnoV0) available online of a presentation Simon Peyton Jones did back in 2008.
-%```
+%``
 
-But remember, reusability is a means, not an end.
-Reusability, only for the sake of reusability is not economically justifiable.
-We must strive for reusability only when it makes sense to actually reuse.
+%But remember, reusability is a means, not an end.
+%Reusability, only for the sake of reusability is not economically justifiable.
+%We must strive for reusability only when it makes sense to actually reuse.
 
 % TODO: My thesis? Showed that this can be applied to policy interventions.
 
@@ -240,103 +242,109 @@ We must strive for reusability only when it makes sense to actually reuse.
 ```{epigraph}
 Degree of effectiveness and efficiency with which it is possible to assess the impact on a product or system of an intended change to one or more of its parts, or to diagnose a product for deficiencies or causes of failures, or to identify parts to be modified.
 
--- {cite:t}`isoiec25010`
+-- ISO/IEC 25010:2011
 ```
 
-Think of your code as a model of the real world.
-The fewer abstractions your model consists of, and the simpler these abstractions are the simpler that model is to reason about.
-Notice how we said "simple" rather than "small".
-Small does not always mean analysable.
-Simple things are simple to analyse.
+When writing code, think of it as a real-world model. The more straightforward your abstractions and the fewer you have, the simpler it is to reason about your model. Note the emphasis on "simplicity" over "size" – small code is not always easy to analyze, but simple code is.
 
-Consequently, the goal cannot be for components to be modular, reusable, and small.
-Instead, they must be modular, reusable, and analysable.
 
-Code golf is a type of programming competition wherein players try solve a given problem with the smallest possible source code.
-In other words, they try to write as short programs as possible.
-Code golf solutions are, for all practical purposes, non-readable for humans.
-Consequently, they are not analysable.
+The goal should be for software components to be modular, reusable, and analysable, not just small. This is where the concept of 'code golf', a programming competition where the goal is to solve problems with the smallest possible source code, falls short. While these solutions may be concise, they are practically indecipherable to humans and thus not analyzable.
 
-But why would I need to change my code you might ask?
-If I just write it correctly the first time around, then there's no need for analysability.
-Well, think back to the motivation section of this chapter and the chapters on [validation](validation) and [verification](verification).
-These are non-trivial problems causing us to think of software as something that's built incrementally.
+"Why would I need to analyse my code?" you might ask. "If I write it correctly the first time around, there's no need for analysability." This mindset overlooks the complex nature of software development, which often involves incrementally building upon code and adjusting for unforeseen issues. Remember, survival of the fittest.
 
 ```{tip}
+%It's wise to write code under the assumption that we might get something wrong.
 Write code under the assumption that we will get it wrong.
 % the first time.
 ```
 
-To change an unreadable program we must either rewrite the program from scratch or we must spend an enormous time dissecting the code line-by-line or perhaps even character-by-character.
+Unreadable code becomes a liability when changes are required – it may need to be rewritten from scratch, or a significant amount of time must be invested in examining it line by line, or even character by character.
+When we write unreadable code, we say that we are incurring 'technical debt'. Just like monetary debt, we will at some point have to pay our dues.
 
-Let's say it in a different way.
-I like to think about analysability in terms of whether or not I'm willing to rewrite any particular piece of code from scratch.
+Analysability should be a priority for any piece of code that we wouldn't be willing to discard and rewrite from scratch for minor changes or bug fixes. This doesn't mean that every level of a system must be equally analysable. However, if we're not ready to throw it away, it should be analysable.
 
-```{important}
-Software must be analysable at all levels of abstraction that we are unwilling to throw out and rewrite from scratch whenever the smallest possible change is required.
-```
+%``{important}
+%Software must be analysable at all levels of abstraction that we are unwilling to throw out and rewrite from scratch whenever the smallest possible change is required.
+%``
 
 %TODO: What did I mean here?
 %Sometimes we just want to give something a name, and stick some complex (but limited) logic behind that name, so that we don't have to think about it too much in the future.
 %In design patterns lingo some might call this a [Facade](facade-pattern).
 
-In other words, it isn't obvious to me that a system should be equally analysable at all levels.
-It might be reasonable to give up analysability for a piece of code that is so "small" that we would be willing to throw it out and rewrite it from scratch any time we have to solve a minor bug or change it some other trivial way.
-However, if we are not willing to throw it out, then the code ought to exhibit analysability.
+%In other words, it isn't obvious to me that a system should be equally analysable at all levels.
+%It might be reasonable to give up analysability for a piece of code that is so "small" that we would be willing to throw it out and rewrite it from scratch any time we have to solve a minor bug or change it some other trivial way.
+%However, if we are not willing to throw it out, then the code ought to exhibit analysability.
 
 
 (modifiability)=
 ### Modifiability
 
-% TODO: THERE'S MORE TO THE DEFINITION THAN WHAT WE'RE DISCUSSING. THIS NEEDS TO BE EXPANDED.
-
 ```{epigraph}
 Degree to which a product or system can be effectively and efficiently modified without introducing defects or degrading existing product quality.
 
--- {cite:t}`isoiec25010`
+-- ISO/IEC 25010:2011
 ```
 
-I never said that the standard is perfect did I?
-Since modularity is defined in terms of allowing modifications of one component without having an impact on other components it could be argued that the modifiability characteristic is quite superflous in the context of software quality.
+In a world where requirements change, technologies evolve, and businesses scale, software must adapt seamlessly to maintain its value. Modifiability ensures that software can be updated and adjusted without compromising its overall quality or functionality.
 
-So let us instead reinforce how modularity enables modifiability.
-When we want to change something, do we have to do a massive rewrite or whether we execute our change in small chunks?
-Are you able to split your massive change into smaller changes that can be independently deployed to your live product?
-If not, then we might call that less modifiable.
+Design decisions made early in the software development cycle greatly impact future modifiability. Careful selection of programming languages, frameworks, and architectures can help create a foundation for modifiable software. Likewise, good programming practices, such as clear documentation, consistent coding standards, and extensive testing, facilitate later modifications.
 
-But why does the modifiability characteristic exist?
-Let's think about this beyond software quality.
-Let's think about process.
+Back to the same question: "Why would I need to change my code?". "If I write it correctly the first time around, there’s no need for modifiability." This is not how the real world works. To provide value, we have to adapt to the ever-changing environment.
+Remember, it is wise to write code under the assumption that we'll get it wrong at least the first time.
 
-Perhaps you are familiar with the agile ideas of continuous delivery and continuous deployment.
-The former meaning that we integrate all development code into the "mainline" as frequently as possible and as a consequence assemble deployable and tested versions.
-In continuous delivery the last step of deployment is also automatically executed.
+However, a high degree of modifiability doesn't mean that changes should be made carelessly. Every modification comes with the risk of introducing new bugs or unexpected behaviors. For this reason, modifiability works hand-in-hand with other maintainability factors like analysability and testability. Analysability ensures that the impact of changes is understood before they are implemented, and testability allows those changes to be verified, ensuring they work as intended without introducing new issues.
+%, forming a cycle of change and verification.
 
-Naively, we could describe the process something like this.
+Modifiability is also inherently linked to the principles of reusability and modularity. Code that is written to be reusable tends to be more modular and abstract, which in turn allows for easy modifications with minimal impact on the overall system.
 
-1. I complete work on a feature on my machine.
-2. I run local tests on my machine to make sure that my code works.
-3. I commit and push my code to our central repository.
-4. The code is automatically integrated with the rest of the system.
-5. The code is automatically tested together with the rest of the system.
-6. If there are no bugs then my code is automatically pushed/pulled and integrated into the publishable mainline.
-7. The code is published.
+In summary, striving for modifiability is about striving for code that can be changed.
+%and deploying code that can be changed.
 
-```{note}
-If we do all steps up and to 4, we would say that we do "continuous integration".
-Up and to 5 we would call it "continuous testing".
-Up and to 6 we would call it "continuous delivery".
-Up and to 7 we would call it "continuous deployment".
-```
+%In summary, modifiability is not just about making changes to the code — it's about making changes that preserve the integrity of the software while accommodating new requirements or improvements. The goal is to ensure that the software remains robust, reliable, and relevant throughout its lifecycle.
 
-This is an oversimplification, and this process might of course involve a number of other steps such as pull requests, code reviews, manual quality assurance, and so forth.
-Of course, that example has almost nothing to do with coding, and almost everything to do with what we usually call [DevOps](https://en.wikipedia.org/wiki/DevOps) (which is short for software development and IT operations).
-
-%Nevertheless, wouldn't you say that the modifiability of such a system needs to be quite high?
-
-So how does this relate to software?
-Well, if our code is not modular then it would be utterly difficult to support such a workflow with anything more than one developer on the team.
-To integrate and test at such a high pace and with such a level of automation, we need modularity.
+%% TODO: THERE'S MORE TO THE DEFINITION THAN WHAT WE'RE DISCUSSING. THIS NEEDS TO BE EXPANDED.
+%
+%I never said that the standard is perfect did I?
+%Since modularity is defined in terms of allowing modifications of one component without having an impact on other components it could be argued that the modifiability characteristic is quite superflous in the context of software quality.
+%
+%So let us instead reinforce how modularity enables modifiability.
+%When we want to change something, do we have to do a massive rewrite or whether we execute our change in small chunks?
+%Are you able to split your massive change into smaller changes that can be independently deployed to your live product?
+%If not, then we might call that less modifiable.
+%
+%But why does the modifiability characteristic exist?
+%Let's think about this beyond software quality.
+%Let's think about process.
+%
+%Perhaps you are familiar with the agile ideas of continuous delivery and continuous deployment.
+%The former meaning that we integrate all development code into the "mainline" as frequently as possible and as a consequence assemble deployable and tested versions.
+%In continuous delivery the last step of deployment is also automatically executed.
+%
+%Naively, we could describe the process something like this.
+%
+%1. I complete work on a feature on my machine.
+%2. I run local tests on my machine to make sure that my code works.
+%3. I commit and push my code to our central repository.
+%4. The code is automatically integrated with the rest of the system.
+%5. The code is automatically tested together with the rest of the system.
+%6. If there are no bugs then my code is automatically pushed/pulled and integrated into the publishable mainline.
+%7. The code is published.
+%
+%``{note}
+%If we do all steps up and to 4, we would say that we do "continuous integration".
+%Up and to 5 we would call it "continuous testing".
+%Up and to 6 we would call it "continuous delivery".
+%Up and to 7 we would call it "continuous deployment".
+%``
+%
+%This is an oversimplification, and this process might of course involve a number of other steps such as pull requests, code reviews, manual quality assurance, and so forth.
+%Of course, that example has almost nothing to do with coding, and almost everything to do with what we usually call [DevOps](https://en.wikipedia.org/wiki/DevOps) (which is short for software development and IT operations).
+%
+%%Nevertheless, wouldn't you say that the modifiability of such a system needs to be quite high?
+%
+%So how does this relate to software?
+%Well, if our code is not modular then it would be utterly difficult to support such a workflow with anything more than one developer on the team.
+%To integrate and test at such a high pace and with such a level of automation, we need modularity.
 
 
 (testability)=
@@ -345,245 +353,65 @@ To integrate and test at such a high pace and with such a level of automation, w
 ```{epigraph}
 Degree of effectiveness and efficiency with which test criteria can be established for a system, product or component and tests can be performed to determine whether those criteria have been met.
 
--- {cite:t}`isoiec25010`
+-- ISO/IEC 25010:2011
 ```
 
-```{note}
-We're focusing on the second part of the "testability" definition since the first is mostly related to process, rather than code.
-Process is outside the scope of this book.
-```
-
-A key ingredient that enables the practice of continuous integration and continuous delivery/deployment is automated software testing.
-We've discussed this in some detail in the chapters on [validation](validation) and [verification](verification), but think of it this way:
-
-Every piece of code we write should come with another piece of code that exercises the first to make sure that it behaves the way it should.
-Every time we write code we must also write some other code that tests the code.
-If we for some reason refactor our code then our tests should tell us whether our refactoring has introduced bugs or not.
+To stay in business we need to rewrite our code quickly and often.
+But every time we rewrite our code we also need to make sure that the code still works.
+This is what our tests should tell us.
 
 ```{warning}
-Continuous deployment without automated testing is an accident waiting to happen.
+Changing code quickly without automated testing is an accident waiting to happen.
 ```
 
-```{note}
-In the software development process called "test-driven development" (TDD), we flip the order and instead say that:
-Everytime we want to write some code we must first write a test that fails because that code doesn't exist.
-```
+Highly testable software is a foundation for the long-term sustainability of any software project. Software that can be easily tested promotes confidence when changes are made, assists in identifying issues quickly, and ultimately ensures that the software works as expected.
+Key characteristics of testable code include being deterministic, isolated, and observable.
 
-So how do we make code testable?
-This is not a book on testing, but let's deal with it very briefly.
-Usually it boils down to one thing: *isolation*.
-The ability to isolate a particular piece of code from other pieces of code and from external state allows us to express simple tests.
+*Deterministic:* Deterministic code is reliable and consistent in its behavior. Given the same inputs, it will always produce the same outputs, and it will not exhibit different behaviors in different runs or under different conditions. This predictability simplifies testing significantly because it means that any test we write today will still be valid tomorrow.
 
-The more concrete dependencies a component has, the more difficult it is to test since the state space of these dependencies may affect the state space of our first component.
-This is why, advanced concepts that we'll talk about later, such as [dependency inversion](dependency-inversion-principle) and therefore [abstract injected object composition](abstract-injected-object-composition) are so important.
+*Isolated:* Highly testable code is independent, or isolated, meaning that it can be tested without having to also test a lot of dependencies at the same time. This is important because it helps us narrow down where a problem might be when a test fails. Isolation can be achieved through techniques such as dependency injection, mocking, and designing for interfaces.
 
-If a component that we want to test, itself creates other concrete components then we won't only have to test the constructing component but also the constructed components.
-If on the other hand a component only depends on injected abstractions then we only have to test how this particular component interacts with any given injected dependency without having to worry about which particular concrete dependency might be injected at run-time and what its states are.
+*Observable:* We must be able to observe what actually happens when the code is executed. This could be through returned results, changes in the state of the system, or observable effects. Observable code allows us to validate that our code is functioning as expected.
 
-```{seealso}
-If you are interested in testability, and already know a tiny bit about testing, then I would highly recommend that you continue your exploration with the following videos:
+By striving for testability, we build software that is resilient to changes and more reliable for the end user.
 
-1. [How to Write Clean, Testable Code](https://youtu.be/XcT4yYu_TTs) by Miško Hevery.
-2. [Integrated tests are a scam](https://youtu.be/fhFa4tkFUFw) by J.B. Rainsberger.
-3. My own [brief summary](https://youtu.be/tbSml2iyDt4) of the original video on integrated tests being a scam.
-```
+%``{note}
+%We're focusing on the second part of the "testability" definition since the first is mostly related to process, rather than code.
+%Process is outside the scope of this book.
+%``
 
+%A key ingredient that enables the practice of continuous integration and continuous delivery/deployment is automated software testing.
+%We've discussed this in some detail in the chapters on [validation](validation) and [verification](verification), but think of it this way:
+%
+%Ideally, every piece of code would be paired with another piece of code that exercises the first to make sure that it behaves the way it should.
+%Every time we write code we must also write some other code that tests the code.
+%If we for some reason refactor our code then our tests should tell us whether our refactoring has introduced bugs or not.
+%
+%```{warning}
+%Deploying quickly without automated testing is an accident waiting to happen.
+%```
+%
+%``{note}
+%In the software development process called "test-driven development" (TDD), we flip the order and instead say that:
+%Everytime we want to write some code we must first write a test that fails because that code doesn't exist.
+%``
 
-## Example
+%So how do we make code testable?
+%Code that is highly testable has clear inputs and outputs and does not have hidden dependencies.
+%Usually it boils down to one thing: *isolation*.
+%The ability to isolate a particular piece of code from other pieces of code and from external state allows us to express simple tests.
+%
+%The more concrete dependencies a component has, the more difficult it is to test since the state space of these dependencies may affect the state space of our first component.
+%This is why, advanced concepts that we'll talk about later, such as [dependency inversion](dependency-inversion-principle) and [composition over inheritance](composition-over-inheritance) are so important.
+%
+%If a component that we want to test, itself creates other concrete components then we won't only have to test the constructing component but also the constructed components.
+%If on the other hand a component only depends on injected abstractions then we only have to test how this particular component interacts with any given injected dependency without having to worry about which particular concrete dependency might be injected at run-time and what its states are.
 
-% TODO: Add narrative in LEGO example where you can explain modularity as the ability to change any particular feature by replacing a particular brick on the spacecraft. How can you have high modularity with low reusability? Well, what if the studs of each individual brick in the model is placed in a different location so that all bricks in the model are unique. A brick type is a class and any given brick an object. Compare this to only using a few types of bricks. Reusability would in the latter case be high. It might seem odd to suggest that all bricks would be unique but then you introduce the DUPLO example. In that case, all bricks in the set are of unique types.
-
-```{figure} https://www.lego.com/cdn/cs/set/assets/blt95f3ee09ff3a70a7/10944.png?fit=bounds&format=webply&quality=80&width=800&height=800&dpr=1.5
-:figclass: margin
-:name: fig:duplo-space-shuttle
-
-LEGO DUPLO Space Shuttle Mission.
-[[Image source]](https://www.lego.com/en-us/product/space-shuttle-mission-10944)
-[[Click to buy]](http://amazon.christopherokhravi.com/?id=B08T21RZ2Q)
-```
-
-```{figure} https://www.lego.com/cdn/cs/set/assets/blt00ba54004c17e820/10283.jpg?fit=bounds&format=webply&quality=80&width=800&height=800&dpr=1
-:figclass: margin
-:name: fig:lego-space-shuttle
-
-LEGO NASA Space Shuttle Discovery.
-[[Image source]](https://www.lego.com/en-us/product/nasa-space-shuttle-discovery-10283)
-[[Click to buy]](http://amazon.christopherokhravi.com/?id=B091GY3FLG)
-```
-
-Let's think about this in terms of LEGO.
-Let's say we want to build a space shuttle.
-LEGO offers at least two options.
-One of the sets (see {numref}`fig:duplo-space-shuttle`) that LEGO offers is using the larger DUPLO pieces and the whole set consists of 23 pieces.
-The ship itself is in this set however only comprised of two pieces but can interface with additional pieces on the top, bottom, wings, and the thrusters.
-Another set (see {numref}`fig:lego-space-shuttle`) is using the smaller LEGO pieces and the whole set contains a stunning 2,354 pieces.
-In this set the vast majority of pieces seems to be used for the ship itself.
-
-The problem with [reasoning by analogy](https://en.wikipedia.org/wiki/Argument_from_analogy) (which we are doing since we are trying to make inferences about software while reasoning about LEGO) is a lack of precision.
-What does maintainability even mean in terms of LEGO?
-
-Let's think about what a piece looks like as the *features* of a piece, and the way it connects to other pieces as the *interface* of that piece.
-We've discussed the idea of features in the chapter on [validation](validation), and we'll formalize the term [interface](interfaces) in a later chapter.
-So when we talk about changing a model built with LEGO we mean that we want to change the features and have to do so while respecting that any connected pieces have to interface with eachother.
-
-%**Two ways we could think about this is in terms of surface area of a piece and the number of problems that are solved by a particular piece.
-%Let's choose the latter.**
-
-At first glance, the simple DUPLO model with few pieces ({numref}`fig:duplo-space-shuttle`) might seem more maintainable than the more complex LEGO model with tons of pieces ({numref}`fig:lego-space-shuttle`).
-Irrespectively what maintainability characteristic we want to hone in on.
-However, we must remember to think about these models as examples of how we choose to structure our code.
-So, we shouldn't merely think about these two models, but rather of whole systems that contain many variations of these two models.
-When choosing the same strategy over and over again, which system ends up being more maintainable?
-
-```{tip}
-When thinking about whether something is a good or bad design decision we should ask ourselves what happens if we take our current practice to the extreme.
-What happens if I design my whole system like this?
-What happens if I compose ten objects like this?
-```
-
-
-### Modularity
-
-Which of the two models is more modular?
-Well, think about the definition of modularity.
-We want the system to be composed of discrete components that we can change without also having to change every other individual piece of the system.
-
-If we don't change how a piece interfaces with other pieces then we're free to change away.
-However, if we consider changing how different types of pieces interface with each other we can discuss much more interesting changes.
-
-Consider the first set, the one with very few DUPLO pieces.
-Let's say that we change how one piece interfaces with other pieces.
-In terms of the number of pieces that also have to change, it seems trivial.
-If we change the top piece of the shuttle, we might have to change the bottom piece and the "fire" pieces, in order to accommodate this change of the interface.
-However, if the landed shuttle itself consists of, say, seven pieces or so, then having to change three out of seven pieces means that we had to make changes in about 40% of the system.
-That can't be good.
-
-Let's consider the second set, the one with many small LEGO pieces.
-Pick any piece, and come up with a change that changes the interface of that piece.
-I bet that no matter how you decide to change the interface, we'll be able to come up with a set of changes for the pieces closest to the piece we've changed that allows us to accommodate the change without having to change anywhere near 40% of all pieces involved in the shuttle.
-That is modularity.
-
-
-### Reusability
-
-How reusable are the space shuttle pieces in the DUPLO model built with only a few pieces ({numref}`fig:duplo-space-shuttle`)?
-What other things could we build using these pieces?
-Not a lot.
-
-Now consider the reusability of the pieces that make up the space shuttle built from thousands of pieces ({numref}`fig:lego-space-shuttle`).
-What other things could we build using these pieces?
-A tremendous amount of things.
-There are so many pieces and they are almost all compatible with eachother.
-The only limitation is our imagination.
-
-
-### Analysability
-
-%What about analysability?
-%Which of the two LEGO models are more analysable?
-
-Let's say we're unable to fit DUPLO figures in the cockpit of the DUPLO ship ({numref}`fig:duplo-space-shuttle`).
-When reasoning about what to change in order to accomodate this we'll likely conclude that we need to remould the top piece.
-However, when doing that we have to take into consideration how it interfaces with the bottom piece, how it affects the cargo area, how it affects the wings, how it interfaces with the thrusters, and so forth.
-Since the ship itself is essentially comprised of two pieces we quite literally have to take all pieces of the system into account.
-If we're considering the landed ship we need to keep around four (top, bottom, and two fire pieces) out of seven pieces in mind when analysing the cockpit.
-That's approximately 57% of the system.
-Not ideal.
-
-What about the LEGO model with lots of pieces ({numref}`fig:lego-space-shuttle`)?
-In this model, the cockpit is now comprised of multiple pieces so to analyse the cockpit we must analyse all these pieces.
-Without counting the number of pieces that are interrelated to the cockpit pieces we can clearly see that it's no more than a handfull.
-Let's exaggerate and say that we need to analyse 20 pieces.
-20 pieces out of 2000 is merely 1%.
-What if it's 40 pieces?
-Well, that's merely 2%.
-A farcry from the 57% of the DUPLO model.
-
-In the LEGO model with many pieces we can analyse any single piece or any set of pieces without having to simulteneously analyse a large number of other pieces.
-
-The most interconnected (or [coupled](coupling) as we will soon learn to call it) piece of the LEGO model seems to be (what I assume is) the swinging doors to the cargo area.
-Let's exaggerate again and say that any such piece is connected to 100 other pieces.
-I certainly don't think that it is, but let's say that it is.
-Even if it was then we're still only looking at about 5% of the whole system.
-Still a whole lot better than 57%.
-
-
-### Modifiability
-
-As we discussed in the definition section of this chapter, modifiability follows modularity in software.
-So, if the LEGO model is more modular than the DUPLO model then it should also be more modifiable.
-
-Intuitively we can also see that this is the case.
-If we want to change the features of some piece (meaning the look of the piece) in a way that also affects the interface of it, then we will only have to change a (in relative terms) very small number of other pieces that interface with that piece.
-
-In the DUPLO model however, if we want to change the interface of some piece we're quite likely to have to change the interface of a large portion of the whole system (even though it in absolute terms means that a small number of pieces have to change).
-
-
-### Testability
-
-What does testability mean in terms of LEGO?
-Since this is not a book on testing we're not going to dive to deeply into this question.
-However, we might say that we want to test all features and the whole interface of a piece.
-
-So how *effectively* and *efficiently* can we test any particular type of piece?
-Well, in the case of the LEGO model it's really quite simple.
-Each piece is trivially simple and writing tests for it will be straightforward and uncomplicated.
-
-Each piece in the DUPO model however, is much more complicated.
-The number of *features* per piece is much higher and the interface is much bigger.
-
-Regarding more features.
-Consider the fact that there are two cargo doors for example.
-The features of both of these doors have to be tested since they are features of a piece rather then individual pieces.
-We're duplicating code.
-Remember, the whole top piece of the DUPLO ship is a monolithic piece, so we have to write tests for all its features.
-Compare this to the doors in the Lego model where each individual door is its own piece that can be tested in isolation.
-
-The same holds true for the interface.
-The interfaces of the DUPLO pieces are much bigger.
-When testing the top piece we have to test the thruster interface, the top interface in the back, the top interface in the front, and the bottom interface.
-There are many places where you can connect other pieces to the piece.
-
-
-Where we'll really run into problems in the DUPLO model is if we fear that there are dependencies between the features or interfaces.
-Consider the fact that the two cargo doors can be opened for example.
-This means that the cargo doors have at least two states: closed and open.
-Any other test in the monolithic top piece that might be affected by whether the cargo doors are openened or closed will have to be tested in both states.
-In theory, any other interface or feature of the top piece could be affected and so we should do this for all the tests.
-Not ideal.
-
-Remember how we said that most problems in testing boils down to isolation?
-Testing the DUPLO piece is more difficult because it isn't possible for us to isolate individual or smaller sets of features and interfaces from other features and interfaces.
-We can't test the cargo doors for example, without also talking about how they interact with, for example, the wings.
-
-
-
-
-## Exercises
-
-```{exercise}
-What are the five characteristics of maintainability listed by ISO/IEC 25010:2011 and that we have discussed in this chapter?
-Explain each of them in your own words.
-```
-
-```{exercise}
-How could it possible to have a high level of modularity while also having a low level of reusability?
-Why could such a system problematic?
-```
-% TODO: If modularity promotes allowing changes that don't cascade wouldn't this promote repeating oneself? Is the antidote to that to improve reusability?
-
-```{exercise}
-How could it possible to have a high level of modularity while also having a low level of analysability?
-Why could such a system problematic?
-```
-
-```{exercise}
-How could it possible to have a high level of analysability while also having a low level of modularity?
-Why could such a system problematic?
-```
-
-```{exercise}
-Come up with your own example of something that's not related to code but that still can be discussed in terms of the maintainability characteristics like we did in this chapter with LEGO and DUPLO.
-Here are some ideas: House building, plumbing, modular furniture, lamps, Macs and PCs, and toy lines (BRIO Builder, railway systems, Meccano, etc.).
-```
+%``{seealso}
+%If you are interested in testability, and already know a tiny bit about testing, then I would highly recommend that you continue your exploration with the following videos:
+%
+%1. [How to Write Clean, Testable Code](https://youtu.be/XcT4yYu_TTs) by Miško Hevery.
+%2. [Integrated tests are a scam](https://youtu.be/fhFa4tkFUFw) by J.B. Rainsberger.
+%3. My own [brief summary](https://youtu.be/tbSml2iyDt4) of the original video on integrated tests being a scam.
+%``
 

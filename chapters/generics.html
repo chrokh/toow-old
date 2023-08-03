@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="79. Generic type parameters" href="generic-type-parameters.html" /><link rel="prev" title="77. Liskov substitution principle" href="liskov-substitution-principle.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="80. Generic type parameters" href="generic-type-parameters.html" /><link rel="prev" title="78. Refactoring" href="refactoring.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>78. Generics - The Object Oriented Way</title>
+        <title>79. Generics - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -153,7 +153,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="https://cdn.discordapp.com/attachments/1118630713084870736/1134043079523967067/chrokh_simple_flat_logo_of_bank_vault_purple_pink_blue_purple_m_3ca3faf9-73e1-4b48-b61c-ee3c142e38d3.png" alt="Logo"/>
+    <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
   </div>
   
   <span class="sidebar-brand-text">The Object Oriented Way</span>
@@ -240,17 +240,17 @@
 <li class="toctree-l1"><a class="reference internal" href="upcasting.html">73. Upcasting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="downcasting.html">74. Downcasting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="everything-is-an-object.html">75. Everything is an object</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variance.html">76. Variance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">77. Liskov substitution principle</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">78. Generics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-type-parameters.html">79. Generic type parameters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-types.html">80. Generic types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-methods.html">81. Generic methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">82. Type parameter constraints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">83. Variant generic interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="uml-class-diagrams.html">84. UML class diagrams</a></li>
-<li class="toctree-l1"><a class="reference internal" href="maintainability.html">85. Maintainability</a></li>
-<li class="toctree-l1"><a class="reference internal" href="refactoring.html">86. Refactoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uml-class-diagrams.html">76. UML class diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintainability.html">77. Maintainability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="refactoring.html">78. Refactoring</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">79. Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-type-parameters.html">80. Generic type parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-types.html">81. Generic types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-methods.html">82. Generic methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">83. Type parameter constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variance.html">84. Variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">85. Liskov substitution principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">86. Variant generic interfaces</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bibliography.html">87. Bibliography</a></li>
 </ul>
 
@@ -287,7 +287,7 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="generics">
-<h1><span class="section-number">78. </span>Generics<a class="headerlink" href="#generics" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">79. </span>Generics<a class="headerlink" href="#generics" title="Permalink to this heading">#</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Work in progress.</p>
@@ -306,7 +306,7 @@ The concepts are all discussed in separate chapters but in this chapter we provi
 <li><p><a class="reference internal" href="variance.html"><span class="doc std std-doc">Variance</span></a>.</p></li>
 </ol>
 <section id="motivation">
-<h2><span class="section-number">78.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">79.1. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this heading">#</a></h2>
 <p>When writing object oriented programs, you will often find that you are repeating yourself.
 Up to this point we’ve pretended that all duplication can be eliminated with subtype polymorphism and object composition.
 As you might have suspected, this is of course not true.</p>
@@ -362,7 +362,7 @@ The implementation of these two classes is virtually the same.</p>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3437.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3419.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -407,12 +407,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.23:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.31:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3437.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3419.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -511,7 +511,7 @@ A major reason for using a language like C# in the first place is the ability to
 Generics help us write reusable code without loosing static type safety.</p>
 </section>
 <section id="definition">
-<h2><span class="section-number">78.2. </span>Definition<a class="headerlink" href="#definition" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">79.2. </span>Definition<a class="headerlink" href="#definition" title="Permalink to this heading">#</a></h2>
 <p>The word “parametric”, in “parametric polymorphism”, was presumably chosen since parametrically polymorphic types are <em>parameterized</em> over types.
 The name “generics” was presumably selected since the use of parametric polymorphism is also known as “generic programming”.
 Which terminology is used mostly depend on the tradition of the language that we are using and in C# we tend to say “generics” rather than “parametric polymorphism”.</p>
@@ -541,7 +541,7 @@ Whenever someone wishes to use your generic type definition they must replace th
 <figure class="align-default" id="fig-generic-type-definition">
 <img alt="https://via.placeholder.com/700x200?text=Image+coming+soon" src="https://via.placeholder.com/700x200?text=Image+coming+soon" />
 <figcaption>
-<p><span class="caption-number">Fig. 78.1 </span><span class="caption-text">A “generic type definition” can be turned into any number of “constructed generic types” by replacing its type parameters with actual types.</span><a class="headerlink" href="#fig-generic-type-definition" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 79.1 </span><span class="caption-text">A “generic type definition” can be turned into any number of “constructed generic types” by replacing its type parameters with actual types.</span><a class="headerlink" href="#fig-generic-type-definition" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>It is important to realize that all type parameters must be replaced with actual types at compile-time rather than at run-time.
@@ -555,7 +555,7 @@ Still, it is tremendously useful when it comes to writing reusable and modular c
 This is why we say that the type is <em>universally</em> polymorphic.</p>
 </div>
 <section id="terminology">
-<span id="generics-terminology"></span><h3><span class="section-number">78.2.1. </span>Terminology<a class="headerlink" href="#terminology" title="Permalink to this heading">#</a></h3>
+<span id="generics-terminology"></span><h3><span class="section-number">79.2.1. </span>Terminology<a class="headerlink" href="#terminology" title="Permalink to this heading">#</a></h3>
 <p>Before we wrap this section up, let’s finish up with some terminology directly from the <a class="reference external" href="https://learn.microsoft.com/en-us/dotnet/standard/generics/">official documentation</a>:</p>
 <ul class="simple">
 <li><p><em>Generic type parameters</em> (or simply type parameters) are placeholders for types in a generic type definition or generic method definition.</p></li>
@@ -570,7 +570,7 @@ This is why we say that the type is <em>universally</em> polymorphic.</p>
 </section>
 </section>
 <section id="examples">
-<h2><span class="section-number">78.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">79.3. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
 <p>The most common use-case for generics is collections.
 Think about a list for example.
 When you’re implementing a method that adds items to the list, do you really need to know what type of element you are adding?
@@ -580,7 +580,7 @@ As long as the type of all elements in the list is the same, and as long as all 
 <figure class="align-default" id="fig-generic-list">
 <img alt="https://via.placeholder.com/700x200?text=Image+coming+soon" src="https://via.placeholder.com/700x200?text=Image+coming+soon" />
 <figcaption>
-<p><span class="caption-number">Fig. 78.2 </span><span class="caption-text">As long as all elements in the list have the same type it doesn’t matter what the type is.
+<p><span class="caption-number">Fig. 79.2 </span><span class="caption-text">As long as all elements in the list have the same type it doesn’t matter what the type is.
 None of these lists have the same type, but these types can all be constructed from the generic list type.</span><a class="headerlink" href="#fig-generic-list" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
@@ -596,7 +596,7 @@ Same for <code class="docutils literal notranslate"><span class="pre">Second</sp
 <figure class="align-default" id="id1">
 <img alt="https://via.placeholder.com/700x200?text=Image+coming+soon" src="https://via.placeholder.com/700x200?text=Image+coming+soon" />
 <figcaption>
-<p><span class="caption-number">Fig. 78.3 </span><span class="caption-text">As long as all instances of a pair type store elements of the same type in the first position and elements of the same type in the right position then it doesn’t matter what these types are.
+<p><span class="caption-number">Fig. 79.3 </span><span class="caption-text">As long as all instances of a pair type store elements of the same type in the first position and elements of the same type in the right position then it doesn’t matter what these types are.
 The pairs that are grouped together have the same type, and all pair types could be constructed from the same generic pair type.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
@@ -608,24 +608,24 @@ If you want to say that there is an implementation for a type that is not a numb
 It’s not obviously parametrically polymorphic.</p>
 </section>
 <section id="exercises">
-<h2><span class="section-number">78.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">79.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <div class="exercise admonition" id="chapters/generics-exercise-0">
 
-<p class="admonition-title"><span class="caption-number">Exercise 78.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 79.1 </span></p>
 <section id="exercise-content">
 <p>What are generics?</p>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/generics-exercise-1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 78.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 79.2 </span></p>
 <section id="exercise-content">
 <p>What is parametric polymorphism?</p>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/generics-exercise-2">
 
-<p class="admonition-title"><span class="caption-number">Exercise 78.3 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 79.3 </span></p>
 <section id="exercise-content">
 <p>Can any method be converted into a parametrically polymorphic method while still maintaining the same functionality?
 Why or why not?</p>
@@ -633,30 +633,30 @@ Why or why not?</p>
 </div>
 <div class="exercise admonition" id="chapters/generics-exercise-3">
 
-<p class="admonition-title"><span class="caption-number">Exercise 78.4 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 79.4 </span></p>
 <section id="exercise-content">
 <p>Give an example, in your own words, of a type that could be parametrically polymorphic.</p>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/generics-exercise-4">
 
-<p class="admonition-title"><span class="caption-number">Exercise 78.5 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 79.5 </span></p>
 <section id="exercise-content">
 <p>What is the difference between a “generic type definition” and a “constructed generic type”?</p>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/generics-exercise-5">
 
-<p class="admonition-title"><span class="caption-number">Exercise 78.6 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 79.6 </span></p>
 <section id="exercise-content">
 <p>Why can’t we use subtyping to somehow “merge” the types <code class="docutils literal notranslate"><span class="pre">CompositeCharToCharCipher</span></code> and <code class="docutils literal notranslate"><span class="pre">CompositeStringToStringCipher</span></code>?</p>
 </section>
 </div>
 <div class="exercise admonition" id="chapters/generics-exercise-6">
 
-<p class="admonition-title"><span class="caption-number">Exercise 78.7 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 79.7 </span></p>
 <section id="exercise-content">
-<p>Explain the benefits of generics in terms of the five characteristics of <a class="reference internal" href="maintainability.html#maintainability-characteristics"><span class="std std-ref">maintainability</span></a>.</p>
+<p>Explain the benefits of generics in terms of the five characteristics of <span class="xref myst">maintainability</span>.</p>
 </section>
 </div>
 </section>
@@ -691,18 +691,18 @@ Why or why not?</p>
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">79. </span>Generic type parameters</div>
+                <div class="title"><span class="section-number">80. </span>Generic type parameters</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="liskov-substitution-principle.html">
+          <a class="prev-page" href="refactoring.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">77. </span>Liskov substitution principle</div>
+                <div class="title"><span class="section-number">78. </span>Refactoring</div>
                 
               </div>
             </a>
@@ -736,14 +736,14 @@ Why or why not?</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">78. Generics</a><ul>
-<li><a class="reference internal" href="#motivation">78.1. Motivation</a></li>
-<li><a class="reference internal" href="#definition">78.2. Definition</a><ul>
-<li><a class="reference internal" href="#terminology">78.2.1. Terminology</a></li>
+<li><a class="reference internal" href="#">79. Generics</a><ul>
+<li><a class="reference internal" href="#motivation">79.1. Motivation</a></li>
+<li><a class="reference internal" href="#definition">79.2. Definition</a><ul>
+<li><a class="reference internal" href="#terminology">79.2.1. Terminology</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#examples">78.3. Examples</a></li>
-<li><a class="reference internal" href="#exercises">78.4. Exercises</a></li>
+<li><a class="reference internal" href="#examples">79.3. Examples</a></li>
+<li><a class="reference internal" href="#exercises">79.4. Exercises</a></li>
 </ul>
 </li>
 </ul>
