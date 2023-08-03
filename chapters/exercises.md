@@ -1192,4 +1192,32 @@ NOTE: All exercises are currently commented out.
 %```
 
 
+## Maintainability
+
+```{exercise}
+What are the five characteristics of maintainability listed by ISO/IEC 25010:2011 and that we have discussed in this chapter?
+Explain each of them in your own words.
+```
+
+```{exercise}
+How could it possible to have a high level of modularity while also having a low level of reusability?
+Why could such a system problematic?
+```
+% TODO: If modularity promotes allowing changes that don't cascade wouldn't this promote repeating oneself? Is the antidote to that to improve reusability?
+
+```{exercise}
+How could it possible to have a high level of modularity while also having a low level of analysability?
+Why could such a system problematic?
+```
+
+```{exercise}
+How could it possible to have a high level of analysability while also having a low level of modularity?
+Why could such a system problematic?
+```
+
+```{exercise}
+Come up with your own example of something that's not related to code but that still can be discussed in terms of the maintainability characteristics like we did in this chapter with LEGO and DUPLO.
+Here are some ideas: House building, plumbing, modular furniture, lamps, Macs and PCs, and toy lines (BRIO Builder, railway systems, Meccano, etc.).
+```
+
 
