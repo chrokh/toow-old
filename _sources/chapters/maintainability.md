@@ -119,7 +119,7 @@ To provide value today without compromising our ability to provide more value in
 
 
 (modularity)=
-### Modularity
+## Modularity
 
 ```{epigraph}
 Degree to which a system or computer program is composed of discrete components such that a change to one component has minimal impact on other components.
@@ -146,7 +146,7 @@ Conversely, software that lacks modularity and is tightly coupled presents chall
 
 
 (reusability)=
-### Reusability
+## Reusability
 
 ```{epigraph}
 Degree to which an asset can be used in more than one system, or in building other assets.
@@ -237,7 +237,7 @@ What is the point of solving future problems if we can't stay in business by sol
 
 
 (analysability)=
-### Analysability
+## Analysability
 
 ```{epigraph}
 Degree of effectiveness and efficiency with which it is possible to assess the impact on a product or system of an intended change to one or more of its parts, or to diagnose a product for deficiencies or causes of failures, or to identify parts to be modified.
@@ -277,7 +277,7 @@ Analysability should be a priority for any piece of code that we wouldn't be wil
 
 
 (modifiability)=
-### Modifiability
+## Modifiability
 
 ```{epigraph}
 Degree to which a product or system can be effectively and efficiently modified without introducing defects or degrading existing product quality.
@@ -348,7 +348,7 @@ In summary, striving for modifiability is about striving for code that can be ch
 
 
 (testability)=
-### Testability
+## Testability
 
 ```{epigraph}
 Degree of effectiveness and efficiency with which test criteria can be established for a system, product or component and tests can be performed to determine whether those criteria have been met.
