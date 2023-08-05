@@ -46,6 +46,8 @@
 - The Everything is an object chapter must also discuss how classes implicitly inherit from `object`.
 - Debugging? Debugger in Visual Studio? How to read compiler errors? How to read stack trace upon exceptions?
 - UML Class diagrams multiplicity (p. 34 [specification](https://www.omg.org/spec/UML/2.5.1/PDF)).
+- `ref` keyword. In reference types chapter? See e.g. [generic swap method](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/generic-methods).
+- Type checking chapter, add terminology: static type safety, static type-checking, compile-time type-checking.
 
 ## Smaller todos
 

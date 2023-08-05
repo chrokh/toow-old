@@ -1253,3 +1253,34 @@ NOTE: All exercises are currently commented out.
 %```
 
 
+%## Generics
+%
+%```{exercise}
+%What are generics?
+%```
+%
+%```{exercise}
+%What is parametric polymorphism?
+%```
+%
+%```{exercise}
+%Can any method be converted into a parametrically polymorphic method while still maintaining the same functionality?
+%Why or why not?
+%```
+%
+%```{exercise}
+%Give an example, in your own words, of a type that could be parametrically polymorphic.
+%```
+%
+%```{exercise}
+%What is the difference between a "generic type definition" and a "constructed generic type"?
+%```
+%
+%```{exercise}
+%Why can't we use subtyping to somehow "merge" the types `CompositeCharToCharCipher` and `CompositeStringToStringCipher`?
+%```
+%
+%```{exercise}
+%Explain the benefits of generics in terms of the five characteristics of [maintainability](maintainability:characteristics).
+%```
+
