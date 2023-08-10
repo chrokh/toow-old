@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="17. Associativity" href="associativity.html" /><link rel="prev" title="15. Assignment operator" href="assignment-operator.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="83. Generic supertypes" href="generic-supertypes.html" /><link rel="prev" title="81. Generic types" href="generic-types.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>16. Precedence - The Object Oriented Way</title>
+        <title>82. Generics and type errors - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -180,7 +180,7 @@
 <li class="toctree-l1"><a class="reference internal" href="relational-operators.html">13. Relational operators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logical-operators.html">14. Logical operators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="assignment-operator.html">15. Assignment operator</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">16. Precedence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="precedence.html">16. Precedence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="associativity.html">17. Associativity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">18. Constants</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statements.html">19. Statements</a></li>
@@ -246,7 +246,7 @@
 <li class="toctree-l1"><a class="reference internal" href="refactoring.html">79. Refactoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generics.html">80. Generics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-types.html">81. Generic types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generics-and-type-errors.html">82. Generics and type errors</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">82. Generics and type errors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">83. Generic supertypes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-methods.html">84. Generic methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">85. Type parameter constraints</a></li>
@@ -288,19 +288,240 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="precedence">
-<h1><span class="section-number">16. </span>Precedence<a class="headerlink" href="#precedence" title="Permalink to this heading">#</a></h1>
-<p>In the world of programming, not all operators are equal. Some have higher priority than others. This is what we call ‘operator precedence’.</p>
-<p>Operator precedence determines the order in which operations are performed when different operators are present within an expression. Just like in algebra, multiplication and division operators have higher precedence than addition and subtraction. So, in an expression like <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">+</span> <span class="pre">4</span> <span class="pre">*</span> <span class="pre">5</span></code>, the multiplication is performed first, resulting in <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">+</span> <span class="pre">20</span></code>, and then the addition is done, leading to the result <code class="docutils literal notranslate"><span class="pre">23</span></code>.</p>
-<p>It’s important to know about operator precedence because it affects how an expression is evaluated. Misunderstanding precedence can lead to unexpected results. If you want to override the default precedence, you can use parentheses. For instance, if you want the addition to happen first in the previous expression, you can write <code class="docutils literal notranslate"><span class="pre">(3</span> <span class="pre">+</span> <span class="pre">4)</span> <span class="pre">*</span> <span class="pre">5</span></code>, which gives <code class="docutils literal notranslate"><span class="pre">35</span></code>.</p>
-<p>C# has a specific order of precedence for its operators.
-The complete list can be found in the <a class="reference external" href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/#operator-precedence">C# documentation</a>.</p>
-<figure class="align-default" id="id1">
-<img alt="https://media.discordapp.net/attachments/1118630713084870736/1122894686944776313/chrokh_a_simple_flat_illustation_of_3_cute_round_league_badges__ebed913a-6e71-445c-b0fb-de4e409abd29.png?width=1440&amp;height=449" src="https://media.discordapp.net/attachments/1118630713084870736/1122894686944776313/chrokh_a_simple_flat_illustation_of_3_cute_round_league_badges__ebed913a-6e71-445c-b0fb-de4e409abd29.png?width=1440&amp;height=449" />
-<figcaption>
-<p><span class="caption-number">Fig. 16.1 </span><span class="caption-text">Not all operators are equal, so when mixing operators you must keep precedence in mind, since some are executed before others.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
+          <section class="tex2jax_ignore mathjax_ignore" id="generics-and-type-errors">
+<h1><span class="section-number">82. </span>Generics and type errors<a class="headerlink" href="#generics-and-type-errors" title="Permalink to this heading">#</a></h1>
+<p>One of the significant advantages of using generics is that they give us compile-time errors instead of run-time errors.
+Generics allow developers to catch <a class="reference internal" href="type-checking.html"><span class="doc std std-doc">type errors</span></a> during the <a class="reference internal" href="compilation.html"><span class="doc std std-doc">compilation</span></a> process rather than at <a class="reference internal" href="execution.html"><span class="doc std std-doc">run-time</span></a>.
+Writing a class like <code class="docutils literal notranslate"><span class="pre">Pair</span></code> without generics would mean that type mismatches or invalid type operations could go unnoticed until the code is executed, leading to potential runtime exceptions.</p>
+<p>Remember the generic class <code class="docutils literal notranslate"><span class="pre">Pair&lt;T1,</span> <span class="pre">T2&gt;</span></code> from the chapter on <a class="reference internal" href="generic-types.html"><span class="doc std std-doc">generic types</span></a>?
+Here’s a simplified version of it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Pair</span><span class="o">&lt;</span><span class="n">T1</span><span class="p">,</span><span class="w"> </span><span class="n">T2</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">T1</span><span class="w"> </span><span class="n">Item1</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">T2</span><span class="w"> </span><span class="n">Item2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-3510.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.125:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '3510.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>Is it possible to achieve the same level of reusability before we had generics or do we have to write different versions of the same code for each type?
+If we want to keep <span class="xref myst">static type safety</span> we have to write duplicated code.
+If we’re willing to sacrifice static type safety then we can either write code that works on the <a class="reference internal" href="everything-is-an-object.html"><span class="doc std std-doc">top-type <code class="docutils literal notranslate"><span class="pre">object</span></code></span></a> and then <a class="reference internal" href="downcasting.html"><span class="doc std std-doc">downcast</span></a> back to whatever type we had before or use <span class="xref myst">the <code class="docutils literal notranslate"><span class="pre">dynamic</span></code> keyword</span> and then <a class="reference internal" href="type-conversions.html"><span class="doc std std-doc">cast</span></a> back to whatever type we had before.
+Since we’ve given up <span class="xref myst">static type safety</span> however we run the risk of writing code that crashes with run-time errors.</p>
+<div class="admonition-key-point admonition">
+<p class="admonition-title">Key point</p>
+<p>With generics, we can write reusable code without giving up static type safety.
+This means that type errors are identified at compile-time rather than at run-time. Which prevents type-related errors from reaching end users and streamlines debugging.</p>
+</div>
+<p>Let’s look at what both of these non-generic solutions would look like.
+First out is the solution that uses the <a class="reference internal" href="everything-is-an-object.html"><span class="doc std std-doc">top-type <code class="docutils literal notranslate"><span class="pre">object</span></code></span></a> that all types implicitly either inherit from or can be boxed into.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ObjectPair</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">object</span><span class="w"> </span><span class="n">Item1</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">object</span><span class="w"> </span><span class="n">Item2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now instantiate the class and store elements of any type.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ObjectPair</span><span class="w"> </span><span class="n">objectPair</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ObjectPair</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Item1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">Item2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Apples&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">objectPair</span><span class="p">.</span><span class="n">Item1</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, since the <a class="reference internal" href="run-time-type-vs-compile-time-type.html"><span class="doc std std-doc">compile-time type</span></a> of both items in every instance of <code class="docutils literal notranslate"><span class="pre">ObjectPair</span></code> is <code class="docutils literal notranslate"><span class="pre">object</span></code> we have to use <a class="reference internal" href="downcasting.html"><span class="doc std std-doc">downcasting</span></a> if we want to get back to the run-time type of the item.
+This is fine as long as we manage to downcast to the correct type.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">item1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">objectPair</span><span class="p">.</span><span class="n">Item1</span><span class="p">;</span><span class="w"> </span><span class="c1">// Compiles and runs.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, if we downcast to the wrong type the code still compiles but we will now get a run-time exception. Boom!</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">item2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">objectPair</span><span class="p">.</span><span class="n">Item2</span><span class="p">;</span><span class="w"> </span><span class="c1">// Compiles but throws exception.</span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">System.InvalidCastException: Unable to cast object of type &#39;System.String&#39; to type &#39;System.Int32&#39;.</span>
+</pre></div>
+</div>
+<p>What if we instead make use of the <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code> keyword</span>?
+It’s the same story. By using the <code class="docutils literal notranslate"><span class="pre">dynamic</span></code> keyword we tell the compiler that the type of the underlying object could be absolutely anything.
+Using <code class="docutils literal notranslate"><span class="pre">dynamic</span></code> we leave the realm of static typing.
+Consequently we can compile code that tries to convert our values to types that they actually are not. Only to blown up with an exception at run-time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">DynamicPair</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">dynamic</span><span class="w"> </span><span class="n">Item1</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">dynamic</span><span class="w"> </span><span class="n">Item2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">DynamicPair</span><span class="w"> </span><span class="n">dynamicPair</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DynamicPair</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Item1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">Item2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Apples&quot;</span><span class="w"> </span><span class="p">};</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">item1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dynamicPair</span><span class="p">.</span><span class="n">Item1</span><span class="p">;</span><span class="w"> </span><span class="c1">// Compiles and runs.</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">item2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dynamicPair</span><span class="p">.</span><span class="n">Item2</span><span class="p">;</span><span class="w"> </span><span class="c1">// Compiles but throws exception.</span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: Cannot implicitly convert type &#39;string&#39; to &#39;int&#39;</span>
+</pre></div>
+</div>
+<p>With generics, such errors are caught during compilation, ensuring that if you have a method expecting a certain type, it cannot inadvertently receive an unexpected type. This compile-time type checking enhances code safety, predictability, and robustness, minimizing surprises during execution and simplifying debugging.</p>
+<p>What happens if we try to write the same incorrect code when using our generic <code class="docutils literal notranslate"><span class="pre">Pair&lt;T1,</span> <span class="pre">T2&gt;</span></code> type? Are we allowed to run the code?
+No, with generics, type-related issues are caught at compile-time, ensuring that we maintain type integrity from the outset
+If it doesn’t compile, we can’t run it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">genericPair</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Item1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Item2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Apples&quot;</span>
+<span class="p">};</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">item1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genericPair</span><span class="p">.</span><span class="n">Item1</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">item2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genericPair</span><span class="p">.</span><span class="n">Item2</span><span class="p">;</span><span class="w"> </span><span class="c1">// Does not compile due to type error.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(8,13): error CS0029: Cannot implicitly convert type &#39;string&#39; to &#39;int&#39;
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>By getting a compile-time error instead of a run-time error we ensure that this error never lands in the hands of the end user.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -312,38 +533,38 @@ The complete list can be found in the <a class="reference external" href="https:
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            name: "python3",
+            name: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="associativity.html">
+          <a class="next-page" href="generic-supertypes.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">17. </span>Associativity</div>
+                <div class="title"><span class="section-number">83. </span>Generic supertypes</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="assignment-operator.html">
+          <a class="prev-page" href="generic-types.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">15. </span>Assignment operator</div>
+                <div class="title"><span class="section-number">81. </span>Generic types</div>
                 
               </div>
             </a>

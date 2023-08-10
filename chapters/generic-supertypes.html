@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="70. Protected access modifier" href="protected.html" /><link rel="prev" title="68. The base keyword" href="the-base-keyword.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="84. Generic methods" href="generic-methods.html" /><link rel="prev" title="82. Generics and type errors" href="generics-and-type-errors.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>69. Constructor chaining - The Object Oriented Way</title>
+        <title>83. Generic supertypes - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -233,7 +233,7 @@
 <li class="toctree-l1"><a class="reference internal" href="overriding.html">66. Overriding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hiding.html">67. Hiding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="the-base-keyword.html">68. The <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">69. Constructor chaining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constructor-chaining.html">69. Constructor chaining</a></li>
 <li class="toctree-l1"><a class="reference internal" href="protected.html">70. Protected access modifier</a></li>
 <li class="toctree-l1"><a class="reference internal" href="abstract-classes.html">71. Abstract classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interface-inheritance.html">72. Interface inheritance</a></li>
@@ -247,7 +247,7 @@
 <li class="toctree-l1"><a class="reference internal" href="generics.html">80. Generics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-types.html">81. Generic types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generics-and-type-errors.html">82. Generics and type errors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">83. Generic supertypes</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">83. Generic supertypes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-methods.html">84. Generic methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">85. Type parameter constraints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variance.html">86. Variance</a></li>
@@ -288,30 +288,35 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="constructor-chaining">
-<h1><span class="section-number">69. </span>Constructor chaining<a class="headerlink" href="#constructor-chaining" title="Permalink to this heading">#</a></h1>
-<p>We’ve already talked about <a class="reference internal" href="constructors.html"><span class="doc std std-doc">constructors</span></a> and <a class="reference internal" href="constructor-overloading.html"><span class="doc std std-doc">constructor overloading</span></a> but let’s now talk about constructor chaining. This is a technique where a constructor in a class calls another constructor in the same class or a constructor in its superclass. It allows for code reusability and is a neat way to initialize an object with different sets of parameters.</p>
-<p>Consider a <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class where one constructor accepts two arguments, <code class="docutils literal notranslate"><span class="pre">width</span></code> and <code class="docutils literal notranslate"><span class="pre">height</span></code>, while another only takes a <code class="docutils literal notranslate"><span class="pre">side</span></code> length and treats the rectangle as a square.</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="generic-supertypes">
+<h1><span class="section-number">83. </span>Generic supertypes<a class="headerlink" href="#generic-supertypes" title="Permalink to this heading">#</a></h1>
+<p>In addition to generic classes, we can also define and implement generic interfaces as well as inherit from generic classes. The same principles apply.
+In this chapter we’ll focus on generic interfaces.</p>
+<div class="admonition-key-point admonition">
+<p class="admonition-title">Key point</p>
+<p>When implementing a generic interface or inheriting from a generic type then we must construct the generic supertype if we want to create a non-generic type.</p>
+</div>
+<p>Let’s imagine that we want to model the idea of different sequences.
+Some classic sequences include the sequence of natural numbers, the alphabet, and the Fibonacci sequence.
+But we can easily imagine more esoteric sequences like the sequence of customers entering a cafe in a simulation game.
+What unifies these different types is the idea of being able to ask for the next element in the sequence.</p>
+<p>We’ll start by creating a generic interface called <code class="docutils literal notranslate"><span class="pre">ISequence&lt;T&gt;</span></code>.
+Any class implementing the interface must define a method <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">Next()</span></code> which simply provides the next element of type <code class="docutils literal notranslate"><span class="pre">T</span></code> in the sequence.
+Let’s also add a <span class="xref myst">default method</span> <code class="docutils literal notranslate"><span class="pre">T[]</span> <span class="pre">Take(int</span> <span class="pre">n)</span></code> that calls <code class="docutils literal notranslate"><span class="pre">Next</span></code> <code class="docutils literal notranslate"><span class="pre">n</span></code> number of times and returns the result as an array of elements of type <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ISequence</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Width</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// Should return the next element in the sequence.</span>
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="nf">Next</span><span class="p">();</span>
 
-<span class="w">    </span><span class="c1">// Constructor for rectangle</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">height</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// Returns an array of the next n elements from the sequence.</span>
+<span class="w">    </span><span class="n">T</span><span class="p">[]</span><span class="w"> </span><span class="nf">Take</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Running constructor with 2 parameters.&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">Width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">width</span><span class="p">;</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">Height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">height</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="c1">// Constructor for square</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">side</span><span class="p">)</span>
-<span class="w">        </span><span class="p">:</span><span class="w"> </span><span class="k">this</span><span class="p">(</span><span class="n">side</span><span class="p">,</span><span class="w"> </span><span class="n">side</span><span class="p">)</span><span class="w"> </span><span class="c1">// This calls the first constructor</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Running constructor with 1 parameter.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">T</span><span class="p">[]</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">T</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">            </span><span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Next</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -320,7 +325,7 @@
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2553.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3342.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -370,7 +375,7 @@ function loadDotnetInteractiveApi() {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2553.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3342.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -426,58 +431,18 @@ else {
     </script>
 </div></div></div>
 </div>
-<p>In the case above, the <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> constructor with one argument, <code class="docutils literal notranslate"><span class="pre">side</span></code>, invokes the two-argument constructor, assuming the rectangle to be a square, with equal <code class="docutils literal notranslate"><span class="pre">width</span></code> and <code class="docutils literal notranslate"><span class="pre">height</span></code>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>When chaining constructors using <code class="docutils literal notranslate"><span class="pre">this</span></code> or <code class="docutils literal notranslate"><span class="pre">base</span></code> we have to supply the arguments for the parameters that the constructor in question is expecting. To do so we are allowed to write <a class="reference internal" href="expressions.html"><span class="doc std std-doc">expressions</span></a>. In these expressions we also have access to the arguments that was passed to the constructor doing the chaining. In the example above, we are passing on the argument <code class="docutils literal notranslate"><span class="pre">side</span></code>.</p>
-</div>
-<p>When we call the constructor which takes two arguments, only that constructor is run.</p>
+<p>When we implement an interface we have to construct the generic type if the implementing type is a non-generic type.
+In other words, if our subtype is not generic then we cannot say that we’re implementing the interface <code class="docutils literal notranslate"><span class="pre">ISequence&lt;T&gt;</span></code> because then there is no way for the user of our subtype to specify what <code class="docutils literal notranslate"><span class="pre">T</span></code> should be.</p>
+<p>In the code below we indicate that the non-generic classes <code class="docutils literal notranslate"><span class="pre">NaturalSequence</span></code> and <code class="docutils literal notranslate"><span class="pre">Alphabet</span></code> implement the constructed generic interfaces <code class="docutils literal notranslate"><span class="pre">ISequence&lt;int&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">ISequence&lt;char&gt;</span></code> respectively.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">new</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running constructor with 2 parameters.
-</pre></div>
-</div>
-</div>
-</div>
-<p>But when we run the constructor which takes one argument, that constructor also invokes the other constructor:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">new</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">(</span><span class="m">10</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running constructor with 2 parameters.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running constructor with 1 parameter.
-</pre></div>
-</div>
-</div>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Note that the constructor we delegate to is run before the constructor doing the delegating.</p>
-</div>
-<p>Let’s now look at constructor chaining with a superclass.
-In a class hierarchy, when you instantiate an object of a derived class, the constructors are called in order from the top-most base class down to the most derived class. Each constructor does its part in initializing the object. If one constructor in the chain explicitly calls another using the <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword, that called constructor runs before the calling constructor continues its execution. This guarantees that the object is fully initialized at each level of the inheritance hierarchy before it’s further initialized at the next level.</p>
-<p>Say that we have a <code class="docutils literal notranslate"><span class="pre">Vehicle</span></code> class and a derived <code class="docutils literal notranslate"><span class="pre">Car</span></code> class. The <code class="docutils literal notranslate"><span class="pre">Vehicle</span></code> constructor accepts a <code class="docutils literal notranslate"><span class="pre">maxSpeed</span></code> parameter, and the <code class="docutils literal notranslate"><span class="pre">Car</span></code> class adds a color property:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Vehicle</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">NaturalSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ISequence</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">MaxSpeed</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Vehicle</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">maxSpeed</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Running constructor in parent.&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">MaxSpeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maxSpeed</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// Returns the next natural number.</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">current</span><span class="o">++</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -485,82 +450,127 @@ In a class hierarchy, when you instantiate an object of a derived class, the con
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Car</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Vehicle</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Alphabet</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ISequence</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="m">1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">char</span><span class="p">[]</span><span class="w"> </span><span class="n">letters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">char</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;B&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;C&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;D&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;E&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;F&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;G&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;H&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;I&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;J&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;K&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;L&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;M&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;N&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;O&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;P&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;Q&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;R&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;S&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;U&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;V&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;W&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;X&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;Z&#39;</span><span class="w"> </span><span class="p">};</span>
 
-<span class="w">    </span><span class="c1">// Constructor</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Car</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">maxSpeed</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">color</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span><span class="n">maxSpeed</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Running constructor in child.&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">Color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">color</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// Returns the next letter in the alphabet, cycling back to &#39;A&#39; after &#39;Z&#39;.</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">letters</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">letters</span><span class="p">.</span><span class="n">Length</span><span class="p">];</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>In this scenario, the <code class="docutils literal notranslate"><span class="pre">Car</span></code> class’s constructor uses the base keyword to call the <code class="docutils literal notranslate"><span class="pre">Vehicle</span></code> class’s constructor. The <code class="docutils literal notranslate"><span class="pre">Vehicle</span></code> constructor initializes the <code class="docutils literal notranslate"><span class="pre">MaxSpeed</span></code> property, and the <code class="docutils literal notranslate"><span class="pre">Car</span></code> constructor then initializes the <code class="docutils literal notranslate"><span class="pre">Color</span></code> property.</p>
-<p>Just like when we chained constructors in the same class, when we run the constructor that delegates to another constructor through constructor chaining, then both constructors are invoked. Again, notice that the constructor we delegate to is run before the constructor doing the delegating.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>While <code class="docutils literal notranslate"><span class="pre">Alphabet</span></code> is a <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype</span></a> of <code class="docutils literal notranslate"><span class="pre">ISequence&lt;char&gt;</span></code> it is <em>not</em> a subtype of <code class="docutils literal notranslate"><span class="pre">ISequence&lt;T&gt;</span></code>.
+This means you can’t use an instance of type <code class="docutils literal notranslate"><span class="pre">Alphabet</span></code> when an <code class="docutils literal notranslate"><span class="pre">ISequence&lt;T&gt;</span></code> is expected but you <em>can</em> use it when an <code class="docutils literal notranslate"><span class="pre">ISequence&lt;char&gt;</span></code> is expected.</p>
+</div>
+<p>Since the classes <code class="docutils literal notranslate"><span class="pre">NaturalSequence</span></code> and <code class="docutils literal notranslate"><span class="pre">Alphabet</span></code> are both non-generic there’s no need to construct them when we want to use them. They are both already actual types.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">new</span><span class="w"> </span><span class="nf">Car</span><span class="p">(</span><span class="m">120</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Red&quot;</span><span class="p">);</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ISequence</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">naturals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NaturalSequence</span><span class="p">();</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">naturals</span><span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">)));</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running constructor in parent.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running constructor in child.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0, 1, 2, 3, 4, 5, 6, 7, 8, 9
 </pre></div>
 </div>
 </div>
 </div>
-<p>Since the constructor in <code class="docutils literal notranslate"><span class="pre">Car</span></code> is the one doing the chaining, only a single constructor is run if we instead instantiate a <code class="docutils literal notranslate"><span class="pre">Vehicle</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">new</span><span class="w"> </span><span class="nf">Vehicle</span><span class="p">(</span><span class="m">120</span><span class="p">);</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ISequence</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="w"> </span><span class="n">alphabet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Alphabet</span><span class="p">();</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alphabet</span><span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="m">40</span><span class="p">)));</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running constructor in parent.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, A, B, C, D, E, F, G, H, I, J, K, L, M, N
 </pre></div>
 </div>
 </div>
 </div>
-<p>Notice that the <code class="docutils literal notranslate"><span class="pre">Vehicle</span></code> superclass doesn’t provide a <a class="reference internal" href="constructors.html"><span class="doc std std-doc">parameterless constructor</span></a>.
-If we were to define a <code class="docutils literal notranslate"><span class="pre">Car</span></code> subclass and try to provide a constructor without using the <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword to call the superclass’s constructor, we would run into a problem.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>When a superclass does not have a parameterless constructor, subclasses must explicitly call one of the available constructors using the <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword.</p>
-</div>
-<div class="cell tag_raises-exception docutils container">
+<p>If however we want a <em>generic</em> subtype which is parameterized over the same type as the supertype, then we don’t have to construct the generic supertype.
+In the code below we’re defining a generic class called <code class="docutils literal notranslate"><span class="pre">Cycle&lt;T&gt;</span></code> that implements the interface <code class="docutils literal notranslate"><span class="pre">ISequence&lt;T&gt;</span></code>.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Car</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Vehicle</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Cycle</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ISequence</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Car</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">color</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">Color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">color</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="m">1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">T</span><span class="p">[]</span><span class="w"> </span><span class="n">elems</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Cycle</span><span class="p">(</span><span class="n">T</span><span class="p">[]</span><span class="w"> </span><span class="n">items</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">elems</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">items</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">elems</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">elems</span><span class="p">.</span><span class="n">Length</span><span class="p">];</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
+</div>
+<p>Since the class <code class="docutils literal notranslate"><span class="pre">Cycle&lt;T&gt;</span></code> is a generic class we must construct it in order to create an actual type. In the examples below we’re using it to create a cycle of characters and a cycle of strings.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ISequence</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rgb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cycle</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">char</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="sc">&#39;R&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;G&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;B&#39;</span><span class="w"> </span><span class="p">});</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rgb</span><span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">)));</span>
+</pre></div>
+</div>
+</div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4,12): error CS7036: There is no argument given that corresponds to the required parameter &#39;maxSpeed&#39; of &#39;Vehicle.Vehicle(double)&#39;
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R, G, B, R, G, B, R, G, B, R
 </pre></div>
 </div>
 </div>
 </div>
-<p>This leads to a compilation error. The compiler complains that we have not provided an argument for the parameter <code class="docutils literal notranslate"><span class="pre">maxSpeed</span></code> in the constructor of <code class="docutils literal notranslate"><span class="pre">Vehicle</span></code>.
-By ensuring that the <code class="docutils literal notranslate"><span class="pre">Car</span></code> class’s constructor calls the <code class="docutils literal notranslate"><span class="pre">Vehicle</span></code> class’s constructor with a <code class="docutils literal notranslate"><span class="pre">maxSpeed</span></code> parameter using the <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword, as we did when we did call <code class="docutils literal notranslate"><span class="pre">base</span></code>, we satisfy the compiler, and the code compiles successfully.</p>
-<div class="admonition-key-point admonition">
-<p class="admonition-title">Key point</p>
-<p>Constructor chaining allows a constructor to call another constructor, either within the same class or in its superclass, using the <code class="docutils literal notranslate"><span class="pre">this</span></code> or <code class="docutils literal notranslate"><span class="pre">base</span></code> keywords respectively. This technique leads to cleaner code by eliminating duplication and ensuring all necessary initialization always takes place, no matter which constructor is called. When a superclass does not have a parameterless constructor, subclasses must explicitly call one of the available constructors using the <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ISequence</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">light</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cycle</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Red&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Orange&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Green&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Orange&quot;</span><span class="w"> </span><span class="p">});</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">light</span><span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">)));</span>
+</pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Red, Orange, Green, Orange, Red, Orange, Green, Orange, Red, Orange
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="docutils literal notranslate"><span class="pre">Cycle&lt;T&gt;</span></code> is <em>not</em> a <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype</span></a> of <code class="docutils literal notranslate"><span class="pre">ISequence&lt;T&gt;</span></code> because neither of these are actual types. They are generic type definitions.
+However, any constructed generic type from <code class="docutils literal notranslate"><span class="pre">Cycle&lt;T&gt;</span></code> (such as <code class="docutils literal notranslate"><span class="pre">Cycle&lt;int&gt;</span></code>) will be a subtype of any constructed generic type from <code class="docutils literal notranslate"><span class="pre">ISequence&lt;T&gt;</span></code> if the type argument used in place of <code class="docutils literal notranslate"><span class="pre">T</span></code> is the same (such as <code class="docutils literal notranslate"><span class="pre">ISequence&lt;int&gt;</span></code>).
+There’s some more nuance to this but we’ll explore that further in the chapter on <a class="reference internal" href="variant-generic-interfaces.html"><span class="doc std std-doc">variant generic interfaces</span></a>.</p>
+</div>
+<p>Now that we’ve grasped the principles behind implementing generic interfaces, let’s pivot our attention to inheritance in generics.
+Inheriting from a generic class works just like inheriting from a non-generic class except that if the subclass is non-generic then the superclass has to be constructed.</p>
+<p>It’s the same logic as when implementing generic interfaces.
+We don’t have to apply type arguments to any type parameter which is shared between the subtype and the supertype.
+Meaning we don’t have to use an actual type (like <code class="docutils literal notranslate"><span class="pre">string</span></code>) as a type argument for the superclass if the type is also a type parameter in the subclass.
+But any parameter that isn’t shared we must apply a type argument to.</p>
+<p>The generic class <code class="docutils literal notranslate"><span class="pre">MonoPair&lt;T&gt;</span></code> inherits from the generic class <code class="docutils literal notranslate"><span class="pre">Pair&lt;T1,</span> <span class="pre">T2&gt;</span></code>.
+It does not change or add any behavior but merely restricts users of the class to a single type parameter which means that all pairs must have the same type in both positions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Pair</span><span class="o">&lt;</span><span class="n">T1</span><span class="p">,</span><span class="w"> </span><span class="n">T2</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MonoPair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that in the definition of <code class="docutils literal notranslate"><span class="pre">MonoPair&lt;T&gt;</span></code> above, the <code class="docutils literal notranslate"><span class="pre">T</span></code> on the left-hand side is a type parameter, while the two <code class="docutils literal notranslate"><span class="pre">T</span></code>’s on the right are type arguments.
+On the left-hand side we declare that the generic class <code class="docutils literal notranslate"><span class="pre">MonoPair&lt;T&gt;</span></code> is a <em>generic</em> type parameterized over one type that we call <code class="docutils literal notranslate"><span class="pre">T</span></code>.
+On the right-hand side however we use <code class="docutils literal notranslate"><span class="pre">T</span></code> as the type argument for both generic type parameters in the generic type <code class="docutils literal notranslate"><span class="pre">Pair&lt;T1,</span> <span class="pre">T2&gt;</span></code> so that whatever <code class="docutils literal notranslate"><span class="pre">T</span></code> is it is used as the type for both <code class="docutils literal notranslate"><span class="pre">T1</span></code> and <code class="docutils literal notranslate"><span class="pre">T2</span></code>.</p>
+<p>Lastly, it’s worth noting that it’s also possible to use generic types in <a class="reference internal" href="interface-inheritance.html"><span class="doc std std-doc">interface inheritance</span></a>.
+This too works in the same way.
+We must supply type arguments for all type parameters of the inherited interfaces and if our inheriting interface is generic then those type arguments can be type parameters of the inheriting interface.</p>
+<p>In this chapter, we’ve delved generic interfaces and inheritance, highlighting the nuances between non-generic and generic subtypes. As we look ahead, we’ll delve deeper into the world of variance and explore variant generic interfaces, which offers even greater flexibility when subtyping constructed generic types. But before that, our journey will take us to generic methods and type constraints. See you in the next chapter.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -587,23 +597,23 @@ By ensuring that the <code class="docutils literal notranslate"><span class="pre
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="protected.html">
+          <a class="next-page" href="generic-methods.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">70. </span>Protected access modifier</div>
+                <div class="title"><span class="section-number">84. </span>Generic methods</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="the-base-keyword.html">
+          <a class="prev-page" href="generics-and-type-errors.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">68. </span>The <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword</div>
+                <div class="title"><span class="section-number">82. </span>Generics and type errors</div>
                 
               </div>
             </a>
