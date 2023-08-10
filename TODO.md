@@ -48,6 +48,9 @@
 - UML Class diagrams multiplicity (p. 34 [specification](https://www.omg.org/spec/UML/2.5.1/PDF)).
 - `ref` keyword. In reference types chapter? See e.g. [generic swap method](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/generic-methods).
 - Type checking chapter, add terminology: static type safety, static type-checking, compile-time type-checking.
+- Overriding ToString(). Everything is an object?
+- Dynamic keyword. It's used in chapter on Generics and type errors.
+- The table comparing hiding and overriding should also compare interface default implementations.
 
 ## Smaller todos
 

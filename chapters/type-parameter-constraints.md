@@ -1,7 +1,7 @@
 # Type parameter constraints
 
 ```{warning}
-Work in progress.
+Coming soon.
 ```
 
 % If we constraint SubstititionCipher to ICipher<T,String> and ICipher<T,char> then we might be able to get rid of the adapter from the chapter on abstract injected object composition?

@@ -1284,3 +1284,123 @@ NOTE: All exercises are currently commented out.
 %Explain the benefits of generics in terms of the five characteristics of [maintainability](maintainability:characteristics).
 %```
 
+
+%## Type parameters
+%
+%```{exercise}
+%What is the difference between a generic type *parameter* and a generic type *argument*?
+%```
+%
+%```{exercise}
+%Why do we need type parameters?
+%```
+%
+%```{exercise}
+%Assume that we declare two type parameters, let's call them `T1` and `T2` within a generic type definition.
+%
+%1. When the generic type is constructed, is it *necessary* that `T1` is the same type as `T2`?
+%2. When the generic type is constructed, is it *possible* for `T1` to be the same type as `T2`?
+%```
+%
+%```{exercise}
+%In your own words, give an example of a type parameter that could be used in a generic type or a generic method.
+%In other words, where could you make use of the type parameter?
+%```
+%
+%```{exercise-start}
+%```
+%Consider the code example below.
+%```{code-cell}
+%interface IPair<T1,T2>
+%{
+%  public T1 Item1 { get; set; }
+%  public T2 Item2 { get; set; }
+%}
+%
+%class Pair<T> : IPair<T, T>
+%{
+%  public T Item1 { get; set; }
+%  public T Item2 { get; set; }
+%}
+%```
+%Why are we allowed to use the type argument `T` twice on the right side of the colon in the definition of the class `Pair<T>`?
+%Had we tried to use the type parameter `T` twice on the left side of the colon we would have gotten a compiler error.
+%Why?
+%```{exercise-end}
+%```
+
+
+%## Generic types
+%
+%```{exercise}
+%What are genric types?
+%```
+%
+%```{exercise}
+%What is the difference between a generic type *definition* and a *constructed* generic type?
+%```
+%
+%```{exercise}
+%Why does the generic type `CompositeCipher<T1,T2,T3>` require three type parameters? Can we achieve the same functionality with just two?
+%```
+%
+%```{exercise}
+%Rewrite the class `SequenceCipher` from {numref}`ex:array-cipher` so that it implements a construction of the generic interface `ICipher<TIn,TOut>`.
+%Bonus question: Can the class `SequenceCipher` be made generic?
+%Why or why not?
+%```
+%
+%```{exercise}
+%:label: ex:generic-types:conditional-cipher
+%Rewrite the conditional cipher that we implemented in {numref}`abstract-injected-object-composition:exercises:predicates` so that it is generic.
+%
+%Hint: This also requires that we rewrite the predicate interface from that same exercise.
+%%ConditionalCipher<TIn,TOut>
+%%IPredicate<T>
+%```
+%
+%```{exercise}
+%Come up with and implement your own *generic type* that fits into our ecosystem of ciphers.
+%```
+%
+%```{exercise}
+%Come up with and implement your own type that subtypes a constructed generic type.
+%The constructed generic type should be constructed from one of the generic types that we've discussed in this chapter.
+%```
+%
+%
+%```{exercise-start}
+%```
+%Write a generic class called `Repeater<T>` that takes an element of type `T` in its constructor and exposes an instance method with the signature `T[] Repeat (int times)`.
+%The instance method returns a new array of a length equal to `times` where every position contains the element passed through the constructor.
+%
+%When you are done, you should be able to run the following code and get the same result.
+%
+%```{code-cell}
+%class Repeater<T>
+%{
+%  T elem;
+%
+%  public Repeater (T elem)
+%    => this.elem = elem;
+%
+%  public T[] Repeat (int times)
+%  {
+%    T[] xs = new T[times];
+%    for (int i=0; i<times; i++)
+%      xs[i] = elem;
+%    return xs;
+%  }
+%}
+%```
+%
+%```{code-cell}
+%Repeater<string> repeater = new Repeater<string>("Echo");
+%string[] output = repeater.Repeat(5);
+%Console.WriteLine(String.Join(", ", output));
+%```
+%```{exercise-end}
+%```
+%
+
+
