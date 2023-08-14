@@ -290,10 +290,285 @@
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="type-parameter-constraints">
 <h1><span class="section-number">85. </span>Type parameter constraints<a class="headerlink" href="#type-parameter-constraints" title="Permalink to this heading">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Coming soon.</p>
+<p>In the realm of generic programming, one often encounters a challenge: the inability to make precise assumptions about the types passed as arguments. This lack of specificity often stands as a roadblock, limiting the range of problems that we can address using generics. Imagine trying to write a piece of code that should work with a broad set of types but simultaneously requires knowledge about certain properties or behaviors of these types. Sounds contradictory, right?</p>
+<p>Enter ‘type parameter constraints’. These constraints allow us to set boundaries on the kinds of types that can be used as type arguments, offering us a perfect blend of generality and specificity.</p>
+<div class="admonition-key-point admonition">
+<p class="admonition-title">Key point</p>
+<p>Type parameter constraints ensure that a type parameter in a generic class or method satisfies certain characteristics or inherits from a specific base type or interface.</p>
 </div>
+<p>Constraints are expressed using the <code class="docutils literal notranslate"><span class="pre">where</span></code> keyword. To add a constraint to a <a class="reference internal" href="generic-methods.html"><span class="doc std std-doc">generic <em>method</em></span></a> we use the <code class="docutils literal notranslate"><span class="pre">where</span></code> keyword after the list of parameters.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="w"> </span><span class="n">MyGenericMethod</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="k">value</span><span class="p">)</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">constraint</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To add a constraint to a <a class="reference internal" href="generic-types.html"><span class="doc std std-doc">generic <em>type</em></span></a> we use the <code class="docutils literal notranslate"><span class="pre">where</span></code> keyword after the type name:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyGenericClass</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">constraint</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You might ask yourself why we would want to use a generic type parameter constrained to an interface instead of just simply using that interface without generics. Let’s illustrate this with an example. Games often involve a diverse range of items that characters can acquire, from weapons and potions to maps and keys. Let’s say that all these items share some properties like a name and let’s bundle that in the interface <code class="docutils literal notranslate"><span class="pre">IItem</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">interface</span><span class="w"> </span><span class="n">IItem</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-5718.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.126:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '5718.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>Let’s assume that we have some classes for types of items.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Weapon</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IItem</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// ... other weapon-specific properties</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Map</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IItem</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// ... other map-specific properties</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The idea is to have a separate inventory for each type of item (weapons, maps, potions, keys, etc.).
+You can visually think of the inventory as a tabulated list where the player can switch between categories (e.g., weapons, potions) and then cycle through the items in the selected category.
+However, since the code for each inventory (each tab) will essentially be the same we want to avoid duplicating code.</p>
+<p>Let’s first look at a solution that only uses <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype polymorphism</span></a> and no generics.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Inventory</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">IItem</span><span class="o">&gt;</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">IItem</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">currentIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">CurrentName</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">CurrentItem</span><span class="p">.</span><span class="n">Name</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">IItem</span><span class="w"> </span><span class="n">CurrentItem</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">items</span><span class="p">[</span><span class="n">currentIndex</span><span class="p">];</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Add</span><span class="p">(</span><span class="n">IItem</span><span class="w"> </span><span class="n">item</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">currentIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">currentIndex</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="n">Count</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When using the inventory, the problem without generics is the loss of type specificity. Retrieving items leads to ambiguity.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Inventory</span><span class="p">();</span>
+<span class="n">inventory</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Weapon</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Wooden Sword&quot;</span><span class="w"> </span><span class="p">});</span>
+
+<span class="n">IItem</span><span class="w"> </span><span class="n">retrievedItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">CurrentItem</span><span class="p">;</span><span class="w">  </span><span class="c1">// Type-information lost!</span>
+<span class="n">Weapon</span><span class="w"> </span><span class="n">retrievedWeapon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Weapon</span><span class="p">)</span><span class="n">retrievedItem</span><span class="p">;</span><span class="w">  </span><span class="c1">// Downcasting needed!</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To regain the lost type-information we have to use more advanced techniques like the <span class="xref myst">Visitor pattern</span> or resort to <a class="reference internal" href="downcasting.html"><span class="doc std std-doc">downcasting</span></a>.</p>
+<p>Let’s now instead look at how we can solve this problem using generics with constraints.
+Here’s how we might write the inventory code as a <a class="reference internal" href="generic-types.html"><span class="doc std std-doc">generic type</span></a> using constraints.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Inventory</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IItem</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">currentIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">CurrentName</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">CurrentItem</span><span class="p">.</span><span class="n">Name</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">CurrentItem</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">items</span><span class="p">[</span><span class="n">currentIndex</span><span class="p">];</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Add</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">item</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">currentIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">currentIndex</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="n">Count</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the above code, we’ve now defined a generic type with a type parameter named <code class="docutils literal notranslate"><span class="pre">T</span></code> which is constrained to the interface <code class="docutils literal notranslate"><span class="pre">IITem</span></code>.
+The constraint is the part that says <code class="docutils literal notranslate"><span class="pre">where</span> <span class="pre">T</span> <span class="pre">:</span> <span class="pre">IItem</span></code>.
+This generic type allows us to retain type information as we add and extract objects from an inventory.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">weaponInventory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Inventory</span><span class="o">&lt;</span><span class="n">Weapon</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="n">weaponInventory</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Weapon</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Wooden Sword&quot;</span><span class="w"> </span><span class="p">});</span>
+
+<span class="n">Weapon</span><span class="w"> </span><span class="n">retrievedWeapon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">weaponInventory</span><span class="p">.</span><span class="n">CurrentItem</span><span class="p">;</span><span class="w">  </span><span class="c1">// No type-information lost!</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>C# provides a versatile toolkit for adding constraints to your generics. Here are some of the different types of constraints that you can apply in C#:</p>
+<ul class="simple">
+<li><p><strong>Base class constraint</strong>: The type argument must inherit from a particular class.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">where</span> <span class="pre">T</span> <span class="pre">:</span> <span class="pre">MyBaseClass</span></code></p></li>
+</ul>
+</li>
+<li><p><strong>Interface constraint</strong>: The type argument must implement a specific interface.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">where</span> <span class="pre">T</span> <span class="pre">:</span> <span class="pre">ISomeInterface</span></code></p></li>
+</ul>
+</li>
+<li><p><strong>Reference type constraint</strong>: The type argument must be a reference type.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">where</span> <span class="pre">T</span> <span class="pre">:</span> <span class="pre">class</span></code></p></li>
+</ul>
+</li>
+<li><p><strong>Reference type constraint</strong>: The type argument must be a value type.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">where</span> <span class="pre">T</span> <span class="pre">:</span> <span class="pre">struct</span></code></p></li>
+</ul>
+</li>
+<li><p><strong>Constructor constraint</strong>: The type argument must have a parameterless constructor, enabling you to create new instances within your generic class or method.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">where</span> <span class="pre">T</span> <span class="pre">:</span> <span class="pre">new()</span></code></p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Type constraints grant a generic method or class more capabilities with the type parameter. For example, without the new() constraint, we wouldn’t be able to create an instance of a type parameter <code class="docutils literal notranslate"><span class="pre">T</span></code> since there’s no guarantee that <code class="docutils literal notranslate"><span class="pre">T</span></code> has a parameterless constructor.</p>
+</div>
+<p>You can apply multiple constraints to a single type parameter, but they must be specified in this order: class/struct, base class, interfaces, <code class="docutils literal notranslate"><span class="pre">new()</span></code>. To add multiple constraints, simply separate them with commas (<code class="docutils literal notranslate"><span class="pre">constraint1,</span> <span class="pre">constraint2,</span> <span class="pre">...</span></code>).</p>
+<p>In cases where you need to apply constraints on multiple type parameters, you can use multiple <code class="docutils literal notranslate"><span class="pre">where</span></code> clauses.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="n">SomeMethod</span><span class="o">&lt;</span><span class="n">T1</span><span class="p">,</span><span class="w"> </span><span class="n">T2</span><span class="o">&gt;</span><span class="p">(</span><span class="n">T1</span><span class="w"> </span><span class="n">item1</span><span class="p">,</span><span class="w"> </span><span class="n">T2</span><span class="w"> </span><span class="n">item2</span><span class="p">)</span>
+<span class="w">    </span><span class="k">where</span><span class="w"> </span><span class="n">T1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">constraint1</span>
+<span class="w">    </span><span class="k">where</span><span class="w"> </span><span class="n">T2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">constraint2</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>By strategically using constraints, you bring more power to your generics. But it’s crucial to apply these constraints only when necessary, as over-restricting can reduce the flexibility and reusability of your generic tools.</p>
+<p>In conclusion, type parameter constraints act as a bridge, melding the generality of generics with the specificity required in certain scenarios.
+By using constraints we can write highly reusable methods and classes that do know some things about the types that they operate on but without over-generalizing and end up having to perform downcasting.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -305,16 +580,16 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            name: "python3",
+            name: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
         </article>
       </div>
       <footer>
