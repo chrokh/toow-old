@@ -53,7 +53,7 @@ foreach (var num in numbers)
     Console.WriteLine(num);
 ```
 
-In this code, `List<T>` is a [generic type](generic-types), specifically a generic class, and `T` is a [type parameter](generic-type-parameters). We'll talk more about this terminology in the next chapter but for now you can think of `T` as a placeholder for a type.
+In this code, `List<T>` is a [generic type](generic-types), specifically a generic class, and `T` is a type parameter. We'll talk more about this terminology in the next chapter but for now you can think of `T` as a placeholder for a type.
 
 To create a list of integers we replace `T` with `int` by writing `List<int>`.
 %We say that `List<T>` is a 'generic type definition', while `List<int>` is a 'constructed generic type'. Both are referred to as a 'generic type'
