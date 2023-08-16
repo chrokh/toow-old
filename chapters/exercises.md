@@ -1404,3 +1404,9 @@ NOTE: All exercises are currently commented out.
 %
 
 
+% ## Dependency injection
+%
+%```{exercise}
+We say that dependency injection separate 'construction' from 'use', what is meant by this?
+%```
+
