@@ -13,7 +13,7 @@ kernelspec:
 # Replace conditional with polymorphism
 
 Instead of relying on long chains of conditionals, we can use this principle to elegantly dispatch behavior based on the object's type.
-The term 'replace conditional with polymorphism' refers to a [refactoring](refactoring) popularized by the book [Refactoring by Martin Fowler](https://geni.us/DABBqp). It's aptly named because we're taking code that uses conditionals and rewrite it so that it instead uses polymorphism.
+The term 'replace conditional with polymorphism' was popularized by Martin Fowlers book, [Refactoring](https://geni.us/DABBqp)'. It's aptly named because we're taking code that uses conditionals and rewrite it so that it instead uses polymorphism.
 
 ```{admonition} Key point
 Using polymorphism can eliminate the need for explicit conditionals in your code, leading to more readable and maintainable solutions.
@@ -83,7 +83,7 @@ class Bishop : IPiece
 }
 ```
 
-With this setup, there's no need for any conditionals. When you call the `Move` method on a character (`IPiece`), the correct implementation for that character type is automatically chosen.
+With this setup, there's no need for any conditionals. When you call the `Move` method on a piece (`IPiece`), the correct implementation for that piece type is automatically chosen.
 Revisit the chapters on [subtype polymorphism](subtype-polymorphism) and [dynamic dispatch](dynamic-dispatch) if this doesn't make sense.
 
 ```{code-cell}
@@ -92,7 +92,7 @@ piece.Move(); // No conditionals needed!
 ```
 
 ```{tip}
-When you find yourself using conditionals based on object types or properties, consider if polymorphism might be a better approach.
+When you find yourself using conditionals based on an object's data type or properties, consider if polymorphism might be a better approach.
 ```
 
 %``{attention}
@@ -105,5 +105,6 @@ When you find yourself using conditionals based on object types or properties, c
 In later chapters we'll explore designs (such as [strategy pattern](strategy-pattern)) and principles (such as [composition over inheritance](composition-over-inheritance)) that take this basic idea even further.
 ```
 
-Remember, the goal of object-oriented programming, and indeed, programming in general, is clarity and maintainability. By making smart choices and leveraging principles like polymorphism, you're well on your way to creating better software.
+Remember, a key goal in object-oriented programming as well as programming in general, is clarity and [maintainability](maintainability).
+By leveraging principles like polymorphism, you pave the way for clearer, more maintainable software
 

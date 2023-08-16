@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="86. Type parameter constraints" href="type-parameter-constraints.html" /><link rel="prev" title="84. Generic supertypes" href="generic-supertypes.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="88. Type parameter constraints" href="type-parameter-constraints.html" /><link rel="prev" title="86. Generic supertypes" href="generic-supertypes.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>85. Generic methods - The Object Oriented Way</title>
+        <title>87. Generic methods - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -245,16 +245,18 @@
 <li class="toctree-l1"><a class="reference internal" href="maintainability.html">78. Maintainability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="refactoring.html">79. Refactoring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">80. Replace conditional with polymorphism</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generics.html">81. Generics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-types.html">82. Generic types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generics-and-type-errors.html">83. Generics and type errors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">84. Generic supertypes</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">85. Generic methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">86. Type parameter constraints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variance.html">87. Variance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">88. Liskov substitution principle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">89. Variant generic interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">90. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependency-injection.html">81. Dependency injection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">82. Composition over inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics.html">83. Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-types.html">84. Generic types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics-and-type-errors.html">85. Generics and type errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">86. Generic supertypes</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">87. Generic methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">88. Type parameter constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variance.html">89. Variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">90. Liskov substitution principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">91. Variant generic interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">92. Bibliography</a></li>
 </ul>
 
 </div>
@@ -290,7 +292,7 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="generic-methods">
-<h1><span class="section-number">85. </span>Generic methods<a class="headerlink" href="#generic-methods" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">87. </span>Generic methods<a class="headerlink" href="#generic-methods" title="Permalink to this heading">#</a></h1>
 <p>Generics aren’t confined to just classes and interfaces; methods can be generic as well.
 Even if their containing type isn’t generic.
 Through the use of generic methods, we can ensure greater type safety without compromising on performance.</p>
@@ -304,7 +306,7 @@ It also means that within a generic class, a method can introduce its own distin
 <figure class="align-default" id="id1">
 <img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1139460159010263100/chrokh_illustration_of_gift_wrapping_station_with_identical_pac_0365ffc2-d3a5-4294-8ed4-242d1530cd72.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1139460159010263100/chrokh_illustration_of_gift_wrapping_station_with_identical_pac_0365ffc2-d3a5-4294-8ed4-242d1530cd72.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 85.1 </span><span class="caption-text">Just like how a wrapping station can encase any, regardless of the specifics of the gift, inside a standard box, generic methods wrap around any type, without needing to know its specifics.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 87.1 </span><span class="caption-text">Just like how a wrapping station can encase any, regardless of the specifics of the gift, inside a standard box, generic methods wrap around any type, without needing to know its specifics.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Imagine that you want a method that duplicates every element in a list. Do we have to create separate methods for lists of <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">string</span></code>, <code class="docutils literal notranslate"><span class="pre">double</span></code>, and so on? No, because this is a prime example of when the of thing that the method deals with doesn’t matter. As long as we get passed a list it doesn’t matter what the list contains. We can utilize generics to write a single solution that works for all types.
@@ -327,7 +329,7 @@ For the sake of simplicity, let’s write it as a <a class="reference internal" 
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3394.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3542.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -372,12 +374,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.202:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.242:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3394.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3542.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -609,7 +611,7 @@ By using generic extension methods, you can add new functionalities to existing 
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">86. </span>Type parameter constraints</div>
+                <div class="title"><span class="section-number">88. </span>Type parameter constraints</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -620,7 +622,7 @@ By using generic extension methods, you can add new functionalities to existing 
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">84. </span>Generic supertypes</div>
+                <div class="title"><span class="section-number">86. </span>Generic supertypes</div>
                 
               </div>
             </a>

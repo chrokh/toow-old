@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="81. Dependency injection" href="dependency-injection.html" /><link rel="prev" title="79. Refactoring" href="refactoring.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="82. Composition over inheritance" href="composition-over-inheritance.html" /><link rel="prev" title="80. Replace conditional with polymorphism" href="replace-conditional-with-polymorphism.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>80. Replace conditional with polymorphism - The Object Oriented Way</title>
+        <title>81. Dependency injection - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -141,7 +141,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -244,8 +244,8 @@
 <li class="toctree-l1"><a class="reference internal" href="uml-class-diagrams.html">77. UML class diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="maintainability.html">78. Maintainability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="refactoring.html">79. Refactoring</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">80. Replace conditional with polymorphism</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dependency-injection.html">81. Dependency injection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">80. Replace conditional with polymorphism</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">81. Dependency injection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">82. Composition over inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generics.html">83. Generics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-types.html">84. Generic types</a></li>
@@ -285,38 +285,81 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="replace-conditional-with-polymorphism">
-<h1><span class="section-number">80. </span>Replace conditional with polymorphism<a class="headerlink" href="#replace-conditional-with-polymorphism" title="Permalink to this heading">#</a></h1>
-<p>Instead of relying on long chains of conditionals, we can use this principle to elegantly dispatch behavior based on the object’s type.
-The term ‘replace conditional with polymorphism’ was popularized by Martin Fowlers book, <a class="reference external" href="https://geni.us/DABBqp">Refactoring</a>’. It’s aptly named because we’re taking code that uses conditionals and rewrite it so that it instead uses polymorphism.</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="dependency-injection">
+<h1><span class="section-number">81. </span>Dependency injection<a class="headerlink" href="#dependency-injection" title="Permalink to this heading">#</a></h1>
+<p>Designing software isn’t just about writing code that works; it’s about crafting architectures that can be maintained and adapted over time.
+In the world of software, dependencies are inevitable. Your class often relies on other classes or services to perform its operations. This interlinking can quickly get messy. This is where ‘Dependency Injection’ (often abbreviated DI) comes into play.</p>
+<p>Dependency injection promotes the ‘injection’ of dependencies as opposed to the ‘construction’ of dependencies.
+At its heart, dependency injection is about inverting control.</p>
 <div class="admonition-key-point admonition">
 <p class="admonition-title">Key point</p>
-<p>Using polymorphism can eliminate the need for explicit conditionals in your code, leading to more readable and maintainable solutions.</p>
+<p>Dependency injection separates object <em>construction</em> from object <em>use</em>. By ‘injecting’ our dependencies instead of ‘constructing’ them we increase <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a> across all dimensions.</p>
 </div>
-<p>To metaphorically visualize this chapter’s concept, think of polymorphism as a symphony orchestra. Instead of one musician trying to play every instrument based on a list of conditions, each musician specializes in one instrument. When a sequence of notes is given to a violinist the piece is played on a violin. But if the same sequence of notes is given to the pianist it is played on a piano. In the same vein, polymorphism ensures the right code executes without the explicit need for conditions.</p>
+<section id="analogies">
+<h2><span class="section-number">81.1. </span>Analogies<a class="headerlink" href="#analogies" title="Permalink to this heading">#</a></h2>
+<p>Think of dependency injection like using a universal remote control. A universal remote is designed to work with various televisions, sound systems, and more. The key is that each device follows the same communication interface, enabling the remote to send standard commands like ‘volume up,’ ‘play,’ or ‘pause.’</p>
 <figure class="align-default" id="id1">
-<img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1140917738378891264/chrokh_illustration_of_an_orchestra_db3193b5-f403-40e4-85dc-86d45c6e8ba8.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1140917738378891264/chrokh_illustration_of_an_orchestra_db3193b5-f403-40e4-85dc-86d45c6e8ba8.png" />
+<img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1140960943988293662/chrokh_apple_TV_remote_control_illustration_simple_flat_f1e5566d-0641-4f28-aab9-f759eac75b09.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1140960943988293662/chrokh_apple_TV_remote_control_illustration_simple_flat_f1e5566d-0641-4f28-aab9-f759eac75b09.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 80.1 </span><span class="caption-text">Replacing conditionals with polymorphism is like moving from a single person playing every instrument to an orchestra where each person specializes in one instrument.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 81.1 </span><span class="caption-text">When using Dependency injection, objects are designed to accept any dependency conforming to an expected interface. This is reminiscent of how a universal remote can be paired with any device that follows the expected protocol.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Imagine you’re building a chess game. In chess, different pieces move in different patterns. For instance, a ‘Knight’ might move in an ‘L’ shape while a ‘Bishop’ might move diagonally. The naive way to code this might involve a lot of conditionals:</p>
+<p>Just as you can connect a new device into your remote’s repertoire, in software design, we can ‘inject’ dependencies into an object. The object, like the remote, doesn’t need to know the intricate workings of what it’s controlling, it just needs to know the interface. This allows for flexibility and modularity, as you can easily swap out one device (or dependency) for another without needing to buy a new remote (or rewrite your class).</p>
+<p>Imagine a child assembling a LEGO model.
+Should the child be responsible for <em>both</em> searching for each individual piece <em>and</em> assembling them?
+In software we often argue that an object only should be responsible for one thing.
+Dependency injection would suggest that we should hand the child each individual piece in the order that they need them which would let the child focus all its energy on the assembly process.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>In dependency injection, classes don’t create their dependencies. Instead they expect whoever is using the class to provide the necessary dependencies.</p>
+</div>
+<p>If you are building a calculator app,
+would you prefer that the method that performs an actual calculation involving two numbers, like addition, also asks the user for two numbers or would you prefer that the numbers are simply passed to your method as arguments?
+Another way of saying this is: would you prefer mixing the code that asks the user for input numbers and the code that performs the actual calculation or would you rather separate the two?
+Dependency injection says that we should not generate the data we need but instead ask callers of our methods and constructors to provide it for us.</p>
+</section>
+<section id="example">
+<h2><span class="section-number">81.2. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
+<p>Let’s get more concrete.
+Imagine you’re developing a side-scrolling adventure game where your main character, the <code class="docutils literal notranslate"><span class="pre">Player</span></code>, can run left, run right, and jump. As the player progresses through the game, they can pick up power-ups that modify their abilities. One such power-up lets the <code class="docutils literal notranslate"><span class="pre">Player</span></code> execute a double jump.</p>
+<p>Without dependency injection, the code might look something like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span><span class="w"> </span><span class="n">PieceType</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Knight</span><span class="p">,</span><span class="w"> </span><span class="n">Bishop</span><span class="p">,</span><span class="w"> </span><span class="n">Pawn</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// Etc...</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Player</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">hasDoubleJumpPowerUp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MoveRight</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Moving right.&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MoveLeft</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Moving left.&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Jump</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hasDoubleJumpPowerUp</span><span class="p">)</span>
+<span class="w">            </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Performing double jump!&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Performing regular jump!&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">EnableDoubleJump</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">enabled</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">hasDoubleJumpPowerUp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">enabled</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-5066.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2920.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -366,7 +409,7 @@ function loadDotnetInteractiveApi() {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '5066.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2920.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -422,89 +465,169 @@ else {
     </script>
 </div></div></div>
 </div>
+<p>While this approach seems simple, it bakes the double jump logic directly into the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class. This becomes problematic if we decide to introduce additional jump-related power-ups in the future. Such as triple jump or glide jump.</p>
+<p>For each power-up, we must add an activation-method and a conditional in the jump-method.
+It gets even worse when we start thinking about the fact that we could have power-ups that affect moving right and left as well.</p>
+<p>Luckily, we’ve learned about <a class="reference internal" href="replace-conditional-with-polymorphism.html"><span class="doc std std-doc">replacing conditionals with polymorphism</span></a>.
+Couldn’t we use polymorphism to control the jumping behavior instead of conditionals?
+We certainly can.
+Dependency injection then takes this a step further and says that the construction of the object that controls the jumping behavior should not be a responsibility of the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class in the first place.</p>
+<p>Let’s start by defining an interface for jump behaviors and some concrete implementations of it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Piece</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IJumpBehavior</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">PieceType</span><span class="w"> </span><span class="n">Type</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="nf">Execute</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SingleJump</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IJumpBehavior</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Execute</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Performing regular jump.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">DoubleJump</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IJumpBehavior</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Execute</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Performing double jump.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With these jump behaviors in place we can now rewrite the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class to delegate the actual jumping to whatever object is currently set as the jump behavior.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Player</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">IJumpBehavior</span><span class="w"> </span><span class="n">jumpBehavior</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Move</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">PieceType</span><span class="p">.</span><span class="n">Knight</span><span class="p">)</span>
-<span class="w">            </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Can move in L shape.&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="nf">if</span><span class="w"> </span><span class="p">(</span><span class="n">Type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">PieceType</span><span class="p">.</span><span class="n">Bishop</span><span class="p">)</span>
-<span class="w">            </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Can move diagonally.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Constructor injection:</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Player</span><span class="p">(</span><span class="n">IJumpBehavior</span><span class="w"> </span><span class="n">jumpBehavior</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">jumpBehavior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jumpBehavior</span><span class="p">;</span>
 
-<span class="w">        </span><span class="c1">// ... etc</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MoveRight</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Moving right.&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MoveLeft</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Moving left.&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Jump</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">jumpBehavior</span><span class="p">.</span><span class="n">Execute</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Method injection:</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetJumpBehavior</span><span class="p">(</span><span class="n">IJumpBehavior</span><span class="w"> </span><span class="n">jumpBehavior</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">jumpBehavior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jumpBehavior</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>The above approach may seem straightforward at first sight, but it becomes cumbersome and less <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainable</span></a> as the number of piece types increases. Moreover, every time a new type is introduced, the <code class="docutils literal notranslate"><span class="pre">Move</span></code> method must be modified. This last point might not be relevant in the chess example but it certainly is valid in scenarios where the requirements aren’t completely known.</p>
-<p>An elegant solution is to instead use polymorphism to delegate the responsibility of moving to the specific piece types.</p>
-<p>Let’s refactor this to instead use polymorphism.
-The idea is to make each piece its own class with its own implementation of the instance method <code class="docutils literal notranslate"><span class="pre">Move</span></code>.
-We then make it possible to use instances of these classes polymorphically by letting them implement the same interface or inherit from the same base class. In this example we’re going to use an interface.
-Have a look at the refactored code that instead uses polymorphism:</p>
+<p>When instantiating the <code class="docutils literal notranslate"><span class="pre">Player</span></code>, you now have to decide which jump behavior the player should have:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IPiece</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="nf">Move</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Knight</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IPiece</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Move</span><span class="p">()</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Can move in L shape.&quot;</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Bishop</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IPiece</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Move</span><span class="p">()</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Can move diagonally.&quot;</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>With this setup, there’s no need for any conditionals. When you call the <code class="docutils literal notranslate"><span class="pre">Move</span></code> method on a piece (<code class="docutils literal notranslate"><span class="pre">IPiece</span></code>), the correct implementation for that piece type is automatically chosen.
-Revisit the chapters on <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype polymorphism</span></a> and <a class="reference internal" href="dynamic-dispatch.html"><span class="doc std std-doc">dynamic dispatch</span></a> if this doesn’t make sense.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IPiece</span><span class="w"> </span><span class="n">piece</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Knight</span><span class="p">();</span>
-<span class="n">piece</span><span class="p">.</span><span class="n">Move</span><span class="p">();</span><span class="w"> </span><span class="c1">// No conditionals needed!</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IJumpBehavior</span><span class="w"> </span><span class="n">basicJump</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SingleJump</span><span class="p">();</span>
+<span class="n">Player</span><span class="w"> </span><span class="n">player</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Player</span><span class="p">(</span><span class="n">basicJump</span><span class="p">);</span>
+<span class="n">player</span><span class="p">.</span><span class="n">Jump</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Can move in L shape.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Performing regular jump.
 </pre></div>
 </div>
 </div>
 </div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>When you find yourself using conditionals based on an object’s data type or properties, consider if polymorphism might be a better approach.</p>
+<p>If the player later picks up a double jump power-up we simply inject the new jumping behavior into the <code class="docutils literal notranslate"><span class="pre">Player</span></code> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IJumpBehavior</span><span class="w"> </span><span class="n">doubleJump</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DoubleJump</span><span class="p">();</span>
+<span class="n">player</span><span class="p">.</span><span class="n">SetJumpBehavior</span><span class="p">(</span><span class="n">doubleJump</span><span class="p">);</span>
+<span class="n">player</span><span class="p">.</span><span class="n">Jump</span><span class="p">();</span>
+</pre></div>
 </div>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p>In later chapters we’ll explore designs (such as <span class="xref myst">strategy pattern</span>) and principles (such as <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">composition over inheritance</span></a>) that take this basic idea even further.</p>
 </div>
-<p>Remember, a key goal in object-oriented programming as well as programming in general, is clarity and <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a>.
-By leveraging principles like polymorphism, you pave the way for clearer, more maintainable software</p>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Performing double jump.
+</pre></div>
+</div>
+</div>
+</div>
+<p>With this setup, if we want to introduce new jump abilities we can do so easily without having to modify any code in the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class. We simply write another class that implements <code class="docutils literal notranslate"><span class="pre">IJumpBehavior</span></code> and inject it into our <code class="docutils literal notranslate"><span class="pre">Player</span></code> instance when needed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">GlideJump</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IJumpBehavior</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Execute</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Perorming jump and glide.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>The class <code class="docutils literal notranslate"><span class="pre">Player</span></code> now ‘depends on’ the interface <code class="docutils literal notranslate"><span class="pre">IJumpBehavior</span></code> which is why we use the word ‘dependency’.
+The act of sending an instance of type <code class="docutils literal notranslate"><span class="pre">IJumpBehavior</span></code> into an instance of type <code class="docutils literal notranslate"><span class="pre">Player</span></code> is what we call ‘injection’ which is why we use the word ‘injection’.
+Hence, we call it ‘dependency injection’.</p>
+</div>
+<p>The same principle can of course be applied to other movement behaviors.
+By adding an interface for movement behavior we could easily write a class for running behavior, and then switch to and from it by injecting it into our <code class="docutils literal notranslate"><span class="pre">Player</span></code> object.
+Try it out on your own!</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the example with the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class, the injected dependency is an interface.
+However, even if the dependency weren’t an interface, it would still be termed ‘dependency injection’.
+The key idea is that an object is injected rather than created.
+That we separate ‘creation’ from <em>use</em>.</p>
+</div>
+</section>
+<section id="types-of-dependency-injection">
+<h2><span class="section-number">81.3. </span>Types of dependency injection<a class="headerlink" href="#types-of-dependency-injection" title="Permalink to this heading">#</a></h2>
+<p>There are mainly three types of dependency injection:</p>
+<section id="constructor-injection">
+<h3><span class="section-number">81.3.1. </span>Constructor Injection<a class="headerlink" href="#constructor-injection" title="Permalink to this heading">#</a></h3>
+<p>The dependencies are injected through the constructor of the dependent class. It’s the most common form of dependency injection and is used when the dependency is mandatory for the class’s operation.</p>
+<p>Example: The <code class="docutils literal notranslate"><span class="pre">Player</span></code> class is passed its initial jump behavior via its constructor.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">new</span><span class="w"> </span><span class="nf">Player</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">JumpBehavior</span><span class="p">()));</span>
+</pre></div>
+</div>
+</section>
+<section id="method-injection">
+<h3><span class="section-number">81.3.2. </span>Method Injection<a class="headerlink" href="#method-injection" title="Permalink to this heading">#</a></h3>
+<p>Here, dependencies are provided through methods. This is useful when the dependencies can change during the lifetime of an instance.</p>
+<p>Example: The jump behavior of a <code class="docutils literal notranslate"><span class="pre">Player</span></code> object can be changed during its lifetime by using the <code class="docutils literal notranslate"><span class="pre">SetJumpBehavior</span></code> method.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">player</span><span class="p">.</span><span class="n">SetJumpBehavior</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DoubleJumpBehavior</span><span class="p">());</span>
+</pre></div>
+</div>
+</section>
+<section id="property-injection">
+<h3><span class="section-number">81.3.3. </span>Property Injection<a class="headerlink" href="#property-injection" title="Permalink to this heading">#</a></h3>
+<p>Dependencies are set via properties of the class. This is often used for optional dependencies. The terms ‘attribute injection’, ‘field injection’, and ‘setter injection’ are essentially the same as this.</p>
+<p>Example: If we converted the field <code class="docutils literal notranslate"><span class="pre">jumpBehavior</span></code> in the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class into a property with a <code class="docutils literal notranslate"><span class="pre">public</span></code> setter then we could inject a jump behavior during the lifetime of a <code class="docutils literal notranslate"><span class="pre">Player</span></code> object by using the setter.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">player</span><span class="p">.</span><span class="n">JumpBehavior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DoubleJumpBehavior</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="conclusion">
+<h2><span class="section-number">81.4. </span>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>While Dependency injection aids in creating a flexible system, it’s crucial to avoid overengineering. Use dependency injection where it genuinely adds value by enhancing <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a>.</p>
+</div>
+<p>In upcoming chapters, we’ll explore principles (like <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">composition over inheritance</span></a>) and patterns (like <span class="xref myst">strategy pattern</span>, that take the concept of dependency injection even further.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -531,23 +654,23 @@ By leveraging principles like polymorphism, you pave the way for clearer, more m
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="dependency-injection.html">
+          <a class="next-page" href="composition-over-inheritance.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">81. </span>Dependency injection</div>
+                <div class="title"><span class="section-number">82. </span>Composition over inheritance</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="refactoring.html">
+          <a class="prev-page" href="replace-conditional-with-polymorphism.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">79. </span>Refactoring</div>
+                <div class="title"><span class="section-number">80. </span>Replace conditional with polymorphism</div>
                 
               </div>
             </a>
@@ -569,8 +692,35 @@ By leveraging principles like polymorphism, you pave the way for clearer, more m
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">81. Dependency injection</a><ul>
+<li><a class="reference internal" href="#analogies">81.1. Analogies</a></li>
+<li><a class="reference internal" href="#example">81.2. Example</a></li>
+<li><a class="reference internal" href="#types-of-dependency-injection">81.3. Types of dependency injection</a><ul>
+<li><a class="reference internal" href="#constructor-injection">81.3.1. Constructor Injection</a></li>
+<li><a class="reference internal" href="#method-injection">81.3.2. Method Injection</a></li>
+<li><a class="reference internal" href="#property-injection">81.3.3. Property Injection</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conclusion">81.4. Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
