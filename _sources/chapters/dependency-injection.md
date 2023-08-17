@@ -32,7 +32,7 @@ Think of dependency injection like using a universal remote control. A universal
 
 ```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1140960943988293662/chrokh_apple_TV_remote_control_illustration_simple_flat_f1e5566d-0641-4f28-aab9-f759eac75b09.png
 
-When using Dependency injection, objects are designed to accept any dependency conforming to an expected interface. This is reminiscent of how a universal remote can be paired with any device that follows the expected protocol.
+When using dependency injection, objects are designed to accept any dependency conforming to an expected interface. This is reminiscent of how a universal remote can be paired with any device that follows the expected protocol.
 ```
 
 Just as you can connect a new device into your remote's repertoire, in software design, we can 'inject' dependencies into an object. The object, like the remote, doesn't need to know the intricate workings of what it's controlling, it just needs to know the interface. This allows for flexibility and modularity, as you can easily swap out one device (or dependency) for another without needing to buy a new remote (or rewrite your class).
@@ -243,13 +243,17 @@ player.JumpBehavior = new DoubleJumpBehavior();
 %    - Example: If we converted the field `jumpBehavior` in the `Player` class into a property with a `public` setter then we could inject a jump behavior during the lifetime of a `Player` object by using the setter.
 %    - `player.JumpBehavior = new DoubleJumpBehavior();`.
 
-```{attention}
-While Dependency injection aids in creating a flexible system, it's crucial to avoid overengineering. Use dependency injection where it genuinely adds value by enhancing [maintainability](maintainability).
+```{important}
+By injecting the jump behavior into player objects we're changing the behavior of players at run-time.
 ```
 
-%As we move forward in our journey, these concepts will become more profound. Remember that the essence of good software design is to make systems modular and extensible. By understanding and applying Dependency injection, you're taking a significant step in that direction.
+```{attention}
+While dependency injection aids in creating a flexible system, it's crucial to avoid overengineering. Use dependency injection where it genuinely adds value by enhancing [maintainability](maintainability).
+```
+
+%As we move forward in our journey, these concepts will become more profound. Remember that the essence of good software design is to make systems modular and extensible. By understanding and applying dependency injection, you're taking a significant step in that direction.
 
 In upcoming chapters, we'll explore principles (like [composition over inheritance](composition-over-inheritance)) and patterns (like [strategy pattern](strategy-pattern), that take the concept of dependency injection even further.
 
-%By embracing Dependency injection, you align with a design principle that emphasizes clarity, testability, and maintainability. It's an approach that's not just about writing code, but about designing robust systems poised for growth and change.
+%By embracing dependency injection, you align with a design principle that emphasizes clarity, testability, and maintainability. It's an approach that's not just about writing code, but about designing robust systems poised for growth and change.
 

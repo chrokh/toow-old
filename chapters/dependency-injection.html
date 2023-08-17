@@ -307,7 +307,7 @@ At its heart, dependency injection is about inverting control.</p>
 <figure class="align-default" id="id1">
 <img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1140960943988293662/chrokh_apple_TV_remote_control_illustration_simple_flat_f1e5566d-0641-4f28-aab9-f759eac75b09.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1140960943988293662/chrokh_apple_TV_remote_control_illustration_simple_flat_f1e5566d-0641-4f28-aab9-f759eac75b09.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 81.1 </span><span class="caption-text">When using Dependency injection, objects are designed to accept any dependency conforming to an expected interface. This is reminiscent of how a universal remote can be paired with any device that follows the expected protocol.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 81.1 </span><span class="caption-text">When using dependency injection, objects are designed to accept any dependency conforming to an expected interface. This is reminiscent of how a universal remote can be paired with any device that follows the expected protocol.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Just as you can connect a new device into your remote’s repertoire, in software design, we can ‘inject’ dependencies into an object. The object, like the remote, doesn’t need to know the intricate workings of what it’s controlling, it just needs to know the interface. This allows for flexibility and modularity, as you can easily swap out one device (or dependency) for another without needing to buy a new remote (or rewrite your class).</p>
@@ -359,7 +359,7 @@ Imagine you’re developing a side-scrolling adventure game where your main char
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2920.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2868.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -404,12 +404,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.242:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.175:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2920.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2868.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -622,9 +622,13 @@ That we separate ‘creation’ from <em>use</em>.</p>
 </section>
 <section id="conclusion">
 <h2><span class="section-number">81.4. </span>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>By injecting the jump behavior into player objects we’re changing the behavior of players at run-time.</p>
+</div>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
-<p>While Dependency injection aids in creating a flexible system, it’s crucial to avoid overengineering. Use dependency injection where it genuinely adds value by enhancing <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a>.</p>
+<p>While dependency injection aids in creating a flexible system, it’s crucial to avoid overengineering. Use dependency injection where it genuinely adds value by enhancing <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a>.</p>
 </div>
 <p>In upcoming chapters, we’ll explore principles (like <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">composition over inheritance</span></a>) and patterns (like <span class="xref myst">strategy pattern</span>, that take the concept of dependency injection even further.</p>
 </section>

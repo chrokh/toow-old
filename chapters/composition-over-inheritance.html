@@ -293,45 +293,50 @@
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="composition-over-inheritance">
 <h1><span class="section-number">82. </span>Composition over inheritance<a class="headerlink" href="#composition-over-inheritance" title="Permalink to this heading">#</a></h1>
-<section id="examples">
-<h2><span class="section-number">82.1. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<section id="ducks">
-<span id="composition-over-inheritance-examples-ducks"></span><h3><span class="section-number">82.1.1. </span>Ducks<a class="headerlink" href="#ducks" title="Permalink to this heading">#</a></h3>
-<p>Let’s run through an example similar to the duck example made famous by <span id="id1">Freeman and Robson [<a class="reference internal" href="bibliography.html#id15" title="E. Freeman and E Robson. Head First Design Patterns: A Brain-Friendly Guide. Head First Series. O'Reilly Media, Incorporated, 2004. ISBN 9780596800741. URL: https://geni.us/nlbA6.">2004</a>]</span>.</p>
-<p>We start with this:</p>
+<p>A student of mine once gave me an excellent example of why favoring <a class="reference internal" href="object-composition.html"><span class="doc std std-doc">composition</span></a> over <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a> is so useful. The student used centaurs but we’ll use mermaids.</p>
+<p>Imagine that you’ve got three types: Human, Fish, and Mermaid. What does the inheritance hierarchy look like?
+Since a mermaid is part human and part fish, some code should be shared between mermaid and human while some code should be shared between mermaid and fish.
+The three types do not form a hierarchy. They don’t follow a clear parent-child relationship, yet their definitions clearly overlap.</p>
+<figure class="align-default" id="id1">
+<img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1141675785967632454/chrokh_an_illustrated_disney_mermaid_f0ff6abc-9a0c-4907-b9f4-dca6182176d7.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1141675785967632454/chrokh_an_illustrated_disney_mermaid_f0ff6abc-9a0c-4907-b9f4-dca6182176d7.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 82.1 </span><span class="caption-text">Just like mermaids are part human and part fish, some concepts don’t form a neat hierarchy.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<div class="legend">
+</div>
+</figcaption>
+</figure>
+<p>There are two key problems with <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a> that have led to the formulation of the design principle known as ‘<a class="reference internal" href="object-composition.html"><span class="doc std std-doc">composition</span></a> over <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a>’:</p>
+<ol class="arabic simple">
+<li><p>Inheritance hierarchies exclusively allow the <strong>sharing of behavior from parent to child, but not between sibling classes</strong>. This intrinsic design presupposes that no child class is, or ever will be, similar to any other child class in any respect. Inheritance enforces a vertical sharing of behavior, leaving no room for horizontal sharing across different child classes.</p></li>
+<li><p>Inheritance rigidly binds an object’s behavior to a lineage of predetermined parent classes, making it a <strong>compile-time construct with no flexibility for run-time adaptation</strong>. In contrast, composition brings dynamism, allowing objects to have their behaviors modified or extended at run-time by composing different components. Think back to the earlier chapter on <a class="reference internal" href="dependency-injection.html"><span class="doc std std-doc">dependency injection</span></a>, where objects are assembled by injecting various behaviors or modules, resulting in a design that’s ready to adapt to evolving demands.</p></li>
+</ol>
+<div class="admonition-key-point admonition">
+<p class="admonition-title">Key point</p>
+<p>Code reuse should be achieved using composition and replacing conditionals with polymorphism rather than through inheritance.</p>
+</div>
+<p>Let’s refresh our memories of the terminology before diving in.
+<a class="reference internal" href="inheritance.html"><span class="doc std std-doc">Inheritance</span></a> refers to a mechanism where a new class, known as the subclass, inherits attributes and methods from an existing class, known as the superclass.
+<a class="reference internal" href="object-composition.html"><span class="doc std std-doc">Composition</span></a>, on the other hand, is a mechanism where one class contains an instance of another class. Instead of inheriting properties and behaviors, a class achieves the desired functionality by having other classes as its members.</p>
+<section id="the-duck-dilemma">
+<h2><span class="section-number">82.1. </span>The duck dilemma<a class="headerlink" href="#the-duck-dilemma" title="Permalink to this heading">#</a></h2>
+<p>To exemplify these key issues with inheritance, let’s dive into a problem inspired by the well-known ‘Duck problem’ popularized by the iconic book <a class="reference external" href="https://geni.us/nlbA6">Head First: Design Patterns</a>.
+That book, by the way, is an excellent book to keep on your shelf as a reference.</p>
+<figure class="align-default" id="id2">
+<img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1141602874699296818/chrokh_illustration_of_a_mallard_duck_aca85583-bb64-4677-b431-197fd8d31cd8.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1141602874699296818/chrokh_illustration_of_a_mallard_duck_aca85583-bb64-4677-b431-197fd8d31cd8.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 82.2 </span><span class="caption-text">While we might label it a ‘Mallard’, it’s the distinct set of behaviors and characteristics it exhibits that truly defines it. Composition over inheritance urges us to focus on capabilities over classifications.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Suppose we are creating a system to simulate a duck pond. We start by defining a base <code class="docutils literal notranslate"><span class="pre">Duck</span></code> class that define base behaviors for quacking and swimming. Now, we want to extend our system by introducing different types of ducks like mallard ducks, redheads, and rubber ducks. We decide to use inheritance. After all, all ducks can quack and swim, but some quack and swim in their special ways, right?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IDuck</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Duck</span>
 <span class="p">{</span>
-<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">();</span>
-<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">();</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Quack</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Quack!&quot;</span><span class="p">);</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">WildDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IDuck</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Quack quack.&quot;</span><span class="p">;</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Flying with wings.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">RubberDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IDuck</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Squeak squeak.&quot;</span><span class="p">;</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Cannot fly.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">RocketPoweredWildDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">WildDuck</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Flying with rockets.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">RocketPoweredRubberDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">RubberDuck</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Flying with rockets.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">RubberDuckWithVoiceSynthesizer</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">RubberDuck</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Quack quack.&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Swim</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Swim!&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -339,7 +344,7 @@
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2510.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2472.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -384,12 +389,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.242:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.175:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2510.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2472.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -445,351 +450,307 @@ else {
     </script>
 </div></div></div>
 </div>
-<p>Pay special attention to how inheritance in the example above doesn’t help us in eliminating all duplication.
-Our use case doesn’t simply form a nice hierarchy and so we end up with duplicated code even though we try our best to use the code-reuse facilities of <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a> to eliminate it.</p>
-<p>Either way, we can use the code like this:</p>
-<div class="cell tag_hide-output docutils container">
-<div class="cell_input above-output-prompt docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IDuck</span><span class="p">[]</span><span class="w"> </span><span class="n">ducks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IDuck</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">WildDuck</span><span class="p">(),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">RubberDuck</span><span class="p">(),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">RocketPoweredWildDuck</span><span class="p">(),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">RocketPoweredRubberDuck</span><span class="p">(),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">RubberDuckWithVoiceSynthesizer</span><span class="p">()</span>
-<span class="p">};</span>
+<p>At first glance this might seem like a sensible solution. As we inherit from our <code class="docutils literal notranslate"><span class="pre">Duck</span></code> class, all we have to do is to <a class="reference internal" href="overriding.html"><span class="doc std std-doc">override</span></a> these methods and implement whatever behavior is specific to that duck. Simple, right? Unfortunately, it’s almost never that simple.
+Let’s start writing subclasses.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MallardDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Duck</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Other Mallard related methods...</span>
+<span class="p">}</span>
 
-<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">IDuck</span><span class="w"> </span><span class="n">duck</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">ducks</span><span class="p">)</span>
-<span class="w">  </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">duck</span><span class="p">.</span><span class="n">Quack</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; | &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">duck</span><span class="p">.</span><span class="n">Fly</span><span class="p">());</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RedheadDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Duck</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Other Redhead related methods...</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
-<details class="hide below-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
-</summary>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Flying with wings.
+</div>
+<p>So far so good.
+It might seem like we’re doing something right when we observe that the swimming and quacking behavior is reused across both <code class="docutils literal notranslate"><span class="pre">MallardDuck</span></code> and <code class="docutils literal notranslate"><span class="pre">RedheadDuck</span></code>.
+But what’s the price we pay for this reuse?
+As we expand our pond, we find that not all ducks fall neatly into our taxonomy. For instance, rubber ducks don’t actually quack – they squeak. And what if we introduce decoy ducks? They can neither quack nor squeak.</p>
+<p>Having learned about <a class="reference internal" href="replace-conditional-with-polymorphism.html"><span class="doc std std-doc">replacing conditionals with polymorphism</span></a> we know that we should resist the urge to introduce convoluted conditional checks.
+But is it even possible to incorporate these new changes into our current inheritance hierarchy?
+Have a look at the code below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">RubberDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Duck</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Quack</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Squeak!&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Swim</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Floats.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DecoyDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Duck</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Quack</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Does nothing. Decoys cannot quack.</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Swim</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Floats.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Squeak squeak. | Cannot fly.
+</div>
+</div>
+<p>Both <code class="docutils literal notranslate"><span class="pre">RubberDuck</span></code> and <code class="docutils literal notranslate"><span class="pre">DecoyDuck</span></code> have swimming behavior which is distinct from the generic swimming behavior of the base class so we override. However, since the swimming behavior is the same between the two classes we end up with duplicated code. Oh no!</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>At this point you might argue that duplicating the ‘floating’ implementation isn’t a problem if we would encapsulate it in its own method in some external helper class and then simply call that method from both places. However, that method call would still be duplicated which means that we’d still increase the <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintenance</span></a> cost of the application making it harder to change.</p>
+</div>
+<p>Inheritance alone does not provide an efficient way to encapsulate behavior that’s shared across subclasses. Each time we introduce a new subclass of <code class="docutils literal notranslate"><span class="pre">Duck</span></code> that want the same ‘floating’ behavior as <code class="docutils literal notranslate"><span class="pre">DecoyDuck</span></code> and <code class="docutils literal notranslate"><span class="pre">RubberDuck</span></code> we’d end up duplicating code. Over and over again.</p>
+<p>Why don’t we just move the ‘floating’ behavior to the superclass <code class="docutils literal notranslate"><span class="pre">Duck</span></code> you might ask. Sure, but then we’d instead end up duplicating the regular ‘swimming’ behavior used by <code class="docutils literal notranslate"><span class="pre">MallardDuck</span></code> and <code class="docutils literal notranslate"><span class="pre">RedheadDuck</span></code>.</p>
+<p>Why don’t we just add on another level of inheritance then you might ask.
+Like in the abbreviated code below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Duck</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+
+<span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">SwimmingDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Duck</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MallardDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">SwimmingDuck</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RedheadDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">SwimmingDuck</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+
+<span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">FloatingDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Duck</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RubberDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">FloatingDuck</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DecoyDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">FloatingDuck</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Flying with rockets.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Squeak squeak. | Flying with rockets.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Cannot fly.
-</pre></div>
 </div>
 </div>
-</details>
+<p>Again, this might seem like a good idea for a while, and it does indeed solve the immediate problem.
+However, we’re just digging a deeper and deeper hole, making our application more and more difficult to maintain.</p>
+<p>What if we want to introduce a <code class="docutils literal notranslate"><span class="pre">RobotDuck</span></code> that can swim like a swimming duck but squeaks like a <code class="docutils literal notranslate"><span class="pre">FloatingDuck</span></code>? Then we’re back at square one. We’ve got a complex hierarchical architecture and still have duplicated code.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Problems caused by inheritance should not be solved with more inheritance.</p>
 </div>
-<p>But as we apply the idea of favoring composition over inheritance we realize that we can break out individual behaviors into their own classes and then compose them as we see fit.
-Let’s start with quacking behaviors.</p>
+<p>Inheritance is simply not a very effective tool when it comes to eliminating duplicated code.
+At a fundamental level, this is because the problem we are trying to solve simply isn’t necessarily hierarchical.</p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Problems that aren’t hierarchical can’t be solved using inheritance without duplicating code.</p>
+</div>
+<p>The challenge of horizontal behavior sharing becomes clear. Inheritance allows for behavior sharing from a base to a derived class but fails when certain classes need to share specific behaviors horizontally - meaning, across siblings. This scenario underlines the importance of seeking an approach that facilitates more efficient behavior sharing, steering us towards composition over inheritance.</p>
+</section>
+<section id="a-compositional-solution">
+<h2><span class="section-number">82.2. </span>A compositional solution<a class="headerlink" href="#a-compositional-solution" title="Permalink to this heading">#</a></h2>
+<p>Instead of tying behavior directly to our <code class="docutils literal notranslate"><span class="pre">Duck</span></code> classes, let’s use composition. We can define each behavior (like quacking) as an interface, and then provide multiple implementations for various duck types.
+We focus on encapsulating different ‘types of behavior’ rather than different ‘types of ducks’.</p>
+<p>To tackle the problem, we start by identifying the behaviors that are subject to change or vary across duck types. Quacking and swimming are the evident ones. By encapsulating these behaviors into separate interfaces, we create a clear separation between what a duck does (its behaviors) and the duck itself.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IQuackBehavior</span>
 <span class="p">{</span>
-<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">QuackBehavior</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IQuackBehavior</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Quack quack.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">SqueakBehavior</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IQuackBehavior</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Squeak squeak.&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="nf">Quack</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Starting to see where this is going?
-Let’s now do the same thing for fly behaviors.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IFlyBehavior</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ISwimBehavior</span>
 <span class="p">{</span>
-<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">FlyWithWings</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IFlyBehavior</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Flying with wings.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">NoFlyBehavior</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IFlyBehavior</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Cannot fly.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">FlyWithRockets</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IFlyBehavior</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Fly with rockets.&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="nf">Swim</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Ok, but what happens to all the duck subclasses?
-Well, now that we’re composing behaviors instead of inheriting and overriding them, we don’t need inheritance anymore.
-A single <code class="docutils literal notranslate"><span class="pre">Duck</span></code> class will do just fine.</p>
+<p>With our interfaces in place, we can create multiple concrete implementations representing the different behaviors:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Duck</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">RegularQuack</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IQuackBehavior</span>
 <span class="p">{</span>
-<span class="w">  </span><span class="n">IQuackBehavior</span><span class="w"> </span><span class="n">quackBehavior</span><span class="p">;</span>
-<span class="w">  </span><span class="n">IFlyBehavior</span><span class="w"> </span><span class="n">flyBehavior</span><span class="p">;</span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Duck</span><span class="w"> </span><span class="p">(</span><span class="n">IQuackBehavior</span><span class="w"> </span><span class="n">quackBehavior</span><span class="p">,</span><span class="w"> </span><span class="n">IFlyBehavior</span><span class="w"> </span><span class="n">flyBehavior</span><span class="p">)</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">quackBehavior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">quackBehavior</span><span class="p">;</span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">flyBehavior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">flyBehavior</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">quackBehavior</span><span class="p">.</span><span class="n">Quack</span><span class="p">();</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">flyBehavior</span><span class="p">.</span><span class="n">Fly</span><span class="p">();</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Quack</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Quack!&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>What we previously considered to be different “types” of ducks no longer need to be represented by different individual classes.
-Instead we can grab any two combination of existing or future quack and fly behaviors and pass them as arguments when constructing a duck.
-The creation of different “types” of ducks, consequently, now happens at run-time rather than compile-time.</p>
-<p>To execute code equivalent to the example that we had before, we would write something like this:</p>
-<div class="cell tag_hide-output docutils container">
-<div class="cell_input above-output-prompt docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Duck</span><span class="p">[]</span><span class="w"> </span><span class="n">ducks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Duck</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Duck</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">QuackBehavior</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FlyWithWings</span><span class="p">()),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Duck</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SqueakBehavior</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NoFlyBehavior</span><span class="p">()),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Duck</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">QuackBehavior</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FlyWithRockets</span><span class="p">()),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Duck</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SqueakBehavior</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FlyWithRockets</span><span class="p">()),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Duck</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">QuackBehavior</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NoFlyBehavior</span><span class="p">())</span>
-<span class="p">};</span>
-
-<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Duck</span><span class="w"> </span><span class="n">duck</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">ducks</span><span class="p">)</span>
-<span class="w">  </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">duck</span><span class="p">.</span><span class="n">Quack</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; | &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">duck</span><span class="p">.</span><span class="n">Fly</span><span class="p">());</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Squeak</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IQuackBehavior</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Quack</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Squeak!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
-<details class="hide below-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
-</summary>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SilentQuack</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IQuackBehavior</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Quack</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* Intentionally silent! */</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">RegularSwim</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ISwimBehavior</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Swim</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Swim!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Float</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ISwimBehavior</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Swim</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Floats.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, instead of ‘hard-coding’ behaviors into our subclasses of <code class="docutils literal notranslate"><span class="pre">Duck</span></code>, we define them as properties, allowing them to be easily changed during run-time.
+Now that we’re composing behaviors instead of inheriting and overriding them, we don’t need inheritance so a single, concrete <code class="docutils literal notranslate"><span class="pre">Duck</span></code> class will do just fine.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Duck</span><span class="w">  </span><span class="c1">// Not abstract!</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Composition:</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">IQuackBehavior</span><span class="w"> </span><span class="n">quackBehavior</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">ISwimBehavior</span><span class="w"> </span><span class="n">swimBehavior</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Constructor injection:</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Duck</span><span class="w"> </span><span class="p">(</span><span class="n">IQuackBehavior</span><span class="w"> </span><span class="n">quackBehavior</span><span class="p">,</span><span class="w"> </span><span class="n">ISwimBehavior</span><span class="w"> </span><span class="n">swimBehavior</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">quackBehavior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">quackBehavior</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">swimBehavior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">swimBehavior</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Delegating to the composed objects:</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Quack</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">quackBehavior</span><span class="p">.</span><span class="n">Quack</span><span class="p">();</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Swim</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">swimBehavior</span><span class="p">.</span><span class="n">Swim</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using this approach, we can dynamically assign behaviors to our <code class="docutils literal notranslate"><span class="pre">Duck</span></code> instances. Like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Duck</span><span class="w"> </span><span class="n">mallard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Duck</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">RegularQuack</span><span class="p">(),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">RegularSwim</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="n">mallard</span><span class="p">.</span><span class="n">Quack</span><span class="p">();</span>
+<span class="n">mallard</span><span class="p">.</span><span class="n">Swim</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Flying with wings.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack!
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Squeak squeak. | Cannot fly.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Fly with rockets.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Squeak squeak. | Fly with rockets.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Cannot fly.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Swim!
 </pre></div>
 </div>
 </div>
-</details>
 </div>
-</section>
-</section>
-<section id="exercises">
-<h2><span class="section-number">82.2. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
-<div class="exercise admonition" id="chapters/composition-over-inheritance-exercise-0">
-
-<p class="admonition-title"><span class="caption-number">Exercise 82.1 </span></p>
-<section id="exercise-content">
-<p>Explain the principle usually called “composition over inheritance” in your own words.</p>
-</section>
-</div>
-<div class="exercise admonition" id="chapters/composition-over-inheritance-exercise-1">
-
-<p class="admonition-title"><span class="caption-number">Exercise 82.2 </span></p>
-<section id="exercise-content">
-<p>How are the <span class="xref myst">maintainability characteristics</span> affected when following the principle of composition over inheritance?</p>
-</section>
-</div>
-<div class="exercise admonition" id="chapters/composition-over-inheritance-exercise-2">
-
-<p class="admonition-title"><span class="caption-number">Exercise 82.3 </span></p>
-<section id="exercise-content">
-<p>It could be argued that favoring composition over inheritance helps avoid issues related to the Liskov substitution principle.
-In what sense?</p>
-</section>
-</div>
-<div class="exercise admonition" id="chapters/composition-over-inheritance-exercise-3">
-
-<p class="admonition-title"><span class="caption-number">Exercise 82.4 </span></p>
-<section id="exercise-content">
-<p>Many object oriented languages do not support multiple inheritance.
-In what sense is the lack of support for multiple inheritance an argument for favoring composition over inheritance?</p>
-</section>
-</div>
-<div class="exercise admonition" id="chapters/composition-over-inheritance-exercise-4">
-
-<p class="admonition-title"><span class="caption-number">Exercise 82.5 </span></p>
-<section id="exercise-content">
-<p>What do we mean when we say that composition over inheritance gives us the flexibility to change behavior at run-time?</p>
-</section>
-</div>
-<div class="exercise admonition" id="ex:composition-over-inheritance:levels">
-
-<p class="admonition-title"><span class="caption-number">Exercise 82.6 </span></p>
-<section id="exercise-content">
-<p>Refactor the application below by favoring composition over inheritance.
-When you are done, levels should not be classes but objects.
-In other words, whenever you want to add a new level, you should not have to write a new class.
-Instead you simply instantiate another <code class="docutils literal notranslate"><span class="pre">Level</span></code> object and pass your configuration of choice to the constructor.</p>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Game</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Duck</span><span class="w"> </span><span class="n">rubberDuck</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Duck</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Squeak</span><span class="p">(),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Float</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="n">rubberDuck</span><span class="p">.</span><span class="n">Quack</span><span class="p">();</span>
+<span class="n">rubberDuck</span><span class="p">.</span><span class="n">Swim</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Squeak!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Floats.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Notice how there’s no longer a class corresponding to each duck type like mallard. A duck is now completely defined by its capabilities rather than its data type.</p>
+</div>
+<p>The creation of different ‘types’ of ducks, now happens at run-time rather than compile-time.
+A ‘type’ of duck is created by <em>composing</em> an instance of <code class="docutils literal notranslate"><span class="pre">Duck</span></code> with specific quack and swim behaviors.
+We say that <code class="docutils literal notranslate"><span class="pre">Duck</span></code> <strong>has-a</strong> <code class="docutils literal notranslate"><span class="pre">IQuackBehavior</span></code> and <code class="docutils literal notranslate"><span class="pre">ISwimBehavior</span></code>.
+This solves the second problem that we outlined in the beginning of this chapter.</p>
+<p>Using composition, our code is much more flexible.
+We can mix and match quack and swim behaviors, creating a plethora of unique ducks without needing a new subclass for each variation.</p>
+<p>Remember the robot duck that we envisaged before? We can now trivially construct such a duck by combining an instance of <code class="docutils literal notranslate"><span class="pre">RegularSwim</span></code> with <code class="docutils literal notranslate"><span class="pre">Squeak</span></code>?
+We can now trivially compose such a <code class="docutils literal notranslate"><span class="pre">Duck</span></code> at run-time without having to add or change any existing classes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Duck</span><span class="w"> </span><span class="n">robot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Duck</span><span class="p">(</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Squeak</span><span class="p">(),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">RegularSwim</span><span class="p">()</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>But what about the mallard specific or redhead specific methods that we mentioned earlier in this chapter?
+Well, nothing prevents you from reintroducing the classes <code class="docutils literal notranslate"><span class="pre">MallardDuck</span></code> and <code class="docutils literal notranslate"><span class="pre">RedheadDuck</span></code>. Well, favoring composition over inheritance means that you don’t <strong>need</strong> the classes <code class="docutils literal notranslate"><span class="pre">MallardDuck</span></code> and <code class="docutils literal notranslate"><span class="pre">RedheadDuck</span></code>, but nothing prevents you from introducing them if you want them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MallardDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Duck</span>
 <span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Run</span><span class="w"> </span><span class="p">(</span><span class="n">ILevel</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">secret</span><span class="p">)</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;The output is &#39;{level.Encode(secret)}&#39;. What is the input?&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&quot;Your guess: &quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">guess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">ReadKey</span><span class="p">().</span><span class="n">KeyChar</span><span class="p">;</span>
-<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">();</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">guess</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">secret</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;You win!&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">else</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Wrong. Try again!&quot;</span><span class="p">);</span>
-<span class="w">      </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">();</span>
-<span class="w">      </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Hint: {level.GetHint()}&quot;</span><span class="p">);</span>
-<span class="w">      </span><span class="n">Run</span><span class="p">(</span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="n">secret</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="c1">// The parameterless constructor sets the appropriate</span>
+<span class="w">    </span><span class="c1">// quack and swim behavior for a mallard duck:</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">MallardDuck</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nf">RegularQuack</span><span class="p">(),</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nf">RegularSwim</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
 
-<span class="k">interface</span><span class="w"> </span><span class="n">ILevel</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">);</span>
-<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="nf">GetHint</span><span class="w"> </span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">Level1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ILevel</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">alphabet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ABCDEFGHIJKLMNOPQRSTUVXYZ&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alphabet</span><span class="p">.</span><span class="n">IndexOf</span><span class="p">(</span><span class="n">Char</span><span class="p">.</span><span class="n">ToUpper</span><span class="p">(</span><span class="n">input</span><span class="p">));</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">newIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">alphabet</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="m">1</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Char</span><span class="p">.</span><span class="n">IsLower</span><span class="p">(</span><span class="n">input</span><span class="p">))</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Char</span><span class="p">.</span><span class="n">ToLower</span><span class="p">(</span><span class="n">alphabet</span><span class="p">[</span><span class="n">newIndex</span><span class="p">]);</span>
-<span class="w">      </span><span class="k">else</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">alphabet</span><span class="p">[</span><span class="n">newIndex</span><span class="p">];</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">input</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">GetHint</span><span class="w"> </span><span class="p">()</span>
-<span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;One step at a time.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">Level2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ILevel</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">alphabet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ABCDEFGHIJKLMNOPQRSTUVXYZ&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alphabet</span><span class="p">.</span><span class="n">IndexOf</span><span class="p">(</span><span class="n">Char</span><span class="p">.</span><span class="n">ToUpper</span><span class="p">(</span><span class="n">input</span><span class="p">));</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">newIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">alphabet</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="m">1</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">newIndex</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
-<span class="w">        </span><span class="n">newIndex</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">alphabet</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span>
-
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Char</span><span class="p">.</span><span class="n">IsLower</span><span class="p">(</span><span class="n">input</span><span class="p">))</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Char</span><span class="p">.</span><span class="n">ToLower</span><span class="p">(</span><span class="n">alphabet</span><span class="p">[</span><span class="n">newIndex</span><span class="p">]);</span>
-<span class="w">      </span><span class="k">else</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">alphabet</span><span class="p">[</span><span class="n">newIndex</span><span class="p">];</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">input</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">GetHint</span><span class="w"> </span><span class="p">()</span>
-<span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Two steps forward, six steps back.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">Level3</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ILevel</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">input</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;L&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sc">&#39;1&#39;</span><span class="p">;</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;1&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sc">&#39;L&#39;</span><span class="p">;</span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sc">&#39;4&#39;</span><span class="p">;</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;4&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">;</span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;O&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">;</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sc">&#39;O&#39;</span><span class="p">;</span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sc">&#39;7&#39;</span><span class="p">;</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;7&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">;</span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;E&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sc">&#39;3&#39;</span><span class="p">;</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;3&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sc">&#39;E&#39;</span><span class="p">;</span>
-<span class="w">      </span><span class="k">default</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">input</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">GetHint</span><span class="w"> </span><span class="p">()</span>
-<span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;H4x&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Other Mallard specific methods...</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
-</details>
 </div>
-<p>Be sure to try out the game before you start refactoring it.
-The example below shows how to start a game.</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Game</span><span class="w"> </span><span class="n">game</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Game</span><span class="p">();</span>
-<span class="n">game</span><span class="p">.</span><span class="n">Run</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Level1</span><span class="p">(),</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>The output of running the game above should look like below, if you guess <code class="docutils literal notranslate"><span class="pre">C</span></code> the first time and <code class="docutils literal notranslate"><span class="pre">A</span></code> the second.</p>
-<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">The output is &#39;B&#39;. What is the input?</span>
-<span class="go">Your guess: C</span>
-<span class="go">Wrong. Try again!</span>
-
-<span class="go">Hint: One step at a time.</span>
-<span class="go">The output is &#39;B&#39;. What is the input?</span>
-<span class="go">Your guess: A</span>
-<span class="go">You win!</span>
-</pre></div>
+<p>In a sense, we’ve transformed our ducks into modular entities where behaviors are mere plug-ins, interchangeable and easily maintainable.
+This approach allows our ducks to adapt and evolve without having to restructure the entire class hierarchy.
+This pivot to composition significantly reduces duplication and significantly improves <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a> across all dimensions.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Focus on what your objects can <em>do</em> rather than what they <em>are</em>. Strive to encapsulate <em>behavior</em> that varies.</p>
 </div>
 </section>
-</div>
-<div class="exercise admonition" id="chapters/composition-over-inheritance-exercise-6">
-
-<p class="admonition-title"><span class="caption-number">Exercise 82.7 </span></p>
-<section id="exercise-content">
-<p>Consider your solution to <a class="reference internal" href="#ex:composition-over-inheritance:levels"><span class="std std-numref">Exercise 82.6</span></a>.
-How is the <span class="xref myst">maintainability</span> of the application changed after having favored composition over inheritance?</p>
+<section id="benefits">
+<h2><span class="section-number">82.3. </span>Benefits<a class="headerlink" href="#benefits" title="Permalink to this heading">#</a></h2>
+<p>Let’s summarize the benefits of favoring composition over inheritance.</p>
+<ul class="simple">
+<li><p><strong>Flexibility</strong>: By breaking down behaviors into composable units, we can mix and match behaviors as needed, making it easier to meet changing requirements.</p></li>
+<li><p><strong>Duplication</strong>: Composition reduces the chances of duplicate code, thus minimizing the ripple effect of changes.</p></li>
+<li><p><strong>Extensibility</strong>: Introducing new behaviors or types of ducks doesn’t require modifying existing classes or creating intricate inheritance hierarchies. This is in line with the <span class="xref myst">open/closed principle</span>.</p></li>
+<li><p><strong>Single Responsibility</strong>: Each behavior class or module does one thing, leading to a cleaner, more understandable codebase. This is in line with the <span class="xref myst">singe responsibility principle</span>.</p></li>
+<li><p><strong>Run-time changes</strong>: While inheritance dictates behavior at compile-time, composition allows for behavior changes at run-time, resulting in a more adaptable system.</p></li>
+</ul>
 </section>
-</div>
-<div class="exercise admonition" id="chapters/composition-over-inheritance-exercise-7">
-
-<p class="admonition-title"><span class="caption-number">Exercise 82.8 </span></p>
-<section id="exercise-content">
-<p>Come up with your own example of a case where one ought to favor composition over inheritance.
-Describe your case in detail but without using any code.
-Use UML class diagrams to illustrate the before and after.</p>
-</section>
-</div>
+<section id="conclusion">
+<h2><span class="section-number">82.4. </span>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>The way we structure our code profoundly influences its maintainability. Through our journey with the ducks, we’ve discerned that while inheritance might seem like an intuitive path for capturing shared behavior, it often falls short in scenarios where behavior sharing is more lateral than vertical.</p>
+<p>As developers, our goal is to craft solutions that stand the test of time by being possible to change. We’ve referred to this as <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a>. By favoring composition over inheritance we create code that is maintainable and hence ready for the challenges of tomorrow.</p>
 </section>
 </section>
 
@@ -868,11 +829,10 @@ Use UML class diagrams to illustrate the before and after.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">82. Composition over inheritance</a><ul>
-<li><a class="reference internal" href="#examples">82.1. Examples</a><ul>
-<li><a class="reference internal" href="#ducks">82.1.1. Ducks</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#exercises">82.2. Exercises</a></li>
+<li><a class="reference internal" href="#the-duck-dilemma">82.1. The duck dilemma</a></li>
+<li><a class="reference internal" href="#a-compositional-solution">82.2. A compositional solution</a></li>
+<li><a class="reference internal" href="#benefits">82.3. Benefits</a></li>
+<li><a class="reference internal" href="#conclusion">82.4. Conclusion</a></li>
 </ul>
 </li>
 </ul>
