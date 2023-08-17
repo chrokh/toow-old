@@ -12,331 +12,330 @@ kernelspec:
 
 # Composition over inheritance
 
-% TODO: Maintainability: With inheritance you might get modularity and some amount of reusability. But with composition you can get that same modularity along with more reusability.
+A student of mine once gave me an excellent example of why favoring [composition](object-composition) over [inheritance](inheritance) is so useful. The student used centaurs but we'll use mermaids.
 
-## Examples
+Imagine that you've got three types: Human, Fish, and Mermaid. What does the inheritance hierarchy look like?
+Since a mermaid is part human and part fish, some code should be shared between mermaid and human while some code should be shared between mermaid and fish.
+The three types do not form a hierarchy. They don't follow a clear parent-child relationship, yet their definitions clearly overlap.
 
-(composition-over-inheritance:examples:ducks)=
-### Ducks
+% https://cdn.discordapp.com/attachments/1118630713084870736/1141667307735756830/chrokh_art_nouveau_illustration_of_full_body_mermaid_3606a26f-ce03-4c6d-8e61-173883c1cad9.png
+% https://cdn.discordapp.com/attachments/1118630713084870736/1141667168740720651/chrokh_art_nouveau_illustration_of_full_body_mermaid_55dca520-20e4-43d7-860a-9dced6878e9f.png
+```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1141675785967632454/chrokh_an_illustrated_disney_mermaid_f0ff6abc-9a0c-4907-b9f4-dca6182176d7.png
 
-Let's run through an example similar to the duck example made famous by {cite:t}`freemanAndRobson2004`.
+Just like mermaids are part human and part fish, some concepts don't form a neat hierarchy.
+%This is the key to understanding why we should favor composition over inheritance.
+```
 
-We start with this:
+There are two key problems with [inheritance](inheritance) that have led to the formulation of the design principle known as '[composition](object-composition) over [inheritance](inheritance)':
 
-```{code-cell} csharp
-interface IDuck
+1. Inheritance hierarchies exclusively allow the **sharing of behavior from parent to child, but not between sibling classes**. This intrinsic design presupposes that no child class is, or ever will be, similar to any other child class in any respect. Inheritance enforces a vertical sharing of behavior, leaving no room for horizontal sharing across different child classes.
+2. Inheritance rigidly binds an object's behavior to a lineage of predetermined parent classes, making it a **compile-time construct with no flexibility for run-time adaptation**. In contrast, composition brings dynamism, allowing objects to have their behaviors modified or extended at run-time by composing different components. Think back to the earlier chapter on [dependency injection](dependency-injection), where objects are assembled by injecting various behaviors or modules, resulting in a design that's ready to adapt to evolving demands.
+
+```{admonition} Key point
+Code reuse should be achieved using composition and replacing conditionals with polymorphism rather than through inheritance.
+%When we're seeing duplicated code we eliminate it by means of 'has-a' rather than 'is-a'.
+```
+
+%## Understanding the principle
+
+Let's refresh our memories of the terminology before diving in.
+[Inheritance](inheritance) refers to a mechanism where a new class, known as the subclass, inherits attributes and methods from an existing class, known as the superclass.
+[Composition](object-composition), on the other hand, is a mechanism where one class contains an instance of another class. Instead of inheriting properties and behaviors, a class achieves the desired functionality by having other classes as its members.
+
+
+## The duck dilemma
+
+To exemplify these key issues with inheritance, let's dive into a problem inspired by the well-known 'Duck problem' popularized by the iconic book [Head First: Design Patterns](https://geni.us/nlbA6).
+That book, by the way, is an excellent book to keep on your shelf as a reference.
+
+```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1141602874699296818/chrokh_illustration_of_a_mallard_duck_aca85583-bb64-4677-b431-197fd8d31cd8.png
+
+While we might label it a 'Mallard', it's the distinct set of behaviors and characteristics it exhibits that truly defines it. Composition over inheritance urges us to focus on capabilities over classifications.
+```
+
+Suppose we are creating a system to simulate a duck pond. We start by defining a base `Duck` class that define base behaviors for quacking and swimming. Now, we want to extend our system by introducing different types of ducks like mallard ducks, redheads, and rubber ducks. We decide to use inheritance. After all, all ducks can quack and swim, but some quack and swim in their special ways, right?
+
+```{code-cell}
+abstract class Duck
 {
-  string Quack ();
-  string Fly ();
-}
+    public virtual void Quack()
+        => Console.WriteLine("Quack!");
 
-class WildDuck : IDuck
-{
-  public virtual string Quack () => "Quack quack.";
-  public virtual string Fly () => "Flying with wings.";
-}
-
-class RubberDuck : IDuck
-{
-  public virtual string Quack () => "Squeak squeak.";
-  public virtual string Fly () => "Cannot fly.";
-}
-
-class RocketPoweredWildDuck : WildDuck
-{
-  public override string Fly () => "Flying with rockets.";
-}
-
-class RocketPoweredRubberDuck : RubberDuck
-{
-  public override string Fly () => "Flying with rockets.";
-}
-
-class RubberDuckWithVoiceSynthesizer : RubberDuck
-{
-  public override string Quack () => "Quack quack.";
+    public virtual void Swim()
+        => Console.WriteLine("Swim!");
 }
 ```
 
-Pay special attention to how inheritance in the example above doesn't help us in eliminating all duplication.
-Our use case doesn't simply form a nice hierarchy and so we end up with duplicated code even though we try our best to use the code-reuse facilities of [inheritance](inheritance) to eliminate it.
+At first glance this might seem like a sensible solution. As we inherit from our `Duck` class, all we have to do is to [override](overriding) these methods and implement whatever behavior is specific to that duck. Simple, right? Unfortunately, it's almost never that simple.
+Let's start writing subclasses.
 
-Either way, we can use the code like this:
+```{code-cell}
+class MallardDuck : Duck
+{
+    // Other Mallard related methods...
+}
 
-```{code-cell} csharp
-:tags: [hide-output]
-IDuck[] ducks = new IDuck[] {
-  new WildDuck(),
-  new RubberDuck(),
-  new RocketPoweredWildDuck(),
-  new RocketPoweredRubberDuck(),
-  new RubberDuckWithVoiceSynthesizer()
-};
-
-foreach (IDuck duck in ducks)
-  Console.WriteLine(duck.Quack() + " | " + duck.Fly());
+class RedheadDuck : Duck
+{
+    // Other Redhead related methods...
+}
 ```
 
-But as we apply the idea of favoring composition over inheritance we realize that we can break out individual behaviors into their own classes and then compose them as we see fit.
-Let's start with quacking behaviors.
+So far so good.
+It might seem like we're doing something right when we observe that the swimming and quacking behavior is reused across both `MallardDuck` and `RedheadDuck`.
+But what's the price we pay for this reuse?
+As we expand our pond, we find that not all ducks fall neatly into our taxonomy. For instance, rubber ducks don't actually quack -- they squeak. And what if we introduce decoy ducks? They can neither quack nor squeak.
 
-```{code-cell} csharp
+Having learned about [replacing conditionals with polymorphism](replace-conditional-with-polymorphism) we know that we should resist the urge to introduce convoluted conditional checks.
+But is it even possible to incorporate these new changes into our current inheritance hierarchy?
+Have a look at the code below:
+
+```{code-cell}
+class RubberDuck : Duck
+{
+    public override void Quack()
+        => Console.WriteLine("Squeak!");
+
+    public override void Swim()
+        => Console.WriteLine("Floats.");
+}
+
+class DecoyDuck : Duck
+{
+    public override void Quack()
+    {
+        // Does nothing. Decoys cannot quack.
+    }
+
+    public override void Swim()
+        => Console.WriteLine("Floats.");
+}
+```
+
+Both `RubberDuck` and `DecoyDuck` have swimming behavior which is distinct from the generic swimming behavior of the base class so we override. However, since the swimming behavior is the same between the two classes we end up with duplicated code. Oh no!
+
+```{note}
+At this point you might argue that duplicating the 'floating' implementation isn't a problem if we would encapsulate it in its own method in some external helper class and then simply call that method from both places. However, that method call would still be duplicated which means that we'd still increase the [maintenance](maintainability) cost of the application making it harder to change.
+```
+
+Inheritance alone does not provide an efficient way to encapsulate behavior that's shared across subclasses. Each time we introduce a new subclass of `Duck` that want the same 'floating' behavior as `DecoyDuck` and `RubberDuck` we'd end up duplicating code. Over and over again.
+
+Why don't we just move the 'floating' behavior to the superclass `Duck` you might ask. Sure, but then we'd instead end up duplicating the regular 'swimming' behavior used by `MallardDuck` and `RedheadDuck`.
+
+Why don't we just add on another level of inheritance then you might ask.
+Like in the abbreviated code below.
+
+```{code-cell}
+abstract class Duck { }
+
+
+abstract class SwimmingDuck : Duck { }
+
+class MallardDuck : SwimmingDuck { }
+
+class RedheadDuck : SwimmingDuck { }
+
+
+abstract class FloatingDuck : Duck { }
+
+class RubberDuck : FloatingDuck { }
+
+class DecoyDuck : FloatingDuck { }
+```
+
+Again, this might seem like a good idea for a while, and it does indeed solve the immediate problem.
+However, we're just digging a deeper and deeper hole, making our application more and more difficult to maintain.
+
+What if we want to introduce a `RobotDuck` that can swim like a swimming duck but squeaks like a `FloatingDuck`? Then we're back at square one. We've got a complex hierarchical architecture and still have duplicated code.
+
+```{tip}
+Problems caused by inheritance should not be solved with more inheritance.
+```
+
+%In terms of eliminating duplicated code, inheritance is not really helping us.
+
+Inheritance is simply not a very effective tool when it comes to eliminating duplicated code.
+At a fundamental level, this is because the problem we are trying to solve simply isn't necessarily hierarchical.
+
+```{danger}
+Problems that aren't hierarchical can't be solved using inheritance without duplicating code.
+```
+
+The challenge of horizontal behavior sharing becomes clear. Inheritance allows for behavior sharing from a base to a derived class but fails when certain classes need to share specific behaviors horizontally - meaning, across siblings. This scenario underlines the importance of seeking an approach that facilitates more efficient behavior sharing, steering us towards composition over inheritance.
+
+
+## A compositional solution
+
+Instead of tying behavior directly to our `Duck` classes, let's use composition. We can define each behavior (like quacking) as an interface, and then provide multiple implementations for various duck types.
+We focus on encapsulating different 'types of behavior' rather than different 'types of ducks'.
+
+To tackle the problem, we start by identifying the behaviors that are subject to change or vary across duck types. Quacking and swimming are the evident ones. By encapsulating these behaviors into separate interfaces, we create a clear separation between what a duck does (its behaviors) and the duck itself.
+
+```{code-cell}
 interface IQuackBehavior
 {
-  string Quack ();
-}
-
-class QuackBehavior : IQuackBehavior
-{
-  public string Quack () => "Quack quack.";
-}
-
-class SqueakBehavior : IQuackBehavior
-{
-  public string Quack () => "Squeak squeak.";
+    void Quack();
 }
 ```
 
-Starting to see where this is going?
-Let's now do the same thing for fly behaviors.
-
-```{code-cell} csharp
-interface IFlyBehavior
+```{code-cell}
+interface ISwimBehavior
 {
-  string Fly ();
-}
-
-class FlyWithWings : IFlyBehavior
-{
-  public string Fly () => "Flying with wings.";
-}
-
-class NoFlyBehavior : IFlyBehavior
-{
-  public string Fly () => "Cannot fly.";
-}
-
-class FlyWithRockets : IFlyBehavior
-{
-  public string Fly () => "Fly with rockets.";
+    void Swim();
 }
 ```
 
-Ok, but what happens to all the duck subclasses?
-Well, now that we're composing behaviors instead of inheriting and overriding them, we don't need inheritance anymore.
-A single `Duck` class will do just fine.
+With our interfaces in place, we can create multiple concrete implementations representing the different behaviors:
 
-```{code-cell} csharp
-class Duck
+```{code-cell}
+class RegularQuack : IQuackBehavior
 {
-  IQuackBehavior quackBehavior;
-  IFlyBehavior flyBehavior;
-
-  public Duck (IQuackBehavior quackBehavior, IFlyBehavior flyBehavior)
-  {
-    this.quackBehavior = quackBehavior;
-    this.flyBehavior = flyBehavior;
-  }
-
-  public string Quack () => quackBehavior.Quack();
-  public string Fly () => flyBehavior.Fly();
+    public void Quack() => Console.WriteLine("Quack!");
 }
 ```
 
-What we previously considered to be different "types" of ducks no longer need to be represented by different individual classes.
-Instead we can grab any two combination of existing or future quack and fly behaviors and pass them as arguments when constructing a duck.
-The creation of different "types" of ducks, consequently, now happens at run-time rather than compile-time.
-
-To execute code equivalent to the example that we had before, we would write something like this:
-
-```{code-cell} csharp
-:tags: [hide-output]
-Duck[] ducks = new Duck[] {
-  new Duck(new QuackBehavior(), new FlyWithWings()),
-  new Duck(new SqueakBehavior(), new NoFlyBehavior()),
-  new Duck(new QuackBehavior(), new FlyWithRockets()),
-  new Duck(new SqueakBehavior(), new FlyWithRockets()),
-  new Duck(new QuackBehavior(), new NoFlyBehavior())
-};
-
-foreach (Duck duck in ducks)
-  Console.WriteLine(duck.Quack() + " | " + duck.Fly());
-```
-
-
-
-%---
-% EXAMPLE: SOLVE THE ISSUE DISCUSSED IN INHERITANCE CHAPTER WHERE WE COULDN'T IMPLEMENT THE FOREACH FOR BOTH CHAR-TO-STRING CIPHERS and CHAR-TO-CHAR CIPHERS. USE COMPOSITION!
-
-%- White-box/black-box reuse. Breaking encapsulation / information hiding (cuz protected, see Gamma et al, 1994, kap 1).
-%- Re-use implementation horizontally (strategy pattern video, sandi metz?).
-%- En student skrev om Kentaur (halv människa halvt djur) som exempel på horisontell delning av kod. Bra exempel. Använd själv Mermaid som exempel för att inte sno dennes exempel rakt av.
-%- Changing behaviour at runtime vs compile time.
-%- Exercises:
-%    - Draw two class diagram in UML that show how a solution that uses inheritance might be refactored into one that uses composition?
-%
-
-%```{important}
-%At it's core, the problem with inheritance is that it assumes that you problem forms a hierarchy.
-%```
-%Few problems are hierarchies, many are graphs.
-
-
-## Exercises
-
-```{exercise}
-Explain the principle usually called "composition over inheritance" in your own words.
-```
-
-```{exercise}
-How are the [maintainability characteristics](maintainability:characteristics) affected when following the principle of composition over inheritance?
-```
-
-```{exercise}
-It could be argued that favoring composition over inheritance helps avoid issues related to the Liskov substitution principle.
-In what sense?
-```
-
-```{exercise}
-Many object oriented languages do not support multiple inheritance.
-In what sense is the lack of support for multiple inheritance an argument for favoring composition over inheritance?
-```
-
-```{exercise}
-What do we mean when we say that composition over inheritance gives us the flexibility to change behavior at run-time?
-```
-
-
-```{exercise-start}
-:label: ex:composition-over-inheritance:levels
-```
-Refactor the application below by favoring composition over inheritance.
-When you are done, levels should not be classes but objects.
-In other words, whenever you want to add a new level, you should not have to write a new class.
-Instead you simply instantiate another `Level` object and pass your configuration of choice to the constructor.
-```{code-cell} csharp
-:tags: [hide-input]
-class Game
+```{code-cell}
+class Squeak : IQuackBehavior
 {
-  public void Run (ILevel level, char secret)
-  {
-    Console.WriteLine($"The output is '{level.Encode(secret)}'. What is the input?");
-    Console.Write("Your guess: ");
-    char guess = Console.ReadKey().KeyChar;
-    Console.WriteLine();
-    if (guess == secret)
+    public void Quack() => Console.WriteLine("Squeak!");
+}
+```
+
+```{code-cell}
+class SilentQuack : IQuackBehavior
+{
+    public void Quack() { /* Intentionally silent! */ }
+}
+```
+
+```{code-cell}
+class RegularSwim : ISwimBehavior
+{
+    public void Swim() => Console.WriteLine("Swim!");
+}
+```
+
+```{code-cell}
+class Float : ISwimBehavior
+{
+    public void Swim() => Console.WriteLine("Floats.");
+}
+```
+
+Now, instead of 'hard-coding' behaviors into our subclasses of `Duck`, we define them as properties, allowing them to be easily changed during run-time.
+Now that we're composing behaviors instead of inheriting and overriding them, we don't need inheritance so a single, concrete `Duck` class will do just fine.
+
+```{code-cell}
+class Duck  // Not abstract!
+{
+    // Composition:
+    private IQuackBehavior quackBehavior { get; set; }
+    private ISwimBehavior swimBehavior { get; set; }
+
+    // Constructor injection:
+    public Duck (IQuackBehavior quackBehavior, ISwimBehavior swimBehavior)
     {
-      Console.WriteLine("You win!");
+        this.quackBehavior = quackBehavior;
+        this.swimBehavior = swimBehavior;
     }
-    else
-    {
-      Console.WriteLine($"Wrong. Try again!");
-      Console.WriteLine();
-      Console.WriteLine($"Hint: {level.GetHint()}");
-      Run(level, secret);
-    }
-  }
-}
 
-interface ILevel
+    // Delegating to the composed objects:
+    public void Quack() => quackBehavior.Quack();
+    public void Swim() => swimBehavior.Swim();
+}
+```
+
+Using this approach, we can dynamically assign behaviors to our `Duck` instances. Like this:
+
+```{code-cell}
+Duck mallard = new Duck(
+    new RegularQuack(),
+    new RegularSwim()
+);
+
+mallard.Quack();
+mallard.Swim();
+```
+
+```{code-cell}
+Duck rubberDuck = new Duck(
+    new Squeak(),
+    new Float()
+);
+
+rubberDuck.Quack();
+rubberDuck.Swim();
+```
+
+```{important}
+Notice how there's no longer a class corresponding to each duck type like mallard. A duck is now completely defined by its capabilities rather than its data type.
+```
+
+%The concept of a type of duck is constructed at run-time by *composing* instances of the `Duck` class with specific quack and swim behavior.
+The creation of different 'types' of ducks, now happens at run-time rather than compile-time.
+A 'type' of duck is created by *composing* an instance of `Duck` with specific quack and swim behaviors.
+We say that `Duck` **has-a** `IQuackBehavior` and `ISwimBehavior`.
+This solves the second problem that we outlined in the beginning of this chapter.
+
+Using composition, our code is much more flexible.
+We can mix and match quack and swim behaviors, creating a plethora of unique ducks without needing a new subclass for each variation.
+
+Remember the robot duck that we envisaged before? We can now trivially construct such a duck by combining an instance of `RegularSwim` with `Squeak`?
+We can now trivially compose such a `Duck` at run-time without having to add or change any existing classes.
+
+```{code-cell}
+Duck robot = new Duck(
+    new Squeak(),
+    new RegularSwim()
+);
+```
+
+But what about the mallard specific or redhead specific methods that we mentioned earlier in this chapter?
+Well, nothing prevents you from reintroducing the classes `MallardDuck` and `RedheadDuck`. Well, favoring composition over inheritance means that you don't **need** the classes `MallardDuck` and `RedheadDuck`, but nothing prevents you from introducing them if you want them.
+
+```{code-cell}
+class MallardDuck : Duck
 {
-  char Encode (char input);
-  string GetHint ();
-}
+    // The parameterless constructor sets the appropriate
+    // quack and swim behavior for a mallard duck:
+    public MallardDuck () : base(
+        new RegularQuack(),
+        new RegularSwim()) { }
 
-class Level1 : ILevel
-{
-  public char Encode (char input)
-  {
-    string alphabet = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
-    int i = alphabet.IndexOf(Char.ToUpper(input));
-    int newIndex = (i + 1) % alphabet.Length;
-    if (i != -1)
-    {
-      if (Char.IsLower(input))
-        return Char.ToLower(alphabet[newIndex]);
-      else
-        return alphabet[newIndex];
-    }
-    return input;
-  }
-
-  public string GetHint ()
-    => "One step at a time.";
-}
-
-class Level2 : ILevel
-{
-  public char Encode (char input)
-  {
-    string alphabet = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
-    int i = alphabet.IndexOf(Char.ToUpper(input));
-    int newIndex = (i - 4) % alphabet.Length;
-    if (i != -1)
-    {
-      if (newIndex < 0)
-        newIndex += alphabet.Length;
-
-      if (Char.IsLower(input))
-        return Char.ToLower(alphabet[newIndex]);
-      else
-        return alphabet[newIndex];
-    }
-    return input;
-  }
-
-  public string GetHint ()
-    => "Two steps forward, six steps back.";
-}
-
-class Level3 : ILevel
-{
-  public char Encode (char input)
-  {
-    switch (input)
-    {
-      case 'L': return '1'; case '1': return 'L';
-      case 'A': return '4'; case '4': return 'A';
-      case 'O': return '0'; case '0': return 'O';
-      case 'T': return '7'; case '7': return 'T';
-      case 'E': return '3'; case '3': return 'E';
-      default: return input;
-    }
-  }
-
-  public string GetHint ()
-    => "H4x";
+    // Other Mallard specific methods...
 }
 ```
-Be sure to try out the game before you start refactoring it.
-The example below shows how to start a game.
-```csharp
-Game game = new Game();
-game.Run(new Level1(), 'A');
-```
-The output of running the game above should look like below, if you guess `C` the first time and `A` the second.
-```output
-The output is 'B'. What is the input?
-Your guess: C
-Wrong. Try again!
 
-Hint: One step at a time.
-The output is 'B'. What is the input?
-Your guess: A
-You win!
-```
-```{exercise-end}
+In a sense, we've transformed our ducks into modular entities where behaviors are mere plug-ins, interchangeable and easily maintainable.
+This approach allows our ducks to adapt and evolve without having to restructure the entire class hierarchy.
+This pivot to composition significantly reduces duplication and significantly improves [maintainability](maintainability) across all dimensions.
+
+```{tip}
+Focus on what your objects can *do* rather than what they *are*. Strive to encapsulate *behavior* that varies.
 ```
 
 
-```{exercise}
-Consider your solution to {numref}`ex:composition-over-inheritance:levels`.
-How is the [maintainability](maintainability:characteristics) of the application changed after having favored composition over inheritance?
-```
+## Benefits
 
-```{exercise}
-Come up with your own example of a case where one ought to favor composition over inheritance.
-Describe your case in detail but without using any code.
-Use UML class diagrams to illustrate the before and after.
-```
+Let's summarize the benefits of favoring composition over inheritance.
+
+- **Flexibility**: By breaking down behaviors into composable units, we can mix and match behaviors as needed, making it easier to meet changing requirements.
+- **Duplication**: Composition reduces the chances of duplicate code, thus minimizing the ripple effect of changes.
+- **Extensibility**: Introducing new behaviors or types of ducks doesn't require modifying existing classes or creating intricate inheritance hierarchies. This is in line with the [open/closed principle](open-closed-principle).
+- **Single Responsibility**: Each behavior class or module does one thing, leading to a cleaner, more understandable codebase. This is in line with the [singe responsibility principle](single-responsibility-principle).
+- **Run-time changes**: While inheritance dictates behavior at compile-time, composition allows for behavior changes at run-time, resulting in a more adaptable system.
+%- **Loose Coupling**: Inheritance tightly couples the subclass to its superclass, meaning changes in the parent often ripple down to the child. Composition allows for a more decoupled architecture.
+
+
+## Conclusion
+
+The way we structure our code profoundly influences its maintainability. Through our journey with the ducks, we've discerned that while inheritance might seem like an intuitive path for capturing shared behavior, it often falls short in scenarios where behavior sharing is more lateral than vertical.
+
+%``{warning}
+%The principle of 'composition over inheritance' isn't a denunciation of inheritance but rather an acknowledgment of its limitations.
+%``
+
+%By favoring composition, we invest in a design that's modular, adaptable, and more aligned with the ever-evolving nature of software requirements.
+
+As developers, our goal is to craft solutions that stand the test of time by being possible to change. We've referred to this as [maintainability](maintainability). By favoring composition over inheritance we create code that is maintainable and hence ready for the challenges of tomorrow.
 

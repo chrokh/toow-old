@@ -114,6 +114,10 @@ In later chapters we will discuss the [fragile base class problem](fragile-base-
 While a class can implement multiple interfaces, it can only inherit from a single class.
 ```
 
+```{seealso}
+Some languages, like C++, but not C#, support 'multiple inheritance'. Allowing subclasses to have multiple parents leads to a problem known as 'The Diamond Problem' which different languages have different ways of handling.
+```
+
 ```{admonition} Key point
 Inheritance allows a class to inherit the **members and type** of another class. Use inheritance only if you need both these things.
 ```
