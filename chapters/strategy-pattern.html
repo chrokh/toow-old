@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="49. Init-only properties" href="init-only-properties.html" /><link rel="prev" title="47. Computed properties" href="computed-properties.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="90. Variance" href="variance.html" /><link rel="prev" title="88. Composition over inheritance" href="composition-over-inheritance.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>48. Required properties and fields - The Object Oriented Way</title>
+        <title>89. Strategy pattern - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -141,7 +141,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -212,7 +212,7 @@
 <li class="toctree-l1"><a class="reference internal" href="read-only-fields.html">45. Read-only fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="read-only-properties.html">46. Read-only properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="computed-properties.html">47. Computed properties</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">48. Required properties and fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="required-properties-and-fields.html">48. Required properties and fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="init-only-properties.html">49. Init-only properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="instance-method-overloading.html">50. Instance method overloading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constructor-overloading.html">51. Constructor overloading</a></li>
@@ -253,7 +253,7 @@
 <li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">86. Replace conditional with polymorphism</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dependency-injection.html">87. Dependency injection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">88. Composition over inheritance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="strategy-pattern.html">89. Strategy pattern</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">89. Strategy pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variance.html">90. Variance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">91. Liskov substitution principle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">92. Variant generic interfaces</a></li>
@@ -286,63 +286,273 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="required-properties-and-fields">
-<h1><span class="section-number">48. </span>Required properties and fields<a class="headerlink" href="#required-properties-and-fields" title="Permalink to this heading">#</a></h1>
-<p>As you’ve already learned in previous chapters, <a class="reference internal" href="fields.html"><span class="doc std std-doc">fields</span></a> and <span class="xref myst">properties</span> are fundamental parts of an object’s state. With constructors, you can ensure an object is created in a valid state, but what if you want to provide more flexibility, using <a class="reference internal" href="object-initializers.html"><span class="doc std std-doc">object initializers</span></a> for instance, while still guaranteeing that some properties or fields are always assigned a value? In C#, you can achieve this using the <code class="docutils literal notranslate"><span class="pre">required</span></code> modifier.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">required</span></code> modifier can be used in a field or property declaration to enforce that they must be given a value when an object is being initialized. If a <code class="docutils literal notranslate"><span class="pre">required</span></code> property or field is not assigned during initialization, the compiler will raise an error. This is particularly useful when certain properties or fields are essential for the correct operation of an object.</p>
-<p>Let’s look at this in the context of a <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span>
+          <section class="tex2jax_ignore mathjax_ignore" id="strategy-pattern">
+<h1><span class="section-number">89. </span>Strategy pattern<a class="headerlink" href="#strategy-pattern" title="Permalink to this heading">#</a></h1>
+<p>Strategy pattern is essentially an embodiment of the principle <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">Composition over inheritance</span></a>.
+At its core, the Strategy pattern is about flexibility and encapsulation.
+It allows us to select the behavior of an object at run-time, without bloating the object’s class with multiple responsibilities or behaviors. Instead, behaviors are extracted into separate classes, each representing a specific strategy.
+These strategies, or behaviors, can be modified, added, or removed without affecting the clients that use them.</p>
+<figure class="align-default" id="id1">
+<img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1142016297459257405/chrokh_wall_socket_simple_flat_illustration_e644dd14-e4e6-48ad-b531-5917f28d1ce3.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1142016297459257405/chrokh_wall_socket_simple_flat_illustration_e644dd14-e4e6-48ad-b531-5917f28d1ce3.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 89.1 </span><span class="caption-text">Just like you can plug any electrical device into a wall socket as long as they follow the same standard, you can plug any strategy into a client as long as the strategy implements the appropriate interface.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Let’s look at the motivation of the pattern from the seminal book <a class="reference external" href="https://geni.us/PsXmo">Design Patterns: Elements of Reusable Object-Oriented Software</a>:</p>
+<blockquote class="epigraph">
+<div><p>Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from the clients that use it.</p>
+<p class="attribution">—<a class="reference external" href="https://geni.us/PsXmo">Design Patterns: Elements of reusable object-oriented software</a>.</p>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the chapter <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">Composition over inheritance</span></a> we used the term ‘behaviors’ but in strategy pattern we often call them ‘strategies’.</p>
+</div>
+<div class="admonition-video-lecture admonition">
+<p class="admonition-title">Video lecture</p>
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/v9ejT8FO-7I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<section id="structure">
+<h2>Structure<a class="headerlink" href="#structure" title="Permalink to this heading">#</a></h2>
+<p>As we can see in the <a class="reference internal" href="uml-class-diagrams.html"><span class="doc std std-doc">UML class diagram</span></a> below, the <code class="docutils literal notranslate"><span class="pre">Context</span></code> class does not implement behavior directly. Instead, it delegates the responsibility of its behavior to an instance of a class that implements the <code class="docutils literal notranslate"><span class="pre">IStrategy</span></code> interface. This strategy interface provides a contract or signature for a method named <code class="docutils literal notranslate"><span class="pre">execute()</span></code>, ensuring that all concrete strategies will have this method implemented.</p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="https://upload.wikimedia.org/wikipedia/commons/3/39/Strategy_Pattern_in_UML.png"><img alt="https://upload.wikimedia.org/wikipedia/commons/3/39/Strategy_Pattern_in_UML.png" src="https://upload.wikimedia.org/wikipedia/commons/3/39/Strategy_Pattern_in_UML.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 89.2 </span><span class="caption-text">UML Class diagram of strategy pattern. <a class="reference external" href="http://www.mcdonaldland.info/2007/11/28/40/">[Source]</a></span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The concrete strategy classes, like <code class="docutils literal notranslate"><span class="pre">ConcreteStrategyA</span></code> and <code class="docutils literal notranslate"><span class="pre">ConcreteStrategyB</span></code>, then provide their own implementation of the <code class="docutils literal notranslate"><span class="pre">execute()</span></code> method as defined by the <code class="docutils literal notranslate"><span class="pre">IStrategy</span></code> interface.
+The <code class="docutils literal notranslate"><span class="pre">Context</span></code> class does not depend on any concrete strategy since concrete strategies are <a class="reference internal" href="dependency-injection.html"><span class="doc std std-doc">dependency injected</span></a> into it.</p>
+<p>This design allows the <code class="docutils literal notranslate"><span class="pre">Context</span></code> class to switch between different strategies dynamically (meaning at run-time), encapsulating algorithm-specific structures and behaviors inside individual strategy classes.</p>
+<p>As a result of encapsulating the strategies, adding new strategies or modifying existing ones becomes an isolated operation that can be done without affecting the <code class="docutils literal notranslate"><span class="pre">Context</span></code> or other strategies.</p>
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
+<p>Imagine a game where characters can wield different weapons.
+We could focus on what things <em>are</em>, organize our code <em>by type</em>, and create a subclasses for every combination of character and weapon.
+That would be an inheritance-based approach and we would end up with classes like <code class="docutils literal notranslate"><span class="pre">Swordsman</span></code>, <code class="docutils literal notranslate"><span class="pre">Archer</span></code>, and so on.
+However, as we learned in the chapter on <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">Composition over inheritance</span></a>, this approach is an inflexible slippery slope.
+Even Legolas sometimes uses a sword.
+Instead, we can favor composition and use, what we here call, the Strategy pattern.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The example is essentially the same as the one in the chapter on <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">Composition over inheritance</span></a>, albeit in a different domain.</p>
+</div>
+<p>Let’s start by defining an interface that will unify all weapon behaviors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">interface</span><span class="w"> </span><span class="n">IWeaponBehavior</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Width</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="nf">UseWeapon</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>In the above code, <code class="docutils literal notranslate"><span class="pre">Width</span></code> and <code class="docutils literal notranslate"><span class="pre">Height</span></code> are declared as <code class="docutils literal notranslate"><span class="pre">required</span></code>. Now, if we try to create a <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> object without setting <code class="docutils literal notranslate"><span class="pre">Width</span></code> and <code class="docutils literal notranslate"><span class="pre">Height</span></code>, the compiler will raise two errors:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Rectangle</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">();</span>
-</pre></div>
 </div>
-<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">Required member &#39;Rectangle.Height&#39; must be set in the object initializer or attribute constructor. (CS9035)</span>
-<span class="go">Required member &#39;Rectangle.Width&#39; must be set in the object initializer or attribute constructor. (CS9035)</span>
-</pre></div>
-</div>
-<p>But if we provide values for <code class="docutils literal notranslate"><span class="pre">Width</span></code> and <code class="docutils literal notranslate"><span class="pre">Height</span></code> during object initialization, the code will compile and run as expected:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Rectangle</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="p">};</span>
-</pre></div>
-</div>
-<p>What if we want the fields to be set in the constructor rather than through object initialization?
-The compiler does <em>not</em> analyze our constructors to figure out whether these properties are set. So, we must use the <code class="docutils literal notranslate"><span class="pre">[SetsRequiredMembers]</span></code> attribute on the constructor. This attribute informs the compiler that this constructor is responsible for setting the <code class="docutils literal notranslate"><span class="pre">required</span></code> members of the class.
-If we’ don’t set the attribute then the compiler will still raise errors when we try to instantiate the class <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> because it doesn’t know that the constructor that we called sets the required attributes.</p>
-<p>Let’s illustrate this with an example. We will modify our <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class to have a constructor:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Width</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-5567.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
 
-<span class="w">    </span><span class="na">[SetsRequiredMembers]</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">height</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">width</span><span class="p">;</span>
-<span class="w">        </span><span class="n">Height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">height</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.69:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '5567.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>Then we’ll now define different weapons that implement the interface.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Sword</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IWeaponBehavior</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">UseWeapon</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Swinging the sword!&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>In this example, the <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> constructor is decorated with the <code class="docutils literal notranslate"><span class="pre">[SetsRequiredMembers]</span></code> attribute and is responsible for setting the <code class="docutils literal notranslate"><span class="pre">Width</span></code> and <code class="docutils literal notranslate"><span class="pre">Height</span></code> properties. Now, we can create an instance of <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> like this:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Using constructor, not object initializers.</span>
-<span class="n">Rectangle</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">);</span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Bow</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IWeaponBehavior</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">UseWeapon</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Shooting an arrow!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<p>In this case, even though we’re not using object initializers, the code compiles and runs successfully because the <code class="docutils literal notranslate"><span class="pre">required</span></code> properties <code class="docutils literal notranslate"><span class="pre">Width</span></code> and <code class="docutils literal notranslate"><span class="pre">Height</span></code> are being assigned within the constructor, and this is communicated to the compiler by the <code class="docutils literal notranslate"><span class="pre">[SetsRequiredMembers]</span></code> attribute.
-It ensures the compiler understands that the constructor is properly initializing the <code class="docutils literal notranslate"><span class="pre">required</span></code> members of the object, satisfying the constraints imposed by the <code class="docutils literal notranslate"><span class="pre">required</span></code> keyword.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">required</span></code> modifier provides a powerful mechanism to enforce the integrity of your objects during initialization. By enforcing initialization rules it makes your code safer and thus more maintainable. We’ll talk more about the benefits of integrity in the chapter on <span class="xref myst">types over tests</span>.
-In the next chapter, we’ll explore <code class="docutils literal notranslate"><span class="pre">init</span></code> accessors, which provide additional control over object initialization.</p>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Axe</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IWeaponBehavior</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">UseWeapon</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Striking with the axe!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, let’s add a <code class="docutils literal notranslate"><span class="pre">Character</span></code> class that will have an instance of <code class="docutils literal notranslate"><span class="pre">IWeaponBehavior</span></code> so that we can compose characters and weapons.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Character</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">IWeaponBehavior</span><span class="w"> </span><span class="n">weapon</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Character</span><span class="p">(</span><span class="n">IWeaponBehavior</span><span class="w"> </span><span class="n">weapon</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">weapon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">weapon</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Attack</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">weapon</span><span class="p">.</span><span class="n">UseWeapon</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the code above the <code class="docutils literal notranslate"><span class="pre">IWeaponBehavior</span></code> acts as an interface for all weapon types. Each weapon, be it <code class="docutils literal notranslate"><span class="pre">Sword</span></code>, <code class="docutils literal notranslate"><span class="pre">Bow</span></code>, or <code class="docutils literal notranslate"><span class="pre">Axe</span></code>, implements this behavior. The <code class="docutils literal notranslate"><span class="pre">Character</span></code> class is composed with a weapon behavior which can be chosen at run-time.</p>
+<p>How would we use these classes?
+Have a look at the code below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Character</span><span class="w"> </span><span class="n">knight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Character</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Sword</span><span class="p">());</span>
+<span class="n">knight</span><span class="p">.</span><span class="n">Attack</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Swinging the sword!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Character</span><span class="w"> </span><span class="n">archer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Character</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Bow</span><span class="p">());</span>
+<span class="n">archer</span><span class="p">.</span><span class="n">Attack</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shooting an arrow!
+</pre></div>
+</div>
+</div>
+</div>
+<p>In terms of the terminology of the Strategy pattern, the interface <code class="docutils literal notranslate"><span class="pre">IWeaponBehavior</span></code> is the interface that defines the family of algorithms/strategies. The implementations of that interface are, in turn, the different algorithms/strategies.
+Finally, the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class is what we call the ‘context’ or the ‘client’.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The benefits of the Strategy pattern are the same as those of <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">Composition over inheritance</span></a>. Revisit that chapter if you need a refresher.</p>
+</div>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>The Strategy pattern is a testament to the power of the <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">Composition over inheritance</span></a> principle. By extracting behaviors and encapsulating them into interchangeable strategies, we increase <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a> across all dimensions and write software that isn’t only useful today but also ready for the inevitable but unpredictable demands of tomorrow.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -354,38 +564,38 @@ In the next chapter, we’ll explore <code class="docutils literal notranslate">
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            name: "python3",
+            name: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="init-only-properties.html">
+          <a class="next-page" href="variance.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">49. </span>Init-only properties</div>
+                <div class="title"><span class="section-number">90. </span>Variance</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="computed-properties.html">
+          <a class="prev-page" href="composition-over-inheritance.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">47. </span>Computed properties</div>
+                <div class="title"><span class="section-number">88. </span>Composition over inheritance</div>
                 
               </div>
             </a>
@@ -407,8 +617,29 @@ In the next chapter, we’ll explore <code class="docutils literal notranslate">
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">89. Strategy pattern</a><ul>
+<li><a class="reference internal" href="#structure">Structure</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

@@ -244,19 +244,20 @@
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">77. UML class diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="maintainability.html">78. Maintainability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="refactoring.html">79. Refactoring</a></li>
-<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">80. Replace conditional with polymorphism</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dependency-injection.html">81. Dependency injection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">82. Composition over inheritance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generics.html">83. Generics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-types.html">84. Generic types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generics-and-type-errors.html">85. Generics and type errors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">86. Generic supertypes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-methods.html">87. Generic methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">88. Type parameter constraints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variance.html">89. Variance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">90. Liskov substitution principle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">91. Variant generic interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">92. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics.html">80. Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-types.html">81. Generic types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics-and-type-errors.html">82. Generics and type errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">83. Generic supertypes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-methods.html">84. Generic methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">85. Type parameter constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">86. Replace conditional with polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependency-injection.html">87. Dependency injection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">88. Composition over inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strategy-pattern.html">89. Strategy pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variance.html">90. Variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">91. Liskov substitution principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">92. Variant generic interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">93. Bibliography</a></li>
 </ul>
 
 </div>
@@ -364,7 +365,7 @@ Having a good understanding of UML class diagram notation is essential if we are
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-5882.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-6019.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -409,12 +410,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.175:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.69:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '5882.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '6019.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -481,7 +482,7 @@ If you’re not following the standard, pick a syntax and stick to it.
 Understandability is key.</p>
 </div>
 <section id="classes">
-<h2><span class="section-number">77.1. </span>Classes<a class="headerlink" href="#classes" title="Permalink to this heading">#</a></h2>
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this heading">#</a></h2>
 <p>To depict a class in a UML class diagram we draw a rectangle (known in UML as an ‘entity’) with three sections.
 In the top section we write the ‘identifier’ (meaning the name) of the class.
 In the middle section we write the ‘attributes’ of the class.
@@ -495,28 +496,28 @@ The attributes (instance variables) and operations (instance methods) of a class
 </div>
 </section>
 <section id="fields">
-<h2><span class="section-number">77.2. </span>Fields<a class="headerlink" href="#fields" title="Permalink to this heading">#</a></h2>
+<h2>Fields<a class="headerlink" href="#fields" title="Permalink to this heading">#</a></h2>
 <p>Fields are modeled as attributes. In the second section of an entity we write the name of the field, followed by a colon (<code class="docutils literal notranslate"><span class="pre">:</span></code>) and then the data type of the attribute. See, for example, the <code class="docutils literal notranslate"><span class="pre">sharpness</span></code> field in the <code class="docutils literal notranslate"><span class="pre">Sword</span></code> class.</p>
 </section>
 <section id="access-modifers">
-<h2><span class="section-number">77.3. </span>Access modifers<a class="headerlink" href="#access-modifers" title="Permalink to this heading">#</a></h2>
+<h2>Access modifers<a class="headerlink" href="#access-modifers" title="Permalink to this heading">#</a></h2>
 <p>We can mark attributes or operations as <code class="docutils literal notranslate"><span class="pre">public</span></code>, <code class="docutils literal notranslate"><span class="pre">private</span></code>, or <code class="docutils literal notranslate"><span class="pre">protected</span></code> by prepending a plus sign (<code class="docutils literal notranslate"><span class="pre">+</span></code>), minus sign (<code class="docutils literal notranslate"><span class="pre">-</span></code>), or hash symbol (<code class="docutils literal notranslate"><span class="pre">#</span></code>), respectively. See, for example, the <code class="docutils literal notranslate"><span class="pre">protected</span></code> field <code class="docutils literal notranslate"><span class="pre">sharpness</span></code> in <code class="docutils literal notranslate"><span class="pre">Sword</span></code> or the <code class="docutils literal notranslate"><span class="pre">private</span></code> field <code class="docutils literal notranslate"><span class="pre">weapon</span></code> in <code class="docutils literal notranslate"><span class="pre">Player</span></code>.</p>
 </section>
 <section id="properties">
-<h2><span class="section-number">77.4. </span>Properties<a class="headerlink" href="#properties" title="Permalink to this heading">#</a></h2>
+<h2>Properties<a class="headerlink" href="#properties" title="Permalink to this heading">#</a></h2>
 <p>Since UML class diagrams are language independent there is no specific support for the C# specific idea of <a class="reference internal" href="auto-implemented-properties.html"><span class="doc std std-doc">properties</span></a>.
 One common way of modeling properties is by means of the <code class="docutils literal notranslate"><span class="pre">«get»</span></code> and <code class="docutils literal notranslate"><span class="pre">«set»</span></code> ‘stereotypes’. We define one UML attribute for the getter and one for the setter and then prepend the appropriate sterotype. See, for example, the <code class="docutils literal notranslate"><span class="pre">Name</span></code> property of the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class.</p>
 </section>
 <section id="instance-methods">
-<h2><span class="section-number">77.5. </span>Instance methods<a class="headerlink" href="#instance-methods" title="Permalink to this heading">#</a></h2>
+<h2>Instance methods<a class="headerlink" href="#instance-methods" title="Permalink to this heading">#</a></h2>
 <p>Instance methods are modeled as ‘operations’ which means that they are listed in the third section of a box. We can specify both the parameter list of an operation and the return type. See, for example, the <code class="docutils literal notranslate"><span class="pre">Attack</span></code> method in the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class</p>
 </section>
 <section id="constructors">
-<h2><span class="section-number">77.6. </span>Constructors<a class="headerlink" href="#constructors" title="Permalink to this heading">#</a></h2>
+<h2>Constructors<a class="headerlink" href="#constructors" title="Permalink to this heading">#</a></h2>
 <p>Constructors should, according to the UML specification, be modeled by prepending the <code class="docutils literal notranslate"><span class="pre">«Create»</span></code> ‘stereotype’ to the member. In practice however, we often find diagrams where the constructor is implicit and simply has the same name and return type as the class. See, for example, the <code class="docutils literal notranslate"><span class="pre">Player</span></code> constructor in the diagram.</p>
 </section>
 <section id="composition">
-<h2><span class="section-number">77.7. </span>Composition<a class="headerlink" href="#composition" title="Permalink to this heading">#</a></h2>
+<h2>Composition<a class="headerlink" href="#composition" title="Permalink to this heading">#</a></h2>
 <p>In UML class diagrams we refer to <a class="reference internal" href="object-composition.html"><span class="doc std std-doc">object composition</span></a> as ‘association’ and we draw it using an arrow.
 The arrow points from the subclass to the superclass.
 The arrow is pointing from the type that has a reference (i.e. the ‘composing’ object) to the type that it has a reference to (i.e. the ‘composed’ object).
@@ -537,7 +538,7 @@ For more reading, please see the <a class="reference external" href="https://en.
 </div>
 </section>
 <section id="interfaces">
-<h2><span class="section-number">77.8. </span>Interfaces<a class="headerlink" href="#interfaces" title="Permalink to this heading">#</a></h2>
+<h2>Interfaces<a class="headerlink" href="#interfaces" title="Permalink to this heading">#</a></h2>
 <p>Interface implementation is, in UML, called ‘realization’ and is depicted using a dashed line with a hollow arrow head.
 The arrow points from the implementation to the interface.
 An interface is an entity but where the ‘classifier’ <code class="docutils literal notranslate"><span class="pre">«interface»</span></code> is added above the identifier.
@@ -547,7 +548,7 @@ Whether or not to include (meaning: repeat) the members of the interface in the 
 Neither leads to a loss of information since if the implementor implements the interface then it must <em>by definition</em> implement all its members.</p>
 </section>
 <section id="inheritance">
-<h2><span class="section-number">77.9. </span>Inheritance<a class="headerlink" href="#inheritance" title="Permalink to this heading">#</a></h2>
+<h2>Inheritance<a class="headerlink" href="#inheritance" title="Permalink to this heading">#</a></h2>
 <p>Inheritance is, in UML, called ‘generalization’ (or sometimes simply ‘inheritance’) and is depicted using a solid line with a hollow arrow head.
 Subclasses are conventionally drawn ‘below’ superclasses.
 To differentiate <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inherited</span></a> or <a class="reference internal" href="overriding.html"><span class="doc std std-doc">overridden</span></a> members apart from <a class="reference internal" href="hiding.html"><span class="doc std std-doc">hidden</span></a> members, inherited or overridden members are either <em>not</em> repeated in the subclass or the caret symbol (<code class="docutils literal notranslate"><span class="pre">^</span></code>) is prepended to their name.
@@ -560,7 +561,7 @@ Similarly, all cats are animals, but not all animals are cats.</p>
 </div>
 </section>
 <section id="abstract">
-<h2><span class="section-number">77.10. </span>Abstract<a class="headerlink" href="#abstract" title="Permalink to this heading">#</a></h2>
+<h2>Abstract<a class="headerlink" href="#abstract" title="Permalink to this heading">#</a></h2>
 <p>Abstract classes and members are denoted by writing the classifier in <em>italics</em>.
 If the font does not permit italics, the specification states that we add the textual annotation <code class="docutils literal notranslate"><span class="pre">{abstract}</span></code> after or below.
 See, for example, the abstract class <code class="docutils literal notranslate"><span class="pre">Sword</span></code> and the abstract method <code class="docutils literal notranslate"><span class="pre">Use</span></code>.</p>
@@ -642,16 +643,16 @@ See, for example, the abstract class <code class="docutils literal notranslate">
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">77. UML class diagrams</a><ul>
-<li><a class="reference internal" href="#classes">77.1. Classes</a></li>
-<li><a class="reference internal" href="#fields">77.2. Fields</a></li>
-<li><a class="reference internal" href="#access-modifers">77.3. Access modifers</a></li>
-<li><a class="reference internal" href="#properties">77.4. Properties</a></li>
-<li><a class="reference internal" href="#instance-methods">77.5. Instance methods</a></li>
-<li><a class="reference internal" href="#constructors">77.6. Constructors</a></li>
-<li><a class="reference internal" href="#composition">77.7. Composition</a></li>
-<li><a class="reference internal" href="#interfaces">77.8. Interfaces</a></li>
-<li><a class="reference internal" href="#inheritance">77.9. Inheritance</a></li>
-<li><a class="reference internal" href="#abstract">77.10. Abstract</a></li>
+<li><a class="reference internal" href="#classes">Classes</a></li>
+<li><a class="reference internal" href="#fields">Fields</a></li>
+<li><a class="reference internal" href="#access-modifers">Access modifers</a></li>
+<li><a class="reference internal" href="#properties">Properties</a></li>
+<li><a class="reference internal" href="#instance-methods">Instance methods</a></li>
+<li><a class="reference internal" href="#constructors">Constructors</a></li>
+<li><a class="reference internal" href="#composition">Composition</a></li>
+<li><a class="reference internal" href="#interfaces">Interfaces</a></li>
+<li><a class="reference internal" href="#inheritance">Inheritance</a></li>
+<li><a class="reference internal" href="#abstract">Abstract</a></li>
 </ul>
 </li>
 </ul>

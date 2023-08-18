@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="83. Generics" href="generics.html" /><link rel="prev" title="81. Dependency injection" href="dependency-injection.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="89. Strategy pattern" href="strategy-pattern.html" /><link rel="prev" title="87. Dependency injection" href="dependency-injection.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>82. Composition over inheritance - The Object Oriented Way</title>
+        <title>88. Composition over inheritance - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -244,19 +244,20 @@
 <li class="toctree-l1"><a class="reference internal" href="uml-class-diagrams.html">77. UML class diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="maintainability.html">78. Maintainability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="refactoring.html">79. Refactoring</a></li>
-<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">80. Replace conditional with polymorphism</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dependency-injection.html">81. Dependency injection</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">82. Composition over inheritance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generics.html">83. Generics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-types.html">84. Generic types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generics-and-type-errors.html">85. Generics and type errors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">86. Generic supertypes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-methods.html">87. Generic methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">88. Type parameter constraints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variance.html">89. Variance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">90. Liskov substitution principle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">91. Variant generic interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">92. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics.html">80. Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-types.html">81. Generic types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics-and-type-errors.html">82. Generics and type errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">83. Generic supertypes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-methods.html">84. Generic methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">85. Type parameter constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">86. Replace conditional with polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependency-injection.html">87. Dependency injection</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">88. Composition over inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strategy-pattern.html">89. Strategy pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variance.html">90. Variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">91. Liskov substitution principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">92. Variant generic interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">93. Bibliography</a></li>
 </ul>
 
 </div>
@@ -292,15 +293,15 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="composition-over-inheritance">
-<h1><span class="section-number">82. </span>Composition over inheritance<a class="headerlink" href="#composition-over-inheritance" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">88. </span>Composition over inheritance<a class="headerlink" href="#composition-over-inheritance" title="Permalink to this heading">#</a></h1>
 <p>A student of mine once gave me an excellent example of why favoring <a class="reference internal" href="object-composition.html"><span class="doc std std-doc">composition</span></a> over <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a> is so useful. The student used centaurs but we’ll use mermaids.</p>
 <p>Imagine that you’ve got three types: Human, Fish, and Mermaid. What does the inheritance hierarchy look like?
 Since a mermaid is part human and part fish, some code should be shared between mermaid and human while some code should be shared between mermaid and fish.
 The three types do not form a hierarchy. They don’t follow a clear parent-child relationship, yet their definitions clearly overlap.</p>
 <figure class="align-default" id="id1">
-<img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1141675785967632454/chrokh_an_illustrated_disney_mermaid_f0ff6abc-9a0c-4907-b9f4-dca6182176d7.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1141675785967632454/chrokh_an_illustrated_disney_mermaid_f0ff6abc-9a0c-4907-b9f4-dca6182176d7.png" />
+<img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1142001080054579283/chrokh_art_nouveau_mermaid_jumping_88812b6f-5189-4bea-a61a-66db4e00de75.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1142001080054579283/chrokh_art_nouveau_mermaid_jumping_88812b6f-5189-4bea-a61a-66db4e00de75.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 82.1 </span><span class="caption-text">Just like mermaids are part human and part fish, some concepts don’t form a neat hierarchy.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 88.1 </span><span class="caption-text">Just like mermaids are part human and part fish, we can’t always form a type hierarchy betewen complex types.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 <div class="legend">
 </div>
 </figcaption>
@@ -317,14 +318,19 @@ The three types do not form a hierarchy. They don’t follow a clear parent-chil
 <p>Let’s refresh our memories of the terminology before diving in.
 <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">Inheritance</span></a> refers to a mechanism where a new class, known as the subclass, inherits attributes and methods from an existing class, known as the superclass.
 <a class="reference internal" href="object-composition.html"><span class="doc std std-doc">Composition</span></a>, on the other hand, is a mechanism where one class contains an instance of another class. Instead of inheriting properties and behaviors, a class achieves the desired functionality by having other classes as its members.</p>
+<div class="admonition-video-lecture admonition">
+<p class="admonition-title">Video lecture</p>
+<p>This video lecture is on <a class="reference internal" href="strategy-pattern.html"><span class="doc std std-doc">Strategy pattern</span></a> which is an embodiment of the principle of favoring composition over inheritance.</p>
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/v9ejT8FO-7I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 <section id="the-duck-dilemma">
-<h2><span class="section-number">82.1. </span>The duck dilemma<a class="headerlink" href="#the-duck-dilemma" title="Permalink to this heading">#</a></h2>
+<h2>The duck dilemma<a class="headerlink" href="#the-duck-dilemma" title="Permalink to this heading">#</a></h2>
 <p>To exemplify these key issues with inheritance, let’s dive into a problem inspired by the well-known ‘Duck problem’ popularized by the iconic book <a class="reference external" href="https://geni.us/nlbA6">Head First: Design Patterns</a>.
 That book, by the way, is an excellent book to keep on your shelf as a reference.</p>
 <figure class="align-default" id="id2">
 <img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1141602874699296818/chrokh_illustration_of_a_mallard_duck_aca85583-bb64-4677-b431-197fd8d31cd8.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1141602874699296818/chrokh_illustration_of_a_mallard_duck_aca85583-bb64-4677-b431-197fd8d31cd8.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 82.2 </span><span class="caption-text">While we might label it a ‘Mallard’, it’s the distinct set of behaviors and characteristics it exhibits that truly defines it. Composition over inheritance urges us to focus on capabilities over classifications.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 88.2 </span><span class="caption-text">While we might label it a ‘Mallard’, it’s the distinct set of behaviors and characteristics it exhibits that truly defines it. Composition over inheritance urges us to focus on capabilities over classifications.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Suppose we are creating a system to simulate a duck pond. We start by defining a base <code class="docutils literal notranslate"><span class="pre">Duck</span></code> class that define base behaviors for quacking and swimming. Now, we want to extend our system by introducing different types of ducks like mallard ducks, redheads, and rubber ducks. We decide to use inheritance. After all, all ducks can quack and swim, but some quack and swim in their special ways, right?</p>
@@ -344,7 +350,7 @@ That book, by the way, is an excellent book to keep on your shelf as a reference
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2472.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2538.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -389,12 +395,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.175:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.69:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2472.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2538.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -545,7 +551,7 @@ At a fundamental level, this is because the problem we are trying to solve simpl
 <p>The challenge of horizontal behavior sharing becomes clear. Inheritance allows for behavior sharing from a base to a derived class but fails when certain classes need to share specific behaviors horizontally - meaning, across siblings. This scenario underlines the importance of seeking an approach that facilitates more efficient behavior sharing, steering us towards composition over inheritance.</p>
 </section>
 <section id="a-compositional-solution">
-<h2><span class="section-number">82.2. </span>A compositional solution<a class="headerlink" href="#a-compositional-solution" title="Permalink to this heading">#</a></h2>
+<h2>A compositional solution<a class="headerlink" href="#a-compositional-solution" title="Permalink to this heading">#</a></h2>
 <p>Instead of tying behavior directly to our <code class="docutils literal notranslate"><span class="pre">Duck</span></code> classes, let’s use composition. We can define each behavior (like quacking) as an interface, and then provide multiple implementations for various duck types.
 We focus on encapsulating different ‘types of behavior’ rather than different ‘types of ducks’.</p>
 <p>To tackle the problem, we start by identifying the behaviors that are subject to change or vary across duck types. Quacking and swimming are the evident ones. By encapsulating these behaviors into separate interfaces, we create a clear separation between what a duck does (its behaviors) and the duck itself.</p>
@@ -737,7 +743,7 @@ This pivot to composition significantly reduces duplication and significantly im
 </div>
 </section>
 <section id="benefits">
-<h2><span class="section-number">82.3. </span>Benefits<a class="headerlink" href="#benefits" title="Permalink to this heading">#</a></h2>
+<h2>Benefits<a class="headerlink" href="#benefits" title="Permalink to this heading">#</a></h2>
 <p>Let’s summarize the benefits of favoring composition over inheritance.</p>
 <ul class="simple">
 <li><p><strong>Flexibility</strong>: By breaking down behaviors into composable units, we can mix and match behaviors as needed, making it easier to meet changing requirements.</p></li>
@@ -748,7 +754,7 @@ This pivot to composition significantly reduces duplication and significantly im
 </ul>
 </section>
 <section id="conclusion">
-<h2><span class="section-number">82.4. </span>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
 <p>The way we structure our code profoundly influences its maintainability. Through our journey with the ducks, we’ve discerned that while inheritance might seem like an intuitive path for capturing shared behavior, it often falls short in scenarios where behavior sharing is more lateral than vertical.</p>
 <p>As developers, our goal is to craft solutions that stand the test of time by being possible to change. We’ve referred to this as <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a>. By favoring composition over inheritance we create code that is maintainable and hence ready for the challenges of tomorrow.</p>
 </section>
@@ -778,12 +784,12 @@ This pivot to composition significantly reduces duplication and significantly im
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="generics.html">
+          <a class="next-page" href="strategy-pattern.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">83. </span>Generics</div>
+                <div class="title"><span class="section-number">89. </span>Strategy pattern</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -794,7 +800,7 @@ This pivot to composition significantly reduces duplication and significantly im
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">81. </span>Dependency injection</div>
+                <div class="title"><span class="section-number">87. </span>Dependency injection</div>
                 
               </div>
             </a>
@@ -828,11 +834,11 @@ This pivot to composition significantly reduces duplication and significantly im
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">82. Composition over inheritance</a><ul>
-<li><a class="reference internal" href="#the-duck-dilemma">82.1. The duck dilemma</a></li>
-<li><a class="reference internal" href="#a-compositional-solution">82.2. A compositional solution</a></li>
-<li><a class="reference internal" href="#benefits">82.3. Benefits</a></li>
-<li><a class="reference internal" href="#conclusion">82.4. Conclusion</a></li>
+<li><a class="reference internal" href="#">88. Composition over inheritance</a><ul>
+<li><a class="reference internal" href="#the-duck-dilemma">The duck dilemma</a></li>
+<li><a class="reference internal" href="#a-compositional-solution">A compositional solution</a></li>
+<li><a class="reference internal" href="#benefits">Benefits</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
 </ul>
 </li>
 </ul>

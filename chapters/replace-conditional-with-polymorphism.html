@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="81. Dependency injection" href="dependency-injection.html" /><link rel="prev" title="79. Refactoring" href="refactoring.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="87. Dependency injection" href="dependency-injection.html" /><link rel="prev" title="85. Type parameter constraints" href="type-parameter-constraints.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>80. Replace conditional with polymorphism - The Object Oriented Way</title>
+        <title>86. Replace conditional with polymorphism - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -244,19 +244,20 @@
 <li class="toctree-l1"><a class="reference internal" href="uml-class-diagrams.html">77. UML class diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="maintainability.html">78. Maintainability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="refactoring.html">79. Refactoring</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">80. Replace conditional with polymorphism</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dependency-injection.html">81. Dependency injection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">82. Composition over inheritance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generics.html">83. Generics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-types.html">84. Generic types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generics-and-type-errors.html">85. Generics and type errors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">86. Generic supertypes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-methods.html">87. Generic methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">88. Type parameter constraints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variance.html">89. Variance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">90. Liskov substitution principle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">91. Variant generic interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">92. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics.html">80. Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-types.html">81. Generic types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics-and-type-errors.html">82. Generics and type errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">83. Generic supertypes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-methods.html">84. Generic methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">85. Type parameter constraints</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">86. Replace conditional with polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependency-injection.html">87. Dependency injection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">88. Composition over inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strategy-pattern.html">89. Strategy pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variance.html">90. Variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">91. Liskov substitution principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">92. Variant generic interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">93. Bibliography</a></li>
 </ul>
 
 </div>
@@ -292,7 +293,7 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="replace-conditional-with-polymorphism">
-<h1><span class="section-number">80. </span>Replace conditional with polymorphism<a class="headerlink" href="#replace-conditional-with-polymorphism" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">86. </span>Replace conditional with polymorphism<a class="headerlink" href="#replace-conditional-with-polymorphism" title="Permalink to this heading">#</a></h1>
 <p>Instead of relying on long chains of conditionals, we can use this principle to elegantly dispatch behavior based on the object’s type.
 The term ‘replace conditional with polymorphism’ was popularized by Martin Fowlers book, <a class="reference external" href="https://geni.us/DABBqp">Refactoring</a>’. It’s aptly named because we’re taking code that uses conditionals and rewrite it so that it instead uses polymorphism.</p>
 <div class="admonition-key-point admonition">
@@ -303,7 +304,7 @@ The term ‘replace conditional with polymorphism’ was popularized by Martin F
 <figure class="align-default" id="id1">
 <img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1140917738378891264/chrokh_illustration_of_an_orchestra_db3193b5-f403-40e4-85dc-86d45c6e8ba8.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1140917738378891264/chrokh_illustration_of_an_orchestra_db3193b5-f403-40e4-85dc-86d45c6e8ba8.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 80.1 </span><span class="caption-text">Replacing conditionals with polymorphism is like moving from a single person playing every instrument to an orchestra where each person specializes in one instrument.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 86.1 </span><span class="caption-text">Replacing conditionals with polymorphism is like moving from a single person playing every instrument to an orchestra where each person specializes in one instrument.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Imagine you’re building a chess game. In chess, different pieces move in different patterns. For instance, a ‘Knight’ might move in an ‘L’ shape while a ‘Bishop’ might move diagonally. The naive way to code this might involve a lot of conditionals:</p>
@@ -316,7 +317,7 @@ The term ‘replace conditional with polymorphism’ was popularized by Martin F
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-4997.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-5061.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -361,12 +362,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.175:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.69:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '4997.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '5061.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -501,7 +502,7 @@ Revisit the chapters on <a class="reference internal" href="subtype-polymorphism
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>In later chapters we’ll explore designs (such as <span class="xref myst">strategy pattern</span>) and principles (such as <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">composition over inheritance</span></a>) that take this basic idea even further.</p>
+<p>In later chapters we’ll explore designs (such as <a class="reference internal" href="strategy-pattern.html"><span class="doc std std-doc">strategy pattern</span></a>) and principles (such as <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">composition over inheritance</span></a>) that take this basic idea even further.</p>
 </div>
 <p>Remember, a key goal in object-oriented programming as well as programming in general, is clarity and <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a>.
 By leveraging principles like polymorphism, you pave the way for clearer, more maintainable software</p>
@@ -536,18 +537,18 @@ By leveraging principles like polymorphism, you pave the way for clearer, more m
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">81. </span>Dependency injection</div>
+                <div class="title"><span class="section-number">87. </span>Dependency injection</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="refactoring.html">
+          <a class="prev-page" href="type-parameter-constraints.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">79. </span>Refactoring</div>
+                <div class="title"><span class="section-number">85. </span>Type parameter constraints</div>
                 
               </div>
             </a>

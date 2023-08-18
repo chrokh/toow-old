@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="82. Composition over inheritance" href="composition-over-inheritance.html" /><link rel="prev" title="80. Replace conditional with polymorphism" href="replace-conditional-with-polymorphism.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="88. Composition over inheritance" href="composition-over-inheritance.html" /><link rel="prev" title="86. Replace conditional with polymorphism" href="replace-conditional-with-polymorphism.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>81. Dependency injection - The Object Oriented Way</title>
+        <title>87. Dependency injection - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -244,19 +244,20 @@
 <li class="toctree-l1"><a class="reference internal" href="uml-class-diagrams.html">77. UML class diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="maintainability.html">78. Maintainability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="refactoring.html">79. Refactoring</a></li>
-<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">80. Replace conditional with polymorphism</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">81. Dependency injection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">82. Composition over inheritance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generics.html">83. Generics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-types.html">84. Generic types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generics-and-type-errors.html">85. Generics and type errors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">86. Generic supertypes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-methods.html">87. Generic methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">88. Type parameter constraints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variance.html">89. Variance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">90. Liskov substitution principle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">91. Variant generic interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">92. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics.html">80. Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-types.html">81. Generic types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics-and-type-errors.html">82. Generics and type errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">83. Generic supertypes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-methods.html">84. Generic methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">85. Type parameter constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">86. Replace conditional with polymorphism</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">87. Dependency injection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">88. Composition over inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strategy-pattern.html">89. Strategy pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variance.html">90. Variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">91. Liskov substitution principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">92. Variant generic interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">93. Bibliography</a></li>
 </ul>
 
 </div>
@@ -292,7 +293,7 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="dependency-injection">
-<h1><span class="section-number">81. </span>Dependency injection<a class="headerlink" href="#dependency-injection" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">87. </span>Dependency injection<a class="headerlink" href="#dependency-injection" title="Permalink to this heading">#</a></h1>
 <p>Designing software isn’t just about writing code that works; it’s about crafting architectures that can be maintained and adapted over time.
 In the world of software, dependencies are inevitable. Your class often relies on other classes or services to perform its operations. This interlinking can quickly get messy. This is where ‘Dependency Injection’ (often abbreviated DI) comes into play.</p>
 <p>Dependency injection promotes the ‘injection’ of dependencies as opposed to the ‘construction’ of dependencies.
@@ -302,12 +303,12 @@ At its heart, dependency injection is about inverting control.</p>
 <p>Dependency injection separates object <em>construction</em> from object <em>use</em>. By ‘injecting’ our dependencies instead of ‘constructing’ them we increase <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a> across all dimensions.</p>
 </div>
 <section id="analogies">
-<h2><span class="section-number">81.1. </span>Analogies<a class="headerlink" href="#analogies" title="Permalink to this heading">#</a></h2>
+<h2>Analogies<a class="headerlink" href="#analogies" title="Permalink to this heading">#</a></h2>
 <p>Think of dependency injection like using a universal remote control. A universal remote is designed to work with various televisions, sound systems, and more. The key is that each device follows the same communication interface, enabling the remote to send standard commands like ‘volume up,’ ‘play,’ or ‘pause.’</p>
 <figure class="align-default" id="id1">
 <img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1140960943988293662/chrokh_apple_TV_remote_control_illustration_simple_flat_f1e5566d-0641-4f28-aab9-f759eac75b09.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1140960943988293662/chrokh_apple_TV_remote_control_illustration_simple_flat_f1e5566d-0641-4f28-aab9-f759eac75b09.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 81.1 </span><span class="caption-text">When using dependency injection, objects are designed to accept any dependency conforming to an expected interface. This is reminiscent of how a universal remote can be paired with any device that follows the expected protocol.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 87.1 </span><span class="caption-text">When using dependency injection, objects are designed to accept any dependency conforming to an expected interface. This is reminiscent of how a universal remote can be paired with any device that follows the expected protocol.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Just as you can connect a new device into your remote’s repertoire, in software design, we can ‘inject’ dependencies into an object. The object, like the remote, doesn’t need to know the intricate workings of what it’s controlling, it just needs to know the interface. This allows for flexibility and modularity, as you can easily swap out one device (or dependency) for another without needing to buy a new remote (or rewrite your class).</p>
@@ -325,7 +326,7 @@ Another way of saying this is: would you prefer mixing the code that asks the us
 Dependency injection says that we should not generate the data we need but instead ask callers of our methods and constructors to provide it for us.</p>
 </section>
 <section id="example">
-<h2><span class="section-number">81.2. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
 <p>Let’s get more concrete.
 Imagine you’re developing a side-scrolling adventure game where your main character, the <code class="docutils literal notranslate"><span class="pre">Player</span></code>, can run left, run right, and jump. As the player progresses through the game, they can pick up power-ups that modify their abilities. One such power-up lets the <code class="docutils literal notranslate"><span class="pre">Player</span></code> execute a double jump.</p>
 <p>Without dependency injection, the code might look something like this:</p>
@@ -359,7 +360,7 @@ Imagine you’re developing a side-scrolling adventure game where your main char
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2868.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2940.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -404,12 +405,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.175:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.69:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2868.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2940.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -593,10 +594,10 @@ That we separate ‘creation’ from <em>use</em>.</p>
 </div>
 </section>
 <section id="types-of-dependency-injection">
-<h2><span class="section-number">81.3. </span>Types of dependency injection<a class="headerlink" href="#types-of-dependency-injection" title="Permalink to this heading">#</a></h2>
+<h2>Types of dependency injection<a class="headerlink" href="#types-of-dependency-injection" title="Permalink to this heading">#</a></h2>
 <p>There are mainly three types of dependency injection:</p>
 <section id="constructor-injection">
-<h3><span class="section-number">81.3.1. </span>Constructor Injection<a class="headerlink" href="#constructor-injection" title="Permalink to this heading">#</a></h3>
+<h3>Constructor Injection<a class="headerlink" href="#constructor-injection" title="Permalink to this heading">#</a></h3>
 <p>The dependencies are injected through the constructor of the dependent class. It’s the most common form of dependency injection and is used when the dependency is mandatory for the class’s operation.</p>
 <p>Example: The <code class="docutils literal notranslate"><span class="pre">Player</span></code> class is passed its initial jump behavior via its constructor.</p>
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">new</span><span class="w"> </span><span class="nf">Player</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">JumpBehavior</span><span class="p">()));</span>
@@ -604,7 +605,7 @@ That we separate ‘creation’ from <em>use</em>.</p>
 </div>
 </section>
 <section id="method-injection">
-<h3><span class="section-number">81.3.2. </span>Method Injection<a class="headerlink" href="#method-injection" title="Permalink to this heading">#</a></h3>
+<h3>Method Injection<a class="headerlink" href="#method-injection" title="Permalink to this heading">#</a></h3>
 <p>Here, dependencies are provided through methods. This is useful when the dependencies can change during the lifetime of an instance.</p>
 <p>Example: The jump behavior of a <code class="docutils literal notranslate"><span class="pre">Player</span></code> object can be changed during its lifetime by using the <code class="docutils literal notranslate"><span class="pre">SetJumpBehavior</span></code> method.</p>
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">player</span><span class="p">.</span><span class="n">SetJumpBehavior</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DoubleJumpBehavior</span><span class="p">());</span>
@@ -612,7 +613,7 @@ That we separate ‘creation’ from <em>use</em>.</p>
 </div>
 </section>
 <section id="property-injection">
-<h3><span class="section-number">81.3.3. </span>Property Injection<a class="headerlink" href="#property-injection" title="Permalink to this heading">#</a></h3>
+<h3>Property Injection<a class="headerlink" href="#property-injection" title="Permalink to this heading">#</a></h3>
 <p>Dependencies are set via properties of the class. This is often used for optional dependencies. The terms ‘attribute injection’, ‘field injection’, and ‘setter injection’ are essentially the same as this.</p>
 <p>Example: If we converted the field <code class="docutils literal notranslate"><span class="pre">jumpBehavior</span></code> in the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class into a property with a <code class="docutils literal notranslate"><span class="pre">public</span></code> setter then we could inject a jump behavior during the lifetime of a <code class="docutils literal notranslate"><span class="pre">Player</span></code> object by using the setter.</p>
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">player</span><span class="p">.</span><span class="n">JumpBehavior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DoubleJumpBehavior</span><span class="p">();</span>
@@ -621,7 +622,7 @@ That we separate ‘creation’ from <em>use</em>.</p>
 </section>
 </section>
 <section id="conclusion">
-<h2><span class="section-number">81.4. </span>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>By injecting the jump behavior into player objects we’re changing the behavior of players at run-time.</p>
@@ -630,7 +631,7 @@ That we separate ‘creation’ from <em>use</em>.</p>
 <p class="admonition-title">Attention</p>
 <p>While dependency injection aids in creating a flexible system, it’s crucial to avoid overengineering. Use dependency injection where it genuinely adds value by enhancing <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a>.</p>
 </div>
-<p>In upcoming chapters, we’ll explore principles (like <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">composition over inheritance</span></a>) and patterns (like <span class="xref myst">strategy pattern</span>, that take the concept of dependency injection even further.</p>
+<p>In upcoming chapters, we’ll explore principles (like <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">composition over inheritance</span></a>) and patterns (like <a class="reference internal" href="strategy-pattern.html"><span class="doc std std-doc">strategy pattern</span></a>, that take the concept of dependency injection even further.</p>
 </section>
 </section>
 
@@ -663,7 +664,7 @@ That we separate ‘creation’ from <em>use</em>.</p>
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">82. </span>Composition over inheritance</div>
+                <div class="title"><span class="section-number">88. </span>Composition over inheritance</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -674,7 +675,7 @@ That we separate ‘creation’ from <em>use</em>.</p>
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">80. </span>Replace conditional with polymorphism</div>
+                <div class="title"><span class="section-number">86. </span>Replace conditional with polymorphism</div>
                 
               </div>
             </a>
@@ -708,16 +709,16 @@ That we separate ‘creation’ from <em>use</em>.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">81. Dependency injection</a><ul>
-<li><a class="reference internal" href="#analogies">81.1. Analogies</a></li>
-<li><a class="reference internal" href="#example">81.2. Example</a></li>
-<li><a class="reference internal" href="#types-of-dependency-injection">81.3. Types of dependency injection</a><ul>
-<li><a class="reference internal" href="#constructor-injection">81.3.1. Constructor Injection</a></li>
-<li><a class="reference internal" href="#method-injection">81.3.2. Method Injection</a></li>
-<li><a class="reference internal" href="#property-injection">81.3.3. Property Injection</a></li>
+<li><a class="reference internal" href="#">87. Dependency injection</a><ul>
+<li><a class="reference internal" href="#analogies">Analogies</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#types-of-dependency-injection">Types of dependency injection</a><ul>
+<li><a class="reference internal" href="#constructor-injection">Constructor Injection</a></li>
+<li><a class="reference internal" href="#method-injection">Method Injection</a></li>
+<li><a class="reference internal" href="#property-injection">Property Injection</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#conclusion">81.4. Conclusion</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
 </ul>
 </li>
 </ul>

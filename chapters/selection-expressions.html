@@ -244,19 +244,20 @@
 <li class="toctree-l1"><a class="reference internal" href="uml-class-diagrams.html">77. UML class diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="maintainability.html">78. Maintainability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="refactoring.html">79. Refactoring</a></li>
-<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">80. Replace conditional with polymorphism</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dependency-injection.html">81. Dependency injection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">82. Composition over inheritance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generics.html">83. Generics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-types.html">84. Generic types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generics-and-type-errors.html">85. Generics and type errors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">86. Generic supertypes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-methods.html">87. Generic methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">88. Type parameter constraints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variance.html">89. Variance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">90. Liskov substitution principle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">91. Variant generic interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">92. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics.html">80. Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-types.html">81. Generic types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics-and-type-errors.html">82. Generics and type errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">83. Generic supertypes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-methods.html">84. Generic methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">85. Type parameter constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">86. Replace conditional with polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependency-injection.html">87. Dependency injection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">88. Composition over inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strategy-pattern.html">89. Strategy pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variance.html">90. Variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">91. Liskov substitution principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">92. Variant generic interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">93. Bibliography</a></li>
 </ul>
 
 </div>
@@ -297,7 +298,7 @@
 <p>As you may recall, the key difference between <a class="reference internal" href="statements.html#statements"><span class="std std-ref">statements</span></a> and <a class="reference internal" href="expressions.html"><span class="doc std std-doc">expressions</span></a> in C# lies in how they’re used and what they produce. A statement performs an action and doesn’t return a value. It’s like a command that you give to the computer. An expression, on the other hand, evaluates to a value and can be used as a part of larger expressions or statements. In other words, an expression is a piece of code that produces a value.</p>
 <p>In the context of this chapter, the ternary conditional operator and switch expressions are selection expressions. This means they evaluate a condition and produce a value based on that condition. This contrasts with the selection statements we discussed in the previous chapter, which perform actions based on conditions but do not produce values.</p>
 <section id="ternary-conditional-operator">
-<h2><span class="section-number">25.1. </span>Ternary Conditional Operator<a class="headerlink" href="#ternary-conditional-operator" title="Permalink to this heading">#</a></h2>
+<h2>Ternary Conditional Operator<a class="headerlink" href="#ternary-conditional-operator" title="Permalink to this heading">#</a></h2>
 <p>One of the most common selection expressions in C# is the ternary conditional operator, which is written as <code class="docutils literal notranslate"><span class="pre">?</span></code>. The ternary operator takes three operands: a condition to check, a result for <code class="docutils literal notranslate"><span class="pre">true</span></code>, and a result for <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
 <p>Here’s how you use it:</p>
 <div class="cell docutils container">
@@ -314,7 +315,7 @@
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-5107.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-5175.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -359,12 +360,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.175:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.69:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '5107.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '5175.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -426,7 +427,7 @@ else {
 <p>In this code, the condition expression <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&gt;</span> <span class="pre">b</span></code> is checked. If it evaluates to <code class="docutils literal notranslate"><span class="pre">true</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;A&quot;</span></code> is assigned to the variable <code class="docutils literal notranslate"><span class="pre">result</span></code>, but if it evaluates to false then <code class="docutils literal notranslate"><span class="pre">&quot;B&quot;</span></code> is assigned.</p>
 </section>
 <section id="switch-expressions">
-<h2><span class="section-number">25.2. </span>Switch Expressions<a class="headerlink" href="#switch-expressions" title="Permalink to this heading">#</a></h2>
+<h2>Switch Expressions<a class="headerlink" href="#switch-expressions" title="Permalink to this heading">#</a></h2>
 <p>Switch expressions provide a more concise syntax than switch statements for some common scenarios.</p>
 <p>Here’s an example of a switch expression:</p>
 <div class="cell docutils container">
@@ -533,8 +534,8 @@ We’ll learn more about <span class="xref myst">pattern matching</span> in a la
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">25. Selection expressions</a><ul>
-<li><a class="reference internal" href="#ternary-conditional-operator">25.1. Ternary Conditional Operator</a></li>
-<li><a class="reference internal" href="#switch-expressions">25.2. Switch Expressions</a></li>
+<li><a class="reference internal" href="#ternary-conditional-operator">Ternary Conditional Operator</a></li>
+<li><a class="reference internal" href="#switch-expressions">Switch Expressions</a></li>
 </ul>
 </li>
 </ul>
