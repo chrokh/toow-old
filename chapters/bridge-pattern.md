@@ -16,6 +16,12 @@ kernelspec:
 Work in progress.
 ```
 
+%```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1142009820904423424/chrokh_illustration_of_shelf_with_camera_lenses_187443ae-0738-4420-ad29-8b1d46fb4efe.png
+%
+%Just like you can connect any camera lens to any camera as long as they both follow the same interface, the Bridge pattern enables you to combine elements from two type hierarchies.
+%https://discord.com/channels/@me/1118630713084870736/1142010037603139604
+%```
+
 %TODO: Strategy pattern as it should be used.
 
 ## Definition

@@ -1,4 +1,4 @@
-# Open-closed principle
+ Open-closed principle
 
 ```{warning}
 Work in progress.
@@ -6,7 +6,8 @@ Work in progress.
 
 %OCP.
 
-% - See discussion on OCP in concrete dependency injection chapter.
+%- See discussion on OCP in concrete dependency injection chapter.
+%- See discussion in composition over inheritance chapter and strategy pattern chapter.
 
 ## Exercises
 
