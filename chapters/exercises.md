@@ -1569,3 +1569,54 @@ We say that dependency injection separate 'construction' from 'use', what is mea
 %Use UML class diagrams to illustrate the before and after.
 %```
 %
+
+
+%## Bridge pattern
+%
+%```{exercise}
+%What is the bridge pattern? Explain it in your own words and by using an example.
+%```
+%
+%```{exercise}
+%Come up with your own example use case for bridge pattern and implement it in code.
+%```
+%
+%```{exercise}
+%In this chapter we have discussed two "flavors" of the bridge pattern.
+%What is the difference between the two and what effects does this difference have on the maintainability of the resulting software?
+%Use the [maintainability characteristics](maintainability:characteristics) terminology from the maintainability chapter.
+%```
+%
+%```{exercise}
+%We have described the bridge pattern as making use of two layers of abstraction.
+%Is it possible to have a number of layers of abstraction?
+%Why would it be useful to have more layers of abstraction?
+%
+%Hint: `new A(new B(new C()))`
+%```
+%
+%```{exercise-start}
+%```
+%Write another class that implements the interface `ICipherView` or inherits from the abstract class `CipherView` from the examples in this chapter.
+%Let's call the new class `ArrowView`.
+%It should behave like this:
+%
+%```{code-cell} csharp
+%:tags: [remove-input]
+%class ArrowView : ICipherView
+%{
+%  ICipher<string,string> cipher;
+%  public ArrowView ( ICipher<string,string> cipher)
+%    => this.cipher = cipher;
+%  public void Draw (string input)
+%    => Console.WriteLine($"{input} => {cipher.Encode(input)}");
+%}
+%```
+%```{code-cell} csharp
+%ArrowView reverseView = new ArrowView(new ReverseCipher());
+%ArrowView caesar2View = new ArrowView(new SubstitutionCipher(new CaesarCipher(2)));
+%reverseView.Draw("Secret message");
+%caesar2View.Draw("Secret message");
+%```
+%```{exercise-end}
+%```

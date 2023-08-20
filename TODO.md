@@ -1,5 +1,6 @@
 # The new todo list
 
+- Replace UML diagram in bridge chapter.
 - Perhaps the mermaid example should be extracted from the chapter on composition over inheritance to a new chapter called 'Substitutability'?
 - Encapsulation chapter: "Encapsulate what varies".
 - 'hard-coding'.
