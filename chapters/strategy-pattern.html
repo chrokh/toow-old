@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="90. Variance" href="variance.html" /><link rel="prev" title="88. Composition over inheritance" href="composition-over-inheritance.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="90. Bridge pattern" href="bridge-pattern.html" /><link rel="prev" title="88. Composition over inheritance" href="composition-over-inheritance.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
         <title>89. Strategy pattern - The Object Oriented Way</title>
@@ -254,10 +254,15 @@
 <li class="toctree-l1"><a class="reference internal" href="dependency-injection.html">87. Dependency injection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">88. Composition over inheritance</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">89. Strategy pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variance.html">90. Variance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">91. Liskov substitution principle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">92. Variant generic interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">93. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bridge-pattern.html">90. Bridge pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="delegates.html">91. Delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-delegates.html">92. Generic delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="built-in-delegates.html">93. Built-in delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multicast-delegates.html">94. Multicast delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variance.html">95. Variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">96. Liskov substitution principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">97. Variant generic interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">98. Bibliography</a></li>
 </ul>
 
 </div>
@@ -304,7 +309,13 @@ These strategies, or behaviors, can be modified, added, or removed without affec
 <p><span class="caption-number">Fig. 89.1 </span><span class="caption-text">Just like you can plug any electrical device into a wall socket as long as they follow the same standard, you can plug any strategy into a client as long as the strategy implements the appropriate interface.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Let’s look at the motivation of the pattern from the seminal book <a class="reference external" href="https://geni.us/PsXmo">Design Patterns: Elements of Reusable Object-Oriented Software</a>:</p>
+<div class="admonition-video-lecture admonition">
+<p class="admonition-title">Video lecture</p>
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/v9ejT8FO-7I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<section id="intent">
+<h2>Intent<a class="headerlink" href="#intent" title="Permalink to this heading">#</a></h2>
+<p>The intent of the Strategy pattern is to:</p>
 <blockquote class="epigraph">
 <div><p>Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from the clients that use it.</p>
 <p class="attribution">—<a class="reference external" href="https://geni.us/PsXmo">Design Patterns: Elements of reusable object-oriented software</a>.</p>
@@ -313,10 +324,7 @@ These strategies, or behaviors, can be modified, added, or removed without affec
 <p class="admonition-title">Note</p>
 <p>In the chapter <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">Composition over inheritance</span></a> we used the term ‘behaviors’ but in strategy pattern we often call them ‘strategies’.</p>
 </div>
-<div class="admonition-video-lecture admonition">
-<p class="admonition-title">Video lecture</p>
-<iframe width="100%" height="315" src="https://www.youtube.com/embed/v9ejT8FO-7I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
+</section>
 <section id="structure">
 <h2>Structure<a class="headerlink" href="#structure" title="Permalink to this heading">#</a></h2>
 <p>As we can see in the <a class="reference internal" href="uml-class-diagrams.html"><span class="doc std std-doc">UML class diagram</span></a> below, the <code class="docutils literal notranslate"><span class="pre">Context</span></code> class does not implement behavior directly. Instead, it delegates the responsibility of its behavior to an instance of a class that implements the <code class="docutils literal notranslate"><span class="pre">IStrategy</span></code> interface. This strategy interface provides a contract or signature for a method named <code class="docutils literal notranslate"><span class="pre">execute()</span></code>, ensuring that all concrete strategies will have this method implemented.</p>
@@ -356,7 +364,7 @@ Instead, we can favor composition and use, what we here call, the Strategy patte
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-5567.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-5769.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -401,12 +409,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.69:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.124:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '5567.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '5769.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -579,12 +587,12 @@ Finally, the <code class="docutils literal notranslate"><span class="pre">Charac
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="variance.html">
+          <a class="next-page" href="bridge-pattern.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">90. </span>Variance</div>
+                <div class="title"><span class="section-number">90. </span>Bridge pattern</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -630,6 +638,7 @@ Finally, the <code class="docutils literal notranslate"><span class="pre">Charac
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">89. Strategy pattern</a><ul>
+<li><a class="reference internal" href="#intent">Intent</a></li>
 <li><a class="reference internal" href="#structure">Structure</a></li>
 <li><a class="reference internal" href="#example">Example</a></li>
 <li><a class="reference internal" href="#conclusion">Conclusion</a></li>

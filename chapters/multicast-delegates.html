@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="16. Precedence" href="precedence.html" /><link rel="prev" title="14. Logical operators" href="logical-operators.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="95. Variance" href="variance.html" /><link rel="prev" title="93. Built-in delegates" href="built-in-delegates.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>15. Assignment operator - The Object Oriented Way</title>
+        <title>94. Multicast delegates - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -141,7 +141,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -179,7 +179,7 @@
 <li class="toctree-l1"><a class="reference internal" href="equality-operators.html">12. Equality operators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="relational-operators.html">13. Relational operators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logical-operators.html">14. Logical operators</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">15. Assignment operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment-operator.html">15. Assignment operator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="precedence.html">16. Precedence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="associativity.html">17. Associativity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">18. Constants</a></li>
@@ -258,7 +258,7 @@
 <li class="toctree-l1"><a class="reference internal" href="delegates.html">91. Delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-delegates.html">92. Generic delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="built-in-delegates.html">93. Built-in delegates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multicast-delegates.html">94. Multicast delegates</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">94. Multicast delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variance.html">95. Variance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">96. Liskov substitution principle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">97. Variant generic interfaces</a></li>
@@ -291,28 +291,308 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="assignment-operator">
-<h1><span class="section-number">15. </span>Assignment operator<a class="headerlink" href="#assignment-operator" title="Permalink to this heading">#</a></h1>
-<p>As we’ve already seen in previous chapters, the assignment operator <code class="docutils literal notranslate"><span class="pre">=</span></code> plays a crucial role in C#. It is the operator that allows us to assign values to our variables. However, the assignment operator has a few more facets worth discussing.</p>
-<p>At its core, the assignment operator is used to assign the value of its right-hand operand to its left-hand operand. For instance:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">numberOfMarbles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">;</span>
+          <section class="tex2jax_ignore mathjax_ignore" id="multicast-delegates">
+<h1><span class="section-number">94. </span>Multicast delegates<a class="headerlink" href="#multicast-delegates" title="Permalink to this heading">#</a></h1>
+<p>In your journey through understanding delegates, you’ve been using them primarily to hold a reference to a single method. But what if you wanted a delegate to hold references to multiple methods, and then invoke all those methods in sequence? Enter: multicast delegates.</p>
+<div class="admonition-key-points admonition">
+<p class="admonition-title">Key points</p>
+<ul class="simple">
+<li><p>Multicast delegates in C# can hold and invoke multiple method references in sequence.</p></li>
+<li><p>They are combined using the addition (<code class="docutils literal notranslate"><span class="pre">+</span></code>) and subtraction (<code class="docutils literal notranslate"><span class="pre">-</span></code>) operators.</p></li>
+<li><p>The return value of a multicast delegate with a non-<code class="docutils literal notranslate"><span class="pre">void</span></code> return type is from the last method invoked.</p></li>
+<li><p>Multicast delegates lay the foundation for <span class="xref myst">event</span> handling in C# where multiple subscribers can react to a single event.</p></li>
+</ul>
+</div>
+<section id="definition">
+<h2>Definition<a class="headerlink" href="#definition" title="Permalink to this heading">#</a></h2>
+<p>A multicast delegate is a delegate that can hold references to more than one method. When you invoke a multicast delegate, it invokes the list of methods it references in the order they were added.
+The capability of a delegate to hold references to multiple methods is built into the delegate type itself, meaning every delegate in C# is inherently a multicast delegate.</p>
+</section>
+<section id="adding">
+<h2>Adding<a class="headerlink" href="#adding" title="Permalink to this heading">#</a></h2>
+<p>While every delegate is a multicast delegate by default, the real power of multicasting shines when you combine delegates using the addition (<code class="docutils literal notranslate"><span class="pre">+</span></code>) and subtraction (<code class="docutils literal notranslate"><span class="pre">-</span></code>) operators.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Some example functions.</span>
+<span class="k">void</span><span class="w"> </span><span class="nf">Method1</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Method 1&quot;</span><span class="p">);</span>
+<span class="k">void</span><span class="w"> </span><span class="nf">Method2</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Method 2&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>In this example, <code class="docutils literal notranslate"><span class="pre">5</span></code> is assigned to <code class="docutils literal notranslate"><span class="pre">numberOfMarbles</span></code>. This means that the variable <code class="docutils literal notranslate"><span class="pre">numberOfMarbles</span></code> now holds the value <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p>
-<p>Something to bear in mind is that the assignment operator is ‘right-associative’. This means that when there are multiple assignment operators in a single statement, they are evaluated from right to left. Let’s see an example:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
-<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">;</span>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-4650.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.124:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '4650.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Make delegate instances.</span>
+<span class="n">Action</span><span class="w"> </span><span class="n">method1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Method1</span><span class="p">;</span>
+<span class="n">Action</span><span class="w"> </span><span class="n">method2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Method2</span><span class="p">;</span>
+
+<span class="c1">// Combine delegate instances into multicast delegate instance.</span>
+<span class="n">Action</span><span class="w"> </span><span class="n">multicast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">method1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">method2</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>In this code snippet, all three variables <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>, and <code class="docutils literal notranslate"><span class="pre">c</span></code> will end up holding the value <code class="docutils literal notranslate"><span class="pre">10</span></code>. Here’s how it works: first, <code class="docutils literal notranslate"><span class="pre">10</span></code> is assigned to <code class="docutils literal notranslate"><span class="pre">c</span></code>. Then, this assigned value is assigned to <code class="docutils literal notranslate"><span class="pre">b</span></code> whose assigned value is then assigned to <code class="docutils literal notranslate"><span class="pre">a</span></code>. The right-associativity of the assignment operator ensures this cascade of assignments works correctly. If we explicitly add parenthases it looks like this: <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">(b</span> <span class="pre">=</span> <span class="pre">(c</span> <span class="pre">=</span> <span class="pre">10))</span></code>.</p>
-<p>One more interesting aspect of the assignment operator is that it’s not just about assigning values - it also returns a value. Specifically, the assignment operator <code class="docutils literal notranslate"><span class="pre">=</span></code> returns the value that was assigned. This is why it’s possible to do multiple assignments in one line, like in the example above.</p>
-<p>It’s important to note that the assignment operator is distinct from the <a class="reference internal" href="equality-operators.html"><span class="doc std std-doc">equality operator</span></a> <code class="docutils literal notranslate"><span class="pre">==,</span></code> which we’ve discussed in a previous chapter. While they might look similar, they serve very different purposes. The assignment operator <code class="docutils literal notranslate"><span class="pre">=</span></code> assigns a value to a variable, while the equality operator <code class="docutils literal notranslate"><span class="pre">==</span></code> checks if two values are equal.</p>
+</div>
+</div>
+<p>If we now invoke the multicast delegate then all delegate instances stored in the multicast delegate will be invoked in order.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">multicast</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Method 1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Method 2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If we add the same delegate instance to a multicast delegate multiple times then the underlying method will be invoked multiple times when the multicast delegate is invoked.</p>
+</div>
+<p>Since all delegates are multicast delegates by default you can combine multicast delegates to make multicast delegates.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Action</span><span class="w"> </span><span class="n">multimulti</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">method1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">multicast</span><span class="p">;</span>
+<span class="n">multimulti</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Method 1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Method 1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Method 2
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="removing">
+<h2>Removing<a class="headerlink" href="#removing" title="Permalink to this heading">#</a></h2>
+<p>You can use the minus operator (<code class="docutils literal notranslate"><span class="pre">-</span></code>) to remove a method reference from a multicast delegate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Removing `method1` from the multicast delegate.</span>
+<span class="n">multicast</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">method1</span><span class="p">;</span>
+
+<span class="c1">// Invoking the multicast delegate.</span>
+<span class="n">multicast</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Method 2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>We can also use the <a class="reference internal" href="arithmetic-operators.html"><span class="doc std std-doc">addition and subtraction assignment operators</span></a> (<code class="docutils literal notranslate"><span class="pre">+=</span></code> and <code class="docutils literal notranslate"><span class="pre">-=</span></code>) to add or remove delegate instances to or from an existing multicast delegate. Like this: <code class="docutils literal notranslate"><span class="pre">multicast</span> <span class="pre">+=</span> <span class="pre">method2</span></code>.</p>
+</div>
+</section>
+<section id="return-values">
+<h2>Return values<a class="headerlink" href="#return-values" title="Permalink to this heading">#</a></h2>
+<p>If a multicast delegate has a return type other than <code class="docutils literal notranslate"><span class="pre">void</span></code>, <strong>only the value of the last invoked method is returned</strong>.
+It’s essential to be aware of this behavior when designing systems using multicast delegates.</p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>If you’re familiar with function composition from functional programming it’s important to note that multicast delegates is (unfortunately) not an implementation of this concept.
+The output of a function in a multicast delegate is <strong>not</strong> passed as input to the next function in the multicast delegate instance.</p>
+</div>
+<p>Let’s try it out.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Some example functions.</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">MethodA</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="m">10</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">MethodB</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="m">20</span><span class="p">;</span>
+
+<span class="c1">// Make delegate instances.</span>
+<span class="n">Func</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">methodA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MethodA</span><span class="p">;</span>
+<span class="n">Func</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">methodB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MethodB</span><span class="p">;</span>
+
+<span class="c1">// Combine delegate instances into multicast delegate instance.</span>
+<span class="n">Func</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">multicast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">methodA</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MethodB</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Only returns 20 and not 10.</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">multicast</span><span class="p">());</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exceptions">
+<h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this heading">#</a></h2>
+<p>When one of the methods referenced by a multicast delegate throws an <span class="xref myst">exception</span>, the subsequent methods will not be executed. Therefore, it’s crucial to ensure exception handling is appropriately addressed when working with multicast delegates.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">void</span><span class="w"> </span><span class="nf">GoodMethod</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;This method runs!&quot;</span><span class="p">);</span>
+<span class="k">void</span><span class="w"> </span><span class="nf">BadMethod</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Exception</span><span class="p">(</span><span class="s">&quot;This method throws!&quot;</span><span class="p">);</span>
+
+<span class="n">Action</span><span class="w"> </span><span class="n">goodMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GoodMethod</span><span class="p">;</span>
+<span class="n">Action</span><span class="w"> </span><span class="n">badMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BadMethod</span><span class="p">;</span>
+
+<span class="n">Action</span><span class="w"> </span><span class="n">combined</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">goodMethod</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">badMethod</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">goodMethod</span><span class="p">;</span>
+
+<span class="k">try</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">combined</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Exception caught: {ex.Message}&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This method runs!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exception caught: This method throws!
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice how we never execute the third delegate in the example above because we encounter an exception in the second method when executing the multicast delegate.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>Multicast delegates offer the flexibility to reference multiple methods and execute them in sequence.
+While you might see limited uses for multicast delegates in regular scenarios, their real power and common application are in <span class="xref myst">events</span>. Events in C# use the capabilities of multicast delegates to allow multiple subscribers (methods) for a single event. This means when an event is raised, multiple methods can react to it.
+We will explore events in a later chapter.
+Stay tuned.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -324,38 +604,38 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            name: "python3",
+            name: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="precedence.html">
+          <a class="next-page" href="variance.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">16. </span>Precedence</div>
+                <div class="title"><span class="section-number">95. </span>Variance</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="logical-operators.html">
+          <a class="prev-page" href="built-in-delegates.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">14. </span>Logical operators</div>
+                <div class="title"><span class="section-number">93. </span>Built-in delegates</div>
                 
               </div>
             </a>
@@ -377,8 +657,32 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">94. Multicast delegates</a><ul>
+<li><a class="reference internal" href="#definition">Definition</a></li>
+<li><a class="reference internal" href="#adding">Adding</a></li>
+<li><a class="reference internal" href="#removing">Removing</a></li>
+<li><a class="reference internal" href="#return-values">Return values</a></li>
+<li><a class="reference internal" href="#exceptions">Exceptions</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

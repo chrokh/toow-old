@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="81. Generic types" href="generic-types.html" /><link rel="prev" title="79. Refactoring" href="refactoring.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="94. Multicast delegates" href="multicast-delegates.html" /><link rel="prev" title="92. Generic delegates" href="generic-delegates.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>80. Generics - The Object Oriented Way</title>
+        <title>93. Built-in delegates - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -141,7 +141,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -244,7 +244,7 @@
 <li class="toctree-l1"><a class="reference internal" href="uml-class-diagrams.html">77. UML class diagrams</a></li>
 <li class="toctree-l1"><a class="reference internal" href="maintainability.html">78. Maintainability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="refactoring.html">79. Refactoring</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">80. Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics.html">80. Generics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-types.html">81. Generic types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generics-and-type-errors.html">82. Generics and type errors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">83. Generic supertypes</a></li>
@@ -257,7 +257,7 @@
 <li class="toctree-l1"><a class="reference internal" href="bridge-pattern.html">90. Bridge pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="delegates.html">91. Delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-delegates.html">92. Generic delegates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="built-in-delegates.html">93. Built-in delegates</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">93. Built-in delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multicast-delegates.html">94. Multicast delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variance.html">95. Variance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">96. Liskov substitution principle</a></li>
@@ -291,41 +291,29 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="generics">
-<h1><span class="section-number">80. </span>Generics<a class="headerlink" href="#generics" title="Permalink to this heading">#</a></h1>
-<p>Sometimes, the only essential difference between two pieces of repeated code is a data type.
-As we’ve learned, eliminating duplication is a key part of improving the <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a> of software.
-With generics, also known as ‘parametric polymorphism’, we can eliminate such duplication without giving up <a class="reference internal" href="type-checking.html"><span class="doc std std-doc">static type safety</span></a>.</p>
-<div class="admonition-key-point admonition">
-<p class="admonition-title">Key point</p>
-<p>Generics allow us to write code that works with <em>any</em> data type while retaining static type safety.
-This means we can reuse the same code for different data types, and still let the compiler find <a class="reference internal" href="type-checking.html"><span class="doc std std-doc">type errors</span></a>.</p>
-</div>
-<p>Imagine that you’ve created a type that behaves like a list.
-When you’re writing the code for the method that adds items to the list, do you really need to know what type of element you are adding?
-Not really, right?
-Adding is just a matter of sticking the element into the list.
-Similarly, as long as all the elements in the list are of the same type, we can safely extract them.
-There is no fundamental difference between the code for a list of strings and the code for a list of integers.</p>
-<p>Let’s illustrate this by looking at the very commonly used type <code class="docutils literal notranslate"><span class="pre">List&lt;T&gt;</span></code> class from the .NET framework. Think of this as a modern <a class="reference internal" href="arrays.html"><span class="doc std std-doc">array</span></a>. We’ll talk more about lists and how they compare to arrays in the chapter on <span class="xref myst">collections</span>.</p>
-<p>Here’s how we might use a <code class="docutils literal notranslate"><span class="pre">List&lt;T&gt;</span></code> to store integers.
-First we create a new list:</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="built-in-delegates">
+<h1><span class="section-number">93. </span>Built-in delegates<a class="headerlink" href="#built-in-delegates" title="Permalink to this heading">#</a></h1>
+<p>When exploring delegates you might have noticed that it’s actually possible to assign any method to a variable if we use <a class="reference internal" href="type-inference.html"><span class="doc std std-doc">type inference</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">();</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Local function that inverts a bool.</span>
+<span class="kt">bool</span><span class="w"> </span><span class="nf">Negate</span><span class="w"> </span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">!</span><span class="n">x</span><span class="p">;</span>
+
+<span class="c1">// The function can be assigned to a variable *without* explicitly declaring a delegate.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">neg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Negate</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3917.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2475.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -375,7 +363,7 @@ function loadDotnetInteractiveApi() {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3917.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2475.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -431,102 +419,153 @@ else {
     </script>
 </div></div></div>
 </div>
-<p>Then we add items to the list using the instance method <code class="docutils literal notranslate"><span class="pre">Add</span></code>.</p>
+<p>How come this works?
+What is the type of variable <code class="docutils literal notranslate"><span class="pre">neg</span></code>?
+This works, because there’s a whole bunch of built-in delegate types in C# that the compiler can treat our methods as.
+The type of <code class="docutils literal notranslate"><span class="pre">neg</span></code> in the example above is <code class="docutils literal notranslate"><span class="pre">Func&lt;bool,</span> <span class="pre">bool&gt;</span></code>.</p>
+<p>While we have the freedom to define custom delegates tailored to specific needs, the language also provides built-in generic delegate types for common scenarios. These types are intended to simplify method declarations, reduce code redundancy, and improve readability. The most prevalent built-in delegates are the <code class="docutils literal notranslate"><span class="pre">Func</span></code> types, the <code class="docutils literal notranslate"><span class="pre">Action</span></code> types, and <code class="docutils literal notranslate"><span class="pre">Predicate&lt;T&gt;</span></code>.</p>
+<div class="admonition-key-points admonition">
+<p class="admonition-title">Key points</p>
+<ul class="simple">
+<li><p>C# offers built-in delegate types like <code class="docutils literal notranslate"><span class="pre">Action</span></code>, <code class="docutils literal notranslate"><span class="pre">Func</span></code>, and <code class="docutils literal notranslate"><span class="pre">Predicate&lt;T&gt;</span></code> for representing common delegates.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Action</span></code> and <code class="docutils literal notranslate"><span class="pre">Func</span></code> families define generic delegates that return <code class="docutils literal notranslate"><span class="pre">void</span></code> or a value, respectively.</p></li>
+<li><p>The generic delegate <code class="docutils literal notranslate"><span class="pre">Predicate&lt;T&gt;</span></code> can be used for methods that take a single generic input and return a <code class="docutils literal notranslate"><span class="pre">bool</span></code>.</p></li>
+</ul>
+</div>
+<section id="action">
+<h2>Action<a class="headerlink" href="#action" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Action</span></code> family of delegates contains delegates whose return type is <code class="docutils literal notranslate"><span class="pre">void</span></code> and can have up to 16 input parameters.
+When we have methods that perform an operation but do not return a value, <code class="docutils literal notranslate"><span class="pre">Action</span></code> is the go-to delegate family.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="m">10</span><span class="p">);</span>
-<span class="n">numbers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="m">20</span><span class="p">);</span>
-<span class="n">numbers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="m">30</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now that we have our items in the list, we can, for example, iterate over the collection and print all the items:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">numbers</span><span class="p">)</span>
-<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">num</span><span class="p">);</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Some example functions.</span>
+<span class="k">void</span><span class="w"> </span><span class="nf">Greet</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+<span class="k">void</span><span class="w"> </span><span class="nf">PrintCoordinates</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;({x}, {y})&quot;</span><span class="p">);</span>
+
+<span class="c1">// Using `Action` delegates.</span>
+<span class="n">Action</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">greet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Greet</span><span class="p">;</span>
+<span class="n">Action</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">printCoordinates</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PrintCoordinates</span><span class="p">;</span>
+<span class="n">Action</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">printString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">;</span>
+<span class="n">Action</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">printInt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">;</span>
+
+<span class="c1">// Invoking the delegates.</span>
+<span class="n">greet</span><span class="p">(</span><span class="s">&quot;Chris&quot;</span><span class="p">);</span>
+<span class="n">printCoordinates</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">);</span>
+<span class="n">printString</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+<span class="n">printInt</span><span class="p">(</span><span class="m">10</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, Chris
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 3)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30
-</pre></div>
-</div>
-</div>
-</div>
-<p>In this code, <code class="docutils literal notranslate"><span class="pre">List&lt;T&gt;</span></code> is a <a class="reference internal" href="generic-types.html"><span class="doc std std-doc">generic type</span></a>, specifically a generic class, and <code class="docutils literal notranslate"><span class="pre">T</span></code> is a type parameter. We’ll talk more about this terminology in the next chapter but for now you can think of <code class="docutils literal notranslate"><span class="pre">T</span></code> as a placeholder for a type.</p>
-<p>To create a list of integers we replace <code class="docutils literal notranslate"><span class="pre">T</span></code> with <code class="docutils literal notranslate"><span class="pre">int</span></code> by writing <code class="docutils literal notranslate"><span class="pre">List&lt;int&gt;</span></code>.</p>
-<p>But what if we wanted a list of strings? Simple, we just replace <code class="docutils literal notranslate"><span class="pre">T</span></code> with <code class="docutils literal notranslate"><span class="pre">string</span></code> and write <code class="docutils literal notranslate"><span class="pre">List&lt;string&gt;</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="p">();</span>
-
-<span class="n">words</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
-<span class="n">words</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;Generic&quot;</span><span class="p">);</span>
-<span class="n">words</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;World&quot;</span><span class="p">);</span>
-
-<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">words</span><span class="p">)</span>
-<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generic
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>World
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
 </pre></div>
 </div>
 </div>
 </div>
-<p>We just plug in the type we want and the generic class <code class="docutils literal notranslate"><span class="pre">List&lt;T&gt;</span></code> works just fine.
-In fact, since the type parameter <code class="docutils literal notranslate"><span class="pre">T</span></code> can be replaced with any type we can even nest generic types.
-For instance, if we wanted to represent a grid or matrix of integers, we could use a list of lists of integers.</p>
+</section>
+<section id="func">
+<h2>Func<a class="headerlink" href="#func" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Func</span></code> family of delegates define generic delegates that can take up to 16 input parameters and always returns a value.
+Whenever we need a delegate for methods that compute and return a value, we can use a <code class="docutils literal notranslate"><span class="pre">Func</span></code> delegate.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">grid</span><span class="p">;</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Some example functions.</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">Add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">Invert</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">-</span><span class="n">x</span><span class="p">;</span>
+
+<span class="c1">// Using `Func` delegates.</span>
+<span class="n">Func</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="k">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Add</span><span class="p">;</span>
+<span class="n">Func</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">invert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Invert</span><span class="p">;</span>
+<span class="n">Func</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">convertToInt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Int32</span><span class="p">.</span><span class="n">Parse</span><span class="p">;</span>
+
+<span class="c1">// Invoking the delegates.</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="k">add</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">));</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">invert</span><span class="p">(</span><span class="m">1</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1
 </pre></div>
 </div>
 </div>
 </div>
-<p>The idea of a generic type is that it is universally polymorphic.
-The instance and static members of a generic type can be defined so that one or more types that these members depend on can be replaced by any possible type.</p>
-<p>In the code above we made use of the instance method <code class="docutils literal notranslate"><span class="pre">Add</span></code> for example.
-The implementation for this method is only written once. Yet that same implementation can be used for any type of object that we might want to put in the list.
-This is the power of generics.</p>
-<div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<ul class="simple">
-<li><p>With overloading, we define different implementations for different types.</p></li>
-<li><p>With overriding, we define specialized implementations for specialized types.</p></li>
-<li><p>With generics, we define <em>a single implementation for all types</em>.</p></li>
-</ul>
+</section>
+<section id="predicate">
+<h2>Predicate<a class="headerlink" href="#predicate" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Predicate&lt;T&gt;</span></code> delegate represents a method that takes a single input parameter and returns a <code class="docutils literal notranslate"><span class="pre">bool</span></code> value, making it ideal for conditions or filters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Some example functions.</span>
+<span class="kt">bool</span><span class="w"> </span><span class="nf">IsEven</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
+<span class="kt">bool</span><span class="w"> </span><span class="nf">IsUpper</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">str</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">str</span><span class="p">.</span><span class="n">ToUpper</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">str</span><span class="p">;</span>
+
+<span class="c1">// Using `Predicate` delegates.</span>
+<span class="n">Predicate</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">isEven</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IsEven</span><span class="p">;</span>
+<span class="n">Predicate</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stringIsUpper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IsUpper</span><span class="p">;</span>
+<span class="n">Predicate</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">isNullOrEmpty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">;</span>
+
+<span class="c1">// Invoking the delegates.</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">isEven</span><span class="p">(</span><span class="m">4</span><span class="p">));</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">stringIsUpper</span><span class="p">(</span><span class="s">&quot;HELLO&quot;</span><span class="p">));</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">isNullOrEmpty</span><span class="p">(</span><span class="s">&quot;HELLO&quot;</span><span class="p">));</span>
+</pre></div>
 </div>
-<p>Said differently, the implementation does not depend on the underlying type that we’ve parameterized over.
-The reason we can define a generic list type is that all behavior of this type can be described without having to know anything about the type of objects that it stores in the list.</p>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>For scenarios like filtering collections, <code class="docutils literal notranslate"><span class="pre">Predicate&lt;T&gt;</span></code> provides a type-safe and expressive way to pass conditions around.
+The <code class="docutils literal notranslate"><span class="pre">Predicate&lt;T&gt;</span></code> delegate is heavily used in .NET and you will e.g. find it in many operations that deal with <span class="xref myst">collections</span> such as the method <code class="docutils literal notranslate"><span class="pre">FindAll</span></code> available on <code class="docutils literal notranslate"><span class="pre">List&lt;T&gt;</span></code>.</p>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Can every type be converted into a generic type?
-No, some algorithms cannot be expressed <strong>without any knowledge of the underlying type</strong>.
-Think about the difference between the act of adding another element to a list (which we’ve talked about) and some other arbitrary type that requires that we do arithmetic on objects of the contained type, or sorting.
-Arithmetic and order is only defined for some types, not all.
-For instance, while you can add two numbers, you can’t add two <code class="docutils literal notranslate"><span class="pre">Person</span></code> objects.
-If you have to make <em>any</em> assumptions about the underlying type then your code is <em>not</em> parametrically polymorphic.</p>
+<p>While <code class="docutils literal notranslate"><span class="pre">Predicate&lt;T&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">Func&lt;T,</span> <span class="pre">bool&gt;</span></code> both are delegates that takes a parameter of type <code class="docutils literal notranslate"><span class="pre">T</span></code> and returns a <code class="docutils literal notranslate"><span class="pre">bool</span></code>, delegate instances of these types are not implicitly convertible to each other. This distinction exists because they represent different semantic meanings in the framework. <code class="docutils literal notranslate"><span class="pre">Predicate&lt;T&gt;</span></code> is specifically designed to represent a method that determines if an element of type <code class="docutils literal notranslate"><span class="pre">T</span></code> meets a condition. On the other hand, <code class="docutils literal notranslate"><span class="pre">Func&lt;T,</span> <span class="pre">bool&gt;</span></code> is a more general-purpose delegate for any method that takes a <code class="docutils literal notranslate"><span class="pre">T</span></code> and returns a bool. Always ensure you’re using the correct delegate type for the task at hand.</p>
 </div>
-<p>In essence, generics allow us to write flexible, reusable code without sacrificing type safety. This means we can reduce duplication and improve the <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a> of our code.
-Generics can be a complex topic, and like many aspects of programming, it is often best learned by doing. As you keep exploring, the concepts will start to become more concrete. Don’t worry if it seems overwhelming. Take it step by step and keep practicing.
-To grok generics, we must understand a number of topics which will be discussed in the coming chapters.
-In the next chapter we’ll discuss generic types and type parameters.</p>
+</section>
+<section id="why">
+<h2>Why<a class="headerlink" href="#why" title="Permalink to this heading">#</a></h2>
+<p>Why should you use the built-in delegate types instead of your own custom types?</p>
+<ul class="simple">
+<li><p><strong>Analyzability</strong>: By using well-recognized delegate types, you improve code clarity. Developers familiar with C# will immediately understand the purpose of a <code class="docutils literal notranslate"><span class="pre">Func</span></code>, <code class="docutils literal notranslate"><span class="pre">Action</span></code>, or <code class="docutils literal notranslate"><span class="pre">Predicate</span></code> delegate in your code.</p></li>
+<li><p><strong>Reduced duplication</strong>: Instead of creating custom delegate types for each unique method signature, leveraging built-in delegates can often satisfy the same requirements.</p></li>
+<li><p><strong>Interoperability</strong>: Many built-in C# libraries and frameworks make use of these delegates, making it essential to be familiar with them.</p></li>
+</ul>
+<p>Why would you choose to write your own delegate instead of using a built-in type?</p>
+<ul class="simple">
+<li><p><strong>Expressiveness</strong>: Custom delegate types can provide more meaningful names and clearer intentions. For instance, instead of a <code class="docutils literal notranslate"><span class="pre">Func&lt;Product,</span> <span class="pre">double&gt;</span></code>, a delegate called <code class="docutils literal notranslate"><span class="pre">ProductPriceCalculation</span></code> lets a developer know that the delegate’s purpose is to compute the price of a product. Similarly, instead of <code class="docutils literal notranslate"><span class="pre">Func&lt;List&lt;Data&gt;,</span> <span class="pre">List&lt;Data&gt;&gt;</span></code> a delegate called <code class="docutils literal notranslate"><span class="pre">DataFilter</span></code> clearly communicates that the purpose of the delegate is to filter data. By using your own types you can also specify more meaningful parameter names which greatly aids in using your code correctly. All this makes the code more self-documenting.</p></li>
+<li><p><strong>Encapsulation</strong>: By creating your own delegate type, you encapsulate and centralize the definition. Instead of scattering a definition like <code class="docutils literal notranslate"><span class="pre">Func&lt;List&lt;Data&gt;,</span> <span class="pre">List&lt;Data&gt;&gt;</span></code> all over your codebase you’ve got it defined in one place which will likely improve <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a>.</p></li>
+<li><p><strong>Fine-grained control</strong>: Custom delegates give you more control by allowing you to: define specific <a class="reference internal" href="type-parameter-constraints.html"><span class="doc std std-doc">constraints</span></a>, specify <span class="xref myst">optional parameters</span>, and use the <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">ref</span></code></span>, <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">out</span></code></span>, and the <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">params</span></code></span> keywords.</p></li>
+</ul>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>Built-in delegates in C# serve as versatile tools, providing type-safe and standardized ways to encapsulate method references. Whether you’re designing a custom API or just writing everyday code, understanding and utilizing <code class="docutils literal notranslate"><span class="pre">Func</span></code>, <code class="docutils literal notranslate"><span class="pre">Action</span></code>, and <code class="docutils literal notranslate"><span class="pre">Predicate</span></code> will significantly enhance the efficiency and clarity of your C# programming endeavors.</p>
+<p>In upcoming chapters, we will delve deeper into how these built-in delegates come to life in advanced features like <span class="xref myst">LINQ</span>. Stay tuned!</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -553,23 +592,23 @@ In the next chapter we’ll discuss generic types and type parameters.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="generic-types.html">
+          <a class="next-page" href="multicast-delegates.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">81. </span>Generic types</div>
+                <div class="title"><span class="section-number">94. </span>Multicast delegates</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="refactoring.html">
+          <a class="prev-page" href="generic-delegates.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">79. </span>Refactoring</div>
+                <div class="title"><span class="section-number">92. </span>Generic delegates</div>
                 
               </div>
             </a>
@@ -591,8 +630,31 @@ In the next chapter we’ll discuss generic types and type parameters.</p>
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">93. Built-in delegates</a><ul>
+<li><a class="reference internal" href="#action">Action</a></li>
+<li><a class="reference internal" href="#func">Func</a></li>
+<li><a class="reference internal" href="#predicate">Predicate</a></li>
+<li><a class="reference internal" href="#why">Why</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

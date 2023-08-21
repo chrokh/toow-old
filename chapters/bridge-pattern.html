@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="88. Composition over inheritance" href="composition-over-inheritance.html" /><link rel="prev" title="86. Replace conditional with polymorphism" href="replace-conditional-with-polymorphism.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="91. Delegates" href="delegates.html" /><link rel="prev" title="89. Strategy pattern" href="strategy-pattern.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>87. Dependency injection - The Object Oriented Way</title>
+        <title>90. Bridge pattern - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -251,10 +251,10 @@
 <li class="toctree-l1"><a class="reference internal" href="generic-methods.html">84. Generic methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">85. Type parameter constraints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">86. Replace conditional with polymorphism</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">87. Dependency injection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependency-injection.html">87. Dependency injection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">88. Composition over inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="strategy-pattern.html">89. Strategy pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bridge-pattern.html">90. Bridge pattern</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">90. Bridge pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="delegates.html">91. Delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-delegates.html">92. Generic delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="built-in-delegates.html">93. Built-in delegates</a></li>
@@ -297,67 +297,94 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="dependency-injection">
-<h1><span class="section-number">87. </span>Dependency injection<a class="headerlink" href="#dependency-injection" title="Permalink to this heading">#</a></h1>
-<p>Designing software isn’t just about writing code that works; it’s about crafting architectures that can be maintained and adapted over time.
-In the world of software, dependencies are inevitable. Your class often relies on other classes or services to perform its operations. This interlinking can quickly get messy. This is where ‘Dependency Injection’ (often abbreviated DI) comes into play.</p>
-<p>Dependency injection promotes the ‘injection’ of dependencies as opposed to the ‘construction’ of dependencies.
-At its heart, dependency injection is about inverting control.</p>
-<div class="admonition-key-point admonition">
-<p class="admonition-title">Key point</p>
-<p>Dependency injection separates object <em>construction</em> from object <em>use</em>. By ‘injecting’ our dependencies instead of ‘constructing’ them we increase <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a> across all dimensions.</p>
-</div>
-<section id="analogies">
-<h2>Analogies<a class="headerlink" href="#analogies" title="Permalink to this heading">#</a></h2>
-<p>Think of dependency injection like using a universal remote control. A universal remote is designed to work with various televisions, sound systems, and more. The key is that each device follows the same communication interface, enabling the remote to send standard commands like ‘volume up,’ ‘play,’ or ‘pause.’</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="bridge-pattern">
+<h1><span class="section-number">90. </span>Bridge pattern<a class="headerlink" href="#bridge-pattern" title="Permalink to this heading">#</a></h1>
+<p>The Strategy pattern provides us with a mechanism to encapsulate different behaviors, making them interchangeable. But as our systems grow in complexity, we often find ourselves dealing with multiple dimensions of variation.</p>
+<p>Imagine you’re designing a music player (like Spotify) which displays different media content (like songs, artists, albums, playlists) in various ways (like thumbnails on an overview page, list items in search, mobile, or desktop).
+With the Bridge pattern, we decouple the media types from the way they can be displayed which means that they can evolve independently.</p>
 <figure class="align-default" id="id1">
-<img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1140960943988293662/chrokh_apple_TV_remote_control_illustration_simple_flat_f1e5566d-0641-4f28-aab9-f759eac75b09.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1140960943988293662/chrokh_apple_TV_remote_control_illustration_simple_flat_f1e5566d-0641-4f28-aab9-f759eac75b09.png" />
+<img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1142009820904423424/chrokh_illustration_of_shelf_with_camera_lenses_187443ae-0738-4420-ad29-8b1d46fb4efe.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1142009820904423424/chrokh_illustration_of_shelf_with_camera_lenses_187443ae-0738-4420-ad29-8b1d46fb4efe.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 87.1 </span><span class="caption-text">When using dependency injection, objects are designed to accept any dependency conforming to an expected interface. This is reminiscent of how a universal remote can be paired with any device that follows the expected protocol.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 90.1 </span><span class="caption-text">Just like you can pair any camera with any lens as long as they both follow the same interface, the Bridge pattern enables you to combine elements from two type hierarchies.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Just as you can connect a new device into your remote’s repertoire, in software design, we can ‘inject’ dependencies into an object. The object, like the remote, doesn’t need to know the intricate workings of what it’s controlling, it just needs to know the interface. This allows for flexibility and modularity, as you can easily swap out one device (or dependency) for another without needing to buy a new remote (or rewrite your class).</p>
-<p>Imagine a child assembling a LEGO model.
-Should the child be responsible for <em>both</em> searching for each individual piece <em>and</em> assembling them?
-In software we often argue that an object only should be responsible for one thing.
-Dependency injection would suggest that we should hand the child each individual piece in the order that they need them which would let the child focus all its energy on the assembly process.</p>
-<div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>In dependency injection, classes don’t create their dependencies. Instead they expect whoever is using the class to provide the necessary dependencies.</p>
+<div class="admonition-video-lecture admonition">
+<p class="admonition-title">Video lecture</p>
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/F1YQ7YRjttI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
-<p>If you are building a calculator app,
-would you prefer that the method that performs an actual calculation involving two numbers, like addition, also asks the user for two numbers or would you prefer that the numbers are simply passed to your method as arguments?
-Another way of saying this is: would you prefer mixing the code that asks the user for input numbers and the code that performs the actual calculation or would you rather separate the two?
-Dependency injection says that we should not generate the data we need but instead ask callers of our methods and constructors to provide it for us.</p>
+<section id="intent">
+<h2>Intent<a class="headerlink" href="#intent" title="Permalink to this heading">#</a></h2>
+<p>The intent of the Bridge pattern is to:</p>
+<blockquote class="epigraph">
+<div><p>Decouple an abstraction from its implementation so that the two can vary independently.</p>
+<p class="attribution">—<a class="reference external" href="https://geni.us/PsXmo">Design Patterns: Elements of Reusable Object-Oriented Software</a>.</p>
+</div></blockquote>
+<p>Essentially, the Bridge pattern separates the platform-general logic from the detailed, platform-specific functionality.</p>
+<p>Another way to think about the Bridge pattern is as ‘an abstraction using an abstraction’, or two ‘layers’ of abstraction.
+In <a class="reference internal" href="strategy-pattern.html"><span class="doc std std-doc">strategy pattern</span></a> we’ve got a concretion composed with an abstraction.
+In Bridge pattern we have an abstraction composed with another abstraction.
+If you recursively apply the Strategy pattern you’ll end up with the Bridge pattern.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Bridge pattern is like a strategy (from the <a class="reference internal" href="strategy-pattern.html"><span class="doc std std-doc">Strategy pattern</span></a>) that also acts like a client for another family of strategies.</p>
+</div>
+</section>
+<section id="structure">
+<h2>Structure<a class="headerlink" href="#structure" title="Permalink to this heading">#</a></h2>
+<p>As can be seen in <a class="reference internal" href="#fig-bridge-pattern-original"><span class="std std-numref">Fig. 90.2</span></a> the Bridge pattern comprises two abstraction hierarchies.</p>
+<figure class="align-default" id="fig-bridge-pattern-original">
+<a class="reference internal image-reference" href="https://upload.wikimedia.org/wikipedia/commons/c/cf/Bridge_UML_class_diagram.svg"><img alt="https://upload.wikimedia.org/wikipedia/commons/c/cf/Bridge_UML_class_diagram.svg" height="300px" src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Bridge_UML_class_diagram.svg" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 90.2 </span><span class="caption-text">UML class diagram of bridge pattern.
+<em>[Image will be replaced soon]</em> [<a class="reference external" href="https://en.wikipedia.org/wiki/File:Bridge_UML_class_diagram.svg">Image source</a>]</span><a class="headerlink" href="#fig-bridge-pattern-original" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple">
+<li><p>The abstraction on the left is usually an <a class="reference internal" href="abstract-classes.html"><span class="doc std std-doc">abstract class</span></a> with a reference to an instance whose type is that of the abstraction on the right. It usually defines some default operations that make use of the instance. The hierarchy on the left is sometimes called ‘the platform-independent’.</p></li>
+<li><p>The abstraction on the right is either an <a class="reference internal" href="abstract-classes.html"><span class="doc std std-doc">abstract class</span></a> or an <a class="reference internal" href="interfaces.html"><span class="doc std std-doc">interface</span></a> which defines the methods that the operations in the abstraction on the left calls. The hierarchy on the right is sometimes called ‘the platform-dependent’.</p></li>
+</ol>
+<p>By delegating responsibility from the abstraction on the left to the abstraction on the right, the two can evolve independently. It’s like having a remote (on the left) for a TV set (on the right). The remote can change its design, buttons, or features, and as long as it communicates with the TV correctly, the TV’s internals or brand can change without affecting the remote.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The word ‘bridge’ in the name refers to how we create a ‘bridge’ between the hierarchy on the left and the hierarchy on the right.</p>
+</div>
+</section>
+<section id="variations">
+<h2>Variations<a class="headerlink" href="#variations" title="Permalink to this heading">#</a></h2>
+<p>In the original conception of the Bridge pattern, given in the book <a class="reference external" href="https://geni.us/PsXmo">Design Patterns: Elements of Reusable Object-Oriented Software</a>, the first abstraction is composed with the second abstraction.
+This is visualized in <a class="reference internal" href="#fig-bridge-pattern-original"><span class="std std-numref">Fig. 90.2</span></a> where we can see that the ‘has-a’ arrow goes from the left abstraction to the right abstraction.</p>
+<p>These days however, the reference to the second abstraction is sometimes placed in concretions of the first abstraction.
+This can be seen in <a class="reference internal" href="#fig-bridge-pattern-modern"><span class="std std-numref">Fig. 90.3</span></a> where the ‘has-a’ arrow goes from a concretion on the left to the abstraction on the right.</p>
+<figure class="align-default" id="fig-bridge-pattern-modern">
+<a class="reference internal image-reference" href="https://upload.wikimedia.org/wikipedia/commons/f/fd/W3sDesign_Bridge_Design_Pattern_UML.jpg"><img alt="https://upload.wikimedia.org/wikipedia/commons/f/fd/W3sDesign_Bridge_Design_Pattern_UML.jpg" src="https://upload.wikimedia.org/wikipedia/commons/f/fd/W3sDesign_Bridge_Design_Pattern_UML.jpg" style="height: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 90.3 </span><span class="caption-text">UML class diagram (left) of modern variation of Bridge pattern.
+<em>[Image will be replaced]</em> [<a class="reference external" href="https://en.wikipedia.org/wiki/File:W3sDesign_Bridge_Design_Pattern_UML.jpg">Image source</a>]</span><a class="headerlink" href="#fig-bridge-pattern-modern" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In the original version, the first abstraction holds the reference to the second abstraction, which means that the second abstraction must remain the same.
+In the modern variation, the concretions hold their own reference to the second abstraction which means that each concretion can choose whatever abstraction they wish.</p>
+<p>The upside of the modern variation is flexibility.
+Different concretions of the abstraction on the left can couple to different abstractions on the right.</p>
+<p>The downside of the modern variation is that the abstraction on the left cannot write concrete implementations that work with the abstraction on the right since we don’t know which abstraction will be used.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The modern and the classic variants of Bridge both have their pros and cons. Choose whatever is best suited for your scenario.</p>
+</div>
 </section>
 <section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
-<p>Let’s get more concrete.
-Imagine you’re developing a side-scrolling adventure game where your main character, the <code class="docutils literal notranslate"><span class="pre">Player</span></code>, can run left, run right, and jump. As the player progresses through the game, they can pick up power-ups that modify their abilities. One such power-up lets the <code class="docutils literal notranslate"><span class="pre">Player</span></code> execute a double jump.</p>
-<p>Without dependency injection, the code might look something like this:</p>
+<p>Let’s dive into a simple example to clarify this.
+Imagine that we need to draw different shapes (like circles and rectangles) in different colors (like red or blue).</p>
+<p>Had we not known about the Bridge pattern we might have created a bunch of classes like <code class="docutils literal notranslate"><span class="pre">RedCircle</span></code>, <code class="docutils literal notranslate"><span class="pre">BlueCircle</span></code>, <code class="docutils literal notranslate"><span class="pre">RedRectangle</span></code>, <code class="docutils literal notranslate"><span class="pre">BlueRectangle</span></code>, and so forth.
+The number of classes would exponentially increases each time we add a new subclass to either type hierarchy.
+Luckily, we know that we can use the Bridge pattern so let’s do that instead.</p>
+<p>Let’s start by defining the abstraction ‘on the right’ and some implementations of it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Player</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IColor</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">hasDoubleJumpPowerUp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MoveRight</span><span class="p">()</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Moving right.&quot;</span><span class="p">);</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MoveLeft</span><span class="p">()</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Moving left.&quot;</span><span class="p">);</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Jump</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hasDoubleJumpPowerUp</span><span class="p">)</span>
-<span class="w">            </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Performing double jump!&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">else</span>
-<span class="w">            </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Performing regular jump!&quot;</span><span class="p">);</span>
-
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">EnableDoubleJump</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">enabled</span><span class="p">)</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">hasDoubleJumpPowerUp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">enabled</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -365,7 +392,7 @@ Imagine you’re developing a side-scrolling adventure game where your main char
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3054.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2419.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -415,7 +442,7 @@ function loadDotnetInteractiveApi() {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3054.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2419.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -471,19 +498,11 @@ else {
     </script>
 </div></div></div>
 </div>
-<p>While this approach seems simple, it bakes the double jump logic directly into the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class. This becomes problematic if we decide to introduce additional jump-related power-ups in the future. Such as triple jump or glide jump.</p>
-<p>For each power-up, we must add an activation-method and a conditional in the jump-method.
-It gets even worse when we start thinking about the fact that we could have power-ups that affect moving right and left as well.</p>
-<p>Luckily, we’ve learned about <a class="reference internal" href="replace-conditional-with-polymorphism.html"><span class="doc std std-doc">replacing conditionals with polymorphism</span></a>.
-Couldn’t we use polymorphism to control the jumping behavior instead of conditionals?
-We certainly can.
-Dependency injection then takes this a step further and says that the construction of the object that controls the jumping behavior should not be a responsibility of the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class in the first place.</p>
-<p>Let’s start by defining an interface for jump behaviors and some concrete implementations of it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IJumpBehavior</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">RedColor</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IColor</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="nf">Execute</span><span class="p">();</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Red&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -491,10 +510,25 @@ Dependency injection then takes this a step further and says that the constructi
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SingleJump</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IJumpBehavior</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">BlueColor</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IColor</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Execute</span><span class="p">()</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Performing regular jump.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Blue&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then let’s define the abstraction ‘on the left’ and some implementations of it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Shape</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="n">IColor</span><span class="w"> </span><span class="n">color</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Shape</span><span class="p">(</span><span class="n">IColor</span><span class="w"> </span><span class="n">color</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">color</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Draw</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -502,141 +536,141 @@ Dependency injection then takes this a step further and says that the constructi
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">DoubleJump</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IJumpBehavior</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Circle</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Shape</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Execute</span><span class="p">()</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Performing double jump.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Circle</span><span class="p">(</span><span class="n">IColor</span><span class="w"> </span><span class="n">color</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span><span class="n">color</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Draw</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Drawing a round, {color.Name}, perfect Circle.&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>With these jump behaviors in place we can now rewrite the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class to delegate the actual jumping to whatever object is currently set as the jump behavior.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Player</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Shape</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">IJumpBehavior</span><span class="w"> </span><span class="n">jumpBehavior</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">(</span><span class="n">IColor</span><span class="w"> </span><span class="n">color</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span><span class="n">color</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
 
-<span class="w">    </span><span class="c1">// Constructor injection:</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Player</span><span class="p">(</span><span class="n">IJumpBehavior</span><span class="w"> </span><span class="n">jumpBehavior</span><span class="p">)</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">jumpBehavior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jumpBehavior</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MoveRight</span><span class="p">()</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Moving right.&quot;</span><span class="p">);</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MoveLeft</span><span class="p">()</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Moving left.&quot;</span><span class="p">);</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Jump</span><span class="p">()</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">jumpBehavior</span><span class="p">.</span><span class="n">Execute</span><span class="p">();</span>
-
-<span class="w">    </span><span class="c1">// Method injection:</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetJumpBehavior</span><span class="p">(</span><span class="n">IJumpBehavior</span><span class="w"> </span><span class="n">jumpBehavior</span><span class="p">)</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">jumpBehavior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jumpBehavior</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Draw</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Finding four corners and drawing {color.Name} lines between each of them.&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>When instantiating the <code class="docutils literal notranslate"><span class="pre">Player</span></code>, you now have to decide which jump behavior the player should have:</p>
+<p>With our bridge set up we are finally ready to instantiate some objects of <code class="docutils literal notranslate"><span class="pre">Shape</span></code> and compose them with objects of <code class="docutils literal notranslate"><span class="pre">IColor</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IJumpBehavior</span><span class="w"> </span><span class="n">basicJump</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SingleJump</span><span class="p">();</span>
-<span class="n">Player</span><span class="w"> </span><span class="n">player</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Player</span><span class="p">(</span><span class="n">basicJump</span><span class="p">);</span>
-<span class="n">player</span><span class="p">.</span><span class="n">Jump</span><span class="p">();</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Shape</span><span class="w"> </span><span class="n">redCircle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Circle</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RedColor</span><span class="p">());</span>
+<span class="n">redCircle</span><span class="p">.</span><span class="n">Draw</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Performing regular jump.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Drawing a round, Red, perfect Circle.
 </pre></div>
 </div>
 </div>
 </div>
-<p>If the player later picks up a double jump power-up we simply inject the new jumping behavior into the <code class="docutils literal notranslate"><span class="pre">Player</span></code> object.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IJumpBehavior</span><span class="w"> </span><span class="n">doubleJump</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DoubleJump</span><span class="p">();</span>
-<span class="n">player</span><span class="p">.</span><span class="n">SetJumpBehavior</span><span class="p">(</span><span class="n">doubleJump</span><span class="p">);</span>
-<span class="n">player</span><span class="p">.</span><span class="n">Jump</span><span class="p">();</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Shape</span><span class="w"> </span><span class="n">blueRectangle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BlueColor</span><span class="p">());</span>
+<span class="n">blueRectangle</span><span class="p">.</span><span class="n">Draw</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Performing double jump.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finding four corners and drawing Blue lines between each of them.
 </pre></div>
 </div>
 </div>
 </div>
-<p>With this setup, if we want to introduce new jump abilities we can do so easily without having to modify any code in the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class. We simply write another class that implements <code class="docutils literal notranslate"><span class="pre">IJumpBehavior</span></code> and inject it into our <code class="docutils literal notranslate"><span class="pre">Player</span></code> instance when needed.</p>
+<p>Notice how the <code class="docutils literal notranslate"><span class="pre">Shape</span></code> class does not need to know the specifics of how colors are applied. It merely delegates the responsibility to the <code class="docutils literal notranslate"><span class="pre">IColor</span></code> interface. The Bridge pattern ensures that shapes and colors can change and evolve independently.</p>
+</section>
+<section id="the-modern-variant">
+<h2>The modern variant<a class="headerlink" href="#the-modern-variant" title="Permalink to this heading">#</a></h2>
+<p>To follow the modern variant of Bridge we could convert the shape abstraction into an interface and only leave the <code class="docutils literal notranslate"><span class="pre">Draw</span></code> method like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">GlideJump</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IJumpBehavior</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IShape</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Execute</span><span class="p">()</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Perorming jump and glide.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="nf">Draw</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>The class <code class="docutils literal notranslate"><span class="pre">Player</span></code> now ‘depends on’ the interface <code class="docutils literal notranslate"><span class="pre">IJumpBehavior</span></code> which is why we use the word ‘dependency’.
-The act of sending an instance of type <code class="docutils literal notranslate"><span class="pre">IJumpBehavior</span></code> into an instance of type <code class="docutils literal notranslate"><span class="pre">Player</span></code> is what we call ‘injection’ which is why we use the word ‘injection’.
-Hence, we call it ‘dependency injection’.</p>
-</div>
-<p>The same principle can of course be applied to other movement behaviors.
-By adding an interface for movement behavior we could easily write a class for running behavior, and then switch to and from it by injecting it into our <code class="docutils literal notranslate"><span class="pre">Player</span></code> object.
-Try it out on your own!</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>In the example with the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class, the injected dependency is an interface.
-However, even if the dependency weren’t an interface, it would still be termed ‘dependency injection’.
-The key idea is that an object is injected rather than created.
-That we separate ‘creation’ from <em>use</em>.</p>
-</div>
-</section>
-<section id="types-of-dependency-injection">
-<h2>Types of dependency injection<a class="headerlink" href="#types-of-dependency-injection" title="Permalink to this heading">#</a></h2>
-<p>There are mainly three types of dependency injection:</p>
-<section id="constructor-injection">
-<h3>Constructor Injection<a class="headerlink" href="#constructor-injection" title="Permalink to this heading">#</a></h3>
-<p>The dependencies are injected through the constructor of the dependent class. It’s the most common form of dependency injection and is used when the dependency is mandatory for the class’s operation.</p>
-<p>Example: The <code class="docutils literal notranslate"><span class="pre">Player</span></code> class is passed its initial jump behavior via its constructor.</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">new</span><span class="w"> </span><span class="nf">Player</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">JumpBehavior</span><span class="p">()));</span>
+<p>This would make our shape implementations more flexible but they would also have to contain some more code since they then would have to be responsible for accepting and managing an <code class="docutils literal notranslate"><span class="pre">IColor</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Circle</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IShape</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// The subtype now needs the field.</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">IColor</span><span class="w"> </span><span class="n">color</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// The subtype now needs to handle the dependency injection.</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Circle</span><span class="p">(</span><span class="n">IColor</span><span class="w"> </span><span class="n">color</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">color</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// The draw method remains the same.</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Draw</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Drawing a round, {color.Name}, perfect Circle.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-</section>
-<section id="method-injection">
-<h3>Method Injection<a class="headerlink" href="#method-injection" title="Permalink to this heading">#</a></h3>
-<p>Here, dependencies are provided through methods. This is useful when the dependencies can change during the lifetime of an instance.</p>
-<p>Example: The jump behavior of a <code class="docutils literal notranslate"><span class="pre">Player</span></code> object can be changed during its lifetime by using the <code class="docutils literal notranslate"><span class="pre">SetJumpBehavior</span></code> method.</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">player</span><span class="p">.</span><span class="n">SetJumpBehavior</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DoubleJumpBehavior</span><span class="p">());</span>
+</div>
+</div>
+<p>The benefit of this approach is that the first abstraction (<code class="docutils literal notranslate"><span class="pre">IShape</span></code>) isn’t at all coupled to the second abstraction (<code class="docutils literal notranslate"><span class="pre">IColor</span></code>).
+That coupling happens in the concretions of the first abstraction.
+Consequently, implementations of <code class="docutils literal notranslate"><span class="pre">IShape</span></code> don’t actually need to compose something of type <code class="docutils literal notranslate"><span class="pre">IColor</span></code> or anything at all for that matter.
+The implementations are free to compose whatever other combination of objects they wish.
+So, the interface <code class="docutils literal notranslate"><span class="pre">IShape</span></code> is more general than the abstract class <code class="docutils literal notranslate"><span class="pre">Shape</span></code> from the earlier example.</p>
+<p>In the updated code we can, of course, still combine any shape with any color and pass the result around without users needing to worry about what concrete shape or color has been used.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IShape</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Circle</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RedColor</span><span class="p">());</span>
+<span class="n">shape</span><span class="p">.</span><span class="n">Draw</span><span class="p">();</span>
 </pre></div>
 </div>
-</section>
-<section id="property-injection">
-<h3>Property Injection<a class="headerlink" href="#property-injection" title="Permalink to this heading">#</a></h3>
-<p>Dependencies are set via properties of the class. This is often used for optional dependencies. The terms ‘attribute injection’, ‘field injection’, and ‘setter injection’ are essentially the same as this.</p>
-<p>Example: If we converted the field <code class="docutils literal notranslate"><span class="pre">jumpBehavior</span></code> in the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class into a property with a <code class="docutils literal notranslate"><span class="pre">public</span></code> setter then we could inject a jump behavior during the lifetime of a <code class="docutils literal notranslate"><span class="pre">Player</span></code> object by using the setter.</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">player</span><span class="p">.</span><span class="n">JumpBehavior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DoubleJumpBehavior</span><span class="p">();</span>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Drawing a round, Red, perfect Circle.
 </pre></div>
 </div>
+</div>
+</div>
 </section>
+<section id="when-to-use">
+<h2>When to use<a class="headerlink" href="#when-to-use" title="Permalink to this heading">#</a></h2>
+<p>At this point you might be wondering if there aren’t simpler approaches. Let’s explore two common queries:</p>
+<ol class="arabic simple">
+<li><p>Can’t we solve the same problem using <span class="xref myst">method overloading</span>? Can’t we just have a bunch of methods with signatures like <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">Draw(RedColor</span> <span class="pre">red,</span> <span class="pre">Circle</span> <span class="pre">circle)</span></code>?
+Of course, but then we cannot call the method if we have objects of type <code class="docutils literal notranslate"><span class="pre">IColor</span></code> and <code class="docutils literal notranslate"><span class="pre">IShape</span></code>, which defats the purpose of using <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype polymorphism</span></a> in the first place.
+Then we can’t pass around shapes without having to always worry about which particular subtype we have.
+As soon as we <a class="reference internal" href="upcasting.html"><span class="doc std std-doc">upcast</span></a> a specific shape to its supertype we’ve lost type information and can’t get back the specific subtype without using <a class="reference internal" href="downcasting.html"><span class="doc std std-doc">downcasting</span></a>, <span class="xref myst">pattern matching</span>, or <span class="xref myst">Visitor pattern</span>.</p></li>
+<li><p>Ok, can’t we then just have a single method with the signature <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">Draw(IColor</span> <span class="pre">color,</span> <span class="pre">IShape</span> <span class="pre">shape)</span></code> then?
+Well yes, but then the implementation of that method can only access what’s in the public interface of <code class="docutils literal notranslate"><span class="pre">IColor</span></code> and <code class="docutils literal notranslate"><span class="pre">IShape</span></code>. The implementation cannot be specific to any of the subtypes of <code class="docutils literal notranslate"><span class="pre">IColor</span></code> and <code class="docutils literal notranslate"><span class="pre">IShape</span></code>.
+Have a look at the code example and notice how the implementation of the <code class="docutils literal notranslate"><span class="pre">Draw</span></code> method in the two shapes are different.
+When writing that implementation, we know which subtype of <code class="docutils literal notranslate"><span class="pre">IShape</span></code> we are in, but we do <em>not</em> know which subtype of <code class="docutils literal notranslate"><span class="pre">IColor</span></code> we have.</p></li>
+</ol>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The Bridge pattern allows us to create implementations tailored to combinations of subtypes from two type hierarchies. These implementations can access the specifics of subtypes from one hierarchy, but must use the general interface of objects from the other.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>If your implementation needs to be specific to subtypes from <em>both</em> hierarchies then you either need the <span class="xref myst">Visitor pattern</span> or <span class="xref myst">pattern matching</span>. Both of which we’ll talk about later.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>By ‘nesting’ the Bridge pattern, we can have an arbitrary number of layers of abstraction where the implementation at each layer can be specific to the subtype of the ‘left’ abstraction but not to the ‘right’. Think: <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">A(new</span> <span class="pre">B(new</span> <span class="pre">C()))</span></code>;</p>
+</div>
 </section>
 <section id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>By injecting the jump behavior into player objects we’re changing the behavior of players at run-time.</p>
-</div>
-<div class="admonition attention">
-<p class="admonition-title">Attention</p>
-<p>While dependency injection aids in creating a flexible system, it’s crucial to avoid overengineering. Use dependency injection where it genuinely adds value by enhancing <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a>.</p>
-</div>
-<p>In upcoming chapters, we’ll explore principles (like <a class="reference internal" href="composition-over-inheritance.html"><span class="doc std std-doc">composition over inheritance</span></a>) and patterns (like <a class="reference internal" href="strategy-pattern.html"><span class="doc std std-doc">strategy pattern</span></a>, that take the concept of dependency injection even further.</p>
+<p>Like the <a class="reference internal" href="strategy-pattern.html"><span class="doc std std-doc">Strategy pattern</span></a> emphasized the power of encapsulation and interchangeability, the Bridge pattern underscores the importance of decoupling and flexibility. In essence, while Strategy gives us one layer of abstraction (or axis of variation), Bridge gives us two.</p>
 </section>
 </section>
 
@@ -664,23 +698,23 @@ That we separate ‘creation’ from <em>use</em>.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="composition-over-inheritance.html">
+          <a class="next-page" href="delegates.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">88. </span>Composition over inheritance</div>
+                <div class="title"><span class="section-number">91. </span>Delegates</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="replace-conditional-with-polymorphism.html">
+          <a class="prev-page" href="strategy-pattern.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">86. </span>Replace conditional with polymorphism</div>
+                <div class="title"><span class="section-number">89. </span>Strategy pattern</div>
                 
               </div>
             </a>
@@ -714,15 +748,13 @@ That we separate ‘creation’ from <em>use</em>.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">87. Dependency injection</a><ul>
-<li><a class="reference internal" href="#analogies">Analogies</a></li>
+<li><a class="reference internal" href="#">90. Bridge pattern</a><ul>
+<li><a class="reference internal" href="#intent">Intent</a></li>
+<li><a class="reference internal" href="#structure">Structure</a></li>
+<li><a class="reference internal" href="#variations">Variations</a></li>
 <li><a class="reference internal" href="#example">Example</a></li>
-<li><a class="reference internal" href="#types-of-dependency-injection">Types of dependency injection</a><ul>
-<li><a class="reference internal" href="#constructor-injection">Constructor Injection</a></li>
-<li><a class="reference internal" href="#method-injection">Method Injection</a></li>
-<li><a class="reference internal" href="#property-injection">Property Injection</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#the-modern-variant">The modern variant</a></li>
+<li><a class="reference internal" href="#when-to-use">When to use</a></li>
 <li><a class="reference internal" href="#conclusion">Conclusion</a></li>
 </ul>
 </li>

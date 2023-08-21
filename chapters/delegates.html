@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="16. Precedence" href="precedence.html" /><link rel="prev" title="14. Logical operators" href="logical-operators.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="92. Generic delegates" href="generic-delegates.html" /><link rel="prev" title="90. Bridge pattern" href="bridge-pattern.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>15. Assignment operator - The Object Oriented Way</title>
+        <title>91. Delegates - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -179,7 +179,7 @@
 <li class="toctree-l1"><a class="reference internal" href="equality-operators.html">12. Equality operators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="relational-operators.html">13. Relational operators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logical-operators.html">14. Logical operators</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">15. Assignment operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment-operator.html">15. Assignment operator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="precedence.html">16. Precedence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="associativity.html">17. Associativity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">18. Constants</a></li>
@@ -255,7 +255,7 @@
 <li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">88. Composition over inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="strategy-pattern.html">89. Strategy pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bridge-pattern.html">90. Bridge pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="delegates.html">91. Delegates</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">91. Delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-delegates.html">92. Generic delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="built-in-delegates.html">93. Built-in delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multicast-delegates.html">94. Multicast delegates</a></li>
@@ -297,22 +297,241 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="assignment-operator">
-<h1><span class="section-number">15. </span>Assignment operator<a class="headerlink" href="#assignment-operator" title="Permalink to this heading">#</a></h1>
-<p>As we’ve already seen in previous chapters, the assignment operator <code class="docutils literal notranslate"><span class="pre">=</span></code> plays a crucial role in C#. It is the operator that allows us to assign values to our variables. However, the assignment operator has a few more facets worth discussing.</p>
-<p>At its core, the assignment operator is used to assign the value of its right-hand operand to its left-hand operand. For instance:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">numberOfMarbles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">;</span>
+          <section class="tex2jax_ignore mathjax_ignore" id="delegates">
+<h1><span class="section-number">91. </span>Delegates<a class="headerlink" href="#delegates" title="Permalink to this heading">#</a></h1>
+<p>Just like verbs are as important as nouns, methods are as important as objects.
+It could be argued that the whole reason that <a class="reference internal" href="strategy-pattern.html"><span class="doc std std-doc">Strategy pattern</span></a> exists is to allow developers to store and pass around methods as if they were <a class="reference internal" href="values.html"><span class="doc std std-doc">values</span></a>.</p>
+<p>Delegates, in C#, can be viewed as a more compact implementation of Strategy pattern with a built-in syntax.
+Inversely, strategy pattern can be seen as a way to implement delegates in object oriented languages.</p>
+<div class="admonition-key-point admonition">
+<p class="admonition-title">Key point</p>
+<p>Delegates in C# let developers treat methods as objects, enabling methods to be passed, stored, and dynamically invoked. All while retaining <a class="reference internal" href="type-checking.html"><span class="doc std std-doc">static type-safety</span></a>.</p>
+</div>
+<p>Just like objects have types, functions and methods have types too.
+While the value <code class="docutils literal notranslate"><span class="pre">2</span></code> might have the type <code class="docutils literal notranslate"><span class="pre">int</span></code>, a function called <code class="docutils literal notranslate"><span class="pre">Increment</span></code> (which, say, increments a number by one) might have the type <code class="docutils literal notranslate"><span class="pre">int</span></code> to <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// A simple local function to increment a number by 1.</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">Increment</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>In this example, <code class="docutils literal notranslate"><span class="pre">5</span></code> is assigned to <code class="docutils literal notranslate"><span class="pre">numberOfMarbles</span></code>. This means that the variable <code class="docutils literal notranslate"><span class="pre">numberOfMarbles</span></code> now holds the value <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p>
-<p>Something to bear in mind is that the assignment operator is ‘right-associative’. This means that when there are multiple assignment operators in a single statement, they are evaluated from right to left. Let’s see an example:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
-<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">;</span>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-2994.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.124:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '2994.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>In mathematics we say that the method <code class="docutils literal notranslate"><span class="pre">Add</span></code> maps from <code class="docutils literal notranslate"><span class="pre">int</span></code> to <code class="docutils literal notranslate"><span class="pre">int</span></code>.
+In programming we call this a ‘type signature’ and in C# we call it a <a class="reference internal" href="local-functions.html"><span class="doc std std-doc">method signature</span></a>.
+When reasoning about programming we often use arrow-syntax which would denote this method signature as <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code>.
+All we’ve done is remove put the input before the output and remove all identifiers.</p>
+<p>Delegates allow us to create types whose values are methods.
+Delegate instances are references to methods which gives us a way to treat methods as first-class entities that we can pass around, much like we pass around objects.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>A delegate is a <em>type</em> whose values are methods.</p>
+</div>
+<p>While Strategy requires us to define interfaces or abstract classes and their implementations, delegates define a type that encapsulate a single method signature which can be instantiated and associated with any method that matches this signature.</p>
+<p>Since a delegate is a <em>type</em> and not a value, a delegate has to be defined directly in a <span class="xref myst">namespace</span>, or as a member of a <a class="reference internal" href="classes.html"><span class="doc std std-doc">class</span></a>.
+We cannot define a delegate inside a method, just like how we cannot define a new class inside another method.</p>
+<p>To define a delegate we use the keyword <code class="docutils literal notranslate"><span class="pre">delegate</span></code> then state the return type of the delegate type, followed by the name of the delegate type, which is finally followed by a parameter list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">delegate</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">IntToString</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="k">value</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>In this code snippet, all three variables <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>, and <code class="docutils literal notranslate"><span class="pre">c</span></code> will end up holding the value <code class="docutils literal notranslate"><span class="pre">10</span></code>. Here’s how it works: first, <code class="docutils literal notranslate"><span class="pre">10</span></code> is assigned to <code class="docutils literal notranslate"><span class="pre">c</span></code>. Then, this assigned value is assigned to <code class="docutils literal notranslate"><span class="pre">b</span></code> whose assigned value is then assigned to <code class="docutils literal notranslate"><span class="pre">a</span></code>. The right-associativity of the assignment operator ensures this cascade of assignments works correctly. If we explicitly add parenthases it looks like this: <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">(b</span> <span class="pre">=</span> <span class="pre">(c</span> <span class="pre">=</span> <span class="pre">10))</span></code>.</p>
-<p>One more interesting aspect of the assignment operator is that it’s not just about assigning values - it also returns a value. Specifically, the assignment operator <code class="docutils literal notranslate"><span class="pre">=</span></code> returns the value that was assigned. This is why it’s possible to do multiple assignments in one line, like in the example above.</p>
-<p>It’s important to note that the assignment operator is distinct from the <a class="reference internal" href="equality-operators.html"><span class="doc std std-doc">equality operator</span></a> <code class="docutils literal notranslate"><span class="pre">==,</span></code> which we’ve discussed in a previous chapter. While they might look similar, they serve very different purposes. The assignment operator <code class="docutils literal notranslate"><span class="pre">=</span></code> assigns a value to a variable, while the equality operator <code class="docutils literal notranslate"><span class="pre">==</span></code> checks if two values are equal.</p>
+</div>
+</div>
+<p>The delegate that we’ve defined maps from <code class="docutils literal notranslate"><span class="pre">int</span></code> to <code class="docutils literal notranslate"><span class="pre">string</span></code>.
+Any method possible method whose type signature claims that it takes an <code class="docutils literal notranslate"><span class="pre">int</span></code> and returns a <code class="docutils literal notranslate"><span class="pre">string</span></code> can be considered a value of the type defined by this delegate.
+Since this is a type, we can declare variables of this type like we would any other type.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IntToString</span><span class="w"> </span><span class="n">converter1</span><span class="p">;</span>
+<span class="n">IntToString</span><span class="w"> </span><span class="n">converter2</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When assigning a value to a variable of our delegate type, the value must be a method that satisfies the signature of the delegate type.
+Let’s, for example, say that we have two <a class="reference internal" href="local-functions.html"><span class="doc std std-doc">local functions</span></a> called <code class="docutils literal notranslate"><span class="pre">PositiveOrNegative</span></code> and <code class="docutils literal notranslate"><span class="pre">ToHex</span></code> that both take <code class="docutils literal notranslate"><span class="pre">int</span></code>s and return <code class="docutils literal notranslate"><span class="pre">string</span></code>s.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="w"> </span><span class="nf">PositiveOrNegative</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">number</span><span class="p">)</span>
+<span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;Positive&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Negative&quot;</span><span class="p">;</span>
+
+<span class="kt">string</span><span class="w"> </span><span class="nf">ToHex</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">number</span><span class="p">)</span>
+<span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">number</span><span class="p">.</span><span class="n">ToString</span><span class="p">(</span><span class="s">&quot;X&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Functions or methods have types, just like values have types.
+Just like the value <code class="docutils literal notranslate"><span class="pre">2</span></code> might have the type <code class="docutils literal notranslate"><span class="pre">int</span></code> the function <code class="docutils literal notranslate"><span class="pre">Increment</span></code> (which, say, increments a number by one) might have the type <code class="docutils literal notranslate"><span class="pre">int</span></code> to <code class="docutils literal notranslate"><span class="pre">int</span></code>.
+In mathematics we say that the method <code class="docutils literal notranslate"><span class="pre">Add</span></code> maps from <code class="docutils literal notranslate"><span class="pre">int</span></code> to <code class="docutils literal notranslate"><span class="pre">int</span></code>.
+In programming we call this a ‘type signature’ and, when reasoning about it sometimes denote it as <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">int</span></code>.
+The local functions in the example above both map from <code class="docutils literal notranslate"><span class="pre">int</span></code> to <code class="docutils literal notranslate"><span class="pre">string</span></code> which could be denoted as <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">-&gt;</span> <span class="pre">string</span></code>.</p>
+</div>
+<p>So far, these methods are completely unrelated to our previously defined delegate <code class="docutils literal notranslate"><span class="pre">IntToString</span></code>.
+These are regular old local functions that cannot be passed around like variables.
+Let’s create instances of our delegate (<code class="docutils literal notranslate"><span class="pre">IntToString</span></code>) by declaring variables to be of that type and then associate them with our local functions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IntToString</span><span class="w"> </span><span class="n">convert1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PositiveOrNegative</span><span class="p">;</span>
+<span class="n">IntToString</span><span class="w"> </span><span class="n">convert2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ToHex</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When assigning a method to a variable of a delegate type, we don’t invoke the method.
+So, avoid using parentheses after the method name.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Delegates maintain <a class="reference internal" href="type-checking.html"><span class="doc std std-doc">static type safety</span></a>. If we attempt to assign a method to a variable declared as a delegate, and the method doesn’t match the delegate’s signature, we will get a compile-time type error.</p>
+</div>
+<p>Our delegate instances can now be invoked just like regular methods can be invoked.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">convert1</span><span class="p">(</span><span class="m">15</span><span class="p">));</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">convert2</span><span class="p">(</span><span class="m">15</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Positive
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F
+</pre></div>
+</div>
+</div>
+</div>
+<p>Unlike regular methods however, we can now also pass them around like any old variable.</p>
+<p>Just like with <a class="reference internal" href="strategy-pattern.html"><span class="doc std std-doc">Strategy pattern</span></a> we can pass algorithms around and choose which one to execute at run-time.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The real power of delegates shines when combined with <span class="xref myst">events</span> and <span class="xref myst">lambda expressions</span>, both of which we’ll talk about later.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Delegates make methods first-class citizens in C#. However, this concept isn’t new.
+Functional programming languages like Haskell or Lisp have been doing this for decades.
+Delegates in C# are <strong>not</strong> as powerful as functions in functional programming since we lack composition, currying, and partial application.
+However, delegates do bring some of the benefits of first-class functions to object oriented programming in C#.</p>
+</div>
+<p>In conclusion, delegates in C# serve as a bridge between the world of object-oriented and functional programming. They empower developers to craft more flexible, modular, and maintainable code, encapsulating method references just as they would variables or objects.
+In essence, delegates solve the same problem as <a class="reference internal" href="strategy-pattern.html"><span class="doc std std-doc">Strategy pattern</span></a>.</p>
+<p>As we journey further, we’ll encounter more sophisticated features (like <span class="xref myst">events</span> and <span class="xref myst">LINQ</span>) built atop this foundation, revealing the profound impact of delegates on modern C# programming.
+In the next chapters however we’ll look at some built-in delegates and what happens when we assign instance methods to delegate instances.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -324,38 +543,38 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            name: "python3",
+            name: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="precedence.html">
+          <a class="next-page" href="generic-delegates.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">16. </span>Precedence</div>
+                <div class="title"><span class="section-number">92. </span>Generic delegates</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="logical-operators.html">
+          <a class="prev-page" href="bridge-pattern.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">14. </span>Logical operators</div>
+                <div class="title"><span class="section-number">90. </span>Bridge pattern</div>
                 
               </div>
             </a>

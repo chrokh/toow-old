@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="16. Precedence" href="precedence.html" /><link rel="prev" title="14. Logical operators" href="logical-operators.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="93. Built-in delegates" href="built-in-delegates.html" /><link rel="prev" title="91. Delegates" href="delegates.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>15. Assignment operator - The Object Oriented Way</title>
+        <title>92. Generic delegates - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -179,7 +179,7 @@
 <li class="toctree-l1"><a class="reference internal" href="equality-operators.html">12. Equality operators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="relational-operators.html">13. Relational operators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logical-operators.html">14. Logical operators</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">15. Assignment operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment-operator.html">15. Assignment operator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="precedence.html">16. Precedence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="associativity.html">17. Associativity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">18. Constants</a></li>
@@ -256,7 +256,7 @@
 <li class="toctree-l1"><a class="reference internal" href="strategy-pattern.html">89. Strategy pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bridge-pattern.html">90. Bridge pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="delegates.html">91. Delegates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-delegates.html">92. Generic delegates</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">92. Generic delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="built-in-delegates.html">93. Built-in delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multicast-delegates.html">94. Multicast delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variance.html">95. Variance</a></li>
@@ -297,22 +297,241 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="assignment-operator">
-<h1><span class="section-number">15. </span>Assignment operator<a class="headerlink" href="#assignment-operator" title="Permalink to this heading">#</a></h1>
-<p>As we’ve already seen in previous chapters, the assignment operator <code class="docutils literal notranslate"><span class="pre">=</span></code> plays a crucial role in C#. It is the operator that allows us to assign values to our variables. However, the assignment operator has a few more facets worth discussing.</p>
-<p>At its core, the assignment operator is used to assign the value of its right-hand operand to its left-hand operand. For instance:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">numberOfMarbles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">;</span>
+          <section id="generic-delegates">
+<h1><span class="section-number">92. </span>Generic delegates<a class="headerlink" href="#generic-delegates" title="Permalink to this heading">#</a></h1>
+<p>Just like generics have opened up the realm of type-agnostic classes and methods, generic delegates allow us to declare and use delegates that can use various types without needing to know these types in advance.</p>
+<div class="admonition-key-point admonition">
+<p class="admonition-title">Key point</p>
+<p>Generic delegates are delegates that take one or more type parameters, enabling the creation of delegate types that can operate on different data types while retaining type safety.</p>
+</div>
+<p>Imagine you’re writing an application where you need to pass around transformers that transform various types of data. Such transformers might convert an <code class="docutils literal notranslate"><span class="pre">int</span></code> to a <code class="docutils literal notranslate"><span class="pre">string</span></code>, invert a <code class="docutils literal notranslate"><span class="pre">bool</span></code>, or capitalize a <code class="docutils literal notranslate"><span class="pre">string</span></code>. While these operations are different, their underlying pattern of transforming one value into another remains the same.</p>
+<p>Here’s where generic delegates come into play. Let’s start with a simple delegate definition without generics:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">delegate</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Transformer</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="k">value</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>In this example, <code class="docutils literal notranslate"><span class="pre">5</span></code> is assigned to <code class="docutils literal notranslate"><span class="pre">numberOfMarbles</span></code>. This means that the variable <code class="docutils literal notranslate"><span class="pre">numberOfMarbles</span></code> now holds the value <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p>
-<p>Something to bear in mind is that the assignment operator is ‘right-associative’. This means that when there are multiple assignment operators in a single statement, they are evaluated from right to left. Let’s see an example:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
-<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">;</span>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-3686.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.124:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '3686.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>This delegate can only transform integers to strings. Now, what if you wanted to have a delegate that can transform from any type <code class="docutils literal notranslate"><span class="pre">TIn</span></code> to another type <code class="docutils literal notranslate"><span class="pre">TOut</span></code>? This is where generics come to the rescue.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">delegate</span><span class="w"> </span><span class="n">TOut</span><span class="w"> </span><span class="n">Transformer</span><span class="o">&lt;</span><span class="n">TIn</span><span class="p">,</span><span class="w"> </span><span class="n">TOut</span><span class="o">&gt;</span><span class="p">(</span><span class="n">TIn</span><span class="w"> </span><span class="k">value</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>In this code snippet, all three variables <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>, and <code class="docutils literal notranslate"><span class="pre">c</span></code> will end up holding the value <code class="docutils literal notranslate"><span class="pre">10</span></code>. Here’s how it works: first, <code class="docutils literal notranslate"><span class="pre">10</span></code> is assigned to <code class="docutils literal notranslate"><span class="pre">c</span></code>. Then, this assigned value is assigned to <code class="docutils literal notranslate"><span class="pre">b</span></code> whose assigned value is then assigned to <code class="docutils literal notranslate"><span class="pre">a</span></code>. The right-associativity of the assignment operator ensures this cascade of assignments works correctly. If we explicitly add parenthases it looks like this: <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">(b</span> <span class="pre">=</span> <span class="pre">(c</span> <span class="pre">=</span> <span class="pre">10))</span></code>.</p>
-<p>One more interesting aspect of the assignment operator is that it’s not just about assigning values - it also returns a value. Specifically, the assignment operator <code class="docutils literal notranslate"><span class="pre">=</span></code> returns the value that was assigned. This is why it’s possible to do multiple assignments in one line, like in the example above.</p>
-<p>It’s important to note that the assignment operator is distinct from the <a class="reference internal" href="equality-operators.html"><span class="doc std std-doc">equality operator</span></a> <code class="docutils literal notranslate"><span class="pre">==,</span></code> which we’ve discussed in a previous chapter. While they might look similar, they serve very different purposes. The assignment operator <code class="docutils literal notranslate"><span class="pre">=</span></code> assigns a value to a variable, while the equality operator <code class="docutils literal notranslate"><span class="pre">==</span></code> checks if two values are equal.</p>
+</div>
+</div>
+<p>With this generic delegate, you have the flexibility to create delegate instances that can transform from and to any type.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Using generic delegates can reduce code duplication. Instead of defining separate delegate types for every method signature, one can define a more generic delegate type and utilize it for various methods.</p>
+</div>
+<p>What are some methods that satisfy this type?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Local function that squares a number.</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">Square</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+
+<span class="c1">// Local function that divides a number by 2.</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">Half</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">2.0</span><span class="p">;</span>
+
+<span class="c1">// Local function that repeats a string.</span>
+<span class="kt">string</span><span class="w"> </span><span class="nf">Repeat</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">s</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Square</span></code> method maps from <code class="docutils literal notranslate"><span class="pre">int</span></code> to <code class="docutils literal notranslate"><span class="pre">double</span></code>, the <code class="docutils literal notranslate"><span class="pre">Half</span></code> method maps from <code class="docutils literal notranslate"><span class="pre">double</span></code> to <code class="docutils literal notranslate"><span class="pre">double</span></code>, and the <code class="docutils literal notranslate"><span class="pre">Repeat</span></code> method from <code class="docutils literal notranslate"><span class="pre">string</span></code> to <code class="docutils literal notranslate"><span class="pre">string</span></code>.
+Since they are all methods that take one argument (also known as ‘unary methods’) and returns something they all satisfy the type of our generic transformer delegate but with different type arguments.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Transformer</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">intTransformer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Square</span><span class="p">;</span>
+<span class="n">Transformer</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">doubleTransformer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Half</span><span class="p">;</span>
+<span class="n">Transformer</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stringTransformer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Repeat</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We could of course have used <a class="reference internal" href="type-inference.html"><span class="doc std std-doc">type inference</span></a> with the <code class="docutils literal notranslate"><span class="pre">var</span></code> keyword to simplify the above declarations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">intTransformer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Square</span><span class="p">;</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">doubleTransformer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Half</span><span class="p">;</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">stringTransformer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Repeat</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This generic transformer delegate allows us to pass around unary methods that map from any type to any type, which provides us with flexibility without losing <a class="reference internal" href="type-checking.html"><span class="doc std std-doc">static type safety</span></a> and without having to write lots of duplicated code.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Within a generic class, delegates can utilize the type parameters just like how other members would.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>With the power of generic delegates, it’s crucial to ensure that the methods assigned to these delegates align with their intended use and abide by the constraints, if any, defined by the generic delegate.</p>
+</div>
+<p>To demonstrate the real strength of generic delegates, consider operations like filtering or sorting <span class="xref myst">lists</span>. While the actual comparison or filter logic can vary, the pattern of operation remains constant. By leveraging generic delegates, one can create powerful utilities that work across different types:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Filter</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">items</span><span class="p">,</span><span class="w"> </span><span class="n">Transformer</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">condition</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">filtered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="k">foreach</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">items</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">condition</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+<span class="w">            </span><span class="n">filtered</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">filtered</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>In the example above we should use the <a class="reference internal" href="built-in-delegates.html"><span class="doc std std-doc">built-in delegate</span></a> <code class="docutils literal notranslate"><span class="pre">Predicate&lt;T&gt;</span></code> instead of our own delegate since the built-in delegates are widely recognized and make the code more readable to other developers.
+We should also use <span class="xref myst">LINQ</span> to simplify the algorithm and the <code class="docutils literal notranslate"><span class="pre">yield</span> <span class="pre">return</span></code> statement for <span class="xref myst">lazy evaluation</span>.
+All these things are covered in coming chapters.</p>
+</div>
+<p>This generic <code class="docutils literal notranslate"><span class="pre">Filter</span></code> method can work with a list of any type and any condition which can be expressed as a mapping from the type of elements in the list to <code class="docutils literal notranslate"><span class="pre">bool</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A function that maps from some type to a <code class="docutils literal notranslate"><span class="pre">bool</span></code> in order to determine if the element matches or not is known as a ‘predicate’.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Simple local function returning true if input number is even.</span>
+<span class="kt">bool</span><span class="w"> </span><span class="nf">IsEven</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
+
+<span class="c1">// A simple list to be used as input.</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">unfiltered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="m">9</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="p">};</span>
+
+<span class="c1">// Filtering the list using our `Filter` function and our `IsEven` condition.</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">filtered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Filter</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">unfiltered</span><span class="p">,</span><span class="w"> </span><span class="n">IsEven</span><span class="p">);</span>
+
+<span class="c1">// Print the filtered and unfiltered list.</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">unfiltered</span><span class="p">));</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">filtered</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2, 4, 6, 8, 10
+</pre></div>
+</div>
+</div>
+</div>
+<p>In conclusion, generic delegates are a powerful tool in the C# arsenal. They enable developers to write flexible, type-safe, and reusable code. By treating methods as first-class citizens and allowing them to operate over a range of types, generic delegates blend the best of both object-oriented and functional programming paradigms in C#.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -324,38 +543,38 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            name: "python3",
+            name: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="precedence.html">
+          <a class="next-page" href="built-in-delegates.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">16. </span>Precedence</div>
+                <div class="title"><span class="section-number">93. </span>Built-in delegates</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="logical-operators.html">
+          <a class="prev-page" href="delegates.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">14. </span>Logical operators</div>
+                <div class="title"><span class="section-number">91. </span>Delegates</div>
                 
               </div>
             </a>

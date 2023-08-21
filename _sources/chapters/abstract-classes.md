@@ -140,10 +140,9 @@ Sequence fib = new FibonacciSequence();
 Console.WriteLine(String.Join(", ", fib.Take(10)));
 ```
 
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1132156773894205500/chrokh_Fibonacci_sequence_snail_pencil_illustration_83e1505e-31b2-460f-bd03-7dc2691dfb54.png
+![](https://cdn.discordapp.com/attachments/1118630713084870736/1132156773894205500/chrokh_Fibonacci_sequence_snail_pencil_illustration_83e1505e-31b2-460f-bd03-7dc2691dfb54.png)
 
 %If a number series can be described in terms of what the next number is, given the current state, then we can implement it as a child of our `Sequence` class.
-```
 
 So, abstract classes are a middle ground between interfaces and regular classes.
 Since we're working with [inheritance](inheritance) we get both code-reuse and [subtype polymorphism](subtype-polymorphism).
