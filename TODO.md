@@ -1,6 +1,9 @@
 # The new todo list
 
 - Replace UML diagram in bridge chapter.
+- Optional parameters.
+- Local functions should be PascalCase not camelCase.
+- Local functions should mention terminology: unary, binary, ternary, etc.
 - Perhaps the mermaid example should be extracted from the chapter on composition over inheritance to a new chapter called 'Substitutability'?
 - Encapsulation chapter: "Encapsulate what varies".
 - 'hard-coding'.
@@ -51,7 +54,7 @@
 - Debugging? Debugger in Visual Studio? How to read compiler errors? How to read stack trace upon exceptions?
 - UML Class diagrams multiplicity (p. 34 [specification](https://www.omg.org/spec/UML/2.5.1/PDF)).
 - `ref` keyword. In reference types chapter? See e.g. [generic swap method](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/generic-methods).
-- Type checking chapter, add terminology: static type safety, static type-checking, compile-time type-checking.
+- Type checking chapter, add terminology: static type safety, static type-checking, compile-time type-checking. Almost all references to type safety are linked to the type-checking chapter.
 - Overriding ToString(). Everything is an object?
 - Dynamic keyword. It's used in chapter on Generics and type errors.
 - The table comparing hiding and overriding should also compare interface default implementations.
