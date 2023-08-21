@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="69. Constructor chaining" href="constructor-chaining.html" /><link rel="prev" title="67. Hiding" href="hiding.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="96. Events" href="events.html" /><link rel="prev" title="94. Multicast delegates" href="multicast-delegates.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>68. The base keyword - The Object Oriented Way</title>
+        <title>95. Observer pattern - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -141,7 +141,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -232,7 +232,7 @@
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">65. Inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="overriding.html">66. Overriding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hiding.html">67. Hiding</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">68. The <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the-base-keyword.html">68. The <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constructor-chaining.html">69. Constructor chaining</a></li>
 <li class="toctree-l1"><a class="reference internal" href="protected.html">70. Protected access modifier</a></li>
 <li class="toctree-l1"><a class="reference internal" href="abstract-classes.html">71. Abstract classes</a></li>
@@ -259,7 +259,7 @@
 <li class="toctree-l1"><a class="reference internal" href="generic-delegates.html">92. Generic delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="built-in-delegates.html">93. Built-in delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multicast-delegates.html">94. Multicast delegates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="observer-pattern.html">95. Observer pattern</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">95. Observer pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="events.html">96. Events</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variance.html">97. Variance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">98. Liskov substitution principle</a></li>
@@ -293,23 +293,103 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="the-base-keyword">
-<h1><span class="section-number">68. </span>The <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword<a class="headerlink" href="#the-base-keyword" title="Permalink to this heading">#</a></h1>
-<p>When working within the realm of inheritance, there are moments when you might want to call a method from the superclass that has been <a class="reference internal" href="hiding.html"><span class="doc std std-doc">hidden</span></a> or <a class="reference internal" href="overriding.html"><span class="doc std std-doc">overridden</span></a> in the subclass. This is where the <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword comes into play.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword is similar to the <code class="docutils literal notranslate"><span class="pre">this</span></code> keyword in that they both provide a way to access members of a class. However, while <code class="docutils literal notranslate"><span class="pre">this</span></code> is used to refer to the current instance of a class, <code class="docutils literal notranslate"><span class="pre">base</span></code> is used to refer to members of the superclass that have been overridden or hidden by the current subclass.</p>
-<p>Let’s look at an example featuring an <code class="docutils literal notranslate"><span class="pre">Animal</span></code> and a <code class="docutils literal notranslate"><span class="pre">Dog</span></code> class.</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="observer-pattern">
+<h1><span class="section-number">95. </span>Observer pattern<a class="headerlink" href="#observer-pattern" title="Permalink to this heading">#</a></h1>
+<p>The Observer pattern is a foundational design pattern that lays the groundwork for many advanced programming concepts such as <a class="reference internal" href="events.html"><span class="doc std std-doc">events</span></a> and real-world applications. Have you ever wondered how certain parts of an application get notified when something else changes, without constantly checking that thing? The Observer pattern serves as the foundational mechanism behind such interactions.</p>
+<div class="admonition-key-point admonition">
+<p class="admonition-title">Key point</p>
+<p>The Observer pattern allows objects, termed ‘observers’, to listen for and be notified of changes in another object known as the ‘observable’ or the ‘subject’.</p>
+</div>
+<section id="intent">
+<h2>Intent<a class="headerlink" href="#intent" title="Permalink to this heading">#</a></h2>
+<p>The intent of the Observer pattern is to:</p>
+<blockquote class="epigraph">
+<div><p>Define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.</p>
+<p class="attribution">—<a class="reference external" href="https://geni.us/PsXmo">Design Patterns: Elements of reusable object-oriented software</a>.</p>
+</div></blockquote>
+<div class="admonition-video-lecture admonition">
+<p class="admonition-title">Video lecture</p>
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/_BpmfnqjgzQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+</section>
+<section id="structure">
+<h2>Structure<a class="headerlink" href="#structure" title="Permalink to this heading">#</a></h2>
+<p>Let’s explain using a real-world example. Think of a podcast app. When a new podcast episode is released, all subscribers are notified. In this analogy, the podcast is the ‘observable’ (also known as the ‘subject’), and the subscribers are the ‘observers’. Every subscriber (observer) gets notified (or gets the new podcast episode) whenever there’s a change (new episode) in the podcast (the observable).</p>
+<p>As depicted in the UML class diagram in <a class="reference internal" href="#fig-observer-pattern"><span class="std std-numref">Fig. 95.1</span></a>, the Observer pattern is comprised of a class that composes an interface of which there are several implementations.</p>
+<figure class="align-default" id="fig-observer-pattern">
+<img alt="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Observer_w_update.svg/1280px-Observer_w_update.svg.png" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Observer_w_update.svg/1280px-Observer_w_update.svg.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 95.1 </span><span class="caption-text">UML class diagram of observer pattern. [<a class="reference external" href="https://en.wikipedia.org/wiki/Observer_pattern#/media/File:Observer_w_update.svg">Source</a>]</span><a class="headerlink" href="#fig-observer-pattern" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Let’s interpret the UML class diagram in the context of our podcast example.</p>
+<ol class="arabic simple">
+<li><p>The podcast corresponds to the class on the right.</p></li>
+<li><p>The interface on the left captures what it means to be a subscriber of the podcast.</p></li>
+<li><p>The two classes that implement the interface on the left correspond to types of subscribers to the podcast such as a listener.</p></li>
+</ol>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The main advantage of the Observer pattern is its ability to promote <span class="xref myst">loose coupling</span> between objects. The observable doesn’t need to know anything specific about its observers, and observers can be added or removed at run-time without affecting the observable’s core functionality.</p>
+</div>
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
+<p>Let’s look at the example that we discussed above in code.
+Imagine that you’re writing a simulation game where you the player can start new podcast that simulation inhabitants can subscribe to.</p>
+<p>In the code below, <code class="docutils literal notranslate"><span class="pre">Podcast</span></code> is the observable that keeps a list of subscribers (observers). It has methods to add (<code class="docutils literal notranslate"><span class="pre">Subscribe</span></code>) or remove (<code class="docutils literal notranslate"><span class="pre">Unsubscribe</span></code>) subscribers. Whenever a new podcast episode is released (<code class="docutils literal notranslate"><span class="pre">ReleaseNewEpisode</span></code>), all subscribers are notified via their <code class="docutils literal notranslate"><span class="pre">Update</span></code> method.</p>
+<p>The observer (<code class="docutils literal notranslate"><span class="pre">ISubscriber</span></code>) interface provides a contract for all concrete observers (like the <code class="docutils literal notranslate"><span class="pre">Listener</span></code> class). Every observer that implements this interface will have the <code class="docutils literal notranslate"><span class="pre">Update</span></code> method, which will be invoked when the subject notifies them.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Animal</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Observer</span>
+<span class="k">interface</span><span class="w"> </span><span class="n">ISubscriber</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Speak</span><span class="p">()</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;The animal makes a sound.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="nf">Update</span><span class="p">(</span><span class="n">Podcast</span><span class="w"> </span><span class="n">podcast</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Observable</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Podcast</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ISubscriber</span><span class="o">&gt;</span><span class="w"> </span><span class="n">subs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ISubscriber</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Title</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="n">init</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Subscribe</span><span class="p">(</span><span class="n">ISubscriber</span><span class="w"> </span><span class="n">subscriber</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">subs</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">subscriber</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Unsubscribe</span><span class="p">(</span><span class="n">ISubscriber</span><span class="w"> </span><span class="n">subscriber</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">subs</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">subscriber</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">ReleaseNewEpisode</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Additional episode-related code...</span>
+
+<span class="w">        </span><span class="n">notifySubs</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">notifySubs</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">sub</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">subs</span><span class="p">)</span>
+<span class="w">            </span><span class="n">sub</span><span class="p">.</span><span class="n">Update</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// An implementation of the Observer interface.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Listener</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ISubscriber</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="n">init</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Update</span><span class="p">(</span><span class="n">Podcast</span><span class="w"> </span><span class="n">podcast</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Notification for {Name}: New episode of &#39;{podcast.Title}&#39;.&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Additional listener-related code...</span>
+
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -317,7 +397,7 @@
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-5858.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-4835.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -367,7 +447,7 @@ function loadDotnetInteractiveApi() {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '5858.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '4835.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -423,76 +503,71 @@ else {
     </script>
 </div></div></div>
 </div>
+<p>Let’s try this out in action.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Dog</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Animal</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Speak</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">base</span><span class="p">.</span><span class="n">Speak</span><span class="p">();</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;The dog barks.&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>In this example, we override the <code class="docutils literal notranslate"><span class="pre">Speak</span></code> method in the <code class="docutils literal notranslate"><span class="pre">Dog</span></code> class. However, before we print <code class="docutils literal notranslate"><span class="pre">&quot;The</span> <span class="pre">dog</span> <span class="pre">barks.&quot;</span></code>, we first call <code class="docutils literal notranslate"><span class="pre">base.Speak()</span></code>. The <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword allows us to call the <code class="docutils literal notranslate"><span class="pre">Speak</span></code> method defined in the superclass <code class="docutils literal notranslate"><span class="pre">Animal</span></code>. Let’s see what happens when we call <code class="docutils literal notranslate"><span class="pre">Speak</span></code> on a <code class="docutils literal notranslate"><span class="pre">Dog</span></code> object.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Dog</span><span class="w"> </span><span class="n">dog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span><span class="p">();</span>
-<span class="n">dog</span><span class="p">.</span><span class="n">Speak</span><span class="p">();</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create podcast.</span>
+<span class="n">Podcast</span><span class="w"> </span><span class="n">podcast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Podcast</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;My First Million&quot;</span><span class="w"> </span><span class="p">};</span>
+
+<span class="c1">// Create listeners.</span>
+<span class="n">Listener</span><span class="w"> </span><span class="n">listener1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Listener</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Chamath&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="n">Listener</span><span class="w"> </span><span class="n">listener2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Listener</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Friedberg&quot;</span><span class="w"> </span><span class="p">};</span>
+
+<span class="c1">// Subscribe the listeners to the podcast.</span>
+<span class="n">podcast</span><span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">listener1</span><span class="p">);</span>
+<span class="n">podcast</span><span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">listener2</span><span class="p">);</span>
+
+<span class="c1">// Release a new episode.</span>
+<span class="n">podcast</span><span class="p">.</span><span class="n">ReleaseNewEpisode</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The animal makes a sound.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Notification for Chamath: New episode of &#39;My First Million&#39;.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The dog barks.
-</pre></div>
-</div>
-</div>
-</div>
-<p>As you can see, <code class="docutils literal notranslate"><span class="pre">base.Speak()</span></code> executes the original <code class="docutils literal notranslate"><span class="pre">Speak</span></code> method from the <code class="docutils literal notranslate"><span class="pre">Animal</span></code> class, before executing the overridden version in <code class="docutils literal notranslate"><span class="pre">Dog</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">base</span></code> can be used in a similar way with hidden methods:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Cat</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Animal</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Speak</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">base</span><span class="p">.</span><span class="n">Speak</span><span class="p">();</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;The cat meows.&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Notification for Friedberg: New episode of &#39;My First Million&#39;.
 </pre></div>
 </div>
 </div>
 </div>
-<p>In this scenario, calling Speak on a <code class="docutils literal notranslate"><span class="pre">Cat</span></code> object would yield:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Cat</span><span class="w"> </span><span class="n">cat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cat</span><span class="p">();</span>
-<span class="n">cat</span><span class="p">.</span><span class="n">Speak</span><span class="p">();</span>
-</pre></div>
+<p>What’s the benefit of this design?
+Adding new features to the <code class="docutils literal notranslate"><span class="pre">Podcast</span></code> or changing how a <code class="docutils literal notranslate"><span class="pre">Listener</span></code> responds does not affect each other as long as the contract <code class="docutils literal notranslate"><span class="pre">ISubscriber</span></code> is maintained.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="events.html"><span class="doc std std-doc">Events</span></a>, which we will talk about in a coming chapter, is essentially a native implementation of the Observer pattern.</p>
 </div>
+<p>A very common use case for the Observer pattern is user interfaces.
+Imagine user interface elements like clickable buttons, scrollable text boxes, input text boxes, swipe:able content and so forth.
+These elements can be viewed as observables that we can register observers to.</p>
+<p>Imagine for example a submission form that you might see on a screen for registering a new user.
+Every time you type a new character in the email-box, an observer might be notified that the contents of the box have changed. The observer can then check if the email you’ve entered for example looks like an email and either display a red cross mark or a green check mark to indicate to the end user that the email that they’ve entered is considered valid.</p>
+<p>Similarly, when the user clicks the submit-button, an observer might receive a notification that the button has been clicked and in response collect the data that has been entered and create a new user account from it.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The ability of the Observer pattern to simplify the solutions to problems that are otherwise quite architecturally complicated should not be underestimated.</p>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The animal makes a sound.
-</pre></div>
+</section>
+<section id="built-in-interfaces">
+<h2>Built-in interfaces<a class="headerlink" href="#built-in-interfaces" title="Permalink to this heading">#</a></h2>
+<p>Beyond traditional implementations, many modern frameworks offer native support for the Observer pattern.
+In .NET we have two native implementations of the Observer pattern.
+One is <span class="xref myst">events</span> which we’ll talk about in the next chapter.
+The other is the <code class="docutils literal notranslate"><span class="pre">IObservable&lt;T&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">IObserver&lt;T&gt;</span></code> interfaces.</p>
+<p><code class="docutils literal notranslate"><span class="pre">IObservable&lt;T&gt;</span></code> is the counterpart of the ‘observable’ in our Observer pattern. It represents a provider of push-based notification, and its primary responsibility is to broadcast notifications to all its subscribers.
+An object that implements <code class="docutils literal notranslate"><span class="pre">IObservable&lt;T&gt;</span></code> can produce a sequence of values over time and can signal its observers with new data, an error, or its completion.</p>
+<p>On the flip side, <code class="docutils literal notranslate"><span class="pre">IObserver&lt;T&gt;</span></code> is the native representation of the observer. Objects that implement this interface can listen to an <code class="docutils literal notranslate"><span class="pre">IObservable&lt;T&gt;</span></code> and react to its notifications. The <code class="docutils literal notranslate"><span class="pre">IObserver&lt;T&gt;</span></code> interface includes three methods: <code class="docutils literal notranslate"><span class="pre">OnNext</span></code>, <code class="docutils literal notranslate"><span class="pre">OnError</span></code>, and <code class="docutils literal notranslate"><span class="pre">OnCompleted</span></code>. <code class="docutils literal notranslate"><span class="pre">OnNext</span></code> is called when there’s new data to process and corresponds to the <code class="docutils literal notranslate"><span class="pre">Update</span></code> method discussed earlier in this chapter. <code class="docutils literal notranslate"><span class="pre">OnError</span></code> is triggered if there’s an error in the data sequence, and <code class="docutils literal notranslate"><span class="pre">OnCompleted</span></code> is invoked once the data sequence completes and no more data is expected.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Utilizing <code class="docutils literal notranslate"><span class="pre">IObservable&lt;T&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">IObserver&lt;T&gt;</span></code> in .NET not only adheres to the standard Observer pattern but also blends seamlessly with the rich ecosystem of <span class="xref myst">Reactive Extensions (Rx)</span>. This allows developers to compose, transform, and query asynchronous data streams with more granular control and flexibility.</p>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The cat meows.
-</pre></div>
-</div>
-</div>
-</div>
-<p>This demonstrates that even when a method is hidden, it can still be accessed through the <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword within the subclass.</p>
-<div class="admonition-key-point admonition">
-<p class="admonition-title">Key point</p>
-<p>The base keyword allows a subclass to call a method in the superclass that it has overridden or hidden. It gives us a way to access the original method from the superclass, preserving its behavior while allowing further augmentation in the subclass.</p>
-</div>
-<p>In the next chapter, we will delve into constructor chaining where you’ll see how the keywords <code class="docutils literal notranslate"><span class="pre">base</span></code> and <code class="docutils literal notranslate"><span class="pre">this</span></code> also can be used to access overloaded constructors within class hierarchies.</p>
+<p>In essence, while the traditional Observer pattern offers a foundational concept, the .NET framework elevates it with native interfaces and tools, making it more powerful and suited for modern, asynchronous programming paradigms.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>In conclusion, the Observer pattern is one of the most versatile and essential patterns in object-oriented design.
+In this chapter we’ve seen how .NET has ready made interfaces for dealing with observers and observables. In a coming chapter, we’ll also explore how the observer pattern is also natively implemented in .NET through <a class="reference internal" href="events.html"><span class="doc std std-doc">events</span></a>.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -519,23 +594,23 @@ else {
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="constructor-chaining.html">
+          <a class="next-page" href="events.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">69. </span>Constructor chaining</div>
+                <div class="title"><span class="section-number">96. </span>Events</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="hiding.html">
+          <a class="prev-page" href="multicast-delegates.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">67. </span>Hiding</div>
+                <div class="title"><span class="section-number">94. </span>Multicast delegates</div>
                 
               </div>
             </a>
@@ -557,8 +632,31 @@ else {
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">95. Observer pattern</a><ul>
+<li><a class="reference internal" href="#intent">Intent</a></li>
+<li><a class="reference internal" href="#structure">Structure</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#built-in-interfaces">Built-in interfaces</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
