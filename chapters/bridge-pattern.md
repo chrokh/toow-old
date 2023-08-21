@@ -20,7 +20,8 @@ With the Bridge pattern, we decouple the media types from the way they can be di
 
 %https://discord.com/channels/@me/1118630713084870736/1142010037603139604
 %https://cdn.discordapp.com/attachments/1118630713084870736/1142009820904423424/chrokh_illustration_of_shelf_with_camera_lenses_187443ae-0738-4420-ad29-8b1d46fb4efe.png
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1142009820904423424/chrokh_illustration_of_shelf_with_camera_lenses_187443ae-0738-4420-ad29-8b1d46fb4efe.png
+%https://cdn.discordapp.com/attachments/1118630713084870736/1142009820904423424/chrokh_illustration_of_shelf_with_camera_lenses_187443ae-0738-4420-ad29-8b1d46fb4efe.png
+```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1143101907401965691/chrokh_camera_lenses_on_shelf_simple_illustration_9ec28b6c-aa76-420d-82cb-7df3b909ec0e.png
 
 Just like you can pair any camera with any lens as long as they both follow the same interface, the Bridge pattern enables you to combine elements from two type hierarchies.
 ```
@@ -90,8 +91,7 @@ This can be seen in {numref}`fig:bridge-pattern-modern` where the 'has-a' arrow 
 :name: fig:bridge-pattern-modern
 :height: 300px
 
-UML class diagram (left) of modern variation of Bridge pattern.
-*[Image will be replaced]* [[Image source](https://en.wikipedia.org/wiki/File:W3sDesign_Bridge_Design_Pattern_UML.jpg)]
+UML class diagram (left) of modern variation of Bridge pattern. [[Source](https://en.wikipedia.org/wiki/File:W3sDesign_Bridge_Design_Pattern_UML.jpg)]
 ```
 
 In the original version, the first abstraction holds the reference to the second abstraction, which means that the second abstraction must remain the same.

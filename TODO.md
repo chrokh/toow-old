@@ -1,6 +1,8 @@
 # The new todo list
 
-- Replace UML diagram in bridge chapter.
+- Coupling.
+- Replace UML diagram in patterns chapters!
+- Add Key point boxes to Strategy and Bridge chapters.
 - Optional parameters.
 - Local functions should be PascalCase not camelCase.
 - Local functions should mention terminology: unary, binary, ternary, etc.
