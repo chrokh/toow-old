@@ -21,6 +21,8 @@ Work in progress.
 %- Principle: The state space of a type should equal the state space of whatever domain concept it is modeling.
 %- Object integrity mentioned in [required](reqiured-attributes) chapter.
 
+%- A very good example is iterator pattern when you use a method `Item Next()` instead of `bool MoveNext()` and `Item Current`. The former can cause exceptions or must return unexpected results. The latter cannot end up in inconsistent states.
+
 ## Definition
 
 %### Make impossible states impossible
