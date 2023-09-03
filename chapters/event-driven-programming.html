@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="32. Recursion" href="recursion.html" /><link rel="prev" title="30. Methods" href="local-functions.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="99. Iterator pattern" href="iterator-pattern.html" /><link rel="prev" title="97. Event conventions" href="event-conventions.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>31. Fat arrows - The Object Oriented Way</title>
+        <title>98. Event-driven programming - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -195,7 +195,7 @@
 <li class="toctree-l1"><a class="reference internal" href="reference-types.html">28. Reference types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="value-types.html">29. Value types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="local-functions.html">30. Methods</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">31. Fat arrows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fat-arrows.html">31. Fat arrows</a></li>
 <li class="toctree-l1"><a class="reference internal" href="recursion.html">32. Recursion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="namespaces.html">33. Namespaces</a></li>
 <li class="toctree-l1"><a class="reference internal" href="objects.html">34. Objects</a></li>
@@ -262,7 +262,7 @@
 <li class="toctree-l1"><a class="reference internal" href="observer-pattern.html">95. Observer pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="events.html">96. Events</a></li>
 <li class="toctree-l1"><a class="reference internal" href="event-conventions.html">97. Event conventions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="event-driven-programming.html">98. Event-driven programming</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">98. Event-driven programming</a></li>
 <li class="toctree-l1"><a class="reference internal" href="iterator-pattern.html">99. Iterator pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enumerables.html">100. Enumerables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variance.html">101. Variance</a></li>
@@ -303,141 +303,12 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="fat-arrows">
-<h1><span class="section-number">31. </span>Fat arrows<a class="headerlink" href="#fat-arrows" title="Permalink to this heading">#</a></h1>
-<p>As you continue to write more complex code, you may find that conciseness can help keep your code readable and maintainable. One way to achieve this in C# is with “fat arrow” syntax which is more formally known as “expression-bodied members”.
-This feature provides a succinct syntax to express the implementation of local functions when their implementation consists of a single expression. It’s commonly referred to as “fat arrow” syntax due to the use of the <code class="docutils literal notranslate"><span class="pre">=&gt;</span></code> operator.</p>
-<p>While we in this chapter will focus on using the fat arrow syntax with local functions, fat arrows can be used with class members such as methods, constructors, and properties. You will see examples of this later chapters.</p>
-<p>Let’s consider a simple local function defined using the traditional method body:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">Add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
+          <section class="tex2jax_ignore mathjax_ignore" id="event-driven-programming">
+<h1><span class="section-number">98. </span>Event-driven programming<a class="headerlink" href="#event-driven-programming" title="Permalink to this heading">#</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Coming soon.</p>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-<div>
-    <div id='dotnet-interactive-this-cell-3593.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
-        The below script needs to be able to find the current output cell; this is an easy method to get it.
-    </div>
-    <script type='text/javascript'>
-async function probeAddresses(probingAddresses) {
-    function timeout(ms, promise) {
-        return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                reject(new Error('timeout'))
-            }, ms)
-            promise.then(resolve, reject)
-        })
-    }
-
-    if (Array.isArray(probingAddresses)) {
-        for (let i = 0; i < probingAddresses.length; i++) {
-
-            let rootUrl = probingAddresses[i];
-
-            if (!rootUrl.endsWith('/')) {
-                rootUrl = `${rootUrl}/`;
-            }
-
-            try {
-                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
-                    method: 'POST',
-                    cache: 'no-cache',
-                    mode: 'cors',
-                    timeout: 1000,
-                    headers: {
-                        'Content-Type': 'text/plain'
-                    },
-                    body: probingAddresses[i]
-                }));
-
-                if (response.status == 200) {
-                    return rootUrl;
-                }
-            }
-            catch (e) { }
-        }
-    }
-}
-
-function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.13:2048/", "http://127.0.0.1:2048/"])
-        .then((root) => {
-        // use probing to find host url and api resources
-        // load interactive helpers and language services
-        let dotnetInteractiveRequire = require.config({
-        context: '3593.Microsoft.DotNet.Interactive.Http.HttpPort',
-                paths:
-            {
-                'dotnet-interactive': `${root}resources`
-                }
-        }) || require;
-
-            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
-
-            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
-                let paths = {};
-                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
-                
-                let internalRequire = require.config({
-                    context: extensionCacheBuster,
-                    paths: paths,
-                    urlArgs: `cacheBuster=${extensionCacheBuster}`
-                    }) || require;
-
-                return internalRequire
-            };
-        
-            dotnetInteractiveRequire([
-                    'dotnet-interactive/dotnet-interactive'
-                ],
-                function (dotnet) {
-                    dotnet.init(window);
-                },
-                function (error) {
-                    console.log(error);
-                }
-            );
-        })
-        .catch(error => {console.log(error);});
-    }
-
-// ensure `require` is available globally
-if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
-    let require_script = document.createElement('script');
-    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
-    require_script.setAttribute('type', 'text/javascript');
-    
-    
-    require_script.onload = function() {
-        loadDotnetInteractiveApi();
-    };
-
-    document.getElementsByTagName('head')[0].appendChild(require_script);
-}
-else {
-    loadDotnetInteractiveApi();
-}
-
-    </script>
-</div></div></div>
-</div>
-<p>We can simplify this function using the fat arrow syntax:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">Add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Here, the <code class="docutils literal notranslate"><span class="pre">Add</span></code> function is defined as an expression-bodied member. The <code class="docutils literal notranslate"><span class="pre">=&gt;</span></code> symbol points to the expression that becomes the function’s return value. Notice how we don’t need to explicitly use the keyword <code class="docutils literal notranslate"><span class="pre">return</span></code>. This version of <code class="docutils literal notranslate"><span class="pre">Add</span></code> is functionally identical to the previous one but is shorter and cleaner. Fat arrows are essentially syntactic sugar.</p>
-<p>Remember, expression-bodied members aren’t limited to local functions - they can be used with instance methods, constructors, and properties. We will see usage of fat arrows in these contexts in the future but won’t explain it in any more detail than we’ve done here. So do come back to this chapter if you need a refresher.</p>
-<p>This chapter should give you a good understanding of how the fat arrow syntax can help you write more concise and readable code. Embrace the power of expression-bodied members and make your code fast to write and easier to read.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -449,38 +320,38 @@ else {
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: ".net-csharp"
+            mode: "python"
         },
         kernelOptions: {
-            name: ".net-csharp",
+            name: "python3",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = '.net-csharp'</script>
+    <script>kernelName = 'python3'</script>
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="recursion.html">
+          <a class="next-page" href="iterator-pattern.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">32. </span>Recursion</div>
+                <div class="title"><span class="section-number">99. </span>Iterator pattern</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="local-functions.html">
+          <a class="prev-page" href="event-conventions.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">30. </span>Methods</div>
+                <div class="title"><span class="section-number">97. </span>Event conventions</div>
                 
               </div>
             </a>

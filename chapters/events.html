@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="97. Iterator pattern" href="iterator-pattern.html" /><link rel="prev" title="95. Observer pattern" href="observer-pattern.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="97. Event conventions" href="event-conventions.html" /><link rel="prev" title="95. Observer pattern" href="observer-pattern.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
         <title>96. Events - The Object Oriented Way</title>
@@ -141,7 +141,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -261,12 +261,14 @@
 <li class="toctree-l1"><a class="reference internal" href="multicast-delegates.html">94. Multicast delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="observer-pattern.html">95. Observer pattern</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">96. Events</a></li>
-<li class="toctree-l1"><a class="reference internal" href="iterator-pattern.html">97. Iterator pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="enumerables.html">98. Enumerables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variance.html">99. Variance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">100. Liskov substitution principle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">101. Variant generic interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">102. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-conventions.html">97. Event conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-driven-programming.html">98. Event-driven programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iterator-pattern.html">99. Iterator pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enumerables.html">100. Enumerables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variance.html">101. Variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">102. Liskov substitution principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">103. Variant generic interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">104. Bibliography</a></li>
 </ul>
 
 </div>
@@ -295,7 +297,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -303,10 +305,379 @@
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="events">
 <h1><span class="section-number">96. </span>Events<a class="headerlink" href="#events" title="Permalink to this heading">#</a></h1>
+<p>Events, together with <a class="reference internal" href="delegates.html"><span class="doc std std-doc">delegates</span></a>, essentially constitute a native implementation of the <a class="reference internal" href="observer-pattern.html"><span class="doc std std-doc">Observer pattern</span></a> in C#.
+They provide a simple and built-in way to allow objects, known as publishers, to notify other objects, known as subscribers, of some event which allows the subscribers to execute code in response to the occurrence of the event.</p>
+<div class="admonition-key-points admonition">
+<p class="admonition-title">Key points</p>
+<ul class="simple">
+<li><p>Events are built on top of <a class="reference internal" href="delegates.html"><span class="doc std std-doc">delegates</span></a>.</p></li>
+<li><p>Events, together with delegates, is a native implementation of the <a class="reference internal" href="observer-pattern.html"><span class="doc std std-doc">Observer pattern</span></a>.</p></li>
+</ul>
+</div>
+<p>Here’s how to work with events in a nutshell:</p>
+<ol class="arabic simple">
+<li><p>Declare a delegate (that will be used as the event handler delegate).</p></li>
+<li><p>Declare an event (whose subscribers must be values of the delegate).</p></li>
+<li><p>Define methods whose signatures follows the delegate.</p></li>
+<li><p>Subscribe the methods to the event.</p></li>
+<li><p>Raise the event and watch the methods get executed one by one.</p></li>
+</ol>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Events are like observables and delegates are like observers.</p>
+</div>
+<figure class="align-default" id="id1">
+<img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1147524013703307345/chrokh_serene_illustration_of_fire_watch_tower_030a13f5-90ad-4e5f-8a73-5ff913174d54.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1147524013703307345/chrokh_serene_illustration_of_fire_watch_tower_030a13f5-90ad-4e5f-8a73-5ff913174d54.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 96.1 </span><span class="caption-text">Like a fire watch tower sending out smoke alerts, weather updates, or lightning strikes, events can send different kinds of data to subscribers when the event occurs.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<section id="relation-to-observer-pattern">
+<h2>Relation to Observer pattern<a class="headerlink" href="#relation-to-observer-pattern" title="Permalink to this heading">#</a></h2>
+<p>Just like with the <a class="reference internal" href="observer-pattern.html"><span class="doc std std-doc">Observer pattern</span></a>, an event in C# is a way for a class to provide notifications to clients of that class when some interesting activity happens or some state changes. The class that raises the event is known as the ‘publisher’, and the classes that handle the event are known as ‘subscribers’.
+In the <a class="reference internal" href="observer-pattern.html"><span class="doc std std-doc">Observer pattern</span></a> we call the publishers ‘observables’ or ‘subjects’ and the subscribers ‘observers’.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Coming soon.</p>
+<p>In events lingo we say that an event is ‘raised’, ‘fired’, or ‘invoked’.
+This corresponds to the state of the observable being updated in the <a class="reference internal" href="observer-pattern.html"><span class="doc std std-doc">Observer pattern</span></a>.
+The consequence in both cases is that we have to notify the subscribers or the observers.</p>
 </div>
+<p>In the Observer pattern, the observable maintains a list of observers and notifies them of state changes, typically by calling one of their methods. The observable and observers are loosely coupled. The observable knows nothing about the observers, other than that they implement a particular interface.</p>
+<p>When using events, the publisher has an event that we register subscribers to. They are loosely coupled since the only thing they know about each other is the signature of, what’s known as the ‘event handler delegate’.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The method in a subscriber that is called when an event is fired is often called a ‘listener’.
+Subscribing to an event is therefore sometimes referred to as ‘listening to an event’.</p>
+</div>
+</section>
+<section id="relation-to-delegates">
+<h2>Relation to delegates<a class="headerlink" href="#relation-to-delegates" title="Permalink to this heading">#</a></h2>
+<p>As you know from the chapters on <a class="reference internal" href="delegates.html"><span class="doc std std-doc">Delegates</span></a>, delegates allow us to treat methods as values that can be stored and passed around.
+We’ve already learned that delegates essentially solve the same problem as the <a class="reference internal" href="strategy-pattern.html"><span class="doc std std-doc">Strategy pattern</span></a>.
+Since observers in the <a class="reference internal" href="observer-pattern.html"><span class="doc std std-doc">Observer pattern</span></a> are essentially equivalent to strategies in the <a class="reference internal" href="strategy-pattern.html"><span class="doc std std-doc">Strategy pattern</span></a>, <a class="reference internal" href="delegates.html"><span class="doc std std-doc">delegates</span></a> in C# can effectively serve the same purpose.
+In other words, when we have delegates, we don’t need a special class or interface for observers.</p>
+<p>Think about it, what do observers do?
+When the observable is updated, a certain method in the observer is executed.
+Observers, like strategies, are merely verbs turned into nouns.
+Delegates is the most compact way of solving that problem in C#.</p>
+</section>
+<section id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading">#</a></h2>
+<p>Let’s look at the basic syntax of events.
+We start by declaring a <span class="xref myst">delegate</span> whose instances will be the subscribers or observers of some event.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Define a delegate that handlers of the event will use.</span>
+<span class="k">delegate</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">MyEventHandler</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">message</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-3422.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.13:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '3422.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>Let’s then define a publisher, or in other words, an observable who can raise events.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Publisher</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Declare the event using the delegate.</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">event</span><span class="w"> </span><span class="n">MyEventHandler</span><span class="w"> </span><span class="n">MyEvent</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// This is how the event is raised.</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">RaiseEvent</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">MyEvent</span><span class="o">?.</span><span class="n">Invoke</span><span class="p">(</span><span class="s">&quot;Event raised!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The event is essentially a variable of a delegate type while the handler is essentially a method whose type signature matches that delegate.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Event handlers are sometimes also called ‘event listeners’.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The question mark at the end of <code class="docutils literal notranslate"><span class="pre">MyEvent?</span></code> is the <span class="xref myst">null-conditional operator</span> and has nothing specific to do with events or delegates.
+Its purpose here is to avoid null reference <span class="xref myst">exceptions</span> with as little <span class="xref myst">boilerplate</span> as possible.</p>
+</div>
+</section>
+<section id="basic-example">
+<h2>Basic example<a class="headerlink" href="#basic-example" title="Permalink to this heading">#</a></h2>
+<p>Let’s take an example involving podcasts and subscribers that get notified when new episodes are published.
+Here’s a definition of the <code class="docutils literal notranslate"><span class="pre">Podcast</span></code> class which will serve as the publisher.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Podcast</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Title</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Podcast</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">title</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">title</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// The delegate used for event handlers.</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">delegate</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">EpisodeReleasedHandler</span><span class="p">(</span><span class="n">Podcast</span><span class="w"> </span><span class="n">sender</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">episodeTitle</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// The dispatchable event that handlers can be registered to.</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">event</span><span class="w"> </span><span class="n">EpisodeReleasedHandler</span><span class="w"> </span><span class="n">EpisodeReleased</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">ReleaseNewEpisode</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">episodeName</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Some actual code for releasing the episode...</span>
+<span class="w">        </span><span class="n">EpisodeReleased</span><span class="o">?.</span><span class="n">Invoke</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">episodeName</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// More podcast and episode related logic...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s now define a method that we will register as an event handler.
+In other words, a method that will be run when the event is raised.
+Meaning, a subscriber.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Subscriber</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Subscriber</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// This instance method will be our event handler.</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">HandleNewEpisode</span><span class="p">(</span><span class="n">Podcast</span><span class="w"> </span><span class="n">podcast</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">episode</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;New episode for \&quot;{Name}\&quot; in \&quot;{podcast.Title}\&quot;: \&quot;{episode}\&quot;&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>At this point the subscriber is not yet subscribed to the podcast.
+For the subscriber to get notified when new episodes are added we must add the handler of an instance of <code class="docutils literal notranslate"><span class="pre">Subscriber</span></code> to the event in our instance of <code class="docutils literal notranslate"><span class="pre">Podcast</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// A publisher</span>
+<span class="n">Podcast</span><span class="w"> </span><span class="n">podcast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Podcast</span><span class="p">(</span><span class="s">&quot;My pod&quot;</span><span class="p">);</span>
+
+<span class="c1">// A subscriber who can subscribe to podcasts.</span>
+<span class="n">Subscriber</span><span class="w"> </span><span class="n">subscriber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Subscriber</span><span class="p">(</span><span class="s">&quot;Chris&quot;</span><span class="p">);</span>
+
+<span class="c1">// Register the event handler to event (i.e. subscribe).</span>
+<span class="n">podcast</span><span class="p">.</span><span class="n">EpisodeReleased</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">subscriber</span><span class="p">.</span><span class="n">HandleNewEpisode</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Notice how we here make use of <a class="reference internal" href="multicast-delegates.html"><span class="doc std std-doc">multicast delegates</span></a> through the <code class="docutils literal notranslate"><span class="pre">+=</span></code> syntax.</p>
+</div>
+<p>Now that we’ve registered the subscriber’s handler to the event, that method will be run when we fire the event.
+Let’s try it out by publishing a new episode which will fire the event.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Raising the event invokes all subscribed handlers.</span>
+<span class="n">podcast</span><span class="p">.</span><span class="n">ReleaseNewEpisode</span><span class="p">(</span><span class="s">&quot;Episode A&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>New episode for &quot;Chris&quot; in &quot;My pod&quot;: &quot;Episode A&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<p>As discussed in the chapter on <a class="reference internal" href="multicast-delegates.html"><span class="doc std std-doc">multicast delegates</span></a>, we can stack any number of callbacks in a delegate instance.
+In the case of the <a class="reference internal" href="observer-pattern.html"><span class="doc std std-doc">Observer pattern</span></a> all our subscribers have to implement some interface (usually called <code class="docutils literal notranslate"><span class="pre">IObserver</span></code>), but in the case of events the only requirement is that the handler has the signature required by the event.</p>
+<p>To exemplify that we don’t even need a subscriber class, let’s write some simple <a class="reference internal" href="local-functions.html"><span class="doc std std-doc">local functions</span></a> that we can use as event handlers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Simple local function that counts the number of episodes released.</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">numEpisodesReleased</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
+<span class="k">void</span><span class="w"> </span><span class="nf">IncrementNumEpisodesReleased</span><span class="p">(</span><span class="n">Podcast</span><span class="w"> </span><span class="n">podcast</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">episodeTitle</span><span class="p">)</span>
+<span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">numEpisodesReleased</span><span class="o">++</span><span class="p">;</span>
+
+<span class="c1">// Simple local function that prints the number of episodes released.</span>
+<span class="k">void</span><span class="w"> </span><span class="nf">PrintNumEpisodesReleased</span><span class="p">(</span><span class="n">Podcast</span><span class="w"> </span><span class="n">podcast</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">episodeTitle</span><span class="p">)</span>
+<span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{numEpisodesReleased} episodes released across all pods.&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s add the local functions as listeners to the event.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Register the new event handler to the event (i.e. subscribe).</span>
+<span class="n">podcast</span><span class="p">.</span><span class="n">EpisodeReleased</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">IncrementNumEpisodesReleased</span><span class="p">;</span>
+<span class="n">podcast</span><span class="p">.</span><span class="n">EpisodeReleased</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">PrintNumEpisodesReleased</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>What do you think happens if we now fire the event?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Raise the event again a few times.</span>
+<span class="n">podcast</span><span class="p">.</span><span class="n">ReleaseNewEpisode</span><span class="p">(</span><span class="s">&quot;Episode B&quot;</span><span class="p">);</span>
+<span class="n">podcast</span><span class="p">.</span><span class="n">ReleaseNewEpisode</span><span class="p">(</span><span class="s">&quot;Episode C&quot;</span><span class="p">);</span>
+<span class="n">podcast</span><span class="p">.</span><span class="n">ReleaseNewEpisode</span><span class="p">(</span><span class="s">&quot;Episode D&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>New episode for &quot;Chris&quot; in &quot;My pod&quot;: &quot;Episode B&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 episodes released across all pods.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>New episode for &quot;Chris&quot; in &quot;My pod&quot;: &quot;Episode C&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 episodes released across all pods.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>New episode for &quot;Chris&quot; in &quot;My pod&quot;: &quot;Episode D&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 episodes released across all pods.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>Why does the output say that we’ve released 3 and not 4 episodes, even though we raised the event 4 times in total in this chapter?</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>The output says that we’ve released 3 and not 4 episodes because the event handler that counts releases was not listening to the event when the event was fired for the first time.</p>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Events in C# can have modifiers such as <code class="docutils literal notranslate"><span class="pre">virtual</span></code>, <code class="docutils literal notranslate"><span class="pre">abstract</span></code>, <code class="docutils literal notranslate"><span class="pre">override</span></code>, <code class="docutils literal notranslate"><span class="pre">sealed</span></code>, <code class="docutils literal notranslate"><span class="pre">static</span></code>, and more. These can help you control, for example, how events are used in inherited classes.</p>
+</div>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>Events in C# elegantly solve the same problem as the <a class="reference internal" href="observer-pattern.html"><span class="doc std std-doc">Observer pattern</span></a>. They enable an object (the publisher) to notify other objects (the subscribers) when something of interest occurs. By using events, which are built on top of delegates, you enable a clean separation of concerns, which results in more <span class="xref myst">maintainable</span> code.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="delegates.html"><span class="doc std std-doc">Delegates</span></a></p></li>
+<li><p><a class="reference internal" href="observer-pattern.html"><span class="doc std std-doc">Observer pattern</span></a></p></li>
+</ul>
+</div>
+<p>By understanding events, <a class="reference internal" href="delegates.html"><span class="doc std std-doc">delegates</span></a> and the <a class="reference internal" href="observer-pattern.html"><span class="doc std std-doc">Observer pattern</span></a> in C#, you will have grasped the mechanics behind <span class="xref myst">event-based programming</span> which is a powerful architecture that some even call its own <span class="xref myst">paradigm</span>.
+You’re also on your way to understand the <span class="xref myst">asynchronous programming model</span> which we’ll talk about much later.</p>
+<p>In the next chapter we’ll talk about important <a class="reference internal" href="event-conventions.html"><span class="doc std std-doc">conventions</span></a> in C# related to events.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -333,12 +704,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="iterator-pattern.html">
+          <a class="next-page" href="event-conventions.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">97. </span>Iterator pattern</div>
+                <div class="title"><span class="section-number">97. </span>Event conventions</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -371,8 +742,31 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">96. Events</a><ul>
+<li><a class="reference internal" href="#relation-to-observer-pattern">Relation to Observer pattern</a></li>
+<li><a class="reference internal" href="#relation-to-delegates">Relation to delegates</a></li>
+<li><a class="reference internal" href="#syntax">Syntax</a></li>
+<li><a class="reference internal" href="#basic-example">Basic example</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

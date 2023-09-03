@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="98. Enumerables" href="enumerables.html" /><link rel="prev" title="96. Events" href="events.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="100. Enumerables" href="enumerables.html" /><link rel="prev" title="98. Event-driven programming" href="event-driven-programming.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>97. Iterator pattern - The Object Oriented Way</title>
+        <title>99. Iterator pattern - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -261,12 +261,14 @@
 <li class="toctree-l1"><a class="reference internal" href="multicast-delegates.html">94. Multicast delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="observer-pattern.html">95. Observer pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="events.html">96. Events</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">97. Iterator pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="enumerables.html">98. Enumerables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variance.html">99. Variance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">100. Liskov substitution principle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">101. Variant generic interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">102. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-conventions.html">97. Event conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-driven-programming.html">98. Event-driven programming</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">99. Iterator pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enumerables.html">100. Enumerables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variance.html">101. Variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">102. Liskov substitution principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">103. Variant generic interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">104. Bibliography</a></li>
 </ul>
 
 </div>
@@ -302,14 +304,14 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="iterator-pattern">
-<h1><span class="section-number">97. </span>Iterator pattern<a class="headerlink" href="#iterator-pattern" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">99. </span>Iterator pattern<a class="headerlink" href="#iterator-pattern" title="Permalink to this heading">#</a></h1>
 <p>The Iterator pattern is one of the foundational design patterns that offers a sequential way to access elements of an iterable object without needing to expose the object’s underlying data structure.
 An iterable object is often also called an ‘aggregate object’ because it ‘aggregates’ values. Anything that can produce a sequence of values can be thought of as an iterable or aggregator.</p>
 <p>The Iterator pattern decouples the client code from the iterable object’s internal structure, allowing items to be navigated and accessed without providing direct access to the underlying representation.</p>
 <figure class="align-default" id="id1">
 <img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1143511292011876372/chrokh_simple_conveyor_belt_simple_illustration_12521e3d-8d7a-4bfe-bd26-e40b7ad07aca.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1143511292011876372/chrokh_simple_conveyor_belt_simple_illustration_12521e3d-8d7a-4bfe-bd26-e40b7ad07aca.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 97.1 </span><span class="caption-text">Just like how items on a conveyor belt are presented one by one without need to know about the machine that feeds the belt, the Iterator pattern allows for sequential access without exposing the structure of the underlying collection.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 99.1 </span><span class="caption-text">Just like how items on a conveyor belt are presented one by one without need to know about the machine that feeds the belt, the Iterator pattern allows for sequential access without exposing the structure of the underlying collection.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="admonition-key-points admonition">
@@ -343,10 +345,10 @@ With the iterator pattern we encapsulate the iteration and can change the struct
 <p>A typical implementation of the Iterator pattern comprises two primary components: the iterator and the iterable (which is sometimes called the ‘aggregator’).</p>
 <figure class="align-default" id="fig-iterator-pattern">
 <img alt="https://upload.wikimedia.org/wikipedia/commons/1/13/Iterator_UML_class_diagram.svg" src="https://upload.wikimedia.org/wikipedia/commons/1/13/Iterator_UML_class_diagram.svg" /><figcaption>
-<p><span class="caption-number">Fig. 97.2 </span><span class="caption-text">UML class diagram of Iterator pattern. [<a class="reference external" href="https://en.wikipedia.org/wiki/Iterator_pattern#/media/File:Iterator_UML_class_diagram.svg">Source</a>]</span><a class="headerlink" href="#fig-iterator-pattern" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 99.2 </span><span class="caption-text">UML class diagram of Iterator pattern. [<a class="reference external" href="https://en.wikipedia.org/wiki/Iterator_pattern#/media/File:Iterator_UML_class_diagram.svg">Source</a>]</span><a class="headerlink" href="#fig-iterator-pattern" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>In the UML class diagram <a class="reference internal" href="#fig-iterator-pattern"><span class="std std-numref">Fig. 97.2</span></a>, the structure can be broken down as follows:</p>
+<p>In the UML class diagram <a class="reference internal" href="#fig-iterator-pattern"><span class="std std-numref">Fig. 99.2</span></a>, the structure can be broken down as follows:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Aggregator</span></code>: This is an interface that defines a method for creating an Iterator object. In some diagrams this interface called the <code class="docutils literal notranslate"><span class="pre">Iterable</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ConcreteAggregator</span></code>: This class implements the <code class="docutils literal notranslate"><span class="pre">Iterable</span></code> interface and returns an instance of the <code class="docutils literal notranslate"><span class="pre">ConcreteIterator</span></code>. In some diagrams this class is called <code class="docutils literal notranslate"><span class="pre">ConcreteIterable</span></code>.</p></li>
@@ -375,7 +377,7 @@ Here’s a naive design that we might end up with if we didn’t know about the 
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-4520.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-4556.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -420,12 +422,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.110:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.13:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '4520.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '4556.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -840,18 +842,18 @@ Let’s redefine our generic iterator interface.</p>
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">98. </span>Enumerables</div>
+                <div class="title"><span class="section-number">100. </span>Enumerables</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="events.html">
+          <a class="prev-page" href="event-driven-programming.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">96. </span>Events</div>
+                <div class="title"><span class="section-number">98. </span>Event-driven programming</div>
                 
               </div>
             </a>
@@ -885,7 +887,7 @@ Let’s redefine our generic iterator interface.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">97. Iterator pattern</a><ul>
+<li><a class="reference internal" href="#">99. Iterator pattern</a><ul>
 <li><a class="reference internal" href="#intent">Intent</a></li>
 <li><a class="reference internal" href="#structure">Structure</a></li>
 <li><a class="reference internal" href="#example">Example</a></li>
