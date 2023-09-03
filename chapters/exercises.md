@@ -1620,3 +1620,122 @@ We say that dependency injection separate 'construction' from 'use', what is mea
 %```
 %```{exercise-end}
 %```
+
+%## Events
+%
+%```{exercise}
+%What are events and why are they useful?
+%```
+%
+%```{exercise}
+%How are delegates used in events?
+%```
+%
+%```{exercise}
+%It could be argued that events and delegates together solve the same problem as the observer pattern do.
+%How so?
+%```
+%
+%```{exercise}
+%What is event-driven programming?
+%```
+%
+%```{exercise-start}
+%```
+%Rewrite the observer `CipherLog` that we wrote in {numref}`ex:observer-pattern:cipher-log` as a method that we can add as an event handler to the event `Encoded` on instances of `ObservableCipher`.
+%```{code-cell} csharp
+%:tags: [remove-input]
+%class CipherLog
+%{
+%  List<(string,string)> log = new List<(string,string)>();
+%  public void Update (string input, string output)
+%    => log.Add((input, output));
+%  public string ToTSV()
+%  {
+%    string output = "INPUT\tOUTPUT\n";
+%    foreach (var entry in log)
+%      output += $"{entry.Item1}\t{entry.Item2}\n";
+%    return output;
+%  }
+%}
+%```
+%```{code-cell} csharp
+%// Instantiate observable cipher.
+%ObservableCipher<string,string> observable
+%  = new ObservableCipher<string,string>(new ReverseCipher());
+%
+%// Instantiate log that will observe.
+%CipherLog log = new CipherLog();
+%
+%// Add the log's update method as an event handler.
+%observable.Encoded += log.Update;
+%
+%// Run the encoding on the observable.
+%observable.Encode("abc");
+%observable.Encode("ABC");
+%observable.Encode("123");
+%
+%// Print the log.
+%Console.WriteLine(log.ToTSV());
+%```
+%```{exercise-end}
+%```
+%
+%
+%
+%
+%
+%
+%```{exercise-start}
+%```
+%Instantiate two observable ciphers and call them `o1` and `o2`.
+%The first should wrap a reverse cipher and the other a Caesar cipher with steps set to 1.
+%
+%Then instantiate two logs and call them `log1` and `log2`.
+%The first log should be updated whenever any of the two ciphers encode data.
+%The second log should only be updated when the first cipher encode data.
+%
+%```{code-cell} csharp
+%:tags: [remove-input]
+%ObservableCipher<string,string> o1
+%  = new ObservableCipher<string,string>(new ReverseCipher());
+%ObservableCipher<string,string> o2
+%  = new ObservableCipher<string,string>(new ReverseCipher());
+%
+%CipherLog log1 = new CipherLog();
+%CipherLog log2 = new CipherLog();
+%
+%o1.Encoded += log1.Update;
+%o1.Encoded += log2.Update;
+%o2.Encoded += log1.Update;
+%```
+%
+%Then encode the following data using the first observable:
+%
+%```{code-cell} csharp
+%o1.Encode("abc");
+%o1.Encode("ABC");
+%```
+%
+%And the following input using the second observable:
+%
+%```{code-cell} csharp
+%o2.Encode("123");
+%o2.Encode("987");
+%```
+%
+%If you've followed these instructions precisely, then `log1` should report the following when we print it:
+%
+%```{code-cell} csharp
+%Console.WriteLine(log1.ToTSV());
+%```
+%
+%However `log2` should only contain the following:
+%
+%```{code-cell} csharp
+%Console.WriteLine(log2.ToTSV());
+%```
+%Bonus question: Why is the output of the two logs different?
+%```{exercise-end}
+%```
+%

@@ -3,7 +3,12 @@
 - Coupling.
 - Replace UML diagram in patterns chapters!
 - Add Key point boxes to Strategy and Bridge chapters.
+- The word built-in should not have a hyphen. Inconsistent usage.
 - Optional parameters.
+- Should we always link to the docs when discussing classes like EventArgs, List, etc?
+- Boilerplate code.
+- Should subsection on Event conventions be its own chapter?
+- Null reference exceptions. Have linked these to exceptions chapter.
 - Local functions should be PascalCase not camelCase.
 - Local functions should mention terminology: unary, binary, ternary, etc.
 - Perhaps the mermaid example should be extracted from the chapter on composition over inheritance to a new chapter called 'Substitutability'?

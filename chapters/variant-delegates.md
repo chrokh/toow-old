@@ -14,6 +14,37 @@ kernelspec:
 
 % Probably the simplest way to explain variance concretely.
 
+% NOTE: WHEN DO WE NEED TO EXPLICITLY USE in AND out? Why does it not always work? Why does it work sometimes? THE ISSUE IS 'ASSIGNING ONE DELEGATE TO ANOTHER'!! Very bad example:
+%```{code-cell}
+%void OldHandler (object sender, EventArgs a) { }
+%void NewHandler(object sender, MyEventArgs a) { }
+%void GeneralHandler(object sender, object a) { }
+%
+%EventHandler2<MyEventArgs> myHandler = NewHandler;
+%EventHandler2<EventArgs> newHandler = OldHandler;
+%EventHandler2<object> generalHandler = GeneralHandler;
+%
+%// These do not work without `in T`.
+%myHandler = newHandler;
+%myHandler = generalHandler;
+%newHandler = generalHandler;
+%
+%Publisher pub = new Publisher();
+%// These work without `in T`.
+%pub.Happened += OldHandler;
+%pub.Happened += NewHandler;
+%pub.Happened += GeneralHandler;
+%
+%class MyEventArgs : EventArgs { }
+%
+%public delegate void EventHandler2<in T>(object sender, T e);
+%
+%class Publisher
+%{
+%    public event EventHandler2<MyEventArgs> Happened;
+%}
+%```
+
 Methods don't have to match the type of a delegate *exactly* in order to be considered members.
 Like we learned in the chapter on [variance](variance), input types can be contravariant, and output types can be covariant.
 
