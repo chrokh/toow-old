@@ -42,6 +42,7 @@ If you're completely new to coding I recommend that you use the online environme
 ## Getting started with Replit
 
 Here's a quick overview of how to get started using [Replit](https://replit.com).
+This is a development environment that you can run directly in your web browser.
 
 1. Navigate to [replit.com](https://replit.com) and create an account.
 2. Press the button 'Create Repl'.
@@ -89,7 +90,8 @@ Coming soon.
 
 ## Getting started with Visual studio
 
-Let's look at how to get started if you're using the program Microsoft Visual Studio.
+Here's a quick overview of how to get started using the program Microsft Visual Studio.
+This is an application that you have to download and run on your own computer.
 
 ```{warning}
 Microsoft will drop support for Visual Studio on Mac so it is not advisable to learn Visual Studio if you're on a Mac.
