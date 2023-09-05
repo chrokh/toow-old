@@ -349,6 +349,11 @@ The consequence in both cases is that we have to notify the subscribers or the o
 <p>The method in a subscriber that is called when an event is fired is often called a ‘listener’.
 Subscribing to an event is therefore sometimes referred to as ‘listening to an event’.</p>
 </div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Events in C# take the Observer pattern a step further by adding an extra layer of encapsulation.
+Events can only be raised from within the class that they are declared.</p>
+</div>
 </section>
 <section id="relation-to-delegates">
 <h2>Relation to delegates<a class="headerlink" href="#relation-to-delegates" title="Permalink to this heading">#</a></h2>
@@ -375,7 +380,7 @@ We start by declaring a <span class="xref myst">delegate</span> whose instances 
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3422.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3324.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -420,12 +425,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.13:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.209:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3422.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3324.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -551,7 +556,7 @@ Meaning, a subscriber.</p>
 <span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
 
 <span class="w">    </span><span class="c1">// This instance method will be our event handler.</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">HandleNewEpisode</span><span class="p">(</span><span class="n">Podcast</span><span class="w"> </span><span class="n">podcast</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">episode</span><span class="p">)</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">HandleEpisodeReleased</span><span class="p">(</span><span class="n">Podcast</span><span class="w"> </span><span class="n">podcast</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">episode</span><span class="p">)</span>
 <span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;New episode for \&quot;{Name}\&quot; in \&quot;{podcast.Title}\&quot;: \&quot;{episode}\&quot;&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
@@ -569,7 +574,7 @@ For the subscriber to get notified when new episodes are added we must add the h
 <span class="n">Subscriber</span><span class="w"> </span><span class="n">subscriber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Subscriber</span><span class="p">(</span><span class="s">&quot;Chris&quot;</span><span class="p">);</span>
 
 <span class="c1">// Register the event handler to event (i.e. subscribe).</span>
-<span class="n">podcast</span><span class="p">.</span><span class="n">EpisodeReleased</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">subscriber</span><span class="p">.</span><span class="n">HandleNewEpisode</span><span class="p">;</span>
+<span class="n">podcast</span><span class="p">.</span><span class="n">EpisodeReleased</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">subscriber</span><span class="p">.</span><span class="n">HandleEpisodeReleased</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>

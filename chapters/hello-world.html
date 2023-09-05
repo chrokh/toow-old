@@ -141,7 +141,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -297,7 +297,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -305,29 +305,128 @@
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="hello-world">
 <h1><span class="section-number">2. </span>Hello world<a class="headerlink" href="#hello-world" title="Permalink to this heading">#</a></h1>
-<p>Think of writing your first program as saying your first word. It’s a profound moment, a starting point for countless conversations with your computer. In programming, that first word is usually “Hello, World!”</p>
+<p>Think of writing your first program as saying your first word. It’s a profound moment, a starting point for countless conversations with your computer. In programming, that first word is usually ‘Hello, World!’.
+Here’s the gist of that program:</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we run that program, here’s what we get:</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, World!
+</pre></div>
+</div>
+</div>
+</div>
 <figure class="align-default" id="id1">
-<img alt="https://media.discordapp.net/attachments/1118630713084870736/1121391240424980601/chrokh_an_oil_painting_of_a_baby_speaking_into_a_microphone_exp_d3b27104-696c-4f67-b482-463f4c387e2e.png" src="https://media.discordapp.net/attachments/1118630713084870736/1121391240424980601/chrokh_an_oil_painting_of_a_baby_speaking_into_a_microphone_exp_d3b27104-696c-4f67-b482-463f4c387e2e.png" />
+<img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1148542428651991051/chrokh_illustration_of_a_rocket_launching_efce4cd4-15b5-48f7-a529-f41d0af4b2ab.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1148542428651991051/chrokh_illustration_of_a_rocket_launching_efce4cd4-15b5-48f7-a529-f41d0af4b2ab.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">‘Hello, World!’ - The first output of a new coder, like a baby’s first words.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">Like a rocket ready to launch, ‘Hello World’ is the program that propels you into the wonderfully powerful world of coding.
+Life will never be the same again.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>To start our conversation in C#, we’ll use a tool called Visual Studio. Ensure you’ve installed it and follow these steps to create your first C# Console project:</p>
-<ol class="arabic simple">
-<li><p>Open Visual Studio and select “Create a new project”.</p></li>
-<li><p>In the project template screen, select “Console App (.NET)” and click “Next”.</p></li>
-<li><p>Name your Project and Solution “Hello World”, choose a location to save your project, and click “Next”.</p></li>
-<li><p>Ensure that the target framework is <strong>.NET 7.0</strong> and “Do not use top-level statements” is <strong>unchecked</strong>. Then, click “Create”.</p></li>
-<li><p>After the project is created, you’ll see a file named “Program.cs” opened in the editor with the following lines:</p></li>
+<p>To be able to write this monumental program we must first decide where we’re going to write and execute our code.
+We usually refer to this as what ‘development environment’ we’re using.</p>
+<p>If you’re completely new to coding I recommend that you use the online environment Replit but we’ll also outline the basics steps for if you want to use ‘Visual Studio Code’ (also known as VS Code), or ‘Visual Studio’ as well.</p>
+<section id="getting-started-with-replit">
+<h2>Getting started with Replit<a class="headerlink" href="#getting-started-with-replit" title="Permalink to this heading">#</a></h2>
+<p>Here’s a quick overview of how to get started using <a class="reference external" href="https://replit.com">Replit</a>.
+This is a development environment that you can run directly in your web browser.</p>
+<ol class="arabic">
+<li><p>Navigate to <a class="reference external" href="https://replit.com">replit.com</a> and create an account.</p></li>
+<li><p>Press the button ‘Create Repl’.</p></li>
+<li><p>Choose the Template ‘C#’. Do <em>not</em> choose the template ‘Mono C#’.</p></li>
+<li><p>Give your Repl a Title and click ‘Create Repl’.</p></li>
+<li><p>Open the main code which is called <code class="docutils literal notranslate"><span class="pre">main.cs</span></code> and verify that Replit has generated the following code for you:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Program</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Main</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;Hello World&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Open the project file which is called <code class="docutils literal notranslate"><span class="pre">main.csproj</span></code> and remove the line that says:</p>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;StartupObject&gt;Program&lt;/StartupObject&gt;</span></code></p>
+<p>If you keep the line you will disable the feature known as <a class="reference internal" href="top-level-statements.html"><span class="doc std std-doc">top-level statements</span></a> which will make our coming steps unnecessarily complicated.</p>
+</li>
+<li><p>Go back to the main code file (<code class="docutils literal notranslate"><span class="pre">main.cs</span></code>) and replace its contents with the following simpler program that makes use of what we later will learn is called <a class="reference internal" href="top-level-statements.html"><span class="doc std std-doc">top-level statements</span></a>:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+<li><p>Run your program by clicking the green ‘Play’ button in the top or using the shortcut <code class="docutils literal notranslate"><span class="pre">Cmd+Enter</span></code> on Mac or <code class="docutils literal notranslate"><span class="pre">Ctrl+Enter</span></code> on Windows.</p></li>
+<li><p>Verify that the output you get is:</p>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">Hello, World!</span>
+</pre></div>
+</div>
+</li>
 </ol>
+</section>
+<section id="getting-started-with-visual-studio-code">
+<h2>Getting started with Visual Studio Code<a class="headerlink" href="#getting-started-with-visual-studio-code" title="Permalink to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Coming soon.</p>
+</div>
+</section>
+<section id="getting-started-with-visual-studio">
+<h2>Getting started with Visual studio<a class="headerlink" href="#getting-started-with-visual-studio" title="Permalink to this heading">#</a></h2>
+<p>Here’s a quick overview of how to get started using the program Microsft Visual Studio.
+This is an application that you have to download and run on your own computer.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Microsoft will drop support for Visual Studio on Mac so it is not advisable to learn Visual Studio if you’re on a Mac.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>More detailed instructions can be found in a <a class="reference external" href="https://learn.microsoft.com/en-us/visualstudio/get-started/csharp/tutorial-console?view=vs-2022">tutorial published by Microsoft</a>.</p>
+</div>
+<ol class="arabic">
+<li><p>Download and install <a class="reference external" href="https://visualstudio.microsoft.com">Visual Studio</a>.</p></li>
+<li><p>Open Visual Studio and select ‘Create a new project’.</p></li>
+<li><p>In the project template screen, select ‘Console App (.NET)’ and click ‘Next’.</p></li>
+<li><p>Give your ‘Project’ and ‘Solution’ a name (such as ‘Hello World’), choose a location to save your project, and click ‘Next’.</p></li>
+<li><p>Ensure that the target framework is <strong>.NET 7.0</strong> and ‘Do not use top-level statements’ is <strong>unchecked</strong>. Then, click ‘Create’.</p></li>
+<li><p>After the project is created, you’ll see a file named <code class="docutils literal notranslate"><span class="pre">Program.cs</span></code> opened in the editor with the following lines:</p>
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// See https://aka.ms/new-console-template for more information</span>
 <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>This is your first C# program! It was generated automatically when you created your project.</p>
-<p>The first line is a comment, which is a note for programmers and is ignored by the C# compiler. The link leads to more information about the new console project structure.</p>
-<p>The second line is a statement that calls the WriteLine method of the Console class, which prints the phrase “Hello, World!” to the terminal.</p>
-<p>To run your program, simply click the green “Play” button in the toolbar, or navigate to “Debug” in the top menu and select “Start Debugging”. This action compiles your code into a language your computer understands and then executes it. Don’t worry about the details for now; we’ll dive into this process in the upcoming chapters.</p>
+</li>
+<li><p>Run your program by clicking the green ‘Play’ button in the top or using the shortcut <code class="docutils literal notranslate"><span class="pre">Cmd+Enter</span></code> on Mac or <code class="docutils literal notranslate"><span class="pre">F5</span></code> on Windows.
+Alternatively, you can navigate to <code class="docutils literal notranslate"><span class="pre">Debug</span> <span class="pre">&gt;</span> <span class="pre">Start</span> <span class="pre">Debugging</span></code> in the top menu.</p></li>
+<li><p>Verify that the output you get is:</p>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">Hello, World!</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you find that the terminal window opens and immediately closes after running your program, it’s because your terminal is set to close when the program finishes executing. The simplest workaround is to add <code class="docutils literal notranslate"><span class="pre">Console.ReadKey();</span></code> on a new last line of the file.</p>
+<p>This extra line of code tells your program to wait for a keypress before closing the terminal window, which causes the window to remain open.</p>
+</div>
+</section>
+<section id="running-your-first-program">
+<h2>Running your first program<a class="headerlink" href="#running-your-first-program" title="Permalink to this heading">#</a></h2>
+<p>When you’re pressing the ‘Play’ button in your development environment your code is <a class="reference internal" href="compilation.html"><span class="doc std std-doc">compiled</span></a> into a language that your computer understands and then <a class="reference internal" href="execution.html"><span class="doc std std-doc">executes</span></a> it. Don’t worry about the details for now, we’ll explain what all this means in the coming chapters.</p>
+<p>If you’ve got lines starting with two forward slashes (<code class="docutils literal notranslate"><span class="pre">//</span></code>) then these are <a class="reference internal" href="comments.html#comments"><span class="std std-ref">comments</span></a>.
+Comments are like notes for programmers and these are ignored by the compiler.
+We’ll talk more about this later.</p>
+<p>If you’ve got lines starting with the word <code class="docutils literal notranslate"><span class="pre">using</span></code> then this is an <span class="xref myst">import</span> which makes additional types available to your program. In this case it makes it possible for us to use the <code class="docutils literal notranslate"><span class="pre">Console</span></code> class. We’ll explain this later on so don’t worry about this line now but keep it in.</p>
+<p>The line that reads <code class="docutils literal notranslate"><span class="pre">Console.WriteLine(&quot;Hello</span> <span class="pre">world&quot;);</span></code> is however a <a class="reference internal" href="statements.html#statements"><span class="std std-ref">statement</span></a>.
+It calls the static <code class="docutils literal notranslate"><span class="pre">WriteLine</span></code> <a class="reference internal" href="static-methods.html"><span class="doc std std-doc">method</span></a> of the <code class="docutils literal notranslate"><span class="pre">Console</span></code> class, passing the <a class="reference internal" href="data-types.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">string</span></code></span></a> <a class="reference internal" href="values.html"><span class="doc std std-doc">value</span></a> <code class="docutils literal notranslate"><span class="pre">&quot;Hello,</span> <span class="pre">World!&quot;</span></code>, which causes that message to be printed to the terminal.</p>
+<p>This is your first program! Hooray.
+Let’s run it by pressing the ‘Play’ button.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="p">);</span>
@@ -335,126 +434,20 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-<div>
-    <div id='dotnet-interactive-this-cell-4107.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
-        The below script needs to be able to find the current output cell; this is an easy method to get it.
-    </div>
-    <script type='text/javascript'>
-async function probeAddresses(probingAddresses) {
-    function timeout(ms, promise) {
-        return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                reject(new Error('timeout'))
-            }, ms)
-            promise.then(resolve, reject)
-        })
-    }
-
-    if (Array.isArray(probingAddresses)) {
-        for (let i = 0; i < probingAddresses.length; i++) {
-
-            let rootUrl = probingAddresses[i];
-
-            if (!rootUrl.endsWith('/')) {
-                rootUrl = `${rootUrl}/`;
-            }
-
-            try {
-                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
-                    method: 'POST',
-                    cache: 'no-cache',
-                    mode: 'cors',
-                    timeout: 1000,
-                    headers: {
-                        'Content-Type': 'text/plain'
-                    },
-                    body: probingAddresses[i]
-                }));
-
-                if (response.status == 200) {
-                    return rootUrl;
-                }
-            }
-            catch (e) { }
-        }
-    }
-}
-
-function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.13:2048/", "http://127.0.0.1:2048/"])
-        .then((root) => {
-        // use probing to find host url and api resources
-        // load interactive helpers and language services
-        let dotnetInteractiveRequire = require.config({
-        context: '4107.Microsoft.DotNet.Interactive.Http.HttpPort',
-                paths:
-            {
-                'dotnet-interactive': `${root}resources`
-                }
-        }) || require;
-
-            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
-
-            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
-                let paths = {};
-                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
-                
-                let internalRequire = require.config({
-                    context: extensionCacheBuster,
-                    paths: paths,
-                    urlArgs: `cacheBuster=${extensionCacheBuster}`
-                    }) || require;
-
-                return internalRequire
-            };
-        
-            dotnetInteractiveRequire([
-                    'dotnet-interactive/dotnet-interactive'
-                ],
-                function (dotnet) {
-                    dotnet.init(window);
-                },
-                function (error) {
-                    console.log(error);
-                }
-            );
-        })
-        .catch(error => {console.log(error);});
-    }
-
-// ensure `require` is available globally
-if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
-    let require_script = document.createElement('script');
-    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
-    require_script.setAttribute('type', 'text/javascript');
-    
-    
-    require_script.onload = function() {
-        loadDotnetInteractiveApi();
-    };
-
-    document.getElementsByTagName('head')[0].appendChild(require_script);
-}
-else {
-    loadDotnetInteractiveApi();
-}
-
-    </script>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, World!
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, World!
 </pre></div>
 </div>
 </div>
 </div>
-<p>If you find that the terminal window opens and immediately closes after running your program, it’s because your terminal is set to close when the program finishes executing. A simple workaround is to add <code class="docutils literal notranslate"><span class="pre">Console.ReadKey();</span></code> after the <code class="docutils literal notranslate"><span class="pre">WriteLine</span></code> statement, like this:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// See https://aka.ms/new-console-template for more information</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">ReadKey</span><span class="p">();</span>
-</pre></div>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>Congratulations on writing and running your first program! This might feel like a small step, but it’s the start of a grand journey into the wonderfully powerful world of programming. Your life is never going to be the same again. In the next chapter, we’ll begin to uncover the magic that transforms your code into an application your computer can run. Exciting times ahead!</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Currently, your program prints <code class="docutils literal notranslate"><span class="pre">Hello,</span> <span class="pre">World!</span></code>. Can you change the program so that it prints a different message of your choice? Maybe <code class="docutils literal notranslate"><span class="pre">Hello,</span> <span class="pre">my</span> <span class="pre">name</span> <span class="pre">is</span> <span class="pre">&lt;your</span> <span class="pre">name&gt;.</span></code>.</p>
 </div>
-<p>This extra line of code tells your program to wait for a keypress before closing the terminal window, which causes the window to remain open.</p>
-<p>Before leaving this chapter, let’s try to change the message that the program prints. Currently, your program prints <code class="docutils literal notranslate"><span class="pre">Hello,</span> <span class="pre">World!</span></code>. Can you change the program so that it prints a different message of your choice?</p>
-<p>Congratulations on writing and running your first program! This might feel like a small step, but it’s the start of a grand journey into the world of programming. In the next chapter, we’ll begin to uncover the magic that transforms your code into an application your computer can run. Exciting times ahead!</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -519,8 +512,31 @@ else {
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">2. Hello world</a><ul>
+<li><a class="reference internal" href="#getting-started-with-replit">Getting started with Replit</a></li>
+<li><a class="reference internal" href="#getting-started-with-visual-studio-code">Getting started with Visual Studio Code</a></li>
+<li><a class="reference internal" href="#getting-started-with-visual-studio">Getting started with Visual studio</a></li>
+<li><a class="reference internal" href="#running-your-first-program">Running your first program</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

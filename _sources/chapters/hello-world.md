@@ -12,54 +12,149 @@ kernelspec:
 
 # Hello world
 
-Think of writing your first program as saying your first word. It's a profound moment, a starting point for countless conversations with your computer. In programming, that first word is usually "Hello, World!"
+Think of writing your first program as saying your first word. It's a profound moment, a starting point for countless conversations with your computer. In programming, that first word is usually 'Hello, World!'.
+Here's the gist of that program:
 
-%https://media.discordapp.net/attachments/1118630713084870736/1121352394454872104/chrokh_an_illustration_of_a_baby_speaking_into_a_microphone_8b6183c9-6680-437d-ae58-b6cff4098a00.png?width=2422&height=1358
-%https://media.discordapp.net/attachments/1118630713084870736/1121355527608356964/chrokh_an_illustration_of_a_happy_baby_speaking_into_a_micropho_59809871-589a-4aa4-a2a3-9c1e81457dc8.png?width=2700&height=1350
-%https://media.discordapp.net/attachments/1118630713084870736/1121353002993856512/chrokh_an_illustration_of_a_baby_and_a_microphone_32bf9db1-b834-44e2-b3a5-1eb2083b7ea8.png?width=2422&height=1358
-%https://media.discordapp.net/attachments/1118630713084870736/1121367396259745902/chrokh_an_illustration_of_a_baby_speaking_into_a_microphone_pin_12c6390e-e19d-46d8-b1d5-b6553f99233f.png?width=2700&height=1350
-%https://media.discordapp.net/attachments/1118630713084870736/1122828342392004698/chrokh_a_simple_flat_illustration_of_a_happy_baby_talking_into__473a52d4-508f-4616-a2d6-47efb2e9fbb6.png?width=2700&height=1180
-
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1121391240424980601/chrokh_an_oil_painting_of_a_baby_speaking_into_a_microphone_exp_d3b27104-696c-4f67-b482-463f4c387e2e.png
-
-'Hello, World!' - The first output of a new coder, like a baby's first words.
-```
-
-To start our conversation in C#, we'll use a tool called Visual Studio. Ensure you've installed it and follow these steps to create your first C# Console project:
-
-1. Open Visual Studio and select "Create a new project".
-1. In the project template screen, select "Console App (.NET)" and click "Next".
-1. Name your Project and Solution "Hello World", choose a location to save your project, and click "Next".
-1. Ensure that the target framework is **.NET 7.0** and "Do not use top-level statements" is **unchecked**. Then, click "Create".
-1. After the project is created, you'll see a file named "Program.cs" opened in the editor with the following lines:
-
-```csharp
-// See https://aka.ms/new-console-template for more information
+```{code-cell}
+:tags: ["remove-output"]
 Console.WriteLine("Hello, World!");
 ```
 
-This is your first C# program! It was generated automatically when you created your project.
+If we run that program, here's what we get:
 
-The first line is a comment, which is a note for programmers and is ignored by the C# compiler. The link leads to more information about the new console project structure.
-
-The second line is a statement that calls the WriteLine method of the Console class, which prints the phrase "Hello, World!" to the terminal.
-
-To run your program, simply click the green "Play" button in the toolbar, or navigate to "Debug" in the top menu and select "Start Debugging". This action compiles your code into a language your computer understands and then executes it. Don't worry about the details for now; we'll dive into this process in the upcoming chapters.
-
-```{code-cell} csharp
+```{code-cell}
+:tags: ["remove-input"]
 Console.WriteLine("Hello, World!");
 ```
 
-If you find that the terminal window opens and immediately closes after running your program, it's because your terminal is set to close when the program finishes executing. A simple workaround is to add `Console.ReadKey();` after the `WriteLine` statement, like this:
-
-```csharp
-// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
-Console.ReadKey();
+```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1148542428651991051/chrokh_illustration_of_a_rocket_launching_efce4cd4-15b5-48f7-a529-f41d0af4b2ab.png
+Like a rocket ready to launch, 'Hello World' is the program that propels you into the wonderfully powerful world of coding.
+Life will never be the same again.
 ```
+
+To be able to write this monumental program we must first decide where we're going to write and execute our code.
+We usually refer to this as what 'development environment' we're using.
+
+If you're completely new to coding I recommend that you use the online environment Replit but we'll also outline the basics steps for if you want to use 'Visual Studio Code' (also known as VS Code), or 'Visual Studio' as well.
+
+
+
+## Getting started with Replit
+
+Here's a quick overview of how to get started using [Replit](https://replit.com).
+This is a development environment that you can run directly in your web browser.
+
+1. Navigate to [replit.com](https://replit.com) and create an account.
+2. Press the button 'Create Repl'.
+3. Choose the Template 'C#'. Do *not* choose the template 'Mono C#'.
+4. Give your Repl a Title and click 'Create Repl'.
+5. Open the main code which is called `main.cs` and verify that Replit has generated the following code for you:
+
+    ```csharp
+    using System;
+
+    class Program {
+        public static void Main (string[] args) {
+          Console.WriteLine ("Hello World");
+        }
+    }
+    ```
+6. Open the project file which is called `main.csproj` and remove the line that says:
+
+    `<StartupObject>Program</StartupObject>`
+
+    If you keep the line you will disable the feature known as [top-level statements](top-level-statements) which will make our coming steps unnecessarily complicated.
+
+7. Go back to the main code file (`main.cs`) and replace its contents with the following simpler program that makes use of what we later will learn is called [top-level statements](top-level-statements):
+
+    ```csharp
+    using System;
+
+    Console.WriteLine("Hello, World!");
+    ```
+
+8. Run your program by clicking the green 'Play' button in the top or using the shortcut `Cmd+Enter` on Mac or `Ctrl+Enter` on Windows.
+9. Verify that the output you get is:
+
+    ```output
+    Hello, World!
+    ```
+
+
+## Getting started with Visual Studio Code
+
+```{note}
+Coming soon.
+```
+
+
+## Getting started with Visual studio
+
+Here's a quick overview of how to get started using the program Microsft Visual Studio.
+This is an application that you have to download and run on your own computer.
+
+```{warning}
+Microsoft will drop support for Visual Studio on Mac so it is not advisable to learn Visual Studio if you're on a Mac.
+```
+
+```{note}
+More detailed instructions can be found in a [tutorial published by Microsoft](https://learn.microsoft.com/en-us/visualstudio/get-started/csharp/tutorial-console?view=vs-2022).
+```
+
+1. Download and install [Visual Studio](https://visualstudio.microsoft.com).
+2. Open Visual Studio and select 'Create a new project'.
+3. In the project template screen, select 'Console App (.NET)' and click 'Next'.
+4. Give your 'Project' and 'Solution' a name (such as 'Hello World'), choose a location to save your project, and click 'Next'.
+5. Ensure that the target framework is **.NET 7.0** and 'Do not use top-level statements' is **unchecked**. Then, click 'Create'.
+
+6. After the project is created, you'll see a file named `Program.cs` opened in the editor with the following lines:
+
+    ```csharp
+    // See https://aka.ms/new-console-template for more information
+    Console.WriteLine("Hello, World!");
+    ```
+
+7. Run your program by clicking the green 'Play' button in the top or using the shortcut `Cmd+Enter` on Mac or `F5` on Windows.
+Alternatively, you can navigate to `Debug > Start Debugging` in the top menu.
+
+8. Verify that the output you get is:
+
+    ```output
+    Hello, World!
+    ```
+
+```{note}
+If you find that the terminal window opens and immediately closes after running your program, it's because your terminal is set to close when the program finishes executing. The simplest workaround is to add `Console.ReadKey();` on a new last line of the file.
 
 This extra line of code tells your program to wait for a keypress before closing the terminal window, which causes the window to remain open.
+```
 
-Before leaving this chapter, let's try to change the message that the program prints. Currently, your program prints `Hello, World!`. Can you change the program so that it prints a different message of your choice?
 
-Congratulations on writing and running your first program! This might feel like a small step, but it's the start of a grand journey into the world of programming. In the next chapter, we'll begin to uncover the magic that transforms your code into an application your computer can run. Exciting times ahead!
+## Running your first program
+
+When you're pressing the 'Play' button in your development environment your code is [compiled](compilation) into a language that your computer understands and then [executes](execution) it. Don't worry about the details for now, we'll explain what all this means in the coming chapters.
+
+If you've got lines starting with two forward slashes (`//`) then these are [comments](comments).
+Comments are like notes for programmers and these are ignored by the compiler.
+We'll talk more about this later.
+
+If you've got lines starting with the word `using` then this is an [import](imports) which makes additional types available to your program. In this case it makes it possible for us to use the `Console` class. We'll explain this later on so don't worry about this line now but keep it in.
+
+The line that reads `Console.WriteLine("Hello world");` is however a [statement](statements).
+It calls the static `WriteLine` [method](static-methods) of the `Console` class, passing the [`string`](data-types) [value](values) `"Hello, World!"`, which causes that message to be printed to the terminal.
+
+This is your first program! Hooray.
+Let's run it by pressing the 'Play' button.
+
+```{code-cell}
+Console.WriteLine("Hello, World!");
+```
+
+
+## Conclusion
+
+Congratulations on writing and running your first program! This might feel like a small step, but it's the start of a grand journey into the wonderfully powerful world of programming. Your life is never going to be the same again. In the next chapter, we'll begin to uncover the magic that transforms your code into an application your computer can run. Exciting times ahead!
+
+```{admonition} Exercise
+Currently, your program prints `Hello, World!`. Can you change the program so that it prints a different message of your choice? Maybe `Hello, my name is <your name>.`.
+```

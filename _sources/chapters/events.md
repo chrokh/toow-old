@@ -70,6 +70,14 @@ The method in a subscriber that is called when an event is fired is often called
 Subscribing to an event is therefore sometimes referred to as 'listening to an event'.
 ```
 
+```{important}
+Events in C# take the Observer pattern a step further by adding an extra layer of encapsulation.
+Events can only be raised from within the class that they are declared.
+%Events ensure that subscribers can only add or remove themselves from the list of subscribers.
+%Subscribers can't raise the event themselves or remove other subscribers.
+```
+
+
 ## Relation to delegates
 
 As you know from the chapters on [Delegates](delegates), delegates allow us to treat methods as values that can be stored and passed around.
@@ -158,7 +166,7 @@ class Subscriber
         => Name = name;
 
     // This instance method will be our event handler.
-    public void HandleNewEpisode(Podcast podcast, string episode)
+    public void HandleEpisodeReleased(Podcast podcast, string episode)
         => Console.WriteLine($"New episode for \"{Name}\" in \"{podcast.Title}\": \"{episode}\"");
 }
 ```
@@ -174,7 +182,7 @@ Podcast podcast = new Podcast("My pod");
 Subscriber subscriber = new Subscriber("Chris");
 
 // Register the event handler to event (i.e. subscribe).
-podcast.EpisodeReleased += subscriber.HandleNewEpisode;
+podcast.EpisodeReleased += subscriber.HandleEpisodeReleased;
 ```
 
 ```{hint}
