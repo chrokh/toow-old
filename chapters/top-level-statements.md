@@ -84,5 +84,9 @@ If you try to compile this, you'll receive an error message from the compiler. T
 You must always declare your `using` directives at the top, then your top-level statements, and finally your types.
 ```
 
+```{tip}
+If your project file (`*.csproj`) contains a `<StartupObject>` element then top-level statements will not work. By removing it you re-enable top-level statements. This is an issue when you're using some online services like [replit.com](https://replit.com/).
+```
+
 %In the upcoming chapters, we'll explore more about the `Main` method, namespaces, classes, and other features that you've seen here. But for now, it's important to understand that even when you're using top-level statements, you're still using these features. You're just letting the C# compiler handle them for you.
 
