@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="97. Event conventions" href="event-conventions.html" /><link rel="prev" title="95. Observer pattern" href="observer-pattern.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="98. Event conventions" href="event-conventions.html" /><link rel="prev" title="96. Observer pattern" href="observer-pattern.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>96. Events - The Object Oriented Way</title>
+        <title>97. Events - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -259,16 +259,17 @@
 <li class="toctree-l1"><a class="reference internal" href="generic-delegates.html">92. Generic delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="built-in-delegates.html">93. Built-in delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multicast-delegates.html">94. Multicast delegates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="observer-pattern.html">95. Observer pattern</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">96. Events</a></li>
-<li class="toctree-l1"><a class="reference internal" href="event-conventions.html">97. Event conventions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="event-driven-programming.html">98. Event-driven programming</a></li>
-<li class="toctree-l1"><a class="reference internal" href="iterator-pattern.html">99. Iterator pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="enumerables.html">100. Enumerables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variance.html">101. Variance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">102. Liskov substitution principle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">103. Variant generic interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">104. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lambdas.html">95. Lambdas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observer-pattern.html">96. Observer pattern</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">97. Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-conventions.html">98. Event conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-driven-programming.html">99. Event-driven programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iterator-pattern.html">100. Iterator pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enumerables.html">101. Enumerables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variance.html">102. Variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">103. Liskov substitution principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">104. Variant generic interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">105. Bibliography</a></li>
 </ul>
 
 </div>
@@ -304,7 +305,7 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="events">
-<h1><span class="section-number">96. </span>Events<a class="headerlink" href="#events" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">97. </span>Events<a class="headerlink" href="#events" title="Permalink to this heading">#</a></h1>
 <p>Events, together with <a class="reference internal" href="delegates.html"><span class="doc std std-doc">delegates</span></a>, essentially constitute a native implementation of the <a class="reference internal" href="observer-pattern.html"><span class="doc std std-doc">Observer pattern</span></a> in C#.
 They provide a simple and built-in way to allow objects, known as publishers, to notify other objects, known as subscribers, of some event which allows the subscribers to execute code in response to the occurrence of the event.</p>
 <div class="admonition-key-points admonition">
@@ -329,7 +330,7 @@ They provide a simple and built-in way to allow objects, known as publishers, to
 <figure class="align-default" id="id1">
 <img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1147524013703307345/chrokh_serene_illustration_of_fire_watch_tower_030a13f5-90ad-4e5f-8a73-5ff913174d54.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1147524013703307345/chrokh_serene_illustration_of_fire_watch_tower_030a13f5-90ad-4e5f-8a73-5ff913174d54.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 96.1 </span><span class="caption-text">Like a fire watch tower sending out smoke alerts, weather updates, or lightning strikes, events can send different kinds of data to subscribers when the event occurs.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 97.1 </span><span class="caption-text">Like a fire watch tower sending out smoke alerts, weather updates, or lightning strikes, events can send different kinds of data to subscribers when the event occurs.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="relation-to-observer-pattern">
@@ -380,7 +381,7 @@ We start by declaring a <span class="xref myst">delegate</span> whose instances 
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3324.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3303.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -425,12 +426,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.209:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.33:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3324.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3303.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -600,32 +601,43 @@ Let’s try it out by publishing a new episode which will fire the event.</p>
 </div>
 <p>As discussed in the chapter on <a class="reference internal" href="multicast-delegates.html"><span class="doc std std-doc">multicast delegates</span></a>, we can stack any number of callbacks in a delegate instance.
 In the case of the <a class="reference internal" href="observer-pattern.html"><span class="doc std std-doc">Observer pattern</span></a> all our subscribers have to implement some interface (usually called <code class="docutils literal notranslate"><span class="pre">IObserver</span></code>), but in the case of events the only requirement is that the handler has the signature required by the event.</p>
-<p>To exemplify that we don’t even need a subscriber class, let’s write some simple <a class="reference internal" href="local-functions.html"><span class="doc std std-doc">local functions</span></a> that we can use as event handlers.</p>
+<p>To exemplify that we don’t even need a subscriber class, let’s write a simple <a class="reference internal" href="local-functions.html"><span class="doc std std-doc">local function</span></a> that we can use as an event handler.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Simple local function that counts the number of episodes released.</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">numEpisodesReleased</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
 <span class="k">void</span><span class="w"> </span><span class="nf">IncrementNumEpisodesReleased</span><span class="p">(</span><span class="n">Podcast</span><span class="w"> </span><span class="n">podcast</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">episodeTitle</span><span class="p">)</span>
 <span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">numEpisodesReleased</span><span class="o">++</span><span class="p">;</span>
-
-<span class="c1">// Simple local function that prints the number of episodes released.</span>
-<span class="k">void</span><span class="w"> </span><span class="nf">PrintNumEpisodesReleased</span><span class="p">(</span><span class="n">Podcast</span><span class="w"> </span><span class="n">podcast</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">episodeTitle</span><span class="p">)</span>
-<span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{numEpisodesReleased} episodes released across all pods.&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Let’s add the local functions as listeners to the event.</p>
+<p>Let’s add the local function as a listener to the event.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Register the new event handler to the event (i.e. subscribe).</span>
 <span class="n">podcast</span><span class="p">.</span><span class="n">EpisodeReleased</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">IncrementNumEpisodesReleased</span><span class="p">;</span>
-<span class="n">podcast</span><span class="p">.</span><span class="n">EpisodeReleased</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">PrintNumEpisodesReleased</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>What do you think happens if we now fire the event?</p>
+<p>Since we’ve learned that <a class="reference internal" href="lambdas.html"><span class="doc std std-doc">lambdas</span></a> can be implicitly converted to <a class="reference internal" href="delegates.html"><span class="doc std std-doc">delegates</span></a> we can of course also use a lambda.
+Let’s define and add a lambda statement that prints the number of episodes released by ‘capturing’ the variable that we declared above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Adding a simple lambda that prints the number of episodes released.</span>
+<span class="n">podcast</span><span class="p">.</span><span class="n">EpisodeReleased</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="n">podcast</span><span class="p">,</span><span class="w"> </span><span class="n">episodeTitle</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{numEpisodesReleased}&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>By adding the lambda at the same time as we define it we can make use of type inference which means that we don’t even have to specify any of the types.</p>
+</div>
+<p>Now, how many listeners have we registered to the event?
+What do you think happens when we fire the event?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Raise the event again a few times.</span>
@@ -639,19 +651,19 @@ In the case of the <a class="reference internal" href="observer-pattern.html"><s
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>New episode for &quot;Chris&quot; in &quot;My pod&quot;: &quot;Episode B&quot;
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 episodes released across all pods.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>New episode for &quot;Chris&quot; in &quot;My pod&quot;: &quot;Episode C&quot;
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 episodes released across all pods.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>New episode for &quot;Chris&quot; in &quot;My pod&quot;: &quot;Episode D&quot;
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 episodes released across all pods.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
 </pre></div>
 </div>
 </div>
@@ -714,7 +726,7 @@ You’re also on your way to understand the <span class="xref myst">asynchronous
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">97. </span>Event conventions</div>
+                <div class="title"><span class="section-number">98. </span>Event conventions</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -725,7 +737,7 @@ You’re also on your way to understand the <span class="xref myst">asynchronous
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">95. </span>Observer pattern</div>
+                <div class="title"><span class="section-number">96. </span>Observer pattern</div>
                 
               </div>
             </a>
@@ -759,7 +771,7 @@ You’re also on your way to understand the <span class="xref myst">asynchronous
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">96. Events</a><ul>
+<li><a class="reference internal" href="#">97. Events</a><ul>
 <li><a class="reference internal" href="#relation-to-observer-pattern">Relation to Observer pattern</a></li>
 <li><a class="reference internal" href="#relation-to-delegates">Relation to delegates</a></li>
 <li><a class="reference internal" href="#syntax">Syntax</a></li>

@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="95. Lambdas" href="lambdas.html" /><link rel="prev" title="93. Built-in delegates" href="built-in-delegates.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="96. Observer pattern" href="observer-pattern.html" /><link rel="prev" title="94. Multicast delegates" href="multicast-delegates.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>94. Multicast delegates - The Object Oriented Way</title>
+        <title>95. Lambdas - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -258,8 +258,8 @@
 <li class="toctree-l1"><a class="reference internal" href="delegates.html">91. Delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-delegates.html">92. Generic delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="built-in-delegates.html">93. Built-in delegates</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">94. Multicast delegates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lambdas.html">95. Lambdas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multicast-delegates.html">94. Multicast delegates</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">95. Lambdas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="observer-pattern.html">96. Observer pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="events.html">97. Events</a></li>
 <li class="toctree-l1"><a class="reference internal" href="event-conventions.html">98. Event conventions</a></li>
@@ -304,38 +304,47 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="multicast-delegates">
-<h1><span class="section-number">94. </span>Multicast delegates<a class="headerlink" href="#multicast-delegates" title="Permalink to this heading">#</a></h1>
-<p>In your journey through understanding delegates, you’ve been using them primarily to hold a reference to a single method. But what if you wanted a delegate to hold references to multiple methods, and then invoke all those methods in sequence? Enter: multicast delegates.</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="lambdas">
+<h1><span class="section-number">95. </span>Lambdas<a class="headerlink" href="#lambdas" title="Permalink to this heading">#</a></h1>
+<p>Sometimes we need quick and compact ways to represent small chunks of behavior without having to write full-fledged methods or local functions. That’s where lambdas come into play. Lambdas in C# offer us a convenient and inline way to define anonymous methods, simplifying our code and making it easier to reason about.</p>
 <div class="admonition-key-points admonition">
 <p class="admonition-title">Key points</p>
 <ul class="simple">
-<li><p>Multicast delegates in C# can hold and invoke multiple method references in sequence.</p></li>
-<li><p>They are combined using the addition (<code class="docutils literal notranslate"><span class="pre">+</span></code>) and subtraction (<code class="docutils literal notranslate"><span class="pre">-</span></code>) operators.</p></li>
-<li><p>The return value of a multicast delegate with a non-<code class="docutils literal notranslate"><span class="pre">void</span></code> return type is from the last method invoked.</p></li>
-<li><p>Multicast delegates lay the foundation for <a class="reference internal" href="events.html"><span class="doc std std-doc">event</span></a> handling in C# where multiple subscribers can react to a single event.</p></li>
+<li><p>A lambda is a concise way to represent an anonymous method that can be used to create delegates or expression tree types.</p></li>
+<li><p>Lambdas in C# allow for type inference, enabling you to omit explicit type declarations for parameters and return type.</p></li>
 </ul>
 </div>
-<section id="definition">
-<h2>Definition<a class="headerlink" href="#definition" title="Permalink to this heading">#</a></h2>
-<p>A multicast delegate is a delegate that can hold references to more than one method. When you invoke a multicast delegate, it invokes the list of methods it references in the order they were added.
-The capability of a delegate to hold references to multiple methods is built into the delegate type itself, meaning every delegate in C# is inherently a multicast delegate.</p>
+<section id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading">#</a></h2>
+<p>There are two types of lambdas in C#, and the syntax of both is straightforward.</p>
+<ol class="arabic">
+<li><p>‘Expression lambdas’ have expressions as their body.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">expression</span>
+</pre></div>
+</div>
+</li>
+<li><p>‘Statement lambdas’ have a statement block as their body.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="n">statements</span><span class="p">;</span> <span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ol>
 </section>
-<section id="adding">
-<h2>Adding<a class="headerlink" href="#adding" title="Permalink to this heading">#</a></h2>
-<p>While every delegate is a multicast delegate by default, the real power of multicasting shines when you combine delegates using the addition (<code class="docutils literal notranslate"><span class="pre">+</span></code>) and subtraction (<code class="docutils literal notranslate"><span class="pre">-</span></code>) operators.</p>
+<section id="simple-examples">
+<h2>Simple examples<a class="headerlink" href="#simple-examples" title="Permalink to this heading">#</a></h2>
+<p>Here are some simple examples of expression lambdas.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Some example functions.</span>
-<span class="k">void</span><span class="w"> </span><span class="nf">Method1</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Method 1&quot;</span><span class="p">);</span>
-<span class="k">void</span><span class="w"> </span><span class="nf">Method2</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Method 2&quot;</span><span class="p">);</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Lambda for adding two numbers.</span>
+<span class="kt">var</span><span class="w"> </span><span class="k">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="k">add</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">));</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-4769.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-4547.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -385,7 +394,7 @@ function loadDotnetInteractiveApi() {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '4769.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '4547.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -439,166 +448,234 @@ else {
 }
 
     </script>
-</div></div></div>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Make delegate instances.</span>
-<span class="n">Action</span><span class="w"> </span><span class="n">method1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Method1</span><span class="p">;</span>
-<span class="n">Action</span><span class="w"> </span><span class="n">method2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Method2</span><span class="p">;</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Lambda for checking if a number is positive.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">isPositive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">isPositive</span><span class="p">(</span><span class="m">5</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the example below we can see how we need to use a pair of empty parentheses(<code class="docutils literal notranslate"><span class="pre">()</span></code>) if our lambda doesn’t need any parameters at all.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;----&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">};</span>
 
-<span class="c1">// Combine delegate instances into multicast delegate instance.</span>
-<span class="n">Action</span><span class="w"> </span><span class="n">multicast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">method1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">method2</span><span class="p">;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>If we now invoke the multicast delegate then all delegate instances stored in the multicast delegate will be invoked in order.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">multicast</span><span class="p">();</span>
+<span class="n">line</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Method 1
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Method 2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----
 </pre></div>
 </div>
 </div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If we add the same delegate instance to a multicast delegate multiple times then the underlying method will be invoked multiple times when the multicast delegate is invoked.</p>
-</div>
-<p>Since all delegates are multicast delegates by default you can combine multicast delegates to make multicast delegates.</p>
+<p>Let’s also look at some simple examples of statement lambdas.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Action</span><span class="w"> </span><span class="n">multimulti</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">method1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">multicast</span><span class="p">;</span>
-<span class="n">multimulti</span><span class="p">();</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">greet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">$&quot;Hello, {name}!&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="n">greet</span><span class="p">(</span><span class="s">&quot;Chris&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Method 1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, Chris!
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Method 1
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;----&quot;</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="n">lines</span><span class="p">(</span><span class="m">3</span><span class="p">);</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Method 2
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="removing">
-<h2>Removing<a class="headerlink" href="#removing" title="Permalink to this heading">#</a></h2>
-<p>You can use the minus operator (<code class="docutils literal notranslate"><span class="pre">-</span></code>) to remove a method reference from a multicast delegate.</p>
+<section id="lambdas-and-delegates">
+<h2>Lambdas and delegates<a class="headerlink" href="#lambdas-and-delegates" title="Permalink to this heading">#</a></h2>
+<p>But wait a minute. What’s the type of all these variables that we assigned lambdas to?
+Remember <a class="reference internal" href="delegates.html"><span class="doc std std-doc">delegates</span></a>?</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Any lambda expression can be implicitly converted to a delegate.</p>
+</div>
+<p>Let’s look at an example by first defining a delegate, and then assigning a lambda expression to a variable of that delegate type.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Removing `method1` from the multicast delegate.</span>
-<span class="n">multicast</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">method1</span><span class="p">;</span>
-
-<span class="c1">// Invoking the multicast delegate.</span>
-<span class="n">multicast</span><span class="p">();</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Delegate</span>
+<span class="k">public</span><span class="w"> </span><span class="k">delegate</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">StringTransformer</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">s</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Lambda</span>
+<span class="n">StringTransformer</span><span class="w"> </span><span class="n">reverse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">string</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">Reverse</span><span class="p">().</span><span class="n">ToArray</span><span class="p">());</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">));</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Method 2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>olleH
+</pre></div>
+</div>
+</div>
+</div>
+<p>Naturally, we can also use lambdas with the built-in delegates.
+Let’s use some of the same lambdas that we’ve already seen above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Func</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="k">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="n">Predicate</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">isPositive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
+<span class="n">Action</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;----&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">};</span>
+<span class="n">Action</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">greet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Hello, {name}!&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">};</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This makes it incredibly easy to pass around behavior in your programs, especially when working with higher-order functions that expect delegate instances.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Lambdas can lead to more expressive and maintainable code when used judiciously.</p>
+</div>
+</section>
+<section id="lambdas-and-type-inference">
+<h2>Lambdas and type inference<a class="headerlink" href="#lambdas-and-type-inference" title="Permalink to this heading">#</a></h2>
+<p>One of the convenient features of lambdas in C# is their ability to utilize type inference. This means that you often don’t have to explicitly specify the types of parameters when you define a lambda expression. The C# compiler is capable of inferring the types based on the context in which the lambda is used.</p>
+<p>The following lambda declarations are all functionally identical:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Func</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">isNegativeExplicit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
+
+<span class="n">Func</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">isNegativeInferred1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
+<span class="n">Func</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">isNegativeInferred2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
+<span class="n">Func</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">isNegativeInferred3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1,38): error CS8934: Cannot convert lambda expression to type &#39;Func&lt;int, bool&gt;&#39; because the return type does not match the delegate return type
+
+(4,39): error CS8934: Cannot convert lambda expression to type &#39;Func&lt;int, bool&gt;&#39; because the return type does not match the delegate return type
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the last three cases the compiler infers what the parameter and/or return type must be based on the delegate type <code class="docutils literal notranslate"><span class="pre">Func&lt;int,</span> <span class="pre">int&gt;</span></code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Notice how we can omit the parentheses around the parameters if the lambda only has a single parameter whose type is inferred.</p>
+</div>
+<p>You can of course also use the <a class="reference internal" href="type-inference.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">var</span></code> keyword</span></a> if you give the compiler enough clues about the type of the lambda.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">isNegativeExplicit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
+
+<span class="kt">var</span><span class="w"> </span><span class="n">isNegativeInferred1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w">  </span><span class="c1">// Compiles.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">isNegativeInferred2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w">  </span><span class="c1">// Compiles.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">isNegativeInferred3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w">       </span><span class="c1">// Does not compile!</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>We can also use the <a class="reference internal" href="arithmetic-operators.html"><span class="doc std std-doc">addition and subtraction assignment operators</span></a> (<code class="docutils literal notranslate"><span class="pre">+=</span></code> and <code class="docutils literal notranslate"><span class="pre">-=</span></code>) to add or remove delegate instances to or from an existing multicast delegate. Like this: <code class="docutils literal notranslate"><span class="pre">multicast</span> <span class="pre">+=</span> <span class="pre">method2</span></code>.</p>
+<p>While type inference can make your lambda expressions more concise, it can sometimes sacrifice readability, especially when the inferred type isn’t immediately clear. Therefore, use type inference judiciously, prioritizing code clarity.</p>
 </div>
 </section>
-<section id="return-values">
-<h2>Return values<a class="headerlink" href="#return-values" title="Permalink to this heading">#</a></h2>
-<p>If a multicast delegate has a return type other than <code class="docutils literal notranslate"><span class="pre">void</span></code>, <strong>only the value of the last invoked method is returned</strong>.
-It’s essential to be aware of this behavior when designing systems using multicast delegates.</p>
-<div class="admonition danger">
-<p class="admonition-title">Danger</p>
-<p>If you’re familiar with function composition from functional programming it’s important to note that multicast delegates is (unfortunately) not an implementation of this concept.
-The output of a function in a multicast delegate is <strong>not</strong> passed as input to the next function in the multicast delegate instance.</p>
-</div>
-<p>Let’s try it out.</p>
+<section id="lambdas-vs-local-functions">
+<h2>Lambdas vs. local Functions<a class="headerlink" href="#lambdas-vs-local-functions" title="Permalink to this heading">#</a></h2>
+<p>We’ve already discussed <a class="reference internal" href="local-functions.html"><span class="doc std std-doc">local functions</span></a>.
+Note that local functions are not lambdas even though they both make use of the, so-called, fat-arrow (<code class="docutils literal notranslate"><span class="pre">=&gt;</span></code>) syntax.
+Have a look at the syntactical difference in the example below:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Some example functions.</span>
-<span class="kt">int</span><span class="w"> </span><span class="nf">MethodA</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="m">10</span><span class="p">;</span>
-<span class="kt">int</span><span class="w"> </span><span class="nf">MethodB</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="m">20</span><span class="p">;</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Local function</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">LocalInc</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">;</span>
 
-<span class="c1">// Make delegate instances.</span>
-<span class="n">Func</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">methodA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MethodA</span><span class="p">;</span>
-<span class="n">Func</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">methodB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MethodB</span><span class="p">;</span>
-
-<span class="c1">// Combine delegate instances into multicast delegate instance.</span>
-<span class="n">Func</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">multicast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">methodA</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MethodB</span><span class="p">;</span>
+<span class="c1">// Lambda</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">lambdaInc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Only returns 20 and not 10.</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">multicast</span><span class="p">());</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
-</pre></div>
-</div>
-</div>
+<section id="key-similarities">
+<h3>Key similarities<a class="headerlink" href="#key-similarities" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Local scope</strong>: Both are accessible only within the scope in which they are defined, making them unavailable for direct invocation from outside that scope.</p></li>
+<li><p><strong>Capturing outer variables</strong>: Both can capture variables from their enclosing scope. This is called a ‘closure’.</p></li>
+</ul>
+</section>
+<section id="key-differences">
+<h3>Key differences<a class="headerlink" href="#key-differences" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Anonymous</strong>: Lambdas are anonymous, meaning they don’t have a name.</p></li>
+<li><p><strong>Type inference</strong>: Lambdas support type inference of parameters and return type.</p></li>
+<li><p><strong>Concise syntax</strong>: Lambdas often end up being more compact.</p></li>
+<li><p><strong>Naming conventions</strong>: Local functions are conventionally named using PascalCase (meaning with an initial letter in uppercase) while lambdas with camelCase (meaning with an initial letter in lowercase).</p></li>
+</ul>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Although lambdas and local functions can look similar, they serve different purposes and have unique constraints and capabilities. Choose based on the needs of your code.</p>
 </div>
 </section>
-<section id="exceptions">
-<h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this heading">#</a></h2>
-<p>When one of the methods referenced by a multicast delegate throws an <span class="xref myst">exception</span>, the subsequent methods will not be executed. Therefore, it’s crucial to ensure exception handling is appropriately addressed when working with multicast delegates.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">void</span><span class="w"> </span><span class="nf">GoodMethod</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;This method runs!&quot;</span><span class="p">);</span>
-<span class="k">void</span><span class="w"> </span><span class="nf">BadMethod</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Exception</span><span class="p">(</span><span class="s">&quot;This method throws!&quot;</span><span class="p">);</span>
-
-<span class="n">Action</span><span class="w"> </span><span class="n">goodMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GoodMethod</span><span class="p">;</span>
-<span class="n">Action</span><span class="w"> </span><span class="n">badMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BadMethod</span><span class="p">;</span>
-
-<span class="n">Action</span><span class="w"> </span><span class="n">combined</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">goodMethod</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">badMethod</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">goodMethod</span><span class="p">;</span>
-
-<span class="k">try</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="n">combined</span><span class="p">();</span>
-<span class="p">}</span>
-<span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Exception caught: {ex.Message}&quot;</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This method runs!
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exception caught: This method throws!
-</pre></div>
-</div>
-</div>
-</div>
-<p>Notice how we never execute the third delegate in the example above because we encounter an exception in the second method when executing the multicast delegate.</p>
+</section>
+<section id="lambdas-vs-expression-bodied-members">
+<h2>Lambdas vs. expression-bodied members<a class="headerlink" href="#lambdas-vs-expression-bodied-members" title="Permalink to this heading">#</a></h2>
+<p>We’ve already encountered the concept of <a class="reference internal" href="fat-arrows.html"><span class="doc std std-doc">expression-bodied members</span></a>, which also use the fat arrow (<code class="docutils literal notranslate"><span class="pre">=&gt;</span></code>) syntax. At a glance, these might look like lambdas, but they are not.</p>
+<ul class="simple">
+<li><p><strong>Named</strong>: Expression-bodied members, whether they’re methods or properties, have names. This means they can be called using their names elsewhere in the codebase. Lambdas, on the other hand, are anonymous; they don’t have names and are usually used inline where they are defined.</p></li>
+<li><p><strong>Scope</strong>: Expression-bodied members belong to a <a class="reference internal" href="classes.html"><span class="doc std std-doc">class</span></a> or <span class="xref myst">struct</span>. They are ‘members’ of the type. Lambdas on the other hand are scoped to the method or block in which they are declared.</p></li>
+</ul>
 </section>
 <section id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
-<p>Multicast delegates offer the flexibility to reference multiple methods and execute them in sequence.
-While you might see limited uses for multicast delegates in regular scenarios, their real power and common application are in <a class="reference internal" href="events.html"><span class="doc std std-doc">events</span></a>. Events in C# use the capabilities of multicast delegates to allow multiple subscribers (methods) for a single event. This means when an event is raised, multiple methods can react to it.
-We will explore events in a later chapter.
-Stay tuned.</p>
+<p>Lambdas provide a powerful and expressive syntax that allows for the creation of anonymous methods with ease.
+In this chapter we’ve seen that lambdas can be used to succinctly define event listeners.
+However, in a coming chapter we will learn about <span class="xref myst">LINQ</span> where lambdas really shine by offering a compact way of performing operations on <span class="xref myst">collections</span> and <a class="reference internal" href="enumerables.html"><span class="doc std std-doc">enumerables</span></a>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Next time you find yourself writing short methods or need a quick function for a one-off operation, consider whether a lambda could do the job more elegantly. Less code usually means improved <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a>.</p>
+</div>
 </section>
 </section>
 
@@ -626,23 +703,23 @@ Stay tuned.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="lambdas.html">
+          <a class="next-page" href="observer-pattern.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">95. </span>Lambdas</div>
+                <div class="title"><span class="section-number">96. </span>Observer pattern</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="built-in-delegates.html">
+          <a class="prev-page" href="multicast-delegates.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">93. </span>Built-in delegates</div>
+                <div class="title"><span class="section-number">94. </span>Multicast delegates</div>
                 
               </div>
             </a>
@@ -676,12 +753,17 @@ Stay tuned.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">94. Multicast delegates</a><ul>
-<li><a class="reference internal" href="#definition">Definition</a></li>
-<li><a class="reference internal" href="#adding">Adding</a></li>
-<li><a class="reference internal" href="#removing">Removing</a></li>
-<li><a class="reference internal" href="#return-values">Return values</a></li>
-<li><a class="reference internal" href="#exceptions">Exceptions</a></li>
+<li><a class="reference internal" href="#">95. Lambdas</a><ul>
+<li><a class="reference internal" href="#syntax">Syntax</a></li>
+<li><a class="reference internal" href="#simple-examples">Simple examples</a></li>
+<li><a class="reference internal" href="#lambdas-and-delegates">Lambdas and delegates</a></li>
+<li><a class="reference internal" href="#lambdas-and-type-inference">Lambdas and type inference</a></li>
+<li><a class="reference internal" href="#lambdas-vs-local-functions">Lambdas vs. local Functions</a><ul>
+<li><a class="reference internal" href="#key-similarities">Key similarities</a></li>
+<li><a class="reference internal" href="#key-differences">Key differences</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lambdas-vs-expression-bodied-members">Lambdas vs. expression-bodied members</a></li>
 <li><a class="reference internal" href="#conclusion">Conclusion</a></li>
 </ul>
 </li>

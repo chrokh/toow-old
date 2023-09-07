@@ -200,28 +200,37 @@ podcast.ReleaseNewEpisode("Episode A");
 As discussed in the chapter on [multicast delegates](multicast-delegates), we can stack any number of callbacks in a delegate instance.
 In the case of the [Observer pattern](observer-pattern) all our subscribers have to implement some interface (usually called `IObserver`), but in the case of events the only requirement is that the handler has the signature required by the event.
 
-To exemplify that we don't even need a subscriber class, let's write some simple [local functions](local-functions) that we can use as event handlers.
+To exemplify that we don't even need a subscriber class, let's write a simple [local function](local-functions) that we can use as an event handler.
 
 ```{code-cell}
 // Simple local function that counts the number of episodes released.
 int numEpisodesReleased = 0;
 void IncrementNumEpisodesReleased(Podcast podcast, string episodeTitle)
     => numEpisodesReleased++;
-
-// Simple local function that prints the number of episodes released.
-void PrintNumEpisodesReleased(Podcast podcast, string episodeTitle)
-    => Console.WriteLine($"{numEpisodesReleased} episodes released across all pods.");
 ```
 
-Let's add the local functions as listeners to the event.
+Let's add the local function as a listener to the event.
 
 ```{code-cell}
 // Register the new event handler to the event (i.e. subscribe).
 podcast.EpisodeReleased += IncrementNumEpisodesReleased;
-podcast.EpisodeReleased += PrintNumEpisodesReleased;
 ```
 
-What do you think happens if we now fire the event?
+Since we've learned that [lambdas](lambdas) can be implicitly converted to [delegates](delegates) we can of course also use a lambda.
+Let's define and add a lambda statement that prints the number of episodes released by 'capturing' the variable that we declared above.
+
+```{code-cell}
+// Adding a simple lambda that prints the number of episodes released.
+podcast.EpisodeReleased += (podcast, episodeTitle) =>
+    Console.WriteLine($"{numEpisodesReleased}");
+```
+
+```{tip}
+By adding the lambda at the same time as we define it we can make use of type inference which means that we don't even have to specify any of the types.
+```
+
+Now, how many listeners have we registered to the event?
+What do you think happens when we fire the event?
 
 ```{code-cell}
 // Raise the event again a few times.

@@ -15,20 +15,18 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-class MyEventPublisher
-{
-    public delegate void MyEventHandler (object sender, MyEventArgs e);
+Func<int, bool> isNegativeExplicit = int (int x) => x < 0;
 
-    public event MyEventHandler MyEvent;
-
-    public void RaiseEvent()
-        => MyEvent?.Invoke(this, new MyEventArgs(this, "Event triggered!"));
-}
+Func<int, bool> isNegativeInferred1 = (int x)=> x < 0;
+Func<int, bool> isNegativeInferred2 = int (x)=> x < 0;
+Func<int, bool> isNegativeInferred3 = x => x < 0;
 ------------------
 
 ----- stderr -----
 
-(8,50): error CS1503: Argument 1: cannot convert from 'MyEventPublisher [ℛ*a0f6ab90-9b65-4849-ba23-85b26e9ec91c#1-8, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]' to 'MyEventPublisher [ℛ*a0f6ab90-9b65-4849-ba23-85b26e9ec91c#1-3, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]'
+(1,38): error CS8934: Cannot convert lambda expression to type 'Func<int, bool>' because the return type does not match the delegate return type
+
+(4,39): error CS8934: Cannot convert lambda expression to type 'Func<int, bool>' because the return type does not match the delegate return type
 ------------------
 
 
