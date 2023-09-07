@@ -1,5 +1,8 @@
 # The new todo list
 
+- Using directive! (imports)
+- Reading input.
+- Are lambdas simply syntactic sugar?
 - Coupling.
 - Replace UML diagram in patterns chapters!
 - Add Key point boxes to Strategy and Bridge chapters.
@@ -27,6 +30,7 @@
 - It's not mentioned in Instance Methods chapter that an instance method can call another instance method.
 - Examples of instance methods that you can call on objects. From .NET.
 - String methods such as IndexOf, Substring, etc. Must have talked about overloading before. Should this simply be a chapter on reading the documentation of classes?
+- The terms framework and library.
 - .NET Framework Class Library (FCL). Mentioned in [static methods](static-methods).
 - When to introduce the meaning of "keyword"? Introduced in syntax chapter no?
 - DRY? Before functions? After iteration?
