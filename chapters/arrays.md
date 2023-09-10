@@ -36,8 +36,7 @@ names[1] = "Whiskers";
 // and so on...
 ```
 
-In many cases, you'll know the values you want to put in an array at the time you create it. C# provides a shorthand, called 'collection initializers', which lets you create the array and assign elements in a single statement.
-Here's a code example:
+In many cases, you'll know the values you want to put in an array at the time you create it. C# provides a shorthand, called [collection initializers](collection-initializers), which lets you create the array and assign elements in a single statement. We'll discuss the syntax in detail much later, but here's a code example:
 
 ```{code-cell}
 string[] names = { "Fluffy", "Whiskers" };
