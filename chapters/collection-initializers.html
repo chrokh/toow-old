@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="5. Interpretation" href="interpretation.html" /><link rel="prev" title="3. Compilation" href="compilation.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="88. Replace conditional with polymorphism" href="replace-conditional-with-polymorphism.html" /><link rel="prev" title="86. Collections" href="collections.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>4. Execution - The Object Oriented Way</title>
+        <title>87. Collection initializers - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -141,7 +141,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -168,7 +168,7 @@
 <li class="toctree-l1"><a class="reference internal" href="syntax.html">1. Syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hello-world.html">2. Hello world</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compilation.html">3. Compilation</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">4. Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="execution.html">4. Execution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interpretation.html">5. Interpretation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="comments.html">6. Comments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="values.html">7. Values</a></li>
@@ -251,7 +251,7 @@
 <li class="toctree-l1"><a class="reference internal" href="generic-methods.html">84. Generic methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">85. Type parameter constraints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="collections.html">86. Collections</a></li>
-<li class="toctree-l1"><a class="reference internal" href="collection-initializers.html">87. Collection initializers</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">87. Collection initializers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">88. Replace conditional with polymorphism</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dependency-injection.html">89. Dependency injection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">90. Composition over inheritance</a></li>
@@ -300,27 +300,212 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="execution">
-<h1><span class="section-number">4. </span>Execution<a class="headerlink" href="#execution" title="Permalink to this heading">#</a></h1>
-<p>After you’ve written your code and it’s been compiled, you might think the journey ends there. But actually, that’s where the magic truly begins. When your code is executed, your ideas and instructions come to life on your computer screen. But how does this process of execution work, and what is the runtime? Let’s dive in.</p>
-<p>Think back to when you clicked “Start Debugging” in Visual Studio. Your code was compiled into an intermediate language. Now, this intermediate code needs to be converted into machine code, which is the language your computer speaks, so that it can be executed. This process happens during what we call the runtime.</p>
-<p>The term “runtime” refers to the period when your program is running, or executing. It’s the stage where your program starts performing the actions you’ve coded. It’s like the play time for a theater production – all the rehearsals (coding and compilation) have been done, and now it’s time for the performance.</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="collection-initializers">
+<h1><span class="section-number">87. </span>Collection initializers<a class="headerlink" href="#collection-initializers" title="Permalink to this heading">#</a></h1>
+<p>After delving into the world of generic collections, you might be wondering if there’s a more concise way to populate collections right at the time of their declaration. Well, C# offers just that with collection initializers. This feature saves you the need for multiple <code class="docutils literal notranslate"><span class="pre">Add</span></code> calls and makes your code cleaner and easier to understand.</p>
+<div class="admonition-key-point admonition">
+<p class="admonition-title">Key point</p>
+<p>Collection initializers provide a shorthand for populating collections like <code class="docutils literal notranslate"><span class="pre">List&lt;T&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">Dictionary&lt;TKey,</span> <span class="pre">TValue&gt;</span></code> at the time of their instantiation. They improve code readability and reduce the lines of code needed for setup.</p>
+</div>
+<p>Collection initializers work like <a class="reference internal" href="object-initializers.html"><span class="doc std std-doc">object initializers</span></a>, but instead of setting properties on a single object, they allow you to add multiple elements to a collection.
+You’ve actually already seen collection initializers in action in the chapter on <a class="reference internal" href="arrays.html"><span class="doc std std-doc">arrays</span></a>.</p>
 <figure class="align-default" id="id1">
-<img alt="https://media.discordapp.net/attachments/1118630713084870736/1121374408406216764/chrokh_A_theatrical_play_on_a_beautiful_stage_with_a_large_audi_3f466beb-977d-47b9-986a-ba035a43ec2a.png" src="https://media.discordapp.net/attachments/1118630713084870736/1121374408406216764/chrokh_A_theatrical_play_on_a_beautiful_stage_with_a_large_audi_3f466beb-977d-47b9-986a-ba035a43ec2a.png" />
+<img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1150400143410086018/chrokh_crate_with_books_illustration_408211c6-b863-43f0-b71b-9cc3e2a6b475.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1150400143410086018/chrokh_crate_with_books_illustration_408211c6-b863-43f0-b71b-9cc3e2a6b475.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.1 </span><span class="caption-text">Runtime is like play time for a theater production.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 87.1 </span><span class="caption-text">Much like dumping a bunch of books in a crate in one go, collection initializers allow you to populate collections, like lists and dictionaries, with multiple elements in a single line of code.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The .NET runtime system is responsible for executing your compiled code. Remember that the C# compiler doesn’t directly convert your code into machine code. Instead, it translates your code into an intermediate language, called Common Intermediate Language (CIL). The .NET runtime then takes this CIL code and converts it into machine code just-in-time as your program runs. This process is known as just-in-time compilation, or JIT compilation.</p>
-<p>As the program executes, it follows the sequence of instructions you’ve written in your code. If your code says to print <code class="docutils literal notranslate"><span class="pre">Hello,</span> <span class="pre">World!</span></code>, that’s what your computer will do when it executes the program. Execution is the stage where your code does what it’s been instructed to do.</p>
-<p>During the runtime, you can also encounter a different type of errors, called runtime errors. These errors occur when something goes wrong while the program is running. For instance, trying to divide a number by zero or accessing an out-of-bounds index in an <span class="xref myst">array</span> would cause a runtime error. Unlike compile-time errors, these aren’t detected by the compiler but crop up when the program is running.</p>
-<p>And that’s the essence of execution and runtime. It’s the stage where your program takes the spotlight and performs the instructions you’ve coded. This process is a pivotal part of the journey from writing code to seeing your program in action.</p>
+<section id="what-are-collection-initializers">
+<h2>What are collection initializers?<a class="headerlink" href="#what-are-collection-initializers" title="Permalink to this heading">#</a></h2>
+<p>In C#, collection initializers are a <span class="xref myst">syntactic sugar</span> that allows you to initialize collections with predefined elements in a single, concise statement.</p>
+</section>
+<section id="syntax-of-collection-initializers">
+<h2>Syntax of collection initializers<a class="headerlink" href="#syntax-of-collection-initializers" title="Permalink to this heading">#</a></h2>
+<p>The general syntax for collection initializers involves declaring a new collection and immediately filling it with elements inside curly braces <code class="docutils literal notranslate"><span class="pre">{}</span></code>.</p>
+<p>For lists, the syntax is straightforward:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Using a collection initializer to create a list of integers.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-2454.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.78:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '2454.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>The code above is equivalent to the code below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Creating an empty list of integers.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="c1">// Adding elements to the list one by one.</span>
+<span class="n">numbers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="m">1</span><span class="p">);</span>
+<span class="n">numbers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="m">2</span><span class="p">);</span>
+<span class="n">numbers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="m">3</span><span class="p">);</span>
+<span class="n">numbers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="m">4</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For dictionaries, the syntax involves key-value pairs:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Using a collection initializer to create a dictionary.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">personInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Alice&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Email&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;alice@email.com&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following code is equivalent to the code above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Creating an empty dictionary.</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">personInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="c1">// Adding key-value pairs to the dictionary one by one.</span>
+<span class="n">personInfo</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;Name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Alice&quot;</span><span class="p">);</span>
+<span class="n">personInfo</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;Email&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;alice@email.com&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You can use collection initializers only when creating a collection. To add more elements later, you must use the <code class="docutils literal notranslate"><span class="pre">Add</span></code> method or other appropriate methods.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The term ‘collection initializers’ is somewhat misleading because it’s not limited to <a class="reference internal" href="collections.html"><span class="doc std std-doc">collections</span></a> but can be used for any <span class="xref myst">enumerable</span> with an <code class="docutils literal notranslate"><span class="pre">Add</span></code> method.
+We’ll talk more about <a class="reference internal" href="enumerables.html"><span class="doc std std-doc">enumerables</span></a> in a later chapter but at this point we should mention that all collections are enumerables.</p>
+</div>
+<p>You can also use collection initializers with your own <a class="reference internal" href="collections.html"><span class="doc std std-doc">collections</span></a> or <a class="reference internal" href="enumerables.html"><span class="doc std std-doc">enumerables</span></a> (that have an <code class="docutils literal notranslate"><span class="pre">Add</span></code> method).</p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>Collection initializers are a handy feature that lets you initialize collections like lists and dictionaries in a simple and readable manner. They don’t replace methods like <code class="docutils literal notranslate"><span class="pre">Add</span></code> but offer a more concise way to populate a collection upon its creation.
+Collection initializers can improve readability and <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Use collection initializers judiciously. While they are convenient for small collections, for large or dynamically populated collections, using methods like <code class="docutils literal notranslate"><span class="pre">Add</span></code> may be more appropriate.</p>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -332,38 +517,38 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            name: "python3",
+            name: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="interpretation.html">
+          <a class="next-page" href="replace-conditional-with-polymorphism.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">5. </span>Interpretation</div>
+                <div class="title"><span class="section-number">88. </span>Replace conditional with polymorphism</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="compilation.html">
+          <a class="prev-page" href="collections.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">3. </span>Compilation</div>
+                <div class="title"><span class="section-number">86. </span>Collections</div>
                 
               </div>
             </a>
@@ -385,8 +570,29 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">87. Collection initializers</a><ul>
+<li><a class="reference internal" href="#what-are-collection-initializers">What are collection initializers?</a></li>
+<li><a class="reference internal" href="#syntax-of-collection-initializers">Syntax of collection initializers</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
