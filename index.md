@@ -18,9 +18,11 @@ I give you a **flat table of contents**.
 All important concepts are shamelessly short, top-level chapters.
 
 I've been teaching object-oriented programming (OOP) in C# **for a decade**. This is the book I wish I had been given.
-You'll find breadth over depth, as understanding the periphery can dramatically enhance your grasp of the core subject.
 
-Whether you're a seasoned coder looking for a turbo boost 🚀 or a complete novice, this book is your ticket to mastering OOP. Expect breadth over depth, as a comprehensive understanding often sprouts from the periphery of a subject.
+Expect **breadth over depth**, as understanding the periphery can dramatically enhance your grasp of the core.
+
+Whether you're a seasoned coder looking for a turbo boost 🚀 or a complete novice, this is your ticket to mastering OOP.
+**No previous coding skills required**. Let me meet you where you are.
 
 Who am I? I'm [Christopher Okhravi](https://www.christopherokhravi.com), a senior lecturer at Uppsala University with a Ph.D. 🎓 in Information Systems. You might know me from my popular [YouTube channel](http://youtube.com/c/christopherokhravi) on programming.
 
