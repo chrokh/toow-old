@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="104. Variance" href="variance.html" /><link rel="prev" title="102. Iterator pattern" href="iterator-pattern.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="104. The yield statement" href="the-yield-statement.html" /><link rel="prev" title="102. Iterator pattern" href="iterator-pattern.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
         <title>103. Enumerables - The Object Oriented Way</title>
@@ -141,7 +141,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -268,10 +268,11 @@
 <li class="toctree-l1"><a class="reference internal" href="event-driven-programming.html">101. Event-driven programming</a></li>
 <li class="toctree-l1"><a class="reference internal" href="iterator-pattern.html">102. Iterator pattern</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">103. Enumerables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variance.html">104. Variance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">105. Liskov substitution principle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">106. Variant generic interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">107. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the-yield-statement.html">104. The <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variance.html">105. Variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">106. Liskov substitution principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">107. Variant generic interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">108. Bibliography</a></li>
 </ul>
 
 </div>
@@ -300,7 +301,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -308,10 +309,250 @@
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="enumerables">
 <h1><span class="section-number">103. </span>Enumerables<a class="headerlink" href="#enumerables" title="Permalink to this heading">#</a></h1>
+<p>Enumerables in .NET are a native implementation of the <a class="reference internal" href="iterator-pattern.html"><span class="doc std std-doc">Iterator pattern</span></a>, allowing you to iterate through collections in a decoupled fashion.</p>
+<p>In .NET we have the interface <code class="docutils literal notranslate"><span class="pre">IEnumerable</span></code> which correspond to the idea of the ‘iterable’ (or ‘aggregator’) from the Iterator pattern and the interface <code class="docutils literal notranslate"><span class="pre">IEnumerator</span></code> which corresponds to the idea of the ‘iterator’.</p>
+<div class="admonition-key-point admonition">
+<p class="admonition-title">Key point</p>
+<p>Enumerables offer a way to access elements in a collection sequentially, without exposing the underlying details, just like the <a class="reference internal" href="iterator-pattern.html"><span class="doc std std-doc">Iterator pattern</span></a>.</p>
+</div>
+<figure class="align-default" id="id1">
+<img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1150645441990508646/chrokh_indiana_jones_in_cave_with_flashlight_illustrated_cartoo_76c3921c-2479-4331-89d4-121ef19dba4a.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1150645441990508646/chrokh_indiana_jones_in_cave_with_flashlight_illustrated_cartoo_76c3921c-2479-4331-89d4-121ef19dba4a.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 103.1 </span><span class="caption-text">Imagine walking through a cave like maze with a flashlight, seeing only one step ahead, yet confident you can explore the entire maze. This is what enumerables are like in programming. They allow you to traverse through collections, one element at a time, without needing to understand its underlying structure.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<section id="what-is-an-enumerable">
+<h2>What is an Enumerable?<a class="headerlink" href="#what-is-an-enumerable" title="Permalink to this heading">#</a></h2>
+<p>An enumerable is an object that implements the <code class="docutils literal notranslate"><span class="pre">IEnumerable</span></code> interface. This interface has a single method called <code class="docutils literal notranslate"><span class="pre">GetEnumerator</span></code>, which returns an object implementing the <code class="docutils literal notranslate"><span class="pre">IEnumerator</span></code> interface. This <code class="docutils literal notranslate"><span class="pre">IEnumerator</span></code> object then allows for the sequential traversal of elements in the collection.</p>
+<p>Since the <code class="docutils literal notranslate"><span class="pre">foreach</span></code> loop has native support for <code class="docutils literal notranslate"><span class="pre">IEnumerable</span></code> we don’t have to explicitly extract and traverse the enumerator when we pass an enumerable to a <code class="docutils literal notranslate"><span class="pre">foreach</span></code> loop.
+Here’s a simple example using a list:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create a List and upcast to IEnumerable.</span>
+<span class="n">IEnumerable</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="p">};</span>
+
+<span class="c1">// Using foreach loop with IEnumerable.</span>
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">numbers</span><span class="p">)</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">number</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-3242.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.216.4:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '3242.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Coming soon.</p>
+<p>Remember, <code class="docutils literal notranslate"><span class="pre">List&lt;T&gt;</span></code> can be upcast to <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;T&gt;</span></code> because it implements the interface <code class="docutils literal notranslate"><span class="pre">ICollection&lt;T&gt;</span></code> which implements the interface <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;T&gt;</span></code>.</p>
 </div>
+</section>
+<section id="relation-to-iterator-pattern">
+<h2>Relation to Iterator pattern<a class="headerlink" href="#relation-to-iterator-pattern" title="Permalink to this heading">#</a></h2>
+<p>If we look at what’s happening under the hood we can start to see how this is a native implementation of the <a class="reference internal" href="iterator-pattern.html"><span class="doc std std-doc">Iterator pattern</span></a>.
+Let’s extract the enumerator and then traverse it manually.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create a List and upcast to IEnumerable.</span>
+<span class="n">IEnumerable</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="p">};</span>
+
+<span class="c1">// Get IEnumerator from IEnumerable.</span>
+<span class="n">IEnumerator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">enumerator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">.</span><span class="n">GetEnumerator</span><span class="p">();</span>
+
+<span class="c1">// Iterate using the enumerator (not enumerable!).</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">enumerator</span><span class="p">.</span><span class="n">MoveNext</span><span class="p">())</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Grab the current item.</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">enumerator</span><span class="p">.</span><span class="n">Current</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">current</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30
+</pre></div>
+</div>
+</div>
+</div>
+<p>The code above essentially looks the same as the code that we saw in the chapter on the <a class="reference internal" href="iterator-pattern.html"><span class="doc std std-doc">Iterator pattern</span></a>.</p>
+</section>
+<section id="first-value-of-an-enumerator">
+<h2>First value of an enumerator<a class="headerlink" href="#first-value-of-an-enumerator" title="Permalink to this heading">#</a></h2>
+<p>What is the first value in the sequence of a new enumerator?
+In the chapter on <a class="reference internal" href="iterator-pattern.html"><span class="doc std std-doc">Iterator pattern</span></a> we set the first value to the first value of the sequence.
+This meant that we had to use a <a class="reference internal" href="iteration.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">do</span> <span class="pre">while</span></code></span></a> loop rather than a <code class="docutils literal notranslate"><span class="pre">while</span></code> loop since we would otherwise skip the first element.
+Have a look back in the chapter on Iterator pattern if this assertion doesn’t make any sense.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Before you’ve called <code class="docutils literal notranslate"><span class="pre">MoveNext</span></code> on the enumerator for the first time, the <code class="docutils literal notranslate"><span class="pre">Current</span></code> value is the <span class="xref myst">default value</span> of the data type of the enumerator.</p>
+</div>
+<p>The behavior of enumerators in .NET is however defined slightly differently.
+To enable programmers to use <code class="docutils literal notranslate"><span class="pre">while</span></code> rather than having to use <code class="docutils literal notranslate"><span class="pre">do</span> <span class="pre">while</span></code> loops the .NET language designers have opted to let the initial value of an enumerator be a value that’s <strong>not</strong> part of the sequence.
+The initial value of an enumerator is instead the default value of the data type aggregated in the enumerator.</p>
+<p>Let’s take <code class="docutils literal notranslate"><span class="pre">List&lt;int&gt;</span></code> for example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create a list of integers.</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="p">};</span>
+
+<span class="c1">// Get an enumerator from the list.</span>
+<span class="n">IEnumerator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">enumerator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">.</span><span class="n">GetEnumerator</span><span class="p">();</span>
+
+<span class="c1">// Without first calling MoveNext, ask for the Current element.</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">enumerator</span><span class="p">.</span><span class="n">Current</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the code above we do not end up with the value <code class="docutils literal notranslate"><span class="pre">10</span></code>, which is the first value in the enumerable.
+Instead we get the value <code class="docutils literal notranslate"><span class="pre">0</span></code>, which is the default value of the data type <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
+<p>You can think of this as that the first value that the enumerator is pointing to is a value not part of the sequence.
+When we’re using the enumerator in a <code class="docutils literal notranslate"><span class="pre">foreach</span></code> loop, we will never see this inital value because <code class="docutils literal notranslate"><span class="pre">MoveNext</span></code> is called immediately.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Under ‘normal use’, the initial value of an enumerator should not be exposed.
+Nevertheless, you should be aware of this risk so that you do not diverge from ‘normal use’.</p>
+</div>
+<div class="admonition-question admonition">
+<p class="admonition-title">Question</p>
+<p>Compare this behavior to the behavior that we defined in the chapter on <a class="reference internal" href="observer-pattern.html"><span class="doc std std-doc">Observer pattern</span></a>.
+What are the benefits and drawbacks of this design?</p>
+</div>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>Enumerables are an embodiment of the <a class="reference internal" href="iterator-pattern.html"><span class="doc std std-doc">Iterator pattern</span></a>.
+They offer a decoupled, simple, and flexible way to traverse collections.</p>
+<p>In the next chapter we will discuss the <a class="reference internal" href="the-yield-statement.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">yield</span></code></span></a> statement, which greatly simplifies the process of writing custom iterators.
+In a later chapter, we will discuss <span class="xref myst">LINQ</span>. The way that enumerables intergrate with LINQ makes both a must-know concept for any C# developer worth their salt.
+Do not sleep on enumerables.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -338,12 +579,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="variance.html">
+          <a class="next-page" href="the-yield-statement.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">104. </span>Variance</div>
+                <div class="title"><span class="section-number">104. </span>The <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -376,8 +617,30 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">103. Enumerables</a><ul>
+<li><a class="reference internal" href="#what-is-an-enumerable">What is an Enumerable?</a></li>
+<li><a class="reference internal" href="#relation-to-iterator-pattern">Relation to Iterator pattern</a></li>
+<li><a class="reference internal" href="#first-value-of-an-enumerator">First value of an enumerator</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

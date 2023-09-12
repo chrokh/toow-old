@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="53. Static constructors" href="static-constructors.html" /><link rel="prev" title="51. Constructor overloading" href="constructor-overloading.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="105. Variance" href="variance.html" /><link rel="prev" title="103. Enumerables" href="enumerables.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>52. Static fields - The Object Oriented Way</title>
+        <title>104. The yield statement - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -141,7 +141,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -216,7 +216,7 @@
 <li class="toctree-l1"><a class="reference internal" href="init-only-properties.html">49. Init-only properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="instance-method-overloading.html">50. Instance method overloading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constructor-overloading.html">51. Constructor overloading</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">52. Static fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static-fields.html">52. Static fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="static-constructors.html">53. Static constructors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="static-methods.html">54. Static methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="static-properties.html">55. Static properties</a></li>
@@ -268,7 +268,7 @@
 <li class="toctree-l1"><a class="reference internal" href="event-driven-programming.html">101. Event-driven programming</a></li>
 <li class="toctree-l1"><a class="reference internal" href="iterator-pattern.html">102. Iterator pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enumerables.html">103. Enumerables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="the-yield-statement.html">104. The <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">104. The <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variance.html">105. Variance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">106. Liskov substitution principle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">107. Variant generic interfaces</a></li>
@@ -301,23 +301,37 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="static-fields">
-<h1><span class="section-number">52. </span>Static fields<a class="headerlink" href="#static-fields" title="Permalink to this heading">#</a></h1>
-<p>In object-oriented languages, we usually manage state through instance fields. However, many of these languages also support a (non-object oriented) feature known as ‘static’. In C#, we have ‘static members’ and ‘static classes’, which we will discuss in the upcoming chapters. In this chapter, we will focus on static fields. Unlike instance fields, where each instance of a class has its own copy, a static field is shared across all instances of the class.</p>
-<p>A static field in C# belongs to the class itself, not to any specific instance of the class. That means all instances of the class share the same static field. A change in the value of a static field is reflected across all instances of the class.</p>
-<p>This makes static fields useful for representing data that should be shared among all instances. Let’s consider an example:</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="the-yield-statement">
+<h1><span class="section-number">104. </span>The <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement<a class="headerlink" href="#the-yield-statement" title="Permalink to this heading">#</a></h1>
+<p>When we discussed <a class="reference internal" href="enumerables.html"><span class="doc std std-doc">enumerables</span></a> in a previous chapter, we talked about how they embody the <a class="reference internal" href="iterator-pattern.html"><span class="doc std std-doc">Iterator pattern</span></a> and enable sequential traversal of collections without revealing their underlying structure. The <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement offers a simpler way to implement custom enumerators, making your code easier to <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintain</span></a>.</p>
+<figure class="align-default" id="id1">
+<img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1151017010239635517/chrokh_funny_illustration_of_a_lazy_cat_f8167ce6-0a30-4b18-ace9-8856ea022b22.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1151017010239635517/chrokh_funny_illustration_of_a_lazy_cat_f8167ce6-0a30-4b18-ace9-8856ea022b22.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 104.1 </span><span class="caption-text">The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword offers a simple way to create enumerators that lazily provide one element at a time.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<section id="the-basics-of-yield">
+<h2>The Basics of <code class="docutils literal notranslate"><span class="pre">yield</span></code><a class="headerlink" href="#the-basics-of-yield" title="Permalink to this heading">#</a></h2>
+<p>In its most basic form, the <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement can be used within a method or property that returns an <code class="docutils literal notranslate"><span class="pre">IEnumerable</span></code> or <code class="docutils literal notranslate"><span class="pre">IEnumerator</span></code>. The <code class="docutils literal notranslate"><span class="pre">yield</span> <span class="pre">return</span></code> statement elements one at a time.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">yield</span> <span class="pre">return</span></code> is used to return the next value in the iteration.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">yield</span> <span class="pre">break</span></code> is used to signal the end of the iteration.</p></li>
+</ul>
+<p>Let’s look at a simple example using <code class="docutils literal notranslate"><span class="pre">yield</span> <span class="pre">return</span></code>.
+Here’s a simple <a class="reference internal" href="local-functions.html"><span class="doc std std-doc">local function</span></a> that yields three numbers one by one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">GameSettings</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetNumbers</span><span class="p">()</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">800</span><span class="p">;</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">600</span><span class="p">;</span>
+<span class="w">    </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="m">10</span><span class="p">;</span>
+<span class="w">    </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="m">20</span><span class="p">;</span>
+<span class="w">    </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="m">30</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -325,7 +339,7 @@
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-5908.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-6306.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -375,7 +389,7 @@ function loadDotnetInteractiveApi() {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '5908.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '6306.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -431,103 +445,183 @@ else {
     </script>
 </div></div></div>
 </div>
-<p>In the above example, <code class="docutils literal notranslate"><span class="pre">GameSettings</span></code> is used to hold configuration data for a game, such as the number of rows and cols in a grid-based game. By marking these fields as <code class="docutils literal notranslate"><span class="pre">static</span></code>, we can access these settings from anywhere in our game code without needing to create an instance of <code class="docutils literal notranslate"><span class="pre">GameSettings</span></code>.</p>
-<p>To access a static field, you use the class name (<code class="docutils literal notranslate"><span class="pre">GameSettings</span></code>), followed by the dot operator (<code class="docutils literal notranslate"><span class="pre">.</span></code>), followed by the static field name (<code class="docutils literal notranslate"><span class="pre">Rows</span></code>, <code class="docutils literal notranslate"><span class="pre">Cols</span></code>). You don’t need to create an instance of the class to access a static field, which makes them especially convenient for shared data like these game settings.</p>
+<p>If we invoke this function then we will get back an object whose compile-time type is <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;int&gt;</span></code>.
+We can then use this enumerable in, for example, a <code class="docutils literal notranslate"><span class="pre">foreach</span></code> loop to iterate over all the numbers one by one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">GameSettings</span><span class="p">.</span><span class="n">Rows</span><span class="p">);</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">foreach</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">GetNumbers</span><span class="p">())</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">number</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>800
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30
 </pre></div>
 </div>
 </div>
 </div>
-<p>Since our fields are not <code class="docutils literal notranslate"><span class="pre">readonly</span></code> we could of course also set their values.</p>
+<p>Since it’s an enumerable we can of course also manually extract the enumerator and traverse the values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">GameSettings</span><span class="p">.</span><span class="n">Rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">;</span>
-<span class="n">GameSettings</span><span class="p">.</span><span class="n">Cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Let’s say we’re writing the part of our game that prints an empty game board.  Here’s how we might use our static fields:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Setting the game settings</span>
-<span class="n">GameSettings</span><span class="p">.</span><span class="n">Rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">;</span>
-<span class="n">GameSettings</span><span class="p">.</span><span class="n">Cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">;</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNumbers</span><span class="p">();</span>
+<span class="n">IEnumerator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">enumerator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numbers</span><span class="p">.</span><span class="n">GetEnumerator</span><span class="p">();</span>
 
-<span class="c1">// Initialize the game grid</span>
-<span class="kt">string</span><span class="w"> </span><span class="n">gameGrid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="n">enumerator</span><span class="p">.</span><span class="n">MoveNext</span><span class="p">();</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">enumerator</span><span class="p">.</span><span class="n">Current</span><span class="p">);</span>
 
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">GameSettings</span><span class="p">.</span><span class="n">Rows</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">GameSettings</span><span class="p">.</span><span class="n">Cols</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">gameGrid</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">&quot;* &quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="n">gameGrid</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">gameGrid</span><span class="p">);</span>
+<span class="n">enumerator</span><span class="p">.</span><span class="n">MoveNext</span><span class="p">();</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">enumerator</span><span class="p">.</span><span class="n">Current</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>* * * * 
-* * * * 
-* * * * 
-* * * * 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
 </pre></div>
 </div>
 </div>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>While the static keyword might seem like a simple solution in the short-term, it often leads to code that is <strong>harder to test and maintain</strong> in the long run. By using static, you depart from the core ideas in object oriented programming, like subtype polymorphism. This leads to less flexible and maintainable code.
-Additionally, because static members maintain state between calls, they can introduce <strong>unexpected side effects</strong> that can make your code <strong>harder to reason about and test</strong>.
-Static fields are essentially ‘global state’.
-Use static members carefully and remember that there always exists an actually object oriented design that meets your needs. You don’t need <code class="docutils literal notranslate"><span class="pre">static</span></code>.</p>
-</div>
-<p>A static field can also be useful when you want to keep track of data relevant to all instances of a class. For example, if you wanted to keep track of the total number of players in a game, a static field could be used.</p>
+</section>
+<section id="lazy-evaluation">
+<h2>Lazy evaluation<a class="headerlink" href="#lazy-evaluation" title="Permalink to this heading">#</a></h2>
+<p>When we’re using <code class="docutils literal notranslate"><span class="pre">yield</span></code> statements we’re writing code that will be ‘lazily evaluated’.
+Up to this point we’ve only dealt with ‘eager evaluation’ where the code will be executed in its entirety.
+In ‘lazy evaluation,’ code executes only as needed.</p>
+<p>When you call a method that uses <code class="docutils literal notranslate"><span class="pre">yield</span></code> statements, no complete list of elements is actually created.
+Until you request the first element, none of the code that you’ve written is executed at all.
+The only thing that happens is that we get back an enumerable or enumerator depending on what we’ve set the return type of the yielding function to.</p>
+<p>When you call <code class="docutils literal notranslate"><span class="pre">MoveNext</span></code> to advance the enumerator, the method executes until it reaches the next <code class="docutils literal notranslate"><span class="pre">yield</span> <span class="pre">return</span></code> statement and then ‘pauses’.</p>
+<p>Have a look at the example below, and pay special attention to the order in which the various messages are printed to the console.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Player</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetNumbers</span><span class="p">()</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">PlayerCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Enumerator: About to yield 1&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="m">1</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Player</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">PlayerCount</span><span class="o">++</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Enumerator: About to yield 2&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="m">2</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Enumerator: About to yield 3&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="m">3</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>In this example, each time a new <code class="docutils literal notranslate"><span class="pre">Player</span></code> is created, the constructor increments the <code class="docutils literal notranslate"><span class="pre">PlayerCount</span></code> static field. Since <code class="docutils literal notranslate"><span class="pre">PlayerCount</span></code> is a static field, this count is maintained across all instances of the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class, giving us a running total of how many <code class="docutils literal notranslate"><span class="pre">Player</span></code> objects have been created.</p>
+<p>In the above example we request all the numbers, one by one, when we run the <code class="docutils literal notranslate"><span class="pre">foreach</span></code> loop.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">new</span><span class="w"> </span><span class="nf">Player</span><span class="p">();</span>
-<span class="k">new</span><span class="w"> </span><span class="nf">Player</span><span class="p">();</span>
-<span class="k">new</span><span class="w"> </span><span class="nf">Player</span><span class="p">();</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Caller: Getting numbers.&quot;</span><span class="p">);</span>
+<span class="n">IEnumerable</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetNumbers</span><span class="p">();</span>
 
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">Player</span><span class="p">.</span><span class="n">PlayerCount</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Caller: About to iterate.&quot;</span><span class="p">);</span>
+<span class="k">foreach</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">GetNumbers</span><span class="p">())</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Caller: {number}&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Caller: Getting numbers.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Caller: About to iterate.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enumerator: About to yield 1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Caller: 1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enumerator: About to yield 2
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Caller: 2
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enumerator: About to yield 3
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Caller: 3
 </pre></div>
 </div>
 </div>
 </div>
-<p>Remember, static fields have their values shared across all instances of the class. This makes them incredibly powerful for certain use cases, but it also means you need to be careful when using them. Misusing static fields can lead to problems in your code due to unexpected sharing of state across instances.
-We will discuss the benefits of not using static later.</p>
+<p>Had we not used lazy evaluation, all messages from the enumerator would have been printed the moment we created it since the whole list of numbers would have been created.</p>
+</section>
+<section id="why-use-yield">
+<h2>Why Use <code class="docutils literal notranslate"><span class="pre">yield</span></code>?<a class="headerlink" href="#why-use-yield" title="Permalink to this heading">#</a></h2>
+<p>You might be asking, why not just return a list? While that’s an option, <code class="docutils literal notranslate"><span class="pre">yield</span></code> offers several advantages:</p>
+<ul class="simple">
+<li><p><strong>Lazy Execution</strong>: The method doesn’t execute until you actually iterate over the enumerable, which can be more efficient.</p></li>
+<li><p><strong>Infinite Enumerators</strong>: The lazy nature of <code class="docutils literal notranslate"><span class="pre">yield</span></code> allows the creation of infinite sequences.</p></li>
+<li><p><strong>State Preservation</strong>: The method’s state is preserved between calls, allowing complex iteration logic without managing state externally and without the need to create a whole new class.</p></li>
+<li><p><strong>Maintainability</strong>: The logic for the iteration stays within the method, making the code simpler.</p></li>
+</ul>
+<p>To better showcase the usefulness of the <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement, consider the following more complex example.
+In the code below, we’re defining a simple local function that generates numbers from the Fibonacci sequence.
+This algorithm needs to maintain state between iterations. Without <code class="docutils literal notranslate"><span class="pre">yield</span></code>, we would need to write a separate <a class="reference internal" href="classes.html"><span class="doc std std-doc">class</span></a> or <span class="xref myst">struct</span> if we wanted a lazy enumerator for this sequence.
+With the <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement however, the implementation is trivial.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GenerateFibonacci</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">next</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// The first number in the sequence</span>
+<span class="w">    </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// The second number in the sequence</span>
+<span class="w">    </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Generate the remaining numbers in the sequence</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">count</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">        </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">        </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next</span><span class="p">;</span>
+<span class="w">        </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">next</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="yield-break">
+<h2><code class="docutils literal notranslate"><span class="pre">yield</span> <span class="pre">break</span></code><a class="headerlink" href="#yield-break" title="Permalink to this heading">#</a></h2>
+<p>In addition to <code class="docutils literal notranslate"><span class="pre">yield</span> <span class="pre">return</span></code>, there’s also <code class="docutils literal notranslate"><span class="pre">yield</span> <span class="pre">break</span></code>. This statement is used to terminate the iteration, indicating that no more elements will be returned.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetNumbersUpToFive</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">5</span><span class="p">)</span>
+<span class="w">            </span><span class="k">yield</span><span class="w"> </span><span class="k">break</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this example, the <code class="docutils literal notranslate"><span class="pre">yield</span> <span class="pre">break</span></code> statement stops the loop once the values exceed <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement is a versatile feature in C# that simplifies the implementation of custom enumerators. It aligns well with the <a class="reference internal" href="iterator-pattern.html"><span class="doc std std-doc">Iterator pattern</span></a>, offering an elegant way to traverse collections lazily and maintain state across iterations. Whether you’re working with simple or complex types, understanding <code class="docutils literal notranslate"><span class="pre">yield</span></code> is likely simplify your enumerator implementations.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -554,23 +648,23 @@ We will discuss the benefits of not using static later.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="static-constructors.html">
+          <a class="next-page" href="variance.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">53. </span>Static constructors</div>
+                <div class="title"><span class="section-number">105. </span>Variance</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="constructor-overloading.html">
+          <a class="prev-page" href="enumerables.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">51. </span>Constructor overloading</div>
+                <div class="title"><span class="section-number">103. </span>Enumerables</div>
                 
               </div>
             </a>
@@ -592,8 +686,31 @@ We will discuss the benefits of not using static later.</p>
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">104. The <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement</a><ul>
+<li><a class="reference internal" href="#the-basics-of-yield">The Basics of <code class="docutils literal notranslate"><span class="pre">yield</span></code></a></li>
+<li><a class="reference internal" href="#lazy-evaluation">Lazy evaluation</a></li>
+<li><a class="reference internal" href="#why-use-yield">Why Use <code class="docutils literal notranslate"><span class="pre">yield</span></code>?</a></li>
+<li><a class="reference internal" href="#yield-break"><code class="docutils literal notranslate"><span class="pre">yield</span> <span class="pre">break</span></code></a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
