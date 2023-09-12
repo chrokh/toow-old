@@ -22,7 +22,7 @@ You'll find breadth over depth, as understanding the periphery can dramatically 
 
 Whether you're a seasoned coder looking for a turbo boost 🚀 or a complete novice, this book is your ticket to mastering OOP. Expect breadth over depth, as a comprehensive understanding often sprouts from the periphery of a subject.
 
-Who am I? I'm [Christopher Okhravi](https://www.christopherokhravi.com), a senior lecturer at Uppsala University with a Ph.D. in Information Systems 🎓. You might know me from my popular [YouTube channel](http://youtube.com/c/christopherokhravi) on programming.
+Who am I? I'm [Christopher Okhravi](https://www.christopherokhravi.com), a senior lecturer at Uppsala University with a Ph.D. 🎓 in Information Systems. You might know me from my popular [YouTube channel](http://youtube.com/c/christopherokhravi) on programming.
 
 Let's dive in and start building these skills one by one.
 
