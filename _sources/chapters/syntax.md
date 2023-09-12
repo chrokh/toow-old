@@ -40,11 +40,6 @@ Understanding how to interpret and solve syntax errors is an essential skill for
 
 In the next chapter we will write our first program. You're off to a great start, let's keep going.
 
-%```{exercise}
-%What is syntax?
-%```
-%
-%```{exercise}
-%What is a syntax error?
-%```
-
+```{tip}
+Use arrow keys to navigate between chapters.
+```
