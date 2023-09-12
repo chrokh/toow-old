@@ -1,5 +1,6 @@
 # The new todo list
 
+- Should labs be included in the book? No, right?
 - Using directive! (imports)
 - Reading input.
 - Default values (of data types) (länkat: default-values).
