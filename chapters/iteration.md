@@ -74,7 +74,7 @@ for (int n = 2; n <= 8; n *= 2)
 }
 ```
 
-Lastly, C# provides the `foreach` loop, which is used to iterate over collections. Since we have yet to talk about collections, we'll discuss more use-cases for the `foreach` loop in a later chapter.
+Lastly, C# provides the `foreach` loop, which is used to iterate over [enumerables](enumerables). Since we have yet to talk about enumerables and collections, we'll discuss more use-cases for the `foreach` loop in a later chapter.
 However, we can illustrate its usage with a `string`, which can be viewed as a sequence of characters (`char`):
 
 ```{code-cell}

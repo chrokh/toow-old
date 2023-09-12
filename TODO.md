@@ -2,6 +2,7 @@
 
 - Using directive! (imports)
 - Reading input.
+- Default values (of data types) (länkat: default-values).
 - Are lambdas simply syntactic sugar?
 - Coupling.
 - Data structures.
