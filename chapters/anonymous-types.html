@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="2. Hello world" href="hello-world.html" /><link rel="prev" title="How to master object-oriented programming in C#" href="../index.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="106. LINQ" href="linq.html" /><link rel="prev" title="104. The yield statement" href="the-yield-statement.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>1. Syntax - The Object Oriented Way</title>
+        <title>105. Anonymous types - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -165,7 +165,7 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">1. Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="syntax.html">1. Syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hello-world.html">2. Hello world</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compilation.html">3. Compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="execution.html">4. Execution</a></li>
@@ -269,7 +269,7 @@
 <li class="toctree-l1"><a class="reference internal" href="iterator-pattern.html">102. Iterator pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enumerables.html">103. Enumerables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="the-yield-statement.html">104. The <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement</a></li>
-<li class="toctree-l1"><a class="reference internal" href="anonymous-types.html">105. Anonymous types</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">105. Anonymous types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linq.html">106. LINQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variance.html">107. Variance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">108. Liskov substitution principle</a></li>
@@ -309,34 +309,9 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="syntax">
-<h1><span class="section-number">1. </span>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading">#</a></h1>
-<p>Understanding syntax is the first step towards writing correct and meaningful programs.
-Programming languages are designed with specific syntaxes that dictate how programs should be written. Just as different spoken languages have distinct grammar rules, different programming languages have different syntax rules.</p>
-<figure class="align-default" id="id1">
-<img alt="https://media.discordapp.net/attachments/1118630713084870736/1121411003985440878/chrokh_An_oil_painting_of_a_music_sheet_with_large_notes_expres_3d1a3b00-bd30-47f6-8812-9f7e53c8d902.png?width=2700&amp;height=1350" src="https://media.discordapp.net/attachments/1118630713084870736/1121411003985440878/chrokh_An_oil_painting_of_a_music_sheet_with_large_notes_expres_3d1a3b00-bd30-47f6-8812-9f7e53c8d902.png?width=2700&amp;height=1350" />
-<figcaption>
-<p><span class="caption-number">Fig. 1.1 </span><span class="caption-text">Musical notation has a specific syntax that musicians understand, with each note, rest, and symbol having a particular place and meaning. The same goes for programming syntax.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>Consider a simple sentence like “The cat sat on the mat.” We can rearrange the words randomly: “Cat sat mat the on the.”
-This rearranged version is nonsensical to us as humans, but what would make it syntactically incorrect to a computer?
-Just as we need proper grammar and word order in a sentence for it to be meaningful, programming languages have syntax rules that determine how code should be structured.</p>
-<p>Syntax relies on language tokens, which are the fundamental building blocks of programming languages.
-Tokens include keywords, identifiers, literals, operators, and punctuation marks.
-These tokens have specific meanings within the language and must be used correctly to form valid code.</p>
-<p>Consider the statement <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">5</span> <span class="pre">+</span> <span class="pre">3</span></code>.
-The tokens are <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">=</span></code>, <code class="docutils literal notranslate"><span class="pre">5</span></code>, <code class="docutils literal notranslate"><span class="pre">+</span></code>, and <code class="docutils literal notranslate"><span class="pre">3</span></code>.
-The syntax rules dictate that the equals sign (=) must be used for assignment, the plus sign (+) is used for addition, and the numbers (5 and 3) are operands. If we were to write <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">+</span> <span class="pre">5</span> <span class="pre">3</span></code>, violating the syntax rules, the code would be nonsensical to the computer, just like the rearranged sentence “Cat sat mat the on the” is to us.</p>
-<p>The syntax rules of a programming language define how tokens can be combined to form valid expressions, statements, and blocks of code. For instance, in many programming languages (including C#), statements must end with a semicolon to be considered valid. Violating these rules results in syntax errors, preventing successful execution of the program.</p>
-<p>Syntax errors occur when code violates these syntax rules. For example, forgetting a semicolon at the end of a statement or mismatching parentheses would result in syntax errors.
-Just like forgetting a period in the end of a sentence would equate to a grammatical error in natural language.</p>
-<p>Understanding how to interpret and solve syntax errors is an essential skill for programmers.</p>
-<p>In the next chapter we will write our first program. You’re off to a great start, let’s keep going.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Use arrow keys to navigate between chapters.</p>
-</div>
+          <section class="tex2jax_ignore mathjax_ignore" id="anonymous-types">
+<h1><span class="section-number">105. </span>Anonymous types<a class="headerlink" href="#anonymous-types" title="Permalink to this heading">#</a></h1>
+<p>Coming soon.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -363,23 +338,23 @@ Just like forgetting a period in the end of a sentence would equate to a grammat
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="hello-world.html">
+          <a class="next-page" href="linq.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title"><span class="section-number">2. </span>Hello world</div>
+                <div class="title"><span class="section-number">106. </span>LINQ</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../index.html">
+          <a class="prev-page" href="the-yield-statement.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Home</div>
+                <div class="title"><span class="section-number">104. </span>The <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement</div>
                 
               </div>
             </a>
