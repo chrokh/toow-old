@@ -1,5 +1,6 @@
 # The new todo list
 
+- Relate LINQ to strategy pattern and relational algebra?
 - Should labs be included in the book? No, right?
 - Using directive! (imports)
 - Reading input.

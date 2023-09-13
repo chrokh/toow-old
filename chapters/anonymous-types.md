@@ -1,9 +1,6 @@
-(anonymous-types)=
 # Anonymous types
 
-```{warning}
-Work in progress.
-```
+Coming soon.
 
 
 %```csharp
