@@ -13,6 +13,12 @@ When writing programs in a language with a type system that supports subtyping i
 If subtypes do not behave according to the specification set by their supertypes, then we cannot safely use subtypes where supertypes are expected without running the risk of unexpected behavior or errors occurring at run-time.
 
 
+```{code-cell}
+// Compiles, but does not make sense.
+class Animal { string Name; }
+class Fruit : Animal {}
+```
+
 ## Definition
 
 % TODO: Source for the keynote.
@@ -36,6 +42,44 @@ If you want to understand more about how the behavioral rules could be implement
 ```
 
 
+(robustness-principle)=
+### Robustness principle
+
+The quote below is known as the Robustness principle, or Postel's laws after Jon Postel {cite:p}`postel1980` used the wording in a specification of TCP.
+While not originally stated in a way related to variance, it is a very common saying used to explain variance.
+The principles states:
+
+```{epigraph}
+[B]e conservative in what you do, be liberal in what you accept from others.
+
+-- {cite:t}`postel1980`
+```
+
+The principle suggested that one should be liberal in what data one accepts from others if their intentions are clear.
+However, one should simultaneously take great care not to give others incorrect data.
+
+In terms of variance, this means that we should be *contravariant when receiving input*, and *covariant when producing output*.
+
+In other words, if I claim to be a subtype of some type then whenever I receive input in an instance method, then I should at least be able to handle all kinds of input that my supertype can handle.
+But I can of course also be able to handle *more* kinds of input.
+I'm liberal in what I accept.
+I'm contravariant in input.
+
+% TODO: Insert superset/subset figure here.
+
+On the flipside, if I claim to be a subtype of some type then whenever I return output from an instance method, then I should only ever return the kind of input that my supertype returns.
+But if I want to I might of course return an even *narrower* set of output.
+I'm conservative in what I send.
+I'm covariant in output.
+
+This maps exactly to the idea of behavioral substitutability.
+So imprint this saying in your mind, and return to it, whenever you get confused on this journey into the world of substitutability.
+
+Conveniently, we will, in the chapter on [variant generic interfaces](variant-generic-interfaces) see that the keyword in C# to specify covariance is `out` (as in "output") while the keyword for contravariance is `in` (as in "input").
+So as long as you remember the Robustness principle, remember which keyword does what, should be dead simple.
+
+
+
 ### Type rules
 
 The Liskov substitution principle stipulates the following three type rules.
@@ -48,7 +92,7 @@ The Liskov substitution principle stipulates the following three type rules.
 %2. Covariance of method return types in the subtype.
 %3. No new exceptions in subtype unless they are subtypes of exceptions thrown by methods of the supertype.
 
-Remember [the robustness principle](robustness-principle) that we discussed in the chapter on [variance](variance)?
+Remember the robustness principle?
 Well, the first two points are basically that principle again.
 
 *Contravariant method parameters* means that instance methods in the subtype must have the same method parameter types as those in the supertype, or more general types.

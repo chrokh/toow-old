@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="109. Variant generic interfaces" href="variant-generic-interfaces.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="109. Contravariance" href="contravariance.html" /><link rel="prev" title="107. Variance" href="variance.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>110. Bibliography - The Object Oriented Way</title>
+        <title>108. Covariance - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -141,7 +141,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -272,9 +272,14 @@
 <li class="toctree-l1"><a class="reference internal" href="anonymous-types.html">105. Anonymous types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linq.html">106. LINQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variance.html">107. Variance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">108. Liskov substitution principle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">109. Variant generic interfaces</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">110. Bibliography</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">108. Covariance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contravariance.html">109. Contravariance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="invariance.html">110. Invariance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">111. Liskov substitution principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-classes.html">112. Variant classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-delegates.html">113. Variant delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-delegates.html">114. Variant generic delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">115. Variant generic interfaces</a></li>
 </ul>
 
 </div>
@@ -303,25 +308,223 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="bibliography">
-<h1><span class="section-number">110. </span>Bibliography<a class="headerlink" href="#bibliography" title="Permalink to this heading">#</a></h1>
-<div class="docutils container" id="id1">
-<div class="citation" id="id11" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
-<p>Barbara H Liskov and Jeannette M Wing. A behavioral notion of subtyping. <em>ACM Transactions on Programming Languages and Systems</em>, 1994. <a class="reference external" href="https://doi.org/10.1145/197320.197383">doi:10.1145/197320.197383</a>.</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="covariance">
+<h1><span class="section-number">108. </span>Covariance<a class="headerlink" href="#covariance" title="Permalink to this heading">#</a></h1>
+<p>We’ve introduced the concept of <a class="reference internal" href="variance.html"><span class="doc std std-doc">variance</span></a> and it’s now time to understand the specific type of variance known as covariance.</p>
+<div class="admonition-key-point admonition">
+<p class="admonition-title">Key point</p>
+<p>If you ask for a bag of fruits and I give you a bag of apples, you shouldn’t be upset.</p>
 </div>
-<div class="citation" id="id10" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
-<p>Jon Postel. Transmission control protocol: RFC 761. 1980. URL: <a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc761">https://datatracker.ietf.org/doc/html/rfc761</a>.</p>
+<p>Imagine that you were expecting a bag of fruit but get a bag of apples.
+A bag of apples is still a bag of fruit.
+Anything you had intended to do with the fruits, you can do to the apples.
+This illustrates the concept of covariance.</p>
+<figure class="align-default" id="id1">
+<img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1152485304486338560/chrokh_a_bag_of_apples_illustration_0917d0b8-86ee-45f7-a934-2ca4edd561fe.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1152485304486338560/chrokh_a_bag_of_apples_illustration_0917d0b8-86ee-45f7-a934-2ca4edd561fe.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 108.1 </span><span class="caption-text">Just like a bag of apples is a bag of fruit, covariance follows the natural hierarchy of types.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>If the contents of a bag is covariant, then a bag of apples is a subtype of a bag of fruit.
+Let’s dissect what this means and why it makes sense.</p>
+<section id="understanding-covariance-with-generics">
+<h2>Understanding covariance with generics<a class="headerlink" href="#understanding-covariance-with-generics" title="Permalink to this heading">#</a></h2>
+<p>If a generic type <code class="docutils literal notranslate"><span class="pre">I</span></code> is parameterized over the type parameter <code class="docutils literal notranslate"><span class="pre">T</span></code>, denoted as <code class="docutils literal notranslate"><span class="pre">I&lt;T&gt;</span></code>, and if <code class="docutils literal notranslate"><span class="pre">T</span></code> is <em>covariant</em>, then the <strong>usual ordering of types is maintained</strong>.</p>
+<p>This means that subtypes may use more <em>specific</em> types than what’s used in the supertype.
+For example <code class="docutils literal notranslate"><span class="pre">I&lt;Apple&gt;</span></code> would be a subtype of <code class="docutils literal notranslate"><span class="pre">I&lt;Fruit&gt;</span></code> if <code class="docutils literal notranslate"><span class="pre">Apple</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">Fruit</span></code>.</p>
+<div class="admonition-definition admonition">
+<p class="admonition-title">Definition</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">A</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">B</span></code> and if <code class="docutils literal notranslate"><span class="pre">T</span></code> is <em>covariant</em> in <code class="docutils literal notranslate"><span class="pre">I&lt;T&gt;</span></code> then <code class="docutils literal notranslate"><span class="pre">I&lt;A&gt;</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">I&lt;B&gt;</span></code>.</p>
+</div>
+<p>Let’s use <a class="reference internal" href="generics.html"><span class="doc std std-doc">generics</span></a> to understand covariance.
+Assume that we have the two classes <code class="docutils literal notranslate"><span class="pre">Apple</span></code> and <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> and that the former is a subtype of the latter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Fruit</span><span class="w"> </span><span class="p">{}</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Apple</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Fruit</span><span class="w"> </span><span class="p">{}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-3208.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.79:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '3208.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>In the example below, a variable of type <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;Fruit&gt;</span></code> is assigned a value of type <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;Apple&gt;</span></code>.
+This is valid since <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;Apple&gt;</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;Fruit&gt;</span></code> which means that the type can be <a class="reference internal" href="type-conversions.html"><span class="doc std std-doc">implicitly upcast</span></a>.
+It is a subtype since <code class="docutils literal notranslate"><span class="pre">T</span></code> is <em>covariant</em> in <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;T&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">Apple</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">Fruit</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span><span class="w"> </span><span class="n">apples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">Fruit</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fruits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">apples</span><span class="p">;</span>
+</pre></div>
 </div>
 </div>
 </div>
+<p>The example shows that if you need a series of fruits then a series of apples will do just fine.
+Why is this compile-time <a class="reference internal" href="type-checking.html"><span class="doc std std-doc">type-safe</span></a>?
+The <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;T&gt;</span></code> interface only exposes a single method which returns <code class="docutils literal notranslate"><span class="pre">IEnumerator&lt;T&gt;</span></code> which in turn allows you to loop through the items in the collection, but not modify them.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;T&gt;</span></code> is essentially a ‘producer’ of elements of type <code class="docutils literal notranslate"><span class="pre">T</span></code> but never a ‘consumer’ of them.
+It only returns elements of type <code class="docutils literal notranslate"><span class="pre">T</span></code> as output, but never takes them as input.</p>
+</div>
+<p>In essence, when you specify that you need an <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;Fruit&gt;</span></code>, you’re saying that you need a sequence that will produce elements that are, at minimum, of type <code class="docutils literal notranslate"><span class="pre">Fruit</span></code>. An object of type <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;Apple&gt;</span></code> fits this criterion because it produces elements that are always of type <code class="docutils literal notranslate"><span class="pre">Apple</span></code>, which is a subtype of <code class="docutils literal notranslate"><span class="pre">Fruit</span></code>.
+Therefore, <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;Apple&gt;</span></code> can be safely treated as <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;Fruit&gt;</span></code> without causing any type errors.</p>
+</section>
+<section id="understanding-covariance-with-classes">
+<h2>Understanding covariance with classes<a class="headerlink" href="#understanding-covariance-with-classes" title="Permalink to this heading">#</a></h2>
+<p>Before we leave this chapter, let’s also look at roughly the same problem but without <a class="reference internal" href="generics.html"><span class="doc std std-doc">generics</span></a>.
+In the code below we can see how a subtype called <code class="docutils literal notranslate"><span class="pre">AppleSequence</span></code> <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inherits</span></a> from <code class="docutils literal notranslate"><span class="pre">FruitSequence</span></code> and <a class="reference internal" href="overriding.html"><span class="doc std std-doc">overrides</span></a> the method that returns the next item in the sequence.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Fruit</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Apple</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Fruit</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">FruitSequence</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="n">Fruit</span><span class="w"> </span><span class="nf">GetNext</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Fruit</span><span class="p">();</span><span class="w"> </span><span class="c1">// Placeholder implementation.</span>
+<span class="p">}</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">AppleSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">FruitSequence</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="n">Apple</span><span class="w"> </span><span class="nf">GetNext</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Apple</span><span class="p">();</span><span class="w"> </span><span class="c1">// Placeholder implementation.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This code is valid C# due to a feature known as <a class="reference internal" href="variant-classes.html"><span class="doc std std-doc">covariant return types</span></a> but more on that in its own chapter.
+What we should emphasize is that the return type of the subtype’s method marked as <code class="docutils literal notranslate"><span class="pre">override</span></code> is a subtype of the return type of the supertype’s method marked as <code class="docutils literal notranslate"><span class="pre">virtual</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Why is it <a class="reference internal" href="type-checking.html"><span class="doc std std-doc">type safe</span></a>? The <code class="docutils literal notranslate"><span class="pre">GetNext()</span></code> method in both <code class="docutils literal notranslate"><span class="pre">FruitSequence</span></code> and <code class="docutils literal notranslate"><span class="pre">AppleSequence</span></code> acts as a ‘producer’ of elements, much like the <code class="docutils literal notranslate"><span class="pre">GetEnumerator</span></code> method of <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;T&gt;</span></code>. It produces elements of a specific type as output but doesn’t consume any elements as input. This is why it is type safe to let the method’s return type be covariant.</p>
+</div>
+<figure class="align-default" id="fig-uml-covariance">
+<img alt="../_images/uml-covariance.png" src="../_images/uml-covariance.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 108.2 </span><span class="caption-text">This UML class diagram is annotated with a red arrow to highlight the concept of covariance. Consistent with the natural type hierarchy of the method return types, where <code class="docutils literal notranslate"><span class="pre">Apple</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">Fruit</span></code>, the arrow between the containing types <code class="docutils literal notranslate"><span class="pre">AppleSequence</span></code> and <code class="docutils literal notranslate"><span class="pre">FruitSequence</span></code> also follows this hierarchy, signifying that <code class="docutils literal notranslate"><span class="pre">AppleSequence</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">FruitSequence</span></code>.</span><a class="headerlink" href="#fig-uml-covariance" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Consider the <span class="xref myst">UML class diagram</span> in <a class="reference internal" href="#fig-uml-covariance"><span class="std std-numref">Fig. 108.2</span></a> where the arrows indicate subtype relationships. The arrow from <code class="docutils literal notranslate"><span class="pre">AppleSequence</span></code> to <code class="docutils literal notranslate"><span class="pre">FruitSequence</span></code> signifies that <code class="docutils literal notranslate"><span class="pre">AppleSequence</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">FruitSequence</span></code>. The arrow from <code class="docutils literal notranslate"><span class="pre">Apple</span></code> to <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> is not standard UML but indicates that <code class="docutils literal notranslate"><span class="pre">Apple</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">Fruit</span></code>.
+The fact that both arrows point in the same direction tells us that we’re dealing with covariance.</p>
+</section>
+<section id="up-next">
+<h2>Up next<a class="headerlink" href="#up-next" title="Permalink to this heading">#</a></h2>
+<p>In the next chapter we will learn about <a class="reference internal" href="contravariance.html"><span class="doc std std-doc">contravariance</span></a> where the type relationships are inverted. While covariance allows us to use a more specific type where a more general one is expected, contravariance allows us to use a more general type in place of a more specific one.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -333,30 +536,38 @@
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: ".net-csharp"
         },
         kernelOptions: {
-            name: "python3",
+            name: ".net-csharp",
             path: "./chapters"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = '.net-csharp'</script>
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          
-          <a class="prev-page" href="variant-generic-interfaces.html">
+          <a class="next-page" href="contravariance.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title"><span class="section-number">109. </span>Contravariance</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="variance.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">109. </span>Variant generic interfaces</div>
+                <div class="title"><span class="section-number">107. </span>Variance</div>
                 
               </div>
             </a>
@@ -378,8 +589,29 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">108. Covariance</a><ul>
+<li><a class="reference internal" href="#understanding-covariance-with-generics">Understanding covariance with generics</a></li>
+<li><a class="reference internal" href="#understanding-covariance-with-classes">Understanding covariance with classes</a></li>
+<li><a class="reference internal" href="#up-next">Up next</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

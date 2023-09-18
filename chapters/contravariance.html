@@ -1,0 +1,644 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="110. Invariance" href="invariance.html" /><link rel="prev" title="108. Covariance" href="covariance.html" />
+
+    <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
+        <title>109. Contravariance - The Object Oriented Way</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">The Object Oriented Way</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">The Object Oriented Way</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="syntax.html">1. Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hello-world.html">2. Hello world</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compilation.html">3. Compilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="execution.html">4. Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpretation.html">5. Interpretation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="comments.html">6. Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="values.html">7. Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">8. Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-types.html">9. Data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expressions.html">10. Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arithmetic-operators.html">11. Arithmetic operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="equality-operators.html">12. Equality operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="relational-operators.html">13. Relational operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logical-operators.html">14. Logical operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment-operator.html">15. Assignment operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="precedence.html">16. Precedence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="associativity.html">17. Associativity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constants.html">18. Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statements.html">19. Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-inference.html">20. Type inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-checking.html">21. Type checking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="floating-point-types.html">22. Floating-point types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enumeration-types.html">23. Enumeration types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="selection-statements.html">24. Selection statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="selection-expressions.html">25. Selection expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iteration.html">26. Iteration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arrays.html">27. Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference-types.html">28. Reference types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="value-types.html">29. Value types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="local-functions.html">30. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fat-arrows.html">31. Fat arrows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recursion.html">32. Recursion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="namespaces.html">33. Namespaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="objects.html">34. Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">35. Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="access-modifiers.html">36. Access modifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html">37. Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constructors.html">38. Constructors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the-this-keyword.html">39. The <code class="docutils literal notranslate"><span class="pre">this</span></code> keyword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="instance-methods.html">40. Instance methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encapsulation.html">41. Encapsulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auto-implemented-properties.html">42. Auto-implemented properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manually-implemented-properties.html">43. Manually implemented properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="object-initializers.html">44. Object initializers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="read-only-fields.html">45. Read-only fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="read-only-properties.html">46. Read-only properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="computed-properties.html">47. Computed properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="required-properties-and-fields.html">48. Required properties and fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="init-only-properties.html">49. Init-only properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="instance-method-overloading.html">50. Instance method overloading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constructor-overloading.html">51. Constructor overloading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static-fields.html">52. Static fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static-constructors.html">53. Static constructors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static-methods.html">54. Static methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static-properties.html">55. Static properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static-classes.html">56. Static classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="top-level-statements.html">57. Top-level statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="object-composition.html">58. Object composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interfaces.html">59. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subtype-polymorphism.html">60. Subtype polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run-time-type-vs-compile-time-type.html">61. Run-time type vs compile-time type</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic-dispatch.html">62. Dynamic dispatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multiple-interfaces.html">63. Multiple interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface-default-implementations.html">64. Interface default implementations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inheritance.html">65. Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overriding.html">66. Overriding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hiding.html">67. Hiding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the-base-keyword.html">68. The <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constructor-chaining.html">69. Constructor chaining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="protected.html">70. Protected access modifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="abstract-classes.html">71. Abstract classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface-inheritance.html">72. Interface inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-conversions.html">73. Type conversions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upcasting.html">74. Upcasting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="downcasting.html">75. Downcasting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="everything-is-an-object.html">76. Everything is an object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uml-class-diagrams.html">77. UML class diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintainability.html">78. Maintainability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="refactoring.html">79. Refactoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics.html">80. Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-types.html">81. Generic types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics-and-type-errors.html">82. Generics and type errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">83. Generic supertypes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-methods.html">84. Generic methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">85. Type parameter constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="collections.html">86. Collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="collection-initializers.html">87. Collection initializers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">88. Replace conditional with polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependency-injection.html">89. Dependency injection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">90. Composition over inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strategy-pattern.html">91. Strategy pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bridge-pattern.html">92. Bridge pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="delegates.html">93. Delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-delegates.html">94. Generic delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="built-in-delegates.html">95. Built-in delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multicast-delegates.html">96. Multicast delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lambdas.html">97. Lambdas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observer-pattern.html">98. Observer pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="events.html">99. Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-conventions.html">100. Event conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-driven-programming.html">101. Event-driven programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iterator-pattern.html">102. Iterator pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enumerables.html">103. Enumerables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the-yield-statement.html">104. The <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="anonymous-types.html">105. Anonymous types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linq.html">106. LINQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variance.html">107. Variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="covariance.html">108. Covariance</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">109. Contravariance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="invariance.html">110. Invariance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">111. Liskov substitution principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-classes.html">112. Variant classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-delegates.html">113. Variant delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-delegates.html">114. Variant generic delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">115. Variant generic interfaces</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section class="tex2jax_ignore mathjax_ignore" id="contravariance">
+<h1><span class="section-number">109. </span>Contravariance<a class="headerlink" href="#contravariance" title="Permalink to this heading">#</a></h1>
+<p>After diving into the topic of <a class="reference internal" href="variance.html"><span class="doc std std-doc">variance</span></a> and having introduced <a class="reference internal" href="covariance.html"><span class="doc std std-doc">covariance</span></a>, it’s time to explore another form of variance: contravariance.</p>
+<div class="admonition-key-point admonition">
+<p class="admonition-title">Key point</p>
+<p>If you ask for a machine that produces juice from apples and I give you a machine that produces juice from any fruit then you shouldn’t be upset.</p>
+</div>
+<p>Imagine that you were expecting a machine that produces juice from apples but get a machine that produces juice from any fruit.
+If you were to feed only apples into this machine, it would function as well as an apple-specific juicer.
+This illustrates the concept of contravariance.</p>
+<figure class="align-default" id="id1">
+<img alt="https://cdn.discordapp.com/attachments/1118630713084870736/1152121720791105598/chrokh_orange_juice_machine_illustration_a1c13a5a-219b-4d2a-8ff9-b831751bb20d.png" src="https://cdn.discordapp.com/attachments/1118630713084870736/1152121720791105598/chrokh_orange_juice_machine_illustration_a1c13a5a-219b-4d2a-8ff9-b831751bb20d.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 109.1 </span><span class="caption-text">Just like a fruit juicer can substitute an orange juicer, contravariance inverts the natural hierarchy of types.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>If the type of input that the machine can process is <em>contravariant</em>, then a more general fruit juicer is a subtype of a more specific apple juicer.
+In other words, the more general machine can <em>substitute</em> the more specific machine.
+Let’s dissect what this means.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Try to focus on whether something can <em>substitute</em> something else, rather than whether something <em>is</em> something else.</p>
+</div>
+<section id="understanding-contravariance-with-generic-delegates">
+<h2>Understanding contravariance with generic delegates<a class="headerlink" href="#understanding-contravariance-with-generic-delegates" title="Permalink to this heading">#</a></h2>
+<p>In <a class="reference internal" href="covariance.html"><span class="doc std std-doc">covariance</span></a>, we saw that a more specific type can substitute a more general type. Contravariance flips this idea on its head.
+If a generic type <code class="docutils literal notranslate"><span class="pre">I</span></code> is parameterized over the type parameter <code class="docutils literal notranslate"><span class="pre">T</span></code>, denoted as <code class="docutils literal notranslate"><span class="pre">I&lt;T&gt;</span></code>, and if <code class="docutils literal notranslate"><span class="pre">T</span></code> is <em>contravariant</em>, then the <strong>usual ordering of types is inverted</strong>.</p>
+<p>This means that subtypes may use more <em>general</em> types than what’s used in the supertype.
+For example <code class="docutils literal notranslate"><span class="pre">I&lt;Fruit&gt;</span></code> would actually be a subtype of <code class="docutils literal notranslate"><span class="pre">I&lt;Apple&gt;</span></code> if <code class="docutils literal notranslate"><span class="pre">Apple</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">Fruit</span></code>.</p>
+<div class="admonition-definition admonition">
+<p class="admonition-title">Definition</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">A</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">B</span></code> and if <code class="docutils literal notranslate"><span class="pre">T</span></code> is <em>contravariant</em> in <code class="docutils literal notranslate"><span class="pre">I&lt;T&gt;</span></code> then <code class="docutils literal notranslate"><span class="pre">I&lt;B&gt;</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">I&lt;A&gt;</span></code>.</p>
+</div>
+<p>Let’s utilize <a class="reference internal" href="generic-delegates.html"><span class="doc std std-doc">generic delegates</span></a> to delve deeper into contravariance.
+Suppose that we have the two classes <code class="docutils literal notranslate"><span class="pre">Apple</span></code> and <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> and that the former is a subtype of the latter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Fruit</span><span class="w"> </span><span class="p">{}</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Apple</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Fruit</span><span class="w"> </span><span class="p">{}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-3152.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.79:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '3152.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<p>In the following example, a variable of type <code class="docutils literal notranslate"><span class="pre">Action&lt;Apple&gt;</span></code> is assigned a delegate instance of type <code class="docutils literal notranslate"><span class="pre">Action&lt;Fruit&gt;</span></code>.
+This code compiles because <code class="docutils literal notranslate"><span class="pre">Action&lt;Fruit&gt;</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">Action&lt;Apple&gt;</span></code> which means that the type can be <a class="reference internal" href="type-conversions.html"><span class="doc std std-doc">implicitly upcast</span></a>.
+It is a subtype since <code class="docutils literal notranslate"><span class="pre">T</span></code> is <em>contravariant</em> in <code class="docutils literal notranslate"><span class="pre">Action&lt;T&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">Apple</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">Fruit</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Action</span><span class="o">&lt;</span><span class="n">Fruit</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fruitJuicer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Fruit</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Turning fruit into juice&quot;</span><span class="p">);</span>
+
+<span class="n">Action</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span><span class="w"> </span><span class="n">appleJuicer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fruitJuicer</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Why is this compile-time <a class="reference internal" href="type-checking.html"><span class="doc std std-doc">type-safe</span></a>?
+An <code class="docutils literal notranslate"><span class="pre">Action&lt;T&gt;</span></code> is a delegate whose values must all be functions or methods that take a <code class="docutils literal notranslate"><span class="pre">T</span></code> as input.
+To determine whether a substitution is type-safe we consequently only need to care about whether any input that can be given to the supertype (<code class="docutils literal notranslate"><span class="pre">Action&lt;Apple&gt;</span></code>) also can be handled by the subtype (<code class="docutils literal notranslate"><span class="pre">Action&lt;Fruit&gt;</span></code>).</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The generic delegate <code class="docutils literal notranslate"><span class="pre">Action&lt;T&gt;</span></code> is essentially a ‘consumer’ of elements of type <code class="docutils literal notranslate"><span class="pre">T</span></code>. It takes them as <em>input</em> but never produces them as <em>output</em>.</p>
+</div>
+<p>When you define an <code class="docutils literal notranslate"><span class="pre">Action&lt;Apple&gt;</span></code>, you are saying you need a function that can take objects of type <code class="docutils literal notranslate"><span class="pre">Apple</span></code> as input. An <code class="docutils literal notranslate"><span class="pre">Action&lt;Fruit&gt;</span></code> meets that requirement because it can take any <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> as input, which of course includes <code class="docutils literal notranslate"><span class="pre">Apple</span></code> since that’s a subtype of <code class="docutils literal notranslate"><span class="pre">Fruit</span></code>. Therefore, it is type-safe to assign <code class="docutils literal notranslate"><span class="pre">Action&lt;Fruit&gt;</span></code> to <code class="docutils literal notranslate"><span class="pre">Action&lt;Apple&gt;</span></code>.</p>
+</section>
+<section id="understanding-contravariance-with-classes">
+<h2>Understanding contravariance with classes<a class="headerlink" href="#understanding-contravariance-with-classes" title="Permalink to this heading">#</a></h2>
+<p>Let’s now also explore how contravariance would work in the context of classes. Unlike with generics and unlike with covariance, C# does <strong>not</strong> support contravariance in classes. More on this in the chapter on <a class="reference internal" href="variant-classes.html"><span class="doc std std-doc">variant classes</span></a>. However, we can still use classes to understand the concept of contravariance theoretically.</p>
+<p>In the hypothetical code below, the class <code class="docutils literal notranslate"><span class="pre">FruitJuicer</span></code> <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inherits</span></a> from the class <code class="docutils literal notranslate"><span class="pre">AppleJuicer</span></code> and <a class="reference internal" href="overriding.html"><span class="doc std std-doc">overrides</span></a> the method that juices its input.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AppleJuicer</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Juice</span><span class="p">(</span><span class="n">Apple</span><span class="w"> </span><span class="n">apple</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Turning apple into juice&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">FruitJuicer</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">AppleJuicer</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// The following override is theoretical and won&#39;t compile in C#.</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Juice</span><span class="p">(</span><span class="n">Fruit</span><span class="w"> </span><span class="n">fruit</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Turning fruit into juice&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The method signature in the super class is <code class="docutils literal notranslate"><span class="pre">Juice(Apple</span> <span class="pre">apple)</span></code> while the method signature in the subclass is <code class="docutils literal notranslate"><span class="pre">Juice(Fruit</span> <span class="pre">fruit)</span></code>.
+If C# would support contravariant method parameters then this would compile.
+The subtype’s method could accept a more general type than what’s used in the supertype.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Why is it <a class="reference internal" href="type-checking.html"><span class="doc std std-doc">type safe</span></a>? The <code class="docutils literal notranslate"><span class="pre">Juice</span></code> method in both <code class="docutils literal notranslate"><span class="pre">AppleJuicer</span></code> and <code class="docutils literal notranslate"><span class="pre">FruitJuicer</span></code> acts as a ‘consumer’ of elements, similar to certain methods in contravariant interfaces like <code class="docutils literal notranslate"><span class="pre">IComparer&lt;T&gt;</span></code>. These methods consume elements of a specific type as input but don’t produce any elements of that type as output. This is why it’s type-safe to have contravariant method input parameters.</p>
+</div>
+<figure class="align-default" id="fig-uml-contravariance">
+<img alt="../_images/uml-contravariance.png" src="../_images/uml-contravariance.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 109.2 </span><span class="caption-text">This UML class diagram is annotated with a red arrow to highlight the concept of contravariance. In contrast to the usual type hierarchy of the method parameters, where <code class="docutils literal notranslate"><span class="pre">Apple</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">Fruit</span></code>, the arrow between the containing types follows an inverted hierarchy which causes the more general <code class="docutils literal notranslate"><span class="pre">FruitJuicer</span></code> to be a subtype of <code class="docutils literal notranslate"><span class="pre">AppleJuicer</span></code>.</span><a class="headerlink" href="#fig-uml-contravariance" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Consider the UML class diagram in <a class="reference internal" href="#fig-uml-contravariance"><span class="std std-numref">Fig. 109.2</span></a> where the arrows indicate subtype relationships. The arrow from <code class="docutils literal notranslate"><span class="pre">FruitJuicer</span></code> to <code class="docutils literal notranslate"><span class="pre">AppleJuicer</span></code> indicates that <code class="docutils literal notranslate"><span class="pre">FruitJuicer</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">AppleJuicer</span></code>. The other arrow from <code class="docutils literal notranslate"><span class="pre">Apple</span></code> to <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> is not standard UML but indicates that <code class="docutils literal notranslate"><span class="pre">Apple</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">Fruit</span></code>.
+The fact that the arrows point in opposite directions tells us that we’re dealing with contravariance.</p>
+</section>
+<section id="up-next">
+<h2>Up next<a class="headerlink" href="#up-next" title="Permalink to this heading">#</a></h2>
+<p>In the next chapter, we will delve into <a class="reference internal" href="invariance.html"><span class="doc std std-doc">invariance</span></a>, where the type relationships are neither <a class="reference internal" href="covariance.html"><span class="doc std std-doc">covariant</span></a> nor contravariant. While covariance lets us use a more specific type where a general one is expected, and contravariance lets us use a more general type in place of a more specific one, invariance restricts us to using exactly the type that is specified.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: ".net-csharp"
+        },
+        kernelOptions: {
+            name: ".net-csharp",
+            path: "./chapters"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = '.net-csharp'</script>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="invariance.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title"><span class="section-number">110. </span>Invariance</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="covariance.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title"><span class="section-number">108. </span>Covariance</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; All rights reserved. By using this site, you agree to our use of cookies for Google Analytics.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">109. Contravariance</a><ul>
+<li><a class="reference internal" href="#understanding-contravariance-with-generic-delegates">Understanding contravariance with generic delegates</a></li>
+<li><a class="reference internal" href="#understanding-contravariance-with-classes">Understanding contravariance with classes</a></li>
+<li><a class="reference internal" href="#up-next">Up next</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://www.googletagmanager.com/gtag/js?id=G-V69WNXD095"></script>
+    <script src="../_static/custom.js"></script>
+    <script src="../_static/analytics.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    </body>
+</html>

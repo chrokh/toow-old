@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="110. Bibliography" href="bibliography.html" /><link rel="prev" title="108. Liskov substitution principle" href="liskov-substitution-principle.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="114. Variant generic delegates" href="variant-generic-delegates.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>109. Variant generic interfaces - The Object Oriented Way</title>
+        <title>115. Variant generic interfaces - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -141,7 +141,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -272,9 +272,14 @@
 <li class="toctree-l1"><a class="reference internal" href="anonymous-types.html">105. Anonymous types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linq.html">106. LINQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variance.html">107. Variance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">108. Liskov substitution principle</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">109. Variant generic interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">110. Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="covariance.html">108. Covariance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contravariance.html">109. Contravariance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="invariance.html">110. Invariance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">111. Liskov substitution principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-classes.html">112. Variant classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-delegates.html">113. Variant delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-delegates.html">114. Variant generic delegates</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">115. Variant generic interfaces</a></li>
 </ul>
 
 </div>
@@ -303,546 +308,18 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="variant-generic-interfaces">
-<h1><span class="section-number">109. </span>Variant generic interfaces<a class="headerlink" href="#variant-generic-interfaces" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">115. </span>Variant generic interfaces<a class="headerlink" href="#variant-generic-interfaces" title="Permalink to this heading">#</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Work in progress.</p>
 </div>
-<section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<section id="predicates">
-<h3>Predicates<a class="headerlink" href="#predicates" title="Permalink to this heading">#</a></h3>
-<p>What’s an example of something that could be contravariant?
-How about predicates?</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IPredicate</span><span class="o">&lt;</span><span class="k">in</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="c1">// Contravariant!</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">Check</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">input</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-<div>
-    <div id='dotnet-interactive-this-cell-7331.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
-        The below script needs to be able to find the current output cell; this is an easy method to get it.
-    </div>
-    <script type='text/javascript'>
-async function probeAddresses(probingAddresses) {
-    function timeout(ms, promise) {
-        return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                reject(new Error('timeout'))
-            }, ms)
-            promise.then(resolve, reject)
-        })
-    }
-
-    if (Array.isArray(probingAddresses)) {
-        for (let i = 0; i < probingAddresses.length; i++) {
-
-            let rootUrl = probingAddresses[i];
-
-            if (!rootUrl.endsWith('/')) {
-                rootUrl = `${rootUrl}/`;
-            }
-
-            try {
-                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
-                    method: 'POST',
-                    cache: 'no-cache',
-                    mode: 'cors',
-                    timeout: 1000,
-                    headers: {
-                        'Content-Type': 'text/plain'
-                    },
-                    body: probingAddresses[i]
-                }));
-
-                if (response.status == 200) {
-                    return rootUrl;
-                }
-            }
-            catch (e) { }
-        }
-    }
-}
-
-function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.145:2048/", "http://127.0.0.1:2048/"])
-        .then((root) => {
-        // use probing to find host url and api resources
-        // load interactive helpers and language services
-        let dotnetInteractiveRequire = require.config({
-        context: '7331.Microsoft.DotNet.Interactive.Http.HttpPort',
-                paths:
-            {
-                'dotnet-interactive': `${root}resources`
-                }
-        }) || require;
-
-            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
-
-            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
-                let paths = {};
-                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
-                
-                let internalRequire = require.config({
-                    context: extensionCacheBuster,
-                    paths: paths,
-                    urlArgs: `cacheBuster=${extensionCacheBuster}`
-                    }) || require;
-
-                return internalRequire
-            };
-        
-            dotnetInteractiveRequire([
-                    'dotnet-interactive/dotnet-interactive'
-                ],
-                function (dotnet) {
-                    dotnet.init(window);
-                },
-                function (error) {
-                    console.log(error);
-                }
-            );
-        })
-        .catch(error => {console.log(error);});
-    }
-
-// ensure `require` is available globally
-if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
-    let require_script = document.createElement('script');
-    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
-    require_script.setAttribute('type', 'text/javascript');
-    
-    
-    require_script.onload = function() {
-        loadDotnetInteractiveApi();
-    };
-
-    document.getElementsByTagName('head')[0].appendChild(require_script);
-}
-else {
-    loadDotnetInteractiveApi();
-}
-
-    </script>
-</div></div></div>
-</div>
-<p>Let’s say that we have a subtyping hierarchy where <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> is a subtype of the interface <code class="docutils literal notranslate"><span class="pre">IShape</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IShape</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">Area</span><span class="w"> </span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IShape</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">;</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Rectangle</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">height</span><span class="p">)</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">width</span><span class="p">;</span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">height</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">Area</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">height</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Let us then define a predicate that works on objects of type <code class="docutils literal notranslate"><span class="pre">Shape</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">LargerThan</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IPredicate</span><span class="o">&lt;</span><span class="n">IShape</span><span class="o">&gt;</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">lim</span><span class="p">;</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">LargerThan</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">lim</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">lim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lim</span><span class="p">;</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">Check</span><span class="w"> </span><span class="p">(</span><span class="n">IShape</span><span class="w"> </span><span class="n">shape</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">shape</span><span class="p">.</span><span class="n">Area</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">lim</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Since the type parameter in <code class="docutils literal notranslate"><span class="pre">IPredicate</span></code> is contravariant we can now use values of type <code class="docutils literal notranslate"><span class="pre">IPredicate&lt;IShape&gt;</span></code> where values of type <code class="docutils literal notranslate"><span class="pre">IPredicate&lt;Rectangle&gt;</span></code> are expected.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IPredicate</span><span class="o">&lt;</span><span class="n">IShape</span><span class="o">&gt;</span><span class="w"> </span><span class="n">shapePredicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LargerThan</span><span class="p">(</span><span class="m">2</span><span class="p">);</span>
-<span class="n">IPredicate</span><span class="o">&lt;</span><span class="n">Rectangle</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shapePredicate</span><span class="p">;</span><span class="w"> </span><span class="c1">// Needs contravariance.</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Without <code class="docutils literal notranslate"><span class="pre">T</span></code> marked as covariant we would get the following error:</p>
-<div class="cell tag_hide-input tag_raises-exception docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IPredicate</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="nf">Check</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">input</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="k">interface</span><span class="w"> </span><span class="n">IShape</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">Area</span><span class="w"> </span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IShape</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">;</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Rectangle</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">height</span><span class="p">)</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">width</span><span class="p">;</span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">height</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">Area</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">height</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">LargerThan</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IPredicate</span><span class="o">&lt;</span><span class="n">IShape</span><span class="o">&gt;</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">lim</span><span class="p">;</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">LargerThan</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">lim</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">lim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lim</span><span class="p">;</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">Check</span><span class="w"> </span><span class="p">(</span><span class="n">IShape</span><span class="w"> </span><span class="n">shape</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">shape</span><span class="p">.</span><span class="n">Area</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">lim</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="n">IPredicate</span><span class="o">&lt;</span><span class="n">IShape</span><span class="o">&gt;</span><span class="w"> </span><span class="n">shapePredicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LargerThan</span><span class="p">(</span><span class="m">2</span><span class="p">);</span>
-<span class="n">IPredicate</span><span class="o">&lt;</span><span class="n">Rectangle</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shapePredicate</span><span class="p">;</span><span class="w"> </span><span class="c1">// Needs contravariance.</span>
-</pre></div>
-</div>
-</div>
-</details>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(30,27): error CS0266: Cannot implicitly convert type &#39;IPredicate&lt;IShape&gt;&#39; to &#39;IPredicate&lt;Rectangle&gt;&#39;. An explicit conversion exists (are you missing a cast?)
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="variant-ciphers">
-<h3>Variant ciphers<a class="headerlink" href="#variant-ciphers" title="Permalink to this heading">#</a></h3>
-<p>Remember <code class="docutils literal notranslate"><span class="pre">ICipher&lt;TIn,TOut&gt;</span></code> from the chapter on on <span class="xref myst">generic types</span>?
-If you think about it, <code class="docutils literal notranslate"><span class="pre">TIn</span></code> is only used as input, and <code class="docutils literal notranslate"><span class="pre">TOut</span></code> is only used as output.
-Consequently, we can, without causing any issues mark <code class="docutils literal notranslate"><span class="pre">TIn</span></code> as being contravariant and <code class="docutils literal notranslate"><span class="pre">TOut</span></code> as being covariant.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ICipher</span><span class="o">&lt;</span><span class="k">in</span><span class="w"> </span><span class="n">TIn</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="w"> </span><span class="n">TOut</span><span class="o">&gt;</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="n">TOut</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="n">TIn</span><span class="w"> </span><span class="n">input</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Let’s then assume that we’ve got a cipher that implements this interface.
-For the sake of simplicity, let’s pick the constant cipher.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ConstantCipher</span><span class="o">&lt;</span><span class="n">TIn</span><span class="p">,</span><span class="w"> </span><span class="n">TOut</span><span class="o">&gt;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICipher</span><span class="o">&lt;</span><span class="n">TIn</span><span class="p">,</span><span class="n">TOut</span><span class="o">&gt;</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="n">TOut</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">ConstantCipher</span><span class="w"> </span><span class="p">(</span><span class="n">TOut</span><span class="w"> </span><span class="n">output</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="n">TOut</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="n">TIn</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Let’s then assume that we have a simple type hierarchy like this:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Animal</span><span class="w"> </span><span class="p">{}</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Cat</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Animal</span><span class="w"> </span><span class="p">{}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Since <code class="docutils literal notranslate"><span class="pre">TIn</span></code> is marked as being contravariant and <code class="docutils literal notranslate"><span class="pre">TOut</span></code> is marked as being covariant we can now do the following:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Cat</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cat</span><span class="p">();</span>
-<span class="n">ICipher</span><span class="o">&lt;</span><span class="n">Cat</span><span class="p">,</span><span class="n">Animal</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cipher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ConstantCipher</span><span class="o">&lt;</span><span class="n">Animal</span><span class="p">,</span><span class="n">Cat</span><span class="o">&gt;</span><span class="p">(</span><span class="n">output</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Notice how the type arguments on the left says <code class="docutils literal notranslate"><span class="pre">&lt;Cat,Animal&gt;</span></code> while the type arguments on the right says <code class="docutils literal notranslate"><span class="pre">&lt;Animal,Cat&gt;</span></code>.</p>
-</section>
-<section id="cipher-factories">
-<span id="variant-generic-interfaces-cipher-factories"></span><h3>Cipher factories<a class="headerlink" href="#cipher-factories" title="Permalink to this heading">#</a></h3>
-<p>Let’s look at a contravariant example that can be used in the context of our ciphers.
-Let’s model a type that can spit out any number of objects of another type.
-You can think of this as a <span class="xref myst">factory</span>, a stream, a sequence, an infinite list, or an <a class="reference internal" href="iterator-pattern.html"><span class="doc std std-doc">iterator</span></a>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IFactory</span><span class="o">&lt;</span><span class="k">out</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="n">T</span><span class="w"> </span><span class="nf">Next</span><span class="w"> </span><span class="p">();</span>
-<span class="w">  </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Take</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The method <code class="docutils literal notranslate"><span class="pre">Next</span></code> returns the next element in the sequence.
-The method <code class="docutils literal notranslate"><span class="pre">Take</span></code> returns the <code class="docutils literal notranslate"><span class="pre">n</span></code> number of next elements in the sequence wrapped in an <code class="docutils literal notranslate"><span class="pre">IEnumerable</span></code> which you can think of as a read-only collection.
-You can read more about <code class="docutils literal notranslate"><span class="pre">IEnumerable</span></code> in a <span class="xref myst">later chapter</span>.</p>
-<p>Let’s first define an abstract factory that other factories can inherit from so that we won’t have to reimplement the <code class="docutils literal notranslate"><span class="pre">Take</span></code> method for all factories.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Factory</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IFactory</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">Next</span><span class="p">();</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Take</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="w">      </span><span class="n">result</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">Next</span><span class="p">());</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Our old trusted friend <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> remains the same, except that we’ve now also exposed the <code class="docutils literal notranslate"><span class="pre">steps</span></code> parameter as a property that publicly can be read and privately set.</p>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ICipher</span><span class="o">&lt;</span><span class="n">TIn</span><span class="p">,</span><span class="w"> </span><span class="n">TOut</span><span class="o">&gt;</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="n">TOut</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="n">TIn</span><span class="w"> </span><span class="n">input</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">CaesarCipher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICipher</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span><span class="kt">char</span><span class="o">&gt;</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Steps</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">CaesarCipher</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">Steps</span><span class="p">)</span>
-<span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">Steps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Steps</span><span class="p">;</span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">alphabet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ABCDEFGHIJKLMNOPQRSTUVXYZ&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alphabet</span><span class="p">.</span><span class="n">IndexOf</span><span class="p">(</span><span class="n">Char</span><span class="p">.</span><span class="n">ToUpper</span><span class="p">(</span><span class="n">input</span><span class="p">));</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">newIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Steps</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">alphabet</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="m">1</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">newIndex</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
-<span class="w">        </span><span class="n">newIndex</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">alphabet</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span>
-
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Char</span><span class="p">.</span><span class="n">IsLower</span><span class="p">(</span><span class="n">input</span><span class="p">))</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Char</span><span class="p">.</span><span class="n">ToLower</span><span class="p">(</span><span class="n">alphabet</span><span class="p">[</span><span class="n">newIndex</span><span class="p">]);</span>
-<span class="w">      </span><span class="k">else</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">alphabet</span><span class="p">[</span><span class="n">newIndex</span><span class="p">];</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">input</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</details>
-</div>
-<p>Let’s now build two factories that yield instances of <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code>.
-The first cipher that the factories generate will have <code class="docutils literal notranslate"><span class="pre">Steps</span></code> set to <code class="docutils literal notranslate"><span class="pre">0</span></code>.
-Upon every subsequent generation of a new factory, the factories will either increment or decrement the counter used to determine what number of <code class="docutils literal notranslate"><span class="pre">Steps</span></code> the next cipher will be instantiated with.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">IncrementingCaesarCipherFactory</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Factory</span><span class="o">&lt;</span><span class="n">CaesarCipher</span><span class="o">&gt;</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="n">CaesarCipher</span><span class="w"> </span><span class="nf">Next</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CaesarCipher</span><span class="p">(</span><span class="n">i</span><span class="o">++</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">DecrementingCaesarCipherFactory</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Factory</span><span class="o">&lt;</span><span class="n">CaesarCipher</span><span class="o">&gt;</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="n">CaesarCipher</span><span class="w"> </span><span class="nf">Next</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CaesarCipher</span><span class="p">(</span><span class="n">i</span><span class="o">--</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>So what can we do with this?
-Well, since <code class="docutils literal notranslate"><span class="pre">T</span></code> in the factory interface is covariant, we can assign a typed as a factory that generates subtypes to a variable typed as a factory that generates the supertype.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IFactory</span><span class="o">&lt;</span><span class="n">CaesarCipher</span><span class="o">&gt;</span><span class="w"> </span><span class="n">caesarFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IncrementingCaesarCipherFactory</span><span class="p">();</span>
-<span class="n">IFactory</span><span class="o">&lt;</span><span class="n">ICipher</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span><span class="kt">char</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">charFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">caesarFactory</span><span class="p">;</span><span class="w"> </span><span class="c1">// Needs covariance.</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Why would this be useful?
-Well, sometimes we want to be able to treat a variable as its specific type, and sometimes we want to treat it as its general type.</p>
-<p>In the example below, we have two methods that take factories of different type.
-Since <code class="docutils literal notranslate"><span class="pre">T</span></code> in the factory interface is covariant we can pass the value of type <code class="docutils literal notranslate"><span class="pre">IFactory&lt;CaesarCipher&gt;</span></code> to both methods even though one of them excepts a value of type <code class="docutils literal notranslate"><span class="pre">IFactory&lt;ICipher&lt;char,char&gt;&gt;</span></code>.
-Why?
-Because a supertype of <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> is <code class="docutils literal notranslate"><span class="pre">ICipher&lt;char,char&gt;</span></code> and the type parameter where we apply this type is covariant.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="w"> </span><span class="nf">encodeAny</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">IFactory</span><span class="o">&lt;</span><span class="n">ICipher</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span><span class="kt">char</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">factory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
-<span class="w">  </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">ICipher</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span><span class="kt">char</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cipher</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">factory</span><span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-<span class="w">    </span><span class="n">output</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="sc">&#39;A&#39;</span><span class="p">);</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">string</span><span class="w"> </span><span class="nf">encodeCaesar</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">IFactory</span><span class="o">&lt;</span><span class="n">CaesarCipher</span><span class="o">&gt;</span><span class="w"> </span><span class="n">factory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
-<span class="w">  </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">CaesarCipher</span><span class="w"> </span><span class="n">cipher</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">factory</span><span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-<span class="w">    </span><span class="n">output</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">$&quot;{cipher.Steps}=&gt;{cipher.Encode(&#39;A&#39;)} &quot;</span><span class="p">;</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="n">IFactory</span><span class="o">&lt;</span><span class="n">CaesarCipher</span><span class="o">&gt;</span><span class="w"> </span><span class="n">factory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IncrementingCaesarCipherFactory</span><span class="p">();</span>
-
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">encodeAny</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">factory</span><span class="p">));</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">encodeCaesar</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">factory</span><span class="p">));</span><span class="w"> </span><span class="c1">// Needs covariance.</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ABCDE
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5=&gt;F 6=&gt;G 7=&gt;H 8=&gt;I 9=&gt;J 
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
-<div class="exercise admonition" id="chapters/variant-generic-interfaces-exercise-0">
-
-<p class="admonition-title"><span class="caption-number">Exercise 109.1 </span></p>
-<section id="exercise-content">
-<p>In the chapter on <span class="xref myst">generic types</span> we introduced the generic interface <code class="docutils literal notranslate"><span class="pre">ICipher&lt;TIn,TOut&gt;</span></code>.
-Both type parameters in this generic type <em>can</em> be variant.
-Explain why this in your own words and write a new version of <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> where the type parameters are variant.</p>
-</section>
-</div>
-<div class="exercise admonition" id="chapters/variant-generic-interfaces-exercise-1">
-
-<p class="admonition-title"><span class="caption-number">Exercise 109.2 </span></p>
-<section id="exercise-content">
-<p>Come up with and implement your own example of an interface with a type parameter that usefully exhibits covariance.
-Give an example in code where you are using the fact that the type parameter is covariant.</p>
-</section>
-</div>
-<div class="exercise admonition" id="chapters/variant-generic-interfaces-exercise-2">
-
-<p class="admonition-title"><span class="caption-number">Exercise 109.3 </span></p>
-<section id="exercise-content">
-<p>Come up with and implement your own example of an interface with a type parameter that usefully exhibits contravariance.
-Give an example in code where you are using the fact that the type parameter is covariant.</p>
-</section>
-</div>
-<div class="exercise admonition" id="chapters/variant-generic-interfaces-exercise-3">
-
-<p class="admonition-title"><span class="caption-number">Exercise 109.4 </span></p>
-<section id="exercise-content">
-<p>Why does the following code generate a compiler-error?</p>
-<div class="cell tag_raises-exception tag_remove-output docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IBox</span><span class="o">&lt;</span><span class="k">out</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="n">T</span><span class="w"> </span><span class="nf">Get</span><span class="w"> </span><span class="p">();</span>
-<span class="w">  </span><span class="k">void</span><span class="w"> </span><span class="nf">Set</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</div>
-<div class="exercise admonition" id="chapters/variant-generic-interfaces-exercise-4">
-
-<p class="admonition-title"><span class="caption-number">Exercise 109.5 </span></p>
-<section id="exercise-content">
-<p>Why does the method <code class="docutils literal notranslate"><span class="pre">Set</span></code> in the following code example <em>not</em> generate a compiler-error even though <code class="docutils literal notranslate"><span class="pre">T</span></code> is marked as covariant.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IBox</span><span class="o">&lt;</span><span class="k">out</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="n">T</span><span class="w"> </span><span class="nf">Get</span><span class="w"> </span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">Box</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IBox</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="n">T</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Box</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">Get</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Set</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</div>
-<div class="exercise admonition" id="chapters/variant-generic-interfaces-exercise-5">
-
-<p class="admonition-title"><span class="caption-number">Exercise 109.6 </span></p>
-<section id="exercise-content">
-<p>Assume that we have the following types.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Box</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">Item</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">interface</span><span class="w"> </span><span class="n">IAnimal</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Cat</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IAnimal</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Dog</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IAnimal</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Disregard the fact that C# only support the variance keywords <code class="docutils literal notranslate"><span class="pre">in</span></code> and <code class="docutils literal notranslate"><span class="pre">out</span></code> on interfaces for a moment.
-Keeping variance and compile-time <span class="xref myst">type safety</span> in mind, why is it important that the example below does not compile?</p>
-<div class="cell tag_raises-exception docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Box</span><span class="o">&lt;</span><span class="n">IAnimal</span><span class="o">&gt;</span><span class="w"> </span><span class="n">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Box</span><span class="o">&lt;</span><span class="n">Cat</span><span class="o">&gt;</span><span class="p">();</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1,20): error CS0029: Cannot implicitly convert type &#39;Box&lt;Cat&gt;&#39; to &#39;Box&lt;IAnimal&gt;&#39;
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</div>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -869,23 +346,15 @@ Keeping variance and compile-time <span class="xref myst">type safety</span> in 
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="bibliography.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title"><span class="section-number">110. </span>Bibliography</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="liskov-substitution-principle.html">
+          
+          <a class="prev-page" href="variant-generic-delegates.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">108. </span>Liskov substitution principle</div>
+                <div class="title"><span class="section-number">114. </span>Variant generic delegates</div>
                 
               </div>
             </a>
@@ -907,33 +376,8 @@ Keeping variance and compile-time <span class="xref myst">type safety</span> in 
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">109. Variant generic interfaces</a><ul>
-<li><a class="reference internal" href="#examples">Examples</a><ul>
-<li><a class="reference internal" href="#predicates">Predicates</a></li>
-<li><a class="reference internal" href="#variant-ciphers">Variant ciphers</a></li>
-<li><a class="reference internal" href="#cipher-factories">Cipher factories</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#exercises">Exercises</a></li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>
