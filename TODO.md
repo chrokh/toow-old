@@ -1,5 +1,7 @@
 # The new todo list
 
+- The covariance, contravariance, and invariance chapters never deal with non-generic subtypes: Covariance permits a method to return a type that is derived from the original return type.
+- Split the variance chapter in two? Covariance and Contravariance?
 - Relate LINQ to strategy pattern and relational algebra?
 - Should labs be included in the book? No, right?
 - Using directive! (imports)
