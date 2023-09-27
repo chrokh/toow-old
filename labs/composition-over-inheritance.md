@@ -12,8 +12,9 @@ kernelspec:
 
 # Lab: Composition over Inheritance
 
-**Objective**:
+```{admonition} Objective
 Refactor the provided inheritance-based code to leverage Composition over inheritance, aiming for a more flexible, maintainable, and logically coherent representation of entities.
+```
 
 ## Step 1: Understand the provided code
 

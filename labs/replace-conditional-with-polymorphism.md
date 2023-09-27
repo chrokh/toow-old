@@ -12,8 +12,9 @@ kernelspec:
 
 # Lab: Replace conditional with polymorphism
 
-**Objective**:
+```{admonition} Objective
 To refactor the provided `Shape` class to [remove conditionals and implement polymorphism](replace-conditional-with-polymorphism), thereby enhancing code [maintainability](maintainability).
+```
 
 ## Step 1: Understand the provided code
 

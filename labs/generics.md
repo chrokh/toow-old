@@ -12,8 +12,9 @@ kernelspec:
 
 # Lab: Generics
 
-**Objective**:
+```{admonition} Objective
 This lab aims to provide hands-on experience in utilizing existing generic types, specifically `List<T>`, to pave the way for more advanced usage of generics.
+```
 
 
 ## Step 1: Understand the provided code
