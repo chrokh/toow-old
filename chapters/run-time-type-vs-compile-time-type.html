@@ -345,7 +345,7 @@ We say that we ‘treat’ a <code class="docutils literal notranslate"><span cl
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-6495.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-7311.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -390,12 +390,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.103:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.56:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '6495.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '7311.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -504,7 +504,7 @@ Because the compiler only knows that <code class="docutils literal notranslate">
 <p>The compile-time type of the variable <code class="docutils literal notranslate"><span class="pre">shape</span></code> is <code class="docutils literal notranslate"><span class="pre">IShape</span></code>. This means that you can only call the methods and properties declared in the <code class="docutils literal notranslate"><span class="pre">IShape</span></code> interface on <code class="docutils literal notranslate"><span class="pre">shape</span></code>, even though it might actually be holding a <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> object that has additional methods.</p>
 <p>In contrast, the run-time type of a variable is the actual type of the object that the variable references at run-time. It can be the same as the compile-time type, but it can also be any <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype</span></a> of the compile-time type.</p>
 <p>Even though the compile-time type of shape is <code class="docutils literal notranslate"><span class="pre">IShape</span></code>, the run-time type is <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>. The shape variable is actually holding a <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> object at run-time.
-This means that the actual implementation of the methods and properties that we invoke come from <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>. We’ll talk more about this in the chapter on <a class="reference internal" href="dynamic-dispatch.html"><span class="doc std std-doc">dynamic dispatch</span></a>.</p>
+This means that the actual implementation of the methods and properties that we invoke come from <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>. We’ll talk more about this in the chapter on <a class="reference internal" href="../old/subtype-polymorphism.html#dynamic-dispatch"><span class="std std-ref">dynamic dispatch</span></a>.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Which implementation of the method that is executed is determined by the <em>run-time type</em>.</p>
@@ -515,7 +515,7 @@ This means that the actual implementation of the methods and properties that we 
 <p class="admonition-title">Key point</p>
 <p>The compile-time type of a variable determines what operations you can perform on the variable in your code, whereas the run-time type determines what actual operations occur when your code is executed.</p>
 </div>
-<p>In the future chapters on upcasting and downcasting, we will discuss how we can temporarily regain ‘lost’ information by using techniques like <a class="reference internal" href="downcasting.html"><span class="doc std std-doc">downcasting</span></a> or the <span class="xref myst">Visitor design pattern</span>. But for now, it’s essential to remember that the compile-time type restricts what methods and properties you can call in your code, and it’s the run-time type that determines what actual methods get called when your code runs.</p>
+<p>In the future chapters on upcasting and downcasting, we will discuss how we can temporarily regain ‘lost’ information by using techniques like <a class="reference internal" href="downcasting.html"><span class="doc std std-doc">downcasting</span></a> or the <a class="reference internal" href="visitor-pattern.html"><span class="doc std std-doc">Visitor design pattern</span></a>. But for now, it’s essential to remember that the compile-time type restricts what methods and properties you can call in your code, and it’s the run-time type that determines what actual methods get called when your code runs.</p>
 </section>
 
     <script type="text/x-thebe-config">

@@ -343,7 +343,7 @@ An iterable object is often also called an ‘aggregate object’ because it ‘
 <p>In simpler terms, the Iterator pattern allows us to traverse through a collection, an iterable, without needing to know the intricacies of how the collection is structured or stored.
 This allows the iterable, and the iteration algorithm, to both change independently of the client that wants to iterate over it.</p>
 <p>Without the iterator pattern, the intricacies of the underlying iterable would be scattered across the application everywhere where we want to iterate over the collection.
-In other words, all clients would be <span class="xref myst">tightly coupled</span> to the iterable.</p>
+In other words, all clients would be <a class="reference internal" href="coupling.html"><span class="doc std std-doc">tightly coupled</span></a> to the iterable.</p>
 <p>Consequently, every time we want to change the iterable or the way we iterate, that change would cascade and we might also have to make changes in every client that uses the iterable.
 With the iterator pattern we encapsulate the iteration and can change the structure of the iterable and the iteration algorithm independently.</p>
 <div class="admonition-video-lecture admonition">
@@ -388,7 +388,7 @@ Here’s a naive design that we might end up with if we didn’t know about the 
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-5266.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-5891.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -433,12 +433,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.103:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.56:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '5266.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '5891.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`

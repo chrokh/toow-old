@@ -321,7 +321,7 @@ Now you might be a bit more skeptical though.
 If <code class="docutils literal notranslate"><span class="pre">Apple</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">Fruit</span></code>, would it not make sense for <code class="docutils literal notranslate"><span class="pre">IList&lt;Apple&gt;</span></code> to also be a subtype of <code class="docutils literal notranslate"><span class="pre">IList&lt;Fruit&gt;</span></code>?</p>
 <p>In most languages, including C#, this is not allowed.
 Why?
-As we will learn in the chapter on the <a class="reference internal" href="liskov-substitution-principle.html"><span class="doc std std-doc">Liskov substitution principle</span></a>, the only solution that’s guaranteed to be <a class="reference internal" href="type-checking.html"><span class="doc std std-doc">type safe</span></a> is covariance in output and contravariance in input.
+As we will learn in the chapter on the <a class="reference internal" href="../old/liskov-substitution-principle.html#liskov-substitution-principle"><span class="std std-ref">Liskov substitution principle</span></a>, the only solution that’s guaranteed to be <a class="reference internal" href="type-checking.html"><span class="doc std std-doc">type safe</span></a> is covariance in output and contravariance in input.
 Since the property <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">Item[]</span></code> of <code class="docutils literal notranslate"><span class="pre">IList&lt;T&gt;</span></code> allows us to ‘get’ elements of type <code class="docutils literal notranslate"><span class="pre">T</span></code> from the list this implies that <code class="docutils literal notranslate"><span class="pre">T</span></code> must be covariant.
 However, the method <code class="docutils literal notranslate"><span class="pre">Add(T</span> <span class="pre">element)</span></code> of <code class="docutils literal notranslate"><span class="pre">IList&lt;T&gt;</span></code> allows us to ‘set’ elements of type <code class="docutils literal notranslate"><span class="pre">T</span></code> which suggests that <code class="docutils literal notranslate"><span class="pre">T</span></code> must be contravariant.</p>
 <p>In theory, it might be possible to let <code class="docutils literal notranslate"><span class="pre">T</span></code> in <code class="docutils literal notranslate"><span class="pre">IList&lt;T&gt;</span></code> be <a class="reference internal" href="variance.html"><span class="doc std std-doc">bivariant</span></a> but this would involve sophisticated compile-time checks, run-time checks, or constraints.
@@ -343,7 +343,7 @@ Assume that we have the two classes <code class="docutils literal notranslate"><
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-5142.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-5766.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -388,12 +388,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.103:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.56:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '5142.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '5766.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`

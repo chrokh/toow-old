@@ -327,7 +327,7 @@
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-7342.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-8160.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -372,12 +372,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.103:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.56:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '7342.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '8160.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -483,7 +483,7 @@ Intuitively this makes sense, because the set of whole numbers can be thought of
 </div>
 </div>
 <p>Explicit type conversions, while useful, can lead to run-time errors if the actual data cannot be accommodated in the target type.
-This can result in <span class="xref myst">exceptions</span>. For instance, trying to convert a <code class="docutils literal notranslate"><span class="pre">string</span></code> representing a non-numeric value into an <code class="docutils literal notranslate"><span class="pre">int</span></code> would fail and cause a <code class="docutils literal notranslate"><span class="pre">System.FormatException</span></code>. It is therefore crucial to employ explicit type conversions judiciously. Rest assured, we will dive into examples and discuss how to handle such scenarios in the upcoming chapter on <a class="reference internal" href="downcasting.html"><span class="doc std std-doc">downcasting</span></a>.</p>
+This can result in <a class="reference internal" href="basic-exceptions.html#exceptions"><span class="std std-ref">exceptions</span></a>. For instance, trying to convert a <code class="docutils literal notranslate"><span class="pre">string</span></code> representing a non-numeric value into an <code class="docutils literal notranslate"><span class="pre">int</span></code> would fail and cause a <code class="docutils literal notranslate"><span class="pre">System.FormatException</span></code>. It is therefore crucial to employ explicit type conversions judiciously. Rest assured, we will dive into examples and discuss how to handle such scenarios in the upcoming chapter on <a class="reference internal" href="downcasting.html"><span class="doc std std-doc">downcasting</span></a>.</p>
 <p>Explicit type conversions, can be done in two ways: using the traditional cast syntax <code class="docutils literal notranslate"><span class="pre">(Type)x</span></code>, or using the <code class="docutils literal notranslate"><span class="pre">as</span></code> keyword with the syntax <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">as</span> <span class="pre">Type</span></code>. Both of these accomplish the same goal, that is, explicitly converting the type of an object, but they differ in their behavior when the conversion isn’t possible.</p>
 <p>Here’s a simple example:</p>
 <div class="cell docutils container">
@@ -497,7 +497,7 @@ This can result in <span class="xref myst">exceptions</span>. For instance, tryi
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In the chapter <a class="reference internal" href="everything-is-an-object.html"><span class="doc std std-doc">Everything is an object</span></a> we discuss why an object of type <code class="docutils literal notranslate"><span class="pre">string</span></code> can be converted to object of type <code class="docutils literal notranslate"><span class="pre">object</span></code>. For now just know that it can.</p>
+<p>In the chapter <a class="reference internal" href="../old/objects-old.html#everything-is-an-object"><span class="std std-ref">Everything is an object</span></a> we discuss why an object of type <code class="docutils literal notranslate"><span class="pre">string</span></code> can be converted to object of type <code class="docutils literal notranslate"><span class="pre">object</span></code>. For now just know that it can.</p>
 </div>
 <p>In this code, <code class="docutils literal notranslate"><span class="pre">obj</span></code> is an instance of object that is holding a <code class="docutils literal notranslate"><span class="pre">string</span></code>. When we use the traditional cast syntax <code class="docutils literal notranslate"><span class="pre">(string)obj</span></code>, we’re telling the compiler to treat <code class="docutils literal notranslate"><span class="pre">obj</span></code> as a <code class="docutils literal notranslate"><span class="pre">string</span></code>. The <code class="docutils literal notranslate"><span class="pre">as</span></code> keyword does the same, but in a safer manner.</p>
 <p>If a cast is not possible, the traditional cast syntax will throw an exception:</p>

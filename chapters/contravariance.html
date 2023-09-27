@@ -359,7 +359,7 @@ Suppose that we have the two classes <code class="docutils literal notranslate">
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3109.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3745.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -404,12 +404,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.103:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.56:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3109.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3745.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -490,7 +490,7 @@ To determine whether a substitution is type-safe we consequently only need to ca
 <section id="understanding-contravariance-with-classes">
 <h2>Understanding contravariance with classes<a class="headerlink" href="#understanding-contravariance-with-classes" title="Permalink to this heading">#</a></h2>
 <p>Let’s now also explore how contravariance would work in the context of classes. Unlike with generics and unlike with covariance, C# does <strong>not</strong> support contravariance in classes. More on this in the chapter on <a class="reference internal" href="variant-classes.html"><span class="doc std std-doc">variant classes</span></a>. However, we can still use classes to understand the concept of contravariance theoretically.</p>
-<p>In the hypothetical code below, the class <code class="docutils literal notranslate"><span class="pre">FruitJuicer</span></code> <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inherits</span></a> from the class <code class="docutils literal notranslate"><span class="pre">AppleJuicer</span></code> and <a class="reference internal" href="overriding.html"><span class="doc std std-doc">overrides</span></a> the method that juices its input.</p>
+<p>In the hypothetical code below, the class <code class="docutils literal notranslate"><span class="pre">FruitJuicer</span></code> <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inherits</span></a> from the class <code class="docutils literal notranslate"><span class="pre">AppleJuicer</span></code> and <a class="reference internal" href="../old/inheritance.html#overriding"><span class="std std-ref">overrides</span></a> the method that juices its input.</p>
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AppleJuicer</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Juice</span><span class="p">(</span><span class="n">Apple</span><span class="w"> </span><span class="n">apple</span><span class="p">)</span>

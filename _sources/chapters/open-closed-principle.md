@@ -1,0 +1,20 @@
+ Open-closed principle
+
+```{warning}
+Work in progress.
+```
+
+%OCP.
+
+%- See discussion on OCP in concrete dependency injection chapter.
+%- See discussion in composition over inheritance chapter and strategy pattern chapter.
+
+## Exercises
+
+```{exercise}
+Explain the open-closed principle in your own words.
+```
+
+```{exercise}
+How does the open-closed principle relate to the maintainability characteristics that we discussed in the chapter on [maintainability](maintainability:characteristics)?
+```

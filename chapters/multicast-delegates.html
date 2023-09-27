@@ -345,7 +345,7 @@ The capability of a delegate to hold references to multiple methods is built int
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-5703.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-6390.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -390,12 +390,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.103:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.56:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '5703.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '6390.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -570,7 +570,7 @@ The output of a function in a multicast delegate is <strong>not</strong> passed 
 </section>
 <section id="exceptions">
 <h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this heading">#</a></h2>
-<p>When one of the methods referenced by a multicast delegate throws an <span class="xref myst">exception</span>, the subsequent methods will not be executed. Therefore, it’s crucial to ensure exception handling is appropriately addressed when working with multicast delegates.</p>
+<p>When one of the methods referenced by a multicast delegate throws an <a class="reference internal" href="basic-exceptions.html#exceptions"><span class="std std-ref">exception</span></a>, the subsequent methods will not be executed. Therefore, it’s crucial to ensure exception handling is appropriately addressed when working with multicast delegates.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">void</span><span class="w"> </span><span class="nf">GoodMethod</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;This method runs!&quot;</span><span class="p">);</span>

@@ -339,7 +339,7 @@ In other words, what should be the parameters of the event handler delegate?
 The guidelines clearly states that we should have two parameters. The first is the ‘sender’ and the second some ‘event arguments’.</p>
 <ol class="arabic simple">
 <li><p>The sender is the object that raised the event, meaning the publisher. In our example above we can see that we were passing the sender by using the <code class="docutils literal notranslate"><span class="pre">this</span></code> keyword. This parameter is conventionally called <code class="docutils literal notranslate"><span class="pre">sender</span></code>.</p></li>
-<li><p>The event arguments is something we didn’t use in our example since we passed a <code class="docutils literal notranslate"><span class="pre">string</span></code> that represented the released episode directly. The idea of event arguments is that we should <a class="reference internal" href="encapsulation.html"><span class="doc std std-doc">encapsulate</span></a> the data that needs to be sent in its own object so that we can avoid cascading changes if we need to change what data is being sent later down the line. This parameter is conventionally called <code class="docutils literal notranslate"><span class="pre">e</span></code>.</p></li>
+<li><p>The event arguments is something we didn’t use in our example since we passed a <code class="docutils literal notranslate"><span class="pre">string</span></code> that represented the released episode directly. The idea of event arguments is that we should <a class="reference internal" href="../old/objects-old.html#encapsulation"><span class="std std-ref">encapsulate</span></a> the data that needs to be sent in its own object so that we can avoid cascading changes if we need to change what data is being sent later down the line. This parameter is conventionally called <code class="docutils literal notranslate"><span class="pre">e</span></code>.</p></li>
 </ol>
 <p>To better illustrate the use of ‘sender’ and ‘e,’ consider the following C# code example.</p>
 <div class="cell docutils container">
@@ -364,7 +364,7 @@ The guidelines clearly states that we should have two parameters. The first is t
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3914.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-4483.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -409,12 +409,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.103:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.56:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3914.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '4483.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -569,7 +569,7 @@ Furthermore, if we would try to convert the sender object to an incompatible typ
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(8,50): error CS1503: Argument 1: cannot convert from &#39;MyEventPublisher [ℛ*0478dde0-6dc0-43d7-95f2-d939effe68c2#1-8, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]&#39; to &#39;MyEventPublisher [ℛ*0478dde0-6dc0-43d7-95f2-d939effe68c2#1-3, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]&#39;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(8,50): error CS1503: Argument 1: cannot convert from &#39;MyEventPublisher [ℛ*64b00a86-95f9-49d3-a532-b3d31f33255e#1-8, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]&#39; to &#39;MyEventPublisher [ℛ*64b00a86-95f9-49d3-a532-b3d31f33255e#1-3, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]&#39;
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
@@ -629,7 +629,7 @@ Instead, we should use the predefined generic delegate <a class="reference exter
 </section>
 <section id="the-on-prefix">
 <h2>The <code class="docutils literal notranslate"><span class="pre">On</span></code>-prefix<a class="headerlink" href="#the-on-prefix" title="Permalink to this heading">#</a></h2>
-<p>Sometimes you will see a <a class="reference internal" href="protected.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">protected</span></code></span></a> <a class="reference internal" href="overriding.html"><span class="doc std std-doc">virtual</span></a> method that invoke an event being called <code class="docutils literal notranslate"><span class="pre">On</span></code> and the name of the event that it invokes.
+<p>Sometimes you will see a <a class="reference internal" href="protected.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">protected</span></code></span></a> <a class="reference internal" href="../old/inheritance.html#overriding"><span class="std std-ref">virtual</span></a> method that invoke an event being called <code class="docutils literal notranslate"><span class="pre">On</span></code> and the name of the event that it invokes.
 Using that convention, our method <code class="docutils literal notranslate"><span class="pre">ReleaseNewEpisode</span></code> would not invoke the event directly, but rather call the method <code class="docutils literal notranslate"><span class="pre">OnEpisodeReleased</span></code> which would invoke the event.</p>
 <p>The method <code class="docutils literal notranslate"><span class="pre">OnEpisodeReleased</span></code> corresponds to the method that we in the <a class="reference internal" href="observer-pattern.html"><span class="doc std std-doc">Observer pattern</span></a> usually call something like, <code class="docutils literal notranslate"><span class="pre">notifyObservers</span></code>.</p>
 <p>Following this convention our <code class="docutils literal notranslate"><span class="pre">Podcast</span></code> class would look like this:</p>
@@ -660,7 +660,7 @@ Using that convention, our method <code class="docutils literal notranslate"><sp
 <p>Does this convention have benefits?</p>
 <ul class="simple">
 <li><p>If you’re designing a publisher class that should be <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inherited</span></a> from it allows subclasses to define custom behavior for the event invoking method and then call the <a class="reference internal" href="the-base-keyword.html"><span class="doc std std-doc">base</span></a> implementation.</p></li>
-<li><p>In line with the <span class="xref myst">single responsibility principle</span>, the convention separates the business logic (such as the code for releasing an episode) from the code that invokes the event.</p></li>
+<li><p>In line with the <a class="reference internal" href="single-responsibility-principle.html"><span class="doc std std-doc">single responsibility principle</span></a>, the convention separates the business logic (such as the code for releasing an episode) from the code that invokes the event.</p></li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>

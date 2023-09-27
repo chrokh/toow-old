@@ -382,7 +382,7 @@ Imagine you’re developing a side-scrolling adventure game where your main char
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3362.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-4058.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -427,12 +427,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.103:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.56:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3362.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '4058.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -491,7 +491,7 @@ else {
 <p>While this approach seems simple, it bakes the double jump logic directly into the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class. This becomes problematic if we decide to introduce additional jump-related power-ups in the future. Such as triple jump or glide jump.</p>
 <p>For each power-up, we must add an activation-method and a conditional in the jump-method.
 It gets even worse when we start thinking about the fact that we could have power-ups that affect moving right and left as well.</p>
-<p>Luckily, we’ve learned about <a class="reference internal" href="replace-conditional-with-polymorphism.html"><span class="doc std std-doc">replacing conditionals with polymorphism</span></a>.
+<p>Luckily, we’ve learned about <a class="reference internal" href="../old/subtype-polymorphism.html#replace-conditional-with-polymorphism"><span class="std std-ref">replacing conditionals with polymorphism</span></a>.
 Couldn’t we use polymorphism to control the jumping behavior instead of conditionals?
 We certainly can.
 Dependency injection then takes this a step further and says that the construction of the object that controls the jumping behavior should not be a responsibility of the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class in the first place.</p>

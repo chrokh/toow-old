@@ -334,7 +334,7 @@ Here’s a simplified version of it:</p>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-4643.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-5280.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -379,12 +379,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.103:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.56:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '4643.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '5280.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -441,16 +441,16 @@ else {
 </div></div></div>
 </div>
 <p>Is it possible to achieve the same level of reusability before we had generics or do we have to write different versions of the same code for each type?
-If we want to keep <span class="xref myst">static type safety</span> we have to write duplicated code.
-If we’re willing to sacrifice static type safety then we can either write code that works on the <a class="reference internal" href="everything-is-an-object.html"><span class="doc std std-doc">top-type <code class="docutils literal notranslate"><span class="pre">object</span></code></span></a> and then <a class="reference internal" href="downcasting.html"><span class="doc std std-doc">downcast</span></a> back to whatever type we had before or use <span class="xref myst">the <code class="docutils literal notranslate"><span class="pre">dynamic</span></code> keyword</span> and then <a class="reference internal" href="type-conversions.html"><span class="doc std std-doc">cast</span></a> back to whatever type we had before.
-Since we’ve given up <span class="xref myst">static type safety</span> however we run the risk of writing code that crashes with run-time errors.</p>
+If we want to keep <a class="reference internal" href="type-systems.html#type-safety"><span class="std std-ref">static type safety</span></a> we have to write duplicated code.
+If we’re willing to sacrifice static type safety then we can either write code that works on the <a class="reference internal" href="../old/objects-old.html#everything-is-an-object"><span class="std std-ref">top-type <code class="docutils literal notranslate"><span class="pre">object</span></code></span></a> and then <a class="reference internal" href="downcasting.html"><span class="doc std std-doc">downcast</span></a> back to whatever type we had before or use <span class="xref myst">the <code class="docutils literal notranslate"><span class="pre">dynamic</span></code> keyword</span> and then <a class="reference internal" href="type-conversions.html"><span class="doc std std-doc">cast</span></a> back to whatever type we had before.
+Since we’ve given up <a class="reference internal" href="type-systems.html#type-safety"><span class="std std-ref">static type safety</span></a> however we run the risk of writing code that crashes with run-time errors.</p>
 <div class="admonition-key-point admonition">
 <p class="admonition-title">Key point</p>
 <p>With generics, we can write reusable code without giving up static type safety.
 This means that type errors are identified at compile-time rather than at run-time. Which prevents type-related errors from reaching end users and streamlines debugging.</p>
 </div>
 <p>Let’s look at what both of these non-generic solutions would look like.
-First out is the solution that uses the <a class="reference internal" href="everything-is-an-object.html"><span class="doc std std-doc">top-type <code class="docutils literal notranslate"><span class="pre">object</span></code></span></a> that all types implicitly either inherit from or can be boxed into.</p>
+First out is the solution that uses the <a class="reference internal" href="../old/objects-old.html#everything-is-an-object"><span class="std std-ref">top-type <code class="docutils literal notranslate"><span class="pre">object</span></code></span></a> that all types implicitly either inherit from or can be boxed into.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ObjectPair</span>

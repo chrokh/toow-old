@@ -1,0 +1,1554 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+
+    <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
+        <title>Methods - The Object Oriented Way</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../_static/style.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">The Object Oriented Way</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">The Object Oriented Way</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="syntax.html">1. Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hello-world.html">2. Hello world</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compilation.html">3. Compilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="execution.html">4. Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpretation.html">5. Interpretation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="comments.html">6. Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="values.html">7. Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">8. Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-types.html">9. Data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expressions.html">10. Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arithmetic-operators.html">11. Arithmetic operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="equality-operators.html">12. Equality operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="relational-operators.html">13. Relational operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logical-operators.html">14. Logical operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assignment-operator.html">15. Assignment operator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="precedence.html">16. Precedence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="associativity.html">17. Associativity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constants.html">18. Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statements.html">19. Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-inference.html">20. Type inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-checking.html">21. Type checking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="floating-point-types.html">22. Floating-point types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enumeration-types.html">23. Enumeration types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="selection-statements.html">24. Selection statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="selection-expressions.html">25. Selection expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iteration.html">26. Iteration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arrays.html">27. Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference-types.html">28. Reference types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="value-types.html">29. Value types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="local-functions.html">30. Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fat-arrows.html">31. Fat arrows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recursion.html">32. Recursion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="namespaces.html">33. Namespaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="objects.html">34. Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">35. Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="access-modifiers.html">36. Access modifiers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html">37. Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constructors.html">38. Constructors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the-this-keyword.html">39. The <code class="docutils literal notranslate"><span class="pre">this</span></code> keyword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="instance-methods.html">40. Instance methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encapsulation.html">41. Encapsulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auto-implemented-properties.html">42. Auto-implemented properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manually-implemented-properties.html">43. Manually implemented properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="object-initializers.html">44. Object initializers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="read-only-fields.html">45. Read-only fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="read-only-properties.html">46. Read-only properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="computed-properties.html">47. Computed properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="required-properties-and-fields.html">48. Required properties and fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="init-only-properties.html">49. Init-only properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="instance-method-overloading.html">50. Instance method overloading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constructor-overloading.html">51. Constructor overloading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static-fields.html">52. Static fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static-constructors.html">53. Static constructors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static-methods.html">54. Static methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static-properties.html">55. Static properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="static-classes.html">56. Static classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="top-level-statements.html">57. Top-level statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="object-composition.html">58. Object composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interfaces.html">59. Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="subtype-polymorphism.html">60. Subtype polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run-time-type-vs-compile-time-type.html">61. Run-time type vs compile-time type</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic-dispatch.html">62. Dynamic dispatch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multiple-interfaces.html">63. Multiple interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface-default-implementations.html">64. Interface default implementations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inheritance.html">65. Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overriding.html">66. Overriding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hiding.html">67. Hiding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the-base-keyword.html">68. The <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constructor-chaining.html">69. Constructor chaining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="protected.html">70. Protected access modifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="abstract-classes.html">71. Abstract classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interface-inheritance.html">72. Interface inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-conversions.html">73. Type conversions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upcasting.html">74. Upcasting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="downcasting.html">75. Downcasting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="everything-is-an-object.html">76. Everything is an object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uml-class-diagrams.html">77. UML class diagrams</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintainability.html">78. Maintainability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="refactoring.html">79. Refactoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics.html">80. Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-types.html">81. Generic types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics-and-type-errors.html">82. Generics and type errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">83. Generic supertypes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-methods.html">84. Generic methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">85. Type parameter constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="collections.html">86. Collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="collection-initializers.html">87. Collection initializers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">88. Replace conditional with polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dependency-injection.html">89. Dependency injection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">90. Composition over inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strategy-pattern.html">91. Strategy pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bridge-pattern.html">92. Bridge pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="delegates.html">93. Delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-delegates.html">94. Generic delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="built-in-delegates.html">95. Built-in delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multicast-delegates.html">96. Multicast delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lambdas.html">97. Lambdas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observer-pattern.html">98. Observer pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="events.html">99. Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-conventions.html">100. Event conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event-driven-programming.html">101. Event-driven programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iterator-pattern.html">102. Iterator pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enumerables.html">103. Enumerables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the-yield-statement.html">104. The <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="anonymous-types.html">105. Anonymous types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linq.html">106. LINQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variance.html">107. Variance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="covariance.html">108. Covariance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contravariance.html">109. Contravariance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="invariance.html">110. Invariance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="liskov-substitution-principle.html">111. Liskov substitution principle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-classes.html">112. Variant classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-delegates.html">113. Variant delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-delegates.html">114. Variant generic delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">115. Variant generic interfaces</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section class="tex2jax_ignore mathjax_ignore" id="methods">
+<span id="local-functions"></span><h1>Methods<a class="headerlink" href="#methods" title="Permalink to this heading">#</a></h1>
+<section id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this heading">#</a></h2>
+<p>Remember the design principle “<span class="xref myst">don’t repeat yourself</span>”?
+The more code we repeat, the more likely we are to introduce bugs.
+Remember how we said that the way we avoid duplicating code is by increasing abstraction?
+Well, one such abstraction is that of the procedure, method, or function.</p>
+<p>The idea of the procedure, method, or function, is, in procedural programming, that we can take a sequence of statements, give that sequence a name, and then whenever we want to execute that sequence we just issue the name.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>I prefer using the word “method” rather than “function” in the context of object oriented programming since functions in imperative languages tend to be <a class="reference internal" href="purity.html"><span class="doc std std-doc">impure</span></a>.
+We’ll talk about what that means in a separate chapter but in short, a pure function is a function that, given the same input, always returns the same output.
+But, since functions/methods in C# can depend on and change state, they are not pure.
+But I digress, we’ll talk more about this in the chapter on <a class="reference internal" href="purity.html"><span class="doc std std-doc">purity</span></a>.</p>
+<p>The reason I bring this up is that while I would prefer using the term “method”, we’re now going to use a feature of C# called “local functions”.</p>
+</div>
+</section>
+<section id="definition">
+<h2>Definition<a class="headerlink" href="#definition" title="Permalink to this heading">#</a></h2>
+<p>Let’s look at what C# calls local functions.
+Local functions are private methods nested inside another member like a method or a constructor for example.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Wait a minute!
+What are these strange words?
+Private, member, constructor.
+Why are we starting here?</p>
+<p>Well, perhaps you remember how we in the chapter on <a class="reference internal" href="old-compilation.html#top-level-statements"><span class="std std-ref">compilation</span></a> discussed how C# supports something called “top-level statements” which allow you to just start writing code without having to define a main class and a static main method.
+It’s not that the main method doesn’t exist, it’s just that it’s generated for you.</p>
+<p>When we’re using top-level statements and start defining methods without making them members of a class then they will be either local functions or <a class="reference internal" href="lambdas.html"><span class="doc std std-doc">lambda expressions</span></a> which we’ll talk about much later.</p>
+<p>So, what should you take away from all this nonsense?
+What C# calls local functions is the simplest way to learn about methods/procedures/functions in C#.
+There are other ways to write methods in C# but let’s worry about that later.
+Now, let’s just learn how to do local functions.</p>
+</div>
+<p>A local function consists of four parts that we must understand.</p>
+<ol class="arabic simple">
+<li><p>A name.</p></li>
+<li><p>A return type.</p></li>
+<li><p>A list of parameters with types.</p></li>
+<li><p>An implementation.</p></li>
+</ol>
+<p>In the code example below we’re defining a local function called <code class="docutils literal notranslate"><span class="pre">add</span></code> which takes two parameters of type <code class="docutils literal notranslate"><span class="pre">int</span></code> and returns a value of type <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">add</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-6324.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.56:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '6324.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<section id="signatures">
+<span id="method-signature"></span><span id="function-signature"></span><h3>Signatures<a class="headerlink" href="#signatures" title="Permalink to this heading">#</a></h3>
+<p>Think back to the chapter on <a class="reference internal" href="functions.html"><span class="doc std std-doc">functions over sets</span></a>.
+The type of this function, can from a set perspective, be described as:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[
+\mathit{add} : (\mathbb{Z} \times \mathbb{Z}) \rightarrow \mathbb{Z}
+\]</div>
+</div>
+<p>Writing out the type of the function in C# syntax we would say:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">add</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In C# we refer to this as the “signature” of the function or method.
+Depending on the context in which we use the word signature, the return type is either included or not included.</p>
+<p>Learning to read function/method signatures is vital when learning C#.
+First, they allow us to understand how we should call a particular function or method.
+But beyond that, as we shall see in later chapters, signatures are a key component of <a class="reference internal" href="overloading.html"><span class="doc std std-doc">overloading polymorphism</span></a> and <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype polymorphism</span></a>.</p>
+</section>
+<section id="invocation">
+<h3>Invocation<a class="headerlink" href="#invocation" title="Permalink to this heading">#</a></h3>
+<p>So how do we apply this function to some arguments?
+How do we, as we say, “call” it, or “invoke” it?
+When we call the function we pass arguments to it.
+In terms of terminology, an “argument” is used in place of a “parameter”.</p>
+<p>Let’s say we want to add the numbers <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">2</span></code>.
+Well, we simply apply the function, just like we would in mathematics.
+We state the name of the function, an opening parenthesis, whatever values we want to pass as arguments for the parameters separated by comma, and close the parenthesis.
+Voilà, we’ve called the function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">add</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s call it again but let’s print out the result this time to make sure that it does what we expected it to do.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">add</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="return-values">
+<h3>Return values<a class="headerlink" href="#return-values" title="Permalink to this heading">#</a></h3>
+<p>How did we get that value out of the function?
+Well, notice how we used the keyword <code class="docutils literal notranslate"><span class="pre">return</span></code> in the definition of the function.</p>
+<p>The keyword <code class="docutils literal notranslate"><span class="pre">return</span></code> is in C# known as a “jump statement” since it transfers control to another section of the code.
+More precisely, it returns control to wherever the method was called.
+However, it also takes whatever value we put to the right of the <code class="docutils literal notranslate"><span class="pre">return</span></code> keyword and replaces our method call with that value.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>As soon as we use the <code class="docutils literal notranslate"><span class="pre">return</span></code> keyword, the method stops executing.
+Inserting a return statement before the end of the method is known as an “early return” and is sometimes a useful way of simplifying code.</p>
+</div>
+</section>
+<section id="expression-bodied-members">
+<span id="id1"></span><h3>Expression-bodied members<a class="headerlink" href="#expression-bodied-members" title="Permalink to this heading">#</a></h3>
+<p>In C# there’s this feature known as expression-bodied members.
+This feature allow us to express implementations using a much more compact syntax.</p>
+<p>If you’ve got an implementation that only consists of a single expression then you can use the expression-bodied member syntax.
+As we shall see in future chapters we can also use this syntax to define <a class="reference internal" href="static-methods.html"><span class="doc std std-doc">static methods</span></a>, <a class="reference internal" href="instance-methods.html"><span class="doc std std-doc">instance methods</span></a>, <a class="reference internal" href="properties.html"><span class="doc std std-doc">properties</span></a>, <a class="reference internal" href="constructors.html"><span class="doc std std-doc">constructors</span></a>, and <a class="reference internal" href="indexers.html"><span class="doc std std-doc">indexers</span></a>.</p>
+<p>We can redefine our <code class="docutils literal notranslate"><span class="pre">add</span></code> method using expression-bodied member syntax like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">add</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice how the <code class="docutils literal notranslate"><span class="pre">return</span></code> keyword is no longer needed since the function returns whatever the single expression returns.
+Notice also how there are no curly brackets needed since there’s no block that needs delimiting.
+Instead we use the symbol known as “fat arrow” (<code class="docutils literal notranslate"><span class="pre">=&gt;</span></code>) before we write the <span class="xref myst">expression</span> that constitutes our method implementation.</p>
+<p>Of course we can still call it the same way:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="k">add</span><span class="p">(</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="m">200</span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>300
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="void">
+<h3>Void<a class="headerlink" href="#void" title="Permalink to this heading">#</a></h3>
+<p>What if you want to write a procedure that simply does something but doesn’t return something.
+What would be an example of such a procedure?
+Well, how about <code class="docutils literal notranslate"><span class="pre">Console.WriteLine</span></code> that we’ve been using so frequently.</p>
+<p>The return type of <code class="docutils literal notranslate"><span class="pre">WriteLine</span></code> is the special type <code class="docutils literal notranslate"><span class="pre">void</span></code> of which there are no values.
+In the case of <code class="docutils literal notranslate"><span class="pre">WriteLine</span></code> this makes sense since we’re not looking to get a value back but rather to have something printed to screen.
+We call this a “side effect”.
+When we’re calling <code class="docutils literal notranslate"><span class="pre">WriteLine</span></code> we’re looking for the side effect of having whatever we pass it printed to the screen.</p>
+<p>We cannot declare a variable of type <code class="docutils literal notranslate"><span class="pre">void</span></code> and so we cannot ever store the result of invoking a function/method that returns <code class="docutils literal notranslate"><span class="pre">void</span></code>.</p>
+</section>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
+<section id="reverse-cipher">
+<h3>Reverse cipher<a class="headerlink" href="#reverse-cipher" title="Permalink to this heading">#</a></h3>
+<p>It should be possible to wrap all ciphers that we’ve defined up to this point in methods.
+Let’s start with the Reverse cipher.
+We’ll simply take the code we wrote in the chapter on <span class="xref myst">iteration</span> and wrap it in a local function.
+But of course, we’ll expose the <code class="docutils literal notranslate"><span class="pre">input</span></code> variable of type <code class="docutils literal notranslate"><span class="pre">string</span></code> as a parameter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="w"> </span><span class="nf">reverse</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="n">input</span><span class="p">.</span><span class="n">Length</span><span class="o">-</span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&gt;=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">--</span><span class="p">)</span>
+<span class="w">    </span><span class="n">output</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Simple enough.
+Let’s try it out.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="s">&quot;desserts&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stressed
+</pre></div>
+</div>
+</div>
+</div>
+<p>Seems to work.
+Could we rewrite it as a single expression and hence an expression-bodied member?
+No.
+But eventually we will, we just have to learn more tricks first.</p>
+</section>
+<section id="robber-s-language">
+<h3>Robber’s language<a class="headerlink" href="#robber-s-language" title="Permalink to this heading">#</a></h3>
+<p>Let’s now go for the Robber’s language.
+Let’s wrap the code we wrote in the chapter on <span class="xref myst">iteration</span> in a method and let’s make the <code class="docutils literal notranslate"><span class="pre">input</span></code> variable of type <code class="docutils literal notranslate"><span class="pre">string</span></code> a parameter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="w"> </span><span class="nf">robbersEncode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">letter</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="n">output</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">letter</span><span class="w"> </span><span class="k">switch</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="sc">&#39;B&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;b&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;C&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;c&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;D&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;d&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;F&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;f&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;G&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;g&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;H&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;h&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;J&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;j&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;K&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;k&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;L&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;l&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;M&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;m&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;N&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;n&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;P&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;p&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;Q&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;q&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;R&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;r&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;S&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;s&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;t&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;V&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;v&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;W&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;w&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;X&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;x&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;Y&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;y&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;Z&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;z&#39;</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">$&quot;{letter}O{letter}&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">letter</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Does it work?
+Sure does!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">robbersEncode</span><span class="p">(</span><span class="s">&quot;DOG&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DODOGOG
+</pre></div>
+</div>
+</div>
+</div>
+<p>But we can go further than this.
+Let’s think like programmers.
+Let’s look for opportunities to generalize and parameterize.
+Why have we hard-coded the vowel that we stick in between consonants?
+Who says that that must be fixed.
+Let’s just make that a parameter as well.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="w"> </span><span class="nf">robbersEncode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">vowel</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">letter</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="n">output</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">letter</span><span class="w"> </span><span class="k">switch</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="sc">&#39;B&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;b&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;C&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;c&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;D&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;d&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;F&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;f&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;G&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;g&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;H&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;h&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;J&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;j&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;K&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;k&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;L&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;l&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;M&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;m&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;N&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;n&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;P&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;p&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;Q&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;q&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;R&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;r&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;S&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;s&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;t&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;V&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;v&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;W&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;w&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;X&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;x&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;Y&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;y&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;Z&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;z&#39;</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">$&quot;{letter}{vowel}{letter}&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">letter</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Does it still work?
+Absolutely.
+But now that we call it we have to also supply a <code class="docutils literal notranslate"><span class="pre">char</span></code> that will play the role of the <code class="docutils literal notranslate"><span class="pre">vowel</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">robbersEncode</span><span class="p">(</span><span class="s">&quot;dog&quot;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;e&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dedogeg
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">robbersEncode</span><span class="p">(</span><span class="s">&quot;bird&quot;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>babirardad
+</pre></div>
+</div>
+</div>
+</div>
+<p>It seems to work!
+But it’s a really long method.
+Let’s see if we can decompose it into multiple methods to improve its <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a>.</p>
+<p>How about splitting the problem into two parts?
+One method could be responsible for iterating over the <code class="docutils literal notranslate"><span class="pre">string</span></code>, character by character, and the other method could be responsible for encoding any given character.
+A character can be represented using the <code class="docutils literal notranslate"><span class="pre">char</span></code> data type.
+Seems reasonable enough, let’s try it.</p>
+<p>Here’s a method that encodes a single character:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="w"> </span><span class="nf">robbersEncodeChar</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">vowel</span><span class="p">)</span>
+<span class="w">  </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="sc">&#39;B&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;b&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;C&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;c&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;D&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;d&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;F&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;f&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;G&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;g&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;H&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;h&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;J&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;j&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;K&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;k&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;L&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;l&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;M&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;m&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;N&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;n&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;P&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;p&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;Q&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;q&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;R&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;r&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;S&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;s&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;t&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;V&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;v&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;W&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;w&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;X&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;x&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;Y&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;y&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;Z&#39;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="sc">&#39;z&#39;</span>
+<span class="w">      </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">$&quot;{input}{vowel}{input}&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">$&quot;{input}&quot;</span>
+<span class="w">  </span><span class="p">};</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since we were using a <span class="xref myst">switch expression</span> rather than a <span class="xref myst">switch statement</span>, the whole implementation of this local function turned out to be a single expression.
+Which in turn means that we can use the shorter expression-bodied member syntax to compact the function even further by getting rid of the <code class="docutils literal notranslate"><span class="pre">return</span></code> keyword and curly brackets.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Notice how we, in the code above, in the default (wildcard) case, return <code class="docutils literal notranslate"><span class="pre">$&quot;{input}&quot;</span></code> instead of simply <code class="docutils literal notranslate"><span class="pre">input</span></code>.
+This is because <code class="docutils literal notranslate"><span class="pre">input</span></code> is a <code class="docutils literal notranslate"><span class="pre">char</span></code> but we need to return a <code class="docutils literal notranslate"><span class="pre">string</span></code>.
+In other words we need to somehow <a class="reference internal" href="type-conversions.html"><span class="doc std std-doc">convert</span></a> the value from type <code class="docutils literal notranslate"><span class="pre">char</span></code> to type <code class="docutils literal notranslate"><span class="pre">string</span></code>.
+Usually we would do this by calling the <a class="reference internal" href="instance-methods.html"><span class="doc std std-doc">instance method</span></a> <code class="docutils literal notranslate"><span class="pre">ToString()</span></code> but since we haven’t talked about instance methods yet I chose to do it through <a class="reference internal" href="syntactic-sugar.html#string-interpolation"><span class="std std-ref">string interpolation</span></a> which we <em>have</em> talked about.</p>
+<p>How come we didn’t have this problem before?
+Well, because previously we never actually assigned a value of type <code class="docutils literal notranslate"><span class="pre">char</span></code> to a variable of type <code class="docutils literal notranslate"><span class="pre">string</span></code> directly.
+Instead we either concatenated the <code class="docutils literal notranslate"><span class="pre">char</span></code> to a <code class="docutils literal notranslate"><span class="pre">string</span></code> using the concatenation operator <code class="docutils literal notranslate"><span class="pre">+</span></code> or we printed the <code class="docutils literal notranslate"><span class="pre">char</span></code> directly to screen using <code class="docutils literal notranslate"><span class="pre">Console.WriteLine</span></code>.
+In both cases, under the hood, this makes use of something known as <a class="reference internal" href="overloading.html"><span class="doc std std-doc">overloading</span></a>.
+We’ll learn more about that later.</p>
+</div>
+<p>Ok, but does our <code class="docutils literal notranslate"><span class="pre">char</span></code> encoding method work?
+Indeed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">robbersEncodeChar</span><span class="p">(</span><span class="sc">&#39;m&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;u&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mum
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">robbersEncodeChar</span><span class="p">(</span><span class="sc">&#39;a&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;u&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s now write the method that takes a whole <code class="docutils literal notranslate"><span class="pre">string</span></code> and applies the <code class="docutils literal notranslate"><span class="pre">char</span></code>-wise cipher to each individual character in order and then concatenates the result.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="w"> </span><span class="nf">robbersEncodeString</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">vowel</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">letter</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
+<span class="w">    </span><span class="n">output</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">robbersEncodeChar</span><span class="w"> </span><span class="p">(</span><span class="n">letter</span><span class="p">,</span><span class="w"> </span><span class="n">vowel</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When <a class="reference internal" href="refactoring.html"><span class="doc std std-doc">refactoring</span></a> (rewriting) your code, always make sure that it still works at every possible opportunity.
+Discovering bugs sooner rather than later makes them much easier to fix.</p>
+</div>
+<p>Let’s try it in action.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span>
+<span class="w">  </span><span class="n">robbersEncodeString</span><span class="p">(</span><span class="s">&quot;Attack at dawn!&quot;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Atattatacackak atat dadawawnan!
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ok, so that’s better.
+In programming jargon we would say that we’ve “separated concerns”.</p>
+</section>
+<section id="caesar-cipher">
+<h3>Caesar cipher<a class="headerlink" href="#caesar-cipher" title="Permalink to this heading">#</a></h3>
+<p>So far so good.
+But we’ve talked about more ciphers than the Robber’s language.
+Remember the <a class="reference internal" href="algorithms.html#caesar-cipher"><span class="std std-ref">Caesar cipher</span></a>?
+If we were to write an implementation of it using only the skills we have learned up to this point, the implementation would be necessarily complicated.
+For that reason we’re going to postpone writing an implementation for now.</p>
+<p>However, what I want to draw your attention to is that it would be quite possible to write an implementation of it that is based around two very similar methods.
+We could decompose the problem in the same way.
+One method is responsible for encoding a single character, while one method is responsible for iterating over the whole <code class="docutils literal notranslate"><span class="pre">string</span></code>, delegataing to the character-converting method, and then concatenating the result.</p>
+<p>We’ve parameterized the Robber’s language over the vowel we stick in between consonants.
+A Caesar cipher however ought to be parameterized over the number of steps to move in the alphabet.
+Let’s represent that with an <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="w"> </span><span class="nf">caesarEncodeString</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">steps</span><span class="p">);</span>
+<span class="kt">char</span><span class="w"> </span><span class="nf">caesarEncodeChar</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">steps</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Hmm… If we manage to implement <code class="docutils literal notranslate"><span class="pre">caesarEncodeChar</span></code>, the implementation of <code class="docutils literal notranslate"><span class="pre">caesarEncodeString</span></code> ought to be trivial.
+Have a look at the code below:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="w"> </span><span class="nf">caesarEncodeString</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">steps</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">letter</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
+<span class="w">    </span><span class="n">output</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">caesarEncodeChar</span><span class="w"> </span><span class="p">(</span><span class="n">letter</span><span class="p">,</span><span class="w"> </span><span class="n">steps</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Does this code remind you of anything?
+It is eerily similar to <code class="docutils literal notranslate"><span class="pre">robbersEncodeString</span></code> right?
+What are the differences?
+There are essentially three.</p>
+<ol class="arabic simple">
+<li><p>The parameters (beyond the input <code class="docutils literal notranslate"><span class="pre">string</span></code>) varies.</p></li>
+<li><p>Which character-replacing method we call varies.</p></li>
+<li><p>One of the character-replacing methods returns a <code class="docutils literal notranslate"><span class="pre">string</span></code> while the other returns a <code class="docutils literal notranslate"><span class="pre">char</span></code>.</p></li>
+</ol>
+</section>
+<section id="leet-language">
+<h3>Leet language<a class="headerlink" href="#leet-language" title="Permalink to this heading">#</a></h3>
+<p>But the eerie similarties don’t stop there.
+Remember the <span class="xref myst">Leet language</span> that you wrote a program for in <code class="xref std std-numref docutils literal notranslate"><span class="pre">ex:iteration-leet</span></code>?</p>
+<p>Let’s say we choose the same strategy as with the Caesar cipher and the Robber’s language and decompose the problem into two subproblems.
+One method is responsible for determining what character to replace any given single character with.
+The other method is responsible for iterating over the characters of a <code class="docutils literal notranslate"><span class="pre">string</span></code> and calling the other method for each character one by one.</p>
+<p>I won’t show how to write the method that converts any given <code class="docutils literal notranslate"><span class="pre">char</span></code> since that’s your job in <code class="xref std std-numref docutils literal notranslate"><span class="pre">ex:methods-leet</span></code>.
+However, the <code class="docutils literal notranslate"><span class="pre">string</span></code>-encoding method ought to look like this:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="w"> </span><span class="nf">leetEncodeString</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">letter</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
+<span class="w">    </span><span class="n">output</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">leetEncodeChar</span><span class="w"> </span><span class="p">(</span><span class="n">letter</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>So much duplicated code!
+Argh!
+Now we’ve got three cases of, air quotes, pretty much the same code.
+Looks like a prime candidate for using methods to eliminate duplication.</p>
+<p>Think about this for a moment, and you’ll realize that whenever we want to build a new cipher that encodes on a character-to-character basis, we’ll have to repeat this code.
+Some parameters vary, and some character-encoding methods return values of type <code class="docutils literal notranslate"><span class="pre">char</span></code> while other return values of type <code class="docutils literal notranslate"><span class="pre">string</span></code>.</p>
+<p>Remember the principle <span class="xref myst">DRY (don’t repeat yourself)</span>?
+This repetition is not ideal.
+So how do we get rid of this duplication?</p>
+</section>
+<section id="substitution-ciphers">
+<span id="parameterizing-what-varies"></span><span id="methods-substitutions"></span><span id="methods-substitution-ciphers"></span><h3>Substitution ciphers<a class="headerlink" href="#substitution-ciphers" title="Permalink to this heading">#</a></h3>
+<p>Let’s think about our use case a bit more.
+It turns out that in the world of cryptography there’s this concept known as a “substitution cipher”.
+The one thing such ciphers have in common is that they encode their input “chunk by chunk”.
+If that chunk happens to be a single character then it’s known as a “simple substitution cipher”.</p>
+<p>All ciphers are <em>not</em> substitution ciphers of course.
+Think of the simple reverse cipher that we discussed.
+Reversing is not a substitution cipher but, what is known as, a “transposition cipher”.
+In transposition ciphers we <em>rearrange</em> letters while in substitution ciphers we <em>substitute</em> letters.</p>
+<p>In order to avoid an explosion of methods that repeat the same task over and over again, we need to turn something into data so that we can parameterize our methods and thus pass the variation as an argument.
+That is, <em>unless we are writing our code in an object oriented style and use subtype polymorphism</em>.</p>
+<p>How come we don’t have to turn something into pure data when doing it in an object oriented style?
+Because objects mix data and methods and support subtyping.
+If you mix data and methods then you have a way of passing around methods.
+And if you can subtype then you can pass around vastly different methods.
+But it’s too soon to talk about those things.
+Don’t worry, we’ll get there eventually.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It should however be noted that in the functional programming paradigm functions are, what we call, first-class citizens.
+This means that you can pass around functions as if they were data.
+It should be noted that this is a non-issue in functional programming languages since functions are first-class citizens.
+To pass around methods in C# we would have to use <a class="reference internal" href="delegates.html"><span class="doc std std-doc">delegates</span></a> but this is not as powerful as what we get in functional programming because we lack the ability to do partial application.</p>
+</div>
+<p>But let’s get back on track.
+What I want you to take away from this discussion is this:</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>With simple static methods you often reach a point where you will have to figure out a way to turn your <em>algorithms</em> into <em>data</em> if you want to elimnate further duplication.</p>
+</div>
+<p>Turning methods into data, what would that look like?
+Well, think about it.
+We said that these ciphers are simple substitution ciphers that substitute a character for a character.
+So what if we use an <a class="reference internal" href="arrays.html"><span class="doc std std-doc">array</span></a> of <span class="xref myst">tuples</span> where the first value of each tuple is that character that we want to replace, and the second is the replacement.</p>
+<p>With such an array of substitutions we can simply iterate over each <code class="docutils literal notranslate"><span class="pre">char</span></code> in the input <code class="docutils literal notranslate"><span class="pre">string</span></code>, and then iterate over each substitution in the array of substitution, and check if the character matches the pattern of the substitution.
+If it does then replace the character with the substitution and otherwise we just continue.
+Simple enough right?
+Let’s implement it, but let’s again separate the two jobs of iterating over a whole <code class="docutils literal notranslate"><span class="pre">string</span></code> and determining replacement character for a given character.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span><span class="w"> </span><span class="nf">substituteChar</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="p">)[]</span><span class="w"> </span><span class="n">substitutions</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">((</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="p">)</span><span class="w"> </span><span class="n">substitution</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">substitutions</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">substitution</span><span class="p">.</span><span class="n">Item1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">substitution</span><span class="p">.</span><span class="n">Item2</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">input</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">string</span><span class="w"> </span><span class="nf">substituteString</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="p">)[]</span><span class="w"> </span><span class="n">substitutions</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
+<span class="w">        </span><span class="n">output</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">substituteChar</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">substitutions</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Does it work?
+Yes, it does.
+Have a look below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="p">)[]</span><span class="w"> </span><span class="n">substitutions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="p">)[]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;L&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;1&#39;</span><span class="p">),</span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;E&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;3&#39;</span><span class="p">),</span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;7&#39;</span><span class="p">),</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">substituteString</span><span class="p">(</span><span class="s">&quot;LEET&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">substitutions</span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1337
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="w"> </span><span class="n">substituteString</span><span class="p">(</span><span class="s">&quot;LOL&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">substitutions</span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1O1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="expanding-substitutions">
+<h3>Expanding substitutions<a class="headerlink" href="#expanding-substitutions" title="Permalink to this heading">#</a></h3>
+<p>Before we leave this idea of treating substitutions as data there’s one more thing we have to talk about and it’s related to Caesar ciphers.</p>
+<p>In any given substitution, the Caesar cipher returns a single <code class="docutils literal notranslate"><span class="pre">char</span></code> when given a single <code class="docutils literal notranslate"><span class="pre">char</span></code>.
+The Robber’s language sometimes return multiple characters, or rather a <code class="docutils literal notranslate"><span class="pre">string</span></code>.
+The Caesar cipher has type <code class="docutils literal notranslate"><span class="pre">char</span> <span class="pre">-&gt;</span> <span class="pre">char</span></code> while the Robber’s language has type <code class="docutils literal notranslate"><span class="pre">char</span> <span class="pre">-&gt;</span> <span class="pre">string</span></code>.</p>
+<p>It looks something like this:</p>
+<p>Why does this matter?
+Think about it.
+How would we use the method <code class="docutils literal notranslate"><span class="pre">substituteChar</span></code> to run a Robber’s language cipher?
+It’s not possible.
+The signature of that method is:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span><span class="w"> </span><span class="nf">substituteChar</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="p">)[]</span><span class="w"> </span><span class="n">substitutions</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>But we know that a Robber’s cipher, when taking a character as input must return a <code class="docutils literal notranslate"><span class="pre">char</span></code>.
+This also means that each substitution must have the type <code class="docutils literal notranslate"><span class="pre">(char,</span> <span class="pre">string)</span></code> and not <code class="docutils literal notranslate"><span class="pre">(char,</span> <span class="pre">char)</span></code>.
+Taking this together the method would look something like below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">string</span><span class="w"> </span><span class="nf">substituteCharUsingString</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="p">)[]</span><span class="w"> </span><span class="n">substitutions</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">foreach</span><span class="w"> </span><span class="p">((</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="n">substitution</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">substitutions</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">substitution</span><span class="p">.</span><span class="n">Item1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">substitution</span><span class="p">.</span><span class="n">Item2</span><span class="p">;</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="s">$&quot;{input}&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Oh no!
+We’re back in the land of duplication.
+This looks way too much like the implementation <code class="docutils literal notranslate"><span class="pre">substituteChar</span></code> right?</p>
+<p>One way of dealing with this duplication involves realizing that any <code class="docutils literal notranslate"><span class="pre">char</span></code> always can be converted into a <code class="docutils literal notranslate"><span class="pre">string</span></code>.
+Which in turn means that any <code class="docutils literal notranslate"><span class="pre">(char,</span> <span class="pre">char)</span></code> tuple can be turned into a <code class="docutils literal notranslate"><span class="pre">(char,</span> <span class="pre">string)</span></code> tuple.
+Which in turn means that any array of substitutions on the form <code class="docutils literal notranslate"><span class="pre">(char,</span> <span class="pre">char)[]</span></code> can be turned into an array of type <code class="docutils literal notranslate"><span class="pre">(char,</span> <span class="pre">string)[]</span></code>.
+Finally, since the method <code class="docutils literal notranslate"><span class="pre">substituteString</span></code> returns a <code class="docutils literal notranslate"><span class="pre">string</span></code> anyway, we might as well convert its input substitutions from <code class="docutils literal notranslate"><span class="pre">(char,char)[]</span></code> to <code class="docutils literal notranslate"><span class="pre">(char,string)[]</span></code> and then simply call <code class="docutils literal notranslate"><span class="pre">substituteCharUsingString</span></code> for each character substitution instead.
+This however only eliminates the duplication between the two methods that take strings as input.</p>
+</section>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<div class="exercise admonition" id="chapters/methods-old-exercise-0">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>In the context of local functions or methods, define what the following terms mean using your own words.</p>
+<ol class="arabic simple">
+<li><p>The <em>name</em> of a function/method.</p></li>
+<li><p>The <em>return type</em> of a function/method.</p></li>
+<li><p>The <em>list of parameters</em> of a function/method.</p></li>
+<li><p>The <em>implementation</em> of a function/method.</p></li>
+</ol>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/methods-old-exercise-1">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>What is the difference between a method/function that returns <code class="docutils literal notranslate"><span class="pre">null</span></code> and one that returns <code class="docutils literal notranslate"><span class="pre">void</span></code>?
+In what cases would you use one and in one what cases would you use the other?</p>
+</section>
+</div>
+<div class="exercise admonition" id="ex:methods-char-to-int">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>Write a local function with the signature:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">charToInt</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The method should return a number that represents the character it was given, based on the scheme below.</p>
+<div class="cell tag_remove-input tag_hide-output docutils container">
+<details class="hide above-output">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell outputs</span>
+<span class="expanded">Hide code cell outputs</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A =&gt; 0
+B =&gt; 1
+C =&gt; 2
+D =&gt; 3
+E =&gt; 4
+F =&gt; 5
+G =&gt; 6
+H =&gt; 7
+I =&gt; 8
+J =&gt; 9
+K =&gt; 10
+L =&gt; 11
+M =&gt; 12
+N =&gt; 13
+O =&gt; 14
+P =&gt; 15
+Q =&gt; 16
+R =&gt; 17
+S =&gt; 18
+T =&gt; 19
+U =&gt; 20
+V =&gt; 21
+W =&gt; 22
+X =&gt; 23
+Y =&gt; 24
+Z =&gt; 25
+a =&gt; 26
+b =&gt; 27
+c =&gt; 28
+d =&gt; 29
+e =&gt; 30
+f =&gt; 31
+g =&gt; 32
+h =&gt; 33
+i =&gt; 34
+j =&gt; 35
+k =&gt; 36
+l =&gt; 37
+m =&gt; 38
+n =&gt; 39
+o =&gt; 40
+p =&gt; 41
+q =&gt; 42
+r =&gt; 43
+s =&gt; 44
+t =&gt; 45
+u =&gt; 46
+v =&gt; 47
+w =&gt; 48
+x =&gt; 49
+y =&gt; 50
+z =&gt; 51
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>All other characters return <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/methods-old-exercise-3">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>Think back to the definitions of <a class="reference internal" href="functions.html"><span class="doc std std-doc">total and partial functions</span></a>.
+Is the function you’ve defined in <code class="xref std std-numref docutils literal notranslate"><span class="pre">ex:methods-char-to-int</span></code> total or partial?</p>
+</section>
+</div>
+<div class="exercise admonition" id="ex:methods-leet">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>In <code class="xref std std-numref docutils literal notranslate"><span class="pre">ex:iteration-leet</span></code> we wrote a program that can encode any given <code class="docutils literal notranslate"><span class="pre">string</span></code> in the Leet language.
+Take inspiration from the Robber’s language cipher that we built in this chapter and write two local functions with the following signatures:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span><span class="w"> </span><span class="nf">leetEncodeChar</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">);</span>
+<span class="kt">string</span><span class="w"> </span><span class="nf">leetEncodeString</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The local function that maps from <code class="docutils literal notranslate"><span class="pre">string</span></code> to <code class="docutils literal notranslate"><span class="pre">string</span></code> should call the local function that maps from <code class="docutils literal notranslate"><span class="pre">char</span></code> to <code class="docutils literal notranslate"><span class="pre">char</span></code>.
+Think of how we split the problem in two methods when implementing the Robber’s cipher.
+Same thing here.</p>
+<p>Please see the usage example below:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">leetEncodeChar</span><span class="p">(</span><span class="sc">&#39;A&#39;</span><span class="p">));</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">leetEncodeChar</span><span class="p">(</span><span class="sc">&#39;5&#39;</span><span class="p">));</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">leetEncodeString</span><span class="p">(</span><span class="s">&quot;LEET 1015&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">4</span>
+<span class="go">S</span>
+<span class="go">1337 LOLS</span>
+</pre></div>
+</div>
+<p>Note: In this exercise you are expected to implement the substitution algorithm directly <em>without</em> using the local functions <code class="docutils literal notranslate"><span class="pre">substituteChar</span></code> and <code class="docutils literal notranslate"><span class="pre">substituteString</span></code> that we defined earlier in this chapter.</p>
+</section>
+</div>
+<div class="exercise admonition" id="chapters/methods-old-exercise-5">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>In this exercise we are going to implement the Leet language using the local function <code class="docutils literal notranslate"><span class="pre">substituteString</span></code> that we defined earlier in this chapter.
+Declare and initialize a variable with the following name and type:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="p">)[]</span><span class="w"> </span><span class="n">leetSubstitutions</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The variable should contain all the substitutions necessary for the Leet language.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="kt">char</span><span class="p">)[]</span><span class="w"> </span><span class="n">leetSubstitutions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="kt">char</span><span class="p">)[]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;A&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;4&#39;</span><span class="p">),</span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;4&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">),</span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;E&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;3&#39;</span><span class="p">),</span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;3&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;E&#39;</span><span class="p">),</span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;L&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;1&#39;</span><span class="p">),</span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;L&#39;</span><span class="p">),</span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;O&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">),</span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;0&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;O&#39;</span><span class="p">),</span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;S&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;5&#39;</span><span class="p">),</span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;5&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;S&#39;</span><span class="p">),</span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;7&#39;</span><span class="p">),</span>
+<span class="w">  </span><span class="p">(</span><span class="sc">&#39;7&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">)</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We should be able to use the variable as an argument to the local function <code class="docutils literal notranslate"><span class="pre">substituteString</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span>
+<span class="w">  </span><span class="n">substituteString</span><span class="p">(</span><span class="s">&quot;1337 LOLS&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">leetSubstitutions</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LEET 1015
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since the variable contains all the substitutions necessary for the the Leet language you should also be able to iterate over it using a <code class="docutils literal notranslate"><span class="pre">foreach</span></code>:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">foreach</span><span class="w"> </span><span class="p">((</span><span class="kt">char</span><span class="p">,</span><span class="kt">char</span><span class="p">)</span><span class="w"> </span><span class="n">sub</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">leetSubstitutions</span><span class="p">)</span>
+<span class="w">  </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{sub.Item1} =&gt; {sub.Item2}&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A =&gt; 4
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4 =&gt; A
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>E =&gt; 3
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 =&gt; E
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L =&gt; 1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 =&gt; L
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>O =&gt; 0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 =&gt; O
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>S =&gt; 5
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5 =&gt; S
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T =&gt; 7
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7 =&gt; T
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+</div>
+<div class="exercise admonition" id="ex:methods-robbers-substitutions">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>Write a local function with the following signature:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="kt">string</span><span class="p">)[]</span><span class="w"> </span><span class="n">makeRobbersSubstitutions</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">vowel</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The method should return an array of <code class="docutils literal notranslate"><span class="pre">(char,string)</span></code> substitutions for the Robber’s language when given a <code class="docutils literal notranslate"><span class="pre">vowel</span></code> as input.</p>
+<p>Since the method returns returns an array of <code class="docutils literal notranslate"><span class="pre">(char,string)</span></code> pairs and not <code class="docutils literal notranslate"><span class="pre">(char,char)</span></code> pairs you should be able to use any result of calling the method as the second argument to <code class="docutils literal notranslate"><span class="pre">substituteCharUsingString</span></code>:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span>
+<span class="w">  </span><span class="n">substituteCharUsingString</span><span class="p">(</span><span class="sc">&#39;l&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">makeRobbersSubstitutions</span><span class="p">(</span><span class="sc">&#39;o&#39;</span><span class="p">)));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lol
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since the method returns an array you should also be able to iterate over the substitutions using a <code class="docutils literal notranslate"><span class="pre">foreach</span></code>:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="kt">string</span><span class="p">)[]</span><span class="w"> </span><span class="n">substitutions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">makeRobbersSubstitutions</span><span class="p">(</span><span class="sc">&#39;a&#39;</span><span class="p">);</span>
+<span class="k">foreach</span><span class="w"> </span><span class="p">((</span><span class="kt">char</span><span class="p">,</span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="n">sub</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">substitutions</span><span class="p">)</span>
+<span class="w">  </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{sub.Item1} =&gt; {sub.Item2}&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>B =&gt; BaB
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C =&gt; CaC
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>D =&gt; DaD
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F =&gt; FaF
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>G =&gt; GaG
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>H =&gt; HaH
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>J =&gt; JaJ
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>K =&gt; KaK
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L =&gt; LaL
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>M =&gt; MaM
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N =&gt; NaN
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P =&gt; PaP
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Q =&gt; QaQ
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R =&gt; RaR
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>S =&gt; SaS
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T =&gt; TaT
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>V =&gt; VaV
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X =&gt; XaX
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Y =&gt; YaY
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Z =&gt; ZaZ
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b =&gt; bab
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c =&gt; cac
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d =&gt; dad
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f =&gt; faf
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g =&gt; gag
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>h =&gt; hah
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>j =&gt; jaj
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>k =&gt; kak
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>l =&gt; lal
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>m =&gt; mam
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n =&gt; nan
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p =&gt; pap
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>q =&gt; qaq
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>r =&gt; rar
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>s =&gt; sas
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t =&gt; tat
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>v =&gt; vav
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x =&gt; xax
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>y =&gt; yay
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>z =&gt; zaz
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+</div>
+<div class="exercise admonition" id="ex:methods-charchar-to-charstring">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>Write a method that takes an array of <code class="docutils literal notranslate"><span class="pre">(char,</span> <span class="pre">char)</span></code> tuples and returns a new array of <code class="docutils literal notranslate"><span class="pre">(char,</span> <span class="pre">string)</span></code> tuples without loosing any information.
+It should have the following signature:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kt">char</span><span class="p">,</span><span class="kt">string</span><span class="p">)[]</span><span class="w"> </span><span class="n">charCharArrayToCharStringArray</span><span class="w"> </span><span class="p">((</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="p">)[]</span><span class="w"> </span><span class="n">substitutions</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: ".net-csharp"
+        },
+        kernelOptions: {
+            name: ".net-csharp",
+            path: "./chapters"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = '.net-csharp'</script>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; All rights reserved. By using this site, you agree to our use of cookies for Google Analytics.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Methods</a><ul>
+<li><a class="reference internal" href="#motivation">Motivation</a></li>
+<li><a class="reference internal" href="#definition">Definition</a><ul>
+<li><a class="reference internal" href="#signatures">Signatures</a></li>
+<li><a class="reference internal" href="#invocation">Invocation</a></li>
+<li><a class="reference internal" href="#return-values">Return values</a></li>
+<li><a class="reference internal" href="#expression-bodied-members">Expression-bodied members</a></li>
+<li><a class="reference internal" href="#void">Void</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#reverse-cipher">Reverse cipher</a></li>
+<li><a class="reference internal" href="#robber-s-language">Robber’s language</a></li>
+<li><a class="reference internal" href="#caesar-cipher">Caesar cipher</a></li>
+<li><a class="reference internal" href="#leet-language">Leet language</a></li>
+<li><a class="reference internal" href="#substitution-ciphers">Substitution ciphers</a></li>
+<li><a class="reference internal" href="#expanding-substitutions">Expanding substitutions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#exercises">Exercises</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://www.googletagmanager.com/gtag/js?id=G-V69WNXD095"></script>
+    <script src="../_static/custom.js"></script>
+    <script src="../_static/analytics.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

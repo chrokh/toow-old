@@ -391,7 +391,7 @@ We start by declaring a <span class="xref myst">delegate</span> whose instances 
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3973.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-4544.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -436,12 +436,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.103:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.56:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3973.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '4544.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -521,7 +521,7 @@ else {
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The question mark at the end of <code class="docutils literal notranslate"><span class="pre">MyEvent?</span></code> is the <span class="xref myst">null-conditional operator</span> and has nothing specific to do with events or delegates.
-Its purpose here is to avoid null reference <span class="xref myst">exceptions</span> with as little <span class="xref myst">boilerplate</span> as possible.</p>
+Its purpose here is to avoid null reference <a class="reference internal" href="basic-exceptions.html#exceptions"><span class="std std-ref">exceptions</span></a> with as little <span class="xref myst">boilerplate</span> as possible.</p>
 </div>
 </section>
 <section id="basic-example">
@@ -611,7 +611,7 @@ Let’s try it out by publishing a new episode which will fire the event.</p>
 </div>
 <p>As discussed in the chapter on <a class="reference internal" href="multicast-delegates.html"><span class="doc std std-doc">multicast delegates</span></a>, we can stack any number of callbacks in a delegate instance.
 In the case of the <a class="reference internal" href="observer-pattern.html"><span class="doc std std-doc">Observer pattern</span></a> all our subscribers have to implement some interface (usually called <code class="docutils literal notranslate"><span class="pre">IObserver</span></code>), but in the case of events the only requirement is that the handler has the signature required by the event.</p>
-<p>To exemplify that we don’t even need a subscriber class, let’s write a simple <a class="reference internal" href="local-functions.html"><span class="doc std std-doc">local function</span></a> that we can use as an event handler.</p>
+<p>To exemplify that we don’t even need a subscriber class, let’s write a simple <a class="reference internal" href="methods-old.html#local-functions"><span class="std std-ref">local function</span></a> that we can use as an event handler.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Simple local function that counts the number of episodes released.</span>
@@ -701,7 +701,7 @@ What do you think happens when we fire the event?</p>
 <li><p><a class="reference internal" href="observer-pattern.html"><span class="doc std std-doc">Observer pattern</span></a></p></li>
 </ul>
 </div>
-<p>By understanding events, <a class="reference internal" href="delegates.html"><span class="doc std std-doc">delegates</span></a> and the <a class="reference internal" href="observer-pattern.html"><span class="doc std std-doc">Observer pattern</span></a> in C#, you will have grasped the mechanics behind <span class="xref myst">event-based programming</span> which is a powerful architecture that some even call its own <span class="xref myst">paradigm</span>.
+<p>By understanding events, <a class="reference internal" href="delegates.html"><span class="doc std std-doc">delegates</span></a> and the <a class="reference internal" href="observer-pattern.html"><span class="doc std std-doc">Observer pattern</span></a> in C#, you will have grasped the mechanics behind <span class="xref myst">event-based programming</span> which is a powerful architecture that some even call its own <a class="reference internal" href="paradigms.html"><span class="doc std std-doc">paradigm</span></a>.
 You’re also on your way to understand the <span class="xref myst">asynchronous programming model</span> which we’ll talk about much later.</p>
 <p>In the next chapter we’ll talk about important <a class="reference internal" href="event-conventions.html"><span class="doc std std-doc">conventions</span></a> in C# related to events.</p>
 </section>

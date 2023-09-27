@@ -354,7 +354,7 @@ Most problems can be effectively solved without resorting to downcasting. The us
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3432.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-4122.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -399,12 +399,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.103:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.56:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3432.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '4122.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -512,11 +512,11 @@ else {
 <p>In both cases however, the code compiles successfully. It compiles because the compiler allows the downcast operation based on the compile-time types involved: <code class="docutils literal notranslate"><span class="pre">Apple</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">IFruit</span></code>. However, at run-time, when the actual type of the object referenced by <code class="docutils literal notranslate"><span class="pre">fruit</span></code> turns out to be <code class="docutils literal notranslate"><span class="pre">Banana</span></code> rather than <code class="docutils literal notranslate"><span class="pre">Apple</span></code>, the downcast operation fails.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>There’s a way to check an object’s type before attempting to downcast it, known as <span class="xref myst">type testing</span>, which we’ll discuss in a future chapter. For now, it’s crucial to understand the risks involved in downcasting.</p>
+<p>There’s a way to check an object’s type before attempting to downcast it, known as <a class="reference internal" href="type-testing.html"><span class="doc std std-doc">type testing</span></a>, which we’ll discuss in a future chapter. For now, it’s crucial to understand the risks involved in downcasting.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Downcasting, as we’ve seen, can be risky. We are basically trying to regain type information that was intentionally lost through upcasting. This operation may fail at run-time, potentially causing an exception. However, there are safer ways to recover this lost type information without resorting to potentially hazardous downcasting. One of these is using design patterns specifically intended for dealing with such situations, like the <span class="xref myst">Visitor pattern</span>.
+<p>Downcasting, as we’ve seen, can be risky. We are basically trying to regain type information that was intentionally lost through upcasting. This operation may fail at run-time, potentially causing an exception. However, there are safer ways to recover this lost type information without resorting to potentially hazardous downcasting. One of these is using design patterns specifically intended for dealing with such situations, like the <a class="reference internal" href="visitor-pattern.html"><span class="doc std std-doc">Visitor pattern</span></a>.
 The Visitor pattern is one such safer way. It allows us to perform operations on objects based on their actual type. This avoids the risk of run-time errors due to failed downcasting. We’ll discuss the Visitor pattern in more depth in a later chapter.</p>
 </div>
 </section>
