@@ -41,44 +41,48 @@ If you're completely new to coding I recommend that you use the online environme
 
 ## Getting started with Replit
 
-Here's a quick overview of how to get started using [Replit](https://replit.com).
-This is a development environment that you can run directly in your web browser.
+```{note}
+Coming soon.
+```
 
-1. Navigate to [replit.com](https://replit.com) and create an account.
-2. Press the button 'Create Repl'.
-3. Choose the Template 'C#'. Do *not* choose the template 'Mono C#'.
-4. Give your Repl a Title and click 'Create Repl'.
-5. Open the main code which is called `main.cs` and verify that Replit has generated the following code for you:
-
-    ```csharp
-    using System;
-
-    class Program {
-        public static void Main (string[] args) {
-          Console.WriteLine ("Hello World");
-        }
-    }
-    ```
-6. Open the project file which is called `main.csproj` and remove the line that says:
-
-    `<StartupObject>Program</StartupObject>`
-
-    If you keep the line you will disable the feature known as [top-level statements](top-level-statements) which will make our coming steps unnecessarily complicated.
-
-7. Go back to the main code file (`main.cs`) and replace its contents with the following simpler program that makes use of what we later will learn is called [top-level statements](top-level-statements):
-
-    ```csharp
-    using System;
-
-    Console.WriteLine("Hello, World!");
-    ```
-
-8. Run your program by clicking the green 'Play' button in the top or using the shortcut `Cmd+Enter` on Mac or `Ctrl+Enter` on Windows.
-9. Verify that the output you get is:
-
-    ```output
-    Hello, World!
-    ```
+%Here's a quick overview of how to get started using [Replit](https://replit.com).
+%This is a development environment that you can run directly in your web browser.
+%
+%1. Navigate to [replit.com](https://replit.com) and create an account.
+%2. Press the button 'Create Repl'.
+%3. Choose the Template 'C#'. Do *not* choose the template 'Mono C#'.
+%4. Give your Repl a Title and click 'Create Repl'.
+%5. Open the main code which is called `main.cs` and verify that Replit has generated the following code for you:
+%
+%    ```csharp
+%    using System;
+%
+%    class Program {
+%        public static void Main (string[] args) {
+%          Console.WriteLine ("Hello World");
+%        }
+%    }
+%    ```
+%6. Open the project file which is called `main.csproj` and remove the line that says:
+%
+%    `<StartupObject>Program</StartupObject>`
+%
+%    If you keep the line you will disable the feature known as [top-level statements](top-level-statements) which will make our coming steps unnecessarily complicated.
+%
+%7. Go back to the main code file (`main.cs`) and replace its contents with the following simpler program that makes use of what we later will learn is called [top-level statements](top-level-statements):
+%
+%    ```csharp
+%    using System;
+%
+%    Console.WriteLine("Hello, World!");
+%    ```
+%
+%8. Run your program by clicking the green 'Play' button in the top or using the shortcut `Cmd+Enter` on Mac or `Ctrl+Enter` on Windows.
+%9. Verify that the output you get is:
+%
+%    ```output
+%    Hello, World!
+%    ```
 
 
 ## Getting started with Visual Studio Code

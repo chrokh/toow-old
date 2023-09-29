@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="2. Lab: Composition over Inheritance" href="composition-over-inheritance.html" /><link rel="prev" title="115. Variant generic interfaces" href="../chapters/variant-generic-interfaces.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Lab: Replace conditional with polymorphism - The Object Oriented Way</title>
+        <title>1. Lab: Replace conditional with polymorphism - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -164,7 +164,8 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul>
+  <p class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/syntax.html">1. Syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/hello-world.html">2. Hello world</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/compilation.html">3. Compilation</a></li>
@@ -281,6 +282,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapters/variant-generic-delegates.html">114. Variant generic delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/variant-generic-interfaces.html">115. Variant generic interfaces</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Labs</span></p>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">1. Lab: Replace conditional with polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">2. Lab: Composition over Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics.html">3. Lab: Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-types.html">4. Lab Exercise: Generic types</a></li>
+</ul>
 
 </div>
 </div>
@@ -315,30 +323,24 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="lab-replace-conditional-with-polymorphism">
-<h1>Lab: Replace conditional with polymorphism<a class="headerlink" href="#lab-replace-conditional-with-polymorphism" title="Permalink to this heading">#</a></h1>
-<div class="admonition-objective admonition">
-<p class="admonition-title">Objective</p>
+<h1><span class="section-number">1. </span>Lab: Replace conditional with polymorphism<a class="headerlink" href="#lab-replace-conditional-with-polymorphism" title="Permalink to this heading">#</a></h1>
+<section id="objective">
+<h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
 <p>To refactor the provided <code class="docutils literal notranslate"><span class="pre">Shape</span></code> class to <a class="reference internal" href="../old/subtype-polymorphism.html#replace-conditional-with-polymorphism"><span class="std std-ref">remove conditionals and implement polymorphism</span></a>, thereby enhancing code <span class="xref myst">maintainability</span>.</p>
-</div>
-<section id="step-1-understand-the-provided-code">
-<h2>Step 1: Understand the provided code<a class="headerlink" href="#step-1-understand-the-provided-code" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="provided-code">
+<h2>Provided code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
 <p>Study the starting code given to you. It consists of a single <code class="docutils literal notranslate"><span class="pre">Shape</span></code> class which draws different shapes based on the <code class="docutils literal notranslate"><span class="pre">ShapeType</span></code> using conditionals.</p>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="n">ShapeType</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">HorizontalLine</span><span class="p">,</span><span class="w"> </span><span class="n">Square</span><span class="p">,</span><span class="w"> </span><span class="n">RightTriangle</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-9099.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-8283.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -383,12 +385,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.56:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.52.4:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '9099.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '8283.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -444,12 +446,7 @@ else {
     </script>
 </div></div></div>
 </div>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Shape</span>
 <span class="p">{</span>
@@ -529,18 +526,10 @@ else {
 </pre></div>
 </div>
 </div>
-</details>
 </div>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Main method</span>
-
-<span class="n">Shape</span><span class="w"> </span><span class="n">shape1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Shape</span><span class="p">(</span><span class="n">ShapeType</span><span class="p">.</span><span class="n">HorizontalLine</span><span class="p">,</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;=&quot;</span><span class="p">);</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Shape</span><span class="w"> </span><span class="n">shape1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Shape</span><span class="p">(</span><span class="n">ShapeType</span><span class="p">.</span><span class="n">HorizontalLine</span><span class="p">,</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;=&quot;</span><span class="p">);</span>
 <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">shape1</span><span class="p">.</span><span class="n">Draw</span><span class="p">());</span>
 
 <span class="n">Shape</span><span class="w"> </span><span class="n">shape2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Shape</span><span class="p">(</span><span class="n">ShapeType</span><span class="p">.</span><span class="n">Square</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;■ &quot;</span><span class="p">);</span>
@@ -551,7 +540,6 @@ else {
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============
 </pre></div>
@@ -573,8 +561,10 @@ else {
 </div>
 </div>
 </section>
-<section id="step-2-replace-conditionals-in-shape-with-polymorphism">
-<h2>Step 2: Replace conditionals in <code class="docutils literal notranslate"><span class="pre">Shape</span></code> with polymorphism<a class="headerlink" href="#step-2-replace-conditionals-in-shape-with-polymorphism" title="Permalink to this heading">#</a></h2>
+<section id="instructions">
+<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
+<section id="step-1-replace-conditionals-in-shape-with-polymorphism">
+<h3>Step 1: Replace conditionals in <code class="docutils literal notranslate"><span class="pre">Shape</span></code> with polymorphism<a class="headerlink" href="#step-1-replace-conditionals-in-shape-with-polymorphism" title="Permalink to this heading">#</a></h3>
 <p>Define an interface, <code class="docutils literal notranslate"><span class="pre">IShape</span></code>, with a method signature for <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">Draw()</span></code>.</p>
 <p>Create individual classes for each shape type, namely <code class="docutils literal notranslate"><span class="pre">HorizontalLine</span></code>, <code class="docutils literal notranslate"><span class="pre">Square</span></code>, and <code class="docutils literal notranslate"><span class="pre">RightTriangle</span></code>, implementing the <code class="docutils literal notranslate"><span class="pre">IShape</span></code> interface.</p>
 <div class="admonition note">
@@ -582,15 +572,15 @@ else {
 <p>It’s ok if you end up duplicating the <code class="docutils literal notranslate"><span class="pre">private</span></code> method <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">draw(string[][]</span> <span class="pre">symbols)</span></code>. We’ll get rid of that duplication later.</p>
 </div>
 </section>
-<section id="step-3-rewrite-the-main-class">
-<h2>Step 3: Rewrite the main class<a class="headerlink" href="#step-3-rewrite-the-main-class" title="Permalink to this heading">#</a></h2>
+<section id="step-2-rewrite-the-main-class">
+<h3>Step 2: Rewrite the main class<a class="headerlink" href="#step-2-rewrite-the-main-class" title="Permalink to this heading">#</a></h3>
 <p>Rewrite the <code class="docutils literal notranslate"><span class="pre">Main</span></code> method so that it uses subtypes of <code class="docutils literal notranslate"><span class="pre">IShape</span></code> instead of the <code class="docutils literal notranslate"><span class="pre">Shape</span></code> class.
 It should look like this and should both compile and still print the same output as before.</p>
 <p>You should now be able to delete the old <code class="docutils literal notranslate"><span class="pre">Shape</span></code> class.</p>
 <div class="cell tag_remove-input docutils container">
 </div>
-<div class="cell tag_hide-output docutils container">
-<div class="cell_input above-output-prompt docutils container">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IShape</span><span class="w"> </span><span class="n">shape1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HorizontalLine</span><span class="p">(</span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;=&quot;</span><span class="p">);</span>
 <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">shape1</span><span class="p">.</span><span class="n">Draw</span><span class="p">());</span>
 
@@ -600,21 +590,15 @@ It should look like this and should both compile and still print the same output
 </pre></div>
 </div>
 </div>
-<details class="hide below-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
-</summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============
 </pre></div>
 </div>
 </div>
-</details>
 </div>
 </section>
-<section id="step-4-eliminate-duplication-using-inheritance">
-<h2>Step 4: Eliminate duplication using inheritance<a class="headerlink" href="#step-4-eliminate-duplication-using-inheritance" title="Permalink to this heading">#</a></h2>
+<section id="step-3-eliminate-duplication-using-inheritance">
+<h3>Step 3: Eliminate duplication using inheritance<a class="headerlink" href="#step-3-eliminate-duplication-using-inheritance" title="Permalink to this heading">#</a></h3>
 <p>When we split the shapes into their own classes that implement the interface <code class="docutils literal notranslate"><span class="pre">IShape</span></code> we ended up duplicating the logic of the <code class="docutils literal notranslate"><span class="pre">private</span></code> method <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">draw(string[][]</span> <span class="pre">symbols)</span></code>.
 Let’s eliminate that duplication using <span class="xref myst">inheritance</span>.</p>
 <p>Make the classes <code class="docutils literal notranslate"><span class="pre">HorizontalLine</span></code>, <code class="docutils literal notranslate"><span class="pre">Square</span></code>, and <code class="docutils literal notranslate"><span class="pre">RightTriangle</span></code> inherit from an <span class="xref myst">abstract class</span> called <code class="docutils literal notranslate"><span class="pre">Shape</span></code> which in turn implements the interface <code class="docutils literal notranslate"><span class="pre">IShape</span></code>.</p>
@@ -627,18 +611,8 @@ Let’s eliminate that duplication using <span class="xref myst">inheritance</sp
 <span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="kt">string</span><span class="p">[][]</span><span class="w"> </span><span class="n">GetLines</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Draw</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Your implementation here...</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Replace with your implementation.</span>
 <span class="p">}</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5,19): error CS0161: &#39;Shape.Draw()&#39;: not all code paths return a value
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -650,10 +624,8 @@ Let’s eliminate that duplication using <span class="xref myst">inheritance</sp
 <span class="p">{</span>
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Draw</span><span class="p">();</span>
 
-<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Flatten</span><span class="p">(</span><span class="kt">string</span><span class="p">[][]</span><span class="w"> </span><span class="n">lines</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Your implementation here...</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Flatten</span><span class="p">(</span><span class="kt">string</span><span class="p">[][]</span><span class="w"> </span><span class="n">lines</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Replace with your implementation.</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -665,13 +637,14 @@ Let’s eliminate that duplication using <span class="xref myst">inheritance</sp
 <p>How does creating specific classes for each shape, adhering to the same interface, make the code more organized and maintainable?</p>
 </div>
 </section>
-<section id="step-5-add-more-shapes">
-<h2>Step 5: Add more shapes<a class="headerlink" href="#step-5-add-more-shapes" title="Permalink to this heading">#</a></h2>
+<section id="step-4-add-more-shapes">
+<h3>Step 4: Add more shapes<a class="headerlink" href="#step-4-add-more-shapes" title="Permalink to this heading">#</a></h3>
 <p>Challenge: Create some new classes, such as <code class="docutils literal notranslate"><span class="pre">VerticalLine</span></code> or <code class="docutils literal notranslate"><span class="pre">Cross</span></code>, that implement <code class="docutils literal notranslate"><span class="pre">IShape</span></code> and integrate it with your existing code without modifying the existing shape classes.</p>
 <div class="admonition-reflection admonition">
 <p class="admonition-title">🤔 Reflection</p>
 <p>How does your design enable the addition of new shapes with minimal changes to existing code?</p>
 </div>
+</section>
 </section>
 </section>
 
@@ -699,8 +672,26 @@ Let’s eliminate that duplication using <span class="xref myst">inheritance</sp
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="composition-over-inheritance.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title"><span class="section-number">2. </span>Lab: Composition over Inheritance</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../chapters/variant-generic-interfaces.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title"><span class="section-number">115. </span>Variant generic interfaces</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -731,12 +722,16 @@ Let’s eliminate that duplication using <span class="xref myst">inheritance</sp
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Lab: Replace conditional with polymorphism</a><ul>
-<li><a class="reference internal" href="#step-1-understand-the-provided-code">Step 1: Understand the provided code</a></li>
-<li><a class="reference internal" href="#step-2-replace-conditionals-in-shape-with-polymorphism">Step 2: Replace conditionals in <code class="docutils literal notranslate"><span class="pre">Shape</span></code> with polymorphism</a></li>
-<li><a class="reference internal" href="#step-3-rewrite-the-main-class">Step 3: Rewrite the main class</a></li>
-<li><a class="reference internal" href="#step-4-eliminate-duplication-using-inheritance">Step 4: Eliminate duplication using inheritance</a></li>
-<li><a class="reference internal" href="#step-5-add-more-shapes">Step 5: Add more shapes</a></li>
+<li><a class="reference internal" href="#">1. Lab: Replace conditional with polymorphism</a><ul>
+<li><a class="reference internal" href="#objective">Objective</a></li>
+<li><a class="reference internal" href="#provided-code">Provided code</a></li>
+<li><a class="reference internal" href="#instructions">Instructions</a><ul>
+<li><a class="reference internal" href="#step-1-replace-conditionals-in-shape-with-polymorphism">Step 1: Replace conditionals in <code class="docutils literal notranslate"><span class="pre">Shape</span></code> with polymorphism</a></li>
+<li><a class="reference internal" href="#step-2-rewrite-the-main-class">Step 2: Rewrite the main class</a></li>
+<li><a class="reference internal" href="#step-3-eliminate-duplication-using-inheritance">Step 3: Eliminate duplication using inheritance</a></li>
+<li><a class="reference internal" href="#step-4-add-more-shapes">Step 4: Add more shapes</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

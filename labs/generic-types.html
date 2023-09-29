@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="3. Lab: Generics" href="generics.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Composition over inheritance - The Object Oriented Way</title>
+        <title>4. Lab Exercise: Generic types - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -283,11 +283,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapters/variant-generic-interfaces.html">115. Variant generic interfaces</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Labs</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../labs/replace-conditional-with-polymorphism.html">1. Lab: Replace conditional with polymorphism</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/composition-over-inheritance.html">2. Lab: Composition over Inheritance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/generics.html">3. Lab: Generics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/generic-types.html">4. Lab Exercise: Generic types</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">1. Lab: Replace conditional with polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">2. Lab: Composition over Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics.html">3. Lab: Generics</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">4. Lab Exercise: Generic types</a></li>
 </ul>
 
 </div>
@@ -322,47 +322,43 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="composition-over-inheritance">
-<h1>Composition over inheritance<a class="headerlink" href="#composition-over-inheritance" title="Permalink to this heading">#</a></h1>
-<section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<section id="ducks">
-<span id="composition-over-inheritance-examples-ducks"></span><h3>Ducks<a class="headerlink" href="#ducks" title="Permalink to this heading">#</a></h3>
-<p>Let’s run through an example similar to the duck example made famous by <span id="id1">Freeman and Robson [<a class="reference internal" href="../chapters/bibliography.html#id15" title="E. Freeman and E Robson. Head First Design Patterns: A Brain-Friendly Guide. Head First Series. O'Reilly Media, Incorporated, 2004. ISBN 9780596800741. URL: https://geni.us/nlbA6.">2004</a>]</span>.</p>
-<p>We start with this:</p>
+          <section id="lab-exercise-generic-types">
+<h1><span class="section-number">4. </span>Lab Exercise: Generic types<a class="headerlink" href="#lab-exercise-generic-types" title="Permalink to this heading">#</a></h1>
+<section id="objective">
+<h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
+<p>In this lab exercise, you will utilize generic types to refactor given classes that represent items in a library. This refactoring will allow you to understand and apply the principles of generic programming for creating reusable and type-safe code. The transformation from non-generic to generic code will illustrate the adaptability and maintainability of using generic types in a real-world scenario.</p>
+</section>
+<section id="provided-code">
+<h2>Provided code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
+<p>Carefully review the provided code. Notice how <code class="docutils literal notranslate"><span class="pre">BookItem</span></code> and <code class="docutils literal notranslate"><span class="pre">MagazineItem</span></code> share similar structures and functionalities, but they are implemented as separate, distinct classes due to their operation on different types – <code class="docutils literal notranslate"><span class="pre">Book</span></code> and <code class="docutils literal notranslate"><span class="pre">Magazine</span></code>. This design can lead to code duplication, which generics can help eliminate by enabling a single class to operate on different types while maintaining type safety.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IDuck</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Book</span>
 <span class="p">{</span>
-<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">();</span>
-<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">();</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Title</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Author</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">WildDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IDuck</span>
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Magazine</span>
 <span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Quack quack.&quot;</span><span class="p">;</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Flying with wings.&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Title</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Issue</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">RubberDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IDuck</span>
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">BookItem</span>
 <span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Squeak squeak.&quot;</span><span class="p">;</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Cannot fly.&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Book</span><span class="w"> </span><span class="n">Book</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">DateTime</span><span class="w"> </span><span class="n">AddedToLibrary</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">IsCheckedOut</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">RocketPoweredWildDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">WildDuck</span>
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MagazineItem</span>
 <span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Flying with rockets.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">RocketPoweredRubberDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">RubberDuck</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Flying with rockets.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">RubberDuckWithVoiceSynthesizer</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">RubberDuck</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Quack quack.&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Magazine</span><span class="w"> </span><span class="n">Magazine</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">DateTime</span><span class="w"> </span><span class="n">AddedToLibrary</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">IsCheckedOut</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -370,7 +366,7 @@
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-8449.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-8172.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -420,7 +416,7 @@ function loadDotnetInteractiveApi() {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '8449.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '8172.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -476,164 +472,68 @@ else {
     </script>
 </div></div></div>
 </div>
-<p>Pay special attention to how inheritance in the example above doesn’t help us in eliminating all duplication.
-Our use case doesn’t simply form a nice hierarchy and so we end up with duplicated code even though we try our best to use the code-reuse facilities of <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a> to eliminate it.</p>
-<p>Either way, we can use the code like this:</p>
-<div class="cell tag_hide-output docutils container">
-<div class="cell_input above-output-prompt docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IDuck</span><span class="p">[]</span><span class="w"> </span><span class="n">ducks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IDuck</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">WildDuck</span><span class="p">(),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">RubberDuck</span><span class="p">(),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">RocketPoweredWildDuck</span><span class="p">(),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">RocketPoweredRubberDuck</span><span class="p">(),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">RubberDuckWithVoiceSynthesizer</span><span class="p">()</span>
-<span class="p">};</span>
-
-<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">IDuck</span><span class="w"> </span><span class="n">duck</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">ducks</span><span class="p">)</span>
-<span class="w">  </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">duck</span><span class="p">.</span><span class="n">Quack</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; | &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">duck</span><span class="p">.</span><span class="n">Fly</span><span class="p">());</span>
-</pre></div>
-</div>
-</div>
-<details class="hide below-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
-</summary>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Flying with wings.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Squeak squeak. | Cannot fly.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Flying with rockets.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Squeak squeak. | Flying with rockets.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Cannot fly.
-</pre></div>
-</div>
-</div>
-</details>
-</div>
-<p>But as we apply the idea of favoring composition over inheritance we realize that we can break out individual behaviors into their own classes and then compose them as we see fit.
-Let’s start with quacking behaviors.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IQuackBehavior</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">QuackBehavior</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IQuackBehavior</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Quack quack.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">SqueakBehavior</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IQuackBehavior</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Squeak squeak.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Starting to see where this is going?
-Let’s now do the same thing for fly behaviors.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IFlyBehavior</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">FlyWithWings</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IFlyBehavior</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Flying with wings.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">NoFlyBehavior</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IFlyBehavior</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Cannot fly.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">FlyWithRockets</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IFlyBehavior</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Fly with rockets.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Ok, but what happens to all the duck subclasses?
-Well, now that we’re composing behaviors instead of inheriting and overriding them, we don’t need inheritance anymore.
-A single <code class="docutils literal notranslate"><span class="pre">Duck</span></code> class will do just fine.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Duck</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="n">IQuackBehavior</span><span class="w"> </span><span class="n">quackBehavior</span><span class="p">;</span>
-<span class="w">  </span><span class="n">IFlyBehavior</span><span class="w"> </span><span class="n">flyBehavior</span><span class="p">;</span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Duck</span><span class="w"> </span><span class="p">(</span><span class="n">IQuackBehavior</span><span class="w"> </span><span class="n">quackBehavior</span><span class="p">,</span><span class="w"> </span><span class="n">IFlyBehavior</span><span class="w"> </span><span class="n">flyBehavior</span><span class="p">)</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">quackBehavior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">quackBehavior</span><span class="p">;</span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">flyBehavior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">flyBehavior</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">quackBehavior</span><span class="p">.</span><span class="n">Quack</span><span class="p">();</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">flyBehavior</span><span class="p">.</span><span class="n">Fly</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>What we previously considered to be different “types” of ducks no longer need to be represented by different individual classes.
-Instead we can grab any two combination of existing or future quack and fly behaviors and pass them as arguments when constructing a duck.
-The creation of different “types” of ducks, consequently, now happens at run-time rather than compile-time.</p>
-<p>To execute code equivalent to the example that we had before, we would write something like this:</p>
-<div class="cell tag_hide-output docutils container">
-<div class="cell_input above-output-prompt docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Duck</span><span class="p">[]</span><span class="w"> </span><span class="n">ducks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Duck</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Duck</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">QuackBehavior</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FlyWithWings</span><span class="p">()),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Duck</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SqueakBehavior</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NoFlyBehavior</span><span class="p">()),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Duck</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">QuackBehavior</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FlyWithRockets</span><span class="p">()),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Duck</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SqueakBehavior</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FlyWithRockets</span><span class="p">()),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Duck</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">QuackBehavior</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NoFlyBehavior</span><span class="p">())</span>
-<span class="p">};</span>
-
-<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Duck</span><span class="w"> </span><span class="n">duck</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">ducks</span><span class="p">)</span>
-<span class="w">  </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">duck</span><span class="p">.</span><span class="n">Quack</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; | &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">duck</span><span class="p">.</span><span class="n">Fly</span><span class="p">());</span>
-</pre></div>
-</div>
-</div>
-<details class="hide below-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
-</summary>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Flying with wings.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Squeak squeak. | Cannot fly.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Fly with rockets.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Squeak squeak. | Fly with rockets.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Cannot fly.
-</pre></div>
-</div>
-</div>
-</details>
+</section>
+<section id="instructions">
+<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
+<section id="step-1-analyze-the-code">
+<h3>Step 1: Analyze the code<a class="headerlink" href="#step-1-analyze-the-code" title="Permalink to this heading">#</a></h3>
+<p>Reflect on why having separate <code class="docutils literal notranslate"><span class="pre">BookItem</span></code> and <code class="docutils literal notranslate"><span class="pre">MagazineItem</span></code> classes might be problematic in terms of code redundancy and maintenance.</p>
+<div class="admonition-reflection admonition">
+<p class="admonition-title">🤔 Reflection</p>
+<p>How might the use of generic types alleviate the issues identified with the current design?</p>
 </div>
 </section>
+<section id="step-2-define-a-generic-class">
+<h3>Step 2: Define a generic class<a class="headerlink" href="#step-2-define-a-generic-class" title="Permalink to this heading">#</a></h3>
+<p>Create a single generic class <code class="docutils literal notranslate"><span class="pre">LibraryItem&lt;T&gt;</span></code>, where <code class="docutils literal notranslate"><span class="pre">T</span></code> can be any type. Include properties that are common between <code class="docutils literal notranslate"><span class="pre">BookItem</span></code> and <code class="docutils literal notranslate"><span class="pre">MagazineItem</span></code>, such as <code class="docutils literal notranslate"><span class="pre">ID</span></code>, <code class="docutils literal notranslate"><span class="pre">Item</span></code> (of type <code class="docutils literal notranslate"><span class="pre">T</span></code>), <code class="docutils literal notranslate"><span class="pre">AddedToLibrary</span></code>, and <code class="docutils literal notranslate"><span class="pre">IsCheckedOut</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">LibraryItem</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Your code here...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-implement-a-method-to-display-item-status">
+<h3>Step 3: Implement a method to display item status<a class="headerlink" href="#step-3-implement-a-method-to-display-item-status" title="Permalink to this heading">#</a></h3>
+<p>Implement an additional method in <code class="docutils literal notranslate"><span class="pre">LibraryItem&lt;T&gt;</span></code> that returns a <code class="docutils literal notranslate"><span class="pre">string</span></code> containing the <code class="docutils literal notranslate"><span class="pre">ID</span></code>, the <code class="docutils literal notranslate"><span class="pre">AddedToLibrary</span></code> date, and whether the book <code class="docutils literal notranslate"><span class="pre">IsCheckedOut</span></code>.
+Consider utilizing the <code class="docutils literal notranslate"><span class="pre">ToString()</span></code> method for this purpose.</p>
+<div class="admonition-reflection admonition">
+<p class="admonition-title">🤔 Reflection</p>
+<p>How does the implementation of this methods in a generic class compare to implementing them in a non-generic class?
+How does the addition of new functionality in the generic class illustrate the maintainability and adaptability of generics in software development?</p>
+</div>
+<div class="admonition-reflection admonition">
+<p class="admonition-title">🤔 Reflection</p>
+<p>Why is it not possible to access the <code class="docutils literal notranslate"><span class="pre">Title</span></code> of the book or magazine in a library item? How could we solve that?</p>
+</div>
+</section>
+<section id="step-4-instantiate-and-use-your-generic-class">
+<h3>Step 4: Instantiate and use your generic class<a class="headerlink" href="#step-4-instantiate-and-use-your-generic-class" title="Permalink to this heading">#</a></h3>
+<p>Create instances of <code class="docutils literal notranslate"><span class="pre">LibraryItem&lt;T&gt;</span></code>, using <code class="docutils literal notranslate"><span class="pre">Book</span></code> and <code class="docutils literal notranslate"><span class="pre">Magazine</span></code> as type parameters, and interact with them utilizing the method implemented in Step 3. Reflect on the interactions and the versatility provided by the generic class.</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">LibraryItem</span><span class="o">&lt;</span><span class="n">Book</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bookItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LibraryItem</span><span class="o">&lt;</span><span class="n">Book</span><span class="o">&gt;</span><span class="p">(</span><span class="w"> </span><span class="cm">/* .... */</span><span class="w"> </span><span class="p">);</span>
+<span class="n">LibraryItem</span><span class="o">&lt;</span><span class="n">Magazine</span><span class="o">&gt;</span><span class="w"> </span><span class="n">magazineItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LibraryItem</span><span class="o">&lt;</span><span class="n">Magazine</span><span class="o">&gt;</span><span class="p">(</span><span class="w"> </span><span class="cm">/* .... */</span><span class="w"> </span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="challenge">
+<h2>Challenge<a class="headerlink" href="#challenge" title="Permalink to this heading">#</a></h2>
+<p>Experiment by creating more classes representing other items that you might find in a library like <code class="docutils literal notranslate"><span class="pre">BoardGame</span></code>, <code class="docutils literal notranslate"><span class="pre">EReader</span></code>, and <code class="docutils literal notranslate"><span class="pre">Tablet</span></code>. Then show that you can instantiate <code class="docutils literal notranslate"><span class="pre">LibraryItem&lt;T&gt;</span></code> with these new types. Reflect on the reusability of the generic class with different type parameters.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>By refactoring the provided non-generic classes into a cohesive generic class, you’ve experienced firsthand the advantages of using generic types in C#. These advantages include improving maintainability without sacrificing and type safety.
+Keep exploring and applying generic types in various scenarios to enhance your proficiency in object-oriented programming in C#.</p>
 </section>
 </section>
 
@@ -650,7 +550,7 @@ The creation of different “types” of ducks, consequently, now happens at run
         },
         kernelOptions: {
             name: ".net-csharp",
-            path: "./old"
+            path: "./labs"
         },
         predefinedOutput: true
     }
@@ -662,7 +562,17 @@ The creation of different “types” of ducks, consequently, now happens at run
         
         <div class="related-pages">
           
-          
+          <a class="prev-page" href="generics.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title"><span class="section-number">3. </span>Lab: Generics</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -693,11 +603,18 @@ The creation of different “types” of ducks, consequently, now happens at run
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Composition over inheritance</a><ul>
-<li><a class="reference internal" href="#examples">Examples</a><ul>
-<li><a class="reference internal" href="#ducks">Ducks</a></li>
+<li><a class="reference internal" href="#">4. Lab Exercise: Generic types</a><ul>
+<li><a class="reference internal" href="#objective">Objective</a></li>
+<li><a class="reference internal" href="#provided-code">Provided code</a></li>
+<li><a class="reference internal" href="#instructions">Instructions</a><ul>
+<li><a class="reference internal" href="#step-1-analyze-the-code">Step 1: Analyze the code</a></li>
+<li><a class="reference internal" href="#step-2-define-a-generic-class">Step 2: Define a generic class</a></li>
+<li><a class="reference internal" href="#step-3-implement-a-method-to-display-item-status">Step 3: Implement a method to display item status</a></li>
+<li><a class="reference internal" href="#step-4-instantiate-and-use-your-generic-class">Step 4: Instantiate and use your generic class</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#challenge">Challenge</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
 </ul>
 </li>
 </ul>

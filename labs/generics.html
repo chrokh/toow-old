@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="4. Lab Exercise: Generic types" href="generic-types.html" /><link rel="prev" title="2. Lab: Composition over Inheritance" href="composition-over-inheritance.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Lab: Generics - The Object Oriented Way</title>
+        <title>3. Lab: Generics - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -164,7 +164,8 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul>
+  <p class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/syntax.html">1. Syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/hello-world.html">2. Hello world</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/compilation.html">3. Compilation</a></li>
@@ -281,6 +282,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapters/variant-generic-delegates.html">114. Variant generic delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/variant-generic-interfaces.html">115. Variant generic interfaces</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Labs</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">1. Lab: Replace conditional with polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">2. Lab: Composition over Inheritance</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">3. Lab: Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-types.html">4. Lab Exercise: Generic types</a></li>
+</ul>
 
 </div>
 </div>
@@ -315,14 +323,14 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="lab-generics">
-<h1>Lab: Generics<a class="headerlink" href="#lab-generics" title="Permalink to this heading">#</a></h1>
-<div class="admonition-objective admonition">
-<p class="admonition-title">Objective</p>
+<h1><span class="section-number">3. </span>Lab: Generics<a class="headerlink" href="#lab-generics" title="Permalink to this heading">#</a></h1>
+<section id="objective">
+<h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
 <p>This lab aims to provide hands-on experience in utilizing existing generic types, specifically <code class="docutils literal notranslate"><span class="pre">List&lt;T&gt;</span></code>, to pave the way for more advanced usage of generics.</p>
-</div>
-<section id="step-1-understand-the-provided-code">
-<h2>Step 1: Understand the provided code<a class="headerlink" href="#step-1-understand-the-provided-code" title="Permalink to this heading">#</a></h2>
-<p>Study the starting code given to you.</p>
+</section>
+<section id="provided-code">
+<h2>Provided code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
+<p>Study the provided code. Notice how the first arrays has a single dimension while the second has two.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// 1D String Array</span>
@@ -340,7 +348,7 @@
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-9039.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-8229.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -385,12 +393,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.56:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.52.4:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '9039.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '8229.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -446,23 +454,28 @@ else {
     </script>
 </div></div></div>
 </div>
+</section>
+<section id="instructions">
+<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
+<section id="step-1-start-from-the-provided-code">
+<h3>Step 1: Start from the provided code<a class="headerlink" href="#step-1-start-from-the-provided-code" title="Permalink to this heading">#</a></h3>
 <p>Do <strong>not</strong> remove the provided code.
 Instead, follow the steps by adding code to this program.</p>
 </section>
 <section id="step-2-create-a-list-string-and-add-an-element">
-<h2>Step 2: Create a <code class="docutils literal notranslate"><span class="pre">List&lt;string&gt;</span></code> and add an element<a class="headerlink" href="#step-2-create-a-list-string-and-add-an-element" title="Permalink to this heading">#</a></h2>
+<h3>Step 2: Create a <code class="docutils literal notranslate"><span class="pre">List&lt;string&gt;</span></code> and add an element<a class="headerlink" href="#step-2-create-a-list-string-and-add-an-element" title="Permalink to this heading">#</a></h3>
 <p>Declare a variable of type <code class="docutils literal notranslate"><span class="pre">List&lt;string&gt;</span></code> and initialize it.</p>
 </section>
 <section id="step-3-iterate-and-copy">
-<h2>Step 3: Iterate and copy<a class="headerlink" href="#step-3-iterate-and-copy" title="Permalink to this heading">#</a></h2>
+<h3>Step 3: Iterate and copy<a class="headerlink" href="#step-3-iterate-and-copy" title="Permalink to this heading">#</a></h3>
 <p>Use a <code class="docutils literal notranslate"><span class="pre">foreach</span></code> loop to iterate over all items in the original <code class="docutils literal notranslate"><span class="pre">words</span></code> array and add them one by one to the <code class="docutils literal notranslate"><span class="pre">List&lt;string&gt;</span></code> object using the instance method <code class="docutils literal notranslate"><span class="pre">Add</span></code>.</p>
 </section>
 <section id="step-4-iterate-and-print">
-<h2>Step 4: Iterate and print<a class="headerlink" href="#step-4-iterate-and-print" title="Permalink to this heading">#</a></h2>
+<h3>Step 4: Iterate and print<a class="headerlink" href="#step-4-iterate-and-print" title="Permalink to this heading">#</a></h3>
 <p>Use a <code class="docutils literal notranslate"><span class="pre">foreach</span></code> loop to iterate over your <code class="docutils literal notranslate"><span class="pre">List&lt;string&gt;</span></code> object and print all strings to the console.</p>
 </section>
 <section id="step-5-do-the-same-for-the-matrix">
-<h2>Step 5: Do the same for the matrix<a class="headerlink" href="#step-5-do-the-same-for-the-matrix" title="Permalink to this heading">#</a></h2>
+<h3>Step 5: Do the same for the matrix<a class="headerlink" href="#step-5-do-the-same-for-the-matrix" title="Permalink to this heading">#</a></h3>
 <ol class="arabic">
 <li><p>Declare and initialize another <code class="docutils literal notranslate"><span class="pre">List</span></code>.</p>
 <div class="admonition hint">
@@ -484,6 +497,7 @@ Instead, follow the steps by adding code to this program.</p>
 </div>
 </li>
 </ol>
+</section>
 </section>
 </section>
 
@@ -511,8 +525,26 @@ Instead, follow the steps by adding code to this program.</p>
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="generic-types.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title"><span class="section-number">4. </span>Lab Exercise: Generic types</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="composition-over-inheritance.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title"><span class="section-number">2. </span>Lab: Composition over Inheritance</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -543,12 +575,17 @@ Instead, follow the steps by adding code to this program.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Lab: Generics</a><ul>
-<li><a class="reference internal" href="#step-1-understand-the-provided-code">Step 1: Understand the provided code</a></li>
+<li><a class="reference internal" href="#">3. Lab: Generics</a><ul>
+<li><a class="reference internal" href="#objective">Objective</a></li>
+<li><a class="reference internal" href="#provided-code">Provided code</a></li>
+<li><a class="reference internal" href="#instructions">Instructions</a><ul>
+<li><a class="reference internal" href="#step-1-start-from-the-provided-code">Step 1: Start from the provided code</a></li>
 <li><a class="reference internal" href="#step-2-create-a-list-string-and-add-an-element">Step 2: Create a <code class="docutils literal notranslate"><span class="pre">List&lt;string&gt;</span></code> and add an element</a></li>
 <li><a class="reference internal" href="#step-3-iterate-and-copy">Step 3: Iterate and copy</a></li>
 <li><a class="reference internal" href="#step-4-iterate-and-print">Step 4: Iterate and print</a></li>
 <li><a class="reference internal" href="#step-5-do-the-same-for-the-matrix">Step 5: Do the same for the matrix</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

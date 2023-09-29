@@ -20,94 +20,85 @@ Animal mermaid = new Animal(new SeaAndLandFoodEating(), new Sleeping(), new Swim
 Animal student = new Animal(new BeerDiet(), new NoSleep(), new Walking());
 Animal bird = new Animal(new SeaFoodEating(), new Sleeping(), new Flying());
 
-human.Eat();
-fish.Eat();
-mermaid.Eat();
-student.Eat();
-bird.Eat();
+void TestAnimal(Animal animal)
+    => Console.WriteLine($"{animal.Move()} | {animal.Eat()} | {animal.Sleep()}");
 
-human.Sleep();
-fish.Sleep();
-mermaid.Sleep();
-student.Sleep();
-bird.Sleep();
-
-human.Move();
-fish.Move();
-mermaid.Move();
-student.Move();
-bird.Move();
+TestAnimal(human);
+TestAnimal(fish);
+TestAnimal(mermaid);
+TestAnimal(student);
+TestAnimal(bird);
 
 
 public interface IEatingBehavior
 {
-    void Eat();
+    string Eat();
 }
 
 public interface ISleepingBehavior
 {
-    void Sleep();
+    string Sleep();
 }
 
 public interface IMovingBehavior
 {
-    void Move();
+    string Move();
 }
 
 
 public class SeaAndLandFoodEating : IEatingBehavior
 {
-    public void Eat() => Console.WriteLine("Eating sea and land food.");
+    public string Eat() => "Eating sea and land food.";
 }
 
 public class SeaFoodEating : IEatingBehavior
 {
-    public void Eat() => Console.WriteLine("Eating sea food.");
+    public string Eat() => "Eating sea food.";
 }
 
 public class BeerDiet : IEatingBehavior
 {
-    public void Eat() => Console.WriteLine("Consuming beer.");
+    public string Eat() => "Consuming beer.";
 }
 
 
 public class Sleeping : ISleepingBehavior
 {
-    public void Sleep() => Console.WriteLine("Sleeping.");
+    public string Sleep() => "Sleeping.";
 }
 
 public class Resting : ISleepingBehavior
 {
-    public void Sleep() => Console.WriteLine("Resting.");
+    public string Sleep() => "Resting.";
 }
 
 public class NoSleep : ISleepingBehavior
 {
-    public void Sleep() => Console.WriteLine("No time for sleep.");
+    public string Sleep() => "No time for sleep.";
 }
 
 
 public class Swimming : IMovingBehavior
 {
-    public void Move() => Console.WriteLine("Swimming.");
+    public string Move() => "Swimming.";
 }
 
 public class Walking : IMovingBehavior
 {
-    public void Move() => Console.WriteLine("Walking.");
+    public string Move() => "Walking.";
 }
 
 public class Flying : IMovingBehavior
 {
-    public void Move() => Console.WriteLine("Flying.");
+    public string Move() => "Flying.";
 }
 
 
 public class Animal
 {
-    private readonly IEatingBehavior eatingBehavior;
-    private readonly ISleepingBehavior sleepingBehavior;
-    private readonly IMovingBehavior movingBehavior;
+    private IEatingBehavior eatingBehavior;
+    private ISleepingBehavior sleepingBehavior;
+    private IMovingBehavior movingBehavior;
 
     public Animal(
         IEatingBehavior eatingBehavior,
@@ -119,9 +110,9 @@ public class Animal
         this.movingBehavior = movingBehavior;
     }
 
-    public void Eat() => eatingBehavior.Eat();
-    public void Sleep() => sleepingBehavior.Sleep();
-    public void Move() => movingBehavior.Move();
+    public string Eat() => eatingBehavior.Eat();
+    public string Sleep() => sleepingBehavior.Sleep();
+    public string Move() => movingBehavior.Move();
 }
 ```
 

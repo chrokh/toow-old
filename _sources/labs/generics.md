@@ -12,14 +12,14 @@ kernelspec:
 
 # Lab: Generics
 
-```{admonition} Objective
+## Objective
+
 This lab aims to provide hands-on experience in utilizing existing generic types, specifically `List<T>`, to pave the way for more advanced usage of generics.
-```
 
 
-## Step 1: Understand the provided code
+## Provided code
 
-Study the starting code given to you.
+Study the provided code. Notice how the first arrays has a single dimension while the second has two.
 
 ```{code-cell}
 // 1D String Array
@@ -33,22 +33,26 @@ int[][] matrix = {
 };
 ```
 
+## Instructions
+
+### Step 1: Start from the provided code
+
 Do **not** remove the provided code.
 Instead, follow the steps by adding code to this program.
 
-## Step 2: Create a `List<string>` and add an element
+### Step 2: Create a `List<string>` and add an element
 
 Declare a variable of type `List<string>` and initialize it.
 
-## Step 3: Iterate and copy
+### Step 3: Iterate and copy
 
 Use a `foreach` loop to iterate over all items in the original `words` array and add them one by one to the `List<string>` object using the instance method `Add`.
 
-## Step 4: Iterate and print
+### Step 4: Iterate and print
 
 Use a `foreach` loop to iterate over your `List<string>` object and print all strings to the console.
 
-## Step 5: Do the same for the matrix
+### Step 5: Do the same for the matrix
 
 1. Declare and initialize another `List`.
 

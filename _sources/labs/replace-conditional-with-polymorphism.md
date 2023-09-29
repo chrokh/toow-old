@@ -12,21 +12,19 @@ kernelspec:
 
 # Lab: Replace conditional with polymorphism
 
-```{admonition} Objective
-To refactor the provided `Shape` class to [remove conditionals and implement polymorphism](replace-conditional-with-polymorphism), thereby enhancing code [maintainability](maintainability).
-```
+## Objective
 
-## Step 1: Understand the provided code
+To refactor the provided `Shape` class to [remove conditionals and implement polymorphism](replace-conditional-with-polymorphism), thereby enhancing code [maintainability](maintainability).
+
+## Provided code
 
 Study the starting code given to you. It consists of a single `Shape` class which draws different shapes based on the `ShapeType` using conditionals.
 
 ```{code-cell}
-:tags: [hide-input]
 public enum ShapeType { HorizontalLine, Square, RightTriangle }
 ```
 
 ```{code-cell}
-:tags: [hide-input]
 public class Shape
 {
     ShapeType type;
@@ -105,9 +103,6 @@ public class Shape
 ```
 
 ```{code-cell}
-:tags: [hide-input]
-// Main method
-
 Shape shape1 = new Shape(ShapeType.HorizontalLine, 12, "=");
 Console.WriteLine(shape1.Draw());
 
@@ -118,7 +113,9 @@ Shape shape3 = new Shape(ShapeType.RightTriangle, 6, "* ");
 Console.WriteLine(shape3.Draw());
 ```
 
-## Step 2: Replace conditionals in `Shape` with polymorphism
+## Instructions
+
+### Step 1: Replace conditionals in `Shape` with polymorphism
 
 Define an interface, `IShape`, with a method signature for `string Draw()`.
 
@@ -128,7 +125,7 @@ Create individual classes for each shape type, namely `HorizontalLine`, `Square`
 It's ok if you end up duplicating the `private` method `string draw(string[][] symbols)`. We'll get rid of that duplication later.
 ```
 
-## Step 3: Rewrite the main class
+### Step 2: Rewrite the main class
 
 Rewrite the `Main` method so that it uses subtypes of `IShape` instead of the `Shape` class.
 It should look like this and should both compile and still print the same output as before.
@@ -182,8 +179,6 @@ public class HorizontalLine : IShape
 ```
 
 ```{code-cell}
-:tags: [hide-output]
-
 IShape shape1 = new HorizontalLine(12, "=");
 Console.WriteLine(shape1.Draw());
 
@@ -192,7 +187,7 @@ Console.WriteLine(shape1.Draw());
 // Do the same for RightTriangle
 ```
 
-## Step 4: Eliminate duplication using inheritance
+### Step 3: Eliminate duplication using inheritance
 
 When we split the shapes into their own classes that implement the interface `IShape` we ended up duplicating the logic of the `private` method `string draw(string[][] symbols)`.
 Let's eliminate that duplication using [inheritance](inheritance).
@@ -209,9 +204,7 @@ public abstract class Shape : IShape
     protected abstract string[][] GetLines();
 
     public string Draw()
-    {
-        // Your implementation here...
-    }
+        => ""; // Replace with your implementation.
 }
 ```
 
@@ -222,10 +215,8 @@ public abstract class Shape : IShape
 {
     public abstract string Draw();
 
-    protected abstract string Flatten(string[][] lines)
-    {
-        // Your implementation here...
-    }
+    protected string Flatten(string[][] lines)
+        => ""; // Replace with your implementation.
 }
 ```
 
@@ -235,7 +226,7 @@ should provide a [protected](protected) method with the signature `string Draw(s
 How does creating specific classes for each shape, adhering to the same interface, make the code more organized and maintainable?
 ```
 
-## Step 5: Add more shapes
+### Step 4: Add more shapes
 
 Challenge: Create some new classes, such as `VerticalLine` or `Cross`, that implement `IShape` and integrate it with your existing code without modifying the existing shape classes.
 

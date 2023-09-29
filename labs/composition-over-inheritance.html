@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="3. Lab: Generics" href="generics.html" /><link rel="prev" title="1. Lab: Replace conditional with polymorphism" href="replace-conditional-with-polymorphism.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Lab: Composition over Inheritance - The Object Oriented Way</title>
+        <title>2. Lab: Composition over Inheritance - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -164,7 +164,8 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul>
+  <p class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/syntax.html">1. Syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/hello-world.html">2. Hello world</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/compilation.html">3. Compilation</a></li>
@@ -281,6 +282,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapters/variant-generic-delegates.html">114. Variant generic delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/variant-generic-interfaces.html">115. Variant generic interfaces</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Labs</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">1. Lab: Replace conditional with polymorphism</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">2. Lab: Composition over Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics.html">3. Lab: Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-types.html">4. Lab Exercise: Generic types</a></li>
+</ul>
 
 </div>
 </div>
@@ -315,35 +323,31 @@
         </div>
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="lab-composition-over-inheritance">
-<h1>Lab: Composition over Inheritance<a class="headerlink" href="#lab-composition-over-inheritance" title="Permalink to this heading">#</a></h1>
-<div class="admonition-objective admonition">
-<p class="admonition-title">Objective</p>
+<h1><span class="section-number">2. </span>Lab: Composition over Inheritance<a class="headerlink" href="#lab-composition-over-inheritance" title="Permalink to this heading">#</a></h1>
+<section id="objective">
+<h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
 <p>Refactor the provided inheritance-based code to leverage Composition over inheritance, aiming for a more flexible, maintainable, and logically coherent representation of entities.</p>
-</div>
-<section id="step-1-understand-the-provided-code">
-<h2>Step 1: Understand the provided code<a class="headerlink" href="#step-1-understand-the-provided-code" title="Permalink to this heading">#</a></h2>
-<p>Study the starting code given to you.</p>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
+</section>
+<section id="provided-code">
+<h2>Provided code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
+<p>Study the starting code given to you.
+Notice how the three classes <code class="docutils literal notranslate"><span class="pre">Human</span></code>, <code class="docutils literal notranslate"><span class="pre">Fish</span></code>, and <code class="docutils literal notranslate"><span class="pre">Mermaid</span></code> all inherit from the class <code class="docutils literal notranslate"><span class="pre">Animal</span></code>.
+Then notice how the <code class="docutils literal notranslate"><span class="pre">Main</span></code> method defines a local function that takes an object of type <code class="docutils literal notranslate"><span class="pre">Animal</span></code> which, through subtype polymorphism, allows us to call the instance methods of said animal without knowing whether it’s a <code class="docutils literal notranslate"><span class="pre">Human</span></code>, <code class="docutils literal notranslate"><span class="pre">Fish</span></code>, or <code class="docutils literal notranslate"><span class="pre">Mermaid</span></code>.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Animal</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Eat</span><span class="p">();</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Sleep</span><span class="p">();</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Move</span><span class="p">();</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Eat</span><span class="p">();</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Sleep</span><span class="p">();</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Move</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-8976.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-8118.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -388,12 +392,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.56:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.52.4:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '8976.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '8118.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -449,126 +453,70 @@ else {
     </script>
 </div></div></div>
 </div>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Concrete Animal Classes</span>
-<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Human</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Animal</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Human</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Animal</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Eat</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Eating sea and land food.&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Sleep</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Sleeping.&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Move</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Walking.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Eat</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Eating sea and land food.&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Sleep</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Sleeping.&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Move</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Walking.&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
-</details>
 </div>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Fish</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Animal</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Eat</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Eating sea food.&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Sleep</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Resting.&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Move</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Swimming.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Eat</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Eating sea food.&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Sleep</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Resting.&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Move</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Swimming.&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
-</details>
 </div>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Mermaid</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Animal</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Eat</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Eating sea and land food.&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Sleep</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Sleeping.&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Move</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Swimming.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Eat</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Eating sea and land food.&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Sleep</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Sleeping.&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Move</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Swimming.&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
-</details>
 </div>
-<div class="cell tag_hide-input tag_hide-output docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input above-output-prompt docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Animal</span><span class="w"> </span><span class="n">human</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Human</span><span class="p">();</span>
-<span class="n">Animal</span><span class="w"> </span><span class="n">fish</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Fish</span><span class="p">();</span>
-<span class="n">Animal</span><span class="w"> </span><span class="n">mermaid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Mermaid</span><span class="p">();</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">void</span><span class="w"> </span><span class="nf">TestAnimal</span><span class="p">(</span><span class="n">Animal</span><span class="w"> </span><span class="n">animal</span><span class="p">)</span>
+<span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{animal.Move()} | {animal.Eat()} | {animal.Sleep()}&quot;</span><span class="p">);</span>
 
-<span class="n">human</span><span class="p">.</span><span class="n">Eat</span><span class="p">();</span>
-<span class="n">fish</span><span class="p">.</span><span class="n">Eat</span><span class="p">();</span>
-<span class="n">mermaid</span><span class="p">.</span><span class="n">Eat</span><span class="p">();</span>
-
-<span class="n">human</span><span class="p">.</span><span class="n">Sleep</span><span class="p">();</span>
-<span class="n">fish</span><span class="p">.</span><span class="n">Sleep</span><span class="p">();</span>
-<span class="n">mermaid</span><span class="p">.</span><span class="n">Sleep</span><span class="p">();</span>
-
-<span class="n">human</span><span class="p">.</span><span class="n">Move</span><span class="p">();</span>
-<span class="n">fish</span><span class="p">.</span><span class="n">Move</span><span class="p">();</span>
-<span class="n">mermaid</span><span class="p">.</span><span class="n">Move</span><span class="p">();</span>
+<span class="n">TestAnimal</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Human</span><span class="p">());</span>
+<span class="n">TestAnimal</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Fish</span><span class="p">());</span>
+<span class="n">TestAnimal</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Mermaid</span><span class="p">());</span>
 </pre></div>
 </div>
 </div>
-</details>
-<details class="hide below-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
-</summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eating sea and land food.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Walking. | Eating sea and land food. | Sleeping.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eating sea food.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Swimming. | Eating sea food. | Resting.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eating sea and land food.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sleeping.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resting.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sleeping.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Walking.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Swimming.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Swimming.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Swimming. | Eating sea and land food. | Sleeping.
 </pre></div>
 </div>
 </div>
-</details>
 </div>
 </section>
-<section id="step-2-identify-behaviors">
-<h2>Step 2: Identify behaviors<a class="headerlink" href="#step-2-identify-behaviors" title="Permalink to this heading">#</a></h2>
+<section id="instructions">
+<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
+<section id="step-1-identify-behaviors">
+<h3>Step 1: Identify behaviors<a class="headerlink" href="#step-1-identify-behaviors" title="Permalink to this heading">#</a></h3>
 <p>Identify which behaviors are <strong>shared</strong> and which are <strong>different</strong> among the classes. These should include eating, sleeping, and moving.</p>
 <div class="admonition-reflection admonition">
 <p class="admonition-title">🤔 Reflection</p>
@@ -576,20 +524,20 @@ else {
 Or even if we can, why would that be a bad idea?</p>
 </div>
 </section>
-<section id="step-3-define-behavior-interfaces">
-<h2>Step 3: Define behavior interfaces<a class="headerlink" href="#step-3-define-behavior-interfaces" title="Permalink to this heading">#</a></h2>
+<section id="step-2-define-behavior-interfaces">
+<h3>Step 2: Define behavior interfaces<a class="headerlink" href="#step-2-define-behavior-interfaces" title="Permalink to this heading">#</a></h3>
 <p>Create separate interfaces for each identified behavior. For instance, <code class="docutils literal notranslate"><span class="pre">IEatingBehavior</span></code> for eating.</p>
 <div class="admonition-reflection admonition">
 <p class="admonition-title">🤔 Reflection</p>
 <p>How does defining behavior through interfaces contribute to code flexibility and maintainability?</p>
 </div>
 </section>
-<section id="step-4-implement-concrete-behaviors">
-<h2>Step 4: Implement concrete behaviors<a class="headerlink" href="#step-4-implement-concrete-behaviors" title="Permalink to this heading">#</a></h2>
+<section id="step-3-implement-concrete-behaviors">
+<h3>Step 3: Implement concrete behaviors<a class="headerlink" href="#step-3-implement-concrete-behaviors" title="Permalink to this heading">#</a></h3>
 <p>Implement specific classes for each behavior interface. For example, you could have <code class="docutils literal notranslate"><span class="pre">Sleeping</span></code> and <code class="docutils literal notranslate"><span class="pre">Resting</span></code> as implementations of <code class="docutils literal notranslate"><span class="pre">IEatingBehavior</span></code>.</p>
 </section>
-<section id="step-5-compose-classes-through-dependency-injection">
-<h2>Step 5: Compose classes through dependency injection<a class="headerlink" href="#step-5-compose-classes-through-dependency-injection" title="Permalink to this heading">#</a></h2>
+<section id="step-3-compose-classes-through-dependency-injection">
+<h3>Step 3: Compose classes through dependency injection<a class="headerlink" href="#step-3-compose-classes-through-dependency-injection" title="Permalink to this heading">#</a></h3>
 <p>Remove the old classes <code class="docutils literal notranslate"><span class="pre">Human</span></code>, <code class="docutils literal notranslate"><span class="pre">Fish</span></code>, and <code class="docutils literal notranslate"><span class="pre">Mermaid</span></code> and replace them with the class called <code class="docutils literal notranslate"><span class="pre">Animal</span></code>.
 The class <code class="docutils literal notranslate"><span class="pre">Animal</span></code> should no longer be abstract.
 The three types of behavior that a given animal uses should be dependency injected through the constructor of <code class="docutils literal notranslate"><span class="pre">Animal</span></code>.</p>
@@ -598,40 +546,50 @@ The three types of behavior that a given animal uses should be dependency inject
 <p>How does composition of behaviors help in representing real-world entities more accurately compared to inheritance?</p>
 </div>
 </section>
-<section id="step-6-instantiate-and-test">
-<h2>Step 6: Instantiate and test<a class="headerlink" href="#step-6-instantiate-and-test" title="Permalink to this heading">#</a></h2>
+<section id="step-4-instantiate-and-test">
+<h3>Step 4: Instantiate and test<a class="headerlink" href="#step-4-instantiate-and-test" title="Permalink to this heading">#</a></h3>
 <p>Instantiate objects for the refactored classes and test their behaviors.
 The <code class="docutils literal notranslate"><span class="pre">Main</span></code> method should now look like the code below and the output should be the same as before.</p>
 <div class="cell tag_remove-input docutils container">
 </div>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Animal</span><span class="w"> </span><span class="n">human</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Animal</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SeaAndLandFoodEating</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Sleeping</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Walking</span><span class="p">());</span>
 <span class="n">Animal</span><span class="w"> </span><span class="n">fish</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Animal</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SeaFoodEating</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Resting</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Swimming</span><span class="p">());</span>
 <span class="n">Animal</span><span class="w"> </span><span class="n">mermaid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Animal</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SeaAndLandFoodEating</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Sleeping</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Swimming</span><span class="p">());</span>
+
+<span class="n">TestAnimal</span><span class="p">(</span><span class="n">human</span><span class="p">);</span>
+<span class="n">TestAnimal</span><span class="p">(</span><span class="n">fish</span><span class="p">);</span>
+<span class="n">TestAnimal</span><span class="p">(</span><span class="n">mermaid</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Walking. | Eating sea and land food. | Sleeping.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Swimming. | Eating sea food. | Resting.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Swimming. | Eating sea and land food. | Sleeping.
+</pre></div>
+</div>
+</div>
 </div>
 <div class="admonition-reflection admonition">
 <p class="admonition-title">🤔 Reflection</p>
 <p>Notice how behaviors are now composed and can be mixed and matched as needed. What are the benefits of this?</p>
 </div>
 </section>
-<section id="step-7-add-your-own-behaviors-and-animals">
-<h2>Step 7: Add your own behaviors and animals<a class="headerlink" href="#step-7-add-your-own-behaviors-and-animals" title="Permalink to this heading">#</a></h2>
+<section id="step-5-add-your-own-behaviors-and-animals">
+<h3>Step 5: Add your own behaviors and animals<a class="headerlink" href="#step-5-add-your-own-behaviors-and-animals" title="Permalink to this heading">#</a></h3>
 <p>Add a new behavior class, such as <code class="docutils literal notranslate"><span class="pre">Flying</span></code>, for each behavior type.
 Then instantiate two new <code class="docutils literal notranslate"><span class="pre">Animal</span></code> objects that use these types along with some of your existing types.</p>
 <div class="admonition-reflection admonition">
 <p class="admonition-title">🤔 Reflection</p>
 <p>How easy would it have been to add this additional behavior using the design that we had in the beginning?</p>
 </div>
+</section>
 </section>
 </section>
 
@@ -659,8 +617,26 @@ Then instantiate two new <code class="docutils literal notranslate"><span class=
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="generics.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title"><span class="section-number">3. </span>Lab: Generics</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="replace-conditional-with-polymorphism.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title"><span class="section-number">1. </span>Lab: Replace conditional with polymorphism</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -691,14 +667,18 @@ Then instantiate two new <code class="docutils literal notranslate"><span class=
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Lab: Composition over Inheritance</a><ul>
-<li><a class="reference internal" href="#step-1-understand-the-provided-code">Step 1: Understand the provided code</a></li>
-<li><a class="reference internal" href="#step-2-identify-behaviors">Step 2: Identify behaviors</a></li>
-<li><a class="reference internal" href="#step-3-define-behavior-interfaces">Step 3: Define behavior interfaces</a></li>
-<li><a class="reference internal" href="#step-4-implement-concrete-behaviors">Step 4: Implement concrete behaviors</a></li>
-<li><a class="reference internal" href="#step-5-compose-classes-through-dependency-injection">Step 5: Compose classes through dependency injection</a></li>
-<li><a class="reference internal" href="#step-6-instantiate-and-test">Step 6: Instantiate and test</a></li>
-<li><a class="reference internal" href="#step-7-add-your-own-behaviors-and-animals">Step 7: Add your own behaviors and animals</a></li>
+<li><a class="reference internal" href="#">2. Lab: Composition over Inheritance</a><ul>
+<li><a class="reference internal" href="#objective">Objective</a></li>
+<li><a class="reference internal" href="#provided-code">Provided code</a></li>
+<li><a class="reference internal" href="#instructions">Instructions</a><ul>
+<li><a class="reference internal" href="#step-1-identify-behaviors">Step 1: Identify behaviors</a></li>
+<li><a class="reference internal" href="#step-2-define-behavior-interfaces">Step 2: Define behavior interfaces</a></li>
+<li><a class="reference internal" href="#step-3-implement-concrete-behaviors">Step 3: Implement concrete behaviors</a></li>
+<li><a class="reference internal" href="#step-3-compose-classes-through-dependency-injection">Step 3: Compose classes through dependency injection</a></li>
+<li><a class="reference internal" href="#step-4-instantiate-and-test">Step 4: Instantiate and test</a></li>
+<li><a class="reference internal" href="#step-5-add-your-own-behaviors-and-animals">Step 5: Add your own behaviors and animals</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

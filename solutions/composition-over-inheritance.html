@@ -164,7 +164,8 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul>
+  <p class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/syntax.html">1. Syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/hello-world.html">2. Hello world</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/compilation.html">3. Compilation</a></li>
@@ -281,6 +282,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapters/variant-generic-delegates.html">114. Variant generic delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapters/variant-generic-interfaces.html">115. Variant generic interfaces</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Labs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../labs/replace-conditional-with-polymorphism.html">1. Lab: Replace conditional with polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/composition-over-inheritance.html">2. Lab: Composition over Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/generics.html">3. Lab: Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/generic-types.html">4. Lab Exercise: Generic types</a></li>
+</ul>
 
 </div>
 </div>
@@ -324,94 +332,85 @@
 <span class="n">Animal</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Animal</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BeerDiet</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NoSleep</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Walking</span><span class="p">());</span>
 <span class="n">Animal</span><span class="w"> </span><span class="n">bird</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Animal</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SeaFoodEating</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Sleeping</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Flying</span><span class="p">());</span>
 
-<span class="n">human</span><span class="p">.</span><span class="n">Eat</span><span class="p">();</span>
-<span class="n">fish</span><span class="p">.</span><span class="n">Eat</span><span class="p">();</span>
-<span class="n">mermaid</span><span class="p">.</span><span class="n">Eat</span><span class="p">();</span>
-<span class="n">student</span><span class="p">.</span><span class="n">Eat</span><span class="p">();</span>
-<span class="n">bird</span><span class="p">.</span><span class="n">Eat</span><span class="p">();</span>
+<span class="k">void</span><span class="w"> </span><span class="nf">TestAnimal</span><span class="p">(</span><span class="n">Animal</span><span class="w"> </span><span class="n">animal</span><span class="p">)</span>
+<span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{animal.Move()} | {animal.Eat()} | {animal.Sleep()}&quot;</span><span class="p">);</span>
 
-<span class="n">human</span><span class="p">.</span><span class="n">Sleep</span><span class="p">();</span>
-<span class="n">fish</span><span class="p">.</span><span class="n">Sleep</span><span class="p">();</span>
-<span class="n">mermaid</span><span class="p">.</span><span class="n">Sleep</span><span class="p">();</span>
-<span class="n">student</span><span class="p">.</span><span class="n">Sleep</span><span class="p">();</span>
-<span class="n">bird</span><span class="p">.</span><span class="n">Sleep</span><span class="p">();</span>
-
-<span class="n">human</span><span class="p">.</span><span class="n">Move</span><span class="p">();</span>
-<span class="n">fish</span><span class="p">.</span><span class="n">Move</span><span class="p">();</span>
-<span class="n">mermaid</span><span class="p">.</span><span class="n">Move</span><span class="p">();</span>
-<span class="n">student</span><span class="p">.</span><span class="n">Move</span><span class="p">();</span>
-<span class="n">bird</span><span class="p">.</span><span class="n">Move</span><span class="p">();</span>
+<span class="n">TestAnimal</span><span class="p">(</span><span class="n">human</span><span class="p">);</span>
+<span class="n">TestAnimal</span><span class="p">(</span><span class="n">fish</span><span class="p">);</span>
+<span class="n">TestAnimal</span><span class="p">(</span><span class="n">mermaid</span><span class="p">);</span>
+<span class="n">TestAnimal</span><span class="p">(</span><span class="n">student</span><span class="p">);</span>
+<span class="n">TestAnimal</span><span class="p">(</span><span class="n">bird</span><span class="p">);</span>
 
 
 <span class="k">public</span><span class="w"> </span><span class="k">interface</span><span class="w"> </span><span class="n">IEatingBehavior</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="nf">Eat</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="nf">Eat</span><span class="p">();</span>
 <span class="p">}</span>
 
 <span class="k">public</span><span class="w"> </span><span class="k">interface</span><span class="w"> </span><span class="n">ISleepingBehavior</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="nf">Sleep</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="nf">Sleep</span><span class="p">();</span>
 <span class="p">}</span>
 
 <span class="k">public</span><span class="w"> </span><span class="k">interface</span><span class="w"> </span><span class="n">IMovingBehavior</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="nf">Move</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="nf">Move</span><span class="p">();</span>
 <span class="p">}</span>
 
 
 <span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">SeaAndLandFoodEating</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IEatingBehavior</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Eat</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Eating sea and land food.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Eat</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Eating sea and land food.&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">SeaFoodEating</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IEatingBehavior</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Eat</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Eating sea food.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Eat</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Eating sea food.&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">BeerDiet</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IEatingBehavior</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Eat</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Consuming beer.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Eat</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Consuming beer.&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 
 
 <span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Sleeping</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ISleepingBehavior</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Sleep</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Sleeping.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Sleep</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Sleeping.&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Resting</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ISleepingBehavior</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Sleep</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Resting.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Sleep</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Resting.&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">NoSleep</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ISleepingBehavior</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Sleep</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;No time for sleep.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Sleep</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;No time for sleep.&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 
 
 <span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Swimming</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IMovingBehavior</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Move</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Swimming.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Move</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Swimming.&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Walking</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IMovingBehavior</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Move</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Walking.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Move</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Walking.&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Flying</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IMovingBehavior</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Move</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Flying.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Move</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Flying.&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 
 
 <span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Animal</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">IEatingBehavior</span><span class="w"> </span><span class="n">eatingBehavior</span><span class="p">;</span>
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">ISleepingBehavior</span><span class="w"> </span><span class="n">sleepingBehavior</span><span class="p">;</span>
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">IMovingBehavior</span><span class="w"> </span><span class="n">movingBehavior</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">IEatingBehavior</span><span class="w"> </span><span class="n">eatingBehavior</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">ISleepingBehavior</span><span class="w"> </span><span class="n">sleepingBehavior</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">IMovingBehavior</span><span class="w"> </span><span class="n">movingBehavior</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Animal</span><span class="p">(</span>
 <span class="w">        </span><span class="n">IEatingBehavior</span><span class="w"> </span><span class="n">eatingBehavior</span><span class="p">,</span>
@@ -423,9 +422,9 @@
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">movingBehavior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">movingBehavior</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Eat</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">eatingBehavior</span><span class="p">.</span><span class="n">Eat</span><span class="p">();</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Sleep</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">sleepingBehavior</span><span class="p">.</span><span class="n">Sleep</span><span class="p">();</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Move</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">movingBehavior</span><span class="p">.</span><span class="n">Move</span><span class="p">();</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Eat</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">eatingBehavior</span><span class="p">.</span><span class="n">Eat</span><span class="p">();</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Sleep</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">sleepingBehavior</span><span class="p">.</span><span class="n">Sleep</span><span class="p">();</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Move</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">movingBehavior</span><span class="p">.</span><span class="n">Move</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -433,7 +432,7 @@
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-10084.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-9194.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -478,12 +477,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.56:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.52.4:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '10084.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '9194.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -537,49 +536,19 @@ else {
 }
 
     </script>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eating sea and land food.
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Walking. | Eating sea and land food. | Sleeping.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eating sea food.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Swimming. | Eating sea food. | Resting.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eating sea and land food.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Swimming. | Eating sea and land food. | Sleeping.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Consuming beer.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Walking. | Consuming beer. | No time for sleep.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eating sea food.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sleeping.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resting.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sleeping.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No time for sleep.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sleeping.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Walking.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Swimming.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Swimming.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Walking.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flying.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flying. | Eating sea food. | Sleeping.
 </pre></div>
 </div>
 </div>

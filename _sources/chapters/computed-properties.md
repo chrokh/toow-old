@@ -20,39 +20,39 @@ How can we do this elegantly, without having to create a separate method to perf
 
 In C#, computed properties (also known as calculated properties) are properties that perform a calculation and return a value, rather than simply getting or setting a stored value. Computed properties don't hold any memory; instead, they provide a value based on other instance variables or methods.
 
-Let's consider a `Rectangle` class that has Length and Width properties. If we wanted to find the area of the rectangle, we could create a `GetArea()` method, but it might be more idiomatic in C# to use a computed property.
+Let's consider a `Rectangle` class that has Width and Height properties. If we wanted to find the area of the rectangle, we could create a `GetArea()` method, but it might be more idiomatic in C# to use a computed property.
 
 Here's how you might define the Area property:
 
 ```{code-cell}
 public class Rectangle
 {
-    public double Length { get; set; }
     public double Width { get; set; }
+    public double Height { get; set; }
 
     public double Area
     {
-        get => Length * Width;
+        get => Width * Height;
     }
 }
 ```
 
-In this example, `Area` is a computed property. It doesn't store a value itself. Instead, when it's accessed, it calculates the value by multiplying `Length` by `Width` and returns the result.
+In this example, `Area` is a computed property. It doesn't store a value itself. Instead, when it's accessed, it calculates the value by multiplying `Width` by `Height` and returns the result.
 Note that if a property only has a `get` accessor whose implementation is a single expression we can simplify by omitting the curly brackets and the `get` keyword. Like this:
 
 ```{code-cell}
 public class Rectangle
 {
-    public double Length { get; set; }
     public double Width { get; set; }
-    public double Area => Length * Width; // Simplified.
+    public double Height { get; set; }
+    public double Area => Width * Height; // Simplified.
 }
 ```
 
 Here's how you could use the `Area` property:
 
 ```{code-cell}
-var rectangle = new Rectangle { Length = 5.0, Width = 4.0 };
+var rectangle = new Rectangle { Width = 4.0, Height = 5.0 };
 Console.WriteLine(rectangle.Area);
 ```
 
@@ -65,34 +65,34 @@ In our `Rectangle` class, let's say we wanted to allow the area to be set direct
 ```{code-cell}
 public class Rectangle
 {
-    public double Length { get; set; }
     public double Width { get; set; }
+    public double Height { get; set; }
 
     public double Area
     {
-        get => Length * Width;
+        get => Width * Height;
         set
         {
-            Length = Math.Sqrt(value);
             Width = Math.Sqrt(value);
+            Height = Math.Sqrt(value);
         }
     }
 }
 ```
 
-In this updated example, the `Area` property now has a setter that modifies both the `Length` and `Width` properties when the `Area` is set. When the area is retrieved, the getter still calculates the value as before. Here's how we could use the setter:
+In this updated example, the `Area` property now has a setter that modifies both the `Width` and `Height` properties when the `Area` is set. When the area is retrieved, the getter still calculates the value as before. Here's how we could use the setter:
 
 ```{code-cell}
-var rectangle = new Rectangle { Length = 5.0, Width = 4.0 };
-Console.WriteLine($"{rectangle.Area} = {rectangle.Length} x {rectangle.Width}");
+var rectangle = new Rectangle { Width = 4.0, Height = 5.0 };
+Console.WriteLine($"{rectangle.Area} = {rectangle.Width} x {rectangle.Height}");
 ```
 
 ```{code-cell}
 rectangle.Area = 25;
-Console.WriteLine($"{rectangle.Area} = {rectangle.Length} x {rectangle.Width}");
+Console.WriteLine($"{rectangle.Area} = {rectangle.Width} x {rectangle.Height}");
 ```
 
-In this case, after setting the `Area` to `25`, both the `Length` and `Width` have been adjusted to be the square root of the new area (which is `5`).
+In this case, after setting the `Area` to `25`, both the `Width` and `Height` have been adjusted to be the square root of the new area (which is `5`).
 
 ```{important}
 When using setters in computed properties, it is important to **consider the logical consistency of your model**. For example: if you 'set' the area only to then immediately 'get' the area, then you should get back the same area as you set.
