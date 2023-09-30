@@ -89,9 +89,9 @@ The implementation for this method is only written once. Yet that same implement
 This is the power of generics.
 
 ```{hint}
-- With overloading, we define different implementations for different types.
-- With overriding, we define specialized implementations for specialized types.
-- With generics, we define *a single implementation for all types*.
+- With **overloading**, we define different implementations for different types.
+- With **subtyping**, we define specialized implementations for specialized types.
+- With **generics**, we define *a single implementation for all types*.
 ```
 
 %Let me say that again, they can be replaced by *any possible type* you can think of.
