@@ -1,3 +1,6 @@
+%![](https://cdn.discordapp.com/attachments/1118630713084870736/1156969131426467860/chrokh_vibrant_illustration_of_cat_with_sunglasses_typing_on_la_72b434e3-4d1d-4ac5-a440-aca93f6a8f03.png?ex=6516e6f8&is=65159578&hm=b243b698dbbf320d80d461d47a4e7b0465dc74b1c5c70854cc4bc7da32b72149&)
+![](https://cdn.discordapp.com/attachments/1118630713084870736/1156998636555743325/chrokh_crazy_hacker_cat_in_sunglasses_and_hoodie_in_front_of_ke_cb2e44f8-83c5-4dcc-89a3-ea0551413b4f.png?ex=65170272&is=6515b0f2&hm=d34c00a9d770f91528551eae025de231d869133e95274d58d508371f2f01e3db&)
+
 # How to master object-oriented programming in C#
 
 *This is **not** about learning how to code.*
