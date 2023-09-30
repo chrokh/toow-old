@@ -74,7 +74,7 @@ Similarly, we can say `Pair<DiceRoll>` for a type whose instances contain pairs 
 ```{admonition} Terminology
 - **Generic type definition**: The raw, parameterized form of a generic type that hasn't been constructed with specific type arguments (e.g., `Pair<T>`).
 - **Type parameter**: A placeholder used in generic type definitions, represented within angle brackets (e.g., `<T>` in `Pair<T>`).
-- **Constructed generic type**: A generic type that has had its type parameters replaced with actual type arguments, making it a concrete, usable type (e.g., `Pair<int>`).
+- **Constructed generic type**: A generic type that has had its type parameters replaced with actual type arguments, making it an actual, usable type (e.g., `Pair<int>`).
 - **Type Argument**: The actual type you provide in place of a type parameter when creating a type from a generic type definition (e.g., `int` in `Pair<int>`).
 - **Generic type**: This term can be used to refer to either a 'generic type definition' or a 'constructed generic type'.
 ```
