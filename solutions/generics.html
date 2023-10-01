@@ -141,7 +141,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -284,8 +284,9 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Labs</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../labs/replace-conditional-with-polymorphism.html">1. Lab: Replace conditional with polymorphism</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/composition-over-inheritance.html">2. Lab: Composition over Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/replace-conditional-with-polymorphism.html">Lab: Replace conditional with polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/generics.html">Lab: Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/generic-types.html">Lab Exercise: Generic types</a></li>
 </ul>
 
 </div>
@@ -314,7 +315,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -322,23 +323,11 @@
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="solution-generics">
 <h1>Solution: Generics<a class="headerlink" href="#solution-generics" title="Permalink to this heading">#</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// This is the code that was provided.</span>
-<span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;banana&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cherry&quot;</span><span class="w"> </span><span class="p">};</span>
-
-<span class="kt">int</span><span class="p">[][]</span><span class="w"> </span><span class="n">matrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">},</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">},</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="m">9</span><span class="p">}</span>
-<span class="p">};</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-9042.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-9088.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -383,12 +372,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.136:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.1.12:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '9042.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '9088.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -444,74 +433,181 @@ else {
     </script>
 </div></div></div>
 </div>
+<section id="step-1-introduce-a-non-generic-objectpair-class">
+<h2>Step 1: Introduce a non-generic <code class="docutils literal notranslate"><span class="pre">ObjectPair</span></code> class<a class="headerlink" href="#step-1-introduce-a-non-generic-objectpair-class" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Step 2: Declare and instantiate list.</span>
-<span class="n">List</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">wordsList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="p">();</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ObjectPair</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">object</span><span class="w"> </span><span class="n">Item1</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">object</span><span class="w"> </span><span class="n">Item2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">Random</span><span class="w"> </span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Random</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">ObjectPair</span><span class="w"> </span><span class="nf">PickRandom</span><span class="p">(</span><span class="kt">object</span><span class="p">[]</span><span class="w"> </span><span class="n">items</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ObjectPair</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Item1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">items</span><span class="p">[</span><span class="n">random</span><span class="p">.</span><span class="n">Next</span><span class="p">(</span><span class="n">items</span><span class="p">.</span><span class="n">Length</span><span class="p">)],</span>
+<span class="w">            </span><span class="n">Item2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">items</span><span class="p">[</span><span class="n">random</span><span class="p">.</span><span class="n">Next</span><span class="p">(</span><span class="n">items</span><span class="p">.</span><span class="n">Length</span><span class="p">)]</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="step-2-refactor-main">
+<h2>Step 2: Refactor <code class="docutils literal notranslate"><span class="pre">Main</span></code><a class="headerlink" href="#step-2-refactor-main" title="Permalink to this heading">#</a></h2>
+<p>Notice the downcasting.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Step 3: Copy all items</span>
-<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">words</span><span class="p">)</span>
-<span class="w">    </span><span class="n">wordsList</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Step 4: Print all items.</span>
-<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">wordsList</span><span class="p">)</span>
-<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">randomDiceRollPair</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ObjectPair</span><span class="p">.</span><span class="n">PickRandom</span><span class="p">(</span><span class="n">diceRolls</span><span class="p">);</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">randomCardPair</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ObjectPair</span><span class="p">.</span><span class="n">PickRandom</span><span class="p">(</span><span class="n">cards</span><span class="p">);</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Random Dice Roll Pair:&quot;</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{((DiceRoll)randomDiceRollPair.Item1).Value}&quot;</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{((DiceRoll)randomDiceRollPair.Item2).Value}&quot;</span><span class="p">);</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Random Card Pair:&quot;</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{((Card)randomCardPair.Item1).Rank} of {((Card)randomCardPair.Item1).Suit}&quot;</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{((Card)randomCardPair.Item2).Rank} of {((Card)randomCardPair.Item2).Suit}&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>apple
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1,48): error CS0103: The name &#39;diceRolls&#39; does not exist in the current context
+
+(2,44): error CS0103: The name &#39;cards&#39; does not exist in the current context
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>banana
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cherry
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell tag_remove-output docutils container">
+</section>
+<section id="step-3-introduce-a-generic-pair-class">
+<h2>Step 3: Introduce a Generic <code class="docutils literal notranslate"><span class="pre">Pair</span></code> Class<a class="headerlink" href="#step-3-introduce-a-generic-pair-class" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Step 5:</span>
-
-<span class="c1">// Declare and instantiate list.</span>
-<span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">matrixList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">();</span>
-
-<span class="c1">// Copy all items.</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">matrix</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span><span class="w"> </span><span class="n">row</span><span class="o">++</span><span class="p">)</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">matrixList</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">());</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">matrix</span><span class="p">[</span><span class="n">row</span><span class="p">].</span><span class="n">Length</span><span class="p">;</span><span class="w"> </span><span class="n">col</span><span class="o">++</span><span class="p">)</span>
-<span class="w">        </span><span class="n">matrixList</span><span class="p">[</span><span class="n">row</span><span class="p">].</span><span class="n">Add</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]);</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">Item1</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">Item2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 
-<span class="c1">// Print all items.</span>
-<span class="k">foreach</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">matrixList</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">foreach</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">row</span><span class="p">)</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="n">item</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">();</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">Random</span><span class="w"> </span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Random</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">PickRandom</span><span class="p">(</span><span class="n">T</span><span class="p">[]</span><span class="w"> </span><span class="n">items</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Item1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">items</span><span class="p">[</span><span class="n">random</span><span class="p">.</span><span class="n">Next</span><span class="p">(</span><span class="n">items</span><span class="p">.</span><span class="n">Length</span><span class="p">)],</span>
+<span class="w">            </span><span class="n">Item2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">items</span><span class="p">[</span><span class="n">random</span><span class="p">.</span><span class="n">Next</span><span class="p">(</span><span class="n">items</span><span class="p">.</span><span class="n">Length</span><span class="p">)]</span>
+<span class="w">        </span><span class="p">};</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">1 2 3</span>
-<span class="go">4 5 6</span>
-<span class="go">7 8 9</span>
+</section>
+<section id="step-4-refactor-main">
+<h2>Step 4: Refactor <code class="docutils literal notranslate"><span class="pre">Main</span></code><a class="headerlink" href="#step-4-refactor-main" title="Permalink to this heading">#</a></h2>
+<p>Notice the lack of downcasting.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">randomDiceRollPair</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">DiceRoll</span><span class="o">&gt;</span><span class="p">.</span><span class="n">PickRandom</span><span class="p">(</span><span class="n">diceRolls</span><span class="p">);</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">randomCardPair</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">Card</span><span class="o">&gt;</span><span class="p">.</span><span class="n">PickRandom</span><span class="p">(</span><span class="n">cards</span><span class="p">);</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Random Dice Roll Pair:&quot;</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{randomDiceRollPair.Item1.Value}&quot;</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{randomDiceRollPair.Item2.Value}&quot;</span><span class="p">);</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Random Card Pair:&quot;</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{randomCardPair.Item1.Rank} of {randomCardPair.Item1.Suit}&quot;</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{randomCardPair.Item2.Rank} of {randomCardPair.Item2.Suit}&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
+</div>
+</div>
+</section>
+<section id="challenge-1-extend-functionality">
+<h2>Challenge 1: Extend Functionality<a class="headerlink" href="#challenge-1-extend-functionality" title="Permalink to this heading">#</a></h2>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">Item1</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">Item2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">Random</span><span class="w"> </span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Random</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">PickRandom</span><span class="p">(</span><span class="n">T</span><span class="p">[]</span><span class="w"> </span><span class="n">items</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Item1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">items</span><span class="p">[</span><span class="n">random</span><span class="p">.</span><span class="n">Next</span><span class="p">(</span><span class="n">items</span><span class="p">.</span><span class="n">Length</span><span class="p">)],</span>
+<span class="w">            </span><span class="n">Item2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">items</span><span class="p">[</span><span class="n">random</span><span class="p">.</span><span class="n">Next</span><span class="p">(</span><span class="n">items</span><span class="p">.</span><span class="n">Length</span><span class="p">)]</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">ToString</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">$&quot;{Item1.ToString()}, {Item2.ToString()}&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">DiceRoll</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">ToString</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Value</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Card</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Suit</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Rank</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">ToString</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">$&quot;{Rank} of {Suit}&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="challenge-2-nested-generics">
+<h2>Challenge 2: Nested Generics<a class="headerlink" href="#challenge-2-nested-generics" title="Permalink to this heading">#</a></h2>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">twoPairs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">Card</span><span class="o">&gt;&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Item1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">Card</span><span class="o">&gt;</span><span class="p">.</span><span class="n">PickRandom</span><span class="p">(</span><span class="n">cards</span><span class="p">),</span>
+<span class="w">    </span><span class="n">Item2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">Card</span><span class="o">&gt;</span><span class="p">.</span><span class="n">PickRandom</span><span class="p">(</span><span class="n">cards</span><span class="p">)</span>
+<span class="p">};</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">twoPairs</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+</pre></div>
+</div>
+</section>
+<section id="challenge-3-replace-arrays-with-list-t">
+<h2>Challenge 3: Replace arrays with <code class="docutils literal notranslate"><span class="pre">List&lt;T&gt;</span></code><a class="headerlink" href="#challenge-3-replace-arrays-with-list-t" title="Permalink to this heading">#</a></h2>
+<p>In <code class="docutils literal notranslate"><span class="pre">Pair&lt;T&gt;</span></code>, change the method <code class="docutils literal notranslate"><span class="pre">PickRandom</span></code> to accept <code class="docutils literal notranslate"><span class="pre">List&lt;T&gt;</span></code> instead of <code class="docutils literal notranslate"><span class="pre">T[]</span></code>.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">PickRandom</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">items</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">Main</span></code>, replace the array initializations with <code class="docutils literal notranslate"><span class="pre">List&lt;T&gt;</span></code> initializations, and adjust the <code class="docutils literal notranslate"><span class="pre">PickRandom</span></code> calls.</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">DiceRoll</span><span class="o">&gt;</span><span class="w"> </span><span class="n">diceRolls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">DiceRoll</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">};</span>
+
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Card</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cards</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Card</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">};</span>
+</pre></div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -558,8 +654,33 @@ else {
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Solution: Generics</a><ul>
+<li><a class="reference internal" href="#step-1-introduce-a-non-generic-objectpair-class">Step 1: Introduce a non-generic <code class="docutils literal notranslate"><span class="pre">ObjectPair</span></code> class</a></li>
+<li><a class="reference internal" href="#step-2-refactor-main">Step 2: Refactor <code class="docutils literal notranslate"><span class="pre">Main</span></code></a></li>
+<li><a class="reference internal" href="#step-3-introduce-a-generic-pair-class">Step 3: Introduce a Generic <code class="docutils literal notranslate"><span class="pre">Pair</span></code> Class</a></li>
+<li><a class="reference internal" href="#step-4-refactor-main">Step 4: Refactor <code class="docutils literal notranslate"><span class="pre">Main</span></code></a></li>
+<li><a class="reference internal" href="#challenge-1-extend-functionality">Challenge 1: Extend Functionality</a></li>
+<li><a class="reference internal" href="#challenge-2-nested-generics">Challenge 2: Nested Generics</a></li>
+<li><a class="reference internal" href="#challenge-3-replace-arrays-with-list-t">Challenge 3: Replace arrays with <code class="docutils literal notranslate"><span class="pre">List&lt;T&gt;</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

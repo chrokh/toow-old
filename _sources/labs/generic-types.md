@@ -60,17 +60,9 @@ How might the use of generic types alleviate the issues identified with the curr
 #### Step 2: Define a generic class
 Create a single generic class `LibraryItem<T>`, where `T` can be any type. Include properties that are common between `BookItem` and `MagazineItem`, such as `ID`, `Item` (of type `T`), `AddedToLibrary`, and `IsCheckedOut`.
 
-```{code-cell}
-public class LibraryItem<T>
-{
-    // Your code here...
-}
-```
-
 #### Step 3: Implement a method to display item status
 
-Implement an additional method in `LibraryItem<T>` that returns a `string` containing the `ID`, the `AddedToLibrary` date, and whether the book `IsCheckedOut`.
-Consider utilizing the `ToString()` method for this purpose.
+Override the `ToString()` method in `LibraryItem<T>` and return a `string` containing the `ID`, the `AddedToLibrary` date, and whether the book `IsCheckedOut`.
 
 ```{admonition} 🤔 Reflection
 How does the implementation of this methods in a generic class compare to implementing them in a non-generic class?
@@ -78,7 +70,7 @@ How does the addition of new functionality in the generic class illustrate the m
 ```
 
 ```{admonition} 🤔 Reflection
-Why is it not possible to access the `Title` of the book or magazine in a library item? How could we solve that?
+Why is it not possible to access the `Title` of the book or magazine in a library item? How can we also print the information of the book or magazine in the `ToString()` method above?
 ```
 
 #### Step 4: Instantiate and use your generic class
@@ -99,7 +91,3 @@ LibraryItem<Magazine> magazineItem = new LibraryItem<Magazine>( /* .... */ );
 
 Experiment by creating more classes representing other items that you might find in a library like `BoardGame`, `EReader`, and `Tablet`. Then show that you can instantiate `LibraryItem<T>` with these new types. Reflect on the reusability of the generic class with different type parameters.
 
-### Conclusion
-
-By refactoring the provided non-generic classes into a cohesive generic class, you've experienced firsthand the advantages of using generic types in C#. These advantages include improving maintainability without sacrificing and type safety.
-Keep exploring and applying generic types in various scenarios to enhance your proficiency in object-oriented programming in C#.

@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="Lab: Generics" href="generics.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
         <title>Lab Exercise: Generic types - The Object Oriented Way</title>
@@ -283,9 +283,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapters/variant-generic-interfaces.html">115. Variant generic interfaces</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Labs</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">1. Lab: Replace conditional with polymorphism</a></li>
-<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">2. Lab: Composition over Inheritance</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">Lab: Replace conditional with polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics.html">Lab: Generics</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Lab Exercise: Generic types</a></li>
 </ul>
 
 </div>
@@ -364,7 +365,7 @@
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-7976.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-7967.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -409,12 +410,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.136:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.1.12:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '7976.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '7967.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -484,21 +485,10 @@ else {
 <section id="step-2-define-a-generic-class">
 <h3>Step 2: Define a generic class<a class="headerlink" href="#step-2-define-a-generic-class" title="Permalink to this heading">#</a></h3>
 <p>Create a single generic class <code class="docutils literal notranslate"><span class="pre">LibraryItem&lt;T&gt;</span></code>, where <code class="docutils literal notranslate"><span class="pre">T</span></code> can be any type. Include properties that are common between <code class="docutils literal notranslate"><span class="pre">BookItem</span></code> and <code class="docutils literal notranslate"><span class="pre">MagazineItem</span></code>, such as <code class="docutils literal notranslate"><span class="pre">ID</span></code>, <code class="docutils literal notranslate"><span class="pre">Item</span></code> (of type <code class="docutils literal notranslate"><span class="pre">T</span></code>), <code class="docutils literal notranslate"><span class="pre">AddedToLibrary</span></code>, and <code class="docutils literal notranslate"><span class="pre">IsCheckedOut</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">LibraryItem</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="c1">// Your code here...</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="step-3-implement-a-method-to-display-item-status">
 <h3>Step 3: Implement a method to display item status<a class="headerlink" href="#step-3-implement-a-method-to-display-item-status" title="Permalink to this heading">#</a></h3>
-<p>Implement an additional method in <code class="docutils literal notranslate"><span class="pre">LibraryItem&lt;T&gt;</span></code> that returns a <code class="docutils literal notranslate"><span class="pre">string</span></code> containing the <code class="docutils literal notranslate"><span class="pre">ID</span></code>, the <code class="docutils literal notranslate"><span class="pre">AddedToLibrary</span></code> date, and whether the book <code class="docutils literal notranslate"><span class="pre">IsCheckedOut</span></code>.
-Consider utilizing the <code class="docutils literal notranslate"><span class="pre">ToString()</span></code> method for this purpose.</p>
+<p>Override the <code class="docutils literal notranslate"><span class="pre">ToString()</span></code> method in <code class="docutils literal notranslate"><span class="pre">LibraryItem&lt;T&gt;</span></code> and return a <code class="docutils literal notranslate"><span class="pre">string</span></code> containing the <code class="docutils literal notranslate"><span class="pre">ID</span></code>, the <code class="docutils literal notranslate"><span class="pre">AddedToLibrary</span></code> date, and whether the book <code class="docutils literal notranslate"><span class="pre">IsCheckedOut</span></code>.</p>
 <div class="admonition-reflection admonition">
 <p class="admonition-title">🤔 Reflection</p>
 <p>How does the implementation of this methods in a generic class compare to implementing them in a non-generic class?
@@ -506,7 +496,7 @@ How does the addition of new functionality in the generic class illustrate the m
 </div>
 <div class="admonition-reflection admonition">
 <p class="admonition-title">🤔 Reflection</p>
-<p>Why is it not possible to access the <code class="docutils literal notranslate"><span class="pre">Title</span></code> of the book or magazine in a library item? How could we solve that?</p>
+<p>Why is it not possible to access the <code class="docutils literal notranslate"><span class="pre">Title</span></code> of the book or magazine in a library item? How can we also print the information of the book or magazine in the <code class="docutils literal notranslate"><span class="pre">ToString()</span></code> method above?</p>
 </div>
 </section>
 <section id="step-4-instantiate-and-use-your-generic-class">
@@ -527,11 +517,6 @@ How does the addition of new functionality in the generic class illustrate the m
 <section id="challenge">
 <h2>Challenge<a class="headerlink" href="#challenge" title="Permalink to this heading">#</a></h2>
 <p>Experiment by creating more classes representing other items that you might find in a library like <code class="docutils literal notranslate"><span class="pre">BoardGame</span></code>, <code class="docutils literal notranslate"><span class="pre">EReader</span></code>, and <code class="docutils literal notranslate"><span class="pre">Tablet</span></code>. Then show that you can instantiate <code class="docutils literal notranslate"><span class="pre">LibraryItem&lt;T&gt;</span></code> with these new types. Reflect on the reusability of the generic class with different type parameters.</p>
-</section>
-<section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
-<p>By refactoring the provided non-generic classes into a cohesive generic class, you’ve experienced firsthand the advantages of using generic types in C#. These advantages include improving maintainability without sacrificing and type safety.
-Keep exploring and applying generic types in various scenarios to enhance your proficiency in object-oriented programming in C#.</p>
 </section>
 </section>
 
@@ -560,7 +545,17 @@ Keep exploring and applying generic types in various scenarios to enhance your p
         
         <div class="related-pages">
           
-          
+          <a class="prev-page" href="generics.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Lab: Generics</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -602,7 +597,6 @@ Keep exploring and applying generic types in various scenarios to enhance your p
 </ul>
 </li>
 <li><a class="reference internal" href="#challenge">Challenge</a></li>
-<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
 </ul>
 </li>
 </ul>
