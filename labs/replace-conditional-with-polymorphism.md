@@ -14,7 +14,7 @@ kernelspec:
 
 ## Objective
 
-To refactor the provided `Shape` class to [remove conditionals and implement polymorphism](replace-conditional-with-polymorphism), thereby enhancing code [maintainability](maintainability).
+To refactor the provided `Shape` class to remove conditionals and implement polymorphism, thereby enhancing code maintainability.
 
 ## Provided code
 
@@ -190,9 +190,9 @@ Console.WriteLine(shape1.Draw());
 ### Step 3: Eliminate duplication using inheritance
 
 When we split the shapes into their own classes that implement the interface `IShape` we ended up duplicating the logic of the `private` method `string draw(string[][] symbols)`.
-Let's eliminate that duplication using [inheritance](inheritance).
+Let's eliminate that duplication using inheritance.
 
-Make the classes `HorizontalLine`, `Square`, and `RightTriangle` inherit from an [abstract class](abstract-classes) called `Shape` which in turn implements the interface `IShape`.
+Make the classes `HorizontalLine`, `Square`, and `RightTriangle` inherit from an abstract class called `Shape` which in turn implements the interface `IShape`.
 
 The abstract class `Shape` should allow you to eliminate the duplicated method  `private` method `string draw(string[][] symbols)`.
 
