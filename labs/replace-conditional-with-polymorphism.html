@@ -325,7 +325,7 @@
 <h1>Lab: Replace conditional with polymorphism<a class="headerlink" href="#lab-replace-conditional-with-polymorphism" title="Permalink to this heading">#</a></h1>
 <section id="objective">
 <h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
-<p>To refactor the provided <code class="docutils literal notranslate"><span class="pre">Shape</span></code> class to <a class="reference internal" href="../old/subtype-polymorphism.html#replace-conditional-with-polymorphism"><span class="std std-ref">remove conditionals and implement polymorphism</span></a>, thereby enhancing code <span class="xref myst">maintainability</span>.</p>
+<p>To refactor the provided <code class="docutils literal notranslate"><span class="pre">Shape</span></code> class to remove conditionals and implement polymorphism, thereby enhancing code maintainability.</p>
 </section>
 <section id="provided-code">
 <h2>Provided code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
@@ -339,7 +339,7 @@
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-8074.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-8211.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -384,12 +384,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.1.12:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.41:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '8074.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '8211.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -599,8 +599,8 @@ It should look like this and should both compile and still print the same output
 <section id="step-3-eliminate-duplication-using-inheritance">
 <h3>Step 3: Eliminate duplication using inheritance<a class="headerlink" href="#step-3-eliminate-duplication-using-inheritance" title="Permalink to this heading">#</a></h3>
 <p>When we split the shapes into their own classes that implement the interface <code class="docutils literal notranslate"><span class="pre">IShape</span></code> we ended up duplicating the logic of the <code class="docutils literal notranslate"><span class="pre">private</span></code> method <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">draw(string[][]</span> <span class="pre">symbols)</span></code>.
-Let’s eliminate that duplication using <span class="xref myst">inheritance</span>.</p>
-<p>Make the classes <code class="docutils literal notranslate"><span class="pre">HorizontalLine</span></code>, <code class="docutils literal notranslate"><span class="pre">Square</span></code>, and <code class="docutils literal notranslate"><span class="pre">RightTriangle</span></code> inherit from an <span class="xref myst">abstract class</span> called <code class="docutils literal notranslate"><span class="pre">Shape</span></code> which in turn implements the interface <code class="docutils literal notranslate"><span class="pre">IShape</span></code>.</p>
+Let’s eliminate that duplication using inheritance.</p>
+<p>Make the classes <code class="docutils literal notranslate"><span class="pre">HorizontalLine</span></code>, <code class="docutils literal notranslate"><span class="pre">Square</span></code>, and <code class="docutils literal notranslate"><span class="pre">RightTriangle</span></code> inherit from an abstract class called <code class="docutils literal notranslate"><span class="pre">Shape</span></code> which in turn implements the interface <code class="docutils literal notranslate"><span class="pre">IShape</span></code>.</p>
 <p>The abstract class <code class="docutils literal notranslate"><span class="pre">Shape</span></code> should allow you to eliminate the duplicated method  <code class="docutils literal notranslate"><span class="pre">private</span></code> method <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">draw(string[][]</span> <span class="pre">symbols)</span></code>.</p>
 <p>One way is to add an <code class="docutils literal notranslate"><span class="pre">abstract</span></code> method to <code class="docutils literal notranslate"><span class="pre">Shape</span></code> with the signature <code class="docutils literal notranslate"><span class="pre">string[][]</span> <span class="pre">MakeLines()</span></code>:</p>
 <div class="cell docutils container">
