@@ -12,65 +12,181 @@ kernelspec:
 
 # Lab: Generics
 
-## Objective
+### Objective
 
-This lab aims to provide hands-on experience in utilizing existing generic types, specifically `List<T>`, to pave the way for more advanced usage of generics.
+In this lab, we will apply our understanding of how to use a generic type that someone has defined to reduce redundancy in code while maintaining type-safety. In this case we'll introduce the generic class `Pair<T>`.
 
+### Provided Code
 
-## Provided code
-
-Study the provided code. Notice how the first arrays has a single dimension while the second has two.
+Carefully review the provided code. Notice the redundancy in the `DiceRollPair` and `CardPair` classes and how `DiceRoll` and `Card` classes are coupled with them.
 
 ```{code-cell}
-// 1D String Array
-string[] words = { "apple", "banana", "cherry" };
-
-// 2D Jagged Integer Array
-int[][] matrix = {
-    new int[] {1, 2, 3},
-    new int[] {4, 5, 6},
-    new int[] {7, 8, 9}
-};
+class DiceRoll
+{
+    public int Value { get; set; }
+}
 ```
 
-## Instructions
+```{code-cell}
+class Card
+{
+    public string Suit { get; set; }
+    public string Rank { get; set; }
+}
+```
 
-### Step 1: Start from the provided code
+```{code-cell}
+class DiceRollPair
+{
+    public DiceRoll Item1 { get; set; }
+    public DiceRoll Item2 { get; set; }
 
-Do **not** remove the provided code.
-Instead, follow the steps by adding code to this program.
+    static readonly Random random = new Random();
 
-### Step 2: Create a `List<string>` and add an element
+    public static DiceRollPair PickRandom(DiceRoll[] diceRolls)
+        => new DiceRollPair
+        {
+            Item1 = diceRolls[random.Next(diceRolls.Length)],
+            Item2 = diceRolls[random.Next(diceRolls.Length)]
+        };
+}
+```
 
-Declare a variable of type `List<string>` and initialize it.
+```{code-cell}
+class CardPair
+{
+    public Card Item1 { get; set; }
+    public Card Item2 { get; set; }
 
-### Step 3: Iterate and copy
+    static readonly Random random = new Random();
 
-Use a `foreach` loop to iterate over all items in the original `words` array and add them one by one to the `List<string>` object using the instance method `Add`.
+    public static CardPair PickRandom(Card[] cards)
+        => new CardPair
+        {
+            Item1 = cards[random.Next(cards.Length)],
+            Item2 = cards[random.Next(cards.Length)]
+        };
+}
+```
 
-### Step 4: Iterate and print
+```{code-cell}
+DiceRoll[] diceRolls = new DiceRoll[]
+{
+    new DiceRoll { Value = 1 },
+    new DiceRoll { Value = 2 },
+    new DiceRoll { Value = 3 },
+    new DiceRoll { Value = 4 },
+    new DiceRoll { Value = 5 },
+    new DiceRoll { Value = 6 }
+};
 
-Use a `foreach` loop to iterate over your `List<string>` object and print all strings to the console.
+Card[] cards = new Card[]
+{
+    new Card { Suit = "Hearts", Rank = "Jack" },
+    new Card { Suit = "Hearts", Rank = "Queen" },
+    new Card { Suit = "Hearts", Rank = "King" },
+    new Card { Suit = "Hearts", Rank = "Ace" },
+    // ...
+};
 
-### Step 5: Do the same for the matrix
+var randomDiceRollPair = DiceRollPair.PickRandom(diceRolls);
+var randomCardPair = CardPair.PickRandom(cards);
 
-1. Declare and initialize another `List`.
+Console.WriteLine("Random Dice Roll Pair:");
+Console.WriteLine($"{randomDiceRollPair.Item1.Value}");
+Console.WriteLine($"{randomDiceRollPair.Item2.Value}");
 
-    ```{hint}
-    Remember that the `T` in `List<T>` can be replaced by any arbitrarily complex type, even another list such as `List<int>`.
-    ```
+Console.WriteLine("Random Card Pair:");
+Console.WriteLine($"{randomCardPair.Item1.Rank} of {randomCardPair.Item1.Suit}");
+Console.WriteLine($"{randomCardPair.Item2.Rank} of {randomCardPair.Item2.Suit}");
+```
 
-2. Iterate over all the items in the two-dimensional `matrix` array, and add them to your list one by one using the `Add` method.
+### Instructions
 
-    ```{tip}
-    Depending on how much you know about the generic `List<T>` type it might be easier to use a `for` loop rather than a `foreach` loop when copying items.
-    ```
+#### Step 1: Introduce a non-generic `ObjectPair` class
 
-3. Iterate over your list using a `foreach` loop and print each item to the console so that the result is:
+Start by creating a non-generic class `ObjectPair`. This will replace the need for separate pair classes for `DiceRoll` and `Card` but will *not* be compile-time type-safe.
 
-    ```
-    1 2 3
-    4 5 6
-    7 8 9
-    ```
+```{code-cell}
+class ObjectPair
+{
+    public object Item1 { get; set; }
+    public object Item2 { get; set; }
+
+    static readonly Random random = new Random();
+
+    public static ObjectPair PickRandom(object[] items)
+        => new ObjectPair
+        {
+            Item1 = items[random.Next(items.Length)],
+            Item2 = items[random.Next(items.Length)]
+        };
+}
+```
+
+```{admonition} 🤔 Reflection
+Why is it not compile-time type-safe?
+```
+
+#### Step 2: Refactor `Main`
+
+Delete the old classes `DiceRollPair` and `CardPair`.
+**Minimally** rewrite the `Main` method so that we make use of `ObjectPair` instead of the two classes `DiceRollPair` and `CardPair`.
+
+```{warning}
+This step requires downcasting.
+```
+
+```{admonition} 🤔 Reflection
+Did we eliminate the duplication?
+Why did we loose compile-time type-safety?
+```
+
+
+#### Step 3: Introduce a Generic `Pair` Class
+
+Add the generic class `Pair<T>`. This will replace the need for separate pair classes for `DiceRoll` and `Card` *and* will be compile-time type-safe.
+
+```{code-cell}
+public class Pair<T>
+{
+    public T Item1 { get; set; }
+    public T Item2 { get; set; }
+
+    static readonly Random random = new Random();
+
+    public static Pair<T> PickRandom(T[] items)
+        => new Pair<T>
+        {
+            Item1 = items[random.Next(items.Length)],
+            Item2 = items[random.Next(items.Length)]
+        };
+}
+```
+
+#### Step 4: Refactor `Main`
+
+Delete the class `ObjectPair`.
+**Minimally** rewrite the `Main` method to make use of `Pair<T>` instead of `ObjectPair`.
+
+```{important}
+You should no longer need to use downcasting.
+```
+
+```{admonition} 🤔 Reflection
+How does the use of generics enhance code maintainability and reduce redundancy in this scenario?
+Why did we regain compile-time type-safety?
+```
+
+### Challenge
+
+1. **Extend Functionality:** Override the `ToString()` method in `Pair<T>`. It should print the details of both the objects in the pair. Tip: All types in C# support the `ToString()` method so it can be called on any object irrespectively of its type.
+
+2. **Nested Generics:** Create a `Pair<Pair<T>>` instance in the `Main` method and experiment with nesting generics.
+
+3. **Replace arrays with List<T>**: Use the generic type `List<T>` instead of arrays in the `Main` method as well as in `Pair<T>`.
+
+```{admonition} 🤔 Reflection
+Consider the advantages of using a `Pair<T>` class. Would implementing such generic classes be feasible or beneficial in a more extensive, real-world project setting? Reflect on scenarios where using generics could be disadvantageous.
+```
 
