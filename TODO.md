@@ -1,5 +1,8 @@
 # The new todo list
 
+- **A MUCH BETTER EXAMPLE FOR THE FIRST GENERICS CHAPTER IS THE ONE I USED IN THE LECTURE. Board and card games: Pair of Cards and DiceRolls. Backgammon, Hold em, and Craps.**
+- Generic supertypes chapter should also discuss interface inheritance. We should also follow the much more logical structure of the OOP2 slides on the chapter. It simplifies the flow.
+- Encapsulation should come after properties. First show what we can do, then explain WHY. Makes it simpler to explain encapsulation because we can use public get private set. NOT OBVIOUS. I am using the term encapsulation in the auto properties chapter.
 - The covariance, contravariance, and invariance chapters never deal with non-generic subtypes: Covariance permits a method to return a type that is derived from the original return type.
 - Should Robustness principle be moved into its own chapter? See old longer version in old/liskov-substitution-principle.md
 - Split the variance chapter in two? Covariance and Contravariance?
