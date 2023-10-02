@@ -141,7 +141,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -315,7 +315,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -323,19 +323,25 @@
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="generic-supertypes">
 <h1><span class="section-number">83. </span>Generic supertypes<a class="headerlink" href="#generic-supertypes" title="Permalink to this heading">#</a></h1>
-<p>In addition to generic classes, we can also define and implement generic interfaces as well as inherit from generic classes. The same principles apply.
+<p>In addition to generic classes, we can also define and implement generic <a class="reference internal" href="interfaces.html"><span class="doc std std-doc">interfaces</span></a> as well as inherit from generic <a class="reference internal" href="classes.html"><span class="doc std std-doc">classes</span></a>. The same principles apply.
 In this chapter we’ll focus on generic interfaces.</p>
 <div class="admonition-key-point admonition">
 <p class="admonition-title">Key point</p>
+<ul class="simple">
+<li><p>If the subtype is <em>generic</em> then the constructed generic supertype can remain “open” (e.g. <code class="docutils literal notranslate"><span class="pre">Cycle&lt;T&gt;</span> <span class="pre">:</span> <span class="pre">ISequence&lt;T&gt;</span></code>).</p></li>
+<li><p>If the subtype is <em>non-generic</em> then the constructed generic supertype must be “closed” (e.g. <code class="docutils literal notranslate"><span class="pre">Alphabet</span> <span class="pre">:</span> <span class="pre">ISequence&lt;char&gt;</span></code>.</p></li>
+</ul>
 <p>When implementing a generic interface or inheriting from a generic type then we must construct the generic supertype if we want to create a non-generic type.</p>
 </div>
 <p>Let’s imagine that we want to model the idea of different sequences.
 Some classic sequences include the sequence of natural numbers, the alphabet, and the Fibonacci sequence.
 But we can easily imagine more esoteric sequences like the sequence of customers entering a cafe in a simulation game.
 What unifies these different types is the idea of being able to ask for the next element in the sequence.</p>
+<section id="implementing-generic-interfaces">
+<h2>Implementing generic interfaces<a class="headerlink" href="#implementing-generic-interfaces" title="Permalink to this heading">#</a></h2>
 <p>We’ll start by creating a generic interface called <code class="docutils literal notranslate"><span class="pre">ISequence&lt;T&gt;</span></code>.
 Any class implementing the interface must define a method <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">Next()</span></code> which simply provides the next element of type <code class="docutils literal notranslate"><span class="pre">T</span></code> in the sequence.
-Let’s also add a <span class="xref myst">default method</span> <code class="docutils literal notranslate"><span class="pre">T[]</span> <span class="pre">Take(int</span> <span class="pre">n)</span></code> that calls <code class="docutils literal notranslate"><span class="pre">Next</span></code> <code class="docutils literal notranslate"><span class="pre">n</span></code> number of times and returns the result as an array of elements of type <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p>
+Let’s also add a <a class="reference internal" href="interface-default-implementations.html"><span class="doc std std-doc">default method</span></a> <code class="docutils literal notranslate"><span class="pre">T[]</span> <span class="pre">Take(int</span> <span class="pre">n)</span></code> that calls <code class="docutils literal notranslate"><span class="pre">Next</span></code> <code class="docutils literal notranslate"><span class="pre">n</span></code> number of times and returns the result as an array of elements of type <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ISequence</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
@@ -358,7 +364,7 @@ Let’s also add a <span class="xref myst">default method</span> <code class="do
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-4452.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-4320.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -403,12 +409,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.41:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.55:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '4452.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '4320.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -464,8 +470,6 @@ else {
     </script>
 </div></div></div>
 </div>
-<p>When we implement an interface we have to construct the generic type if the implementing type is a non-generic type.
-In other words, if our subtype is not generic then we cannot say that we’re implementing the interface <code class="docutils literal notranslate"><span class="pre">ISequence&lt;T&gt;</span></code> because then there is no way for the user of our subtype to specify what <code class="docutils literal notranslate"><span class="pre">T</span></code> should be.</p>
 <p>In the code below we indicate that the non-generic classes <code class="docutils literal notranslate"><span class="pre">NaturalSequence</span></code> and <code class="docutils literal notranslate"><span class="pre">Alphabet</span></code> implement the constructed generic interfaces <code class="docutils literal notranslate"><span class="pre">ISequence&lt;int&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">ISequence&lt;char&gt;</span></code> respectively.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -496,6 +500,9 @@ In other words, if our subtype is not generic then we cannot say that we’re im
 </div>
 </div>
 </div>
+<p>Since our subtypes of the generic interface are non-generic we have to “close” the constructed generic supertype.
+In other words, we cannot say that <code class="docutils literal notranslate"><span class="pre">NaturalSequence</span></code> or <code class="docutils literal notranslate"><span class="pre">Alphabet</span></code> implements the interface <code class="docutils literal notranslate"><span class="pre">ISequence&lt;T&gt;</span></code>.
+If we could, then there would be no way for the user of our subtype to specify what <code class="docutils literal notranslate"><span class="pre">T</span></code> should be.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>While <code class="docutils literal notranslate"><span class="pre">Alphabet</span></code> is a <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype</span></a> of <code class="docutils literal notranslate"><span class="pre">ISequence&lt;char&gt;</span></code> it is <em>not</em> a subtype of <code class="docutils literal notranslate"><span class="pre">ISequence&lt;T&gt;</span></code>.
@@ -528,7 +535,7 @@ This means you can’t use an instance of type <code class="docutils literal not
 </div>
 </div>
 </div>
-<p>If however we want a <em>generic</em> subtype which is parameterized over the same type as the supertype, then we don’t have to construct the generic supertype.
+<p>If however we want a <em>generic</em> subtype which is parameterized over the same type as the supertype, then we don’t have to “close” the constructed generic supertype.
 In the code below we’re defining a generic class called <code class="docutils literal notranslate"><span class="pre">Cycle&lt;T&gt;</span></code> that implements the interface <code class="docutils literal notranslate"><span class="pre">ISequence&lt;T&gt;</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -574,36 +581,96 @@ In the code below we’re defining a generic class called <code class="docutils 
 </div>
 </div>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p><code class="docutils literal notranslate"><span class="pre">Cycle&lt;T&gt;</span></code> is <em>not</em> a <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype</span></a> of <code class="docutils literal notranslate"><span class="pre">ISequence&lt;T&gt;</span></code> because neither of these are actual types. They are generic type definitions.
-However, any constructed generic type from <code class="docutils literal notranslate"><span class="pre">Cycle&lt;T&gt;</span></code> (such as <code class="docutils literal notranslate"><span class="pre">Cycle&lt;int&gt;</span></code>) will be a subtype of any constructed generic type from <code class="docutils literal notranslate"><span class="pre">ISequence&lt;T&gt;</span></code> if the type argument used in place of <code class="docutils literal notranslate"><span class="pre">T</span></code> is the same (such as <code class="docutils literal notranslate"><span class="pre">ISequence&lt;int&gt;</span></code>).
-There’s some more nuance to this but we’ll explore that further in the chapter on <a class="reference internal" href="variant-generic-interfaces.html"><span class="doc std std-doc">variant generic interfaces</span></a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Any constructed generic type from <code class="docutils literal notranslate"><span class="pre">Cycle&lt;T&gt;</span></code> (such as <code class="docutils literal notranslate"><span class="pre">Cycle&lt;int&gt;</span></code>) will be a subtype of any constructed generic type from <code class="docutils literal notranslate"><span class="pre">ISequence&lt;T&gt;</span></code> if the type argument used in place of <code class="docutils literal notranslate"><span class="pre">T</span></code> is the same (such as <code class="docutils literal notranslate"><span class="pre">ISequence&lt;int&gt;</span></code>).</p>
 </div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>There’s more nuance to substitutability in generic interfaces but we’ll explore that in the chapter on <a class="reference internal" href="variant-generic-interfaces.html"><span class="doc std std-doc">variant generic interfaces</span></a>.</p>
+</div>
+</section>
+<section id="inheriting-from-generic-classes">
+<h2>Inheriting from generic classes<a class="headerlink" href="#inheriting-from-generic-classes" title="Permalink to this heading">#</a></h2>
 <p>Now that we’ve grasped the principles behind implementing generic interfaces, let’s pivot our attention to inheritance in generics.
-Inheriting from a generic class works just like inheriting from a non-generic class except that if the subclass is non-generic then the superclass has to be constructed.</p>
+Inheriting from a generic class works just like inheriting from a non-generic class except that if the subclass is non-generic then the constructed generic superclass must be “closed”.</p>
 <p>It’s the same logic as when implementing generic interfaces.
-We don’t have to apply type arguments to any type parameter which is shared between the subtype and the supertype.
-Meaning we don’t have to use an actual type (like <code class="docutils literal notranslate"><span class="pre">string</span></code>) as a type argument for the superclass if the type is also a type parameter in the subclass.
-But any parameter that isn’t shared we must apply a type argument to.</p>
+If the subclass is generic and we pass the type parameter as a type argument to the construction of the generic superclass then we can keep the generic superclass “open”.</p>
+<p>Meaning we don’t have to use an actual type (like <code class="docutils literal notranslate"><span class="pre">string</span></code>) as a type argument for the superclass if the type is also a type parameter in the subclass.
+However, if we don’t use our type parameters as type arguments in the super class then we must of course close those parameters of the constructed generic super class.</p>
 <p>The generic class <code class="docutils literal notranslate"><span class="pre">MonoPair&lt;T&gt;</span></code> inherits from the generic class <code class="docutils literal notranslate"><span class="pre">Pair&lt;T1,</span> <span class="pre">T2&gt;</span></code>.
 It does not change or add any behavior but merely restricts users of the class to a single type parameter which means that all pairs must have the same type in both positions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Pair</span><span class="o">&lt;</span><span class="n">T1</span><span class="p">,</span><span class="w"> </span><span class="n">T2</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Pair</span><span class="o">&lt;</span><span class="n">T1</span><span class="p">,</span><span class="w"> </span><span class="n">T2</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">T1</span><span class="w"> </span><span class="n">Item1</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="n">init</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">T2</span><span class="w"> </span><span class="n">Item2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="n">init</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">MonoPair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Pair</span><span class="p">(</span><span class="n">T1</span><span class="w"> </span><span class="n">item1</span><span class="p">,</span><span class="w"> </span><span class="n">T2</span><span class="w"> </span><span class="n">item2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Item1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">item1</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Item2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">item2</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Note that in the definition of <code class="docutils literal notranslate"><span class="pre">MonoPair&lt;T&gt;</span></code> above, the <code class="docutils literal notranslate"><span class="pre">T</span></code> on the left-hand side is a type parameter, while the two <code class="docutils literal notranslate"><span class="pre">T</span></code>’s on the right are type arguments.
-On the left-hand side we declare that the generic class <code class="docutils literal notranslate"><span class="pre">MonoPair&lt;T&gt;</span></code> is a <em>generic</em> type parameterized over one type that we call <code class="docutils literal notranslate"><span class="pre">T</span></code>.
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MonoPair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">MonoPair</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">item1</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">item2</span><span class="p">)</span>
+<span class="w">        </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span><span class="n">item1</span><span class="p">,</span><span class="w"> </span><span class="n">item2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>In the definition of <code class="docutils literal notranslate"><span class="pre">MonoPair&lt;T&gt;</span></code> above, the <code class="docutils literal notranslate"><span class="pre">T</span></code> on the left-hand side is a type parameter, while the two <code class="docutils literal notranslate"><span class="pre">T</span></code>’s on the right are type arguments.</p>
+</div>
+<p>On the left-hand side we declare that the generic class <code class="docutils literal notranslate"><span class="pre">MonoPair&lt;T&gt;</span></code> is a <em>generic</em> type parameterized over one type that we call <code class="docutils literal notranslate"><span class="pre">T</span></code>.
 On the right-hand side however we use <code class="docutils literal notranslate"><span class="pre">T</span></code> as the type argument for both generic type parameters in the generic type <code class="docutils literal notranslate"><span class="pre">Pair&lt;T1,</span> <span class="pre">T2&gt;</span></code> so that whatever <code class="docutils literal notranslate"><span class="pre">T</span></code> is it is used as the type for both <code class="docutils literal notranslate"><span class="pre">T1</span></code> and <code class="docutils literal notranslate"><span class="pre">T2</span></code>.</p>
-<p>Lastly, it’s worth noting that it’s also possible to use generic types in <a class="reference internal" href="interface-inheritance.html"><span class="doc std std-doc">interface inheritance</span></a>.
-This too works in the same way.
-We must supply type arguments for all type parameters of the inherited interfaces and if our inheriting interface is generic then those type arguments can be type parameters of the inheriting interface.</p>
+</section>
+<section id="inheriting-from-generic-interfaces">
+<h2>Inheriting from generic interfaces<a class="headerlink" href="#inheriting-from-generic-interfaces" title="Permalink to this heading">#</a></h2>
+<p>It’s worth noting that it’s also possible to use generic types in <a class="reference internal" href="interface-inheritance.html"><span class="doc std std-doc">interface inheritance</span></a>.
+The same rules apply.</p>
+<p>Any type parameter of the constructed supertype that isn’t matched with a type parameter of the generic subtype must be “closed”.</p>
+<p>We must supply type arguments for all type parameters of the inherited interfaces and if our inheriting interface is generic then those type arguments can be type parameters of the inheriting interface.</p>
+<p>In the example below we keep the constructed generic supertype open.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ISequence</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="nf">Next</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">interface</span><span class="w"> </span><span class="n">ICycle</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ISequence</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="nf">Reset</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the example below however we close the constructed generic supertype.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ICharSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ISequence</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="nf">SetUpperCase</span><span class="p">();</span><span class="w"> </span><span class="c1">// Changes to uppercase.</span>
+<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="nf">SetLowerCase</span><span class="p">();</span><span class="w"> </span><span class="c1">// Changes to lowercase.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
 <p>In this chapter, we’ve delved generic interfaces and inheritance, highlighting the nuances between non-generic and generic subtypes. As we look ahead, we’ll delve deeper into the world of variance and explore variant generic interfaces, which offers even greater flexibility when subtyping constructed generic types. But before that, our journey will take us to generic methods and type constraints. See you in the next chapter.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -668,8 +735,30 @@ We must supply type arguments for all type parameters of the inherited interface
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">83. Generic supertypes</a><ul>
+<li><a class="reference internal" href="#implementing-generic-interfaces">Implementing generic interfaces</a></li>
+<li><a class="reference internal" href="#inheriting-from-generic-classes">Inheriting from generic classes</a></li>
+<li><a class="reference internal" href="#inheriting-from-generic-interfaces">Inheriting from generic interfaces</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
