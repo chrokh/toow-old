@@ -12,11 +12,11 @@ kernelspec:
 
 # Lab: Generics
 
-### Objective
+## Objective
 
 In this lab, we will apply our understanding of how to use a generic type that someone has defined to reduce redundancy in code while maintaining type-safety. In this case we'll introduce the generic class `Pair<T>`.
 
-### Provided Code
+## Provided Code
 
 Carefully review the provided code. Notice the redundancy in the `DiceRollPair` and `CardPair` classes and how `DiceRoll` and `Card` classes are coupled with them.
 
@@ -101,9 +101,9 @@ Console.WriteLine($"{randomCardPair.Item1.Rank} of {randomCardPair.Item1.Suit}")
 Console.WriteLine($"{randomCardPair.Item2.Rank} of {randomCardPair.Item2.Suit}");
 ```
 
-### Instructions
+## Instructions
 
-#### Step 1: Introduce a non-generic `ObjectPair` class
+### Step 1: Introduce a non-generic `ObjectPair` class
 
 Start by creating a non-generic class `ObjectPair`. This will replace the need for separate pair classes for `DiceRoll` and `Card` but will *not* be compile-time type-safe.
 
@@ -128,7 +128,7 @@ class ObjectPair
 Why is it not compile-time type-safe?
 ```
 
-#### Step 2: Refactor `Main`
+### Step 2: Refactor `Main`
 
 Delete the old classes `DiceRollPair` and `CardPair`.
 **Minimally** rewrite the `Main` method so that we make use of `ObjectPair` instead of the two classes `DiceRollPair` and `CardPair`.
@@ -143,12 +143,12 @@ Why did we loose compile-time type-safety?
 ```
 
 
-#### Step 3: Introduce a Generic `Pair` Class
+### Step 3: Introduce a Generic `Pair` Class
 
 Add the generic class `Pair<T>`. This will replace the need for separate pair classes for `DiceRoll` and `Card` *and* will be compile-time type-safe.
 
 ```{code-cell}
-public class Pair<T>
+class Pair<T>
 {
     public T Item1 { get; set; }
     public T Item2 { get; set; }
@@ -164,7 +164,7 @@ public class Pair<T>
 }
 ```
 
-#### Step 4: Refactor `Main`
+### Step 4: Refactor `Main`
 
 Delete the class `ObjectPair`.
 **Minimally** rewrite the `Main` method to make use of `Pair<T>` instead of `ObjectPair`.
@@ -178,7 +178,7 @@ How does the use of generics enhance code maintainability and reduce redundancy 
 Why did we regain compile-time type-safety?
 ```
 
-### Challenge
+## Challenge
 
 1. **Extend Functionality:** Override the `ToString()` method in `Pair<T>`. It should print the details of both the objects in the pair. Tip: All types in C# support the `ToString()` method so it can be called on any object irrespectively of its type.
 

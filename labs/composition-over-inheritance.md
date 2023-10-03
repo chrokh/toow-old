@@ -24,7 +24,7 @@ Notice how the three classes `Human`, `Fish`, and `Mermaid` all inherit from the
 Then notice how the `Main` method defines a local function that takes an object of type `Animal` which, through subtype polymorphism, allows us to call the instance methods of said animal without knowing whether it's a `Human`, `Fish`, or `Mermaid`.
 
 ```{code-cell}
-public abstract class Animal
+abstract class Animal
 {
     public abstract string Eat();
     public abstract string Sleep();
@@ -33,7 +33,7 @@ public abstract class Animal
 ```
 
 ```{code-cell}
-public class Human : Animal
+class Human : Animal
 {
     public override string Eat() => "Eating sea and land food.";
     public override string Sleep() => "Sleeping.";
@@ -42,7 +42,7 @@ public class Human : Animal
 ```
 
 ```{code-cell}
-public class Fish : Animal
+class Fish : Animal
 {
     public override string Eat() => "Eating sea food.";
     public override string Sleep() => "Resting.";
@@ -51,7 +51,7 @@ public class Fish : Animal
 ```
 
 ```{code-cell}
-public class Mermaid : Animal
+class Mermaid : Animal
 {
     public override string Eat() => "Eating sea and land food.";
     public override string Sleep() => "Sleeping.";
@@ -110,52 +110,52 @@ The `Main` method should now look like the code below and the output should be t
 ```{code-cell}
 :tags: [remove-input]
 
-public interface IEatingBehavior
+interface IEatingBehavior
 {
     string Eat();
 }
 
-public interface ISleepingBehavior
+interface ISleepingBehavior
 {
     string Sleep();
 }
 
-public interface IMovingBehavior
+interface IMovingBehavior
 {
     string Move();
 }
 
-public class SeaAndLandFoodEating : IEatingBehavior
+class SeaAndLandFoodEating : IEatingBehavior
 {
     public string Eat() => "Eating sea and land food.";
 }
 
-public class SeaFoodEating : IEatingBehavior
+class SeaFoodEating : IEatingBehavior
 {
     public string Eat() => "Eating sea food.";
 }
 
-public class Sleeping : ISleepingBehavior
+class Sleeping : ISleepingBehavior
 {
     public string Sleep() => "Sleeping.";
 }
 
-public class Resting : ISleepingBehavior
+class Resting : ISleepingBehavior
 {
     public string Sleep() => "Resting.";
 }
 
-public class Swimming : IMovingBehavior
+class Swimming : IMovingBehavior
 {
     public string Move() => "Swimming.";
 }
 
-public class Walking : IMovingBehavior
+class Walking : IMovingBehavior
 {
     public string Move() => "Walking.";
 }
 
-public class Animal
+class Animal
 {
     private readonly IEatingBehavior eatingBehavior;
     private readonly ISleepingBehavior sleepingBehavior;

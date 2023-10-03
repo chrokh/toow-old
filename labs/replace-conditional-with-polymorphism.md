@@ -21,11 +21,11 @@ To refactor the provided `Shape` class to remove conditionals and implement poly
 Study the starting code given to you. It consists of a single `Shape` class which draws different shapes based on the `ShapeType` using conditionals.
 
 ```{code-cell}
-public enum ShapeType { HorizontalLine, Square, RightTriangle }
+enum ShapeType { HorizontalLine, Square, RightTriangle }
 ```
 
 ```{code-cell}
-public class Shape
+class Shape
 {
     ShapeType type;
     int size;
@@ -134,13 +134,13 @@ You should now be able to delete the old `Shape` class.
 
 ```{code-cell}
 :tags: [remove-input]
-public interface IShape
+interface IShape
 {
     string Draw();
 }
 
 
-public class HorizontalLine : IShape
+class HorizontalLine : IShape
 {
     int size;
     string symbol;
@@ -199,7 +199,7 @@ The abstract class `Shape` should allow you to eliminate the duplicated method  
 One way is to add an `abstract` method to `Shape` with the signature `string[][] MakeLines()`:
 
 ```{code-cell}
-public abstract class Shape : IShape
+abstract class Shape : IShape
 {
     protected abstract string[][] GetLines();
 
@@ -211,7 +211,7 @@ public abstract class Shape : IShape
 Another way is to make `Draw` `abstract` in `Shape` and instead offer its subclasses a `protected` method with the signature `string Flatten(string[][] symbols)`.
 
 ```{code-cell}
-public abstract class Shape : IShape
+abstract class Shape : IShape
 {
     public abstract string Draw();
 
