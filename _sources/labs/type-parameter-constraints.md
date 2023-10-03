@@ -10,13 +10,13 @@ kernelspec:
   name: .net-csharp
 ---
 
-## Lab: Type parameter constraints
+# Lab: Type parameter constraints
 
-### Objective
+## Objective
 
 In this lab, we will harness the power of type parameter constraints to create a type-safe inventory management system that can handle distinct item types with their unique behaviors. We'll focus on implementing and extending a generic inventory, and then populating this inventory with various items and interacting with them.
 
-### Provided code
+## Provided code
 
 Carefully review the provided code. We have a basic interface `IItem` and two implementations: `Weapon` and `Map`.
 
@@ -46,9 +46,9 @@ public class Map : IItem
 We aim to further enrich this system by enhancing the functionalities of these items and ensuring our inventory can exploit these capabilities without losing type-specific details.
 
 
-### Instructions
+## Instructions
 
-#### Step 1: Crafting the Generic Inventory
+### Step 1: Crafting the Generic Inventory
 
 Your task is to design a generic inventory class `Inventory<T>`, where `T` is constrained to the interface `IItem`. This class should be able to:
 
@@ -86,7 +86,7 @@ Did you encounter any issues? Why do you think this is the case?
 Why are we not able directly call `Use()` or `Open()` on an extracted item from an `Inventory<IItem>`? What does this tell us about the advantages and limitations of subtype polymorphism?
 ```
 
-#### Step 3: Specific Inventories
+### Step 3: Specific Inventories
 
 In the `Main` program.
 Create inventories of type `Inventory<Weapon>` and `Inventory<Map>`.
@@ -103,7 +103,7 @@ What are the benefits of using separate inventories for the two types `Weapon` a
 ```
 
 
-### Challenge
+## Challenge
 
 1. Introduce a new item type, `Key`. This should implement `IItem` and have a method `Unlock()` that prints "Unlocking with {Name}".
 2. Create an inventory for keys, add a few keys to it, and iterate through it to unlock using the keys.
