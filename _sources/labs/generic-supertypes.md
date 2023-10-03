@@ -170,15 +170,18 @@ Of course! Here's a new Step 4 for the lab exercise:
 
 ### Step 4: Using the Sequences
 
-In this step, we're going to instantiate the classes we've implemented so far, put them in lists, and invoke the `Take` method on each sequence in the lists, printing the results.
+In this step, we're going to instantiate the classes we've implemented so far, put them in a list, and then iterate over them to invoke the `Take` method on each of them. Finally, we will print each element from the results to the console.
 
-1. Create multiple instances of the `IStepSequence` and `Cycle<T>` classes.
-2. Create multiple lists that can hold your instances.
-3. Add your instances to the appropriate lists.
-4. Iterate over each element in your lists, call the `Take` method to retrieve the next `5` elements, and print each of them to the console.
+1. Create multiple instances of the `IStepSequence` and `Cycle<T>` classes. Make sure to use the same typ for `T` in all sequences!
+2. Store these instances in a generic list of sequences.
+3. Iterate over each sequence in the list, call the `Take` method to retrieve the next `5` elements, and print each of them to the console.
 
 ```{admonition} 🤔 Reflection
-Why do we need different lists? Try putting all your sequences into the same list? Why is it not possible if we want to be able to call `Take`?
+Reflect on the polymorphic behavior exhibited by the sequences in the list. How does the `ISequence<int>` interface allow us to treat different sequences in a unified manner? What implications does this have for maintainability?
+```
+
+```{admonition} 🤔 Reflection
+Is this also possible if we use different types for `T`? Try it. Why does it work or not work?
 ```
 
 ## Challenge
