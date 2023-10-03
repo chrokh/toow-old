@@ -2,6 +2,10 @@
 
 Coming soon.
 
+```{seealso}
+Meanwhile, please refer to [this page](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-8.0/default-interface-methods) in the official documentation.
+```
+
 % - A form of multiple inheritance.
 % - MUST REWRITE INTERFACES CHAPTER. Cannot say that interfaces don't support concrete implementations.
 
