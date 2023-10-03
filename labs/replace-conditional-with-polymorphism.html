@@ -332,14 +332,14 @@
 <p>Study the starting code given to you. It consists of a single <code class="docutils literal notranslate"><span class="pre">Shape</span></code> class which draws different shapes based on the <code class="docutils literal notranslate"><span class="pre">ShapeType</span></code> using conditionals.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="n">ShapeType</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">HorizontalLine</span><span class="p">,</span><span class="w"> </span><span class="n">Square</span><span class="p">,</span><span class="w"> </span><span class="n">RightTriangle</span><span class="w"> </span><span class="p">}</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span><span class="w"> </span><span class="n">ShapeType</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">HorizontalLine</span><span class="p">,</span><span class="w"> </span><span class="n">Square</span><span class="p">,</span><span class="w"> </span><span class="n">RightTriangle</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-8162.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-8945.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -384,12 +384,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.55:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.71:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '8162.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '8945.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -447,7 +447,7 @@ else {
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Shape</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Shape</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="n">ShapeType</span><span class="w"> </span><span class="n">type</span><span class="p">;</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
@@ -605,7 +605,7 @@ Let’s eliminate that duplication using inheritance.</p>
 <p>One way is to add an <code class="docutils literal notranslate"><span class="pre">abstract</span></code> method to <code class="docutils literal notranslate"><span class="pre">Shape</span></code> with the signature <code class="docutils literal notranslate"><span class="pre">string[][]</span> <span class="pre">MakeLines()</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Shape</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IShape</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Shape</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IShape</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="kt">string</span><span class="p">[][]</span><span class="w"> </span><span class="n">GetLines</span><span class="p">();</span>
 
@@ -619,7 +619,7 @@ Let’s eliminate that duplication using inheritance.</p>
 <p>Another way is to make <code class="docutils literal notranslate"><span class="pre">Draw</span></code> <code class="docutils literal notranslate"><span class="pre">abstract</span></code> in <code class="docutils literal notranslate"><span class="pre">Shape</span></code> and instead offer its subclasses a <code class="docutils literal notranslate"><span class="pre">protected</span></code> method with the signature <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">Flatten(string[][]</span> <span class="pre">symbols)</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Shape</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IShape</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Shape</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IShape</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Draw</span><span class="p">();</span>
 
