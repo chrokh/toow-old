@@ -354,7 +354,7 @@
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-8783.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-8779.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -399,12 +399,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.147:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.48:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '8783.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '8779.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -561,7 +561,7 @@ This means that we also have to implement the <code class="docutils literal notr
 <h3>Step 4: Using the Sequences<a class="headerlink" href="#step-4-using-the-sequences" title="Permalink to this heading">#</a></h3>
 <p>In this step, we’re going to instantiate the classes we’ve implemented so far, put them in a list, and then iterate over them to invoke the <code class="docutils literal notranslate"><span class="pre">Take</span></code> method on each of them. Finally, we will print each element from the results to the console.</p>
 <ol class="arabic simple">
-<li><p>Create multiple instances of the <code class="docutils literal notranslate"><span class="pre">IStepSequence</span></code> and <code class="docutils literal notranslate"><span class="pre">Cycle&lt;T&gt;</span></code> classes. Make sure to use the same typ for <code class="docutils literal notranslate"><span class="pre">T</span></code> in all sequences!</p></li>
+<li><p>Create multiple instances of the <code class="docutils literal notranslate"><span class="pre">StepSequence</span></code> and <code class="docutils literal notranslate"><span class="pre">Cycle&lt;T&gt;</span></code> classes. Make sure to use the same typ for <code class="docutils literal notranslate"><span class="pre">T</span></code> in all sequences!</p></li>
 <li><p>Store these instances in a list of sequences.</p></li>
 <li><p>Iterate over each sequence in the list, call the <code class="docutils literal notranslate"><span class="pre">Take</span></code> method to retrieve the next <code class="docutils literal notranslate"><span class="pre">5</span></code> elements, and print each of them to the console.</p></li>
 </ol>

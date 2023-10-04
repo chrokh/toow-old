@@ -172,7 +172,7 @@ Of course! Here's a new Step 4 for the lab exercise:
 
 In this step, we're going to instantiate the classes we've implemented so far, put them in a list, and then iterate over them to invoke the `Take` method on each of them. Finally, we will print each element from the results to the console.
 
-1. Create multiple instances of the `IStepSequence` and `Cycle<T>` classes. Make sure to use the same typ for `T` in all sequences!
+1. Create multiple instances of the `StepSequence` and `Cycle<T>` classes. Make sure to use the same typ for `T` in all sequences!
 2. Store these instances in a list of sequences.
 3. Iterate over each sequence in the list, call the `Take` method to retrieve the next `5` elements, and print each of them to the console.
 
