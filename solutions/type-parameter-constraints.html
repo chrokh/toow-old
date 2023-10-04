@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Solution: Generic Supertypes - The Object Oriented Way</title>
+        <title>Solution: Type parameter constraints - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -323,8 +323,10 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="solution-generic-supertypes">
-<h1>Solution: Generic Supertypes<a class="headerlink" href="#solution-generic-supertypes" title="Permalink to this heading">#</a></h1>
+          <section class="tex2jax_ignore mathjax_ignore" id="solution-type-parameter-constraints">
+<h1>Solution: Type parameter constraints<a class="headerlink" href="#solution-type-parameter-constraints" title="Permalink to this heading">#</a></h1>
+<section id="provided-code">
+<h2>Provided code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -332,17 +334,25 @@
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ISequence</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">interface</span><span class="w"> </span><span class="n">IItem</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="nf">Next</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
 
-<span class="w">    </span><span class="n">T</span><span class="p">[]</span><span class="w"> </span><span class="nf">Take</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">T</span><span class="p">[]</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">T</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
-<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="w">            </span><span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Next</span><span class="p">();</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Weapon</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IItem</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Use</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Using {Name}.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Map</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IItem</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Open</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Opening {Name}.&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -351,7 +361,7 @@
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-10091.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-10341.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -401,7 +411,7 @@ function loadDotnetInteractiveApi() {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '10091.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '10341.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -457,244 +467,174 @@ else {
     </script>
 </div></div></div>
 </div>
-<section id="step-1-stepsequence">
-<h2>Step 1: StepSequence<a class="headerlink" href="#step-1-stepsequence" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="step-1-crafting-the-generic-inventory">
+<h2>Step 1: Crafting the Generic Inventory<a class="headerlink" href="#step-1-crafting-the-generic-inventory" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">StepSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ISequence</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Inventory</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IItem</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">current</span><span class="p">;</span>
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">steps</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">currentIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="m">1</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">StepSequence</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">steps</span><span class="p">)</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">Current</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">start</span><span class="p">;</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">steps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">steps</span><span class="p">;</span>
+<span class="w">        </span><span class="k">get</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">currentIndex</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">currentIndex</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="n">Count</span><span class="p">)</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">items</span><span class="p">[</span><span class="n">currentIndex</span><span class="p">];</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="nf">default</span><span class="p">(</span><span class="n">T</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">CurrentName</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">current</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">steps</span><span class="p">;</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">current</span><span class="p">;</span>
+<span class="w">        </span><span class="k">get</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">currentIndex</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">currentIndex</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="n">Count</span><span class="p">)</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">items</span><span class="p">[</span><span class="n">currentIndex</span><span class="p">].</span><span class="n">Name</span><span class="p">;</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Add</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">item</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">Remove</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">item</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ItemNames</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">items</span><span class="p">)</span>
+<span class="w">            </span><span class="n">names</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">names</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">items</span><span class="p">.</span><span class="n">Count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<span class="w">            </span><span class="n">currentIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">currentIndex</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="n">Count</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Prev</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">items</span><span class="p">.</span><span class="n">Count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<span class="w">            </span><span class="n">currentIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">currentIndex</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="n">Count</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="n">Count</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p><strong>Reflection</strong>: The constraint ensures that only types implementing <code class="docutils literal notranslate"><span class="pre">IItem</span></code> can be used with <code class="docutils literal notranslate"><span class="pre">Inventory&lt;T&gt;</span></code>, guaranteeing that the common property <code class="docutils literal notranslate"><span class="pre">Name</span></code> will be available.</p>
 </section>
-<section id="step-2-creating-ifinitesequence-t">
-<h2>Step 2: Creating <code class="docutils literal notranslate"><span class="pre">IFiniteSequence&lt;T&gt;</span></code><a class="headerlink" href="#step-2-creating-ifinitesequence-t" title="Permalink to this heading">#</a></h2>
+<section id="step-2-a-mixed-inventory">
+<h2>Step 2: A Mixed Inventory<a class="headerlink" href="#step-2-a-mixed-inventory" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IFiniteSequence</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ISequence</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="nf">First</span><span class="p">();</span>
-<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="nf">Last</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="step-3-implementing-cycle-t">
-<h2>Step 3: Implementing Cycle<T><a class="headerlink" href="#step-3-implementing-cycle-t" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Cycle</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IFiniteSequence</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">T</span><span class="p">[]</span><span class="w"> </span><span class="n">items</span><span class="p">;</span>
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="m">1</span><span class="p">;</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Inventory</span><span class="o">&lt;</span><span class="n">IItem</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mixedInventory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Inventory</span><span class="o">&lt;</span><span class="n">IItem</span><span class="o">&gt;</span><span class="p">();</span>
 
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Cycle</span><span class="p">(</span><span class="n">T</span><span class="p">[]</span><span class="w"> </span><span class="n">items</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">items</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="n">mixedInventory</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Weapon</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Sword&quot;</span><span class="w"> </span><span class="p">});</span>
+<span class="n">mixedInventory</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Weapon</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Bow&quot;</span><span class="w"> </span><span class="p">});</span>
+<span class="n">mixedInventory</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Map</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;World Map&quot;</span><span class="w"> </span><span class="p">});</span>
+<span class="n">mixedInventory</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Map</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Dungeon Map&quot;</span><span class="w"> </span><span class="p">});</span>
 
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">index</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">mixedInventory</span><span class="p">.</span><span class="n">ItemNames</span><span class="p">())</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">First</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="n">IItem</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mixedInventory</span><span class="p">.</span><span class="n">Current</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">Last</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="n">Length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">;</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="step-4-using-the-sequences">
-<h2>Step 4: Using the Sequences<a class="headerlink" href="#step-4-using-the-sequences" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">sequences</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ISequence</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">StepSequence</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Cycle</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="p">})</span>
-<span class="p">};</span>
+<span class="c1">// We can&#39;t directly call Use() or Open() here since</span>
+<span class="c1">// the type is IItem which doesn&#39;t define these methods.</span>
+<span class="c1">// We need to downcast it to the specific type first.</span>
 
-<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">sequence</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">sequences</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sequence</span><span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="m">5</span><span class="p">);</span>
-<span class="w">    </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="k">value</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">values</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="k">value</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
+<span class="c1">// item.Use();  // Compilation error!</span>
+<span class="c1">// item.Open(); // Compilation error!</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sword
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bow
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>World Map
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dungeon Map
 </pre></div>
 </div>
 </div>
 </div>
-<p>Regarding the reflection box:</p>
-<div class="cell tag_raises-exception docutils container">
+<p><strong>Reflection</strong>: When using a mixed inventory, one cannot immediately use type-specific methods because the stored type is the general <code class="docutils literal notranslate"><span class="pre">IItem</span></code> interface which doesn’t have the <code class="docutils literal notranslate"><span class="pre">Use()</span></code> or <code class="docutils literal notranslate"><span class="pre">Open()</span></code> methods.</p>
+</section>
+<section id="step-3-specific-inventories">
+<h2>Step 3: Specific Inventories<a class="headerlink" href="#step-3-specific-inventories" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">var</span><span class="w"> </span><span class="n">mixedSequences</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ISequence</span><span class="o">&lt;</span><span class="kt">object</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Inventory</span><span class="o">&lt;</span><span class="n">Weapon</span><span class="o">&gt;</span><span class="w"> </span><span class="n">weaponInventory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Inventory</span><span class="o">&lt;</span><span class="n">Weapon</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="n">weaponInventory</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Weapon</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Axe&quot;</span><span class="w"> </span><span class="p">});</span>
+<span class="n">weaponInventory</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Weapon</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Dagger&quot;</span><span class="w"> </span><span class="p">});</span>
 
-<span class="n">mixedSequences</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">StepSequence</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">));</span><span class="w">  </span><span class="c1">// Error</span>
+<span class="n">Inventory</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mapInventory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Inventory</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="n">mapInventory</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Map</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;City Map&quot;</span><span class="w"> </span><span class="p">});</span>
+<span class="n">mapInventory</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Map</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Cave Map&quot;</span><span class="w"> </span><span class="p">});</span>
+
+<span class="c1">// Since we know it&#39;s a Weapon, we can directly call Use()</span>
+<span class="n">weaponInventory</span><span class="p">.</span><span class="n">Next</span><span class="p">();</span>
+<span class="n">weaponInventory</span><span class="p">.</span><span class="n">Current</span><span class="p">.</span><span class="n">Use</span><span class="p">();</span>
+
+<span class="c1">// Since we know it&#39;s a Map, we can directly call Open()</span>
+<span class="n">mapInventory</span><span class="p">.</span><span class="n">Next</span><span class="p">();</span>
+<span class="n">mapInventory</span><span class="p">.</span><span class="n">Current</span><span class="p">.</span><span class="n">Open</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3,20): error CS1503: Argument 1: cannot convert from &#39;StepSequence&#39; to &#39;ISequence&lt;object&gt;&#39;
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>System.NullReferenceException: Object reference not set to an instance of an object.
+   at Submission#6.&lt;&lt;Initialize&gt;&gt;d__0.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.CodeAnalysis.Scripting.ScriptExecutionState.RunSubmissionsAsync[TResult](ImmutableArray`1 precedingExecutors, Func`2 currentExecutor, StrongBox`1 exceptionHolderOpt, Func`2 catchExceptionOpt, CancellationToken cancellationToken)
+   at Submission#6.&lt;&lt;Initialize&gt;&gt;d__0.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.CodeAnalysis.Scripting.ScriptExecutionState.RunSubmissionsAsync[TResult](ImmutableArray`1 precedingExecutors, Func`2 currentExecutor, StrongBox`1 exceptionHolderOpt, Func`2 catchExceptionOpt, CancellationToken cancellationToken)
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
 </div>
 </div>
-</div>
+<p><strong>Reflection</strong>: Having separate inventories ensures that one can directly access type-specific methods without casting, but it requires managing multiple inventories.</p>
 </section>
-<section id="challenge-fibonacci-sequence-class">
-<h2>Challenge: Fibonacci sequence class<a class="headerlink" href="#challenge-fibonacci-sequence-class" title="Permalink to this heading">#</a></h2>
+<section id="challenge">
+<h2>Challenge<a class="headerlink" href="#challenge" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">FibonacciSequence</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ISequence</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Key</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IItem</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">prev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current</span><span class="p">;</span>
-<span class="w">        </span><span class="n">current</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">prev</span><span class="p">;</span>
-<span class="w">        </span><span class="n">prev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Unlock</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Unlocking with {Name}.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Usage in Main method:</span>
+<span class="kt">var</span><span class="w"> </span><span class="n">keyInventory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Inventory</span><span class="o">&lt;</span><span class="n">Key</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="n">keyInventory</span><span class="p">.</span><span class="n">AddItem</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Key</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Golden Key&quot;</span><span class="w"> </span><span class="p">});</span>
+<span class="n">keyInventory</span><span class="p">.</span><span class="n">AddItem</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Key</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Silver Key&quot;</span><span class="w"> </span><span class="p">});</span>
+
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">keyInventory</span><span class="p">.</span><span class="n">ItemNames</span><span class="p">())</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">key</span><span class="p">.</span><span class="n">Unlock</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="challenge-alternating-sequences">
-<h2>Challenge: Alternating sequences<a class="headerlink" href="#challenge-alternating-sequences" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AlternatingSequence</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ISequence</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">ISequence</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sequenceA</span><span class="p">;</span>
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">ISequence</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sequenceB</span><span class="p">;</span>
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">AlternatingSequence</span><span class="p">(</span><span class="n">ISequence</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sequenceA</span><span class="p">,</span><span class="w"> </span><span class="n">ISequence</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sequenceB</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">sequenceA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sequenceA</span><span class="p">;</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">sequenceB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sequenceB</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">sequenceA</span><span class="p">.</span><span class="n">Next</span><span class="p">();</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">else</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">sequenceB</span><span class="p">.</span><span class="n">Next</span><span class="p">();</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="challenge-skipping-sequence">
-<h2>Challenge: Skipping sequence<a class="headerlink" href="#challenge-skipping-sequence" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SkippingSequence</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ISequence</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">ISequence</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">innerSequence</span><span class="p">;</span>
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">skip</span><span class="p">;</span>
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">SkippingSequence</span><span class="p">(</span><span class="n">ISequence</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">innerSequence</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">skip</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">innerSequence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">innerSequence</span><span class="p">;</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">skip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">skip</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">Next</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">T</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">(</span><span class="n">T</span><span class="p">);</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">skip</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">innerSequence</span><span class="p">.</span><span class="n">Next</span><span class="p">();</span>
-<span class="w">            </span><span class="n">counter</span><span class="o">++</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p><strong>Reflection</strong>: Introducing a new item type doesn’t affect the existing inventory system because of the flexibility provided by generic type constraints. The inventory can handle any new type that implements <code class="docutils literal notranslate"><span class="pre">IItem</span></code>, which ensures that the system can be extended smoothly.</p>
 </section>
 </section>
 
@@ -754,14 +694,12 @@ else {
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Solution: Generic Supertypes</a><ul>
-<li><a class="reference internal" href="#step-1-stepsequence">Step 1: StepSequence</a></li>
-<li><a class="reference internal" href="#step-2-creating-ifinitesequence-t">Step 2: Creating <code class="docutils literal notranslate"><span class="pre">IFiniteSequence&lt;T&gt;</span></code></a></li>
-<li><a class="reference internal" href="#step-3-implementing-cycle-t">Step 3: Implementing Cycle<T></a></li>
-<li><a class="reference internal" href="#step-4-using-the-sequences">Step 4: Using the Sequences</a></li>
-<li><a class="reference internal" href="#challenge-fibonacci-sequence-class">Challenge: Fibonacci sequence class</a></li>
-<li><a class="reference internal" href="#challenge-alternating-sequences">Challenge: Alternating sequences</a></li>
-<li><a class="reference internal" href="#challenge-skipping-sequence">Challenge: Skipping sequence</a></li>
+<li><a class="reference internal" href="#">Solution: Type parameter constraints</a><ul>
+<li><a class="reference internal" href="#provided-code">Provided code</a></li>
+<li><a class="reference internal" href="#step-1-crafting-the-generic-inventory">Step 1: Crafting the Generic Inventory</a></li>
+<li><a class="reference internal" href="#step-2-a-mixed-inventory">Step 2: A Mixed Inventory</a></li>
+<li><a class="reference internal" href="#step-3-specific-inventories">Step 3: Specific Inventories</a></li>
+<li><a class="reference internal" href="#challenge">Challenge</a></li>
 </ul>
 </li>
 </ul>

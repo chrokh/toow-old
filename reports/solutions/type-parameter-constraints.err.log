@@ -15,21 +15,23 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-class MyEventPublisher
-{
-    public delegate void MyEventHandler (object sender, MyEventArgs e);
+Inventory<Weapon> weaponInventory = new Inventory<Weapon>();
+weaponInventory.Add(new Weapon { Name = "Axe" });
+weaponInventory.Add(new Weapon { Name = "Dagger" });
 
-    public event MyEventHandler MyEvent;
+Inventory<Map> mapInventory = new Inventory<Map>();
+mapInventory.Add(new Map { Name = "City Map" });
+mapInventory.Add(new Map { Name = "Cave Map" });
 
-    public void RaiseEvent()
-        => MyEvent?.Invoke(this, new MyEventArgs(this, "Event triggered!"));
-}
+// Since we know it's a Weapon, we can directly call Use()
+weaponInventory.Next();
+weaponInventory.Current.Use();
+
+// Since we know it's a Map, we can directly call Open()
+mapInventory.Next();
+mapInventory.Current.Open();
 ------------------
 
------ stderr -----
-
-(8,50): error CS1503: Argument 1: cannot convert from 'MyEventPublisher [ℛ*a9779dc5-81e7-427c-9677-187795c4aa5a#1-8, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]' to 'MyEventPublisher [ℛ*a9779dc5-81e7-427c-9677-187795c4aa5a#1-3, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]'
-------------------
 
 
 
