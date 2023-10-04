@@ -54,6 +54,7 @@ Your task is to design a generic inventory class `Inventory<T>`, where `T` is co
 
 - Add items to the inventory.
 - Remove items from the inventory.
+- Get the currently selected item.
 - Retrieve the currently selected item's name.
 - Get a list of strings of the names of all items in the inventory.
 - Navigate through items (with methods like `Next()` and `Prev()`).
