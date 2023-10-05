@@ -10,7 +10,7 @@ kernelspec:
   name: .net-csharp
 ---
 
-# Lab Exercise: Generic types
+# Lab: Generic types
 
 ## Objective
 In this lab exercise, you will utilize generic types to refactor given classes that represent items in a library. This refactoring will allow you to understand and apply the principles of generic programming for creating reusable and type-safe code. The transformation from non-generic to generic code will illustrate the adaptability and maintainability of using generic types in a real-world scenario.
