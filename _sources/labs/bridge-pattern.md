@@ -18,7 +18,7 @@ In this lab exercise, we'll delve into the Bridge pattern.
 In this lab, we will refactor an existing design to use the Bridge pattern, separating the source of video content from the mode of video playback.
 By doing so, we will gain a practical understanding of how the Bridge pattern works and recognize scenarios where it can be beneficial.
 
-## Provided Code:
+## Provided Code
 
 Carefully review the provided code. Notice that we have multiple classes (`StreamingVideoBackgroundPlayer`, `LocalVideoBackgroundPlayer`, etc.) which combine two concerns: the source of the video (streaming or local) and the mode of playback (background or full screen).
 
@@ -96,7 +96,7 @@ video3.ShowNextFrame();
 video4.ShowNextFrame();
 ```
 
-## Instructions:
+## Instructions
 
 ### Step 1: Define video source abstraction
 

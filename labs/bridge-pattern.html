@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="Lab: Composition over Inheritance" href="composition-over-inheritance.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Lab: Delegates" href="delegates.html" /><link rel="prev" title="Lab: Composition over Inheritance" href="composition-over-inheritance.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
         <title>Lab: Bridge Pattern - The Object Oriented Way</title>
@@ -291,6 +291,7 @@
 <li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">Lab: Type parameter constraints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">Lab: Composition over Inheritance</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Lab: Bridge Pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="delegates.html">Lab: Delegates</a></li>
 </ul>
 
 </div>
@@ -334,7 +335,7 @@ In this lab, we will refactor an existing design to use the Bridge pattern, sepa
 By doing so, we will gain a practical understanding of how the Bridge pattern works and recognize scenarios where it can be beneficial.</p>
 </section>
 <section id="provided-code">
-<h2>Provided Code:<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
+<h2>Provided Code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
 <p>Carefully review the provided code. Notice that we have multiple classes (<code class="docutils literal notranslate"><span class="pre">StreamingVideoBackgroundPlayer</span></code>, <code class="docutils literal notranslate"><span class="pre">LocalVideoBackgroundPlayer</span></code>, etc.) which combine two concerns: the source of the video (streaming or local) and the mode of playback (background or full screen).</p>
 <p>When we play videos in the background, we’re not displaying any video and so would like to fetch audio-only to save bandwidth.
 However, when playing in the foreground we of course want to fetch both audio and video.</p>
@@ -350,7 +351,7 @@ However, when playing in the foreground we of course want to fetch both audio an
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-8014.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-8465.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -395,12 +396,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.194.3:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.116:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '8014.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '8465.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -563,7 +564,7 @@ else {
 </div>
 </section>
 <section id="instructions">
-<h2>Instructions:<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
+<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
 <section id="step-1-define-video-source-abstraction">
 <h3>Step 1: Define video source abstraction<a class="headerlink" href="#step-1-define-video-source-abstraction" title="Permalink to this heading">#</a></h3>
 <p>Begin by defining the source of our video. This is where we’ll fetch our video content from, be it streaming or local.</p>
@@ -690,7 +691,15 @@ It should look something like this:</p>
       <footer>
         
         <div class="related-pages">
-          
+          <a class="next-page" href="delegates.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Lab: Delegates</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
           <a class="prev-page" href="composition-over-inheritance.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
@@ -734,8 +743,8 @@ It should look something like this:</p>
             <ul>
 <li><a class="reference internal" href="#">Lab: Bridge Pattern</a><ul>
 <li><a class="reference internal" href="#objective">Objective</a></li>
-<li><a class="reference internal" href="#provided-code">Provided Code:</a></li>
-<li><a class="reference internal" href="#instructions">Instructions:</a><ul>
+<li><a class="reference internal" href="#provided-code">Provided Code</a></li>
+<li><a class="reference internal" href="#instructions">Instructions</a><ul>
 <li><a class="reference internal" href="#step-1-define-video-source-abstraction">Step 1: Define video source abstraction</a></li>
 <li><a class="reference internal" href="#step-2-define-concrete-video-sources">Step 2: Define concrete video sources</a></li>
 <li><a class="reference internal" href="#step-3-define-player-abstraction">Step 3: Define player abstraction</a></li>
