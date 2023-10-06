@@ -146,11 +146,12 @@ Notice how we can omit the parentheses around the parameters if the lambda only 
 You can of course also use the [`var` keyword](type-inference) if you give the compiler enough clues about the type of the lambda.
 
 ```{code-cell}
-var isNegativeExplicit = int (int x) => x < 0;
+:tags: [raises-exception]
+var isNegativeExplicit = bool (int x) => x < 0; // Compiles.
 
-var isNegativeInferred1 = (int x)=> x < 0;  // Compiles.
-var isNegativeInferred2 = int (x)=> x < 0;  // Compiles.
-var isNegativeInferred3 = x => x < 0;       // Does not compile!
+var isNegativeInferred1 = (int x)=> x < 0;      // Compiles.
+var isNegativeInferred2 = bool (x) => x < 0;    // Does not compile!
+var isNegativeInferred3 = x => x < 0;           // Does not compile!
 ```
 
 ```{tip}
