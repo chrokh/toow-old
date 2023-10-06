@@ -130,10 +130,10 @@ One of the convenient features of lambdas in C# is their ability to utilize type
 The following lambda declarations are all functionally identical:
 
 ```{code-cell}
-Func<int, bool> isNegativeExplicit = int (int x) => x < 0;
+Func<int, bool> isNegativeExplicit = bool (int x) => x < 0;
 
 Func<int, bool> isNegativeInferred1 = (int x)=> x < 0;
-Func<int, bool> isNegativeInferred2 = int (x)=> x < 0;
+Func<int, bool> isNegativeInferred2 = bool (x)=> x < 0;
 Func<int, bool> isNegativeInferred3 = x => x < 0;
 ```
 
