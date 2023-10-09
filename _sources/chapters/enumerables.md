@@ -109,7 +109,7 @@ Nevertheless, you should be aware of this risk so that you do not diverge from '
 ```
 
 ```{admonition} Question
-Compare this behavior to the behavior that we defined in the chapter on [Observer pattern](observer-pattern).
+Compare this behavior to the behavior that we defined in the chapter on [Iterator pattern](iterator-pattern).
 What are the benefits and drawbacks of this design?
 ```
 
