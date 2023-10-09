@@ -352,7 +352,7 @@ However, when playing in the foreground we of course want to fetch both audio an
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-8037.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-8488.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -397,12 +397,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.250:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.74:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '8037.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '8488.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -570,7 +570,7 @@ else {
 <h3>Step 1: Define video source abstraction<a class="headerlink" href="#step-1-define-video-source-abstraction" title="Permalink to this heading">#</a></h3>
 <p>Begin by defining the source of our video. This is where we’ll fetch our video content from, be it streaming or local.</p>
 <ul class="simple">
-<li><p>Define an <code class="docutils literal notranslate"><span class="pre">ISource</span></code> interface with methods to fetch the next audio frame, the next audio-video frame, and the next video frame. Consider using the signatures <code class="docutils literal notranslate"><span class="pre">Frame</span> <span class="pre">NextAudioOnlyFrame()</span></code>, <code class="docutils literal notranslate"><span class="pre">Frame</span> <span class="pre">NextVideoOnlyFrame()</span></code>, and <code class="docutils literal notranslate"><span class="pre">Frame</span> <span class="pre">NextAudioVideoFrame()</span></code>.</p></li>
+<li><p>Define an <code class="docutils literal notranslate"><span class="pre">IVideoSource</span></code> interface with methods to fetch the next audio frame, the next audio-video frame, and the next video frame. Consider using the signatures <code class="docutils literal notranslate"><span class="pre">Frame</span> <span class="pre">NextAudioOnlyFrame()</span></code>, <code class="docutils literal notranslate"><span class="pre">Frame</span> <span class="pre">NextVideoOnlyFrame()</span></code>, and <code class="docutils literal notranslate"><span class="pre">Frame</span> <span class="pre">NextAudioVideoFrame()</span></code>.</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -589,7 +589,7 @@ else {
 <p>After having defined our video sources, let’s establish a means of playing video.</p>
 <ul class="simple">
 <li><p>Defining an abstract class called <code class="docutils literal notranslate"><span class="pre">VideoPlayer</span></code> that serves as the “bridge” between our video source and the mode of playback.</p></li>
-<li><p>It should take an instance of <code class="docutils literal notranslate"><span class="pre">ISource</span></code> in the constructor.</p></li>
+<li><p>It should take an instance of <code class="docutils literal notranslate"><span class="pre">IVideoSource</span></code> in the constructor.</p></li>
 </ul>
 </section>
 <section id="step-4-define-concrete-players">
