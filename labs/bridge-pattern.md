@@ -102,7 +102,7 @@ video4.ShowNextFrame();
 
 Begin by defining the source of our video. This is where we'll fetch our video content from, be it streaming or local.
 
-- Define an `ISource` interface with methods to fetch the next audio frame, the next audio-video frame, and the next video frame. Consider using the signatures `Frame NextAudioOnlyFrame()`, `Frame NextVideoOnlyFrame()`, and `Frame NextAudioVideoFrame()`.
+- Define an `IVideoSource` interface with methods to fetch the next audio frame, the next audio-video frame, and the next video frame. Consider using the signatures `Frame NextAudioOnlyFrame()`, `Frame NextVideoOnlyFrame()`, and `Frame NextAudioVideoFrame()`.
 
 ```{note}
 You might want to introduce an empty class to represent the concept of a `Frame`.
@@ -118,7 +118,7 @@ You might want to introduce an empty class to represent the concept of a `Frame`
 After having defined our video sources, let's establish a means of playing video.
 
 - Defining an abstract class called `VideoPlayer` that serves as the "bridge" between our video source and the mode of playback.
-- It should take an instance of `ISource` in the constructor.
+- It should take an instance of `IVideoSource` in the constructor.
 
 ### Step 4: Define concrete players
 
