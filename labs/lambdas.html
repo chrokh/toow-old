@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="Lab: Delegates" href="delegates.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Solution: Bridge Pattern - The Object Oriented Way</title>
+        <title>Lab: Lambdas - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -283,16 +283,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapters/variant-generic-interfaces.html">115. Variant generic interfaces</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Labs</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../labs/replace-conditional-with-polymorphism.html">Lab: Replace conditional with polymorphism</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/generics.html">Lab: Generics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/generic-types.html">Lab: Generic types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/generic-supertypes.html">Lab: Generic Supertypes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/type-parameter-constraints.html">Lab: Type parameter constraints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/composition-over-inheritance.html">Lab: Composition over Inheritance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/bridge-pattern.html">Lab: Bridge Pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/delegates.html">Lab: Delegates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/lambdas.html">Lab: Lambdas</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">Lab: Replace conditional with polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics.html">Lab: Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-types.html">Lab: Generic types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">Lab: Generic Supertypes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">Lab: Type parameter constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">Lab: Composition over Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bridge-pattern.html">Lab: Bridge Pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="delegates.html">Lab: Delegates</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Lab: Lambdas</a></li>
 </ul>
 
 </div>
@@ -327,288 +327,53 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="solution-bridge-pattern">
-<h1>Solution: Bridge Pattern<a class="headerlink" href="#solution-bridge-pattern" title="Permalink to this heading">#</a></h1>
-<p>Here are example solutions to the code questions and reflection questions.</p>
-<section id="step-1-define-video-source-abstraction">
-<h2>Step 1: Define video source abstraction<a class="headerlink" href="#step-1-define-video-source-abstraction" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Frame</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
-
-<span class="k">interface</span><span class="w"> </span><span class="n">IVideoSource</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="n">Frame</span><span class="w"> </span><span class="nf">NextAudioFrame</span><span class="p">();</span>
-<span class="w">    </span><span class="n">Frame</span><span class="w"> </span><span class="nf">NextAudioVideoFrame</span><span class="p">();</span>
-<span class="w">    </span><span class="n">Frame</span><span class="w"> </span><span class="nf">NextVideoFrame</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-<div>
-    <div id='dotnet-interactive-this-cell-9661.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
-        The below script needs to be able to find the current output cell; this is an easy method to get it.
-    </div>
-    <script type='text/javascript'>
-async function probeAddresses(probingAddresses) {
-    function timeout(ms, promise) {
-        return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                reject(new Error('timeout'))
-            }, ms)
-            promise.then(resolve, reject)
-        })
-    }
-
-    if (Array.isArray(probingAddresses)) {
-        for (let i = 0; i < probingAddresses.length; i++) {
-
-            let rootUrl = probingAddresses[i];
-
-            if (!rootUrl.endsWith('/')) {
-                rootUrl = `${rootUrl}/`;
-            }
-
-            try {
-                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
-                    method: 'POST',
-                    cache: 'no-cache',
-                    mode: 'cors',
-                    timeout: 1000,
-                    headers: {
-                        'Content-Type': 'text/plain'
-                    },
-                    body: probingAddresses[i]
-                }));
-
-                if (response.status == 200) {
-                    return rootUrl;
-                }
-            }
-            catch (e) { }
-        }
-    }
-}
-
-function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.250:2048/", "http://127.0.0.1:2048/"])
-        .then((root) => {
-        // use probing to find host url and api resources
-        // load interactive helpers and language services
-        let dotnetInteractiveRequire = require.config({
-        context: '9661.Microsoft.DotNet.Interactive.Http.HttpPort',
-                paths:
-            {
-                'dotnet-interactive': `${root}resources`
-                }
-        }) || require;
-
-            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
-
-            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
-                let paths = {};
-                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
-                
-                let internalRequire = require.config({
-                    context: extensionCacheBuster,
-                    paths: paths,
-                    urlArgs: `cacheBuster=${extensionCacheBuster}`
-                    }) || require;
-
-                return internalRequire
-            };
-        
-            dotnetInteractiveRequire([
-                    'dotnet-interactive/dotnet-interactive'
-                ],
-                function (dotnet) {
-                    dotnet.init(window);
-                },
-                function (error) {
-                    console.log(error);
-                }
-            );
-        })
-        .catch(error => {console.log(error);});
-    }
-
-// ensure `require` is available globally
-if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
-    let require_script = document.createElement('script');
-    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
-    require_script.setAttribute('type', 'text/javascript');
-    
-    
-    require_script.onload = function() {
-        loadDotnetInteractiveApi();
-    };
-
-    document.getElementsByTagName('head')[0].appendChild(require_script);
-}
-else {
-    loadDotnetInteractiveApi();
-}
-
-    </script>
-</div></div></div>
+          <section class="tex2jax_ignore mathjax_ignore" id="lab-lambdas">
+<h1>Lab: Lambdas<a class="headerlink" href="#lab-lambdas" title="Permalink to this heading">#</a></h1>
+<section id="objective">
+<h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
+<p>In this lab, we will practice writing lambdas in C# with a focus on utilizing the power of type inference. We aim to understand the difference in specifying types explicitly versus letting the C# compiler infer the types for us. By the end of this lab, we should be proficient in crafting concise lambdas and understand the scenarios where type inference can be a boon.</p>
+</section>
+<section id="instructions">
+<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
+<section id="step-1-type-inference">
+<h3>Step 1: Type Inference<a class="headerlink" href="#step-1-type-inference" title="Permalink to this heading">#</a></h3>
+<p>Use the built-in delegate types (<code class="docutils literal notranslate"><span class="pre">Func</span></code>, <code class="docutils literal notranslate"><span class="pre">Predicate</span></code>, and <code class="docutils literal notranslate"><span class="pre">Action</span></code>) explicitly and allow the rest of your lambda to be inferred. Write the following lambdas:</p>
+<ol class="arabic simple">
+<li><p>A lambda that takes two integers and returns their sum. Use the <code class="docutils literal notranslate"><span class="pre">Func&lt;int,</span> <span class="pre">int,</span> <span class="pre">int&gt;</span></code> delegate and assign it to a variable called <code class="docutils literal notranslate"><span class="pre">add</span></code>.</p></li>
+<li><p>A lambda that checks if an integer is even. Use the <code class="docutils literal notranslate"><span class="pre">Predicate&lt;int&gt;</span></code> delegate and name the lambda <code class="docutils literal notranslate"><span class="pre">isEven</span></code>.</p></li>
+<li><p>A lambda that takes a string and prints it. Use the <code class="docutils literal notranslate"><span class="pre">Action&lt;string&gt;</span></code> delegate and name it <code class="docutils literal notranslate"><span class="pre">printString</span></code>.</p></li>
+</ol>
+</section>
+<section id="step-2-inferring-return-type">
+<h3>Step 2: Inferring return type<a class="headerlink" href="#step-2-inferring-return-type" title="Permalink to this heading">#</a></h3>
+<p>In this exercise, you will define only the input parameter types, letting the compiler infer the return type. Remember to use <code class="docutils literal notranslate"><span class="pre">var</span></code>. Write the following lambdas:</p>
+<ol class="arabic simple">
+<li><p>A lambda that takes a <code class="docutils literal notranslate"><span class="pre">double</span></code> and returns its square. Name it <code class="docutils literal notranslate"><span class="pre">square</span></code>.</p></li>
+<li><p>A lambda that takes two <code class="docutils literal notranslate"><span class="pre">strings</span></code> and concatenates them. Name it <code class="docutils literal notranslate"><span class="pre">concatenate</span></code>.</p></li>
+<li><p>A lambda that returns an <code class="docutils literal notranslate"><span class="pre">int</span></code> and calculates the product of two numbers. Name it <code class="docutils literal notranslate"><span class="pre">multiply</span></code>.</p></li>
+<li><p>A lambda returning a <code class="docutils literal notranslate"><span class="pre">bool</span></code> that checks if a given string starts with an uppercase letter. Name it <code class="docutils literal notranslate"><span class="pre">startsWithUppercase</span></code>.</p></li>
+</ol>
+</section>
+<section id="step-4-custom-delegate-inference">
+<h3>Step 4: Custom Delegate Inference<a class="headerlink" href="#step-4-custom-delegate-inference" title="Permalink to this heading">#</a></h3>
+<p>Define your own delegate, declare a variable of that delegate type, and assign a lambda to that variable. Let both parameters and return type of the lambda be inferred.
+The variable should be called <code class="docutils literal notranslate"><span class="pre">toggleCase</span></code> and should toggle the case of a string so that all uppercase characters are turned lowercase and vice versa.</p>
+<div class="admonition-reflection admonition">
+<p class="admonition-title">🤔 Reflection</p>
+<p>How do you feel about type inference? Can you think of situations where it might be helpful? When might it be less useful or potentially confusing?</p>
 </div>
 </section>
-<section id="step-2-define-concrete-video-sources">
-<h2>Step 2: Define concrete video sources<a class="headerlink" href="#step-2-define-concrete-video-sources" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">StreamingVideo</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IVideoSource</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Url</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Frame</span><span class="w"> </span><span class="nf">NextAudioFrame</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Fetching next audio-only frame from {Url}&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">Frame</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Frame</span><span class="w"> </span><span class="nf">NextAudioVideoFrame</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Fetching next audio-video frame from {Url}&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">Frame</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Frame</span><span class="w"> </span><span class="nf">NextVideoFrame</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Fetching next video-only frame from {Url}&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">Frame</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">LocalVideo</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IVideoSource</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">FilePath</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Frame</span><span class="w"> </span><span class="nf">NextAudioFrame</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Reading next audio-only frame from {FilePath}&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">Frame</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Frame</span><span class="w"> </span><span class="nf">NextAudioVideoFrame</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Reading next audio/video frame from {FilePath}&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">Frame</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Frame</span><span class="w"> </span><span class="nf">NextVideoFrame</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Reading next video-only frame from {FilePath}&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">Frame</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="step-3-define-player-abstraction">
-<h2>Step 3: Define player abstraction<a class="headerlink" href="#step-3-define-player-abstraction" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">VideoPlayer</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="n">IVideoSource</span><span class="w"> </span><span class="n">Source</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">VideoPlayer</span><span class="p">(</span><span class="n">IVideoSource</span><span class="w"> </span><span class="n">source</span><span class="p">)</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">source</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">PlayNextFrame</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="step-4-define-concrete-players">
-<h2>Step 4: Define concrete players<a class="headerlink" href="#step-4-define-concrete-players" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">BackgroundPlayer</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">VideoPlayer</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">BackgroundPlayer</span><span class="p">(</span><span class="n">IVideoSource</span><span class="w"> </span><span class="n">source</span><span class="p">)</span>
-<span class="w">        </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">PlayNextFrame</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Frame</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Source</span><span class="p">.</span><span class="n">NextAudioFrame</span><span class="p">();</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Play audio-only frame in the background.&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">FullScreenPlayer</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">VideoPlayer</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">FullScreenPlayer</span><span class="p">(</span><span class="n">IVideoSource</span><span class="w"> </span><span class="n">source</span><span class="p">)</span>
-<span class="w">        </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">PlayNextFrame</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Frame</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Source</span><span class="p">.</span><span class="n">NextAudioVideoFrame</span><span class="p">();</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Show audio-video frame in full screen.&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="reflection-1">
-<h2>Reflection 1<a class="headerlink" href="#reflection-1" title="Permalink to this heading">#</a></h2>
-<p>The bridge pattern has allowed us to decouple the source of the video from its playback mode. In the initial code, for each combination of source and playback, we had a separate class, leading to combinatorial explosion as new sources or modes are added. After refactoring, we can independently add new sources or playback modes without having to create new combinations for each.</p>
-<p>The Bridge pattern indeed offers flexibility. Now, adding another source or playback mode would mean just extending our current structure, without duplicating the existing code. Yes, we eliminated the duplication of the logic related to where the video is coming from and how it is being played.</p>
 </section>
 <section id="challenge">
 <h2>Challenge<a class="headerlink" href="#challenge" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MutedPlayer</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">VideoPlayer</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">MutedPlayer</span><span class="p">(</span><span class="n">IVideoSource</span><span class="w"> </span><span class="n">source</span><span class="p">)</span>
-<span class="w">        </span><span class="p">:</span><span class="w"> </span><span class="k">base</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">PlayNextFrame</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Frame</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Source</span><span class="p">.</span><span class="n">NextVideoFrame</span><span class="p">();</span>
-<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Show video frame with audio muted.&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IVideoSource</span><span class="w"> </span><span class="n">streamingVideoChallenge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StreamingVideo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;https://example.com&quot;</span><span class="w"> </span><span class="p">};</span>
-<span class="n">VideoPlayer</span><span class="w"> </span><span class="n">mutedPlayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MutedPlayer</span><span class="p">(</span><span class="n">streamingVideoChallenge</span><span class="p">);</span>
-<span class="n">mutedPlayer</span><span class="p">.</span><span class="n">PlayNextFrame</span><span class="p">();</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fetching next video-only frame from https://example.com
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Show video frame with audio muted.
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="reflection-2">
-<h2>Reflection 2<a class="headerlink" href="#reflection-2" title="Permalink to this heading">#</a></h2>
-<p>After refactoring with the bridge pattern, adding a new playback mode was straightforward. We simply needed to define the behavior for this new mode without touching the source implementations. The bridge pattern has allowed us to extend our design with minimal changes, ensuring extensibility and reducing complexity.</p>
+<p>Write the following lambdas:</p>
+<ol class="arabic simple">
+<li><p>A lambda that adds two numbers and assign it to a variable called <code class="docutils literal notranslate"><span class="pre">sum</span></code>.</p></li>
+<li><p>A lambda that checks if a given number is positive. Name it <code class="docutils literal notranslate"><span class="pre">isPositive</span></code>.</p></li>
+<li><p>A lambda that prints a line. Name this lambda <code class="docutils literal notranslate"><span class="pre">printLine</span></code>.</p></li>
+<li><p>A lambda that greets a given name. For instance, for the name <code class="docutils literal notranslate"><span class="pre">&quot;Chris&quot;</span></code>, it should print <code class="docutils literal notranslate"><span class="pre">&quot;Hello,</span> <span class="pre">Chris!&quot;</span></code>. Name this lambda <code class="docutils literal notranslate"><span class="pre">greet</span></code>.</p></li>
+<li><p>A lambda that checks the equality of two strings without considering their case. Name it <code class="docutils literal notranslate"><span class="pre">areSimilar</span></code>.</p></li>
+</ol>
 </section>
 </section>
 
@@ -625,7 +390,7 @@ else {
         },
         kernelOptions: {
             name: ".net-csharp",
-            path: "./unpublished-solutions"
+            path: "./labs"
         },
         predefinedOutput: true
     }
@@ -637,7 +402,17 @@ else {
         
         <div class="related-pages">
           
-          
+          <a class="prev-page" href="delegates.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Lab: Delegates</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -668,14 +443,15 @@ else {
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Solution: Bridge Pattern</a><ul>
-<li><a class="reference internal" href="#step-1-define-video-source-abstraction">Step 1: Define video source abstraction</a></li>
-<li><a class="reference internal" href="#step-2-define-concrete-video-sources">Step 2: Define concrete video sources</a></li>
-<li><a class="reference internal" href="#step-3-define-player-abstraction">Step 3: Define player abstraction</a></li>
-<li><a class="reference internal" href="#step-4-define-concrete-players">Step 4: Define concrete players</a></li>
-<li><a class="reference internal" href="#reflection-1">Reflection 1</a></li>
+<li><a class="reference internal" href="#">Lab: Lambdas</a><ul>
+<li><a class="reference internal" href="#objective">Objective</a></li>
+<li><a class="reference internal" href="#instructions">Instructions</a><ul>
+<li><a class="reference internal" href="#step-1-type-inference">Step 1: Type Inference</a></li>
+<li><a class="reference internal" href="#step-2-inferring-return-type">Step 2: Inferring return type</a></li>
+<li><a class="reference internal" href="#step-4-custom-delegate-inference">Step 4: Custom Delegate Inference</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#challenge">Challenge</a></li>
-<li><a class="reference internal" href="#reflection-2">Reflection 2</a></li>
 </ul>
 </li>
 </ul>
