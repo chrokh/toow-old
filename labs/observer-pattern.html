@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Lab: Generics" href="generics.html" /><link rel="prev" title="115. Variant generic interfaces" href="../chapters/variant-generic-interfaces.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="Lab: Lambdas" href="lambdas.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Lab: Replace conditional with polymorphism - The Object Oriented Way</title>
+        <title>Lab: Observer Pattern - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -284,7 +284,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Labs</span></p>
 <ul class="current">
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Lab: Replace conditional with polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">Lab: Replace conditional with polymorphism</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generics.html">Lab: Generics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-types.html">Lab: Generic types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">Lab: Generic Supertypes</a></li>
@@ -293,7 +293,7 @@
 <li class="toctree-l1"><a class="reference internal" href="bridge-pattern.html">Lab: Bridge Pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="delegates.html">Lab: Delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lambdas.html">Lab: Lambdas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="observer-pattern.html">Lab: Observer Pattern</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Lab: Observer Pattern</a></li>
 </ul>
 
 </div>
@@ -328,25 +328,30 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="lab-replace-conditional-with-polymorphism">
-<h1>Lab: Replace conditional with polymorphism<a class="headerlink" href="#lab-replace-conditional-with-polymorphism" title="Permalink to this heading">#</a></h1>
+          <section class="tex2jax_ignore mathjax_ignore" id="lab-observer-pattern">
+<h1>Lab: Observer Pattern<a class="headerlink" href="#lab-observer-pattern" title="Permalink to this heading">#</a></h1>
 <section id="objective">
 <h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
-<p>To refactor the provided <code class="docutils literal notranslate"><span class="pre">Shape</span></code> class to remove conditionals and implement polymorphism, thereby enhancing code maintainability.</p>
+<p>In this lab, we’ll practice the Observer pattern by building a chat room application. The chat room will notify its registered clients every time a new message is posted.</p>
 </section>
-<section id="provided-code">
-<h2>Provided code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
-<p>Study the starting code given to you. It consists of a single <code class="docutils literal notranslate"><span class="pre">Shape</span></code> class which draws different shapes based on the <code class="docutils literal notranslate"><span class="pre">ShapeType</span></code> using conditionals.</p>
+<section id="part-1-custom-implementation">
+<h2>Part 1: Custom Implementation<a class="headerlink" href="#part-1-custom-implementation" title="Permalink to this heading">#</a></h2>
+<section id="step-1-creating-our-observer-iclient">
+<h3>Step 1: Creating our Observer: IClient<a class="headerlink" href="#step-1-creating-our-observer-iclient" title="Permalink to this heading">#</a></h3>
+<p>Define the observer interface <code class="docutils literal notranslate"><span class="pre">IClient</span></code> which should contain a <code class="docutils literal notranslate"><span class="pre">ReceiveMessage</span></code> method. The chat room will call this method to notify clients of a new message.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span><span class="w"> </span><span class="n">ShapeType</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">HorizontalLine</span><span class="p">,</span><span class="w"> </span><span class="n">Square</span><span class="p">,</span><span class="w"> </span><span class="n">RightTriangle</span><span class="w"> </span><span class="p">}</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IClient</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="nf">ReceiveMessage</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">message</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-9125.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-9063.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -396,7 +401,7 @@ function loadDotnetInteractiveApi() {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '9125.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '9063.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -452,205 +457,224 @@ else {
     </script>
 </div></div></div>
 </div>
+</section>
+<section id="step-2-creating-our-observable-chatroom">
+<h3>Step 2: Creating our Observable: ChatRoom<a class="headerlink" href="#step-2-creating-our-observable-chatroom" title="Permalink to this heading">#</a></h3>
+<p>Design the <code class="docutils literal notranslate"><span class="pre">ChatRoom</span></code> class, which will act as our Observable. This class should have:</p>
+<ul class="simple">
+<li><p>A private list to keep track of registered clients (observers).</p></li>
+<li><p>A method to post a new message.</p></li>
+<li><p>Methods to add (<code class="docutils literal notranslate"><span class="pre">RegisterClient</span></code>) and remove (<code class="docutils literal notranslate"><span class="pre">UnregisterClient</span></code>) clients.</p></li>
+<li><p>A method to notify all registered clients of a new message.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Shape</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ChatRoom</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">ShapeType</span><span class="w"> </span><span class="n">type</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">symbol</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">IClient</span><span class="o">&gt;</span><span class="w"> </span><span class="n">clients</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">IClient</span><span class="o">&gt;</span><span class="p">();</span>
 
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Shape</span><span class="p">(</span><span class="n">ShapeType</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">symbol</span><span class="p">)</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">RegisterClient</span><span class="p">(</span><span class="n">IClient</span><span class="w"> </span><span class="n">client</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">clients</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">client</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">UnregisterClient</span><span class="p">(</span><span class="n">IClient</span><span class="w"> </span><span class="n">client</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">clients</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">client</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">PostMessage</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">message</span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">symbol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">symbol</span><span class="p">;</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">type</span><span class="p">;</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
+<span class="w">        </span><span class="n">NotifyClients</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Draw</span><span class="p">()</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">NotifyClients</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">message</span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ShapeType</span><span class="p">.</span><span class="n">HorizontalLine</span><span class="p">)</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="n">MakeHorizontalLine</span><span class="p">());</span>
-<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="nf">if</span><span class="w"> </span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ShapeType</span><span class="p">.</span><span class="n">Square</span><span class="p">)</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="n">MakeSquare</span><span class="p">());</span>
-<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="nf">if</span><span class="w"> </span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ShapeType</span><span class="p">.</span><span class="n">RightTriangle</span><span class="p">)</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="n">MakeRightTriangle</span><span class="p">());</span>
-<span class="w">        </span><span class="k">else</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="kt">string</span><span class="p">[][]</span><span class="w"> </span><span class="n">symbols</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">symbols</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="kt">string</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
-<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">symbols</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">Length</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
-<span class="w">            </span><span class="p">{</span>
-<span class="w">                </span><span class="n">line</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">symbols</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">            </span><span class="n">lines</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">lines</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="p">[][]</span><span class="w"> </span><span class="n">MakeHorizontalLine</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">string</span><span class="p">[][]</span><span class="w"> </span><span class="n">symbols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">string</span><span class="p">[</span><span class="m">1</span><span class="p">][];</span>
-<span class="w">        </span><span class="n">symbols</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">string</span><span class="p">[</span><span class="n">size</span><span class="p">];</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="w">            </span><span class="n">symbols</span><span class="p">[</span><span class="m">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">symbol</span><span class="p">;</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">symbols</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="p">[][]</span><span class="w"> </span><span class="n">MakeSquare</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">string</span><span class="p">[][]</span><span class="w"> </span><span class="n">symbols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">string</span><span class="p">[</span><span class="n">size</span><span class="p">][];</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="n">symbols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">string</span><span class="p">[</span><span class="n">size</span><span class="p">];</span>
-<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
-<span class="w">                </span><span class="n">symbols</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">symbol</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">symbols</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="p">[][]</span><span class="w"> </span><span class="n">MakeRightTriangle</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">string</span><span class="p">[][]</span><span class="w"> </span><span class="n">symbols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">string</span><span class="p">[</span><span class="n">size</span><span class="p">][];</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="n">symbols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">string</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">];</span>
-<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
-<span class="w">                </span><span class="n">symbols</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">symbol</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">symbols</span><span class="p">;</span>
+<span class="w">        </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">clients</span><span class="p">)</span>
+<span class="w">            </span><span class="n">client</span><span class="p">.</span><span class="n">ReceiveMessage</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="step-3-implementing-a-concrete-observer-client">
+<h3>Step 3: Implementing a Concrete Observer: Client<a class="headerlink" href="#step-3-implementing-a-concrete-observer-client" title="Permalink to this heading">#</a></h3>
+<p>Implement a concrete observer, <code class="docutils literal notranslate"><span class="pre">Client</span></code>, which implements the <code class="docutils literal notranslate"><span class="pre">IClient</span></code> interface. When it receives a message update, it should display the new message.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Shape</span><span class="w"> </span><span class="n">shape1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Shape</span><span class="p">(</span><span class="n">ShapeType</span><span class="p">.</span><span class="n">HorizontalLine</span><span class="p">,</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;=&quot;</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">shape1</span><span class="p">.</span><span class="n">Draw</span><span class="p">());</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Client</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IClient</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">ClientName</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 
-<span class="n">Shape</span><span class="w"> </span><span class="n">shape2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Shape</span><span class="p">(</span><span class="n">ShapeType</span><span class="p">.</span><span class="n">Square</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;■ &quot;</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">shape2</span><span class="p">.</span><span class="n">Draw</span><span class="p">());</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">ReceiveMessage</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">message</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{ClientName} received: {message}&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-testing-the-custom-implementation">
+<h3>Step 4: Testing the Custom Implementation<a class="headerlink" href="#step-4-testing-the-custom-implementation" title="Permalink to this heading">#</a></h3>
+<p>Test the interaction:</p>
+<ul class="simple">
+<li><p>Instantiate a <code class="docutils literal notranslate"><span class="pre">ChatRoom</span></code>.</p></li>
+<li><p>Register a couple of <code class="docutils literal notranslate"><span class="pre">Client</span></code> instances with the chat room.</p></li>
+<li><p>Post a new message using the <code class="docutils literal notranslate"><span class="pre">PostMessage</span></code> method and observe the notifications.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ChatRoom</span><span class="w"> </span><span class="n">room</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ChatRoom</span><span class="p">();</span>
 
-<span class="n">Shape</span><span class="w"> </span><span class="n">shape3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Shape</span><span class="p">(</span><span class="n">ShapeType</span><span class="p">.</span><span class="n">RightTriangle</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;* &quot;</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">shape3</span><span class="p">.</span><span class="n">Draw</span><span class="p">());</span>
+<span class="n">Client</span><span class="w"> </span><span class="n">client1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Client</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">ClientName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Alice&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="n">Client</span><span class="w"> </span><span class="n">client2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Client</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">ClientName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Bob&quot;</span><span class="w"> </span><span class="p">};</span>
+
+<span class="n">room</span><span class="p">.</span><span class="n">RegisterClient</span><span class="p">(</span><span class="n">client1</span><span class="p">);</span>
+<span class="n">room</span><span class="p">.</span><span class="n">RegisterClient</span><span class="p">(</span><span class="n">client2</span><span class="p">);</span>
+
+<span class="n">room</span><span class="p">.</span><span class="n">PostMessage</span><span class="p">(</span><span class="s">&quot;Hello, world!&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Alice received: Hello, world!
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>■ ■ ■ ■ 
-■ ■ ■ ■ 
-■ ■ ■ ■ 
-■ ■ ■ ■ 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>* 
-* * 
-* * * 
-* * * * 
-* * * * * 
-* * * * * * 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bob received: Hello, world!
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="instructions">
-<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
-<section id="step-1-replace-conditionals-in-shape-with-polymorphism">
-<h3>Step 1: Replace conditionals in <code class="docutils literal notranslate"><span class="pre">Shape</span></code> with polymorphism<a class="headerlink" href="#step-1-replace-conditionals-in-shape-with-polymorphism" title="Permalink to this heading">#</a></h3>
-<p>Define an interface, <code class="docutils literal notranslate"><span class="pre">IShape</span></code>, with a method signature for <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">Draw()</span></code>.</p>
-<p>Create individual classes for each shape type, namely <code class="docutils literal notranslate"><span class="pre">HorizontalLine</span></code>, <code class="docutils literal notranslate"><span class="pre">Square</span></code>, and <code class="docutils literal notranslate"><span class="pre">RightTriangle</span></code>, implementing the <code class="docutils literal notranslate"><span class="pre">IShape</span></code> interface.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>It’s ok if you end up duplicating the <code class="docutils literal notranslate"><span class="pre">private</span></code> method <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">draw(string[][]</span> <span class="pre">symbols)</span></code>. We’ll get rid of that duplication later.</p>
-</div>
 </section>
-<section id="step-2-rewrite-the-main-class">
-<h3>Step 2: Rewrite the main class<a class="headerlink" href="#step-2-rewrite-the-main-class" title="Permalink to this heading">#</a></h3>
-<p>Rewrite the <code class="docutils literal notranslate"><span class="pre">Main</span></code> method so that it uses subtypes of <code class="docutils literal notranslate"><span class="pre">IShape</span></code> instead of the <code class="docutils literal notranslate"><span class="pre">Shape</span></code> class.
-It should look like this and should both compile and still print the same output as before.</p>
-<p>You should now be able to delete the old <code class="docutils literal notranslate"><span class="pre">Shape</span></code> class.</p>
-<div class="cell tag_remove-input docutils container">
-</div>
+<section id="part-2-refactoring-with-net-built-in-interfaces">
+<h2>Part 2: Refactoring with .NET Built-in Interfaces<a class="headerlink" href="#part-2-refactoring-with-net-built-in-interfaces" title="Permalink to this heading">#</a></h2>
+<p>Of course! Let’s dive into the details for refactoring with .NET’s built-in interfaces for the Observer pattern.</p>
+<section id="step-1-refactor-chatroom-to-use-iobservable-t">
+<h3>Step 1: Refactor ChatRoom to use IObservable<T><a class="headerlink" href="#step-1-refactor-chatroom-to-use-iobservable-t" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Update the <code class="docutils literal notranslate"><span class="pre">ChatRoom</span></code> class to implement <code class="docutils literal notranslate"><span class="pre">IObservable&lt;string&gt;</span></code>.</p></li>
+<li><p>Instead of our custom list of clients (<code class="docutils literal notranslate"><span class="pre">IClient</span></code>), we will use a list of <code class="docutils literal notranslate"><span class="pre">IObserver&lt;string&gt;</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">IObservable&lt;T&gt;</span></code> interface requires an implementation of the <code class="docutils literal notranslate"><span class="pre">Subscribe</span></code> method which replaces our <code class="docutils literal notranslate"><span class="pre">RegisterClient</span></code> method. The <code class="docutils literal notranslate"><span class="pre">Subscribe</span></code> method will return an <code class="docutils literal notranslate"><span class="pre">IDisposable</span></code>, which can be used to unsubscribe or unregister a client from the chat room.</p></li>
+</ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IShape</span><span class="w"> </span><span class="n">shape1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HorizontalLine</span><span class="p">(</span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;=&quot;</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">shape1</span><span class="p">.</span><span class="n">Draw</span><span class="p">());</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ChatRoom</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IObservable</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">IObserver</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">observers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">IObserver</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;&gt;</span><span class="p">();</span>
 
-<span class="c1">// Do the same for Square.</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">IDisposable</span><span class="w"> </span><span class="nf">Subscribe</span><span class="p">(</span><span class="n">IObserver</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">observer</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">observers</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">observer</span><span class="p">))</span>
+<span class="w">            </span><span class="n">observers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">observer</span><span class="p">);</span>
 
-<span class="c1">// Do the same for RightTriangle</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">Unsubscriber</span><span class="p">(</span><span class="n">observers</span><span class="p">,</span><span class="w"> </span><span class="n">observer</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">PostMessage</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">message</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">observer</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">observers</span><span class="p">.</span><span class="n">ToArray</span><span class="p">())</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">observers</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">observer</span><span class="p">))</span>
+<span class="w">                </span><span class="n">observer</span><span class="p">.</span><span class="n">OnNext</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Unsubscriber</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IDisposable</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">IObserver</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">observers</span><span class="p">;</span>
+<span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="n">IObserver</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">observer</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="nf">Unsubscriber</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">IObserver</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">observers</span><span class="p">,</span><span class="w"> </span><span class="n">IObserver</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">observer</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="n">observers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">observers</span><span class="p">;</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="n">observer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">observer</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Dispose</span><span class="p">()</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">observer</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">observers</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">observer</span><span class="p">))</span>
+<span class="w">                </span><span class="n">observers</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">observer</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-refactor-iclient-to-use-iobserver-t">
+<h3>Step 2: Refactor IClient to use IObserver<T><a class="headerlink" href="#step-2-refactor-iclient-to-use-iobserver-t" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Update the <code class="docutils literal notranslate"><span class="pre">IClient</span></code> interface to extend <code class="docutils literal notranslate"><span class="pre">IObserver&lt;string&gt;</span></code>. The <code class="docutils literal notranslate"><span class="pre">IObserver&lt;T&gt;</span></code> interface has three methods: <code class="docutils literal notranslate"><span class="pre">OnNext</span></code>, <code class="docutils literal notranslate"><span class="pre">OnError</span></code>, and <code class="docutils literal notranslate"><span class="pre">OnCompleted</span></code>. For our chat room application, we will mainly focus on the <code class="docutils literal notranslate"><span class="pre">OnNext</span></code> method which is invoked to provide the subscribed observer with new data (in our case, new chat messages).</p></li>
+<li><p>Implement the <code class="docutils literal notranslate"><span class="pre">IObserver&lt;string&gt;</span></code> interface in our <code class="docutils literal notranslate"><span class="pre">Client</span></code> class.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Client</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IObserver</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">ClientName</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnNext</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">message</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{ClientName} received: {message}&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnError</span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{ClientName} experienced an error: {e.Message}&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnCompleted</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{ClientName} has left the chat room.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-testing-the-refactored-implementation">
+<h3>Step 3: Testing the Refactored Implementation<a class="headerlink" href="#step-3-testing-the-refactored-implementation" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple" start="6">
+<li><p>Test the refactored chat room application.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ChatRoom</span><span class="w"> </span><span class="n">room</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ChatRoom</span><span class="p">();</span>
+
+<span class="n">Client</span><span class="w"> </span><span class="n">client1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Client</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">ClientName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Alice&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="n">Client</span><span class="w"> </span><span class="n">client2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Client</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">ClientName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Bob&quot;</span><span class="w"> </span><span class="p">};</span>
+
+<span class="n">IDisposable</span><span class="w"> </span><span class="n">aliceSubscription</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">room</span><span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">client1</span><span class="p">);</span>
+<span class="n">IDisposable</span><span class="w"> </span><span class="n">bobSubscription</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">room</span><span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">client2</span><span class="p">);</span>
+
+<span class="n">room</span><span class="p">.</span><span class="n">PostMessage</span><span class="p">(</span><span class="s">&quot;Hello, world!&quot;</span><span class="p">);</span>
+
+<span class="c1">// Simulate Alice leaving the chat room.</span>
+<span class="n">aliceSubscription</span><span class="p">.</span><span class="n">Dispose</span><span class="p">();</span>
+
+<span class="n">room</span><span class="p">.</span><span class="n">PostMessage</span><span class="p">(</span><span class="s">&quot;Is Alice still here?&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Alice received: Hello, world!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bob received: Hello, world!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bob received: Is Alice still here?
 </pre></div>
 </div>
 </div>
 </div>
+<p>By following these steps, we’ve successfully refactored our custom chat room application to use the built-in <code class="docutils literal notranslate"><span class="pre">IObservable&lt;T&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">IObserver&lt;T&gt;</span></code> interfaces from .NET. This provides a standardized way of implementing the Observer pattern and may offer better interoperability with other .NET components and libraries.</p>
 </section>
-<section id="step-3-eliminate-duplication-using-inheritance">
-<h3>Step 3: Eliminate duplication using inheritance<a class="headerlink" href="#step-3-eliminate-duplication-using-inheritance" title="Permalink to this heading">#</a></h3>
-<p>When we split the shapes into their own classes that implement the interface <code class="docutils literal notranslate"><span class="pre">IShape</span></code> we ended up duplicating the logic of the <code class="docutils literal notranslate"><span class="pre">private</span></code> method <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">draw(string[][]</span> <span class="pre">symbols)</span></code>.
-Let’s eliminate that duplication using inheritance.</p>
-<p>Make the classes <code class="docutils literal notranslate"><span class="pre">HorizontalLine</span></code>, <code class="docutils literal notranslate"><span class="pre">Square</span></code>, and <code class="docutils literal notranslate"><span class="pre">RightTriangle</span></code> inherit from an abstract class called <code class="docutils literal notranslate"><span class="pre">Shape</span></code> which in turn implements the interface <code class="docutils literal notranslate"><span class="pre">IShape</span></code>.</p>
-<p>The abstract class <code class="docutils literal notranslate"><span class="pre">Shape</span></code> should allow you to eliminate the duplicated method  <code class="docutils literal notranslate"><span class="pre">private</span></code> method <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">draw(string[][]</span> <span class="pre">symbols)</span></code>.</p>
-<p>One way is to add an <code class="docutils literal notranslate"><span class="pre">abstract</span></code> method to <code class="docutils literal notranslate"><span class="pre">Shape</span></code> with the signature <code class="docutils literal notranslate"><span class="pre">string[][]</span> <span class="pre">MakeLines()</span></code>:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Shape</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IShape</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="kt">string</span><span class="p">[][]</span><span class="w"> </span><span class="n">GetLines</span><span class="p">();</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Draw</span><span class="p">()</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Replace with your implementation.</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Another way is to make <code class="docutils literal notranslate"><span class="pre">Draw</span></code> <code class="docutils literal notranslate"><span class="pre">abstract</span></code> in <code class="docutils literal notranslate"><span class="pre">Shape</span></code> and instead offer its subclasses a <code class="docutils literal notranslate"><span class="pre">protected</span></code> method with the signature <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">Flatten(string[][]</span> <span class="pre">symbols)</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Shape</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IShape</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Draw</span><span class="p">();</span>
-
-<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Flatten</span><span class="p">(</span><span class="kt">string</span><span class="p">[][]</span><span class="w"> </span><span class="n">lines</span><span class="p">)</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Replace with your implementation.</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>should provide a <span class="xref myst">protected</span> method with the signature <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">Draw(string[][]</span> <span class="pre">symbols</span></code>. This allows us to remove the duplicated code in the three shape classes.</p>
+</section>
+<section id="challenge">
+<h2>Challenge<a class="headerlink" href="#challenge" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>How would you implement a feature for clients to post messages back to the chat room, which then gets broadcasted to all clients?</p></li>
+<li><p>How could we include the name of the sender in the broadcasted message?</p></li>
+<li><p>Add a new type of client, such as a <code class="docutils literal notranslate"><span class="pre">BotClient</span></code>, which automatically responds to certain keywords in the chat room. Implement this and test its integration.</p></li>
+</ol>
 <div class="admonition-reflection admonition">
 <p class="admonition-title">🤔 Reflection</p>
-<p>How does creating specific classes for each shape, adhering to the same interface, make the code more organized and maintainable?</p>
+<p>Reflect on the difference between implementing the Observer pattern using custom interfaces versus using the built-in .NET interfaces. What are the advantages and disadvantages of each approach?</p>
 </div>
-</section>
-<section id="step-4-add-more-shapes">
-<h3>Step 4: Add more shapes<a class="headerlink" href="#step-4-add-more-shapes" title="Permalink to this heading">#</a></h3>
-<p>Challenge: Create some new classes, such as <code class="docutils literal notranslate"><span class="pre">VerticalLine</span></code> or <code class="docutils literal notranslate"><span class="pre">Cross</span></code>, that implement <code class="docutils literal notranslate"><span class="pre">IShape</span></code> and integrate it with your existing code without modifying the existing shape classes.</p>
-<div class="admonition-reflection admonition">
-<p class="admonition-title">🤔 Reflection</p>
-<p>How does your design enable the addition of new shapes with minimal changes to existing code?</p>
-</div>
-</section>
 </section>
 </section>
 
@@ -678,23 +702,15 @@ Let’s eliminate that duplication using inheritance.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="generics.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">Lab: Generics</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="../chapters/variant-generic-interfaces.html">
+          
+          <a class="prev-page" href="lambdas.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title"><span class="section-number">115. </span>Variant generic interfaces</div>
+                <div class="title">Lab: Lambdas</div>
                 
               </div>
             </a>
@@ -728,16 +744,22 @@ Let’s eliminate that duplication using inheritance.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Lab: Replace conditional with polymorphism</a><ul>
+<li><a class="reference internal" href="#">Lab: Observer Pattern</a><ul>
 <li><a class="reference internal" href="#objective">Objective</a></li>
-<li><a class="reference internal" href="#provided-code">Provided code</a></li>
-<li><a class="reference internal" href="#instructions">Instructions</a><ul>
-<li><a class="reference internal" href="#step-1-replace-conditionals-in-shape-with-polymorphism">Step 1: Replace conditionals in <code class="docutils literal notranslate"><span class="pre">Shape</span></code> with polymorphism</a></li>
-<li><a class="reference internal" href="#step-2-rewrite-the-main-class">Step 2: Rewrite the main class</a></li>
-<li><a class="reference internal" href="#step-3-eliminate-duplication-using-inheritance">Step 3: Eliminate duplication using inheritance</a></li>
-<li><a class="reference internal" href="#step-4-add-more-shapes">Step 4: Add more shapes</a></li>
+<li><a class="reference internal" href="#part-1-custom-implementation">Part 1: Custom Implementation</a><ul>
+<li><a class="reference internal" href="#step-1-creating-our-observer-iclient">Step 1: Creating our Observer: IClient</a></li>
+<li><a class="reference internal" href="#step-2-creating-our-observable-chatroom">Step 2: Creating our Observable: ChatRoom</a></li>
+<li><a class="reference internal" href="#step-3-implementing-a-concrete-observer-client">Step 3: Implementing a Concrete Observer: Client</a></li>
+<li><a class="reference internal" href="#step-4-testing-the-custom-implementation">Step 4: Testing the Custom Implementation</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#part-2-refactoring-with-net-built-in-interfaces">Part 2: Refactoring with .NET Built-in Interfaces</a><ul>
+<li><a class="reference internal" href="#step-1-refactor-chatroom-to-use-iobservable-t">Step 1: Refactor ChatRoom to use IObservable<T></a></li>
+<li><a class="reference internal" href="#step-2-refactor-iclient-to-use-iobserver-t">Step 2: Refactor IClient to use IObserver<T></a></li>
+<li><a class="reference internal" href="#step-3-testing-the-refactored-implementation">Step 3: Testing the Refactored Implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#challenge">Challenge</a></li>
 </ul>
 </li>
 </ul>
