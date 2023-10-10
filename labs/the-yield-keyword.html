@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Lab: Composition over Inheritance" href="composition-over-inheritance.html" /><link rel="prev" title="Lab: Generic Supertypes" href="generic-supertypes.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="Lab: Enumerables" href="enumerables.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Lab: Type parameter constraints - The Object Oriented Way</title>
+        <title>Lab: The yield keyword - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -288,7 +288,7 @@
 <li class="toctree-l1"><a class="reference internal" href="generics.html">Lab: Generics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-types.html">Lab: Generic types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">Lab: Generic Supertypes</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Lab: Type parameter constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">Lab: Type parameter constraints</a></li>
 <li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">Lab: Composition over Inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bridge-pattern.html">Lab: Bridge Pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="delegates.html">Lab: Delegates</a></li>
@@ -297,7 +297,7 @@
 <li class="toctree-l1"><a class="reference internal" href="events.html">Lab: Events</a></li>
 <li class="toctree-l1"><a class="reference internal" href="iterator-pattern.html">Lab: Iterator pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enumerables.html">Lab: Enumerables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="the-yield-keyword.html">Lab: The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Lab: The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword</a></li>
 </ul>
 
 </div>
@@ -332,36 +332,69 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="lab-type-parameter-constraints">
-<h1>Lab: Type parameter constraints<a class="headerlink" href="#lab-type-parameter-constraints" title="Permalink to this heading">#</a></h1>
+          <section class="tex2jax_ignore mathjax_ignore" id="lab-the-yield-keyword">
+<h1>Lab: The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword<a class="headerlink" href="#lab-the-yield-keyword" title="Permalink to this heading">#</a></h1>
 <section id="objective">
 <h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
-<p>In this lab, we will harness the power of type parameter constraints to create a type-safe inventory management system that can handle distinct item types with their unique behaviors. We’ll focus on implementing and extending a generic inventory, and then populating this inventory with various items and interacting with them.</p>
+<p>In this lab, we will delve into the practical applications of the <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword in C#. Our primary goal is to simplify and streamline the process of iterating over collections without the necessity of creating a class that implements the <code class="docutils literal notranslate"><span class="pre">IEnumerator&lt;T&gt;</span></code> interface.</p>
 </section>
 <section id="provided-code">
 <h2>Provided code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
-<p>Carefully review the provided code. We have a basic interface <code class="docutils literal notranslate"><span class="pre">IItem</span></code> and two implementations: <code class="docutils literal notranslate"><span class="pre">Weapon</span></code> and <code class="docutils literal notranslate"><span class="pre">Map</span></code>.</p>
+<p>Carefully review the provided code. Notice the classes <code class="docutils literal notranslate"><span class="pre">Inventory</span></code> and <code class="docutils literal notranslate"><span class="pre">InventoryEnumerator</span></code>. The <code class="docutils literal notranslate"><span class="pre">Inventory</span></code> class holds three items, while the <code class="docutils literal notranslate"><span class="pre">InventoryEnumerator</span></code> allows for iteration through the items in the inventory. This is done manually, by using an enumerator class. Iteration can be accomplished either with a <code class="docutils literal notranslate"><span class="pre">foreach</span></code> loop or by manually invoking the enumerator.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">interface</span><span class="w"> </span><span class="n">IItem</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Item</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="n">init</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Weapon</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IItem</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Inventory</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Item</span><span class="w"> </span><span class="n">Item1</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Item</span><span class="w"> </span><span class="n">Item2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Item</span><span class="w"> </span><span class="n">Item3</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Use</span><span class="p">()</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Using {Name}.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">IEnumerator</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetEnumerator</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">InventoryEnumerator</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Required for the non-generic interface</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">IEnumerator</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">IEnumerable</span><span class="p">.</span><span class="n">GetEnumerator</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">GetEnumerator</span><span class="p">();</span>
 <span class="p">}</span>
 
-<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Map</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IItem</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">InventoryEnumerator</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IEnumerator</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">Inventory</span><span class="w"> </span><span class="n">inventory</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">currentIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="m">1</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Open</span><span class="p">()</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Opening {Name}.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">InventoryEnumerator</span><span class="p">(</span><span class="n">Inventory</span><span class="w"> </span><span class="n">inventory</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">inventory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inventory</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Item</span><span class="w"> </span><span class="n">Current</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">get</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">currentIndex</span><span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="m">0</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">Item1</span><span class="p">,</span>
+<span class="w">            </span><span class="m">1</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">Item2</span><span class="p">,</span>
+<span class="w">            </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">Item3</span><span class="p">,</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Required for the non-generic interface</span>
+<span class="w">    </span><span class="kt">object</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">IEnumerator</span><span class="p">.</span><span class="n">Current</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Current</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">MoveNext</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">currentIndex</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">currentIndex</span><span class="o">++</span><span class="p">;</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Reset</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">currentIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="m">1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Dispose</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -369,7 +402,7 @@
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-9252.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-9193.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -419,7 +452,7 @@ function loadDotnetInteractiveApi() {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '9252.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '9193.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -475,75 +508,92 @@ else {
     </script>
 </div></div></div>
 </div>
-<p>We aim to further enrich this system by enhancing the functionalities of these items and ensuring our inventory can exploit these capabilities without losing type-specific details.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Inventory</span><span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Inventory</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Item1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Item</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Key&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="n">Item2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Item</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Sword&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="n">Item3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Item</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Map&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Iterating using foreach:</span>
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Item</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">inventory</span><span class="p">)</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
+
+<span class="c1">// Iterating by manually using the enumerator:</span>
+<span class="n">IEnumerator</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span><span class="w"> </span><span class="n">enumerator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">GetEnumerator</span><span class="p">();</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">enumerator</span><span class="p">.</span><span class="n">MoveNext</span><span class="p">())</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">enumerator</span><span class="p">.</span><span class="n">Current</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Key
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sword
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Map
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Key
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sword
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Map
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="instructions">
 <h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
-<section id="step-1-crafting-the-generic-inventory">
-<h3>Step 1: Crafting the Generic Inventory<a class="headerlink" href="#step-1-crafting-the-generic-inventory" title="Permalink to this heading">#</a></h3>
-<p>Your task is to design a generic inventory class <code class="docutils literal notranslate"><span class="pre">Inventory&lt;T&gt;</span></code>, where <code class="docutils literal notranslate"><span class="pre">T</span></code> is constrained to the interface <code class="docutils literal notranslate"><span class="pre">IItem</span></code>. This class should be able to:</p>
-<ul class="simple">
-<li><p>Add items to the inventory.</p></li>
-<li><p>Remove items from the inventory.</p></li>
-<li><p>Get the currently selected item.</p></li>
-<li><p>Retrieve the currently selected item’s name.</p></li>
-<li><p>Get a list of strings of the names of all items in the inventory.</p></li>
-<li><p>Navigate through items (with methods like <code class="docutils literal notranslate"><span class="pre">Next()</span></code> and <code class="docutils literal notranslate"><span class="pre">Prev()</span></code>).</p></li>
-</ul>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Remember to employ the <code class="docutils literal notranslate"><span class="pre">where</span></code> keyword to add the constraint.</p>
-</div>
-<div class="admonition-reflection admonition">
-<p class="admonition-title">🤔 Reflection</p>
-<p>Why do we need the constraint?</p>
-</div>
-</section>
-<section id="step-2-a-mixed-inventory">
-<h3>Step 2: A Mixed Inventory<a class="headerlink" href="#step-2-a-mixed-inventory" title="Permalink to this heading">#</a></h3>
-<p>In the <code class="docutils literal notranslate"><span class="pre">Main</span></code> method, create an instance of <code class="docutils literal notranslate"><span class="pre">Inventory&lt;IItem&gt;</span></code>.
-This inventory should be able to hold any item that implements the <code class="docutils literal notranslate"><span class="pre">IItem</span></code> interface.</p>
+<section id="step-1-removing-the-inventoryenumerator">
+<h3>Step 1: Removing the InventoryEnumerator<a class="headerlink" href="#step-1-removing-the-inventoryenumerator" title="Permalink to this heading">#</a></h3>
+<p>The first step in our refactoring process is to get rid of the <code class="docutils literal notranslate"><span class="pre">InventoryEnumerator</span></code> class. Instead of manually defining the enumerator logic, we will leverage the power of the <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword.</p>
 <ol class="arabic simple">
-<li><p>Create a new inventory instance of type <code class="docutils literal notranslate"><span class="pre">Inventory&lt;IItem&gt;</span></code>.</p></li>
-<li><p>Add a few objects of type <code class="docutils literal notranslate"><span class="pre">Weapon</span></code> and a few of type <code class="docutils literal notranslate"><span class="pre">Map</span></code> to this inventory.</p></li>
-<li><p>Print the names of all items in the inventory by interacting with the inventory.</p></li>
+<li><p>Delete the entire <code class="docutils literal notranslate"><span class="pre">InventoryEnumerator</span></code> class.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">Inventory</span></code> class, modify the <code class="docutils literal notranslate"><span class="pre">GetEnumerator()</span></code> method to use the <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword to yield each item in the inventory.</p></li>
 </ol>
-<p>Now, here’s where things get a little more challenging:</p>
-<ul class="simple">
-<li><p>Try to extract a specific item from the inventory. Once you have this item, attempt to call the <code class="docutils literal notranslate"><span class="pre">Use()</span></code> or <code class="docutils literal notranslate"><span class="pre">Open()</span></code> methods.</p></li>
-</ul>
-<p>Did you encounter any issues? Why do you think this is the case?</p>
-<div class="admonition-reflection admonition">
-<p class="admonition-title">🤔 Reflection</p>
-<p>Why are we not able directly call <code class="docutils literal notranslate"><span class="pre">Use()</span></code> or <code class="docutils literal notranslate"><span class="pre">Open()</span></code> on an extracted item from an <code class="docutils literal notranslate"><span class="pre">Inventory&lt;IItem&gt;</span></code>? What does this tell us about the advantages and limitations of subtype polymorphism?</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="n">IEnumerator</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetEnumerator</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Item1</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Item1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Item2</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Item2</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Item3</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Item3</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
 </div>
 </section>
-<section id="step-3-specific-inventories">
-<h3>Step 3: Specific Inventories<a class="headerlink" href="#step-3-specific-inventories" title="Permalink to this heading">#</a></h3>
-<p>In the <code class="docutils literal notranslate"><span class="pre">Main</span></code> program.
-Create inventories of type <code class="docutils literal notranslate"><span class="pre">Inventory&lt;Weapon&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">Inventory&lt;Map&gt;</span></code>.
-Create multiple instances of <code class="docutils literal notranslate"><span class="pre">Weapon</span></code> and <code class="docutils literal notranslate"><span class="pre">Map</span></code> and add them to their respective inventories.</p>
-<p>Move through these inventories using the <code class="docutils literal notranslate"><span class="pre">Next()</span></code> and <code class="docutils literal notranslate"><span class="pre">Prev()</span></code> methods, and for each item call <code class="docutils literal notranslate"><span class="pre">Use()</span></code> or <code class="docutils literal notranslate"><span class="pre">Open()</span></code> depending on from which inventory you got the item.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Objects of type <code class="docutils literal notranslate"><span class="pre">Weapon</span></code> and objects of type <code class="docutils literal notranslate"><span class="pre">Map</span></code> should be stored in <strong>different</strong> inventory objects. So when we step through what’s in our inventories, we have to step through two inventories.</p>
-</div>
+<section id="step-2-run-the-program">
+<h3>Step 2: Run the program<a class="headerlink" href="#step-2-run-the-program" title="Permalink to this heading">#</a></h3>
+<p>With this simple change, we’ve eliminated the need for a separate enumerator class, and the logic for iterating over the items in the inventory has become much clearer.</p>
+<p>Run the main program and check that you still get the same results.</p>
 <div class="admonition-reflection admonition">
 <p class="admonition-title">🤔 Reflection</p>
-<p>What are the benefits of using separate inventories for the two types <code class="docutils literal notranslate"><span class="pre">Weapon</span></code> and <code class="docutils literal notranslate"><span class="pre">Map</span></code>? What are the downsides?</p>
+<p>How has the usage of the <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword simplified our code? Consider the pros and cons of this approach in comparison to the previous enumerator-based method.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Notice how we didn’t have to change anything in the main code since we’re still following the <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;T&gt;</span></code> interface.</p>
 </div>
 </section>
 </section>
 <section id="challenge">
 <h2>Challenge<a class="headerlink" href="#challenge" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Introduce a new item type, <code class="docutils literal notranslate"><span class="pre">Key</span></code>. This should implement <code class="docutils literal notranslate"><span class="pre">IItem</span></code> and have a method <code class="docutils literal notranslate"><span class="pre">Unlock()</span></code> that prints “Unlocking with {Name}”.</p></li>
-<li><p>Create an inventory for keys, add a few keys to it, and iterate through it to unlock using the keys.</p></li>
+<li><p><strong>Reverse enumeration:</strong> Add a method called <code class="docutils literal notranslate"><span class="pre">GetReverseEnumerable()</span></code> in the <code class="docutils literal notranslate"><span class="pre">Inventory</span></code> class that returns the items in reverse order, utilizing the <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword. Use the method in the main program to make sure that it works as expected.</p></li>
+<li><p><strong>Random enumeration:</strong> Add a method called <code class="docutils literal notranslate"><span class="pre">GetRandomEnumerable()</span></code> in the <code class="docutils literal notranslate"><span class="pre">Inventory</span></code> class that returns the items but in random order, utilizing the <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword. Use the method in the main program to make sure that it works as expected.</p></li>
+<li><p><strong>Local function with <code class="docutils literal notranslate"><span class="pre">yield</span></code>:</strong> In the main program, write a local function with the signature <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;int&gt;</span> <span class="pre">MakeRange</span> <span class="pre">(int</span> <span class="pre">from,</span> <span class="pre">int</span> <span class="pre">to)</span></code>. Use the <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword to return an <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;int&gt;</span></code> that produces all numbers between <code class="docutils literal notranslate"><span class="pre">from</span></code> and <code class="docutils literal notranslate"><span class="pre">to</span></code>. When you’re done, remember to call the method and try it to make sure that it behaves as expected.</p></li>
 </ol>
 <div class="admonition-reflection admonition">
 <p class="admonition-title">🤔 Reflection</p>
-<p>How did introducing a new item type impact our existing inventory system? How do type parameter constraints provide a framework to smoothly integrate new types into our application?</p>
+<p>How can the <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword enhance maintainability?</p>
 </div>
+<p>Happy coding!</p>
 </section>
 </section>
 
@@ -571,23 +621,15 @@ Create multiple instances of <code class="docutils literal notranslate"><span cl
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="composition-over-inheritance.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">Lab: Composition over Inheritance</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="generic-supertypes.html">
+          
+          <a class="prev-page" href="enumerables.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Lab: Generic Supertypes</div>
+                <div class="title">Lab: Enumerables</div>
                 
               </div>
             </a>
@@ -621,13 +663,12 @@ Create multiple instances of <code class="docutils literal notranslate"><span cl
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Lab: Type parameter constraints</a><ul>
+<li><a class="reference internal" href="#">Lab: The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword</a><ul>
 <li><a class="reference internal" href="#objective">Objective</a></li>
 <li><a class="reference internal" href="#provided-code">Provided code</a></li>
 <li><a class="reference internal" href="#instructions">Instructions</a><ul>
-<li><a class="reference internal" href="#step-1-crafting-the-generic-inventory">Step 1: Crafting the Generic Inventory</a></li>
-<li><a class="reference internal" href="#step-2-a-mixed-inventory">Step 2: A Mixed Inventory</a></li>
-<li><a class="reference internal" href="#step-3-specific-inventories">Step 3: Specific Inventories</a></li>
+<li><a class="reference internal" href="#step-1-removing-the-inventoryenumerator">Step 1: Removing the InventoryEnumerator</a></li>
+<li><a class="reference internal" href="#step-2-run-the-program">Step 2: Run the program</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#challenge">Challenge</a></li>
