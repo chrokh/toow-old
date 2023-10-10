@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="Lab: Observer Pattern" href="observer-pattern.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Composition over inheritance - The Object Oriented Way</title>
+        <title>Lab: Events - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -283,18 +283,18 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapters/variant-generic-interfaces.html">115. Variant generic interfaces</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Labs</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../labs/replace-conditional-with-polymorphism.html">Lab: Replace conditional with polymorphism</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/generics.html">Lab: Generics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/generic-types.html">Lab: Generic types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/generic-supertypes.html">Lab: Generic Supertypes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/type-parameter-constraints.html">Lab: Type parameter constraints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/composition-over-inheritance.html">Lab: Composition over Inheritance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/bridge-pattern.html">Lab: Bridge Pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/delegates.html">Lab: Delegates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/lambdas.html">Lab: Lambdas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/observer-pattern.html">Lab: Observer Pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/events.html">Lab: Events</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">Lab: Replace conditional with polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics.html">Lab: Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-types.html">Lab: Generic types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">Lab: Generic Supertypes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">Lab: Type parameter constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">Lab: Composition over Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bridge-pattern.html">Lab: Bridge Pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="delegates.html">Lab: Delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lambdas.html">Lab: Lambdas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observer-pattern.html">Lab: Observer Pattern</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Lab: Events</a></li>
 </ul>
 
 </div>
@@ -329,47 +329,29 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="composition-over-inheritance">
-<h1>Composition over inheritance<a class="headerlink" href="#composition-over-inheritance" title="Permalink to this heading">#</a></h1>
-<section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<section id="ducks">
-<span id="composition-over-inheritance-examples-ducks"></span><h3>Ducks<a class="headerlink" href="#ducks" title="Permalink to this heading">#</a></h3>
-<p>Let’s run through an example similar to the duck example made famous by <span id="id1">Freeman and Robson [<a class="reference internal" href="../chapters/bibliography.html#id15" title="E. Freeman and E Robson. Head First Design Patterns: A Brain-Friendly Guide. Head First Series. O'Reilly Media, Incorporated, 2004. ISBN 9780596800741. URL: https://geni.us/nlbA6.">2004</a>]</span>.</p>
-<p>We start with this:</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="lab-events">
+<h1>Lab: Events<a class="headerlink" href="#lab-events" title="Permalink to this heading">#</a></h1>
+<section id="objective">
+<h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
+<p>In this lab, we will refactor the provided chat room and client code that uses the Observer pattern into one that utilizes C#’s native event mechanism. By the end, we should have a better grasp of how events can replace and simplify certain observer scenarios in .NET.</p>
+</section>
+<section id="provided-code">
+<h2>Provided Code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
+<p>Carefully review the provided code. Notice that the <code class="docutils literal notranslate"><span class="pre">ChatRoom</span></code> class implements the <code class="docutils literal notranslate"><span class="pre">IObservable&lt;string&gt;</span></code> interface and maintains a list of observers. Each client, in turn, implements the <code class="docutils literal notranslate"><span class="pre">IObserver&lt;string&gt;</span></code> interface. When a message is posted in the chat room, all subscribed clients receive it. Clients can also leave the chat room by calling the <code class="docutils literal notranslate"><span class="pre">Dispose</span></code> method on their subscription.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IDuck</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Client</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IObserver</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span>
 <span class="p">{</span>
-<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">();</span>
-<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">();</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">ClientName</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">WildDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IDuck</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Quack quack.&quot;</span><span class="p">;</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Flying with wings.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnNext</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">message</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{ClientName} received: {message}&quot;</span><span class="p">);</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">RubberDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IDuck</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Squeak squeak.&quot;</span><span class="p">;</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Cannot fly.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnError</span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{ClientName} experienced an error: {e.Message}&quot;</span><span class="p">);</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">RocketPoweredWildDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">WildDuck</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Flying with rockets.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">RocketPoweredRubberDuck</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">RubberDuck</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Flying with rockets.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">RubberDuckWithVoiceSynthesizer</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">RubberDuck</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Quack quack.&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnCompleted</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{ClientName} has left the chat room.&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -377,7 +359,7 @@
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-9515.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-8922.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -427,7 +409,7 @@ function loadDotnetInteractiveApi() {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '9515.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '8922.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -483,164 +465,170 @@ else {
     </script>
 </div></div></div>
 </div>
-<p>Pay special attention to how inheritance in the example above doesn’t help us in eliminating all duplication.
-Our use case doesn’t simply form a nice hierarchy and so we end up with duplicated code even though we try our best to use the code-reuse facilities of <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">inheritance</span></a> to eliminate it.</p>
-<p>Either way, we can use the code like this:</p>
-<div class="cell tag_hide-output docutils container">
-<div class="cell_input above-output-prompt docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IDuck</span><span class="p">[]</span><span class="w"> </span><span class="n">ducks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IDuck</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">WildDuck</span><span class="p">(),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">RubberDuck</span><span class="p">(),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">RocketPoweredWildDuck</span><span class="p">(),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">RocketPoweredRubberDuck</span><span class="p">(),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">RubberDuckWithVoiceSynthesizer</span><span class="p">()</span>
-<span class="p">};</span>
-
-<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">IDuck</span><span class="w"> </span><span class="n">duck</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">ducks</span><span class="p">)</span>
-<span class="w">  </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">duck</span><span class="p">.</span><span class="n">Quack</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; | &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">duck</span><span class="p">.</span><span class="n">Fly</span><span class="p">());</span>
-</pre></div>
-</div>
-</div>
-<details class="hide below-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
-</summary>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Flying with wings.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Squeak squeak. | Cannot fly.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Flying with rockets.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Squeak squeak. | Flying with rockets.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Cannot fly.
-</pre></div>
-</div>
-</div>
-</details>
-</div>
-<p>But as we apply the idea of favoring composition over inheritance we realize that we can break out individual behaviors into their own classes and then compose them as we see fit.
-Let’s start with quacking behaviors.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IQuackBehavior</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ChatRoom</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IObservable</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span>
 <span class="p">{</span>
-<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">();</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">IObserver</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">observers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">IObserver</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;&gt;</span><span class="p">();</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">QuackBehavior</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IQuackBehavior</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Quack quack.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">IDisposable</span><span class="w"> </span><span class="nf">Subscribe</span><span class="p">(</span><span class="n">IObserver</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">observer</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">observers</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">observer</span><span class="p">))</span>
+<span class="w">            </span><span class="n">observers</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">observer</span><span class="p">);</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">SqueakBehavior</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IQuackBehavior</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Squeak squeak.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Starting to see where this is going?
-Let’s now do the same thing for fly behaviors.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IFlyBehavior</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">();</span>
-<span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">Unsubscriber</span><span class="p">(</span><span class="n">observers</span><span class="p">,</span><span class="w"> </span><span class="n">observer</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">FlyWithWings</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IFlyBehavior</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Flying with wings.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">PostMessage</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">message</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">observer</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">observers</span><span class="p">.</span><span class="n">ToArray</span><span class="p">())</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">observers</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">observer</span><span class="p">))</span>
+<span class="w">                </span><span class="n">observer</span><span class="p">.</span><span class="n">OnNext</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">NoFlyBehavior</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IFlyBehavior</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Cannot fly.&quot;</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Unsubscriber</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IDisposable</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">IObserver</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">observers</span><span class="p">;</span>
+<span class="w">        </span><span class="k">private</span><span class="w"> </span><span class="n">IObserver</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">observer</span><span class="p">;</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">FlyWithRockets</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IFlyBehavior</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Fly with rockets.&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="nf">Unsubscriber</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">IObserver</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">observers</span><span class="p">,</span><span class="w"> </span><span class="n">IObserver</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">observer</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="n">observers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">observers</span><span class="p">;</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="n">observer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">observer</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Dispose</span><span class="p">()</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">observer</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">observers</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">observer</span><span class="p">))</span>
+<span class="w">                </span><span class="n">observers</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">observer</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Ok, but what happens to all the duck subclasses?
-Well, now that we’re composing behaviors instead of inheriting and overriding them, we don’t need inheritance anymore.
-A single <code class="docutils literal notranslate"><span class="pre">Duck</span></code> class will do just fine.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Duck</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="n">IQuackBehavior</span><span class="w"> </span><span class="n">quackBehavior</span><span class="p">;</span>
-<span class="w">  </span><span class="n">IFlyBehavior</span><span class="w"> </span><span class="n">flyBehavior</span><span class="p">;</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ChatRoom</span><span class="w"> </span><span class="n">room</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ChatRoom</span><span class="p">();</span>
 
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">Duck</span><span class="w"> </span><span class="p">(</span><span class="n">IQuackBehavior</span><span class="w"> </span><span class="n">quackBehavior</span><span class="p">,</span><span class="w"> </span><span class="n">IFlyBehavior</span><span class="w"> </span><span class="n">flyBehavior</span><span class="p">)</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">quackBehavior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">quackBehavior</span><span class="p">;</span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">flyBehavior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">flyBehavior</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
+<span class="n">Client</span><span class="w"> </span><span class="n">client1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Client</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">ClientName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Alice&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="n">Client</span><span class="w"> </span><span class="n">client2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Client</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">ClientName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Bob&quot;</span><span class="w"> </span><span class="p">};</span>
 
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Quack</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">quackBehavior</span><span class="p">.</span><span class="n">Quack</span><span class="p">();</span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Fly</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">flyBehavior</span><span class="p">.</span><span class="n">Fly</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>What we previously considered to be different “types” of ducks no longer need to be represented by different individual classes.
-Instead we can grab any two combination of existing or future quack and fly behaviors and pass them as arguments when constructing a duck.
-The creation of different “types” of ducks, consequently, now happens at run-time rather than compile-time.</p>
-<p>To execute code equivalent to the example that we had before, we would write something like this:</p>
-<div class="cell tag_hide-output docutils container">
-<div class="cell_input above-output-prompt docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Duck</span><span class="p">[]</span><span class="w"> </span><span class="n">ducks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Duck</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Duck</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">QuackBehavior</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FlyWithWings</span><span class="p">()),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Duck</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SqueakBehavior</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NoFlyBehavior</span><span class="p">()),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Duck</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">QuackBehavior</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FlyWithRockets</span><span class="p">()),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Duck</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SqueakBehavior</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FlyWithRockets</span><span class="p">()),</span>
-<span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="nf">Duck</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">QuackBehavior</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NoFlyBehavior</span><span class="p">())</span>
-<span class="p">};</span>
+<span class="n">IDisposable</span><span class="w"> </span><span class="n">aliceSubscription</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">room</span><span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">client1</span><span class="p">);</span>
+<span class="n">IDisposable</span><span class="w"> </span><span class="n">bobSubscription</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">room</span><span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">client2</span><span class="p">);</span>
 
-<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Duck</span><span class="w"> </span><span class="n">duck</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">ducks</span><span class="p">)</span>
-<span class="w">  </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">duck</span><span class="p">.</span><span class="n">Quack</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; | &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">duck</span><span class="p">.</span><span class="n">Fly</span><span class="p">());</span>
+<span class="n">room</span><span class="p">.</span><span class="n">PostMessage</span><span class="p">(</span><span class="s">&quot;Hello, world!&quot;</span><span class="p">);</span>
+
+<span class="c1">// Simulate Alice leaving the chat room.</span>
+<span class="n">aliceSubscription</span><span class="p">.</span><span class="n">Dispose</span><span class="p">();</span>
+
+<span class="n">room</span><span class="p">.</span><span class="n">PostMessage</span><span class="p">(</span><span class="s">&quot;Is Alice still here?&quot;</span><span class="p">);</span>
 </pre></div>
-</div>
-</div>
-<details class="hide below-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
-</summary>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Flying with wings.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Squeak squeak. | Cannot fly.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Fly with rockets.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Squeak squeak. | Fly with rockets.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quack quack. | Cannot fly.
-</pre></div>
-</div>
-</div>
-</details>
 </div>
 </section>
+<section id="instructions">
+<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
+<section id="step-1-introduce-the-messageeventargs-class">
+<h3>Step 1: Introduce the <code class="docutils literal notranslate"><span class="pre">MessageEventArgs</span></code> class<a class="headerlink" href="#step-1-introduce-the-messageeventargs-class" title="Permalink to this heading">#</a></h3>
+<p>We will start by creating a new class called <code class="docutils literal notranslate"><span class="pre">MessageEventArgs</span></code> which inherits from <code class="docutils literal notranslate"><span class="pre">EventArgs</span></code>. This class will contain a single property, <code class="docutils literal notranslate"><span class="pre">Message</span></code>, of type <code class="docutils literal notranslate"><span class="pre">string</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MessageEventArgs</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">EventArgs</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Message</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">MessageEventArgs</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">message</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">message</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-replace-observer-pattern-with-event">
+<h3>Step 2: Replace Observer pattern with Event<a class="headerlink" href="#step-2-replace-observer-pattern-with-event" title="Permalink to this heading">#</a></h3>
+<p>Replace the <code class="docutils literal notranslate"><span class="pre">IObservable&lt;string&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">IObserver&lt;string&gt;</span></code> interfaces in <code class="docutils literal notranslate"><span class="pre">ChatRoom</span></code> and <code class="docutils literal notranslate"><span class="pre">Client</span></code> classes, respectively. Instead, we will declare an event in the <code class="docutils literal notranslate"><span class="pre">ChatRoom</span></code> class called <code class="docutils literal notranslate"><span class="pre">MessagePosted</span></code> of type <code class="docutils literal notranslate"><span class="pre">EventHandler&lt;MessageEventArgs&gt;</span></code>.</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">ChatRoom</span></code> class, fire the event in the <code class="docutils literal notranslate"><span class="pre">PostMessage</span></code> method. In the <code class="docutils literal notranslate"><span class="pre">Client</span></code> class, we will register and unregister for this event, and handle messages using an event handler.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Client</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">ClientName</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">HandleMessagePosted</span><span class="p">(</span><span class="kt">object</span><span class="w"> </span><span class="n">sender</span><span class="p">,</span><span class="w"> </span><span class="n">MessageEventArgs</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{ClientName} received: {e.Message}&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ChatRoom</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">event</span><span class="w"> </span><span class="n">EventHandler</span><span class="o">&lt;</span><span class="n">MessageEventArgs</span><span class="o">&gt;</span><span class="w"> </span><span class="n">MessagePosted</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">PostMessage</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">message</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">MessagePosted</span><span class="o">?.</span><span class="n">Invoke</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MessageEventArgs</span><span class="p">(</span><span class="n">message</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-update-client-subscriptions">
+<h3>Step 3: Update Client Subscriptions<a class="headerlink" href="#step-3-update-client-subscriptions" title="Permalink to this heading">#</a></h3>
+<p>Adjust how the clients subscribe and unsubscribe from the chat room. Instead of the <code class="docutils literal notranslate"><span class="pre">Subscribe</span></code> method and <code class="docutils literal notranslate"><span class="pre">Dispose</span></code>, we will use <code class="docutils literal notranslate"><span class="pre">+=</span></code> to register for the event and <code class="docutils literal notranslate"><span class="pre">-=</span></code> to unregister.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ChatRoom</span><span class="w"> </span><span class="n">room</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ChatRoom</span><span class="p">();</span>
+
+<span class="n">Client</span><span class="w"> </span><span class="n">client1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Client</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">ClientName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Alice&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="n">Client</span><span class="w"> </span><span class="n">client2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Client</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">ClientName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Bob&quot;</span><span class="w"> </span><span class="p">};</span>
+
+<span class="n">room</span><span class="p">.</span><span class="n">MessagePosted</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">client1</span><span class="p">.</span><span class="n">HandleMessagePosted</span><span class="p">;</span>
+<span class="n">room</span><span class="p">.</span><span class="n">MessagePosted</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">client2</span><span class="p">.</span><span class="n">HandleMessagePosted</span><span class="p">;</span>
+
+<span class="n">room</span><span class="p">.</span><span class="n">PostMessage</span><span class="p">(</span><span class="s">&quot;Hello, world!&quot;</span><span class="p">);</span>
+
+<span class="c1">// Simulate Alice leaving the chat room.</span>
+<span class="n">room</span><span class="p">.</span><span class="n">MessagePosted</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">client1</span><span class="p">.</span><span class="n">HandleMessagePosted</span><span class="p">;</span>
+
+<span class="n">room</span><span class="p">.</span><span class="n">PostMessage</span><span class="p">(</span><span class="s">&quot;Is Alice still here?&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Alice received: Hello, world!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bob received: Hello, world!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bob received: Is Alice still here?
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition-reflection admonition">
+<p class="admonition-title">🤔 Reflection</p>
+<p>Consider how the event-driven approach simplifies client subscriptions and the overall flow of the chatroom messaging process. What are the pros and cons of this approach compared to the Observer pattern?</p>
+</div>
+</section>
+</section>
+<section id="challenge">
+<h2>Challenge<a class="headerlink" href="#challenge" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>How would you implement a feature for clients to post messages back to the chat room, which then gets broadcasted to all clients?</p></li>
+<li><p>How could we include the name of the sender in the broadcasted message?</p></li>
+<li><p>Add a new type of client, such as a <code class="docutils literal notranslate"><span class="pre">BotClient</span></code>, which automatically responds to certain keywords in the chat room. Implement this and test its integration.</p></li>
+</ol>
+<div class="admonition-reflection admonition">
+<p class="admonition-title">🤔 Reflection</p>
+<p>Reflect on the ease of adding this feature now that we’ve switched to an event-driven model. Would it have been more complex with the original Observer pattern? Why or why not?</p>
+</div>
+<p>Happy coding!</p>
 </section>
 </section>
 
@@ -657,7 +645,7 @@ The creation of different “types” of ducks, consequently, now happens at run
         },
         kernelOptions: {
             name: ".net-csharp",
-            path: "./old"
+            path: "./labs"
         },
         predefinedOutput: true
     }
@@ -669,7 +657,17 @@ The creation of different “types” of ducks, consequently, now happens at run
         
         <div class="related-pages">
           
-          
+          <a class="prev-page" href="observer-pattern.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Lab: Observer Pattern</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -700,11 +698,16 @@ The creation of different “types” of ducks, consequently, now happens at run
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Composition over inheritance</a><ul>
-<li><a class="reference internal" href="#examples">Examples</a><ul>
-<li><a class="reference internal" href="#ducks">Ducks</a></li>
+<li><a class="reference internal" href="#">Lab: Events</a><ul>
+<li><a class="reference internal" href="#objective">Objective</a></li>
+<li><a class="reference internal" href="#provided-code">Provided Code</a></li>
+<li><a class="reference internal" href="#instructions">Instructions</a><ul>
+<li><a class="reference internal" href="#step-1-introduce-the-messageeventargs-class">Step 1: Introduce the <code class="docutils literal notranslate"><span class="pre">MessageEventArgs</span></code> class</a></li>
+<li><a class="reference internal" href="#step-2-replace-observer-pattern-with-event">Step 2: Replace Observer pattern with Event</a></li>
+<li><a class="reference internal" href="#step-3-update-client-subscriptions">Step 3: Update Client Subscriptions</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#challenge">Challenge</a></li>
 </ul>
 </li>
 </ul>

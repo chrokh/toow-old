@@ -70,10 +70,10 @@ Implement a concrete observer, `Client`, which implements the `IClient` interfac
 ```{code-cell}
 class Client : IClient
 {
-    public string ClientName { get; set; }
+    public string Name { get; set; }
 
     public void ReceiveMessage(string message)
-        => Console.WriteLine($"{ClientName} received: {message}");
+        => Console.WriteLine($"{Name} received: {message}");
 }
 ```
 
@@ -88,8 +88,8 @@ Test the interaction:
 ```{code-cell}
 ChatRoom room = new ChatRoom();
 
-Client client1 = new Client() { ClientName = "Alice" };
-Client client2 = new Client() { ClientName = "Bob" };
+Client client1 = new Client() { Name = "Alice" };
+Client client2 = new Client() { Name = "Bob" };
 
 room.RegisterClient(client1);
 room.RegisterClient(client2);
@@ -158,16 +158,16 @@ class ChatRoom : IObservable<string>
 ```{code-cell}
 class Client : IObserver<string>
 {
-    public string ClientName { get; set; }
+    public string Name { get; set; }
 
     public void OnNext(string message)
-        => Console.WriteLine($"{ClientName} received: {message}");
+        => Console.WriteLine($"{Name} received: {message}");
 
     public void OnError(Exception e)
-        => Console.WriteLine($"{ClientName} experienced an error: {e.Message}");
+        => Console.WriteLine($"{Name} experienced an error: {e.Message}");
 
     public void OnCompleted()
-        => Console.WriteLine($"{ClientName} has left the chat room.");
+        => Console.WriteLine($"{Name} has left the chat room.");
 }
 ```
 
@@ -178,8 +178,8 @@ class Client : IObserver<string>
 ```{code-cell}
 ChatRoom room = new ChatRoom();
 
-Client client1 = new Client() { ClientName = "Alice" };
-Client client2 = new Client() { ClientName = "Bob" };
+Client client1 = new Client() { Name = "Alice" };
+Client client2 = new Client() { Name = "Bob" };
 
 IDisposable aliceSubscription = room.Subscribe(client1);
 IDisposable bobSubscription = room.Subscribe(client2);
