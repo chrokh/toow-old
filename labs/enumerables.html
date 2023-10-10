@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="Lab: Iterator pattern" href="iterator-pattern.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Generics - The Object Oriented Way</title>
+        <title>Lab: Enumerables - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -283,20 +283,20 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapters/variant-generic-interfaces.html">115. Variant generic interfaces</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Labs</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../labs/replace-conditional-with-polymorphism.html">Lab: Replace conditional with polymorphism</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/generics.html">Lab: Generics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/generic-types.html">Lab: Generic types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/generic-supertypes.html">Lab: Generic Supertypes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/type-parameter-constraints.html">Lab: Type parameter constraints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/composition-over-inheritance.html">Lab: Composition over Inheritance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/bridge-pattern.html">Lab: Bridge Pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/delegates.html">Lab: Delegates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/lambdas.html">Lab: Lambdas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/observer-pattern.html">Lab: Observer Pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/events.html">Lab: Events</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/iterator-pattern.html">Lab: Iterator pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/enumerables.html">Lab: Enumerables</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">Lab: Replace conditional with polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics.html">Lab: Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-types.html">Lab: Generic types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">Lab: Generic Supertypes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">Lab: Type parameter constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">Lab: Composition over Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bridge-pattern.html">Lab: Bridge Pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="delegates.html">Lab: Delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lambdas.html">Lab: Lambdas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observer-pattern.html">Lab: Observer Pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="events.html">Lab: Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iterator-pattern.html">Lab: Iterator pattern</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Lab: Enumerables</a></li>
 </ul>
 
 </div>
@@ -331,83 +331,90 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="generics">
-<h1>Generics<a class="headerlink" href="#generics" title="Permalink to this heading">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
-</div>
-<p>Remember how we said that there are at least <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">four types of polymorphism</span></a>?
-In object oriented programming subtype polymorphism is the really big one, but in hybrid languages such as C# parametric polymorphism is really important and frequently used.
-In C# parametric polymorphism is implemented through the concept known as “generics”.</p>
-<p>For a basic understanding of generics / parametric polymorphism we must understand the topics below.
-The concepts are all discussed in separate chapters but in this chapter we provide an overview to the topic of generics as such.</p>
-<ol class="arabic simple">
-<li><p><a class="reference internal" href="generic-type-parameters.html"><span class="doc std std-doc">Generic type parameters</span></a>.</p></li>
-<li><p><a class="reference internal" href="generic-types.html"><span class="doc std std-doc">Generic types</span></a> (classes, interfaces, and structs).</p></li>
-<li><p><span class="xref myst">Generic methods</span>.</p></li>
-<li><p><a class="reference internal" href="delegates.html"><span class="doc std std-doc">Generic delegates</span></a>.</p></li>
-<li><p><span class="xref myst">Type parameter constraints</span>.</p></li>
-<li><p><span class="xref myst">Variance</span>.</p></li>
-</ol>
-<section id="motivation">
-<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this heading">#</a></h2>
-<p>When writing object oriented programs, you will often find that you are repeating yourself.
-Up to this point we’ve pretended that all duplication can be eliminated with subtype polymorphism and object composition.
-As you might have suspected, this is of course not true.</p>
-<p>Think of the case of the <code class="docutils literal notranslate"><span class="pre">CompositeCipher</span></code> that we wrote in the chapter on <span class="xref myst">abstract injected object composition</span>.
-The class is dependency injected with two ciphers of type <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code> and the class itself is an <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code>.
-When we call the instance method <code class="docutils literal notranslate"><span class="pre">Encode</span></code> and supply some input the cipher runs the input through the first cipher, takes the result, and runs it through the second cipher.</p>
-<p>Remember how we said that it clearly should be possible to define a <code class="docutils literal notranslate"><span class="pre">CompositeCipher</span></code> type that instead supported ciphers of type <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code>?
-But that doing so would involve duplicating the whole class.
-Have a look at the code below where we’ve duplicated the code in order to make a second class that supports <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code>.
-The implementation of these two classes is virtually the same.</p>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
+          <section class="tex2jax_ignore mathjax_ignore" id="lab-enumerables">
+<h1>Lab: Enumerables<a class="headerlink" href="#lab-enumerables" title="Permalink to this heading">#</a></h1>
+<section id="objective">
+<h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
+<p>In this lab, we aim to refactor the given codebase which currently uses a manual implementation of the Iterator pattern. We will transition to using the more standard <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;T&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">IEnumerator&lt;T&gt;</span></code>. By doing so, we hope to introduce the power of standard collection interfaces in C# and promote the understanding of enumeration.</p>
+</section>
+<section id="provided-code">
+<h2>Provided code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
+<p>Carefully review the provided code. Notice that the current setup uses custom <code class="docutils literal notranslate"><span class="pre">IIterable&lt;T&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">IIterator&lt;T&gt;</span></code> interfaces to mimic the behavior of the built-in <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;T&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">IEnumerator&lt;T&gt;</span></code>. The <code class="docutils literal notranslate"><span class="pre">Inventory</span></code> class acts as a simple container for three items, and the corresponding <code class="docutils literal notranslate"><span class="pre">InventoryIterator</span></code> class provides an iteration mechanism over those items.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CompositeCharToCharCipher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ICharToCharCipher</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">ICharToCharCipher</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">second</span><span class="p">;</span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">CompositeCharToCharCipher</span><span class="w"> </span><span class="p">(</span>
-<span class="w">      </span><span class="n">ICharToCharCipher</span><span class="w"> </span><span class="n">first</span><span class="p">,</span>
-<span class="w">      </span><span class="n">ICharToCharCipher</span><span class="w"> </span><span class="n">second</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">first</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">first</span><span class="p">;</span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">second</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
-<span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">second</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">first</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">input</span><span class="p">));</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Item</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="n">init</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">CompositeStringToStringCipher</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IStringToStringCipher</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">IStringToStringCipher</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">second</span><span class="p">;</span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nf">CompositeStringToStringCipher</span><span class="w"> </span><span class="p">(</span>
-<span class="w">      </span><span class="n">IStringToStringCipher</span><span class="w"> </span><span class="n">first</span><span class="p">,</span>
-<span class="w">      </span><span class="n">IStringToStringCipher</span><span class="w"> </span><span class="n">second</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">first</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">first</span><span class="p">;</span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="n">second</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">second</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
-<span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">second</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">first</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="n">input</span><span class="p">));</span>
+<span class="k">interface</span><span class="w"> </span><span class="n">IIterator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="n">Current</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="nf">MoveNext</span><span class="p">();</span>
+<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="nf">Reset</span><span class="p">();</span>
 <span class="p">}</span>
 
-<span class="k">interface</span><span class="w"> </span><span class="n">ICharToCharCipher</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
-<span class="k">interface</span><span class="w"> </span><span class="n">IStringToStringCipher</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
-<span class="k">interface</span><span class="w"> </span><span class="n">ICharToStringCipher</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Encode</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">input</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="k">interface</span><span class="w"> </span><span class="n">IIterable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">IIterator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">CreateIterator</span><span class="p">();</span>
+<span class="p">}</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">InventoryIterator</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IIterator</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="n">Inventory</span><span class="w"> </span><span class="n">inventory</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">currentIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="m">1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">InventoryIterator</span><span class="p">(</span><span class="n">Inventory</span><span class="w"> </span><span class="n">inventory</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">inventory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inventory</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Item</span><span class="w"> </span><span class="n">Current</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">get</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">currentIndex</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">currentIndex</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">InvalidOperationException</span><span class="p">(</span><span class="s">&quot;Iterator is out of bounds.&quot;</span><span class="p">);</span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">currentIndex</span><span class="w"> </span><span class="k">switch</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="m">0</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">Item1</span><span class="p">,</span>
+<span class="w">                </span><span class="m">1</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">Item2</span><span class="p">,</span>
+<span class="w">                </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">Item3</span><span class="p">,</span>
+<span class="w">            </span><span class="p">};</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">MoveNext</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">currentIndex</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">currentIndex</span><span class="o">++</span><span class="p">;</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">false</span><span class="p">;</span><span class="w"> </span><span class="c1">// Can&#39;t move next if at end.</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Reset</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">currentIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="m">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Inventory</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IIterable</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Item</span><span class="w"> </span><span class="n">Item1</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Item</span><span class="w"> </span><span class="n">Item2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Item</span><span class="w"> </span><span class="n">Item3</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">IIterator</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span><span class="w"> </span><span class="n">CreateIterator</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">InventoryIterator</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-9970.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-8860.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -457,7 +464,7 @@ function loadDotnetInteractiveApi() {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '9970.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '8860.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -513,144 +520,119 @@ else {
     </script>
 </div></div></div>
 </div>
-<p>How should we go about removing this duplication?</p>
-<p>The two composite classes are fundamentally not in a subtyping relationship because <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code> and <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code> are fundamentally not subtypes.</p>
-<p>We’ve already learned that C# classes supports <span class="xref myst">covariant return types</span> but not contravariant parameter types.
-Even if C# would support contravariant parameter types and even if variance would be supported in interfaces <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code> and <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code> are still not in a subtyping relationship.
-Even if <code class="docutils literal notranslate"><span class="pre">string</span></code> and <code class="docutils literal notranslate"><span class="pre">char</span></code> would be in a suptyping relationship (which they are not) where <code class="docutils literal notranslate"><span class="pre">char</span></code> would be a subtype (think: specialization) of <code class="docutils literal notranslate"><span class="pre">string</span></code> (which makes more sense than the other way around) <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code> and <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code> would still not be in a subtyping relationship.</p>
-<p>Why?
-Well, because if <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code> then the <em>input type</em> of the <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method must be <em>covariant</em> since the subtype <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code> returns a <code class="docutils literal notranslate"><span class="pre">char</span></code> which then is a specialization/subtype of <code class="docutils literal notranslate"><span class="pre">string</span></code>.
-But covariant input is not allowed according to the <a class="reference internal" href="liskov-substitution-principle.html#liskov-substitution-principle"><span class="std std-ref">Liskov Substitution Principle</span></a>.</p>
-<p>Ok, so let’s flip it?
-Well, if <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code> is a subtype of <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code> then the return type, the <em>output type</em> must be contravariant since the subtype <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code> returns a <code class="docutils literal notranslate"><span class="pre">string</span></code> which is a generalization/supertype of <code class="docutils literal notranslate"><span class="pre">char</span></code>.
-So, in this scenario, subtyping simply doesn’t help us eliminate duplication without solving the problem in a completely different way.</p>
-<p>Without being able to treat <code class="docutils literal notranslate"><span class="pre">char</span></code> based ciphers and <code class="docutils literal notranslate"><span class="pre">string</span></code> based ciphers uniformly there’s simply no way to get rid of that duplicated code.</p>
-<p>But why would we care about a single duplicated line you might say?
-If we ignore the constructors, it’s just a single line that’s duplicated.
-The contents of the <code class="docutils literal notranslate"><span class="pre">Encode</span></code> method.
-Well, this is merely an example.
-If there’s one duplicated line, that’s a sign that there are many more possible things that could be duplicated.</p>
-<p>How about, for example the <code class="docutils literal notranslate"><span class="pre">SequenceCipher</span></code> that we wrote in <code class="xref std std-numref docutils literal notranslate"><span class="pre">ex:array-cipher</span></code>?
-That was a cipher that took an array of ciphers as input and then applied them one by one.
-In that exercise, <code class="docutils literal notranslate"><span class="pre">SequenceCipher</span></code> dealt with <code class="docutils literal notranslate"><span class="pre">string</span></code> based ciphers, but if we would write an implementation for <code class="docutils literal notranslate"><span class="pre">char</span></code> based ciphers it would be exactly the same.
-The only difference between the two would be the types.</p>
-<p>Notice a pattern?</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p><em>If the implementation is the same, but the types are different</em>, then you’re probably looking at a scenario where we could use parametric polymorphism.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// An example inventory.</span>
+<span class="n">Inventory</span><span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Inventory</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Item1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Item</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Key&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="n">Item2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Item</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Sword&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="n">Item3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Item</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Map&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Create an iterator from the iterable.</span>
+<span class="n">IIterator</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span><span class="w"> </span><span class="n">iterator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">CreateIterator</span><span class="p">();</span>
+
+<span class="c1">// Loop through all items using the iterator.</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">iterator</span><span class="p">.</span><span class="n">MoveNext</span><span class="p">())</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">iterator</span><span class="p">.</span><span class="n">Current</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
+</pre></div>
 </div>
-<p>Enter parametric polymorphism.
-Generic programming.
-In the following chapters we will replace our interfaces <code class="docutils literal notranslate"><span class="pre">ICharToCharCipher</span></code>, <code class="docutils literal notranslate"><span class="pre">IStringToStringCipher</span></code>, and <code class="docutils literal notranslate"><span class="pre">ICharToStringCipher</span></code> with a single generic interface, called <code class="docutils literal notranslate"><span class="pre">ICipher&lt;TIn,</span> <span class="pre">TOut&gt;</span></code>.
-This allows us to eliminate further duplication, not only in the interfaces, but also by implementing a single <code class="docutils literal notranslate"><span class="pre">CompositeCipher&lt;T&gt;</span></code> that works for input and outputs of both type <code class="docutils literal notranslate"><span class="pre">string</span></code> and type <code class="docutils literal notranslate"><span class="pre">char</span></code>.</p>
-<p>As we shall see, parametric polymorphism not only help us eliminate duplicated code, but also spreads like a virus.
-The good kind of virus.
-By turning a non-generic type into a generic type it is often possible that things that use this new generic type can too be converted from non-generic to generic types.
-And so the meme permeates throughout our code-base.
-Generic types increase the <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">maintainability</span></a> of our code since they (at least) ought to increase modularity.</p>
-<p>Another important aspect is that of <span class="xref myst">static type safety</span>.
-Most things that we do with generics can trivially be achieved in dynamically typed languages, or even in C# by using the <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code> keyword</span> or by simply treating things as the top-type <a class="reference internal" href="inheritance.html"><span class="doc std std-doc">object</span></a>.
-The fact that all types in C# inherit from object is something that we’ll discuss in further detail in the chapter on <span class="xref myst">type hierarchies</span>.
-The first strategy involve unsafe <span class="xref myst">type conversions</span> and the second potential <span class="xref myst">downcasting</span> which may cause <span class="xref myst">run-time errors</span>.
-A major reason for using a language like C# in the first place is the ability to use static typing to avoid run-time errors.
-Generics help us write reusable code without loosing static type safety.</p>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Key
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sword
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Map
+</pre></div>
+</div>
+</div>
+</div>
+<p>This structure demonstrates the basics of an iterator pattern but lacks the flexibility and advantages of the built-in .NET interfaces.</p>
 </section>
-<section id="definition">
-<h2>Definition<a class="headerlink" href="#definition" title="Permalink to this heading">#</a></h2>
-<p>The word “parametric”, in “parametric polymorphism”, was presumably chosen since parametrically polymorphic types are <em>parameterized</em> over types.
-The name “generics” was presumably selected since the use of parametric polymorphism is also known as “generic programming”.
-Which terminology is used mostly depend on the tradition of the language that we are using and in C# we tend to say “generics” rather than “parametric polymorphism”.</p>
-<p>The idea of a generic type is that it is universally polymorphic.
-The instance and static members of a generic type can be defined so that one or more types that these members depend on can be replaced by any possible type.
-Let me say that again, they can be replaced by <em>any possible type</em>.
-We write a single implementation that works for every member of every possible type at the same time.
-Said differently, the implementation does not depend on the underlying type that we’ve parameterized over.</p>
-<div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>With overloading, we define different implementations for different types.
-With overriding, we define specialized implementations for specialized types.
-With generics, we define <em>a single implementation for all types</em>.</p>
-</div>
-<p>So, what is a generic type?
-The term “generic type” refers to both the “generic type definition” and a “<em>constructed</em> generic type”.
-The former is a type with type parameters that must be replaced with actual types.
-The latter is a type that has had its type parameters replaced with actual types.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>A generic type definition is not a complete type.
-To construct a type we must replace its <em>type parameters</em> with actual types in order to form a <em>constructed generic type</em>.</p>
-</div>
-<p>Think of it this way: A generic type depends on some other type or types, but what these types are is not known at the time you write the implementation of your generic type.
-So, instead you parameterize your generic type with some “type parameters”.
-Whenever someone wishes to use your generic type definition they must replace the type parameters in the generic type definition with actual types so that we get, what is called, a <em>generic constructed type</em> or simply a <em>constructed type</em>.</p>
-<figure class="align-default" id="fig-generic-type-definition">
-<img alt="https://via.placeholder.com/700x200?text=Image+coming+soon" src="https://via.placeholder.com/700x200?text=Image+coming+soon" />
-<figcaption>
-<p><span class="caption-text">A “generic type definition” can be turned into any number of “constructed generic types” by replacing its type parameters with actual types.</span><a class="headerlink" href="#fig-generic-type-definition" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>It is important to realize that all type parameters must be replaced with actual types at compile-time rather than at run-time.
-In terms of using the term “polymorphism” we ought to classify this as “static” rather than “dynamic” polymorphism.
-With subtype polymorphism, it is possible to defer the decision of which implementation to use at run-time.
-With parametric polymorphism, which implementation to use has to be known at compile-time.
-Still, it is tremendously useful when it comes to writing reusable and modular code without ever having to give up static typing.</p>
-<div class="seealso admonition">
-<p class="admonition-title">Aside</p>
-<p>If you happen to be familiar with logic quantifiers then we should emphasize that a generic type is a <em>universally quantified</em> type.
-This is why we say that the type is <em>universally</em> polymorphic.</p>
-</div>
-<section id="terminology">
-<span id="generics-terminology"></span><h3>Terminology<a class="headerlink" href="#terminology" title="Permalink to this heading">#</a></h3>
-<p>Before we wrap this section up, let’s finish up with some terminology directly from the <a class="reference external" href="https://learn.microsoft.com/en-us/dotnet/standard/generics/">official documentation</a>:</p>
+<section id="instructions">
+<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
+<section id="step-1-refactor-to-ienumerable-t-and-ienumerator-t">
+<h3>Step 1: Refactor to <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;T&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">IEnumerator&lt;T&gt;</span></code><a class="headerlink" href="#step-1-refactor-to-ienumerable-t-and-ienumerator-t" title="Permalink to this heading">#</a></h3>
+<p>Firstly, let’s replace <code class="docutils literal notranslate"><span class="pre">IIterable&lt;T&gt;</span></code> with <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;T&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">IIterator&lt;T&gt;</span></code> with <code class="docutils literal notranslate"><span class="pre">IEnumerator&lt;T&gt;</span></code>. This will involve:</p>
 <ul class="simple">
-<li><p><em>Generic type parameters</em> (or simply type parameters) are placeholders for types in a generic type definition or generic method definition.</p></li>
-<li><p>A <em>generic type definition</em> is a class, struct, or an interface declaration with type parameters. It is like a template rather than a complete type definition. An example is <code class="docutils literal notranslate"><span class="pre">List&lt;T&gt;</span></code>.</p></li>
-<li><p>A <em>constructed generic type</em> is the result of replacing the type parameters in a generic type definition with actual types. An example is: <code class="docutils literal notranslate"><span class="pre">List&lt;int&gt;</span></code>.</p></li>
-<li><p>A <em>generic type</em> is either a generic type definition or a constructed generic type.</p></li>
-<li><p>A <em>generic method definition</em> is a method which before its formal parameter list (for values), also contains a list of generic type parameters. Type parameters can be used as the return type or as the type of formal arguments. An example is: <code class="docutils literal notranslate"><span class="pre">List&lt;T&gt;</span> <span class="pre">Repeat&lt;T&gt;</span> <span class="pre">(T</span> <span class="pre">value,</span> <span class="pre">int</span> <span class="pre">times)</span></code>. The <code class="docutils literal notranslate"><span class="pre">&lt;T&gt;</span></code> in the method name (<code class="docutils literal notranslate"><span class="pre">Repeat&lt;T&gt;</span></code>) is the type parameter.</p></li>
-<li><p>A <em>generic type argument</em> is whatever type is used to replace a type parameter with an actual type. Just like how an argument is used in place of a parameter when applying methods, a generic type argument is used in place of a generic type parameter.</p></li>
-<li><p>The <em>variance</em> of generic type parameters determine whether more or less derived type can be used when some constructed generic type is expected. Variance can only be specified for type parameters in generic interfaces.</p></li>
-<li><p><em>Constraints</em> on generic type parameters limit the types that can be used as type arguments. You might for example declare that a type parameter must be replaced with an argument that is not null, or that is a <code class="docutils literal notranslate"><span class="pre">class</span></code> (as opposed to a <code class="docutils literal notranslate"><span class="pre">struct</span></code> for example).</p></li>
+<li><p>Updating the method names and properties to match those in the .NET interfaces.</p></li>
+<li><p>Modifying the <code class="docutils literal notranslate"><span class="pre">Inventory</span></code> class to implement <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;Item&gt;</span></code>.</p></li>
 </ul>
 </section>
+<section id="step-2-update-main">
+<h3>Step 2: Update Main<a class="headerlink" href="#step-2-update-main" title="Permalink to this heading">#</a></h3>
+<p>With the refactored interfaces in place, rewrite the loop logic. Firstly, using the <code class="docutils literal notranslate"><span class="pre">foreach</span></code> loop which is a direct advantage of implementing <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;T&gt;</span></code>. Later, try manually extracting the <code class="docutils literal notranslate"><span class="pre">IEnumerator&lt;T&gt;</span></code> and use the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop.</p>
+<p>Your code should look something like this:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Inventory</span><span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Inventory</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Item1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Item</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Key&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="n">Item2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Item</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Sword&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="n">Item3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Item</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Map&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Iterating using foreach:</span>
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Item</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">inventory</span><span class="p">)</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
+
+<span class="c1">// Iterating by manually using the enumerator:</span>
+<span class="n">IEnumerator</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span><span class="w"> </span><span class="n">enumerator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">GetEnumerator</span><span class="p">();</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">enumerator</span><span class="p">.</span><span class="n">MoveNext</span><span class="p">())</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">enumerator</span><span class="p">.</span><span class="n">Current</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Key
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sword
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Map
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Key
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sword
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Map
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition-reflection admonition">
+<p class="admonition-title">🤔 Reflection</p>
+<p>How does the usage of built-in .NET interfaces affect the readability and usability of the code?</p>
+</div>
 </section>
-<section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
-<p>The most common use-case for generics is collections.
-Think about a list for example.
-When you’re implementing a method that adds items to the list, do you really need to know what type of element you are adding?
-Not really, right?
-Adding is just a matter of sticking the element into the list.
-As long as the type of all elements in the list is the same, and as long as all instances of any list type have the same type, we’re fine.</p>
-<figure class="align-default" id="fig-generic-list">
-<img alt="https://via.placeholder.com/700x200?text=Image+coming+soon" src="https://via.placeholder.com/700x200?text=Image+coming+soon" />
-<figcaption>
-<p><span class="caption-text">As long as all elements in the list have the same type it doesn’t matter what the type is.
-None of these lists have the same type, but these types can all be constructed from the generic list type.</span><a class="headerlink" href="#fig-generic-list" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>Let’s take a simpler example.
-How about the notion of a pair.
-This is sometimes also known as a “tuple”.
-A pair is simply a collection of two elements.
-Let’s refer to these elements as the <code class="docutils literal notranslate"><span class="pre">First</span></code> element and the <code class="docutils literal notranslate"><span class="pre">Second</span></code> element.
-The type of <code class="docutils literal notranslate"><span class="pre">First</span></code> might be the same as the type of <code class="docutils literal notranslate"><span class="pre">Second</span></code> or it might not.
-But if we define a data type for a pair then the type of <code class="docutils literal notranslate"><span class="pre">First</span></code> must be the same for every instance of the pair type.
-Same for <code class="docutils literal notranslate"><span class="pre">Second</span></code>.</p>
-<p>But if we define a generic type for pairs then we can create any number of non-generic types of pairs without having to write any implementation.</p>
-<figure class="align-default" id="id1">
-<img alt="https://via.placeholder.com/700x200?text=Image+coming+soon" src="https://via.placeholder.com/700x200?text=Image+coming+soon" />
-<figcaption>
-<p><span class="caption-text">As long as all instances of a pair type store elements of the same type in the first position and elements of the same type in the right position then it doesn’t matter what these types are.
-The pairs that are grouped together have the same type, and all pair types could be constructed from the same generic pair type.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>Can every type be converted into a generic type?
-No, some algorithms cannot be expressed without knowledge of the underlying type.
-Think about the difference between the act of adding another element to a list (which we’ve talked about) and that of arithmetic addition.
-Arithmetic addition is only defined for numeric types.
-If you want to say that there is an implementation for a type that is not a number then you have to define that implementation yourself.
-It’s not obviously parametrically polymorphic.</p>
+</section>
+<section id="challenge">
+<h2>Challenge<a class="headerlink" href="#challenge" title="Permalink to this heading">#</a></h2>
+<p>Now that we’ve refactored our code, let’s move from having three fixed items in our <code class="docutils literal notranslate"><span class="pre">Inventory</span></code> to a more flexible list of items. Implement a <code class="docutils literal notranslate"><span class="pre">List&lt;Item&gt;</span></code> inside the <code class="docutils literal notranslate"><span class="pre">Inventory</span></code> class. Adjust your <code class="docutils literal notranslate"><span class="pre">IEnumerator&lt;T&gt;</span></code> implementation to enumerate over this list.</p>
+<ol class="arabic simple">
+<li><p>Refactor the <code class="docutils literal notranslate"><span class="pre">Inventory</span></code> class to have a <code class="docutils literal notranslate"><span class="pre">List&lt;Item&gt;</span></code> property.</p></li>
+<li><p>Update the <code class="docutils literal notranslate"><span class="pre">IEnumerator&lt;T&gt;</span></code> implementation (i.e., <code class="docutils literal notranslate"><span class="pre">InventoryIterator</span></code> unless you’ve renamed it) to iterate over the items in this list.</p></li>
+<li><p>Add functionality to add items to the inventory.</p></li>
+<li><p>Test by adding more than three items and ensure that the enumeration still works as expected.</p></li>
+</ol>
+<div class="admonition-reflection admonition">
+<p class="admonition-title">🤔 Reflection</p>
+<p>How difficult would it have been to move to a list-based approach without the use of Iterator pattern or enumerables? Did we have to make any changes in the main program related to the actual iteration?</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>After completing the challenge, consider experimenting further with other LINQ methods or additional list operations. Leveraging the power of <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;T&gt;</span></code> offers a myriad of functionalities to manipulate and interact with collections in C#.</p>
+</div>
 </section>
 </section>
 
@@ -667,7 +649,7 @@ It’s not obviously parametrically polymorphic.</p>
         },
         kernelOptions: {
             name: ".net-csharp",
-            path: "./old"
+            path: "./labs"
         },
         predefinedOutput: true
     }
@@ -679,7 +661,17 @@ It’s not obviously parametrically polymorphic.</p>
         
         <div class="related-pages">
           
-          
+          <a class="prev-page" href="iterator-pattern.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Lab: Iterator pattern</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -710,13 +702,15 @@ It’s not obviously parametrically polymorphic.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Generics</a><ul>
-<li><a class="reference internal" href="#motivation">Motivation</a></li>
-<li><a class="reference internal" href="#definition">Definition</a><ul>
-<li><a class="reference internal" href="#terminology">Terminology</a></li>
+<li><a class="reference internal" href="#">Lab: Enumerables</a><ul>
+<li><a class="reference internal" href="#objective">Objective</a></li>
+<li><a class="reference internal" href="#provided-code">Provided code</a></li>
+<li><a class="reference internal" href="#instructions">Instructions</a><ul>
+<li><a class="reference internal" href="#step-1-refactor-to-ienumerable-t-and-ienumerator-t">Step 1: Refactor to <code class="docutils literal notranslate"><span class="pre">IEnumerable&lt;T&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">IEnumerator&lt;T&gt;</span></code></a></li>
+<li><a class="reference internal" href="#step-2-update-main">Step 2: Update Main</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#challenge">Challenge</a></li>
 </ul>
 </li>
 </ul>
