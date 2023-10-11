@@ -84,7 +84,6 @@ interface IIterable<T>
 Rewrite the `Inventory` class so that it implements the `IIterable<Item>` interface. Create a new `InventoryIterator` class that implements the `IIterator<Item>` interface.
 
 ```csharp
-:tags: [raises-exception, remove-output]
 class InventoryIterator : IIterator<Item>
 {
     // ...
