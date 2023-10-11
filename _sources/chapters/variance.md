@@ -25,6 +25,11 @@ Variance is fundamentally about substitution.
 When can we use a type that uses a type in place of another type that uses a type?
 ```
 
+```{figure} ../images/subset.png
+
+A subtype can be thought of as a subset. This means that it must be possible to use the subtype anywhere where the supertype is expected. Variance deals with the question of what this means in the context of types that use instances of other types.
+```
+
 Say, for example, that we have a variable of type `IList<Fruit>`.
 Can we then assign an instance of the type `IList<Apple>` to that variable?
 If apples are fruits then a list of apples should be a list of fruit, right?
