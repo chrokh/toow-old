@@ -28,7 +28,7 @@ However, when playing in the foreground we of course want to fetch both audio an
 ```{code-cell}
 interface IVideo
 {
-    public void ShowNextFrame();
+    void ShowNextFrame();
 }
 ```
 
