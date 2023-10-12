@@ -53,6 +53,8 @@ Now, without explicitly stating that `T` in `Factory<T>` is covariant using the 
 
 ```{code-cell}
 :tags: [raises-exception]
+Factory<Apple> appleFactory = () => new Apple();
+
 // Trying to use a Factory<Apple> where a Factory<Fruit> is expected.
 Factory<Fruit> fruitFactory = appleFactory;
 ```
@@ -113,7 +115,49 @@ Consumer<Apple> appleConsumer = fruitConsumer;
 
 Hooray again. 🙌
 
-#### Conclusion
+## Example
 
-Having the ability to assign methods with more derived (or less derived) types to generic delegates provides flexibility. It means our methods can be more general-purpose, yet still be used in specific scenarios. This results in code that's not only reusable and adaptable but also still statically [type-safe](maintainability).
+What's an example when we might make use of covariant or contravariant generic delegates you ask? Well, the [built-in generic delegates](built-in-delegates) `Func`, `Action`, and `Predicate` all have variant parameters.
+
+Consider the delegate `Func<T, TResult>` for example. It is approximately defined like below:
+
+```csharp
+delegate TResult Func<in T,out TResult>(T arg);
+```
+
+This means that `Func<T, TResult>` is contravariant in `T` and covariant in `TResult`.
+Which, in turn, allows us to compile and run the following code:
+
+```{code-cell}
+public class Fruit
+{
+    public bool IsRipe { get; set; }
+}
+```
+
+```{code-cell}
+public class Apple : Fruit { }
+```
+
+```{code-cell}
+// A list of Apples.
+List<Apple> apples = new List<Apple>
+{
+    new Apple { IsRipe = true },
+    new Apple { IsRipe = false }
+};
+
+// A method that checks if a Fruit is ripe
+Func<Fruit, bool> IsRipeFruit = fruit => fruit.IsRipe;
+
+// Contravariance allows us to use IsRipeFruit.
+IEnumerable<Fruit> ripeApples = apples.Where(IsRipeFruit);
+```
+
+In the code above, we're passing the delegate variable `IsRipeFruit` of type `Funct<Fruit, bool>` to the LINQ method `Where` even though the type `Func<Apple, bool>` was expected. This works since delegates are contravariant in input.
+
+
+## Conclusion
+
+Having the ability to assign methods with more derived (or less derived) types to generic delegates provides flexibility. It means our methods can be more general-purpose, yet still be used in specific scenarios. This results in code that's not only reusable and adaptable but also still statically [type-safe](type-checking).
 

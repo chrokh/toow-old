@@ -357,7 +357,7 @@ Consider the following simple class hierarchy:</p>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-8759.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-8117.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -402,12 +402,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.171:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.6:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '8759.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '8117.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -491,13 +491,15 @@ else {
 <p>Now, without explicitly stating that <code class="docutils literal notranslate"><span class="pre">T</span></code> in <code class="docutils literal notranslate"><span class="pre">Factory&lt;T&gt;</span></code> is covariant using the <code class="docutils literal notranslate"><span class="pre">out</span></code> keyword, the following attempt to assign a <code class="docutils literal notranslate"><span class="pre">Factory&lt;Apple&gt;</span></code> to a <code class="docutils literal notranslate"><span class="pre">Factory&lt;Fruit&gt;</span></code> variable does <em>not</em> compile:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Trying to use a Factory&lt;Apple&gt; where a Factory&lt;Fruit&gt; is expected.</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Factory</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span><span class="w"> </span><span class="n">appleFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Apple</span><span class="p">();</span>
+
+<span class="c1">// Trying to use a Factory&lt;Apple&gt; where a Factory&lt;Fruit&gt; is expected.</span>
 <span class="n">Factory</span><span class="o">&lt;</span><span class="n">Fruit</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fruitFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">appleFactory</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2,31): error CS0029: Cannot implicitly convert type &#39;Factory&lt;Apple&gt;&#39; to &#39;Factory&lt;Fruit&gt;&#39;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4,31): error CS0029: Cannot implicitly convert type &#39;Factory&lt;Apple&gt;&#39; to &#39;Factory&lt;Fruit&gt;&#39;
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
@@ -574,10 +576,56 @@ else {
 </div>
 </div>
 <p>Hooray again. 🙌</p>
-<section id="conclusion">
-<h3>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h3>
-<p>Having the ability to assign methods with more derived (or less derived) types to generic delegates provides flexibility. It means our methods can be more general-purpose, yet still be used in specific scenarios. This results in code that’s not only reusable and adaptable but also still statically <a class="reference internal" href="maintainability.html"><span class="doc std std-doc">type-safe</span></a>.</p>
 </section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
+<p>What’s an example when we might make use of covariant or contravariant generic delegates you ask? Well, the <a class="reference internal" href="built-in-delegates.html"><span class="doc std std-doc">built-in generic delegates</span></a> <code class="docutils literal notranslate"><span class="pre">Func</span></code>, <code class="docutils literal notranslate"><span class="pre">Action</span></code>, and <code class="docutils literal notranslate"><span class="pre">Predicate</span></code> all have variant parameters.</p>
+<p>Consider the delegate <code class="docutils literal notranslate"><span class="pre">Func&lt;T,</span> <span class="pre">TResult&gt;</span></code> for example. It is approximately defined like below:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">delegate</span><span class="w"> </span><span class="n">TResult</span><span class="w"> </span><span class="n">Func</span><span class="o">&lt;</span><span class="k">in</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="k">out</span><span class="w"> </span><span class="n">TResult</span><span class="o">&gt;</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">arg</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This means that <code class="docutils literal notranslate"><span class="pre">Func&lt;T,</span> <span class="pre">TResult&gt;</span></code> is contravariant in <code class="docutils literal notranslate"><span class="pre">T</span></code> and covariant in <code class="docutils literal notranslate"><span class="pre">TResult</span></code>.
+Which, in turn, allows us to compile and run the following code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Fruit</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">IsRipe</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Apple</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Fruit</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// A list of Apples.</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span><span class="w"> </span><span class="n">apples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Apple</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">IsRipe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Apple</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">IsRipe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// A method that checks if a Fruit is ripe</span>
+<span class="n">Func</span><span class="o">&lt;</span><span class="n">Fruit</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">IsRipeFruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fruit</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">fruit</span><span class="p">.</span><span class="n">IsRipe</span><span class="p">;</span>
+
+<span class="c1">// Contravariance allows us to use IsRipeFruit.</span>
+<span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">Fruit</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ripeApples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">apples</span><span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">IsRipeFruit</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the code above, we’re passing the delegate variable <code class="docutils literal notranslate"><span class="pre">IsRipeFruit</span></code> of type <code class="docutils literal notranslate"><span class="pre">Funct&lt;Fruit,</span> <span class="pre">bool&gt;</span></code> to the LINQ method <code class="docutils literal notranslate"><span class="pre">Where</span></code> even though the type <code class="docutils literal notranslate"><span class="pre">Func&lt;Apple,</span> <span class="pre">bool&gt;</span></code> was expected. This works since delegates are contravariant in input.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>Having the ability to assign methods with more derived (or less derived) types to generic delegates provides flexibility. It means our methods can be more general-purpose, yet still be used in specific scenarios. This results in code that’s not only reusable and adaptable but also still statically <a class="reference internal" href="type-checking.html"><span class="doc std std-doc">type-safe</span></a>.</p>
 </section>
 </section>
 
@@ -657,10 +705,9 @@ else {
             <ul>
 <li><a class="reference internal" href="#">114. Variant Generic Delegates</a><ul>
 <li><a class="reference internal" href="#covariant-generic-delegates">Covariant Generic Delegates</a></li>
-<li><a class="reference internal" href="#contravariant-generic-delegates">Contravariant Generic Delegates</a><ul>
+<li><a class="reference internal" href="#contravariant-generic-delegates">Contravariant Generic Delegates</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
 <li><a class="reference internal" href="#conclusion">Conclusion</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>

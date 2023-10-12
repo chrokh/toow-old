@@ -76,39 +76,6 @@ AppleProcessor processor = ProcessFruit;
 
 In this example, `ProcessFruit` accepts objects of type `Fruit` which is a supertype of `Apple`. Even though the delegate variable `processor` of type `AppleProcessor` expects a method that accepts objects of type `Apple`, we can still assign `ProcessFruit` to it. This is because delegates are contravariant in input, allowing us to use a less derived type than originally specified by the delegate.
 
-### Example
-
-What's an example when we might make use of this you ask? Have a look at the code below.
-
-```{code-cell}
-public class Fruit
-{
-    public bool IsRipe { get; set; }
-}
-```
-
-```{code-cell}
-public class Apple : Fruit { }
-```
-
-```{code-cell}
-// A method that checks if a general fruit is ripe
-Predicate<Fruit> IsRipeFruit = fruit => fruit.IsRipe;
-
-// A list of Apples.
-List<Apple> apples = new List<Apple>
-{
-    new Apple { IsRipe = true },
-    new Apple { IsRipe = false }
-};
-
-// Contravariance allows us to use IsRipeFruit.
-List<Apple> ripeApples = apples.Where(IsRipeFruit);
-```
-
-In the code above, we're passing the delegate variable `IsRipeFruit` of type `Predicate<Fruit>` to the LINQ method `Where` even though the type `Predicate<Apple>` was expected. This works since delegates are contravariant in input.
-
-
 ## Conclusion
 
 Variance in delegates empowers developers to write more adaptable code. By grasping the concepts of covariance and contravariance within the context of delegates, we're better equipped to craft robust systems that can gracefully handle ever-evolving requirements.

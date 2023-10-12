@@ -352,7 +352,7 @@
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-8692.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-8063.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -397,12 +397,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.171:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.6:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '8692.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '8063.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -525,54 +525,6 @@ else {
 </div>
 </div>
 <p>In this example, <code class="docutils literal notranslate"><span class="pre">ProcessFruit</span></code> accepts objects of type <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> which is a supertype of <code class="docutils literal notranslate"><span class="pre">Apple</span></code>. Even though the delegate variable <code class="docutils literal notranslate"><span class="pre">processor</span></code> of type <code class="docutils literal notranslate"><span class="pre">AppleProcessor</span></code> expects a method that accepts objects of type <code class="docutils literal notranslate"><span class="pre">Apple</span></code>, we can still assign <code class="docutils literal notranslate"><span class="pre">ProcessFruit</span></code> to it. This is because delegates are contravariant in input, allowing us to use a less derived type than originally specified by the delegate.</p>
-<section id="example">
-<h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
-<p>What’s an example when we might make use of this you ask? Have a look at the code below.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Fruit</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">IsRipe</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Apple</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Fruit</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// A method that checks if a general fruit is ripe</span>
-<span class="n">Predicate</span><span class="o">&lt;</span><span class="n">Fruit</span><span class="o">&gt;</span><span class="w"> </span><span class="n">IsRipeFruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fruit</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">fruit</span><span class="p">.</span><span class="n">IsRipe</span><span class="p">;</span>
-
-<span class="c1">// A list of Apples.</span>
-<span class="n">List</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span><span class="w"> </span><span class="n">apples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Apple</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">IsRipe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Apple</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">IsRipe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="w"> </span><span class="p">}</span>
-<span class="p">};</span>
-
-<span class="c1">// Contravariance allows us to use IsRipeFruit.</span>
-<span class="n">List</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ripeApples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">apples</span><span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">IsRipeFruit</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(12,39): error CS1503: Argument 2: cannot convert from &#39;System.Predicate&lt;Fruit&gt;&#39; to &#39;System.Func&lt;Apple, bool&gt;&#39;
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>In the code above, we’re passing the delegate variable <code class="docutils literal notranslate"><span class="pre">IsRipeFruit</span></code> of type <code class="docutils literal notranslate"><span class="pre">Predicate&lt;Fruit&gt;</span></code> to the LINQ method <code class="docutils literal notranslate"><span class="pre">Where</span></code> even though the type <code class="docutils literal notranslate"><span class="pre">Predicate&lt;Apple&gt;</span></code> was expected. This works since delegates are contravariant in input.</p>
-</section>
 </section>
 <section id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
@@ -656,10 +608,7 @@ else {
             <ul>
 <li><a class="reference internal" href="#">113. Variant delegates</a><ul>
 <li><a class="reference internal" href="#covariance">Covariance</a></li>
-<li><a class="reference internal" href="#contravariance">Contravariance</a><ul>
-<li><a class="reference internal" href="#example">Example</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#contravariance">Contravariance</a></li>
 <li><a class="reference internal" href="#conclusion">Conclusion</a></li>
 </ul>
 </li>
