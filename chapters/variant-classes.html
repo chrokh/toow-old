@@ -141,7 +141,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -326,7 +326,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -334,10 +334,303 @@
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="variant-classes">
 <h1><span class="section-number">112. </span>Variant classes<a class="headerlink" href="#variant-classes" title="Permalink to this heading">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
+<p>When we delved into <a class="reference internal" href="covariance.html"><span class="doc std std-doc">covariance</span></a>, <a class="reference internal" href="contravariance.html"><span class="doc std std-doc">contravariance</span></a>, and <a class="reference internal" href="invariance.html"><span class="doc std std-doc">invariance</span></a>, we learnt about the flexibility of type relations, especially when working with generic types. Now, we turn our attention to how these concepts apply to <a class="reference internal" href="classes.html"><span class="doc std std-doc">classes</span></a>.</p>
+<div class="admonition-key-points admonition">
+<p class="admonition-title">Key points</p>
+<ul class="simple">
+<li><p>C# supports covariant return types.</p></li>
+<li><p>C# does not support contravariant parameter types.</p></li>
+</ul>
 </div>
+<section id="covariant-return-types">
+<h2>Covariant Return Types<a class="headerlink" href="#covariant-return-types" title="Permalink to this heading">#</a></h2>
+<p>In many object-oriented languages, when you <a class="reference internal" href="../old/inheritance.html#overriding"><span class="std std-ref">override</span></a> a method, the return type of the overridden method should match the return type of the base method. However, C# has added more flexibility by allowing return types to be <a class="reference internal" href="covariance.html"><span class="doc std std-doc">covariant</span></a>. This means that an overridden method in a derived class can have a <strong>more derived return type</strong> than the method in the base class.</p>
+<p>Consider the following classes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Fruit</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-8710.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.116:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '8710.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Apple</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Fruit</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">FruitTree</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="n">Fruit</span><span class="w"> </span><span class="nf">GetFruit</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Fruit</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AppleTree</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">FruitTree</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="n">Apple</span><span class="w"> </span><span class="nf">GetFruit</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Apple</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the above example, the <code class="docutils literal notranslate"><span class="pre">Apple</span></code> class is derived from the <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> class. Similarly, the <code class="docutils literal notranslate"><span class="pre">AppleTree</span></code> class is derived from the <code class="docutils literal notranslate"><span class="pre">FruitTree</span></code> class.</p>
+<p>While the <code class="docutils literal notranslate"><span class="pre">GetFruit</span></code> method in the <code class="docutils literal notranslate"><span class="pre">FruitTree</span></code> class returns objects of type <code class="docutils literal notranslate"><span class="pre">Fruit</span></code>, the overridden <code class="docutils literal notranslate"><span class="pre">GetFruit</span></code> method in the <code class="docutils literal notranslate"><span class="pre">AppleTree</span></code> class returns objects of type <code class="docutils literal notranslate"><span class="pre">Apple</span></code> which is a more derived type.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>C# supports covariant return types.</p>
+</div>
+<section id="benefits">
+<h3>Benefits<a class="headerlink" href="#benefits" title="Permalink to this heading">#</a></h3>
+<p>What might the benefit of this be?
+Covariant return types help us avoid loosing type-information.
+When we have an <code class="docutils literal notranslate"><span class="pre">AppleTree</span></code> and ask it for a <code class="docutils literal notranslate"><span class="pre">Fruit</span></code>, the compiler will know that we won’t get any old <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> but rather precisely an <code class="docutils literal notranslate"><span class="pre">Apple</span></code>.
+Consider the code below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">AppleTree</span><span class="w"> </span><span class="n">tree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AppleTree</span><span class="p">();</span>
+<span class="n">Apple</span><span class="w"> </span><span class="n">apple</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tree</span><span class="p">.</span><span class="n">GetFruit</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The code compiles and runs as expected. However, had we not used a covariant return type, we would not have been able to extract an <code class="docutils literal notranslate"><span class="pre">Apple</span></code> from the tree without downcasting. Compare the example above with the one below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">InvariantAppleTree</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">FruitTree</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="n">Fruit</span><span class="w"> </span><span class="nf">GetFruit</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Apple</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">InvariantAppleTree</span><span class="w"> </span><span class="n">tree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">InvariantAppleTree</span><span class="p">();</span>
+<span class="n">Apple</span><span class="w"> </span><span class="n">apple</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tree</span><span class="p">.</span><span class="n">GetFruit</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2,15): error CS0266: Cannot implicitly convert type &#39;Fruit&#39; to &#39;Apple&#39;. An explicit conversion exists (are you missing a cast?)
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Covariant return types enhance type safety. When working with derived classes, you can be more specific about what you return, preventing unexpected behaviors and potential issues down the line.</p>
+</div>
+</section>
+</section>
+<section id="contravariant-parameter-types">
+<h2>Contravariant Parameter Types<a class="headerlink" href="#contravariant-parameter-types" title="Permalink to this heading">#</a></h2>
+<p>Contravariance is when you can use a less derived (or “broader”) type instead of a more derived (or “narrower”) type. However, when it comes to method parameters in C#, contravariance isn’t supported. This means that if you override a method in a derived class, the parameter types of the overridden method must match exactly the parameter types of the method in the base class.</p>
+<p>Let’s however entertain a hypothetical example of what this might have looked like if C# would have supported contravariant parameter types.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AppleJuicer</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Juice</span><span class="p">(</span><span class="n">Apple</span><span class="w"> </span><span class="n">apple</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Juicing the apple.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">FruitJuicer</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">AppleJuicer</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// This won&#39;t compile!</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Juice</span><span class="p">(</span><span class="n">Fruit</span><span class="w"> </span><span class="n">fruit</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Juicing the fruit.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4,26): error CS0115: &#39;FruitJuicer.Juice(Fruit)&#39;: no suitable method found to override
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Juice</span></code> method in the <code class="docutils literal notranslate"><span class="pre">FruitJuicer</span></code> class overrides the <code class="docutils literal notranslate"><span class="pre">Juice</span></code> method in the <code class="docutils literal notranslate"><span class="pre">AppleJuicer</span></code> class and accepts a less derived parameter type. However, since C# does not support contravariant parameters in classes, this code does not compile.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When overriding methods in C#, the parameter types must match those of the overridden method.</p>
+</div>
+</section>
+<section id="covariant-parameter-types-in-other-languages">
+<h2>Covariant Parameter Types in Other Languages<a class="headerlink" href="#covariant-parameter-types-in-other-languages" title="Permalink to this heading">#</a></h2>
+<p>Some programming languages permit <em>covariant parameter types</em>. This means that a derived class, can use a narrower parameter type compared to the same method in the base class.</p>
+<p>For example, if a base class method accepts a parameter of type <code class="docutils literal notranslate"><span class="pre">Fruit</span></code>, the corresponding method in a derived class would be allowed to specify a narrower type like <code class="docutils literal notranslate"><span class="pre">Apple</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AppleJuicer</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Juice</span><span class="p">(</span><span class="n">Fruit</span><span class="w"> </span><span class="n">fruit</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Juicing the fruit.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">FruitJuicer</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">AppleJuicer</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// This won&#39;t compile and is not type-safe!</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Juice</span><span class="p">(</span><span class="n">Apple</span><span class="w"> </span><span class="n">apple</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Juicing the apple.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4,26): error CS0115: &#39;FruitJuicer.Juice(Apple)&#39;: no suitable method found to override
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, the <code class="docutils literal notranslate"><span class="pre">PerformAction</span></code> method in <code class="docutils literal notranslate"><span class="pre">Dog</span></code> narrows down its parameter type to <code class="docutils literal notranslate"><span class="pre">Dog</span></code>, even though the corresponding method in <code class="docutils literal notranslate"><span class="pre">Animal</span></code> accepts any <code class="docutils literal notranslate"><span class="pre">Animal</span></code>.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>This might seem flexible, but as we have learned in the chapter on the <a class="reference internal" href="../old/liskov-substitution-principle.html#liskov-substitution-principle"><span class="std std-ref">Liskov Substitution Principle</span></a>, covariance in input will lead to a loss of static-type safety.
+Languages with this feature are thus prone to run-time errors.</p>
+</div>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>Variance in programming is all about flexibility and type safety. While C# offers a certain level of flexibility with covariant return types, it does not support contravariant parameter types. Possibly as a consequence of not supporting multiple inheritance. As we continue to explore deeper concepts, always keep in mind the delicate balance between flexibility and safety that C# aims to achieve. It’s all about writing robust and maintainable code.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -402,8 +695,33 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">112. Variant classes</a><ul>
+<li><a class="reference internal" href="#covariant-return-types">Covariant Return Types</a><ul>
+<li><a class="reference internal" href="#benefits">Benefits</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#contravariant-parameter-types">Contravariant Parameter Types</a></li>
+<li><a class="reference internal" href="#covariant-parameter-types-in-other-languages">Covariant Parameter Types in Other Languages</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
