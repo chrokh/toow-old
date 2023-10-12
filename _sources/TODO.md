@@ -1,9 +1,12 @@
 # The new todo list
 
 - **A MUCH BETTER EXAMPLE FOR THE FIRST GENERICS CHAPTER IS THE ONE I USED IN THE LECTURE. Board and card games: Pair of Cards and DiceRolls. Backgammon, Hold em, and Craps.**
+- Is this true?: Variance in delegates is only applicable to reference types. Value types like structs do not exhibit variance.
 - Generic supertypes chapter should also discuss interface inheritance. We should also follow the much more logical structure of the OOP2 slides on the chapter. It simplifies the flow.
+- Event conventions should mention that On-prefix is NOT EVEN USED that old way in RxNET. Instead it is used the way it is used in e.g. JavaScript.
 - Encapsulation should come after properties. First show what we can do, then explain WHY. Makes it simpler to explain encapsulation because we can use public get private set. NOT OBVIOUS. I am using the term encapsulation in the auto properties chapter.
 - The point about generic delegates and classes that's being made in the chapter on Generic Delegates should be in the chapter on Delegates.
+- Observables and Events should be covered AFTER iterator pattern and Enumerable. Because that would allow us to talk about Rx.NET brings LINQ to observers.
 - The covariance, contravariance, and invariance chapters never deal with non-generic subtypes: Covariance permits a method to return a type that is derived from the original return type.
 - Should Robustness principle be moved into its own chapter? See old longer version in old/liskov-substitution-principle.md
 - Split the variance chapter in two? Covariance and Contravariance?
