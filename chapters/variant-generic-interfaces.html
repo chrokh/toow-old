@@ -141,7 +141,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -326,7 +326,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -334,10 +334,310 @@
         <article role="main">
           <section class="tex2jax_ignore mathjax_ignore" id="variant-generic-interfaces">
 <h1><span class="section-number">115. </span>Variant generic interfaces<a class="headerlink" href="#variant-generic-interfaces" title="Permalink to this heading">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Work in progress.</p>
+<p><a class="reference internal" href="generic-supertypes.html"><span class="doc std std-doc">Generic interfaces</span></a> are a staple in C#. They enable us to write type-agnostic code while maintaining type safety.
+Another hallmark in programming is the concept of <a class="reference internal" href="variance.html"><span class="doc std std-doc">variance</span></a> which allows us to be more flexible with type assignments.
+Combining these two leads to enormously reusable code.</p>
+<div class="admonition-key-point admonition">
+<p class="admonition-title">Key point</p>
+<p>C# supports variance for generic interfaces with the <code class="docutils literal notranslate"><span class="pre">in</span></code> and <code class="docutils literal notranslate"><span class="pre">out</span></code> keywords.
+The keyword <code class="docutils literal notranslate"><span class="pre">out</span></code> is for covariant “output”, while the keyword <code class="docutils literal notranslate"><span class="pre">in</span></code> is for contravariant “input”.
+Not specifying any of them results in invariance.</p>
 </div>
+<ul class="simple">
+<li><p>Prefixing a type parameter with the keyword <code class="docutils literal notranslate"><span class="pre">out</span></code> makes it <a class="reference internal" href="covariance.html"><span class="doc std std-doc">covariant</span></a>.</p></li>
+<li><p>Prefixing a type parameter with the keyword <code class="docutils literal notranslate"><span class="pre">in</span></code> makes it <a class="reference internal" href="contravariance.html"><span class="doc std std-doc">contravariant</span></a>.</p></li>
+<li><p>Not prefixing a type parameter with any of these kewywords makes it <a class="reference internal" href="invariance.html"><span class="doc std std-doc">invariant</span></a>.</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">out</span></code> and <code class="docutils literal notranslate"><span class="pre">in</span></code> with generic interfaces is not about altering the behavior of the interface itself. Instead, it’s about providing flexibility in type assignments, making your types more adaptable.</p>
+</div>
+<section id="covariance-using-out">
+<h2>Covariance using <code class="docutils literal notranslate"><span class="pre">out</span></code><a class="headerlink" href="#covariance-using-out" title="Permalink to this heading">#</a></h2>
+<p>In a universe of geometric shapes, every shape has an area. Some shapes, like circles, have specific properties like a radius. Let’s represent this in code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Shape</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Area</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-8907.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.116.1:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '8907.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Circle</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Shape</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Radius</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Area</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="n">PI</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Radius</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Radius</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this world, let’s consider a scenario where we often work with pairs of shapes. We create a covariant, read-only pair:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IPair</span><span class="o">&lt;</span><span class="k">out</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="n">First</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="n">Second</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, let’s also define a <code class="docutils literal notranslate"><span class="pre">Pair&lt;T&gt;</span></code> class:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IPair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">First</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">Second</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Pair</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">second</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">First</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">first</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Second</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">second</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s where the magic happens. Let’s say we have a method that calculates the total area of a pair of shapes:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="nf">TotalArea</span><span class="p">(</span><span class="n">IPair</span><span class="o">&lt;</span><span class="n">Shape</span><span class="o">&gt;</span><span class="w"> </span><span class="n">shapePair</span><span class="p">)</span>
+<span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">shapePair</span><span class="p">.</span><span class="n">First</span><span class="p">.</span><span class="n">Area</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">shapePair</span><span class="p">.</span><span class="n">Second</span><span class="p">.</span><span class="n">Area</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Even though this method expects a pair of <code class="docutils literal notranslate"><span class="pre">Shape</span></code> objects, due to the covariance enabled by <code class="docutils literal notranslate"><span class="pre">out</span></code>, we can pass in a pair of <code class="docutils literal notranslate"><span class="pre">Circle</span></code> objects:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IPair</span><span class="o">&lt;</span><span class="n">Circle</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pair</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">Circle</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Circle</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Radius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Circle</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Radius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="p">});</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">combinedArea</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TotalArea</span><span class="p">(</span><span class="n">pair</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is the essence of covariance: the ability to use a more derived type (like <code class="docutils literal notranslate"><span class="pre">Circle</span></code>) where a less derived type (like <code class="docutils literal notranslate"><span class="pre">Shape</span></code>) is expected. In this case, a method designed for general shapes can seamlessly compute the area for specific circle pairs.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When you see the <code class="docutils literal notranslate"><span class="pre">out</span></code> keyword in a generic interface, think of it as “outputting” data, which aligns with returning values, hence its association with return types.</p>
+</div>
+</section>
+<section id="contravariance-using-in">
+<h2>Contravariance using <code class="docutils literal notranslate"><span class="pre">in</span></code><a class="headerlink" href="#contravariance-using-in" title="Permalink to this heading">#</a></h2>
+<p>Contravariance is the opposite of covariance. It allows a more general type to be used where a more specific type is expected. This might sound counterintuitive, but it’s incredibly powerful in certain scenarios.</p>
+<p>Consider, forinstance, this general interface that we can use for comparing the “size” of any two objects.
+Notice how the type parameter <code class="docutils literal notranslate"><span class="pre">T</span></code> is marked as being contravariant.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IComparer</span><span class="o">&lt;</span><span class="k">in</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="nf">IsGreaterThan</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">right</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s then define a type that implements this interface for any <code class="docutils literal notranslate"><span class="pre">Shape</span></code>.
+The implementation compares <code class="docutils literal notranslate"><span class="pre">Shape</span></code>s based on their <code class="docutils literal notranslate"><span class="pre">Area</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ShapeAreaComparer</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IComparer</span><span class="o">&lt;</span><span class="n">Shape</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">IsGreaterThan</span><span class="p">(</span><span class="n">Shape</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">Shape</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">Area</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">.</span><span class="n">Area</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With contravariance, we can use this general <code class="docutils literal notranslate"><span class="pre">Shape</span></code> comparer even if we need a more specific comparer like <code class="docutils literal notranslate"><span class="pre">IComparer&lt;Circle&gt;</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IComparer</span><span class="o">&lt;</span><span class="n">Circle</span><span class="o">&gt;</span><span class="w"> </span><span class="n">circleComparer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ShapeAreaComparer</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>At first glance this might not seem like a big deal. But again, consider that these objects might be found inside other structures. Let’s reintroduce the notion of a <code class="docutils literal notranslate"><span class="pre">Pair&lt;T&gt;</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IPair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">First</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">Second</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Pair</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">second</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">First</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">first</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Second</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">second</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">Largest</span><span class="w"> </span><span class="p">(</span><span class="n">IComparer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">comparer</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">comparer</span><span class="p">.</span><span class="n">IsGreaterThan</span><span class="p">(</span><span class="n">Second</span><span class="p">,</span><span class="w"> </span><span class="n">First</span><span class="p">))</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">Second</span><span class="p">;</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">First</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">Circle</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pair</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">Circle</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Circle</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Radius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Circle</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Radius</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="p">});</span>
+
+<span class="n">Circle</span><span class="w"> </span><span class="n">largest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pair</span><span class="p">.</span><span class="n">Largest</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ShapeAreaComparer</span><span class="p">());</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">largest</span><span class="p">.</span><span class="n">Radius</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Remember, contravariance is about inputting data. When you see the <code class="docutils literal notranslate"><span class="pre">in</span></code> keyword, think about consuming or taking in values, aligning with input parameters.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>We don’t actually have to build an interface like <code class="docutils literal notranslate"><span class="pre">IComparer&lt;T&gt;</span></code> since .NET already contains a better implementation with the same name 🤓.</p>
+</div>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>By understanding and leveraging covariance and contravariance in generic interfaces, we can write code that is both type-safe and flexible. It allows us to build systems that can evolve over time without extensive refactoring, saving both time and effort.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Remember, <code class="docutils literal notranslate"><span class="pre">out</span></code> is for covariant output, while <code class="docutils literal notranslate"><span class="pre">in</span></code> is for contravariant input.</p>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -402,8 +702,29 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">115. Variant generic interfaces</a><ul>
+<li><a class="reference internal" href="#covariance-using-out">Covariance using <code class="docutils literal notranslate"><span class="pre">out</span></code></a></li>
+<li><a class="reference internal" href="#contravariance-using-in">Contravariance using <code class="docutils literal notranslate"><span class="pre">in</span></code></a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

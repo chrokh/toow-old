@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Lab: Composition over Inheritance" href="composition-over-inheritance.html" /><link rel="prev" title="Lab: Generic Supertypes" href="generic-supertypes.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Lab: Type parameter constraints - The Object Oriented Way</title>
+        <title>Variant generic interfaces - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -283,21 +283,21 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapters/variant-generic-interfaces.html">115. Variant generic interfaces</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Labs</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">Lab: Replace conditional with polymorphism</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generics.html">Lab: Generics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-types.html">Lab: Generic types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">Lab: Generic Supertypes</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Lab: Type parameter constraints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">Lab: Composition over Inheritance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bridge-pattern.html">Lab: Bridge Pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="delegates.html">Lab: Delegates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lambdas.html">Lab: Lambdas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="observer-pattern.html">Lab: Observer Pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="events.html">Lab: Events</a></li>
-<li class="toctree-l1"><a class="reference internal" href="iterator-pattern.html">Lab: Iterator pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="enumerables.html">Lab: Enumerables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="the-yield-keyword.html">Lab: The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../labs/replace-conditional-with-polymorphism.html">Lab: Replace conditional with polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/generics.html">Lab: Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/generic-types.html">Lab: Generic types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/generic-supertypes.html">Lab: Generic Supertypes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/type-parameter-constraints.html">Lab: Type parameter constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/composition-over-inheritance.html">Lab: Composition over Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/bridge-pattern.html">Lab: Bridge Pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/delegates.html">Lab: Delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/lambdas.html">Lab: Lambdas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/observer-pattern.html">Lab: Observer Pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/events.html">Lab: Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/iterator-pattern.html">Lab: Iterator pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/enumerables.html">Lab: Enumerables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/the-yield-keyword.html">Lab: The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword</a></li>
 </ul>
 
 </div>
@@ -332,218 +332,122 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="lab-type-parameter-constraints">
-<h1>Lab: Type parameter constraints<a class="headerlink" href="#lab-type-parameter-constraints" title="Permalink to this heading">#</a></h1>
-<section id="objective">
-<h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
-<p>In this lab, we will harness the power of type parameter constraints to create a type-safe inventory management system that can handle distinct item types with their unique behaviors. We’ll focus on implementing and extending a generic inventory, and then populating this inventory with various items and interacting with them.</p>
+          <section class="tex2jax_ignore mathjax_ignore" id="variant-generic-interfaces">
+<h1>Variant generic interfaces<a class="headerlink" href="#variant-generic-interfaces" title="Permalink to this heading">#</a></h1>
+<hr class="docutils" />
+<section id="contravariance">
+<h2>Contravariance<a class="headerlink" href="#contravariance" title="Permalink to this heading">#</a></h2>
+<section id="predicates">
+<h3>Predicates<a class="headerlink" href="#predicates" title="Permalink to this heading">#</a></h3>
+<p>What’s an example of something that could be contravariant?
+How about predicates?</p>
+<p>Let’s say that we have a subtyping hierarchy where <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> is a subtype of the interface <code class="docutils literal notranslate"><span class="pre">IShape</span></code>.</p>
+<p>Let us then define a predicate that works on objects of type <code class="docutils literal notranslate"><span class="pre">Shape</span></code>.</p>
+<p>Since the type parameter in <code class="docutils literal notranslate"><span class="pre">IPredicate</span></code> is contravariant we can now use values of type <code class="docutils literal notranslate"><span class="pre">IPredicate&lt;IShape&gt;</span></code> where values of type <code class="docutils literal notranslate"><span class="pre">IPredicate&lt;Rectangle&gt;</span></code> are expected.</p>
+<p>Without <code class="docutils literal notranslate"><span class="pre">T</span></code> marked as covariant we would get the following error:</p>
+<p><code class="docutils literal notranslate"><span class="pre">{code-cell}</span> <span class="pre">csharp</span> <span class="pre">//class</span> <span class="pre">ConditionalCipher&lt;T&gt;</span> <span class="pre">:</span> <span class="pre">ICipher&lt;T,T&gt;</span> <span class="pre">//{</span> <span class="pre">//</span>&#160; <span class="pre">ICipher&lt;T,T&gt;</span> <span class="pre">cipher;</span> <span class="pre">//</span>&#160; <span class="pre">IPredicate&lt;T&gt;</span> <span class="pre">predicate;</span> <span class="pre">//</span>&#160; <span class="pre">public</span> <span class="pre">ConditionalCipher</span> <span class="pre">(ICipher&lt;T,T&gt;</span> <span class="pre">cipher,</span> <span class="pre">IPredicate&lt;T&gt;</span> <span class="pre">predicate)</span> <span class="pre">//</span>&#160; <span class="pre">{</span> <span class="pre">//</span>&#160;&#160;&#160; <span class="pre">this.cipher</span> <span class="pre">=</span> <span class="pre">cipher;</span> <span class="pre">//</span>&#160;&#160;&#160; <span class="pre">this.predicate</span> <span class="pre">=</span> <span class="pre">predicate;</span> <span class="pre">//</span>&#160; <span class="pre">}</span> <span class="pre">//</span> <span class="pre">//</span>&#160; <span class="pre">public</span> <span class="pre">T</span> <span class="pre">Encode</span> <span class="pre">(T</span> <span class="pre">input)</span> <span class="pre">//</span>&#160; <span class="pre">{</span> <span class="pre">//</span>&#160;&#160;&#160; <span class="pre">if</span> <span class="pre">(predicate.Check(input))</span> <span class="pre">//</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">return</span> <span class="pre">cipher.Encode(input);</span> <span class="pre">//</span>&#160;&#160;&#160; <span class="pre">else</span> <span class="pre">//</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">return</span> <span class="pre">input;</span> <span class="pre">//</span>&#160; <span class="pre">}</span> <span class="pre">//}</span> </code></p>
 </section>
-<section id="provided-code">
-<h2>Provided code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
-<p>Carefully review the provided code. We have a basic interface <code class="docutils literal notranslate"><span class="pre">IItem</span></code> and two implementations: <code class="docutils literal notranslate"><span class="pre">Weapon</span></code> and <code class="docutils literal notranslate"><span class="pre">Map</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">interface</span><span class="w"> </span><span class="n">IItem</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Weapon</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IItem</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Use</span><span class="p">()</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Using {Name}.&quot;</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Map</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IItem</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Open</span><span class="p">()</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Opening {Name}.&quot;</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-<div>
-    <div id='dotnet-interactive-this-cell-9760.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
-        The below script needs to be able to find the current output cell; this is an easy method to get it.
-    </div>
-    <script type='text/javascript'>
-async function probeAddresses(probingAddresses) {
-    function timeout(ms, promise) {
-        return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                reject(new Error('timeout'))
-            }, ms)
-            promise.then(resolve, reject)
-        })
-    }
-
-    if (Array.isArray(probingAddresses)) {
-        for (let i = 0; i < probingAddresses.length; i++) {
-
-            let rootUrl = probingAddresses[i];
-
-            if (!rootUrl.endsWith('/')) {
-                rootUrl = `${rootUrl}/`;
-            }
-
-            try {
-                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
-                    method: 'POST',
-                    cache: 'no-cache',
-                    mode: 'cors',
-                    timeout: 1000,
-                    headers: {
-                        'Content-Type': 'text/plain'
-                    },
-                    body: probingAddresses[i]
-                }));
-
-                if (response.status == 200) {
-                    return rootUrl;
-                }
-            }
-            catch (e) { }
-        }
-    }
-}
-
-function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.116.1:2048/", "http://127.0.0.1:2048/"])
-        .then((root) => {
-        // use probing to find host url and api resources
-        // load interactive helpers and language services
-        let dotnetInteractiveRequire = require.config({
-        context: '9760.Microsoft.DotNet.Interactive.Http.HttpPort',
-                paths:
-            {
-                'dotnet-interactive': `${root}resources`
-                }
-        }) || require;
-
-            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
-
-            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
-                let paths = {};
-                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
-                
-                let internalRequire = require.config({
-                    context: extensionCacheBuster,
-                    paths: paths,
-                    urlArgs: `cacheBuster=${extensionCacheBuster}`
-                    }) || require;
-
-                return internalRequire
-            };
-        
-            dotnetInteractiveRequire([
-                    'dotnet-interactive/dotnet-interactive'
-                ],
-                function (dotnet) {
-                    dotnet.init(window);
-                },
-                function (error) {
-                    console.log(error);
-                }
-            );
-        })
-        .catch(error => {console.log(error);});
-    }
-
-// ensure `require` is available globally
-if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
-    let require_script = document.createElement('script');
-    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
-    require_script.setAttribute('type', 'text/javascript');
-    
-    
-    require_script.onload = function() {
-        loadDotnetInteractiveApi();
-    };
-
-    document.getElementsByTagName('head')[0].appendChild(require_script);
-}
-else {
-    loadDotnetInteractiveApi();
-}
-
-    </script>
-</div></div></div>
-</div>
-<p>We aim to further enrich this system by enhancing the functionalities of these items and ensuring our inventory can exploit these capabilities without losing type-specific details.</p>
+<section id="variant-ciphers">
+<h3>Variant ciphers<a class="headerlink" href="#variant-ciphers" title="Permalink to this heading">#</a></h3>
+<p>Remember <code class="docutils literal notranslate"><span class="pre">ICipher&lt;TIn,TOut&gt;</span></code> from the chapter on on <a class="reference internal" href="generic-types.html#generic-types-icipher"><span class="std std-ref">generic types</span></a>?
+If you think about it, <code class="docutils literal notranslate"><span class="pre">TIn</span></code> is only used as input, and <code class="docutils literal notranslate"><span class="pre">TOut</span></code> is only used as output.
+Consequently, we can, without causing any issues mark <code class="docutils literal notranslate"><span class="pre">TIn</span></code> as being contravariant and <code class="docutils literal notranslate"><span class="pre">TOut</span></code> as being covariant.</p>
+<p>Let’s then assume that we’ve got a cipher that implements this interface.
+For the sake of simplicity, let’s pick the constant cipher.</p>
+<p>Let’s then assume that we have a simple type hierarchy like this:</p>
+<p>Since <code class="docutils literal notranslate"><span class="pre">TIn</span></code> is marked as being contravariant and <code class="docutils literal notranslate"><span class="pre">TOut</span></code> is marked as being covariant we can now do the following:</p>
+<p>Notice how the type arguments on the left says <code class="docutils literal notranslate"><span class="pre">&lt;Cat,Animal&gt;</span></code> while the type arguments on the right says <code class="docutils literal notranslate"><span class="pre">&lt;Animal,Cat&gt;</span></code>.</p>
 </section>
-<section id="instructions">
-<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
-<section id="step-1-crafting-the-generic-inventory">
-<h3>Step 1: Crafting the Generic Inventory<a class="headerlink" href="#step-1-crafting-the-generic-inventory" title="Permalink to this heading">#</a></h3>
-<p>Your task is to design a generic inventory class <code class="docutils literal notranslate"><span class="pre">Inventory&lt;T&gt;</span></code>, where <code class="docutils literal notranslate"><span class="pre">T</span></code> is constrained to the interface <code class="docutils literal notranslate"><span class="pre">IItem</span></code>. This class should be able to:</p>
-<ul class="simple">
-<li><p>Add items to the inventory.</p></li>
-<li><p>Remove items from the inventory.</p></li>
-<li><p>Get the currently selected item.</p></li>
-<li><p>Retrieve the currently selected item’s name.</p></li>
-<li><p>Get a list of strings of the names of all items in the inventory.</p></li>
-<li><p>Navigate through items (with methods like <code class="docutils literal notranslate"><span class="pre">Next()</span></code> and <code class="docutils literal notranslate"><span class="pre">Prev()</span></code>).</p></li>
-</ul>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Remember to employ the <code class="docutils literal notranslate"><span class="pre">where</span></code> keyword to add the constraint.</p>
-</div>
-<div class="admonition-reflection admonition">
-<p class="admonition-title">🤔 Reflection</p>
-<p>Why do we need the constraint?</p>
-</div>
-</section>
-<section id="step-2-a-mixed-inventory">
-<h3>Step 2: A Mixed Inventory<a class="headerlink" href="#step-2-a-mixed-inventory" title="Permalink to this heading">#</a></h3>
-<p>In the <code class="docutils literal notranslate"><span class="pre">Main</span></code> method, create an instance of <code class="docutils literal notranslate"><span class="pre">Inventory&lt;IItem&gt;</span></code>.
-This inventory should be able to hold any item that implements the <code class="docutils literal notranslate"><span class="pre">IItem</span></code> interface.</p>
-<ol class="arabic simple">
-<li><p>Create a new inventory instance of type <code class="docutils literal notranslate"><span class="pre">Inventory&lt;IItem&gt;</span></code>.</p></li>
-<li><p>Add a few objects of type <code class="docutils literal notranslate"><span class="pre">Weapon</span></code> and a few of type <code class="docutils literal notranslate"><span class="pre">Map</span></code> to this inventory.</p></li>
-<li><p>Print the names of all items in the inventory by interacting with the inventory.</p></li>
-</ol>
-<p>Now, here’s where things get a little more challenging:</p>
-<ul class="simple">
-<li><p>Try to extract a specific item from the inventory. Once you have this item, attempt to call the <code class="docutils literal notranslate"><span class="pre">Use()</span></code> or <code class="docutils literal notranslate"><span class="pre">Open()</span></code> methods.</p></li>
-</ul>
-<p>Did you encounter any issues? Why do you think this is the case?</p>
-<div class="admonition-reflection admonition">
-<p class="admonition-title">🤔 Reflection</p>
-<p>Why are we not able directly call <code class="docutils literal notranslate"><span class="pre">Use()</span></code> or <code class="docutils literal notranslate"><span class="pre">Open()</span></code> on an extracted item from an <code class="docutils literal notranslate"><span class="pre">Inventory&lt;IItem&gt;</span></code>? What does this tell us about the advantages and limitations of subtype polymorphism?</p>
-</div>
-</section>
-<section id="step-3-specific-inventories">
-<h3>Step 3: Specific Inventories<a class="headerlink" href="#step-3-specific-inventories" title="Permalink to this heading">#</a></h3>
-<p>In the <code class="docutils literal notranslate"><span class="pre">Main</span></code> program.
-Create inventories of type <code class="docutils literal notranslate"><span class="pre">Inventory&lt;Weapon&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">Inventory&lt;Map&gt;</span></code>.
-Create multiple instances of <code class="docutils literal notranslate"><span class="pre">Weapon</span></code> and <code class="docutils literal notranslate"><span class="pre">Map</span></code> and add them to their respective inventories.</p>
-<p>Move through these inventories using the <code class="docutils literal notranslate"><span class="pre">Next()</span></code> and <code class="docutils literal notranslate"><span class="pre">Prev()</span></code> methods, and for each item call <code class="docutils literal notranslate"><span class="pre">Use()</span></code> or <code class="docutils literal notranslate"><span class="pre">Open()</span></code> depending on from which inventory you got the item.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Objects of type <code class="docutils literal notranslate"><span class="pre">Weapon</span></code> and objects of type <code class="docutils literal notranslate"><span class="pre">Map</span></code> should be stored in <strong>different</strong> inventory objects. So when we step through what’s in our inventories, we have to step through two inventories.</p>
-</div>
-<div class="admonition-reflection admonition">
-<p class="admonition-title">🤔 Reflection</p>
-<p>What are the benefits of using separate inventories for the two types <code class="docutils literal notranslate"><span class="pre">Weapon</span></code> and <code class="docutils literal notranslate"><span class="pre">Map</span></code>? What are the downsides?</p>
-</div>
+<section id="cipher-factories">
+<span id="variant-generic-interfaces-cipher-factories"></span><h3>Cipher factories<a class="headerlink" href="#cipher-factories" title="Permalink to this heading">#</a></h3>
+<p>Let’s look at a contravariant example that can be used in the context of our ciphers.
+Let’s model a type that can spit out any number of objects of another type.
+You can think of this as a <span class="xref myst">factory</span>, a stream, a sequence, an infinite list, or an <span class="xref myst">iterator</span>.</p>
+<p>The method <code class="docutils literal notranslate"><span class="pre">Next</span></code> returns the next element in the sequence.
+The method <code class="docutils literal notranslate"><span class="pre">Take</span></code> returns the <code class="docutils literal notranslate"><span class="pre">n</span></code> number of next elements in the sequence wrapped in an <code class="docutils literal notranslate"><span class="pre">IEnumerable</span></code> which you can think of as a read-only collection.
+You can read more about <code class="docutils literal notranslate"><span class="pre">IEnumerable</span></code> in a <a class="reference internal" href="../chapters/type-hierarchies.html#ienumerable"><span class="std std-ref">later chapter</span></a>.</p>
+<p>Let’s first define an abstract factory that other factories can inherit from so that we won’t have to reimplement the <code class="docutils literal notranslate"><span class="pre">Take</span></code> method for all factories.</p>
+<p>Our old trusted friend <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> remains the same, except that we’ve now also exposed the <code class="docutils literal notranslate"><span class="pre">steps</span></code> parameter as a property that publicly can be read and privately set.</p>
+<p>Let’s now build two factories that yield instances of <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code>.
+The first cipher that the factories generate will have <code class="docutils literal notranslate"><span class="pre">Steps</span></code> set to <code class="docutils literal notranslate"><span class="pre">0</span></code>.
+Upon every subsequent generation of a new factory, the factories will either increment or decrement the counter used to determine what number of <code class="docutils literal notranslate"><span class="pre">Steps</span></code> the next cipher will be instantiated with.</p>
+<p>So what can we do with this?
+Well, since <code class="docutils literal notranslate"><span class="pre">T</span></code> in the factory interface is covariant, we can assign a typed as a factory that generates subtypes to a variable typed as a factory that generates the supertype.</p>
+<p>Why would this be useful?
+Well, sometimes we want to be able to treat a variable as its specific type, and sometimes we want to treat it as its general type.</p>
+<p>In the example below, we have two methods that take factories of different type.
+Since <code class="docutils literal notranslate"><span class="pre">T</span></code> in the factory interface is covariant we can pass the value of type <code class="docutils literal notranslate"><span class="pre">IFactory&lt;CaesarCipher&gt;</span></code> to both methods even though one of them excepts a value of type <code class="docutils literal notranslate"><span class="pre">IFactory&lt;ICipher&lt;char,char&gt;&gt;</span></code>.
+Why?
+Because a supertype of <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> is <code class="docutils literal notranslate"><span class="pre">ICipher&lt;char,char&gt;</span></code> and the type parameter where we apply this type is covariant.</p>
 </section>
 </section>
-<section id="challenge">
-<h2>Challenge<a class="headerlink" href="#challenge" title="Permalink to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Introduce a new item type, <code class="docutils literal notranslate"><span class="pre">Key</span></code>. This should implement <code class="docutils literal notranslate"><span class="pre">IItem</span></code> and have a method <code class="docutils literal notranslate"><span class="pre">Unlock()</span></code> that prints “Unlocking with {Name}”.</p></li>
-<li><p>Create an inventory for keys, add a few keys to it, and iterate through it to unlock using the keys.</p></li>
-</ol>
-<div class="admonition-reflection admonition">
-<p class="admonition-title">🤔 Reflection</p>
-<p>How did introducing a new item type impact our existing inventory system? How do type parameter constraints provide a framework to smoothly integrate new types into our application?</p>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<div class="exercise admonition" id="old/variant-generic-interfaces-exercise-0">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>In the chapter on <a class="reference internal" href="generic-types.html#generic-types-icipher"><span class="std std-ref">generic types</span></a> we introduced the generic interface <code class="docutils literal notranslate"><span class="pre">ICipher&lt;TIn,TOut&gt;</span></code>.
+Both type parameters in this generic type <em>can</em> be variant.
+Explain why this in your own words and write a new version of <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> where the type parameters are variant.</p>
+</section>
 </div>
+<div class="exercise admonition" id="old/variant-generic-interfaces-exercise-1">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>Come up with and implement your own example of an interface with a type parameter that usefully exhibits covariance.
+Give an example in code where you are using the fact that the type parameter is covariant.</p>
+</section>
+</div>
+<div class="exercise admonition" id="old/variant-generic-interfaces-exercise-2">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>Come up with and implement your own example of an interface with a type parameter that usefully exhibits contravariance.
+Give an example in code where you are using the fact that the type parameter is covariant.</p>
+</section>
+</div>
+<div class="exercise admonition" id="old/variant-generic-interfaces-exercise-3">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>Why does the following code generate a compiler-error?</p>
+</section>
+</div>
+<div class="exercise admonition" id="old/variant-generic-interfaces-exercise-4">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>Why does the method <code class="docutils literal notranslate"><span class="pre">Set</span></code> in the following code example <em>not</em> generate a compiler-error even though <code class="docutils literal notranslate"><span class="pre">T</span></code> is marked as covariant.</p>
+</section>
+</div>
+<div class="exercise admonition" id="old/variant-generic-interfaces-exercise-5">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>Assume that we have the following types.</p>
+<p>Disregard the fact that C# only support the variance keywords <code class="docutils literal notranslate"><span class="pre">in</span></code> and <code class="docutils literal notranslate"><span class="pre">out</span></code> on interfaces for a moment.
+Keeping variance and compile-time <a class="reference internal" href="../chapters/type-systems.html#type-safety"><span class="std std-ref">type safety</span></a> in mind, why is it important that the example below does not compile?</p>
+</section>
+</div>
+<p>Example of variance could be the Predicate interface from an exercise in the chapter on <a class="reference internal" href="../chapters/abstract-injected-object-composition.html#abstract-injected-object-composition:exercises:predicates"><span class="std std-ref">abstract inject object composition</span></a>. The variant type is always fed in, but never out.</p>
+<p>TODO: Example where when we go from two type parameters to one:</p>
+<p>IParent&lt;Dog,Dog&gt; id1 = new Identity<Dog>();
+IParent&lt;Dog,Animal&gt; id2 = new Identity<Dog>();
+IParent&lt;Dog,Animal&gt; id3 = new Identity<Animal>();</p>
+<p>interface IParent &lt;in T1, out T2&gt;
+{
+T2 Transform (T1 input);
+}</p>
+<p>class Identity<T> : IParent&lt;T,T&gt;
+{
+public T Transform (T x) =&gt; x;
+}</p>
+<p>class Animal {}
+class Mammal : Animal {}
+class Cat : Mammal {}
+class Dog : Mammal {}</p>
 </section>
 </section>
 
@@ -556,41 +460,23 @@ Create multiple instances of <code class="docutils literal notranslate"><span cl
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: ".net-csharp"
+            mode: "python"
         },
         kernelOptions: {
-            name: ".net-csharp",
-            path: "./labs"
+            name: "python3",
+            path: "./old"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = '.net-csharp'</script>
+    <script>kernelName = 'python3'</script>
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="composition-over-inheritance.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">Lab: Composition over Inheritance</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="generic-supertypes.html">
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">Lab: Generic Supertypes</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -621,16 +507,14 @@ Create multiple instances of <code class="docutils literal notranslate"><span cl
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Lab: Type parameter constraints</a><ul>
-<li><a class="reference internal" href="#objective">Objective</a></li>
-<li><a class="reference internal" href="#provided-code">Provided code</a></li>
-<li><a class="reference internal" href="#instructions">Instructions</a><ul>
-<li><a class="reference internal" href="#step-1-crafting-the-generic-inventory">Step 1: Crafting the Generic Inventory</a></li>
-<li><a class="reference internal" href="#step-2-a-mixed-inventory">Step 2: A Mixed Inventory</a></li>
-<li><a class="reference internal" href="#step-3-specific-inventories">Step 3: Specific Inventories</a></li>
+<li><a class="reference internal" href="#">Variant generic interfaces</a><ul>
+<li><a class="reference internal" href="#contravariance">Contravariance</a><ul>
+<li><a class="reference internal" href="#predicates">Predicates</a></li>
+<li><a class="reference internal" href="#variant-ciphers">Variant ciphers</a></li>
+<li><a class="reference internal" href="#cipher-factories">Cipher factories</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#challenge">Challenge</a></li>
+<li><a class="reference internal" href="#exercises">Exercises</a></li>
 </ul>
 </li>
 </ul>
