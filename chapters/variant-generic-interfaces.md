@@ -12,461 +12,171 @@ kernelspec:
 
 # Variant generic interfaces
 
-```{warning}
-Work in progress.
+[Generic interfaces](generic-supertypes) are a staple in C#. They enable us to write type-agnostic code while maintaining type safety.
+Another hallmark in programming is the concept of [variance](variance) which allows us to be more flexible with type assignments.
+Combining these two leads to enormously reusable code.
+
+```{admonition} Key point
+C# supports variance for generic interfaces with the `in` and `out` keywords.
+The keyword `out` is for covariant "output", while the keyword `in` is for contravariant "input".
+Not specifying any of them results in invariance.
 ```
 
-%## Contravariance
-%
-%```{code-cell}
-%IJuicer<Orange> orangeJuicer = new FruitJuicer();
-%//IJuicer<Fruit> fruitJuicer = new OrangeJuicer(); // Does not compile.
-%
-%class Fruit { }
-%class Orange : Fruit { }
-%
-%class FruitJuice { }
-%
-%interface IJuicer<in TIn>
-%{
-%    FruitJuice Process(TIn product);
-%}
-%
-%class FruitJuicer : IJuicer<Fruit>
-%{
-%    public FruitJuice Process(Fruit fruit)
-%        => new FruitJuice(); // Dummy implementation.
-%}
-%
-%class OrangeJuicer : IJuicer<Orange>
-%{
-%    public FruitJuice Process(Orange orange)
-%        => new FruitJuice(); // Dummy implementation.
-%}
-%```
-%
-%
-%### Predicates
-%
-%What's an example of something that could be contravariant?
-%How about predicates?
-%
-%```{code-cell} csharp
-%interface IPredicate<in T> // Contravariant!
-%{
-%  bool Check (T input);
-%}
-%```
-%
-%Let's say that we have a subtyping hierarchy where `Rectangle` is a subtype of the interface `IShape`.
-%
-%```{code-cell} csharp
-%interface IShape
-%{
-%  public double Area ();
-%}
-%
-%class Rectangle : IShape
-%{
-%  int width, height;
-%  public Rectangle (int width, int height)
-%  {
-%    this.width = width;
-%    this.height = height;
-%  }
-%  public double Area () => width * height;
-%}
-%```
-%
-%Let us then define a predicate that works on objects of type `Shape`.
-%
-%```{code-cell} csharp
-%class LargerThan : IPredicate<IShape>
-%{
-%  double lim;
-%  public LargerThan (double lim) => this.lim = lim;
-%  public bool Check (IShape shape) => shape.Area() > lim;
-%}
-%```
-%
-%Since the type parameter in `IPredicate` is contravariant we can now use values of type `IPredicate<IShape>` where values of type `IPredicate<Rectangle>` are expected.
-%
-%```{code-cell} csharp
-%IPredicate<IShape> shapePredicate = new LargerThan(2);
-%IPredicate<Rectangle> p = shapePredicate; // Needs contravariance.
-%```
-%
-%Without `T` marked as covariant we would get the following error:
-%
-%```{code-cell} csharp
-%:tags: [hide-input, raises-exception]
-%interface IPredicate<T>
-%{
-%  bool Check (T input);
-%}
-%
-%interface IShape
-%{
-%  public double Area ();
-%}
-%
-%class Rectangle : IShape
-%{
-%  int width, height;
-%  public Rectangle (int width, int height)
-%  {
-%    this.width = width;
-%    this.height = height;
-%  }
-%  public double Area () => width * height;
-%}
-%
-%class LargerThan : IPredicate<IShape>
-%{
-%  double lim;
-%  public LargerThan (double lim) => this.lim = lim;
-%  public bool Check (IShape shape) => shape.Area() > lim;
-%}
-%
-%IPredicate<IShape> shapePredicate = new LargerThan(2);
-%IPredicate<Rectangle> p = shapePredicate; // Needs contravariance.
-%```
+- Prefixing a type parameter with the keyword `out` makes it [covariant](covariance).
+- Prefixing a type parameter with the keyword `in` makes it [contravariant](contravariance).
+- Not prefixing a type parameter with any of these kewywords makes it [invariant](invariance).
+
+```{important}
+Using `out` and `in` with generic interfaces is not about altering the behavior of the interface itself. Instead, it's about providing flexibility in type assignments, making your types more adaptable.
+```
 
 
-%``{code-cell} csharp
-%//class ConditionalCipher<T> : ICipher<T,T>
-%//{
-%//  ICipher<T,T> cipher;
-%//  IPredicate<T> predicate;
-%//  public ConditionalCipher (ICipher<T,T> cipher, IPredicate<T> predicate)
-%//  {
-%//    this.cipher = cipher;
-%//    this.predicate = predicate;
-%//  }
-%//
-%//  public T Encode (T input)
-%//  {
-%//    if (predicate.Check(input))
-%//      return cipher.Encode(input);
-%//    else
-%//      return input;
-%//  }
-%//}
-%``
+## Covariance using `out`
 
+In a universe of geometric shapes, every shape has an area. Some shapes, like circles, have specific properties like a radius. Let's represent this in code:
 
+```{code-cell}
+class Shape
+{
+    public virtual double Area { get; set; }
+}
+```
 
-%### Variant ciphers
-%
-%Remember `ICipher<TIn,TOut>` from the chapter on on [generic types](generic-types:icipher)?
-%If you think about it, `TIn` is only used as input, and `TOut` is only used as output.
-%Consequently, we can, without causing any issues mark `TIn` as being contravariant and `TOut` as being covariant.
-%
-%```{code-cell} csharp
-%interface ICipher<in TIn, out TOut>
-%{
-%  TOut Encode (TIn input);
-%}
-%```
-%
-%Let's then assume that we've got a cipher that implements this interface.
-%For the sake of simplicity, let's pick the constant cipher.
-%
-%```{code-cell} csharp
-%class ConstantCipher<TIn, TOut> : ICipher<TIn,TOut>
-%{
-%  TOut output;
-%  public ConstantCipher (TOut output) => this.output = output;
-%  public TOut Encode (TIn input) => output;
-%}
-%```
-%
-%Let's then assume that we have a simple type hierarchy like this:
-%
-%```{code-cell} csharp
-%class Animal {}
-%class Cat : Animal {}
-%```
-%
-%Since `TIn` is marked as being contravariant and `TOut` is marked as being covariant we can now do the following:
-%
-%```{code-cell} csharp
-%Cat output = new Cat();
-%ICipher<Cat,Animal> cipher = new ConstantCipher<Animal,Cat>(output);
-%```
-%
-%Notice how the type arguments on the left says `<Cat,Animal>` while the type arguments on the right says `<Animal,Cat>`.
-%
-%
-%
-%
-%
-%(variant-generic-interfaces:cipher-factories)=
-%### Cipher factories
-%
-%Let's look at a contravariant example that can be used in the context of our ciphers.
-%Let's model a type that can spit out any number of objects of another type.
-%You can think of this as a [factory](factory-method-pattern), a stream, a sequence, an infinite list, or an [iterator](iterator-pattern).
-%
-%```{code-cell} csharp
-%interface IFactory<out T>
-%{
-%  T Next ();
-%  IEnumerable<T> Take (int n);
-%}
-%```
-%
-%The method `Next` returns the next element in the sequence.
-%The method `Take` returns the `n` number of next elements in the sequence wrapped in an `IEnumerable` which you can think of as a read-only collection.
-%You can read more about `IEnumerable` in a [later chapter](ienumerable).
-%
-%Let's first define an abstract factory that other factories can inherit from so that we won't have to reimplement the `Take` method for all factories.
-%
-%```{code-cell} csharp
-%abstract class Factory<T> : IFactory<T>
-%{
-%  public abstract T Next();
-%  public IEnumerable<T> Take (int n)
-%  {
-%    List<T> result = new List<T>();
-%    for (int i=0; i<n; i++)
-%      result.Add(Next());
-%    return result;
-%  }
-%}
-%```
-%
-%Our old trusted friend `CaesarCipher` remains the same, except that we've now also exposed the `steps` parameter as a property that publicly can be read and privately set.
-%
-%```{code-cell} csharp
-%:tags: [hide-input]
-%interface ICipher<TIn, TOut>
-%{
-%  TOut Encode (TIn input);
-%}
-%
-%class CaesarCipher : ICipher<char,char>
-%{
-%  public int Steps { get; private set; }
-%
-%  public CaesarCipher (int Steps)
-%    => this.Steps = Steps;
-%
-%  public char Encode (char input)
-%  {
-%    string alphabet = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
-%    int i = alphabet.IndexOf(Char.ToUpper(input));
-%    int newIndex = (i + Steps) % alphabet.Length;
-%    if (i != -1)
-%    {
-%      if (newIndex < 0)
-%        newIndex += alphabet.Length;
-%
-%      if (Char.IsLower(input))
-%        return Char.ToLower(alphabet[newIndex]);
-%      else
-%        return alphabet[newIndex];
-%    }
-%    return input;
-%  }
-%}
-%```
-%
-%Let's now build two factories that yield instances of `CaesarCipher`.
-%The first cipher that the factories generate will have `Steps` set to `0`.
-%Upon every subsequent generation of a new factory, the factories will either increment or decrement the counter used to determine what number of `Steps` the next cipher will be instantiated with.
-%
-%```{code-cell} csharp
-%class IncrementingCaesarCipherFactory : Factory<CaesarCipher>
-%{
-%  int i = 0;
-%  public override CaesarCipher Next () => new CaesarCipher(i++);
-%}
-%
-%class DecrementingCaesarCipherFactory : Factory<CaesarCipher>
-%{
-%  int i = 0;
-%  public override CaesarCipher Next () => new CaesarCipher(i--);
-%}
-%```
-%
-%So what can we do with this?
-%Well, since `T` in the factory interface is covariant, we can assign a typed as a factory that generates subtypes to a variable typed as a factory that generates the supertype.
-%
-%```{code-cell}
-%IFactory<CaesarCipher> caesarFactory = new IncrementingCaesarCipherFactory();
-%IFactory<ICipher<char,char>> charFactory = caesarFactory; // Needs covariance.
-%```
-%
-%Why would this be useful?
-%Well, sometimes we want to be able to treat a variable as its specific type, and sometimes we want to treat it as its general type.
-%
-%In the example below, we have two methods that take factories of different type.
-%Since `T` in the factory interface is covariant we can pass the value of type `IFactory<CaesarCipher>` to both methods even though one of them excepts a value of type `IFactory<ICipher<char,char>>`.
-%Why?
-%Because a supertype of `CaesarCipher` is `ICipher<char,char>` and the type parameter where we apply this type is covariant.
-%
-%```{code-cell} csharp
-%string encodeAny (int n, IFactory<ICipher<char,char>> factory) {
-%  string output = "";
-%  foreach (ICipher<char,char> cipher in factory.Take(n))
-%    output += cipher.Encode('A');
-%  return output;
-%}
-%
-%string encodeCaesar (int n, IFactory<CaesarCipher> factory) {
-%  string output = "";
-%  foreach (CaesarCipher cipher in factory.Take(n))
-%    output += $"{cipher.Steps}=>{cipher.Encode('A')} ";
-%  return output;
-%}
-%
-%IFactory<CaesarCipher> factory = new IncrementingCaesarCipherFactory();
-%
-%Console.WriteLine(encodeAny(5, factory));
-%Console.WriteLine(encodeCaesar(5, factory)); // Needs covariance.
-%```
-%
-%
-%## Exercises
-%
-%```{exercise}
-%In the chapter on [generic types](generic-types:icipher) we introduced the generic interface `ICipher<TIn,TOut>`.
-%Both type parameters in this generic type *can* be variant.
-%Explain why this in your own words and write a new version of `ICipher` where the type parameters are variant.
-%```
-%
-%```{exercise}
-%Come up with and implement your own example of an interface with a type parameter that usefully exhibits covariance.
-%Give an example in code where you are using the fact that the type parameter is covariant.
-%```
-%
-%```{exercise}
-%Come up with and implement your own example of an interface with a type parameter that usefully exhibits contravariance.
-%Give an example in code where you are using the fact that the type parameter is covariant.
-%```
-%
-%```{exercise-start}
-%```
-%Why does the following code generate a compiler-error?
-%```{code-cell} csharp
-%:tags: [raises-exception, remove-output]
-%interface IBox<out T>
-%{
-%  T Get ();
-%  void Set(T x);
-%}
-%```
-%```{exercise-end}
-%```
-%
-%```{exercise-start}
-%```
-%Why does the method `Set` in the following code example *not* generate a compiler-error even though `T` is marked as covariant.
-%```{code-cell} csharp
-%interface IBox<out T>
-%{
-%  T Get ();
-%}
-%
-%class Box<T> : IBox<T>
-%{
-%  T x;
-%  public Box (T x) => this.x = x;
-%  public T Get () => x;
-%  public void Set (T x) => this.x = x;
-%}
-%```
-%```{exercise-end}
-%```
-%
-%
-%```{exercise-start}
-%```
-%Assume that we have the following types.
-%```{code-cell}
-%class Box<T>
-%{
-%  public T Item { get; set; }
-%}
-%
-%interface IAnimal { }
-%class Cat : IAnimal { }
-%class Dog : IAnimal { }
-%```
-%Disregard the fact that C# only support the variance keywords `in` and `out` on interfaces for a moment.
-%Keeping variance and compile-time [type safety](type-safety) in mind, why is it important that the example below does not compile?
-%
-%```{code-cell}
-%:tags: [raises-exception]
-%Box<IAnimal> box = new Box<Cat>();
-%```
-%```{exercise-end}
-%```
+```{code-cell}
+class Circle : Shape
+{
+    public double Radius { get; set; }
+    public override double Area => Math.PI * Radius * Radius;
+}
+```
 
+In this world, let's consider a scenario where we often work with pairs of shapes. We create a covariant, read-only pair:
 
+```{code-cell}
+interface IPair<out T>
+{
+    T First { get; }
+    T Second { get; }
+}
+```
 
-% Example of variance could be the Predicate interface from an exercise in the chapter on [abstract inject object composition](abstract-injected-object-composition:exercises:predicates). The variant type is always fed in, but never out.
+Now, let's also define a `Pair<T>` class:
 
-%%```csharp
-%%interface ICipher<in TIn, out TOut>
-%%{
-%%  public TOut Encode (TIn input);
-%%}
-%%```
-%
-%
-%
-%%```csharp
-%%Derived d = new Derived();
-%%Base b = new Base();
-%%
-%%// Example 1
-%%IBox<Derived> derivedBox = new Box<Derived>(d);
-%%IBox<Base> baseBox = derivedBox;
-%%
-%%// Example 2
-%%IBox<Base> box = new Box<Derived>(d);
-%%
-%%// Example 3 (regular polymorphism to contrast, this is not the thing)
-%%IBox<Base> different = new Box<Base>(d);
-%%
-%%
-%%class Base {}
-%%class Derived : Base {}
-%%
-%%interface IBox<out T>
-%%{
-%%  T Get ();
-%%}
-%%
-%%class Box<T> : IBox<T>
-%%{
-%%  T x;
-%%  // Constructor can still take T as input even thought IBox is covariant. Because constructors are not polymorphic and dynamically dispatched. Constructors are like static methods. Whenever we run them we know exactly what type we have.
-%%  public Box (T x) => this.x = x;
-%%  public T Get () => x;
-%%}
-%%```
+```{code-cell}
+class Pair<T> : IPair<T>
+{
+    public T First { get; }
+    public T Second { get; }
 
+    public Pair(T first, T second)
+    {
+        First = first;
+        Second = second;
+    }
+}
+```
 
-% TODO: Example where when we go from two type parameters to one:
+Here's where the magic happens. Let's say we have a method that calculates the total area of a pair of shapes:
 
-%IParent<Dog,Dog> id1 = new Identity<Dog>();
-%IParent<Dog,Animal> id2 = new Identity<Dog>();
-%IParent<Dog,Animal> id3 = new Identity<Animal>();
-%
-%interface IParent <in T1, out T2>
-%{
-%  T2 Transform (T1 input);
-%}
-%
-%class Identity<T> : IParent<T,T>
-%{
-%  public T Transform (T x) => x;
-%}
-%
-%class Animal {}
-%class Mammal : Animal {}
-%class Cat : Mammal {}
-%class Dog : Mammal {}
+```{code-cell}
+double TotalArea(IPair<Shape> shapePair)
+    => shapePair.First.Area + shapePair.Second.Area;
+```
+
+Even though this method expects a pair of `Shape` objects, due to the covariance enabled by `out`, we can pass in a pair of `Circle` objects:
+
+```{code-cell}
+IPair<Circle> pair = new Pair<Circle>(
+        new Circle { Radius = 5 },
+        new Circle { Radius = 3 });
+
+double combinedArea = TotalArea(pair);
+```
+
+This is the essence of covariance: the ability to use a more derived type (like `Circle`) where a less derived type (like `Shape`) is expected. In this case, a method designed for general shapes can seamlessly compute the area for specific circle pairs.
+
+```{tip}
+When you see the `out` keyword in a generic interface, think of it as "outputting" data, which aligns with returning values, hence its association with return types.
+```
+
+## Contravariance using `in`
+
+Contravariance is the opposite of covariance. It allows a more general type to be used where a more specific type is expected. This might sound counterintuitive, but it’s incredibly powerful in certain scenarios.
+
+Consider, forinstance, this general interface that we can use for comparing the "size" of any two objects.
+Notice how the type parameter `T` is marked as being contravariant.
+
+```{code-cell}
+interface IComparer<in T>
+{
+    bool IsGreaterThan(T left, T right);
+}
+```
+
+Let's then define a type that implements this interface for any `Shape`.
+The implementation compares `Shape`s based on their `Area`.
+
+```{code-cell}
+class ShapeAreaComparer : IComparer<Shape>
+{
+    public bool IsGreaterThan(Shape x, Shape y)
+        => x.Area > y.Area;
+}
+```
+
+With contravariance, we can use this general `Shape` comparer even if we need a more specific comparer like `IComparer<Circle>`:
+
+```{code-cell}
+IComparer<Circle> circleComparer = new ShapeAreaComparer();
+```
+
+At first glance this might not seem like a big deal. But again, consider that these objects might be found inside other structures. Let's reintroduce the notion of a `Pair<T>`.
+
+```{code-cell}
+class Pair<T> : IPair<T>
+{
+    public T First { get; }
+    public T Second { get; }
+
+    public Pair(T first, T second)
+    {
+        First = first;
+        Second = second;
+    }
+
+    public T Largest (IComparer<T> comparer)
+    {
+        if (comparer.IsGreaterThan(Second, First))
+            return Second;
+        else
+            return First;
+    }
+}
+```
+
+```{code-cell}
+Pair<Circle> pair = new Pair<Circle>(
+        new Circle { Radius = 3 },
+        new Circle { Radius = 5 });
+
+Circle largest = pair.Largest(new ShapeAreaComparer());
+
+Console.WriteLine(largest.Radius);
+```
+
+```{tip}
+Remember, contravariance is about inputting data. When you see the `in` keyword, think about consuming or taking in values, aligning with input parameters.
+```
+
+```{seealso}
+We don't actually have to build an interface like `IComparer<T>` since .NET already contains a better implementation with the same name 🤓.
+```
+
+## Conclusion
+
+By understanding and leveraging covariance and contravariance in generic interfaces, we can write code that is both type-safe and flexible. It allows us to build systems that can evolve over time without extensive refactoring, saving both time and effort.
+
+```{tip}
+Remember, `out` is for covariant output, while `in` is for contravariant input.
+```
+
