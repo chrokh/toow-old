@@ -298,6 +298,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../labs/iterator-pattern.html">Lab: Iterator pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../labs/enumerables.html">Lab: Enumerables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../labs/the-yield-keyword.html">Lab: The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/variant-classes.html">Lab: Variant classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/variant-delegates.html">Lab: Variant delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/variant-generic-delegates.html">Lab: Variant Generic Delegates</a></li>
 </ul>
 
 </div>
@@ -382,7 +385,7 @@ The guidelines clearly states that we should have two parameters. The first is t
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-4416.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-4293.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -427,12 +430,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.116.1:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.18:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '4416.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '4293.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -587,7 +590,7 @@ Furthermore, if we would try to convert the sender object to an incompatible typ
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(8,50): error CS1503: Argument 1: cannot convert from &#39;MyEventPublisher [ℛ*c3479353-7303-49a6-b28a-e499db54e1cc#1-8, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]&#39; to &#39;MyEventPublisher [ℛ*c3479353-7303-49a6-b28a-e499db54e1cc#1-3, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]&#39;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(8,50): error CS1503: Argument 1: cannot convert from &#39;MyEventPublisher [ℛ*bef8de5c-12f9-44f1-8ff3-8feef0d31a50#1-8, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]&#39; to &#39;MyEventPublisher [ℛ*bef8de5c-12f9-44f1-8ff3-8feef0d31a50#1-3, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]&#39;
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
