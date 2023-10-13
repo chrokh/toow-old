@@ -10,7 +10,7 @@ kernelspec:
   name: .net-csharp
 ---
 
-# Variant Generic Delegates
+# Variant generic delegates
 
 Variation in programming offers the flexibility to adapt code efficiently. With generic delegates, variance takes on a new dimension. In C#, variance for generic delegates means that we can use a more derived type (or a less derived type) than originally specified.
 
