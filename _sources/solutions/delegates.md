@@ -12,7 +12,6 @@ kernelspec:
 
 # Solution: Delegates
 
-
 ## Step 1: Defining the Delegate
 
 Since a delegate is a type, we need to define it somewhere where types can be defined. Such as as a member of a class, or directly in a namespace.
