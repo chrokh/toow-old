@@ -349,7 +349,7 @@
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Fruit</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -357,7 +357,7 @@
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-9099.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-8962.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -402,12 +402,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.231:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.22.1:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '9099.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '8962.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -465,10 +465,7 @@ else {
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Apple</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Fruit</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Variety</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Apple</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Fruit</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -476,7 +473,7 @@ else {
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">delegate</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">Factory</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="k">delegate</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="n">Consumer</span><span class="o">&lt;</span><span class="k">in</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">item</span><span class="p">);</span>
+<span class="k">delegate</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">item</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -492,13 +489,13 @@ else {
 <li><p>Try to assign the <code class="docutils literal notranslate"><span class="pre">Factory&lt;Apple&gt;</span></code> variable to a <code class="docutils literal notranslate"><span class="pre">Factory&lt;Fruit&gt;</span></code> variable. Does it work?</p></li>
 <li><p>Update the <code class="docutils literal notranslate"><span class="pre">Factory&lt;T&gt;</span></code> delegate to support covariance by adding the <code class="docutils literal notranslate"><span class="pre">out</span></code> keyword.</p></li>
 <li><p>Now, assign the <code class="docutils literal notranslate"><span class="pre">Factory&lt;Apple&gt;</span></code> variable to a <code class="docutils literal notranslate"><span class="pre">Factory&lt;Fruit&gt;</span></code> variable.</p></li>
-<li><p>Print the name of the fruit produced by the <code class="docutils literal notranslate"><span class="pre">Factory&lt;Fruit&gt;</span></code> delegate.</p></li>
+<li><p>Print the color of the fruit produced by the <code class="docutils literal notranslate"><span class="pre">Factory&lt;Fruit&gt;</span></code> delegate.</p></li>
 </ol>
 </section>
 <section id="step-2-implement-contravariance">
 <h3>Step 2: Implement Contravariance<a class="headerlink" href="#step-2-implement-contravariance" title="Permalink to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>Define a method that consumes a <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> object, perhaps by simply printing its name.</p></li>
+<li><p>Define a method that consumes a <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> object, perhaps by simply printing its color.</p></li>
 <li><p>Assign this method to a <code class="docutils literal notranslate"><span class="pre">Consumer&lt;Fruit&gt;</span></code> delegate variable.</p></li>
 <li><p>Try to assign the <code class="docutils literal notranslate"><span class="pre">Consumer&lt;Fruit&gt;</span></code> delegate to a <code class="docutils literal notranslate"><span class="pre">Consumer&lt;Apple&gt;</span></code> variable. Does it work?</p></li>
 <li><p>Update the <code class="docutils literal notranslate"><span class="pre">Consumer&lt;T&gt;</span></code> delegate to support contravariance using the <code class="docutils literal notranslate"><span class="pre">in</span></code> keyword.</p></li>
@@ -518,8 +515,8 @@ else {
 <p>As mentioned in the study material, built-in generic delegates such as <code class="docutils literal notranslate"><span class="pre">Func</span></code>, <code class="docutils literal notranslate"><span class="pre">Action</span></code>, and <code class="docutils literal notranslate"><span class="pre">Predicate</span></code> have variant parameters. Let’s explore this:</p>
 <ol class="arabic simple">
 <li><p>Create a list of <code class="docutils literal notranslate"><span class="pre">Apple</span></code> objects.</p></li>
-<li><p>Define a <code class="docutils literal notranslate"><span class="pre">Func&lt;Fruit,</span> <span class="pre">string&gt;</span></code> delegate that takes a <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> and returns its name.</p></li>
-<li><p>Use this delegate with the <code class="docutils literal notranslate"><span class="pre">Select</span></code> LINQ method on the list of apples to retrieve a list of apple names. Notice how we can pass a delegate that expects a <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> to a method that works with <code class="docutils literal notranslate"><span class="pre">Apple</span></code>.</p></li>
+<li><p>Define a <code class="docutils literal notranslate"><span class="pre">Func&lt;Fruit,</span> <span class="pre">string&gt;</span></code> delegate that takes a <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> and returns its color.</p></li>
+<li><p>Use this delegate with the <code class="docutils literal notranslate"><span class="pre">Select</span></code> LINQ method on the list of apples to retrieve a list of apple colors. Notice how we can pass a delegate that expects a <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> to a method that works with <code class="docutils literal notranslate"><span class="pre">Apple</span></code>.</p></li>
 </ol>
 <div class="admonition-reflection admonition">
 <p class="admonition-title">🤔 Reflection</p>
