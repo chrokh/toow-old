@@ -16,12 +16,12 @@ kernelspec:
 
 ```{code-cell}
 :tags: [hide-input]
-public interface IItem
+interface IItem
 {
     string Name { get; }
 }
 
-public class Weapon : IItem
+class Weapon : IItem
 {
     public string Name { get; set; }
 
@@ -29,7 +29,7 @@ public class Weapon : IItem
         => Console.WriteLine($"Using {Name}.");
 }
 
-public class Map : IItem
+class Map : IItem
 {
     public string Name { get; set; }
 
@@ -42,7 +42,7 @@ public class Map : IItem
 ## Step 1: Crafting the Generic Inventory
 
 ```{code-cell}
-public class Inventory<T> where T : IItem
+class Inventory<T> where T : IItem
 {
     private readonly List<T> items = new List<T>();
     private int currentIndex = -1;
@@ -150,7 +150,7 @@ mapInventory.Current.Open();
 ## Challenge
 
 ```{code-cell}
-public class Key : IItem
+class Key : IItem
 {
     public string Name { get; set; }
 

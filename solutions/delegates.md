@@ -37,7 +37,7 @@ void AxeAction()
 ## Step 3: Refactor the Character Class
 
 ```csharp [3]
-public class Character
+class Character
 {
     private WeaponAction weaponAction;
 

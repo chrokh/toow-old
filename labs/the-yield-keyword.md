@@ -131,7 +131,7 @@ Notice how we didn't have to change anything in the main code since we're still 
 
 1. **Reverse enumeration:** Add a method called `GetReverseEnumerable()` in the `Inventory` class that returns the items in reverse order, utilizing the `yield` keyword. Use the method in the main program to make sure that it works as expected.
 2. **Random enumeration:** Add a method called `GetRandomEnumerable()` in the `Inventory` class that returns the items but in random order, utilizing the `yield` keyword. Use the method in the main program to make sure that it works as expected.
-3. **Local function with `yield`:** In the main program, write a local function with the signature `IEnumerable<int> MakeRange (int from, int to)`. Use the `yield` keyword to return an `IEnumerable<int>` that produces all numbers between `from` and `to`. When you're done, remember to call the method and try it to make sure that it behaves as expected.
+3. **Local function with `yield`:** In the main program, write a local function with the signature `IEnumerable<int> MakeRange (int first, int last)`. Use the `yield` keyword to return an `IEnumerable<int>` that produces all numbers between `first` and `last`. When you're done, remember to call the method and try it to make sure that it behaves as expected.
 
 ```{admonition} 🤔 Reflection
 How can the `yield` keyword enhance maintainability?
