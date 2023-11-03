@@ -10,7 +10,7 @@ kernelspec:
   name: .net-csharp
 ---
 
-# Lab Exercise: Instance Method Overloading
+# Lab: Instance Method Overloading
 
 ## Objective
 

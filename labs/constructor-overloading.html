@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Lab: Variant Generic Interfaces" href="variant-generic-interfaces.html" /><link rel="prev" title="Lab: Variant delegates" href="variant-delegates.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Lab: Variant Generic Delegates - The Object Oriented Way</title>
+        <title>Lab: Constructor overloading - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -283,7 +283,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapters/variant-generic-interfaces.html">115. Variant generic interfaces</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Labs</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">Lab: Replace conditional with polymorphism</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generics.html">Lab: Generics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-types.html">Lab: Generic types</a></li>
@@ -300,7 +300,7 @@
 <li class="toctree-l1"><a class="reference internal" href="the-yield-keyword.html">Lab: The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variant-classes.html">Lab: Variant classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variant-delegates.html">Lab: Variant delegates</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Lab: Variant Generic Delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-delegates.html">Lab: Variant Generic Delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">Lab: Variant Generic Interfaces</a></li>
 </ul>
 
@@ -336,144 +336,40 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="lab-variant-generic-delegates">
-<h1>Lab: Variant Generic Delegates<a class="headerlink" href="#lab-variant-generic-delegates" title="Permalink to this heading">#</a></h1>
+          <section class="tex2jax_ignore mathjax_ignore" id="lab-constructor-overloading">
+<h1>Lab: Constructor overloading<a class="headerlink" href="#lab-constructor-overloading" title="Permalink to this heading">#</a></h1>
 <section id="objective">
 <h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
-<p>In this lab exercise, we will delve deep into the concept of variant generic delegates in C#. Our goal is to understand and implement both covariance and contravariance in generic delegates. By the end of this lab, we should have a firm grasp of how to use the <code class="docutils literal notranslate"><span class="pre">in</span></code> and <code class="docutils literal notranslate"><span class="pre">out</span></code> keywords effectively with generic delegates to achieve type safety while maintaining flexibility.</p>
+<p>In this exercise, we will explore the concept of constructor overloading in C#. We aim to understand the flexibility and convenience that multiple constructors bring to a class’s instantiation process. We will modify the provided <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class to allow different ways of object creation.</p>
 </section>
 <section id="provided-code">
-<h2>Provided code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
-<p>Carefully review the provided code. Notice the class hierarchy and the initial delegates definitions.</p>
-<div class="cell docutils container">
+<h2>Provided Code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
+<p>Consider the provided code. Notice how the <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class has two <code class="docutils literal notranslate"><span class="pre">private</span></code> instance fields but no way to actually set their values.
+We do have a <code class="docutils literal notranslate"><span class="pre">public</span></code> method which will help us print <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> objects however.</p>
+<div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Fruit</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Print</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;({width} x {height})&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-<div>
-    <div id='dotnet-interactive-this-cell-9456.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
-        The below script needs to be able to find the current output cell; this is an easy method to get it.
-    </div>
-    <script type='text/javascript'>
-async function probeAddresses(probingAddresses) {
-    function timeout(ms, promise) {
-        return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                reject(new Error('timeout'))
-            }, ms)
-            promise.then(resolve, reject)
-        })
-    }
-
-    if (Array.isArray(probingAddresses)) {
-        for (let i = 0; i < probingAddresses.length; i++) {
-
-            let rootUrl = probingAddresses[i];
-
-            if (!rootUrl.endsWith('/')) {
-                rootUrl = `${rootUrl}/`;
-            }
-
-            try {
-                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
-                    method: 'POST',
-                    cache: 'no-cache',
-                    mode: 'cors',
-                    timeout: 1000,
-                    headers: {
-                        'Content-Type': 'text/plain'
-                    },
-                    body: probingAddresses[i]
-                }));
-
-                if (response.status == 200) {
-                    return rootUrl;
-                }
-            }
-            catch (e) { }
-        }
-    }
-}
-
-function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.72:2048/", "http://127.0.0.1:2048/"])
-        .then((root) => {
-        // use probing to find host url and api resources
-        // load interactive helpers and language services
-        let dotnetInteractiveRequire = require.config({
-        context: '9456.Microsoft.DotNet.Interactive.Http.HttpPort',
-                paths:
-            {
-                'dotnet-interactive': `${root}resources`
-                }
-        }) || require;
-
-            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
-
-            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
-                let paths = {};
-                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
-                
-                let internalRequire = require.config({
-                    context: extensionCacheBuster,
-                    paths: paths,
-                    urlArgs: `cacheBuster=${extensionCacheBuster}`
-                    }) || require;
-
-                return internalRequire
-            };
-        
-            dotnetInteractiveRequire([
-                    'dotnet-interactive/dotnet-interactive'
-                ],
-                function (dotnet) {
-                    dotnet.init(window);
-                },
-                function (error) {
-                    console.log(error);
-                }
-            );
-        })
-        .catch(error => {console.log(error);});
-    }
-
-// ensure `require` is available globally
-if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
-    let require_script = document.createElement('script');
-    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
-    require_script.setAttribute('type', 'text/javascript');
-    
-    
-    require_script.onload = function() {
-        loadDotnetInteractiveApi();
-    };
-
-    document.getElementsByTagName('head')[0].appendChild(require_script);
-}
-else {
-    loadDotnetInteractiveApi();
-}
-
-    </script>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Apple</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Fruit</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Rectangle</span><span class="w"> </span><span class="n">rect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">();</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">delegate</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">Factory</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="k">delegate</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">item</span><span class="p">);</span>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0 x 0)
 </pre></div>
 </div>
 </div>
@@ -481,57 +377,197 @@ else {
 </section>
 <section id="instructions">
 <h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
-<section id="step-1-implement-covariance">
-<h3>Step 1: Implement Covariance<a class="headerlink" href="#step-1-implement-covariance" title="Permalink to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p>Begin by defining a method that returns an <code class="docutils literal notranslate"><span class="pre">Apple</span></code> object.</p></li>
-<li><p>Assign this method to a <code class="docutils literal notranslate"><span class="pre">Factory&lt;Apple&gt;</span></code> delegate variable.</p></li>
-<li><p>Try to assign the <code class="docutils literal notranslate"><span class="pre">Factory&lt;Apple&gt;</span></code> variable to a <code class="docutils literal notranslate"><span class="pre">Factory&lt;Fruit&gt;</span></code> variable. Does it work?</p></li>
-<li><p>Update the <code class="docutils literal notranslate"><span class="pre">Factory&lt;T&gt;</span></code> delegate to support covariance by adding the <code class="docutils literal notranslate"><span class="pre">out</span></code> keyword.</p></li>
-<li><p>Now, assign the <code class="docutils literal notranslate"><span class="pre">Factory&lt;Apple&gt;</span></code> variable to a <code class="docutils literal notranslate"><span class="pre">Factory&lt;Fruit&gt;</span></code> variable.</p></li>
-<li><p>Print the color of the fruit produced by the <code class="docutils literal notranslate"><span class="pre">Factory&lt;Fruit&gt;</span></code> delegate.</p></li>
-</ol>
-</section>
-<section id="step-2-implement-contravariance">
-<h3>Step 2: Implement Contravariance<a class="headerlink" href="#step-2-implement-contravariance" title="Permalink to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p>Define a method that consumes a <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> object, perhaps by simply printing its color.</p></li>
-<li><p>Assign this method to a <code class="docutils literal notranslate"><span class="pre">Consumer&lt;Fruit&gt;</span></code> delegate variable.</p></li>
-<li><p>Try to assign the <code class="docutils literal notranslate"><span class="pre">Consumer&lt;Fruit&gt;</span></code> delegate to a <code class="docutils literal notranslate"><span class="pre">Consumer&lt;Apple&gt;</span></code> variable. Does it work?</p></li>
-<li><p>Update the <code class="docutils literal notranslate"><span class="pre">Consumer&lt;T&gt;</span></code> delegate to support contravariance using the <code class="docutils literal notranslate"><span class="pre">in</span></code> keyword.</p></li>
-<li><p>Now, assign the <code class="docutils literal notranslate"><span class="pre">Consumer&lt;Fruit&gt;</span></code> delegate to a <code class="docutils literal notranslate"><span class="pre">Consumer&lt;Apple&gt;</span></code> variable.</p></li>
-<li><p>Pass an <code class="docutils literal notranslate"><span class="pre">Apple</span></code> object with a specific variety to the <code class="docutils literal notranslate"><span class="pre">Consumer&lt;Apple&gt;</span></code> delegate and see how it’s consumed.</p></li>
-</ol>
+<p>Let’s enhance the <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class by adding multiple constructors to provide different ways of instantiating rectangle objects.</p>
+<section id="step-1-add-a-constructor-that-takes-two-parameters">
+<h3>Step 1: Add a constructor that takes two parameters<a class="headerlink" href="#step-1-add-a-constructor-that-takes-two-parameters" title="Permalink to this heading">#</a></h3>
+<p>Let’s begin by adding a constructor that takes two parameters of type <code class="docutils literal notranslate"><span class="pre">double</span></code> corresponding to <code class="docutils literal notranslate"><span class="pre">width</span></code> and <code class="docutils literal notranslate"><span class="pre">height</span></code>.
+When you’re done you should be able to execute the following code:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Rectangle</span><span class="w"> </span><span class="n">rect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">);</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20 x 10)
+</pre></div>
+</div>
+</div>
+</div>
 <div class="admonition-reflection admonition">
 <p class="admonition-title">🤔 Reflection</p>
-<p>Think about the benefits of having this kind of flexibility with generic delegates. Why might we want to assign a delegate of one type to a delegate of another type? In what real-world scenarios might this be useful?</p>
+<p>Is it possible to add another constructor with two parameters of type <code class="docutils literal notranslate"><span class="pre">double</span></code> to the class <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>? Why or why not?</p>
+</div>
+</section>
+<section id="step-2-add-a-square-constructor">
+<h3>Step 2: Add a square constructor<a class="headerlink" href="#step-2-add-a-square-constructor" title="Permalink to this heading">#</a></h3>
+<p>Let’s now add another constructor that only has a single <code class="docutils literal notranslate"><span class="pre">double</span></code> parameter. This constructor will create a <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> object where the <code class="docutils literal notranslate"><span class="pre">width</span></code> and <code class="docutils literal notranslate"><span class="pre">height</span></code> are equal, effectively creating a square.</p>
+<p>When you’re done with this step you should be able to run the following code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Rectangle</span><span class="w"> </span><span class="n">r1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">);</span>
+<span class="n">r1</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+
+<span class="n">Rectangle</span><span class="w"> </span><span class="n">r2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="m">100</span><span class="p">);</span>
+<span class="n">r2</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20 x 10)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(100 x 100)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-add-a-copy-constructor">
+<h3>Step 3: Add a copy constructor<a class="headerlink" href="#step-3-add-a-copy-constructor" title="Permalink to this heading">#</a></h3>
+<p>Let’s now add a constructor to the <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class that takes another <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> object and initializes a new instance with the same dimensions as that rectangle.</p>
+<p>When you’re done you should be able to run the following code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Rectangle</span><span class="w"> </span><span class="n">r1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">);</span>
+<span class="n">r1</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+
+<span class="n">Rectangle</span><span class="w"> </span><span class="n">r2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="m">100</span><span class="p">);</span>
+<span class="n">r2</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+
+<span class="n">Rectangle</span><span class="w"> </span><span class="n">r3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="n">r1</span><span class="p">);</span>
+<span class="n">r3</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20 x 10)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(100 x 100)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20 x 10)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-add-a-parameterless-constructor">
+<h3>Step 4: Add a parameterless constructor<a class="headerlink" href="#step-4-add-a-parameterless-constructor" title="Permalink to this heading">#</a></h3>
+<p>Remember how defining a constructor with parameters causes the default parameterless constructor to be removed?
+Have a look at the error below:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">new</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s reintroduce a parameterless constructor and choose a sensible default like 1x1.
+When you’re done you should be able to run the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Rectangle</span><span class="w"> </span><span class="n">r1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">);</span>
+<span class="n">r1</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+
+<span class="n">Rectangle</span><span class="w"> </span><span class="n">r2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="m">100</span><span class="p">);</span>
+<span class="n">r2</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+
+<span class="n">Rectangle</span><span class="w"> </span><span class="n">r3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="n">r1</span><span class="p">);</span>
+<span class="n">r3</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+
+<span class="n">Rectangle</span><span class="w"> </span><span class="n">r4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">();</span>
+<span class="n">r4</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20 x 10)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(100 x 100)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20 x 10)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1 x 1)
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
 <section id="challenge">
 <h2>Challenge<a class="headerlink" href="#challenge" title="Permalink to this heading">#</a></h2>
-<section id="challenge-1-variant-generic-delegates-and-linq">
-<h3>Challenge 1: Variant generic delegates and LINQ<a class="headerlink" href="#challenge-1-variant-generic-delegates-and-linq" title="Permalink to this heading">#</a></h3>
-<p>As mentioned in the study material, built-in generic delegates such as <code class="docutils literal notranslate"><span class="pre">Func</span></code>, <code class="docutils literal notranslate"><span class="pre">Action</span></code>, and <code class="docutils literal notranslate"><span class="pre">Predicate</span></code> have variant parameters. Let’s explore this:</p>
-<ol class="arabic simple">
-<li><p>Create a list of <code class="docutils literal notranslate"><span class="pre">Apple</span></code> objects.</p></li>
-<li><p>Define a <code class="docutils literal notranslate"><span class="pre">Func&lt;Fruit,</span> <span class="pre">string&gt;</span></code> delegate that takes a <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> and returns its color.</p></li>
-<li><p>Use this delegate with the <code class="docutils literal notranslate"><span class="pre">Select</span></code> LINQ method on the list of apples to retrieve a list of apple colors. Notice how we can pass a delegate that expects a <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> to a method that works with <code class="docutils literal notranslate"><span class="pre">Apple</span></code>.</p></li>
-</ol>
-<div class="admonition-reflection admonition">
-<p class="admonition-title">🤔 Reflection</p>
-<p>Having gone through the challenge, can you think of other places in the .NET framework where such variance can be beneficial? How does this improve code reuse and adaptability?</p>
+<p>Implement a constructor in the <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class that accepts a single <code class="docutils literal notranslate"><span class="pre">string</span></code> parameter in the format <code class="docutils literal notranslate"><span class="pre">width,height</span></code>. Your constructor must parse this <code class="docutils literal notranslate"><span class="pre">string</span></code> to extract the <code class="docutils literal notranslate"><span class="pre">width</span></code> and <code class="docutils literal notranslate"><span class="pre">height</span></code> as <code class="docutils literal notranslate"><span class="pre">double</span></code> values and then initialize the rectangle’s dimensions accordingly.</p>
+<p>If the parsing fails due to an invalid format or non-numeric values, your constructor should throw an appropriate exception, like this:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">ArgumentException</span><span class="p">(</span><span class="s">&quot;Could not parse input.&quot;</span><span class="p">);</span>
+</pre></div>
 </div>
-</section>
-<section id="challenge-2-multiple-levels-of-hierarchy">
-<h3>Challenge 2: Multiple Levels of Hierarchy<a class="headerlink" href="#challenge-2-multiple-levels-of-hierarchy" title="Permalink to this heading">#</a></h3>
-<p>Consider we have another class <code class="docutils literal notranslate"><span class="pre">GrannySmith</span></code> that inherits from <code class="docutils literal notranslate"><span class="pre">Apple</span></code>. Can you showcase variance (both covariance and contravariance) using three levels of hierarchy: <code class="docutils literal notranslate"><span class="pre">Fruit</span></code>, <code class="docutils literal notranslate"><span class="pre">Apple</span></code>, and <code class="docutils literal notranslate"><span class="pre">GrannySmith</span></code>? Think about how you might define and use delegates in this context.</p>
-</section>
+<p>When you’re done you should be able to run the following code:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Rectangle</span><span class="w"> </span><span class="n">r1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">);</span>
+<span class="n">r1</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+
+<span class="n">Rectangle</span><span class="w"> </span><span class="n">r2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="m">100</span><span class="p">);</span>
+<span class="n">r2</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+
+<span class="n">Rectangle</span><span class="w"> </span><span class="n">r3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="n">r1</span><span class="p">);</span>
+<span class="n">r3</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+
+<span class="n">Rectangle</span><span class="w"> </span><span class="n">r4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">();</span>
+<span class="n">r4</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+
+<span class="n">Rectangle</span><span class="w"> </span><span class="n">r5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="s">&quot;16.5,9.7&quot;</span><span class="p">);</span>
+<span class="n">r5</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+
+<span class="n">Rectangle</span><span class="w"> </span><span class="n">r6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="s">&quot;12,hello&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20 x 10)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(100 x 100)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20 x 10)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1 x 1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(16.5 x 9.7)
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>System.ArgumentException: Could not parse input.
+   at Submission#5.Rectangle..ctor(String dimensions)
+   at Submission#11.&lt;&lt;Initialize&gt;&gt;d__0.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.CodeAnalysis.Scripting.ScriptExecutionState.RunSubmissionsAsync[TResult](ImmutableArray`1 precedingExecutors, Func`2 currentExecutor, StrongBox`1 exceptionHolderOpt, Func`2 catchExceptionOpt, CancellationToken cancellationToken)
+   at Submission#5.Rectangle..ctor(String dimensions)
+   at Submission#11.&lt;&lt;Initialize&gt;&gt;d__0.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.CodeAnalysis.Scripting.ScriptExecutionState.RunSubmissionsAsync[TResult](ImmutableArray`1 precedingExecutors, Func`2 currentExecutor, StrongBox`1 exceptionHolderOpt, Func`2 catchExceptionOpt, CancellationToken cancellationToken)
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
-<p>We hope this lab exercise deepens your understanding of variant generic delegates in C#.</p>
-<p>Happy coding! 🤓</p>
+<div class="admonition-reflection admonition">
+<p class="admonition-title">🤔 Reflection</p>
+<p>How do the constructors we’ve added enhance the object creation process for the <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class? Reflect on scenarios where each constructor might be the most useful. In a later lab we’ll practice on constructor chaining which makes this process even simpler.</p>
+</div>
+<p>Excellent work! You’ve expanded the <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class functionality by overloading its constructor. In a later lab we’ll practice on constructor chaining which makes this process even simpler.</p>
 </section>
 </section>
 
@@ -559,26 +595,8 @@ else {
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="variant-generic-interfaces.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">Lab: Variant Generic Interfaces</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="variant-delegates.html">
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">Lab: Variant delegates</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -609,19 +627,17 @@ else {
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Lab: Variant Generic Delegates</a><ul>
+<li><a class="reference internal" href="#">Lab: Constructor overloading</a><ul>
 <li><a class="reference internal" href="#objective">Objective</a></li>
-<li><a class="reference internal" href="#provided-code">Provided code</a></li>
+<li><a class="reference internal" href="#provided-code">Provided Code</a></li>
 <li><a class="reference internal" href="#instructions">Instructions</a><ul>
-<li><a class="reference internal" href="#step-1-implement-covariance">Step 1: Implement Covariance</a></li>
-<li><a class="reference internal" href="#step-2-implement-contravariance">Step 2: Implement Contravariance</a></li>
+<li><a class="reference internal" href="#step-1-add-a-constructor-that-takes-two-parameters">Step 1: Add a constructor that takes two parameters</a></li>
+<li><a class="reference internal" href="#step-2-add-a-square-constructor">Step 2: Add a square constructor</a></li>
+<li><a class="reference internal" href="#step-3-add-a-copy-constructor">Step 3: Add a copy constructor</a></li>
+<li><a class="reference internal" href="#step-4-add-a-parameterless-constructor">Step 4: Add a parameterless constructor</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#challenge">Challenge</a><ul>
-<li><a class="reference internal" href="#challenge-1-variant-generic-delegates-and-linq">Challenge 1: Variant generic delegates and LINQ</a></li>
-<li><a class="reference internal" href="#challenge-2-multiple-levels-of-hierarchy">Challenge 2: Multiple Levels of Hierarchy</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#challenge">Challenge</a></li>
 <li><a class="reference internal" href="#conclusion">Conclusion</a></li>
 </ul>
 </li>
