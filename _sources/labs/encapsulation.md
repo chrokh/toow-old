@@ -83,7 +83,7 @@ Remember that members are `private` by default so we can actually emit the keywo
 Since `private` fields are conventionally named using camelCase rather than pascalCase, remember to change the name of the fields.
 ```
 
-### Step 2: Implement Instance Methods for Access and Modification
+### Step 2: Implement Instance Methods for Modification
 
 Let's now write methods to accellerate and brake in a controlled manner.
 

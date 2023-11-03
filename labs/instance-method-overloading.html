@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Solution: The yield keyword - The Object Oriented Way</title>
+        <title>Lab Exercise: Instance Method Overloading - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -284,24 +284,24 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Labs</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../labs/replace-conditional-with-polymorphism.html">Lab: Replace conditional with polymorphism</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/generics.html">Lab: Generics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/generic-types.html">Lab: Generic types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/generic-supertypes.html">Lab: Generic Supertypes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/type-parameter-constraints.html">Lab: Type parameter constraints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/composition-over-inheritance.html">Lab: Composition over Inheritance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/bridge-pattern.html">Lab: Bridge Pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/delegates.html">Lab: Delegates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/lambdas.html">Lab: Lambdas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/observer-pattern.html">Lab: Observer Pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/events.html">Lab: Events</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/iterator-pattern.html">Lab: Iterator pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/enumerables.html">Lab: Enumerables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/the-yield-keyword.html">Lab: The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/variant-classes.html">Lab: Variant classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/variant-delegates.html">Lab: Variant delegates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/variant-generic-delegates.html">Lab: Variant Generic Delegates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/variant-generic-interfaces.html">Lab: Variant Generic Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">Lab: Replace conditional with polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics.html">Lab: Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-types.html">Lab: Generic types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">Lab: Generic Supertypes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">Lab: Type parameter constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">Lab: Composition over Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bridge-pattern.html">Lab: Bridge Pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="delegates.html">Lab: Delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lambdas.html">Lab: Lambdas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observer-pattern.html">Lab: Observer Pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="events.html">Lab: Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iterator-pattern.html">Lab: Iterator pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enumerables.html">Lab: Enumerables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the-yield-keyword.html">Lab: The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-classes.html">Lab: Variant classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-delegates.html">Lab: Variant delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-delegates.html">Lab: Variant Generic Delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">Lab: Variant Generic Interfaces</a></li>
 </ul>
 
 </div>
@@ -336,56 +336,37 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="solution-the-yield-keyword">
-<h1>Solution: The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword<a class="headerlink" href="#solution-the-yield-keyword" title="Permalink to this heading">#</a></h1>
-<section id="step-2-reflection">
-<h2>Step 2: Reflection<a class="headerlink" href="#step-2-reflection" title="Permalink to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword has simplified our code by abstracting the logic behind the iteration. Instead of manually managing indices and implementing multiple members of an enumerator class, we simply specify the order in which items are yielded.
-The benefits include:</p>
-<ol class="arabic simple">
-<li><p>More concise and readable code.</p></li>
-<li><p>Removes the need for a separate enumerator class.</p></li>
-<li><p>Simplifies logic of returning items one-by-one.</p></li>
-</ol>
+          <section class="tex2jax_ignore mathjax_ignore" id="lab-exercise-instance-method-overloading">
+<h1>Lab Exercise: Instance Method Overloading<a class="headerlink" href="#lab-exercise-instance-method-overloading" title="Permalink to this heading">#</a></h1>
+<section id="objective">
+<h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
+<p>In this lab, we will delve into the concept of instance method overloading by applying it to a practical example. We’ll refine and expand a given class by adding overloadeds of an existing instance method. The purpose is to understand how to implement method overloading to enhance code readability and maintainability.</p>
 </section>
-<section id="challenge">
-<h2>Challenge<a class="headerlink" href="#challenge" title="Permalink to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p><strong>Reverse enumeration:</strong></p></li>
-</ol>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetReverseEnumerable</span><span class="p">()</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Item3</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Item3</span><span class="p">;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Item2</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Item2</span><span class="p">;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Item1</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Item1</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<ol class="arabic simple" start="2">
-<li><p><strong>Random enumeration:</strong></p></li>
-</ol>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GetRandomEnumerable</span><span class="p">()</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Item1</span><span class="p">,</span><span class="w"> </span><span class="n">Item2</span><span class="p">,</span><span class="w"> </span><span class="n">Item3</span><span class="w"> </span><span class="p">};</span>
-<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Random</span><span class="p">();</span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">items</span><span class="p">.</span><span class="n">Count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">random</span><span class="p">.</span><span class="n">Next</span><span class="p">(</span><span class="n">items</span><span class="p">.</span><span class="n">Count</span><span class="p">);</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
-<span class="w">        </span><span class="n">items</span><span class="p">.</span><span class="n">RemoveAt</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<ol class="arabic simple" start="3">
-<li><p><strong>Local function with <code class="docutils literal notranslate"><span class="pre">yield</span></code>:</strong></p></li>
-</ol>
+<section id="provided-code">
+<h2>Provided Code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
+<p>Carefully review the provided code. Notice the structure of the <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class, which includes private fields for dimensions, a constructor to initialize these fields, and a <code class="docutils literal notranslate"><span class="pre">Scale</span></code> method designed to adjust the rectangle’s size. The <code class="docutils literal notranslate"><span class="pre">Scale</span></code> method double to scale both dimensions equally, while the second takes two doubles to scale each dimension independently.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">MakeRange</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">last</span><span class="p">)</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">first</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">last</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="w">        </span><span class="k">yield</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">height</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">width</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">height</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Scale</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">widthFactor</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">heightFactor</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">width</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">widthFactor</span><span class="p">;</span>
+<span class="w">        </span><span class="n">height</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">heightFactor</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Print</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;({width} x {height})&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -393,7 +374,7 @@ The benefits include:</p>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-10878.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-8664.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -443,7 +424,7 @@ function loadDotnetInteractiveApi() {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '10878.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '8664.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -501,33 +482,173 @@ else {
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">MakeRange</span><span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">))</span>
-<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">number</span><span class="p">);</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Rectangle</span><span class="w"> </span><span class="n">rect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">);</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+
+<span class="n">rect</span><span class="p">.</span><span class="n">Scale</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">);</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20 x 10)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(60 x 20)
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="reflection">
-<h2>Reflection<a class="headerlink" href="#reflection" title="Permalink to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword can enhance maintainability by:</p>
-<ol class="arabic simple">
-<li><p>Reducing the amount of boilerplate code required for creating enumerators.</p></li>
-<li><p>Making the logic for generating sequences more readable and direct.</p></li>
-<li><p>Abstracting the complexities of manual iteration.</p></li>
-</ol>
-<p>By providing a cleaner, more declarative way of expressing sequences, it’s easier for developers to understand, modify, and extend the code.</p>
+<section id="instructions">
+<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
+<p>We will now enhance our <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class by adding more overloaded methods and utilizing them.</p>
+<section id="step-1-add-overloaded-scale-method">
+<h3>Step 1: Add Overloaded <code class="docutils literal notranslate"><span class="pre">Scale</span></code> method<a class="headerlink" href="#step-1-add-overloaded-scale-method" title="Permalink to this heading">#</a></h3>
+<p>Create a new overloaded <code class="docutils literal notranslate"><span class="pre">Scale</span></code> method that accepts a single <code class="docutils literal notranslate"><span class="pre">double</span></code> parameter. This method should call the other <code class="docutils literal notranslate"><span class="pre">Scale</span></code> method and thereby scale the rectangle with the same factor in both dimensions.</p>
+<p>Instantiate a <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> and use both <code class="docutils literal notranslate"><span class="pre">Scale</span></code> methods to demonstrate their functionality. Print the dimensions after each scaling operation to verify the methods work as expected.</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Rectangle</span><span class="w"> </span><span class="n">rect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="m">200</span><span class="p">,</span><span class="w"> </span><span class="m">100</span><span class="p">);</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+
+<span class="n">rect</span><span class="p">.</span><span class="n">Scale</span><span class="p">(</span><span class="m">0.5</span><span class="p">);</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+
+<span class="n">rect</span><span class="p">.</span><span class="n">Scale</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">);</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(200 x 100)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(100 x 50)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(200 x 50)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-add-an-overload-that-takes-a-point">
+<h3>Step 2: Add an Overload That Takes a <code class="docutils literal notranslate"><span class="pre">Point</span></code><a class="headerlink" href="#step-2-add-an-overload-that-takes-a-point" title="Permalink to this heading">#</a></h3>
+<p>Consider the following class that can be used to represents points:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Point</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">X</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Y</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Point</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Add the class to your code base and add another overload of the method <code class="docutils literal notranslate"><span class="pre">Scale</span></code> with the signature <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">Scale(Point</span> <span class="pre">point)</span></code>.</p>
+<p>Go back to the main method and use all three overloads of <code class="docutils literal notranslate"><span class="pre">Scale</span></code> to make sure that they all work.</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Rectangle</span><span class="w"> </span><span class="n">rect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">);</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+
+<span class="n">Point</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Point</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">);</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">point</span><span class="p">);</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+
+<span class="n">rect</span><span class="p">.</span><span class="n">Scale</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Point</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">));</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+
+<span class="n">rect</span><span class="p">.</span><span class="n">Scale</span><span class="p">(</span><span class="m">0.5</span><span class="p">);</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+
+<span class="n">rect</span><span class="p">.</span><span class="n">Scale</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">100</span><span class="p">);</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2 x 1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20 x 5)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(40 x 5)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20 x 2.5)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(200 x 250)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="challenge">
+<h2>Challenge<a class="headerlink" href="#challenge" title="Permalink to this heading">#</a></h2>
+<p>Add three instance methods with the following signatures:</p>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetAspectRatio</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">ratio</span><span class="p">);</span>
+<span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetAspectRatio</span><span class="w"> </span><span class="p">(</span><span class="n">Rectangle</span><span class="w"> </span><span class="n">other</span><span class="p">);</span>
+<span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetAspectRatio</span><span class="w"> </span><span class="p">(</span><span class="n">Point</span><span class="w"> </span><span class="n">point</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>These methods should change the dimensions of a <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> object  in order to achieve the desired aspect ratio (in terms of width/height).</p>
+<p>There’s many ways to choose whether to change the width or the height but let’s here choose a strategy where we always <em>increase</em> a dimension.
+To determine which dimension needs to be increased we can check whether the new ratio is larger than the old ratio.
+If the new ratio is larger then we should increase width, and if not then we should increase height.</p>
+<p>When you’re done you should be able to do the following:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Rectangle</span><span class="w"> </span><span class="n">rect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">);</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+
+<span class="n">rect</span><span class="p">.</span><span class="n">SetAspectRatio</span><span class="p">(</span><span class="m">0.5</span><span class="p">);</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+
+<span class="n">rect</span><span class="p">.</span><span class="n">SetAspectRatio</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">(</span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="m">9</span><span class="p">));</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+
+<span class="n">rect</span><span class="p">.</span><span class="n">SetAspectRatio</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Point</span><span class="p">(</span><span class="m">9</span><span class="p">,</span><span class="w"> </span><span class="m">16</span><span class="p">));</span>
+<span class="n">rect</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5 x 20)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10 x 20)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(35.55555555555556 x 20)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(35.55555555555556 x 63.20987654320988)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>Good job. You’re on fire. 🔥</p>
 </section>
 </section>
 
@@ -544,7 +665,7 @@ else {
         },
         kernelOptions: {
             name: ".net-csharp",
-            path: "./solutions"
+            path: "./labs"
         },
         predefinedOutput: true
     }
@@ -587,10 +708,16 @@ else {
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Solution: The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword</a><ul>
-<li><a class="reference internal" href="#step-2-reflection">Step 2: Reflection</a></li>
+<li><a class="reference internal" href="#">Lab Exercise: Instance Method Overloading</a><ul>
+<li><a class="reference internal" href="#objective">Objective</a></li>
+<li><a class="reference internal" href="#provided-code">Provided Code</a></li>
+<li><a class="reference internal" href="#instructions">Instructions</a><ul>
+<li><a class="reference internal" href="#step-1-add-overloaded-scale-method">Step 1: Add Overloaded <code class="docutils literal notranslate"><span class="pre">Scale</span></code> method</a></li>
+<li><a class="reference internal" href="#step-2-add-an-overload-that-takes-a-point">Step 2: Add an Overload That Takes a <code class="docutils literal notranslate"><span class="pre">Point</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#challenge">Challenge</a></li>
-<li><a class="reference internal" href="#reflection">Reflection</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
 </ul>
 </li>
 </ul>
