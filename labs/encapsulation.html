@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Lab: Variant delegates" href="variant-delegates.html" /><link rel="prev" title="Lab: The yield keyword" href="the-yield-keyword.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Lab: Variant classes - The Object Oriented Way</title>
+        <title>Lab: Encapsulation - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -283,7 +283,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapters/variant-generic-interfaces.html">115. Variant generic interfaces</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Labs</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">Lab: Replace conditional with polymorphism</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generics.html">Lab: Generics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-types.html">Lab: Generic types</a></li>
@@ -298,7 +298,7 @@
 <li class="toctree-l1"><a class="reference internal" href="iterator-pattern.html">Lab: Iterator pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enumerables.html">Lab: Enumerables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="the-yield-keyword.html">Lab: The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Lab: Variant classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-classes.html">Lab: Variant classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variant-delegates.html">Lab: Variant delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variant-generic-delegates.html">Lab: Variant Generic Delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">Lab: Variant Generic Interfaces</a></li>
@@ -336,196 +336,235 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="lab-variant-classes">
-<h1>Lab: Variant classes<a class="headerlink" href="#lab-variant-classes" title="Permalink to this heading">#</a></h1>
+          <section class="tex2jax_ignore mathjax_ignore" id="lab-encapsulation">
+<h1>Lab: Encapsulation<a class="headerlink" href="#lab-encapsulation" title="Permalink to this heading">#</a></h1>
 <section id="objective">
 <h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
-<p>In this lab, we will deepen our understanding of variance in C# by exploring covariant return types in classes. We will practice implementing and using them, while also reflecting on the benefits of type-safety and the importance of maintaining a balance between flexibility and safety.</p>
+<p>In this lab, we delve into the principle of encapsulation by refactoring a <code class="docutils literal notranslate"><span class="pre">Car</span></code> class. We will control access to the <code class="docutils literal notranslate"><span class="pre">Speed</span></code> and <code class="docutils literal notranslate"><span class="pre">TopSpeed</span></code> attributes through instance methods, ensuring that the state of our car objects remains valid and realistic.</p>
 </section>
 <section id="provided-code">
-<h2>Provided code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
-<p>Carefully review the provided code. Notice the structure of the classes <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> and <code class="docutils literal notranslate"><span class="pre">Apple</span></code> and their relationship. Similarly, observe how <code class="docutils literal notranslate"><span class="pre">FruitTree</span></code> and <code class="docutils literal notranslate"><span class="pre">AppleTree</span></code> are constructed and how the <code class="docutils literal notranslate"><span class="pre">GetFruit</span></code> method is overridden in <code class="docutils literal notranslate"><span class="pre">AppleTree</span></code> to return an instance of <code class="docutils literal notranslate"><span class="pre">Apple</span></code>.</p>
+<h2>Provided Code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
+<p>Carefully review the provided code. Notice the public fields <code class="docutils literal notranslate"><span class="pre">Speed</span></code> and <code class="docutils literal notranslate"><span class="pre">TopSpeed</span></code> that allow any part of the code to modify these values, potentially leading to inconsistent object states.</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Car</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Speed</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">TopSpeed</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Accelerate</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Speed</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">TopSpeed</span><span class="p">)</span>
+<span class="w">            </span><span class="n">Speed</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Brake</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Speed</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<span class="w">            </span><span class="n">Speed</span><span class="o">--</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Print</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{Name}: {Speed} ({TopSpeed})&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>While the instance methods <code class="docutils literal notranslate"><span class="pre">Accelerate</span></code> and <code class="docutils literal notranslate"><span class="pre">Brake</span></code> indeed respects the top speed and the requirement that speed cannot be negative we can bypass this by changing the <code class="docutils literal notranslate"><span class="pre">Speed</span></code> field directly.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Fruit</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Car</span><span class="w"> </span><span class="n">beetle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Car</span><span class="p">();</span>
+<span class="n">beetle</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Beetle&quot;</span><span class="p">;</span>
+<span class="n">beetle</span><span class="p">.</span><span class="n">TopSpeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">120</span><span class="p">;</span>
+<span class="n">beetle</span><span class="p">.</span><span class="n">Speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">30000</span><span class="p">;</span><span class="w"> </span><span class="c1">// 🤔 Wait a minute...</span>
+<span class="n">beetle</span><span class="p">.</span><span class="n">Speed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="m">400</span><span class="p">;</span><span class="w"> </span><span class="c1">// Eh, is reversing allowed?</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="instructions">
+<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
+<section id="step-1-make-the-fields-private">
+<h3>Step 1: Make the Fields Private<a class="headerlink" href="#step-1-make-the-fields-private" title="Permalink to this heading">#</a></h3>
+<p>Convert all the fields into private fields in order to encapsulate them.</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Car</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">speed</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">topSpeed</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Remember that members are <code class="docutils literal notranslate"><span class="pre">private</span></code> by default so we can actually emit the keyword <code class="docutils literal notranslate"><span class="pre">private</span></code> alltogether should we so wish.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since <code class="docutils literal notranslate"><span class="pre">private</span></code> fields are conventionally named using camelCase rather than pascalCase, remember to change the name of the fields.</p>
+</div>
+</section>
+<section id="step-2-implement-instance-methods-for-access-and-modification">
+<h3>Step 2: Implement Instance Methods for Access and Modification<a class="headerlink" href="#step-2-implement-instance-methods-for-access-and-modification" title="Permalink to this heading">#</a></h3>
+<p>Let’s now write methods to accellerate and brake in a controlled manner.</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Car</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">speed</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">topSpeed</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Accelerate</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">speed</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">topSpeed</span><span class="p">)</span>
+<span class="w">            </span><span class="n">speed</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Brake</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">speed</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<span class="w">            </span><span class="n">speed</span><span class="o">--</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Print</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{name}: {speed} ({topSpeed})&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>But, how are we now supposed to set the <code class="docutils literal notranslate"><span class="pre">topSpeed</span></code> and <code class="docutils literal notranslate"><span class="pre">name</span></code>? 🤷</p>
+</section>
+<section id="step-3-set-initial-state-using-a-constructor">
+<h3>Step 3: Set initial state using a Constructor<a class="headerlink" href="#step-3-set-initial-state-using-a-constructor" title="Permalink to this heading">#</a></h3>
+<p>Let’s add a constructor that takes a parameter of type <code class="docutils literal notranslate"><span class="pre">string</span></code> called <code class="docutils literal notranslate"><span class="pre">name</span></code> and an <code class="docutils literal notranslate"><span class="pre">int</span></code> called <code class="docutils literal notranslate"><span class="pre">topSpeed</span></code>.</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Car</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">speed</span><span class="p">;</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">topSpeed</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Car</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">topSpeed</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">topSpeed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">topSpeed</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Accelerate</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">speed</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">topSpeed</span><span class="p">)</span>
+<span class="w">            </span><span class="n">speed</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Brake</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">speed</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<span class="w">            </span><span class="n">speed</span><span class="o">--</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Print</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{name}: {speed} ({topSpeed})&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition-reflection admonition">
+<p class="admonition-title">🤔 Reflection</p>
+<p>How is this code more encapsulated than the code that we started with?
+Can an object of type <code class="docutils literal notranslate"><span class="pre">Car</span></code> now end up in an inconsistent state where <code class="docutils literal notranslate"><span class="pre">Speed</span></code> exceeds <code class="docutils literal notranslate"><span class="pre">topSpeed</span></code> or is below 0?</p>
+</div>
+</section>
+<section id="step-4-test-the-code">
+<h3>Step 4: Test the Code<a class="headerlink" href="#step-4-test-the-code" title="Permalink to this heading">#</a></h3>
+<p>Instantiate two <code class="docutils literal notranslate"><span class="pre">Car</span></code> objects with different top speed and check whether their <code class="docutils literal notranslate"><span class="pre">Accelerate</span></code> and <code class="docutils literal notranslate"><span class="pre">Brake</span></code> methods seem to work.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Car</span><span class="w"> </span><span class="n">roadster</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Car</span><span class="p">(</span><span class="s">&quot;Roadster&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">);</span>
+<span class="n">Car</span><span class="w"> </span><span class="n">cybertruck</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Car</span><span class="p">(</span><span class="s">&quot;Cybertruck&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">);</span>
+
+<span class="n">Car</span><span class="p">[]</span><span class="w"> </span><span class="n">cars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Car</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">roadster</span><span class="p">,</span><span class="w"> </span><span class="n">cybertruck</span><span class="w"> </span><span class="p">};</span>
+
+<span class="c1">// Accellerate</span>
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Car</span><span class="w"> </span><span class="n">car</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">cars</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="m">5</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="n">car</span><span class="p">.</span><span class="n">Accelerate</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">car</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="m">5</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="n">car</span><span class="p">.</span><span class="n">Brake</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">car</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-<div>
-    <div id='dotnet-interactive-this-cell-9144.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
-        The below script needs to be able to find the current output cell; this is an easy method to get it.
-    </div>
-    <script type='text/javascript'>
-async function probeAddresses(probingAddresses) {
-    function timeout(ms, promise) {
-        return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                reject(new Error('timeout'))
-            }, ms)
-            promise.then(resolve, reject)
-        })
-    }
-
-    if (Array.isArray(probingAddresses)) {
-        for (let i = 0; i < probingAddresses.length; i++) {
-
-            let rootUrl = probingAddresses[i];
-
-            if (!rootUrl.endsWith('/')) {
-                rootUrl = `${rootUrl}/`;
-            }
-
-            try {
-                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
-                    method: 'POST',
-                    cache: 'no-cache',
-                    mode: 'cors',
-                    timeout: 1000,
-                    headers: {
-                        'Content-Type': 'text/plain'
-                    },
-                    body: probingAddresses[i]
-                }));
-
-                if (response.status == 200) {
-                    return rootUrl;
-                }
-            }
-            catch (e) { }
-        }
-    }
-}
-
-function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.226:2048/", "http://127.0.0.1:2048/"])
-        .then((root) => {
-        // use probing to find host url and api resources
-        // load interactive helpers and language services
-        let dotnetInteractiveRequire = require.config({
-        context: '9144.Microsoft.DotNet.Interactive.Http.HttpPort',
-                paths:
-            {
-                'dotnet-interactive': `${root}resources`
-                }
-        }) || require;
-
-            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
-
-            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
-                let paths = {};
-                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
-                
-                let internalRequire = require.config({
-                    context: extensionCacheBuster,
-                    paths: paths,
-                    urlArgs: `cacheBuster=${extensionCacheBuster}`
-                    }) || require;
-
-                return internalRequire
-            };
-        
-            dotnetInteractiveRequire([
-                    'dotnet-interactive/dotnet-interactive'
-                ],
-                function (dotnet) {
-                    dotnet.init(window);
-                },
-                function (error) {
-                    console.log(error);
-                }
-            );
-        })
-        .catch(error => {console.log(error);});
-    }
-
-// ensure `require` is available globally
-if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
-    let require_script = document.createElement('script');
-    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
-    require_script.setAttribute('type', 'text/javascript');
-    
-    
-    require_script.onload = function() {
-        loadDotnetInteractiveApi();
-    };
-
-    document.getElementsByTagName('head')[0].appendChild(require_script);
-}
-else {
-    loadDotnetInteractiveApi();
-}
-
-    </script>
-</div></div></div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Roadster: 3 (3)
+</pre></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Apple</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Fruit</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Roadster: 0 (3)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cybertruck: 1 (1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cybertruck: 0 (1)
 </pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">FruitTree</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="n">Fruit</span><span class="w"> </span><span class="nf">GetFruit</span><span class="p">()</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Fruit</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AppleTree</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">FruitTree</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="n">Apple</span><span class="w"> </span><span class="nf">GetFruit</span><span class="p">()</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Apple</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The key takeaway here is the usage of covariant return types. The method <code class="docutils literal notranslate"><span class="pre">GetFruit</span></code> in the derived <code class="docutils literal notranslate"><span class="pre">AppleTree</span></code> class has a more derived return type (<code class="docutils literal notranslate"><span class="pre">Apple</span></code>) than the same method in its base class <code class="docutils literal notranslate"><span class="pre">FruitTree</span></code>.</p>
-</section>
-<section id="instructions">
-<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
-<section id="step-1-implement-and-test-covariant-return-types">
-<h3>Step 1: Implement and Test Covariant Return Types<a class="headerlink" href="#step-1-implement-and-test-covariant-return-types" title="Permalink to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p>Create a new class called <code class="docutils literal notranslate"><span class="pre">Pear</span></code> which is derived from the <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> class.</p></li>
-<li><p>Create a new class called <code class="docutils literal notranslate"><span class="pre">PearTree</span></code> which is derived from the <code class="docutils literal notranslate"><span class="pre">FruitTree</span></code> class.</p></li>
-<li><p>Override the <code class="docutils literal notranslate"><span class="pre">GetFruit</span></code> method in the <code class="docutils literal notranslate"><span class="pre">PearTree</span></code> class such that it returns an instance of the <code class="docutils literal notranslate"><span class="pre">Pear</span></code> class, showcasing the use of covariant return types.</p></li>
-</ol>
-<p>After implementing the above, test your new classes:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">PearTree</span><span class="w"> </span><span class="n">pearTree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PearTree</span><span class="p">();</span>
-
-<span class="n">Pear</span><span class="w"> </span><span class="n">pear</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pearTree</span><span class="p">.</span><span class="n">GetFruit</span><span class="p">();</span>
-</pre></div>
 </div>
 </section>
-<section id="step-2-reflect-on-the-benefits-of-covariant-return-types">
-<h3>Step 2: Reflect on the Benefits of Covariant Return Types<a class="headerlink" href="#step-2-reflect-on-the-benefits-of-covariant-return-types" title="Permalink to this heading">#</a></h3>
-<p>Given the previous steps, consider the benefits of using covariant return types. How does it improve type safety and the clarity of your code?</p>
+</section>
+<section id="challenge">
+<h2>Challenge<a class="headerlink" href="#challenge" title="Permalink to this heading">#</a></h2>
+<p>Add a new instance method to the <code class="docutils literal notranslate"><span class="pre">Car</span></code> class with the signature <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">Match(Car</span> <span class="pre">other)</span></code>. The method should set the speed of this car to the speed of the other.</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Car</span><span class="w"> </span><span class="n">roadster</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Car</span><span class="p">(</span><span class="s">&quot;Roadster&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">);</span>
+<span class="n">Car</span><span class="w"> </span><span class="n">cybertruck</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Car</span><span class="p">(</span><span class="s">&quot;Cybertruck&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">);</span>
+
+<span class="n">roadster</span><span class="p">.</span><span class="n">Accelerate</span><span class="p">();</span>
+<span class="n">roadster</span><span class="p">.</span><span class="n">Accelerate</span><span class="p">();</span>
+<span class="n">roadster</span><span class="p">.</span><span class="n">Accelerate</span><span class="p">();</span>
+
+<span class="n">cybertruck</span><span class="p">.</span><span class="n">MatchSpeed</span><span class="p">(</span><span class="n">roadster</span><span class="p">);</span>
+<span class="n">cybertruck</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span><span class="w"> </span><span class="c1">// Oh no 😬</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cybertruck: 3 (1)
+</pre></div>
+</div>
+</div>
+</div>
 <div class="admonition-reflection admonition">
 <p class="admonition-title">🤔 Reflection</p>
-<p>Think about the difference between using covariant return types and needing to downcast every time we want a specific derived type. What might be some potential issues if we had to constantly use explicit casting?</p>
+<p>By creating the <code class="docutils literal notranslate"><span class="pre">Match</span></code> method, we are allowing one instance of <code class="docutils literal notranslate"><span class="pre">Car</span></code> to interact with the private state of another instance. What does this teach us about how <code class="docutils literal notranslate"><span class="pre">private</span></code> works? How might this be useful in practice?</p>
 </div>
-</section>
-<section id="step-3-understand-the-limitations-of-contravariant-parameter-types">
-<h3>Step 3: Understand the Limitations of Contravariant Parameter Types<a class="headerlink" href="#step-3-understand-the-limitations-of-contravariant-parameter-types" title="Permalink to this heading">#</a></h3>
-<p>Create a new class called <code class="docutils literal notranslate"><span class="pre">Banana</span></code> derived from <code class="docutils literal notranslate"><span class="pre">Fruit</span></code>. Also, create a class called <code class="docutils literal notranslate"><span class="pre">BananaMixer</span></code> that contains a method to juice a <code class="docutils literal notranslate"><span class="pre">Banana</span></code>.</p>
-<p>Try to create another class, <code class="docutils literal notranslate"><span class="pre">FruitMixer</span></code>, derived from <code class="docutils literal notranslate"><span class="pre">BananaMixer</span></code>, and attempt to override the juicing method with a broader parameter (e.g., <code class="docutils literal notranslate"><span class="pre">Fruit</span></code>). Notice that C# will not allow this, as it does not support contravariant parameter types.</p>
-<p>Reflect on the potential pitfalls of contravariant parameter types and how they might violate type safety.</p>
-</section>
-</section>
-<section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
-<p>Variance is an essential concept in C#, offering flexibility without compromising type safety. By completing this lab exercise, we’ve gained a deeper understanding of how covariant return types are implemented and the benefits they offer in writing clear and robust code.</p>
-<p>Happy coding! 🤓</p>
+<p>Through this lab, we have put the concept of encapsulation into practice by limiting access to the internal state of our <code class="docutils literal notranslate"><span class="pre">Car</span></code> objects, thereby enhancing the robustness and reliability of our code.
+In effect, we have encapsulated the implementation details, or “hidden our private parts” 😳.
+But we’ve also reflected over how the nuances caused by how <code class="docutils literal notranslate"><span class="pre">private</span></code> members are private to the type in which they are defined, not to objects of the class.</p>
+<p>Good job! 👊</p>
 </section>
 </section>
 
@@ -553,26 +592,8 @@ else {
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="variant-delegates.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">Lab: Variant delegates</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="the-yield-keyword.html">
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">Lab: The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -603,16 +624,17 @@ else {
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Lab: Variant classes</a><ul>
+<li><a class="reference internal" href="#">Lab: Encapsulation</a><ul>
 <li><a class="reference internal" href="#objective">Objective</a></li>
-<li><a class="reference internal" href="#provided-code">Provided code</a></li>
+<li><a class="reference internal" href="#provided-code">Provided Code</a></li>
 <li><a class="reference internal" href="#instructions">Instructions</a><ul>
-<li><a class="reference internal" href="#step-1-implement-and-test-covariant-return-types">Step 1: Implement and Test Covariant Return Types</a></li>
-<li><a class="reference internal" href="#step-2-reflect-on-the-benefits-of-covariant-return-types">Step 2: Reflect on the Benefits of Covariant Return Types</a></li>
-<li><a class="reference internal" href="#step-3-understand-the-limitations-of-contravariant-parameter-types">Step 3: Understand the Limitations of Contravariant Parameter Types</a></li>
+<li><a class="reference internal" href="#step-1-make-the-fields-private">Step 1: Make the Fields Private</a></li>
+<li><a class="reference internal" href="#step-2-implement-instance-methods-for-access-and-modification">Step 2: Implement Instance Methods for Access and Modification</a></li>
+<li><a class="reference internal" href="#step-3-set-initial-state-using-a-constructor">Step 3: Set initial state using a Constructor</a></li>
+<li><a class="reference internal" href="#step-4-test-the-code">Step 4: Test the Code</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+<li><a class="reference internal" href="#challenge">Challenge</a></li>
 </ul>
 </li>
 </ul>
