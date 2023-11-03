@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Solution: Variant generic delegates - The Object Oriented Way</title>
+        <title>Lab: Instance methods - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -284,24 +284,24 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Labs</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../labs/replace-conditional-with-polymorphism.html">Lab: Replace conditional with polymorphism</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/generics.html">Lab: Generics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/generic-types.html">Lab: Generic types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/generic-supertypes.html">Lab: Generic Supertypes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/type-parameter-constraints.html">Lab: Type parameter constraints</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/composition-over-inheritance.html">Lab: Composition over Inheritance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/bridge-pattern.html">Lab: Bridge Pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/delegates.html">Lab: Delegates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/lambdas.html">Lab: Lambdas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/observer-pattern.html">Lab: Observer Pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/events.html">Lab: Events</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/iterator-pattern.html">Lab: Iterator pattern</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/enumerables.html">Lab: Enumerables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/the-yield-keyword.html">Lab: The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/variant-classes.html">Lab: Variant classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/variant-delegates.html">Lab: Variant delegates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/variant-generic-delegates.html">Lab: Variant Generic Delegates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/variant-generic-interfaces.html">Lab: Variant Generic Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">Lab: Replace conditional with polymorphism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generics.html">Lab: Generics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-types.html">Lab: Generic types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">Lab: Generic Supertypes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="type-parameter-constraints.html">Lab: Type parameter constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">Lab: Composition over Inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bridge-pattern.html">Lab: Bridge Pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="delegates.html">Lab: Delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lambdas.html">Lab: Lambdas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observer-pattern.html">Lab: Observer Pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="events.html">Lab: Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iterator-pattern.html">Lab: Iterator pattern</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enumerables.html">Lab: Enumerables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the-yield-keyword.html">Lab: The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-classes.html">Lab: Variant classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-delegates.html">Lab: Variant delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-delegates.html">Lab: Variant Generic Delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">Lab: Variant Generic Interfaces</a></li>
 </ul>
 
 </div>
@@ -336,356 +336,176 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="solution-variant-generic-delegates">
-<h1>Solution: Variant generic delegates<a class="headerlink" href="#solution-variant-generic-delegates" title="Permalink to this heading">#</a></h1>
-<div class="cell docutils container">
+          <section class="tex2jax_ignore mathjax_ignore" id="lab-instance-methods">
+<h1>Lab: Instance methods<a class="headerlink" href="#lab-instance-methods" title="Permalink to this heading">#</a></h1>
+<section id="objective">
+<h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
+<p>In this lab, we will enhance our understanding of object oriented programming in C# by refactoring local functions or static methods into instance methods. We will work with a simple library system, focusing on the behaviors of books, to illustrate the power of instance methods and the principle of encapsulation.</p>
+</section>
+<section id="provided-code">
+<h2>Provided Code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
+<p>Carefully review the provided code. Notice the static method <code class="docutils literal notranslate"><span class="pre">describe</span></code> which prints details of a <code class="docutils literal notranslate"><span class="pre">Book</span></code> object. This demonstrates a procedural approach that we will transform into a more object oriented pattern by enabling each <code class="docutils literal notranslate"><span class="pre">Book</span></code> to handle its own description.</p>
+<div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Fruit</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Book</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Title</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Author</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">PageCount</span><span class="p">;</span>
 <span class="p">}</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">Apple</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Fruit</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Static method</span>
+<span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">describe</span><span class="p">(</span><span class="n">Book</span><span class="w"> </span><span class="n">book</span><span class="p">)</span>
 <span class="p">{</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;&#39;{book.Title}&#39; by {book.Author} ({book.PageCount} pages).&quot;</span><span class="p">);</span>
 <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Example usage</span>
+<span class="n">Book</span><span class="w"> </span><span class="n">book</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Book</span><span class="p">();</span>
+<span class="n">book</span><span class="p">.</span><span class="n">Title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;A Random Walk down Wall Street&quot;</span><span class="p">;</span>
+<span class="n">book</span><span class="p">.</span><span class="n">Author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Burton G. Malkiel&quot;</span><span class="p">;</span>
+<span class="n">book</span><span class="p">.</span><span class="n">PageCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">432</span><span class="p">;</span>
 
-<span class="k">delegate</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">Factory</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="k">delegate</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">item</span><span class="p">);</span>
+<span class="c1">// Passing the book to the static method.</span>
+<span class="n">describe</span><span class="p">(</span><span class="n">book</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-<div>
-    <div id='dotnet-interactive-this-cell-11102.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
-        The below script needs to be able to find the current output cell; this is an easy method to get it.
-    </div>
-    <script type='text/javascript'>
-async function probeAddresses(probingAddresses) {
-    function timeout(ms, promise) {
-        return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                reject(new Error('timeout'))
-            }, ms)
-            promise.then(resolve, reject)
-        })
-    }
-
-    if (Array.isArray(probingAddresses)) {
-        for (let i = 0; i < probingAddresses.length; i++) {
-
-            let rootUrl = probingAddresses[i];
-
-            if (!rootUrl.endsWith('/')) {
-                rootUrl = `${rootUrl}/`;
-            }
-
-            try {
-                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
-                    method: 'POST',
-                    cache: 'no-cache',
-                    mode: 'cors',
-                    timeout: 1000,
-                    headers: {
-                        'Content-Type': 'text/plain'
-                    },
-                    body: probingAddresses[i]
-                }));
-
-                if (response.status == 200) {
-                    return rootUrl;
-                }
-            }
-            catch (e) { }
-        }
-    }
-}
-
-function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.16:2048/", "http://127.0.0.1:2048/"])
-        .then((root) => {
-        // use probing to find host url and api resources
-        // load interactive helpers and language services
-        let dotnetInteractiveRequire = require.config({
-        context: '11102.Microsoft.DotNet.Interactive.Http.HttpPort',
-                paths:
-            {
-                'dotnet-interactive': `${root}resources`
-                }
-        }) || require;
-
-            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
-
-            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
-                let paths = {};
-                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
-                
-                let internalRequire = require.config({
-                    context: extensionCacheBuster,
-                    paths: paths,
-                    urlArgs: `cacheBuster=${extensionCacheBuster}`
-                    }) || require;
-
-                return internalRequire
-            };
-        
-            dotnetInteractiveRequire([
-                    'dotnet-interactive/dotnet-interactive'
-                ],
-                function (dotnet) {
-                    dotnet.init(window);
-                },
-                function (error) {
-                    console.log(error);
-                }
-            );
-        })
-        .catch(error => {console.log(error);});
-    }
-
-// ensure `require` is available globally
-if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
-    let require_script = document.createElement('script');
-    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
-    require_script.setAttribute('type', 'text/javascript');
-    
-    
-    require_script.onload = function() {
-        loadDotnetInteractiveApi();
-    };
-
-    document.getElementsByTagName('head')[0].appendChild(require_script);
-}
-else {
-    loadDotnetInteractiveApi();
-}
-
-    </script>
-</div></div></div>
-</div>
-<section id="step-1-implement-covariance">
-<h2>Step 1: Implement Covariance<a class="headerlink" href="#step-1-implement-covariance" title="Permalink to this heading">#</a></h2>
-<p>1. Define a method that returns an <code class="docutils literal notranslate"><span class="pre">Apple</span></code> object.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Apple</span><span class="w"> </span><span class="nf">CreateApple</span><span class="p">()</span>
-<span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Apple</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Green&quot;</span><span class="w"> </span><span class="p">};</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;A Random Walk down Wall Street&#39; by Burton G. Malkiel (432 pages).
 </pre></div>
 </div>
 </div>
 </div>
-<p>2. Assign this method to a <code class="docutils literal notranslate"><span class="pre">Factory&lt;Apple&gt;</span></code> delegate variable.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Factory</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span><span class="w"> </span><span class="n">appleFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CreateApple</span><span class="p">;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>3. Without covariance, this assignment will not work:</p>
-<div class="cell tag_raises-exception docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Factory</span><span class="o">&lt;</span><span class="n">Fruit</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fruitFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">appleFactory</span><span class="p">;</span><span class="w"> </span><span class="c1">// Error :(</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1,31): error CS0029: Cannot implicitly convert type &#39;Factory&lt;Apple&gt;&#39; to &#39;Factory&lt;Fruit&gt;&#39;
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>4. Update the <code class="docutils literal notranslate"><span class="pre">Factory&lt;T&gt;</span></code> delegate to support covariance by adding the <code class="docutils literal notranslate"><span class="pre">out</span></code> keyword.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">delegate</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">Factory</span><span class="o">&lt;</span><span class="k">out</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="p">();</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>5. Assign the <code class="docutils literal notranslate"><span class="pre">Factory&lt;Apple&gt;</span></code> variable to a <code class="docutils literal notranslate"><span class="pre">Factory&lt;Fruit&gt;</span></code> variable.</p>
-<div class="cell tag_remove-input docutils container">
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Factory</span><span class="o">&lt;</span><span class="n">Fruit</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fruitFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">appleFactory</span><span class="p">;</span><span class="w"> </span><span class="c1">// No error :)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>6. Print the color of the fruit produced by the <code class="docutils literal notranslate"><span class="pre">Factory&lt;Fruit&gt;</span></code> delegate.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">fruitFactory</span><span class="p">().</span><span class="n">Color</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Green
-</pre></div>
-</div>
-</div>
-</div>
+<p>Here, we have a <code class="docutils literal notranslate"><span class="pre">Book</span></code> class with fields that represent the state of a book in a library. Our objective is to modify this procedural code into object oriented code by using instance methods.</p>
 </section>
-<section id="step-2-implement-contravariance">
-<h2>Step 2: Implement Contravariance<a class="headerlink" href="#step-2-implement-contravariance" title="Permalink to this heading">#</a></h2>
-<p>1. Define a method that consumes a <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> object.</p>
-<div class="cell docutils container">
+<section id="instructions">
+<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
+<p>We will now turn the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method into an instance method within the class <code class="docutils literal notranslate"><span class="pre">Book</span></code>.
+This will allow any <code class="docutils literal notranslate"><span class="pre">Book</span></code> object to describe itself by accessing its own state.</p>
+<section id="step-1-convert-describe-to-an-instance-method">
+<h3>Step 1: Convert <code class="docutils literal notranslate"><span class="pre">describe</span></code> to an Instance Method<a class="headerlink" href="#step-1-convert-describe-to-an-instance-method" title="Permalink to this heading">#</a></h3>
+<p>Redefine the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method to be an instance method. It will not take any parameters, as it should now refer to the internal state of the instance.</p>
+<div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">void</span><span class="w"> </span><span class="nf">ConsumeFruit</span><span class="p">(</span><span class="n">Fruit</span><span class="w"> </span><span class="n">fruit</span><span class="p">)</span>
-<span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Eating {fruit.Color} fruit.&quot;</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>2. Assign this method to a <code class="docutils literal notranslate"><span class="pre">Consumer&lt;Fruit&gt;</span></code> delegate variable.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">Fruit</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fruitConsumer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ConsumeFruit</span><span class="p">;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>3. Without contravariance, this assignment will not work:</p>
-<div class="cell tag_raises-exception docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span><span class="w"> </span><span class="n">appleConsumer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fruitConsumer</span><span class="p">;</span><span class="w"> </span><span class="c1">// Error :(</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1,33): error CS0029: Cannot implicitly convert type &#39;Consumer&lt;Fruit&gt;&#39; to &#39;Consumer&lt;Apple&gt;&#39;
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>4. Update the <code class="docutils literal notranslate"><span class="pre">Consumer&lt;T&gt;</span></code> delegate to support contravariance using the <code class="docutils literal notranslate"><span class="pre">in</span></code> keyword.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">delegate</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="n">Consumer</span><span class="o">&lt;</span><span class="k">in</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">item</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>5. Assign the <code class="docutils literal notranslate"><span class="pre">Consumer&lt;Fruit&gt;</span></code> delegate to a <code class="docutils literal notranslate"><span class="pre">Consumer&lt;Apple&gt;</span></code> variable.</p>
-<div class="cell tag_remove-input docutils container">
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span><span class="w"> </span><span class="n">appleConsumer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fruitConsumer</span><span class="p">;</span><span class="w"> </span><span class="c1">// No error :)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>6. Pass an <code class="docutils literal notranslate"><span class="pre">Apple</span></code> object to the <code class="docutils literal notranslate"><span class="pre">Consumer&lt;Apple&gt;</span></code> delegate.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">appleConsumer</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Apple</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Yellow&quot;</span><span class="w"> </span><span class="p">});</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eating Yellow fruit.
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="reflection">
-<h2>🤔 Reflection<a class="headerlink" href="#reflection" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Generic variance in delegates allows for greater flexibility while maintaining type safety. This is useful when working with a type hierarchy, where we want to use a method that works with a base type but pass a derived type or vice versa.</p></li>
-<li><p>In the real world we often find ourselves making use of variance when we pass lambdas to LINQ methods.</p></li>
-</ul>
-<section id="challenge-1-variant-generic-delegates-and-linq">
-<h3>Challenge 1: Variant generic delegates and LINQ<a class="headerlink" href="#challenge-1-variant-generic-delegates-and-linq" title="Permalink to this heading">#</a></h3>
-<p>1. Create a list of <code class="docutils literal notranslate"><span class="pre">Apple</span></code> objects.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span><span class="w"> </span><span class="n">apples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Book</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Apple</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Yellow&quot;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">Apple</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Green&quot;</span><span class="w"> </span><span class="p">},</span>
-<span class="p">};</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Title</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Author</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">PageCount</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Instance method to describe book details</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Describe</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Add the implementation here...</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>2. Define a <code class="docutils literal notranslate"><span class="pre">Func&lt;Fruit,</span> <span class="pre">string&gt;</span></code> delegate.</p>
+</section>
+<section id="step-2-update-method-invocation">
+<h3>Step 2: Update Method Invocation<a class="headerlink" href="#step-2-update-method-invocation" title="Permalink to this heading">#</a></h3>
+<p>Change the way you call the <code class="docutils literal notranslate"><span class="pre">Describe</span></code> method so that it is called on an instance of <code class="docutils literal notranslate"><span class="pre">Book</span></code> rather than as a static method.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Func</span><span class="o">&lt;</span><span class="n">Fruit</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fruitColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fruit</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">fruit</span><span class="p">.</span><span class="n">Color</span><span class="p">;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>3. Use the delegate with the <code class="docutils literal notranslate"><span class="pre">Select</span></code> LINQ method.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">foreach</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">apples</span><span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">fruitColor</span><span class="p">))</span>
-<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Book</span><span class="w"> </span><span class="n">book</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Book</span><span class="p">();</span>
+<span class="n">book</span><span class="p">.</span><span class="n">Title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;How to Win Friends and Influence People&quot;</span><span class="p">;</span>
+<span class="n">book</span><span class="p">.</span><span class="n">Author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Dale Carnegie&quot;</span><span class="p">;</span>
+<span class="n">book</span><span class="p">.</span><span class="n">PageCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">320</span><span class="p">;</span>
+
+<span class="n">book</span><span class="p">.</span><span class="n">Describe</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Yellow
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Green
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;How to Win Friends and Influence People&#39; by Dale Carnegie (320 pages).
 </pre></div>
 </div>
 </div>
 </div>
-<p>Notice how we can pass a delegate that expects a <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> to a method that works with <code class="docutils literal notranslate"><span class="pre">Apple</span></code>.</p>
+<div class="admonition-reflection admonition">
+<p class="admonition-title">🤔 Reflection</p>
+<p>In the transition from a static method to an instance method, consider how the context of <code class="docutils literal notranslate"><span class="pre">Describe</span></code> has changed. Why does the instance method <code class="docutils literal notranslate"><span class="pre">Describe</span></code> not need any parameters? How does this relate to encapsulation?</p>
+</div>
 </section>
 </section>
-<section id="id1">
-<h2>🤔 Reflection<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
-<p>Variance in built-in generic delegates like <code class="docutils literal notranslate"><span class="pre">Func</span></code>, <code class="docutils literal notranslate"><span class="pre">Action</span></code>, and <code class="docutils literal notranslate"><span class="pre">Predicate</span></code> is beneficial when using LINQ or when trying to achieve greater code reuse by defining methods that operate on base types and can still accept/return derived types.</p>
-<section id="challenge-2-multiple-levels-of-hierarchy">
-<h3>Challenge 2: Multiple Levels of Hierarchy<a class="headerlink" href="#challenge-2-multiple-levels-of-hierarchy" title="Permalink to this heading">#</a></h3>
-<p>1. Create a <code class="docutils literal notranslate"><span class="pre">GrannySmith</span></code> class:</p>
+<section id="challenge">
+<h2>Challenge<a class="headerlink" href="#challenge" title="Permalink to this heading">#</a></h2>
+<p>Add an instance method called <code class="docutils literal notranslate"><span class="pre">ReadPage</span></code> to the <code class="docutils literal notranslate"><span class="pre">Book</span></code> class that simulates reading a page by incrementing a field called <code class="docutils literal notranslate"><span class="pre">CurrentPage</span></code> and printing a message that a page has been read.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ReadPage</span></code> method should:</p>
+<ol class="arabic simple">
+<li><p>Increase <code class="docutils literal notranslate"><span class="pre">CurrentPage</span></code> by one each time it is called.</p></li>
+<li><p>Not allow <code class="docutils literal notranslate"><span class="pre">CurrentPage</span></code> to exceed the <code class="docutils literal notranslate"><span class="pre">PageCount</span></code>.</p></li>
+<li><p>Print a message each time a page is read, and a different message if there are no more pages to read.</p></li>
+</ol>
+<p>After adding the <code class="docutils literal notranslate"><span class="pre">ReadPage</span></code> method to the <code class="docutils literal notranslate"><span class="pre">Book</span></code> class, create two instances of <code class="docutils literal notranslate"><span class="pre">Book</span></code> in the <code class="docutils literal notranslate"><span class="pre">Main</span></code> method and try reading a few pages of them instance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">GrannySmith</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Apple</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Book</span><span class="w"> </span><span class="n">b1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Book</span><span class="p">();</span>
+<span class="n">Book</span><span class="w"> </span><span class="n">b2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Book</span><span class="p">();</span>
+
+<span class="c1">// Set attributes of b1.</span>
+<span class="n">b1</span><span class="p">.</span><span class="n">Title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Built to sell&quot;</span><span class="p">;</span>
+<span class="n">b1</span><span class="p">.</span><span class="n">Author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;John Warrillow&quot;</span><span class="p">;</span>
+<span class="n">b1</span><span class="p">.</span><span class="n">PageCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">;</span>
+
+<span class="c1">// Set attributes of b2.</span>
+<span class="c1">// ...</span>
+
+<span class="c1">// Read pages of b1.</span>
+<span class="n">b1</span><span class="p">.</span><span class="n">ReadPage</span><span class="p">();</span>
+<span class="n">b1</span><span class="p">.</span><span class="n">ReadPage</span><span class="p">();</span>
+<span class="n">b1</span><span class="p">.</span><span class="n">ReadPage</span><span class="p">();</span>
+<span class="n">b1</span><span class="p">.</span><span class="n">ReadPage</span><span class="p">();</span>
+
+<span class="c1">// Read pages of b2.</span>
+<span class="c1">// ...</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reading page 1 of &#39;Built to sell&#39;. 2 remaining.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reading page 2 of &#39;Built to sell&#39;. 1 remaining.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reading page 3 of &#39;Built to sell&#39;. 0 remaining.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You have finished reading &#39;Built to sell&#39;!
 </pre></div>
 </div>
 </div>
 </div>
-<p>2. Using covariance:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">GrannySmith</span><span class="w"> </span><span class="nf">CreateGrannySmith</span><span class="p">()</span>
-<span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GrannySmith</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Green&quot;</span><span class="w"> </span><span class="p">};</span>
-
-<span class="n">Factory</span><span class="o">&lt;</span><span class="n">GrannySmith</span><span class="o">&gt;</span><span class="w"> </span><span class="n">grannySmithFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CreateGrannySmith</span><span class="p">;</span>
-
-<span class="n">Factory</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span><span class="w"> </span><span class="n">appleFactoryFromGrannySmith</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grannySmithFactory</span><span class="p">;</span>
-
-<span class="n">Factory</span><span class="o">&lt;</span><span class="n">Fruit</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fruitFactoryFromGrannySmith</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grannySmithFactory</span><span class="p">;</span>
-</pre></div>
+<div class="admonition-reflection admonition">
+<p class="admonition-title">🤔 Reflection</p>
+<p>Does reading pages in <code class="docutils literal notranslate"><span class="pre">b1</span></code> affect anything in <code class="docutils literal notranslate"><span class="pre">b2</span></code>?</p>
 </div>
-</div>
-</div>
-<p>3. Using contravariance:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">Fruit</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fruitConsumer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ConsumeFruit</span><span class="p">;</span>
-
-<span class="n">Consumer</span><span class="o">&lt;</span><span class="n">Apple</span><span class="o">&gt;</span><span class="w"> </span><span class="n">appleConsumerFromFruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fruitConsumer</span><span class="p">;</span>
-
-<span class="n">Consumer</span><span class="o">&lt;</span><span class="n">GrannySmith</span><span class="o">&gt;</span><span class="w"> </span><span class="n">grannySmithConsumerFromFruit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fruitConsumer</span><span class="p">;</span>
-</pre></div>
-</div>
-</div>
+<div class="admonition-reflection admonition">
+<p class="admonition-title">🤔 Reflection</p>
+<p>Reflect on the implementation of the <code class="docutils literal notranslate"><span class="pre">ReadPage</span></code> method. How does managing state within an instance affect the way we think about the data and behavior of objects in object oriented programming?</p>
 </div>
 </section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<div class="admonition-reflection admonition">
+<p class="admonition-title">🤔 Reflection</p>
+<p>Since all fields in <code class="docutils literal notranslate"><span class="pre">Book</span></code> are <code class="docutils literal notranslate"><span class="pre">public</span></code> we can access these fields on any <code class="docutils literal notranslate"><span class="pre">Book</span></code> object. For example, this means that we can update the <code class="docutils literal notranslate"><span class="pre">CurrentPage</span></code> of a book instance by saying <code class="docutils literal notranslate"><span class="pre">book.CurrentPage</span> <span class="pre">=</span> <span class="pre">12</span></code> (if the variable containing a <code class="docutils literal notranslate"><span class="pre">Book</span></code> object is called <code class="docutils literal notranslate"><span class="pre">book</span></code>). Why is this problematic?</p>
+</div>
+<p>Excellent work! 🌟</p>
 </section>
 </section>
 
@@ -702,7 +522,7 @@ else {
         },
         kernelOptions: {
             name: ".net-csharp",
-            path: "./solutions"
+            path: "./labs"
         },
         predefinedOutput: true
     }
@@ -745,17 +565,16 @@ else {
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Solution: Variant generic delegates</a><ul>
-<li><a class="reference internal" href="#step-1-implement-covariance">Step 1: Implement Covariance</a></li>
-<li><a class="reference internal" href="#step-2-implement-contravariance">Step 2: Implement Contravariance</a></li>
-<li><a class="reference internal" href="#reflection">🤔 Reflection</a><ul>
-<li><a class="reference internal" href="#challenge-1-variant-generic-delegates-and-linq">Challenge 1: Variant generic delegates and LINQ</a></li>
+<li><a class="reference internal" href="#">Lab: Instance methods</a><ul>
+<li><a class="reference internal" href="#objective">Objective</a></li>
+<li><a class="reference internal" href="#provided-code">Provided Code</a></li>
+<li><a class="reference internal" href="#instructions">Instructions</a><ul>
+<li><a class="reference internal" href="#step-1-convert-describe-to-an-instance-method">Step 1: Convert <code class="docutils literal notranslate"><span class="pre">describe</span></code> to an Instance Method</a></li>
+<li><a class="reference internal" href="#step-2-update-method-invocation">Step 2: Update Method Invocation</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id1">🤔 Reflection</a><ul>
-<li><a class="reference internal" href="#challenge-2-multiple-levels-of-hierarchy">Challenge 2: Multiple Levels of Hierarchy</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#challenge">Challenge</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
 </ul>
 </li>
 </ul>

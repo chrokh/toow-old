@@ -14,7 +14,7 @@ kernelspec:
 
 ## Objective
 
-In this lab, we will transform procedural C# code into slightly more object-oriented code by introducing classes with fields. We have a long way to go before we can call this code object-oriented but we've got to start somewhere. By using fields we group related data in separate classes.
+In this lab, we will transform procedural C# code into slightly more object oriented code by introducing classes with fields. We have a long way to go before we can call this code object oriented but we've got to start somewhere. By using fields we group related data in separate classes.
 
 ## Provided Code
 
@@ -34,7 +34,7 @@ int enemyDamage = 20;
 string enemyName = "Orc";
 ```
 
-Here, we have loosely related variables that could represent a player's and an enemy's characteristics in a simple game scenario. Our task is to group these variables into classes, converting this procedural style into an object-oriented approach.
+Here, we have loosely related variables that could represent a player's and an enemy's characteristics in a simple game scenario. Our task is to group these variables into classes, converting this procedural style into an object oriented approach.
 
 ## Instructions
 
