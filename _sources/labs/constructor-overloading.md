@@ -43,9 +43,9 @@ rect.Print();
 
 Let's enhance the `Rectangle` class by adding multiple constructors to provide different ways of instantiating rectangle objects.
 
-### Step 1: Add a constructor that takes two parameters
+### Step 1: Add a constructor that with two parameters
 
-Let's begin by adding a constructor that takes two parameters of type `double` corresponding to `width` and `height`.
+Let's begin by adding a constructor with two parameters of type `double` corresponding to `width` and `height`.
 When you're done you should be able to execute the following code:
 
 ```{code-cell}
