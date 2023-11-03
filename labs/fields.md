@@ -151,8 +151,8 @@ void Attack (Character attacker, Character attacked)
     }
     else
     {
+        attacked.Health -= (attacker.Damage - attacked.Armor);
         attacked.Armor = 0;
-        attacked.Health -= attacker.Damage - attacked.Armor;
     }
 }
 ```
