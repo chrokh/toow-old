@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Lab: Variant delegates" href="variant-delegates.html" /><link rel="prev" title="Lab: The yield keyword" href="the-yield-keyword.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Lab: Variant classes - The Object Oriented Way</title>
+        <title>Lab: Static - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -292,7 +292,7 @@
 <li class="toctree-l1"><a class="reference internal" href="manually-implemented-properties.html">Lab: Manually implemented properties</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Labs (part 2)</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">Lab: Replace conditional with polymorphism</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generics.html">Lab: Generics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-types.html">Lab: Generic types</a></li>
@@ -307,7 +307,7 @@
 <li class="toctree-l1"><a class="reference internal" href="iterator-pattern.html">Lab: Iterator pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="enumerables.html">Lab: Enumerables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="the-yield-keyword.html">Lab: The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Lab: Variant classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-classes.html">Lab: Variant classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variant-delegates.html">Lab: Variant delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variant-generic-delegates.html">Lab: Variant Generic Delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">Lab: Variant Generic Interfaces</a></li>
@@ -345,25 +345,37 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="lab-variant-classes">
-<h1>Lab: Variant classes<a class="headerlink" href="#lab-variant-classes" title="Permalink to this heading">#</a></h1>
+          <section class="tex2jax_ignore mathjax_ignore" id="lab-static">
+<h1>Lab: Static<a class="headerlink" href="#lab-static" title="Permalink to this heading">#</a></h1>
 <section id="objective">
 <h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
-<p>In this lab, we will deepen our understanding of variance in C# by exploring covariant return types in classes. We will practice implementing and using them, while also reflecting on the benefits of type-safety and the importance of maintaining a balance between flexibility and safety.</p>
+<p>In this lab, we will be working with static members in C#. Specifically, we will modify a <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class to track the number of instances created and to calculate the average area of all created rectangles.
+Understanding static members and classes will help us better appreciate why they should be avoided.</p>
 </section>
 <section id="provided-code">
-<h2>Provided code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
-<p>Carefully review the provided code. Notice the structure of the classes <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> and <code class="docutils literal notranslate"><span class="pre">Apple</span></code> and their relationship. Similarly, observe how <code class="docutils literal notranslate"><span class="pre">FruitTree</span></code> and <code class="docutils literal notranslate"><span class="pre">AppleTree</span></code> are constructed and how the <code class="docutils literal notranslate"><span class="pre">GetFruit</span></code> method is overridden in <code class="docutils literal notranslate"><span class="pre">AppleTree</span></code> to return an instance of <code class="docutils literal notranslate"><span class="pre">Apple</span></code>.</p>
+<h2>Provided Code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
+<p>Carefully review the provided code. Notice how, currently, there is no mechanism to track the total number of <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> instances or perform operations across all instances.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Fruit</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Width</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">Area</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Width</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Height</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">height</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">width</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">height</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-9390.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-9225.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -413,7 +425,7 @@ function loadDotnetInteractiveApi() {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '9390.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '9225.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -469,72 +481,131 @@ else {
     </script>
 </div></div></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Apple</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Fruit</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">FruitTree</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="n">Fruit</span><span class="w"> </span><span class="nf">GetFruit</span><span class="p">()</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Fruit</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AppleTree</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">FruitTree</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="n">Apple</span><span class="w"> </span><span class="nf">GetFruit</span><span class="p">()</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Apple</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The key takeaway here is the usage of covariant return types. The method <code class="docutils literal notranslate"><span class="pre">GetFruit</span></code> in the derived <code class="docutils literal notranslate"><span class="pre">AppleTree</span></code> class has a more derived return type (<code class="docutils literal notranslate"><span class="pre">Apple</span></code>) than the same method in its base class <code class="docutils literal notranslate"><span class="pre">FruitTree</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class provided includes properties for <code class="docutils literal notranslate"><span class="pre">Width</span></code> and <code class="docutils literal notranslate"><span class="pre">Height</span></code>, a constructor to set those properties, and a computed, read-only property called <code class="docutils literal notranslate"><span class="pre">Area</span></code> that computes the area of the rectangle.</p>
 </section>
 <section id="instructions">
 <h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
-<section id="step-1-implement-and-test-covariant-return-types">
-<h3>Step 1: Implement and Test Covariant Return Types<a class="headerlink" href="#step-1-implement-and-test-covariant-return-types" title="Permalink to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p>Create a new class called <code class="docutils literal notranslate"><span class="pre">Pear</span></code> which is derived from the <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> class.</p></li>
-<li><p>Create a new class called <code class="docutils literal notranslate"><span class="pre">PearTree</span></code> which is derived from the <code class="docutils literal notranslate"><span class="pre">FruitTree</span></code> class.</p></li>
-<li><p>Override the <code class="docutils literal notranslate"><span class="pre">GetFruit</span></code> method in the <code class="docutils literal notranslate"><span class="pre">PearTree</span></code> class such that it returns an instance of the <code class="docutils literal notranslate"><span class="pre">Pear</span></code> class, showcasing the use of covariant return types.</p></li>
-</ol>
-<p>After implementing the above, test your new classes:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">PearTree</span><span class="w"> </span><span class="n">pearTree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PearTree</span><span class="p">();</span>
+<section id="step-1-introduce-a-static-property">
+<h3>Step 1: Introduce a Static Property<a class="headerlink" href="#step-1-introduce-a-static-property" title="Permalink to this heading">#</a></h3>
+<p>First, introduce add a static property to the <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class to keep track of how many rectangles have been instantiated. You can call it <code class="docutils literal notranslate"><span class="pre">Count</span></code> and it should have a <code class="docutils literal notranslate"><span class="pre">public</span></code> <code class="docutils literal notranslate"><span class="pre">get</span></code> accessor but a <code class="docutils literal notranslate"><span class="pre">private</span></code> <code class="docutils literal notranslate"><span class="pre">set</span></code> accessor.</p>
+<p>For each <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> instance created, increment the static counter field. This will allow us to keep track of how many rectangles have been created.</p>
+<p>Here’s what the code should behave like:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">new</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">);</span>
+<span class="k">new</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">);</span>
+<span class="k">new</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">12</span><span class="p">);</span>
 
-<span class="n">Pear</span><span class="w"> </span><span class="n">pear</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pearTree</span><span class="p">.</span><span class="n">GetFruit</span><span class="p">();</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">.</span><span class="n">Count</span><span class="p">);</span>
 </pre></div>
 </div>
-</section>
-<section id="step-2-reflect-on-the-benefits-of-covariant-return-types">
-<h3>Step 2: Reflect on the Benefits of Covariant Return Types<a class="headerlink" href="#step-2-reflect-on-the-benefits-of-covariant-return-types" title="Permalink to this heading">#</a></h3>
-<p>Given the previous steps, consider the benefits of using covariant return types. How does it improve type safety and the clarity of your code?</p>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
 <div class="admonition-reflection admonition">
 <p class="admonition-title">🤔 Reflection</p>
-<p>Think about the difference between using covariant return types and needing to downcast every time we want a specific derived type. What might be some potential issues if we had to constantly use explicit casting?</p>
+<p>Can the class <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> be marked as <code class="docutils literal notranslate"><span class="pre">static</span></code>? Why or why not?</p>
 </div>
 </section>
-<section id="step-3-understand-the-limitations-of-contravariant-parameter-types">
-<h3>Step 3: Understand the Limitations of Contravariant Parameter Types<a class="headerlink" href="#step-3-understand-the-limitations-of-contravariant-parameter-types" title="Permalink to this heading">#</a></h3>
-<p>Create a new class called <code class="docutils literal notranslate"><span class="pre">Banana</span></code> derived from <code class="docutils literal notranslate"><span class="pre">Fruit</span></code>. Also, create a class called <code class="docutils literal notranslate"><span class="pre">BananaMixer</span></code> that contains a method to juice a <code class="docutils literal notranslate"><span class="pre">Banana</span></code>.</p>
-<p>Try to create another class, <code class="docutils literal notranslate"><span class="pre">FruitMixer</span></code>, derived from <code class="docutils literal notranslate"><span class="pre">BananaMixer</span></code>, and attempt to override the juicing method with a broader parameter (e.g., <code class="docutils literal notranslate"><span class="pre">Fruit</span></code>). Notice that C# will not allow this, as it does not support contravariant parameter types.</p>
-<p>Reflect on the potential pitfalls of contravariant parameter types and how they might violate type safety.</p>
+<section id="step-2-static-constructor-message">
+<h3>Step 2: Static Constructor Message<a class="headerlink" href="#step-2-static-constructor-message" title="Permalink to this heading">#</a></h3>
+<p>Next, add a static constructor in the <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class that writes a message to the console indicating that the rectangle counter is active.</p>
+<p>Here’s what the code should behave like:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">new</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">);</span>
+<span class="k">new</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">);</span>
+<span class="k">new</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">(</span><span class="m">110</span><span class="p">,</span><span class="w"> </span><span class="m">12</span><span class="p">);</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">.</span><span class="n">Count</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rectangle counter is now active.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-array-of-rectangles">
+<h3>Step 3: Array of Rectangles<a class="headerlink" href="#step-3-array-of-rectangles" title="Permalink to this heading">#</a></h3>
+<p>Introduce another static field of type <code class="docutils literal notranslate"><span class="pre">Rectangle[]</span></code>. This static field should be an array that always contains all <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code>s that have been created. You should achieve this by updating the constructor so that it adds the new <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> instance to this array.</p>
+<p>This should also allow you to refactor the static property called <code class="docutils literal notranslate"><span class="pre">Count</span></code>, into a computed, read-only property who’s value is computed from the array.</p>
+<p>The code should behave like this:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">new</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">);</span>
+<span class="k">new</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">);</span>
+<span class="k">new</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">12</span><span class="p">);</span>
+
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">Rectangle</span><span class="w"> </span><span class="n">rect</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">.</span><span class="n">Instances</span><span class="p">)</span>
+<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;{rect.Width}x{rect.Height} = {rect.Area}&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rectangle counter is now active.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20x10 = 200
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2x5 = 10
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10x12 = 120
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-computed-read-only-static-property">
+<h3>Step 4: Computed Read-Only Static Property<a class="headerlink" href="#step-4-computed-read-only-static-property" title="Permalink to this heading">#</a></h3>
+<p>Implement a static property called <code class="docutils literal notranslate"><span class="pre">AverageArea</span></code> that computes the average area of all rectangles stored in the static array.</p>
+<p>The code should behave like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">new</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">);</span>
+<span class="k">new</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">);</span>
+<span class="k">new</span><span class="w"> </span><span class="nf">Rectangle</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">12</span><span class="p">);</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">.</span><span class="n">AverageArea</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>110
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
-<section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
-<p>Variance is an essential concept in C#, offering flexibility without compromising type safety. By completing this lab exercise, we’ve gained a deeper understanding of how covariant return types are implemented and the benefits they offer in writing clear and robust code.</p>
-<p>Happy coding! 🤓</p>
+<section id="challenge">
+<h2>Challenge<a class="headerlink" href="#challenge" title="Permalink to this heading">#</a></h2>
+<p>Consider how you would write a program to achieve similar functionality without using static members. Before tackling this problem, make sure you understand Object Composition and how it can be used to manage state and behavior among objects.</p>
+<div class="admonition-reflection admonition">
+<p class="admonition-title">🤔 Reflection</p>
+<p>Reflect on how the use of static members changes the design and functionality of our <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> class. What are the limitations and benefits of using static members in this scenario? Can you think of any potential issues with using a static array to store instances?</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>To redesigning the solution without static members, consider how an instance of another class might manage multiple <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> instances and perform the necessary calculations.</p>
+</div>
 </section>
 </section>
 
@@ -562,26 +633,8 @@ else {
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="variant-delegates.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">Lab: Variant delegates</div>
-              </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="the-yield-keyword.html">
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">Lab: The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -612,16 +665,17 @@ else {
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Lab: Variant classes</a><ul>
+<li><a class="reference internal" href="#">Lab: Static</a><ul>
 <li><a class="reference internal" href="#objective">Objective</a></li>
-<li><a class="reference internal" href="#provided-code">Provided code</a></li>
+<li><a class="reference internal" href="#provided-code">Provided Code</a></li>
 <li><a class="reference internal" href="#instructions">Instructions</a><ul>
-<li><a class="reference internal" href="#step-1-implement-and-test-covariant-return-types">Step 1: Implement and Test Covariant Return Types</a></li>
-<li><a class="reference internal" href="#step-2-reflect-on-the-benefits-of-covariant-return-types">Step 2: Reflect on the Benefits of Covariant Return Types</a></li>
-<li><a class="reference internal" href="#step-3-understand-the-limitations-of-contravariant-parameter-types">Step 3: Understand the Limitations of Contravariant Parameter Types</a></li>
+<li><a class="reference internal" href="#step-1-introduce-a-static-property">Step 1: Introduce a Static Property</a></li>
+<li><a class="reference internal" href="#step-2-static-constructor-message">Step 2: Static Constructor Message</a></li>
+<li><a class="reference internal" href="#step-3-array-of-rectangles">Step 3: Array of Rectangles</a></li>
+<li><a class="reference internal" href="#step-4-computed-read-only-static-property">Step 4: Computed Read-Only Static Property</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+<li><a class="reference internal" href="#challenge">Challenge</a></li>
 </ul>
 </li>
 </ul>
