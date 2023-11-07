@@ -75,10 +75,6 @@ new Rectangle(10, 12);
 Console.WriteLine(Rectangle.Count);
 ```
 
-```{admonition} 🤔 Reflection
-Can the class `Rectangle` be marked as `static`? Why or why not?
-```
-
 ### Step 2: Static Constructor Message
 
 Next, add a static constructor in the `Rectangle` class that writes a message to the console indicating that the rectangle counter is active.
