@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Lab: Generics" href="generics.html" /><link rel="prev" title="Lab: Object composition" href="object-composition.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Lab: Replace conditional with polymorphism" href="replace-conditional-with-polymorphism.html" /><link rel="prev" title="Lab: Static" href="static.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Lab: Replace conditional with polymorphism - The Object Oriented Way</title>
+        <title>Lab: Object composition - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -283,7 +283,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapters/variant-generic-interfaces.html">115. Variant generic interfaces</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Labs (part 1)</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="fields.html">Lab: Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="instance-methods.html">Lab: Instance methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="encapsulation.html">Lab: Encapsulation</a></li>
@@ -292,11 +292,11 @@
 <li class="toctree-l1"><a class="reference internal" href="manually-implemented-properties.html">Lab: Manually implemented properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="computed-properties.html">Lab: Computed Properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="static.html">Lab: Static</a></li>
-<li class="toctree-l1"><a class="reference internal" href="object-composition.html">Lab: Object composition</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Lab: Object composition</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Labs (part 2)</span></p>
-<ul class="current">
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Lab: Replace conditional with polymorphism</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">Lab: Replace conditional with polymorphism</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generics.html">Lab: Generics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-types.html">Lab: Generic types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">Lab: Generic Supertypes</a></li>
@@ -348,25 +348,36 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="lab-replace-conditional-with-polymorphism">
-<h1>Lab: Replace conditional with polymorphism<a class="headerlink" href="#lab-replace-conditional-with-polymorphism" title="Permalink to this heading">#</a></h1>
+          <section class="tex2jax_ignore mathjax_ignore" id="lab-object-composition">
+<h1>Lab: Object composition<a class="headerlink" href="#lab-object-composition" title="Permalink to this heading">#</a></h1>
 <section id="objective">
 <h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
-<p>To refactor the provided <code class="docutils literal notranslate"><span class="pre">Shape</span></code> class to remove conditionals and implement polymorphism, thereby enhancing code maintainability.</p>
+<p>In this lab, we will delve into the concept of object composition. We will explore how complex structures can be constructed from simpler components, implementing the “has-a” relationship in our code. The purpose is to gain a practical understanding of object composition, which is a fundamental principle in object oriented programming.</p>
 </section>
 <section id="provided-code">
-<h2>Provided code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
-<p>Study the starting code given to you. It consists of a single <code class="docutils literal notranslate"><span class="pre">Shape</span></code> class which draws different shapes based on the <code class="docutils literal notranslate"><span class="pre">ShapeType</span></code> using conditionals.</p>
+<h2>Provided Code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
+<p>Carefully review the provided code. Notice how classes are composed to form a relationship where objects of one class (<code class="docutils literal notranslate"><span class="pre">Player</span></code>) contains a reference to an object of another (<code class="docutils literal notranslate"><span class="pre">Weapon</span></code>), establishing a “has-a” relationship rather than an “is-a” relationship that is typical with inheritance.
+Also notice how the same <code class="docutils literal notranslate"><span class="pre">Weapon</span></code> instance can be shared by multiple <code class="docutils literal notranslate"><span class="pre">Player</span></code> instances, which demonstrates the power and flexibility of object composition in sharing and managing state.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">enum</span><span class="w"> </span><span class="n">ShapeType</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">HorizontalLine</span><span class="p">,</span><span class="w"> </span><span class="n">Square</span><span class="p">,</span><span class="w"> </span><span class="n">RightTriangle</span><span class="w"> </span><span class="p">}</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Weapon</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">damage</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Weapon</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">damage</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">damage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">damage</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-9367.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-9254.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -416,7 +427,7 @@ function loadDotnetInteractiveApi() {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '9367.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '9254.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -474,114 +485,19 @@ else {
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Shape</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Player</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">ShapeType</span><span class="w"> </span><span class="n">type</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">symbol</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Health</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Weapon</span><span class="w"> </span><span class="n">Weapon</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Shape</span><span class="p">(</span><span class="n">ShapeType</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">symbol</span><span class="p">)</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">Player</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">health</span><span class="p">,</span><span class="w"> </span><span class="n">Weapon</span><span class="w"> </span><span class="n">weapon</span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">symbol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">symbol</span><span class="p">;</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">type</span><span class="p">;</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Draw</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ShapeType</span><span class="p">.</span><span class="n">HorizontalLine</span><span class="p">)</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="n">MakeHorizontalLine</span><span class="p">());</span>
-<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="nf">if</span><span class="w"> </span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ShapeType</span><span class="p">.</span><span class="n">Square</span><span class="p">)</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="n">MakeSquare</span><span class="p">());</span>
-<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="nf">if</span><span class="w"> </span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ShapeType</span><span class="p">.</span><span class="n">RightTriangle</span><span class="p">)</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="n">MakeRightTriangle</span><span class="p">());</span>
-<span class="w">        </span><span class="k">else</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="kt">string</span><span class="p">[][]</span><span class="w"> </span><span class="n">symbols</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">symbols</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="kt">string</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
-<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">symbols</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">Length</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
-<span class="w">            </span><span class="p">{</span>
-<span class="w">                </span><span class="n">line</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">symbols</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">            </span><span class="n">lines</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">lines</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="p">[][]</span><span class="w"> </span><span class="n">MakeHorizontalLine</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">string</span><span class="p">[][]</span><span class="w"> </span><span class="n">symbols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">string</span><span class="p">[</span><span class="m">1</span><span class="p">][];</span>
-<span class="w">        </span><span class="n">symbols</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">string</span><span class="p">[</span><span class="n">size</span><span class="p">];</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="w">            </span><span class="n">symbols</span><span class="p">[</span><span class="m">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">symbol</span><span class="p">;</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">symbols</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="p">[][]</span><span class="w"> </span><span class="n">MakeSquare</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">string</span><span class="p">[][]</span><span class="w"> </span><span class="n">symbols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">string</span><span class="p">[</span><span class="n">size</span><span class="p">][];</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="n">symbols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">string</span><span class="p">[</span><span class="n">size</span><span class="p">];</span>
-<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
-<span class="w">                </span><span class="n">symbols</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">symbol</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">symbols</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="kt">string</span><span class="p">[][]</span><span class="w"> </span><span class="n">MakeRightTriangle</span><span class="p">()</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">string</span><span class="p">[][]</span><span class="w"> </span><span class="n">symbols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">string</span><span class="p">[</span><span class="n">size</span><span class="p">][];</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="n">symbols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">string</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">];</span>
-<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
-<span class="w">                </span><span class="n">symbols</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">symbol</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">symbols</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Health</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">health</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Weapon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">weapon</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Shape</span><span class="w"> </span><span class="n">shape1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Shape</span><span class="p">(</span><span class="n">ShapeType</span><span class="p">.</span><span class="n">HorizontalLine</span><span class="p">,</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;=&quot;</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">shape1</span><span class="p">.</span><span class="n">Draw</span><span class="p">());</span>
-
-<span class="n">Shape</span><span class="w"> </span><span class="n">shape2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Shape</span><span class="p">(</span><span class="n">ShapeType</span><span class="p">.</span><span class="n">Square</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;■ &quot;</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">shape2</span><span class="p">.</span><span class="n">Draw</span><span class="p">());</span>
-
-<span class="n">Shape</span><span class="w"> </span><span class="n">shape3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Shape</span><span class="p">(</span><span class="n">ShapeType</span><span class="p">.</span><span class="n">RightTriangle</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;* &quot;</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">shape3</span><span class="p">.</span><span class="n">Draw</span><span class="p">());</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>■ ■ ■ ■ 
-■ ■ ■ ■ 
-■ ■ ■ ■ 
-■ ■ ■ ■ 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>* 
-* * 
-* * * 
-* * * * 
-* * * * * 
-* * * * * * 
 </pre></div>
 </div>
 </div>
@@ -589,88 +505,141 @@ else {
 </section>
 <section id="instructions">
 <h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
-<section id="step-1-replace-conditionals-in-shape-with-polymorphism">
-<h3>Step 1: Replace conditionals in <code class="docutils literal notranslate"><span class="pre">Shape</span></code> with polymorphism<a class="headerlink" href="#step-1-replace-conditionals-in-shape-with-polymorphism" title="Permalink to this heading">#</a></h3>
-<p>Define an interface, <code class="docutils literal notranslate"><span class="pre">IShape</span></code>, with a method signature for <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">Draw()</span></code>.</p>
-<p>Create individual classes for each shape type, namely <code class="docutils literal notranslate"><span class="pre">HorizontalLine</span></code>, <code class="docutils literal notranslate"><span class="pre">Square</span></code>, and <code class="docutils literal notranslate"><span class="pre">RightTriangle</span></code>, implementing the <code class="docutils literal notranslate"><span class="pre">IShape</span></code> interface.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>It’s ok if you end up duplicating the <code class="docutils literal notranslate"><span class="pre">private</span></code> method <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">draw(string[][]</span> <span class="pre">symbols)</span></code>. We’ll get rid of that duplication later.</p>
-</div>
-</section>
-<section id="step-2-rewrite-the-main-class">
-<h3>Step 2: Rewrite the main class<a class="headerlink" href="#step-2-rewrite-the-main-class" title="Permalink to this heading">#</a></h3>
-<p>Rewrite the <code class="docutils literal notranslate"><span class="pre">Main</span></code> method so that it uses subtypes of <code class="docutils literal notranslate"><span class="pre">IShape</span></code> instead of the <code class="docutils literal notranslate"><span class="pre">Shape</span></code> class.
-It should look like this and should both compile and still print the same output as before.</p>
-<p>You should now be able to delete the old <code class="docutils literal notranslate"><span class="pre">Shape</span></code> class.</p>
+<p>We will now take the code we have been given and enhance it by incorporating proper encapsulation and use composition to add more complexity to the game.</p>
+<section id="step-1-encapsulate-weapon-behavior">
+<h3>Step 1: Encapsulate Weapon Behavior<a class="headerlink" href="#step-1-encapsulate-weapon-behavior" title="Permalink to this heading">#</a></h3>
+<p>First, we need to encapsulate the attack logic within the <code class="docutils literal notranslate"><span class="pre">Weapon</span></code> class. This ensures that the details of how a weapon attacks are hidden from the <code class="docutils literal notranslate"><span class="pre">Player</span></code>.</p>
+<p>Implement the Attack method in the Weapon class so that it reduces the <code class="docutils literal notranslate"><span class="pre">Health</span></code> of the <code class="docutils literal notranslate"><span class="pre">Player</span></code> passed as a target by the <code class="docutils literal notranslate"><span class="pre">Damage</span></code> of the weapon.
+The method should also print some information to the console so that we know what happened.</p>
+<p>It should behave like this:</p>
 <div class="cell tag_remove-input docutils container">
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IShape</span><span class="w"> </span><span class="n">shape1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HorizontalLine</span><span class="p">(</span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;=&quot;</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">shape1</span><span class="p">.</span><span class="n">Draw</span><span class="p">());</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Player</span><span class="w"> </span><span class="n">bowser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Player</span><span class="p">(</span><span class="s">&quot;Bowser 🐲&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="k">null</span><span class="p">);</span>
+<span class="n">Weapon</span><span class="w"> </span><span class="n">hammer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Weapon</span><span class="p">(</span><span class="s">&quot;Hammer 🔨&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">15</span><span class="p">);</span>
 
-<span class="c1">// Do the same for Square.</span>
-
-<span class="c1">// Do the same for RightTriangle</span>
+<span class="n">hammer</span><span class="p">.</span><span class="n">Attack</span><span class="p">(</span><span class="n">bowser</span><span class="p">);</span>
+<span class="n">hammer</span><span class="p">.</span><span class="n">Attack</span><span class="p">(</span><span class="n">bowser</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 caused 15 damage to Bowser 🐲 (❤️ 35).
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 caused 15 damage to Bowser 🐲 (❤️ 20).
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="step-3-eliminate-duplication-using-inheritance">
-<h3>Step 3: Eliminate duplication using inheritance<a class="headerlink" href="#step-3-eliminate-duplication-using-inheritance" title="Permalink to this heading">#</a></h3>
-<p>When we split the shapes into their own classes that implement the interface <code class="docutils literal notranslate"><span class="pre">IShape</span></code> we ended up duplicating the logic of the <code class="docutils literal notranslate"><span class="pre">private</span></code> method <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">draw(string[][]</span> <span class="pre">symbols)</span></code>.
-Let’s eliminate that duplication using inheritance.</p>
-<p>Make the classes <code class="docutils literal notranslate"><span class="pre">HorizontalLine</span></code>, <code class="docutils literal notranslate"><span class="pre">Square</span></code>, and <code class="docutils literal notranslate"><span class="pre">RightTriangle</span></code> inherit from an abstract class called <code class="docutils literal notranslate"><span class="pre">Shape</span></code> which in turn implements the interface <code class="docutils literal notranslate"><span class="pre">IShape</span></code>.</p>
-<p>The abstract class <code class="docutils literal notranslate"><span class="pre">Shape</span></code> should allow you to eliminate the duplicated method  <code class="docutils literal notranslate"><span class="pre">private</span></code> method <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">draw(string[][]</span> <span class="pre">symbols)</span></code>.</p>
-<p>One way is to add an <code class="docutils literal notranslate"><span class="pre">abstract</span></code> method to <code class="docutils literal notranslate"><span class="pre">Shape</span></code> with the signature <code class="docutils literal notranslate"><span class="pre">string[][]</span> <span class="pre">MakeLines()</span></code>:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Shape</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IShape</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="kt">string</span><span class="p">[][]</span><span class="w"> </span><span class="n">GetLines</span><span class="p">();</span>
-
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Draw</span><span class="p">()</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Replace with your implementation.</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Another way is to make <code class="docutils literal notranslate"><span class="pre">Draw</span></code> <code class="docutils literal notranslate"><span class="pre">abstract</span></code> in <code class="docutils literal notranslate"><span class="pre">Shape</span></code> and instead offer its subclasses a <code class="docutils literal notranslate"><span class="pre">protected</span></code> method with the signature <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">Flatten(string[][]</span> <span class="pre">symbols)</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Shape</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IShape</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Draw</span><span class="p">();</span>
-
-<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Flatten</span><span class="p">(</span><span class="kt">string</span><span class="p">[][]</span><span class="w"> </span><span class="n">lines</span><span class="p">)</span>
-<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Replace with your implementation.</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>should provide a <span class="xref myst">protected</span> method with the signature <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">Draw(string[][]</span> <span class="pre">symbols</span></code>. This allows us to remove the duplicated code in the three shape classes.</p>
 <div class="admonition-reflection admonition">
 <p class="admonition-title">🤔 Reflection</p>
-<p>How does creating specific classes for each shape, adhering to the same interface, make the code more organized and maintainable?</p>
+<p>Why is encapsulating the attack logic within the <code class="docutils literal notranslate"><span class="pre">Weapon</span></code> class beneficial from an object oriented design perspective?</p>
 </div>
 </section>
-<section id="step-4-add-more-shapes">
-<h3>Step 4: Add more shapes<a class="headerlink" href="#step-4-add-more-shapes" title="Permalink to this heading">#</a></h3>
-<p>Challenge: Create some new classes, such as <code class="docutils literal notranslate"><span class="pre">VerticalLine</span></code> or <code class="docutils literal notranslate"><span class="pre">Cross</span></code>, that implement <code class="docutils literal notranslate"><span class="pre">IShape</span></code> and integrate it with your existing code without modifying the existing shape classes.</p>
+<section id="step-2-implement-attack-logic-in-player">
+<h3>Step 2: Implement Attack Logic in <code class="docutils literal notranslate"><span class="pre">Player</span></code><a class="headerlink" href="#step-2-implement-attack-logic-in-player" title="Permalink to this heading">#</a></h3>
+<p>Add an instance method to <code class="docutils literal notranslate"><span class="pre">Player</span></code> with the signature <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">Attack</span> <span class="pre">(Player</span> <span class="pre">target)</span></code>.
+Implement it so that it calls the <code class="docutils literal notranslate"><span class="pre">Attack</span></code> method of the player’s weapon with the passed <code class="docutils literal notranslate"><span class="pre">target</span></code> as the target player.</p>
+<p>It should behave like this:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Weapon</span><span class="w"> </span><span class="n">hammer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Weapon</span><span class="p">(</span><span class="s">&quot;Hammer 🔨&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">15</span><span class="p">);</span>
+<span class="n">Player</span><span class="w"> </span><span class="n">mario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Player</span><span class="p">(</span><span class="s">&quot;Mario 🥸&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">hammer</span><span class="p">);</span>
+<span class="n">Player</span><span class="w"> </span><span class="n">bowser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Player</span><span class="p">(</span><span class="s">&quot;Bowser 🐲&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="n">hammer</span><span class="p">);</span>
+
+<span class="n">mario</span><span class="p">.</span><span class="n">Attack</span><span class="p">(</span><span class="n">bowser</span><span class="p">);</span>
+<span class="n">bowser</span><span class="p">.</span><span class="n">Attack</span><span class="p">(</span><span class="n">mario</span><span class="p">);</span>
+<span class="n">mario</span><span class="p">.</span><span class="n">Attack</span><span class="p">(</span><span class="n">bowser</span><span class="p">);</span>
+<span class="n">bowser</span><span class="p">.</span><span class="n">Attack</span><span class="p">(</span><span class="n">mario</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 caused 15 damage to Bowser 🐲 (❤️ 35).
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 caused 15 damage to Mario 🥸 (❤️ 85).
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 caused 15 damage to Bowser 🐲 (❤️ 20).
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 caused 15 damage to Mario 🥸 (❤️ 70).
+</pre></div>
+</div>
+</div>
+</div>
 <div class="admonition-reflection admonition">
 <p class="admonition-title">🤔 Reflection</p>
-<p>How does your design enable the addition of new shapes with minimal changes to existing code?</p>
+<p>What happens if we change the value of the <code class="docutils literal notranslate"><span class="pre">Damage</span></code> property of the object behind the variable <code class="docutils literal notranslate"><span class="pre">hammer</span></code> by saying <code class="docutils literal notranslate"><span class="pre">hammer.Damage</span> <span class="pre">=</span> <span class="pre">80</span></code> and then let both players attack each other?
+How does this behavior relate to the concept of reference types?</p>
 </div>
 </section>
+<section id="step-3-add-special-attack-method-with-state">
+<h3>Step 3: Add Special Attack Method with State<a class="headerlink" href="#step-3-add-special-attack-method-with-state" title="Permalink to this heading">#</a></h3>
+<p>Now that we have refactored our code to have a better structure and encapsulation, let’s add a new feature: a special move for our weapons. This move should do double damage <em>every other time</em> it is used. The other times it should do <code class="docutils literal notranslate"><span class="pre">0</span></code> damage.</p>
+<p>Implement a <code class="docutils literal notranslate"><span class="pre">SpecialAttack</span></code> method within the <code class="docutils literal notranslate"><span class="pre">Weapon</span></code> class that applies double damage every other time and <code class="docutils literal notranslate"><span class="pre">0</span></code> every other.
+Also implement the <code class="docutils literal notranslate"><span class="pre">SpecialAttack</span></code> method within the <code class="docutils literal notranslate"><span class="pre">Player</span></code> class such that it calls the <code class="docutils literal notranslate"><span class="pre">SpecialAttack</span></code> method in <code class="docutils literal notranslate"><span class="pre">Weapon</span></code>.</p>
+<p>It should behave like this:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Weapon</span><span class="w"> </span><span class="n">hammer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Weapon</span><span class="p">(</span><span class="s">&quot;Hammer 🔨&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">15</span><span class="p">);</span>
+<span class="n">Player</span><span class="w"> </span><span class="n">mario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Player</span><span class="p">(</span><span class="s">&quot;Mario 🥸&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">hammer</span><span class="p">);</span>
+<span class="n">Player</span><span class="w"> </span><span class="n">bowser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Player</span><span class="p">(</span><span class="s">&quot;Bowser 🐲&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="n">hammer</span><span class="p">);</span>
+
+<span class="n">mario</span><span class="p">.</span><span class="n">SpecialAttack</span><span class="p">(</span><span class="n">bowser</span><span class="p">);</span>
+<span class="n">bowser</span><span class="p">.</span><span class="n">SpecialAttack</span><span class="p">(</span><span class="n">mario</span><span class="p">);</span>
+<span class="n">mario</span><span class="p">.</span><span class="n">SpecialAttack</span><span class="p">(</span><span class="n">bowser</span><span class="p">);</span>
+<span class="n">bowser</span><span class="p">.</span><span class="n">SpecialAttack</span><span class="p">(</span><span class="n">mario</span><span class="p">);</span>
+<span class="n">mario</span><span class="p">.</span><span class="n">SpecialAttack</span><span class="p">(</span><span class="n">bowser</span><span class="p">);</span>
+<span class="n">bowser</span><span class="p">.</span><span class="n">SpecialAttack</span><span class="p">(</span><span class="n">mario</span><span class="p">);</span>
+<span class="n">bowser</span><span class="p">.</span><span class="n">SpecialAttack</span><span class="p">(</span><span class="n">mario</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 caused 15 damage to Bowser 🐲 (❤️ 35).
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 missed Mario 🥸 (❤️ 100).
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 caused 15 damage to Bowser 🐲 (❤️ 20).
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 missed Mario 🥸 (❤️ 100).
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 caused 15 damage to Bowser 🐲 (❤️ 5).
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 missed Mario 🥸 (❤️ 100).
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 caused 15 damage to Mario 🥸 (❤️ 85).
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition-reflection admonition">
+<p class="admonition-title">🤔 Reflection</p>
+<p>How would the implementation of a <code class="docutils literal notranslate"><span class="pre">SpecialAttack</span></code> method have been more complex without our initial refactoring? Grab a friend and discuss the importance of encapsulation and object composition in extending existing code with new features.</p>
+</div>
+<div class="admonition-reflection admonition">
+<p class="admonition-title">🤔 Reflection</p>
+<p>Why does it seem like both players are using the same hammer? How can we avoid that “problem”?</p>
+</div>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>By completing this lab, we have experienced the robustness of object composition in building and extending applications. This is just the beginning; as we delve deeper into object oriented design, we will uncover more benefits and strategies for writing clean, maintainable, and scalable code.</p>
 </section>
 </section>
 
@@ -698,23 +667,23 @@ Let’s eliminate that duplication using inheritance.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="generics.html">
+          <a class="next-page" href="replace-conditional-with-polymorphism.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Lab: Generics</div>
+                <div class="title">Lab: Replace conditional with polymorphism</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="object-composition.html">
+          <a class="prev-page" href="static.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Lab: Object composition</div>
+                <div class="title">Lab: Static</div>
                 
               </div>
             </a>
@@ -748,16 +717,16 @@ Let’s eliminate that duplication using inheritance.</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Lab: Replace conditional with polymorphism</a><ul>
+<li><a class="reference internal" href="#">Lab: Object composition</a><ul>
 <li><a class="reference internal" href="#objective">Objective</a></li>
-<li><a class="reference internal" href="#provided-code">Provided code</a></li>
+<li><a class="reference internal" href="#provided-code">Provided Code</a></li>
 <li><a class="reference internal" href="#instructions">Instructions</a><ul>
-<li><a class="reference internal" href="#step-1-replace-conditionals-in-shape-with-polymorphism">Step 1: Replace conditionals in <code class="docutils literal notranslate"><span class="pre">Shape</span></code> with polymorphism</a></li>
-<li><a class="reference internal" href="#step-2-rewrite-the-main-class">Step 2: Rewrite the main class</a></li>
-<li><a class="reference internal" href="#step-3-eliminate-duplication-using-inheritance">Step 3: Eliminate duplication using inheritance</a></li>
-<li><a class="reference internal" href="#step-4-add-more-shapes">Step 4: Add more shapes</a></li>
+<li><a class="reference internal" href="#step-1-encapsulate-weapon-behavior">Step 1: Encapsulate Weapon Behavior</a></li>
+<li><a class="reference internal" href="#step-2-implement-attack-logic-in-player">Step 2: Implement Attack Logic in <code class="docutils literal notranslate"><span class="pre">Player</span></code></a></li>
+<li><a class="reference internal" href="#step-3-add-special-attack-method-with-state">Step 3: Add Special Attack Method with State</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
 </ul>
 </li>
 </ul>
