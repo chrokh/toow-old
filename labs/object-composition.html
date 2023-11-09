@@ -377,7 +377,7 @@ Also notice how the same <code class="docutils literal notranslate"><span class=
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-9254.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-9181.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -422,12 +422,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.39:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.178:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '9254.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '9181.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -507,7 +507,7 @@ else {
 <h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
 <p>We will now take the code we have been given and enhance it by incorporating proper encapsulation and use composition to add more complexity to the game.</p>
 <section id="step-1-encapsulate-weapon-behavior">
-<h3>Step 1: Encapsulate Weapon Behavior<a class="headerlink" href="#step-1-encapsulate-weapon-behavior" title="Permalink to this heading">#</a></h3>
+<h3>Step 1: Encapsulate <code class="docutils literal notranslate"><span class="pre">Weapon</span></code> Behavior<a class="headerlink" href="#step-1-encapsulate-weapon-behavior" title="Permalink to this heading">#</a></h3>
 <p>First, we need to encapsulate the attack logic within the <code class="docutils literal notranslate"><span class="pre">Weapon</span></code> class. This ensures that the details of how a weapon attacks are hidden from the <code class="docutils literal notranslate"><span class="pre">Player</span></code>.</p>
 <p>Implement the Attack method in the Weapon class so that it reduces the <code class="docutils literal notranslate"><span class="pre">Health</span></code> of the <code class="docutils literal notranslate"><span class="pre">Player</span></code> passed as a target by the <code class="docutils literal notranslate"><span class="pre">Damage</span></code> of the weapon.
 The method should also print some information to the console so that we know what happened.</p>
@@ -604,25 +604,25 @@ Also implement the <code class="docutils literal notranslate"><span class="pre">
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 caused 15 damage to Bowser 🐲 (❤️ 35).
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 caused 30 damage to Bowser 🐲 (❤️ 20).
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 missed Mario 🥸 (❤️ 100).
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 caused 15 damage to Bowser 🐲 (❤️ 20).
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 caused 30 damage to Bowser 🐲 (❤️ -10).
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 missed Mario 🥸 (❤️ 100).
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 caused 15 damage to Bowser 🐲 (❤️ 5).
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 caused 30 damage to Bowser 🐲 (❤️ -40).
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 missed Mario 🥸 (❤️ 100).
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 caused 15 damage to Mario 🥸 (❤️ 85).
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hammer 🔨 caused 30 damage to Mario 🥸 (❤️ 70).
 </pre></div>
 </div>
 </div>
@@ -721,7 +721,7 @@ Also implement the <code class="docutils literal notranslate"><span class="pre">
 <li><a class="reference internal" href="#objective">Objective</a></li>
 <li><a class="reference internal" href="#provided-code">Provided Code</a></li>
 <li><a class="reference internal" href="#instructions">Instructions</a><ul>
-<li><a class="reference internal" href="#step-1-encapsulate-weapon-behavior">Step 1: Encapsulate Weapon Behavior</a></li>
+<li><a class="reference internal" href="#step-1-encapsulate-weapon-behavior">Step 1: Encapsulate <code class="docutils literal notranslate"><span class="pre">Weapon</span></code> Behavior</a></li>
 <li><a class="reference internal" href="#step-2-implement-attack-logic-in-player">Step 2: Implement Attack Logic in <code class="docutils literal notranslate"><span class="pre">Player</span></code></a></li>
 <li><a class="reference internal" href="#step-3-add-special-attack-method-with-state">Step 3: Add Special Attack Method with State</a></li>
 </ul>

@@ -55,7 +55,7 @@ class Player
 
 We will now take the code we have been given and enhance it by incorporating proper encapsulation and use composition to add more complexity to the game.
 
-### Step 1: Encapsulate Weapon Behavior
+### Step 1: Encapsulate `Weapon` Behavior
 
 First, we need to encapsulate the attack logic within the `Weapon` class. This ensures that the details of how a weapon attacks are hidden from the `Player`.
 
@@ -205,8 +205,9 @@ class Weapon
     {
         if (counter % 2 == 0)
         {
-            target.Health -= damage;
-            Console.WriteLine($"{Name} caused {damage} damage to {target.Name} (❤️ {target.Health}).");
+            int specialDamage = damage * 2;
+            target.Health -= specialDamage;
+            Console.WriteLine($"{Name} caused {specialDamage} damage to {target.Name} (❤️ {target.Health}).");
         }
         else
         {
