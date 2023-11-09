@@ -94,7 +94,7 @@ Console.WriteLine(saab.Speed == 0);
 
 ### Step 3: Introduce a `MaxSpeed` property
 
-Add a new property called `MaxSpeed` to the `Car` class. Its type should be `int`. This property should have a public `get` accessor and a private `set` accessor.
+Add a new (automatically implemented) property called `MaxSpeed` to the `Car` class. Its type should be `int`. This property should have a public `get` accessor and a private `set` accessor.
 Add a constructor that takes a single parameter of type `int`. This value should be used to set the `MaxSpeed` of the `Car` object.
 
 ```{code-cell}
