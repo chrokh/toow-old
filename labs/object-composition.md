@@ -205,8 +205,9 @@ class Weapon
     {
         if (counter % 2 == 0)
         {
-            target.Health -= damage;
-            Console.WriteLine($"{Name} caused {damage} damage to {target.Name} (❤️ {target.Health}).");
+            int specialDamage = damage * 2;
+            target.Health -= specialDamage;
+            Console.WriteLine($"{Name} caused {specialDamage} damage to {target.Name} (❤️ {target.Health}).");
         }
         else
         {
