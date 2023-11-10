@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Lab: Variant Generic Delegates" href="variant-generic-delegates.html" /><link rel="prev" title="Lab: Variant classes" href="variant-classes.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Lab: Replace conditional with polymorphism" href="replace-conditional-with-polymorphism.html" /><link rel="prev" title="Lab: Object composition" href="object-composition.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Lab: Variant delegates - The Object Oriented Way</title>
+        <title>Lab: Interfaces - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -283,7 +283,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapters/variant-generic-interfaces.html">115. Variant generic interfaces</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Labs (part 1)</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="fields.html">Lab: Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="instance-methods.html">Lab: Instance methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="encapsulation.html">Lab: Encapsulation</a></li>
@@ -293,10 +293,10 @@
 <li class="toctree-l1"><a class="reference internal" href="computed-properties.html">Lab: Computed Properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="static.html">Lab: Static</a></li>
 <li class="toctree-l1"><a class="reference internal" href="object-composition.html">Lab: Object composition</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interfaces.html">Lab: Interfaces</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Lab: Interfaces</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Labs (part 2)</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">Lab: Replace conditional with polymorphism</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generics.html">Lab: Generics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-types.html">Lab: Generic types</a></li>
@@ -312,7 +312,7 @@
 <li class="toctree-l1"><a class="reference internal" href="enumerables.html">Lab: Enumerables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="the-yield-keyword.html">Lab: The <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variant-classes.html">Lab: Variant classes</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Lab: Variant delegates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variant-delegates.html">Lab: Variant delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variant-generic-delegates.html">Lab: Variant Generic Delegates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variant-generic-interfaces.html">Lab: Variant Generic Interfaces</a></li>
 </ul>
@@ -349,25 +349,31 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="lab-variant-delegates">
-<h1>Lab: Variant delegates<a class="headerlink" href="#lab-variant-delegates" title="Permalink to this heading">#</a></h1>
+          <section class="tex2jax_ignore mathjax_ignore" id="lab-interfaces">
+<h1>Lab: Interfaces<a class="headerlink" href="#lab-interfaces" title="Permalink to this heading">#</a></h1>
 <section id="objective">
 <h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
-<p>In this lab exercise, we will dive deeper into the concept of variance in delegates. We aim to solidify our understanding of covariance and contravariance within the realm of delegates, empowering us to leverage this feature for more flexible and adaptable code.</p>
+<p>In this lab, we will explore the concept of interfaces. We’ll learn how to define and implement interfaces, ensuring our classes adhere to specified contracts.</p>
 </section>
 <section id="provided-code">
-<h2>Provided code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
-<p>Carefully review the provided code. Notice that we have two class definitions, <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> and its derived class, <code class="docutils literal notranslate"><span class="pre">Apple</span></code>. We also have two delegate definitions, <code class="docutils literal notranslate"><span class="pre">FruitFactory</span></code> and <code class="docutils literal notranslate"><span class="pre">AppleProcessor</span></code>, which serve as our tools for understanding variance.</p>
+<h2>Provided Code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
+<p>Carefully review the provided code. Notice how the interface <code class="docutils literal notranslate"><span class="pre">IShape</span></code> defines a contract without specifying implementation details. The interface declares properties and methods that implementing classes must provide.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Fruit</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">IShape</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">Width</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">Height</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">Area</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">void</span><span class="w"> </span><span class="nf">Scale</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">factor</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-9920.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-9306.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -417,7 +423,7 @@ function loadDotnetInteractiveApi() {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '9920.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '9306.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -473,147 +479,90 @@ else {
     </script>
 </div></div></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Apple</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Fruit</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">delegate</span><span class="w"> </span><span class="n">Fruit</span><span class="w"> </span><span class="nf">FruitFactory</span><span class="p">();</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">delegate</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">AppleProcessor</span><span class="p">(</span><span class="n">Apple</span><span class="w"> </span><span class="n">apple</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Recall that in the context of delegates, covariance allows for the return of a subtype, while contravariance permits input of a supertype.</p>
 </section>
 <section id="instructions">
 <h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
-<section id="step-1-experiment-with-covariance">
-<h3>Step 1: Experiment with Covariance<a class="headerlink" href="#step-1-experiment-with-covariance" title="Permalink to this heading">#</a></h3>
-<p>Start by creating another derived class of <code class="docutils literal notranslate"><span class="pre">Fruit</span></code>, for example, <code class="docutils literal notranslate"><span class="pre">Banana</span></code>.</p>
+<section id="step-1-define-classes-that-implement-ishape">
+<h3>Step 1: Define classes that implement <code class="docutils literal notranslate"><span class="pre">IShape</span></code><a class="headerlink" href="#step-1-define-classes-that-implement-ishape" title="Permalink to this heading">#</a></h3>
+<p>Write two classes called <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> and <code class="docutils literal notranslate"><span class="pre">Ellipse</span></code> that both implement the interface <code class="docutils literal notranslate"><span class="pre">IShape</span></code>.</p>
+<p>When you’re done, you should be able to run the following code:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Banana</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Fruit</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Create a method <code class="docutils literal notranslate"><span class="pre">MakeBanana</span></code> that returns an object of type <code class="docutils literal notranslate"><span class="pre">Banana</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="n">Banana</span><span class="w"> </span><span class="nf">MakeBanana</span><span class="p">()</span>
-<span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banana</span><span class="p">();</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Test the covariance principle by assigning the <code class="docutils literal notranslate"><span class="pre">MakeBanana</span></code> method to the <code class="docutils literal notranslate"><span class="pre">FruitFactory</span></code> delegate.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">FruitFactory</span><span class="w"> </span><span class="n">bananaFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MakeBanana</span><span class="p">;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="admonition-reflection admonition">
-<p class="admonition-title">🤔 Reflection</p>
-<p>Reflect on how covariance permits this kind of assignment. Why is this useful in certain scenarios?
-Think about how this level of flexibility in method assignment can be beneficial in larger systems where different components may evolve separately.</p>
-</div>
-</section>
-<section id="step-2-explore-contravariance">
-<h3>Step 2: Explore Contravariance<a class="headerlink" href="#step-2-explore-contravariance" title="Permalink to this heading">#</a></h3>
-<p>Define another method named <code class="docutils literal notranslate"><span class="pre">GeneralProcessor</span></code> that accepts a parameter of type <code class="docutils literal notranslate"><span class="pre">Object</span></code>, the base class for all C# types.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">GeneralProcessor</span><span class="p">(</span><span class="kt">object</span><span class="w"> </span><span class="n">obj</span><span class="p">)</span>
-<span class="w">    </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Processing the object.&quot;</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Try assigning this <code class="docutils literal notranslate"><span class="pre">GeneralProcessor</span></code> method to the <code class="docutils literal notranslate"><span class="pre">AppleProcessor</span></code> delegate.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">AppleProcessor</span><span class="w"> </span><span class="n">objProcessor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GeneralProcessor</span><span class="p">;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Ponder on the contravariance principle that allows this kind of assignment. In what scenarios can this be advantageous?</p>
-<div class="admonition-reflection admonition">
-<p class="admonition-title">🤔 Reflection</p>
-<p>Reflect on how allowing a more general input type can provide room for broader functionality without changing established interfaces or delegate definitions.</p>
-</div>
-</section>
-</section>
-<section id="step-3-understanding-delegate-variance-limitations">
-<h2>Step 3: Understanding Delegate Variance Limitations<a class="headerlink" href="#step-3-understanding-delegate-variance-limitations" title="Permalink to this heading">#</a></h2>
-<p>First, let’s create a delegate specifically for making Bananas.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">delegate</span><span class="w"> </span><span class="n">Banana</span><span class="w"> </span><span class="nf">BananaFactory</span><span class="p">();</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now, let’s try to assign an instance of <code class="docutils literal notranslate"><span class="pre">BananaFactory</span></code> to <code class="docutils literal notranslate"><span class="pre">FruitFactory</span></code>.</p>
-<div class="cell tag_raises-exception docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">BananaFactory</span><span class="w"> </span><span class="n">bananaMaker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MakeBanana</span><span class="p">;</span>
-<span class="n">FruitFactory</span><span class="w"> </span><span class="n">fruitMaker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bananaMaker</span><span class="p">;</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IShape</span><span class="w"> </span><span class="n">shape1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Width</span><span class="o">=</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">Height</span><span class="o">=</span><span class="m">10</span><span class="w"> </span><span class="p">};</span>
+<span class="n">IShape</span><span class="w"> </span><span class="n">shape2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Ellipse</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Width</span><span class="o">=</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="n">Height</span><span class="o">=</span><span class="m">20</span><span class="w"> </span><span class="p">};</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">shape1</span><span class="p">.</span><span class="n">Area</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">shape2</span><span class="p">.</span><span class="n">Area</span><span class="p">);</span>
+
+<span class="n">shape1</span><span class="p">.</span><span class="n">Scale</span><span class="p">(</span><span class="m">0.5</span><span class="p">);</span>
+<span class="n">shape2</span><span class="p">.</span><span class="n">Scale</span><span class="p">(</span><span class="m">2</span><span class="p">);</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">shape1</span><span class="p">.</span><span class="n">Area</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">shape2</span><span class="p">.</span><span class="n">Area</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2,27): error CS0029: Cannot implicitly convert type &#39;BananaFactory&#39; to &#39;FruitFactory&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>200
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3141.5926535897934
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12566.370614359173
 </pre></div>
 </div>
 </div>
 </div>
-<p>You’ll notice this does not compile. Even though <code class="docutils literal notranslate"><span class="pre">MakeBanana</span></code> can be assigned to a <code class="docutils literal notranslate"><span class="pre">FruitFactory</span></code> delegate (due to covariance on the return type), we cannot directly assign a <code class="docutils literal notranslate"><span class="pre">BananaFactory</span></code> delegate to a <code class="docutils literal notranslate"><span class="pre">FruitFactory</span></code> delegate.</p>
-<p>This is because the variance applies to the method signatures that the delegates point to, not the delegate types themselves. When we talk about delegate variance, it is always with respect to the methods they can reference, not about assigning instances of one delegate type to another.</p>
-<div class="admonition-reflection admonition">
-<p class="admonition-title">🤔 Reflection</p>
-<p>Consider the implications of this limitation. Why do you think the C# language designers made this decision? How does this ensure type safety while still providing flexibility?</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Note how the compile-time type (i.e. the type “on the left”) of both types is <code class="docutils literal notranslate"><span class="pre">IShape</span></code>.</p>
 </div>
-<p>By understanding this limitation, we can better appreciate the balance C# strikes between flexibility and type safety. This ensures that we always know the type of delegate we’re working with, while still allowing us to leverage the power of variance in the methods the delegates reference.</p>
+<p>We will create a new interface and implement it in different classes to observe interface functionality.</p>
 </section>
-<section id="challenge">
-<h2>Challenge<a class="headerlink" href="#challenge" title="Permalink to this heading">#</a></h2>
-<p>Now that we’ve refactored and expanded our understanding of variant delegates, let’s tackle a challenge.</p>
-<p>Create a new derived class from <code class="docutils literal notranslate"><span class="pre">Apple</span></code>, perhaps called <code class="docutils literal notranslate"><span class="pre">GoldenApple</span></code>.</p>
+</section>
+<section id="step-2-define-an-interface-called-ipositionable">
+<h2>Step 2: Define an interface called <code class="docutils literal notranslate"><span class="pre">IPositionable</span></code><a class="headerlink" href="#step-2-define-an-interface-called-ipositionable" title="Permalink to this heading">#</a></h2>
+<p>Define an interface called <code class="docutils literal notranslate"><span class="pre">IPositionable</span></code> that demands that its implementors define two publically gettable properties, of type <code class="docutils literal notranslate"><span class="pre">int</span></code>, called <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code></p>
+<p>Add to the <code class="docutils literal notranslate"><span class="pre">Rectangle</span></code> and <code class="docutils literal notranslate"><span class="pre">Circle</span></code> classes so that they implement the interface <code class="docutils literal notranslate"><span class="pre">IPositionable</span></code>.</p>
+<p>When you’re done you should be able to run the following code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">GoldenApple</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Apple</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">IPositionable</span><span class="w"> </span><span class="n">shape1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Rectangle</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span>
+<span class="w">    </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span>
+<span class="p">};</span>
+
+<span class="n">IPositionable</span><span class="w"> </span><span class="n">shape2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Ellipse</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span>
+<span class="w">    </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span>
+<span class="p">};</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;({shape1.X}, {shape1.Y})&quot;</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;({shape2.X}, {shape2.Y})&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10, 20)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5, 2)
 </pre></div>
 </div>
 </div>
 </div>
-<p>Using the variance principles you’ve learned, assign a method that returns a <code class="docutils literal notranslate"><span class="pre">GoldenApple</span></code> to the <code class="docutils literal notranslate"><span class="pre">FruitFactory</span></code> delegate and a method that accepts a <code class="docutils literal notranslate"><span class="pre">Fruit</span></code> to the <code class="docutils literal notranslate"><span class="pre">AppleProcessor</span></code> delegate.</p>
-<p>Reflect on the flexibility this offers, especially when considering larger systems with many interconnected components.</p>
-<div class="admonition-reflection admonition">
-<p class="admonition-title">🤔 Reflection</p>
-<p>How can the concept of variance, when used appropriately, reduce the need for frequent changes in a system’s architecture as new subclasses or functionalities are introduced?</p>
-</div>
-</section>
-<section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
-<p>By the end of this lab, we should be more comfortable and familiar with the concept of variance in delegates, understanding its applications and benefits in C# programming.</p>
-<p>Happy coding! 🤓</p>
 </section>
 </section>
 
@@ -641,23 +590,23 @@ Think about how this level of flexibility in method assignment can be beneficial
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="variant-generic-delegates.html">
+          <a class="next-page" href="replace-conditional-with-polymorphism.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Lab: Variant Generic Delegates</div>
+                <div class="title">Lab: Replace conditional with polymorphism</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="variant-classes.html">
+          <a class="prev-page" href="object-composition.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Lab: Variant classes</div>
+                <div class="title">Lab: Object composition</div>
                 
               </div>
             </a>
@@ -691,17 +640,14 @@ Think about how this level of flexibility in method assignment can be beneficial
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Lab: Variant delegates</a><ul>
+<li><a class="reference internal" href="#">Lab: Interfaces</a><ul>
 <li><a class="reference internal" href="#objective">Objective</a></li>
-<li><a class="reference internal" href="#provided-code">Provided code</a></li>
+<li><a class="reference internal" href="#provided-code">Provided Code</a></li>
 <li><a class="reference internal" href="#instructions">Instructions</a><ul>
-<li><a class="reference internal" href="#step-1-experiment-with-covariance">Step 1: Experiment with Covariance</a></li>
-<li><a class="reference internal" href="#step-2-explore-contravariance">Step 2: Explore Contravariance</a></li>
+<li><a class="reference internal" href="#step-1-define-classes-that-implement-ishape">Step 1: Define classes that implement <code class="docutils literal notranslate"><span class="pre">IShape</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#step-3-understanding-delegate-variance-limitations">Step 3: Understanding Delegate Variance Limitations</a></li>
-<li><a class="reference internal" href="#challenge">Challenge</a></li>
-<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+<li><a class="reference internal" href="#step-2-define-an-interface-called-ipositionable">Step 2: Define an interface called <code class="docutils literal notranslate"><span class="pre">IPositionable</span></code></a></li>
 </ul>
 </li>
 </ul>
