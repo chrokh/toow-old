@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Lab: Encapsulation" href="encapsulation.html" /><link rel="prev" title="Lab: Fields" href="fields.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Lab: Replace conditional with polymorphism" href="replace-conditional-with-polymorphism.html" /><link rel="prev" title="Lab: Interfaces" href="interfaces.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Lab: Instance methods - The Object Oriented Way</title>
+        <title>Lab: Subtype polymorphism - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -285,7 +285,7 @@
 <p class="caption" role="heading"><span class="caption-text">Labs (part 1)</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="fields.html">Lab: Fields</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Lab: Instance methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="instance-methods.html">Lab: Instance methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="encapsulation.html">Lab: Encapsulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="instance-method-overloading.html">Lab: Instance Method Overloading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constructor-overloading.html">Lab: Constructor overloading</a></li>
@@ -294,7 +294,7 @@
 <li class="toctree-l1"><a class="reference internal" href="static.html">Lab: Static</a></li>
 <li class="toctree-l1"><a class="reference internal" href="object-composition.html">Lab: Object composition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interfaces.html">Lab: Interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="subtype-polymorphism.html">Lab: Subtype polymorphism</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Lab: Subtype polymorphism</a></li>
 <li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">Lab: Replace conditional with polymorphism</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Labs (part 2)</span></p>
@@ -350,176 +350,344 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="lab-instance-methods">
-<h1>Lab: Instance methods<a class="headerlink" href="#lab-instance-methods" title="Permalink to this heading">#</a></h1>
+          <section class="tex2jax_ignore mathjax_ignore" id="lab-subtype-polymorphism">
+<h1>Lab: Subtype polymorphism<a class="headerlink" href="#lab-subtype-polymorphism" title="Permalink to this heading">#</a></h1>
 <section id="objective">
 <h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
-<p>In this lab, we will enhance our understanding of object oriented programming in C# by refactoring local functions or static methods into instance methods. We will work with a simple library system, focusing on the behaviors of books, to illustrate the power of instance methods and the principle of encapsulation.</p>
+<p>In this lab, we will refactor a simple program to implement subtype polymorphism. Starting with a <code class="docutils literal notranslate"><span class="pre">Snake</span></code> class that interacts with apples and bombs in a non-polymorphic manner, we will introduce an interface to unify these interactions. Our goal is to deepen our understanding of polymorphism in object oriented programming and learn how to apply it to make our code more flexible and maintainable.</p>
 </section>
 <section id="provided-code">
 <h2>Provided Code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
-<p>Carefully review the provided code. Notice the static method <code class="docutils literal notranslate"><span class="pre">describe</span></code> which prints details of a <code class="docutils literal notranslate"><span class="pre">Book</span></code> object. This demonstrates a procedural approach that we will transform into a more object oriented pattern by enabling each <code class="docutils literal notranslate"><span class="pre">Book</span></code> to handle its own description.</p>
-<div class="cell tag_remove-output docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Book</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Title</span><span class="p">;</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Author</span><span class="p">;</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">PageCount</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p>We begin with a <code class="docutils literal notranslate"><span class="pre">Snake</span></code> class that has methods to simulate eating an apple and a bomb, affecting its length and life status. This setup lacks polymorphism, which we will introduce to improve the design.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Static method</span>
-<span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">describe</span><span class="p">(</span><span class="n">Book</span><span class="w"> </span><span class="n">book</span><span class="p">)</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Snake</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;&#39;{book.Title}&#39; by {book.Author} ({book.PageCount} pages).&quot;</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Example usage</span>
-<span class="n">Book</span><span class="w"> </span><span class="n">book</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Book</span><span class="p">();</span>
-<span class="n">book</span><span class="p">.</span><span class="n">Title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;A Random Walk down Wall Street&quot;</span><span class="p">;</span>
-<span class="n">book</span><span class="p">.</span><span class="n">Author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Burton G. Malkiel&quot;</span><span class="p">;</span>
-<span class="n">book</span><span class="p">.</span><span class="n">PageCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">432</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">Length</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">IsAlive</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
 
-<span class="c1">// Passing the book to the static method.</span>
-<span class="n">describe</span><span class="p">(</span><span class="n">book</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;A Random Walk down Wall Street&#39; by Burton G. Malkiel (432 pages).
-</pre></div>
-</div>
-</div>
-</div>
-<p>Here, we have a <code class="docutils literal notranslate"><span class="pre">Book</span></code> class with fields that represent the state of a book in a library. Our objective is to modify this procedural code into object oriented code by using instance methods.</p>
-</section>
-<section id="instructions">
-<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
-<p>We will now turn the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method into an instance method within the class <code class="docutils literal notranslate"><span class="pre">Book</span></code>.
-This will allow any <code class="docutils literal notranslate"><span class="pre">Book</span></code> object to describe itself by accessing its own state.</p>
-<section id="step-1-convert-describe-to-an-instance-method">
-<h3>Step 1: Convert <code class="docutils literal notranslate"><span class="pre">describe</span></code> to an Instance Method<a class="headerlink" href="#step-1-convert-describe-to-an-instance-method" title="Permalink to this heading">#</a></h3>
-<p>Redefine the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method to be an instance method. It will not take any parameters, as it should now refer to the internal state of the instance.</p>
-<div class="cell tag_remove-output docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Book</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Title</span><span class="p">;</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Author</span><span class="p">;</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">PageCount</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">// Instance method to describe book details</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Describe</span><span class="p">()</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">EatApple</span><span class="p">()</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Add the implementation here...</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">IsAlive</span><span class="p">)</span>
+<span class="w">            </span><span class="n">Length</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">EatBomb</span><span class="p">()</span>
+<span class="w">        </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">IsAlive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Print</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IsAlive</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;Alive&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Dead&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&quot;Snake: {Length} ({status})&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-9379.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.0.19:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '9379.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
 </div>
-</section>
-<section id="step-2-update-method-invocation">
-<h3>Step 2: Update Method Invocation<a class="headerlink" href="#step-2-update-method-invocation" title="Permalink to this heading">#</a></h3>
-<p>Change the way you call the <code class="docutils literal notranslate"><span class="pre">Describe</span></code> method so that it is called on an instance of <code class="docutils literal notranslate"><span class="pre">Book</span></code> rather than as a static method.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Book</span><span class="w"> </span><span class="n">book</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Book</span><span class="p">();</span>
-<span class="n">book</span><span class="p">.</span><span class="n">Title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;How to Win Friends and Influence People&quot;</span><span class="p">;</span>
-<span class="n">book</span><span class="p">.</span><span class="n">Author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Dale Carnegie&quot;</span><span class="p">;</span>
-<span class="n">book</span><span class="p">.</span><span class="n">PageCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">320</span><span class="p">;</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Snake</span><span class="w"> </span><span class="n">snake</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Snake</span><span class="p">();</span>
 
-<span class="n">book</span><span class="p">.</span><span class="n">Describe</span><span class="p">();</span>
+<span class="n">snake</span><span class="p">.</span><span class="n">EatApple</span><span class="p">();</span>
+<span class="n">snake</span><span class="p">.</span><span class="n">EatApple</span><span class="p">();</span>
+<span class="n">snake</span><span class="p">.</span><span class="n">EatApple</span><span class="p">();</span>
+
+<span class="n">snake</span><span class="p">.</span><span class="n">EatBomb</span><span class="p">();</span>
+
+<span class="n">snake</span><span class="p">.</span><span class="n">EatApple</span><span class="p">();</span>
+
+<span class="n">snake</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;How to Win Friends and Influence People&#39; by Dale Carnegie (320 pages).
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Snake: 4 (Dead)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="instructions">
+<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
+<p>Let’s transform this code to implement subtype polymorphism by introducing an interface called <code class="docutils literal notranslate"><span class="pre">IEdible</span></code>.</p>
+<section id="step-1-define-the-interface">
+<h3>Step 1: Define the Interface<a class="headerlink" href="#step-1-define-the-interface" title="Permalink to this heading">#</a></h3>
+<p>Analyze the <code class="docutils literal notranslate"><span class="pre">EatApple</span></code> and <code class="docutils literal notranslate"><span class="pre">EatBomb</span></code> methods in the <code class="docutils literal notranslate"><span class="pre">Snake</span></code> class. Notice how these methods have the same signature but different names. Also notice how both these methods require the same data.</p>
+<p>Create an interface named <code class="docutils literal notranslate"><span class="pre">IEdible</span></code>. This interface should define a method that encapsulates the action of the <code class="docutils literal notranslate"><span class="pre">Snake</span></code> eating an object.</p>
+<p>You might want to use the signature <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">GetEatenBy</span> <span class="pre">(Snake</span> <span class="pre">snake)</span></code>.</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+</section>
+<section id="step-2-implement-the-interface">
+<h3>Step 2: Implement the Interface<a class="headerlink" href="#step-2-implement-the-interface" title="Permalink to this heading">#</a></h3>
+<p>Create two classes called <code class="docutils literal notranslate"><span class="pre">Apple</span></code> and <code class="docutils literal notranslate"><span class="pre">Bomb</span></code> and let them that implement the <code class="docutils literal notranslate"><span class="pre">IEdible</span></code> interface. Ensure that each class defines the appropriate behavior when eaten by the <code class="docutils literal notranslate"><span class="pre">Snake</span></code>.</p>
+<p>Your code should behave like this:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Snake</span><span class="w"> </span><span class="n">snake</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Snake</span><span class="p">();</span>
+
+<span class="n">List</span><span class="o">&lt;</span><span class="n">IEdible</span><span class="o">&gt;</span><span class="w"> </span><span class="n">edibles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">IEdible</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Apple</span><span class="p">(),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Apple</span><span class="p">(),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Bomb</span><span class="p">(),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Apple</span><span class="p">()</span>
+<span class="p">};</span>
+
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">IEdible</span><span class="w"> </span><span class="n">edible</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">edibles</span><span class="p">)</span>
+<span class="w">    </span><span class="n">edible</span><span class="p">.</span><span class="n">GetEatenBy</span><span class="p">(</span><span class="n">snake</span><span class="p">);</span>
+
+<span class="n">snake</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Snake: 4 (Dead)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice how we’ve removed the <code class="docutils literal notranslate"><span class="pre">if</span></code> statement that checked if the <code class="docutils literal notranslate"><span class="pre">Snake</span></code> was alive, before allowing it to eat the <code class="docutils literal notranslate"><span class="pre">Apple</span></code>. We’ll reintroduce this check in the next step.</p>
+<div class="admonition-reflection admonition">
+<p class="admonition-title">🤔 Reflection</p>
+<p>How does implementing the <code class="docutils literal notranslate"><span class="pre">IEdible</span></code> interface change the way we interact with the <code class="docutils literal notranslate"><span class="pre">Apple</span></code> and <code class="docutils literal notranslate"><span class="pre">Bomb</span></code> objects? Discuss the benefits of using an interface in this scenario.</p>
+</div>
+</section>
+<section id="step-3-refactor-the-snake-class">
+<h3>Step 3: Refactor the Snake Class<a class="headerlink" href="#step-3-refactor-the-snake-class" title="Permalink to this heading">#</a></h3>
+<p>Modify the <code class="docutils literal notranslate"><span class="pre">Snake</span></code> class to remove the <code class="docutils literal notranslate"><span class="pre">EatApple</span></code> and <code class="docutils literal notranslate"><span class="pre">EatBomb</span></code> methods. Instead, introduce a method with the signature <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">Eat(IEdible</span> <span class="pre">edible)</span></code> that allows the <code class="docutils literal notranslate"><span class="pre">Snake</span></code> to interact with any <code class="docutils literal notranslate"><span class="pre">IEdible</span></code> object.</p>
+<p>In this step you should also reintroduce the <code class="docutils literal notranslate"><span class="pre">if</span></code> statement that checks if the <code class="docutils literal notranslate"><span class="pre">Snake</span></code> is allowed, so that only snakes that are alive can eat <code class="docutils literal notranslate"><span class="pre">IEdible</span></code>s.
+This check should reside in the method <code class="docutils literal notranslate"><span class="pre">Eat</span></code>.</p>
+<p>Your code should behave like this:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Snake</span><span class="w"> </span><span class="n">snake</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Snake</span><span class="p">();</span>
+
+<span class="n">List</span><span class="o">&lt;</span><span class="n">IEdible</span><span class="o">&gt;</span><span class="w"> </span><span class="n">edibles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">IEdible</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Apple</span><span class="p">(),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Apple</span><span class="p">(),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Apple</span><span class="p">(),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Bomb</span><span class="p">(),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Apple</span><span class="p">()</span>
+<span class="p">};</span>
+
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">IEdible</span><span class="w"> </span><span class="n">edible</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">edibles</span><span class="p">)</span>
+<span class="w">    </span><span class="n">snake</span><span class="p">.</span><span class="n">Eat</span><span class="p">(</span><span class="n">edible</span><span class="p">);</span>
+
+<span class="n">snake</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Snake: 4 (Dead)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice how the <code class="docutils literal notranslate"><span class="pre">Snake</span></code>’s state changes after each interaction.</p>
+<div class="admonition-reflection admonition">
+<p class="admonition-title">🤔 Reflection</p>
+<p>How does passing an <code class="docutils literal notranslate"><span class="pre">IEdible</span></code> to a <code class="docutils literal notranslate"><span class="pre">Snake</span></code>  change the way we interact with the <code class="docutils literal notranslate"><span class="pre">Apple</span></code> and <code class="docutils literal notranslate"><span class="pre">Bomb</span></code> objects? Why did we introduce this method?</p>
+</div>
+</section>
+<section id="step-4-add-goldenapple">
+<h3>Step 4: Add <code class="docutils literal notranslate"><span class="pre">GoldenApple</span></code><a class="headerlink" href="#step-4-add-goldenapple" title="Permalink to this heading">#</a></h3>
+<p>Add a new <code class="docutils literal notranslate"><span class="pre">GoldenApple</span></code> class that implements <code class="docutils literal notranslate"><span class="pre">IEdible</span></code>. This <code class="docutils literal notranslate"><span class="pre">GoldenApple</span></code> should take an <code class="docutils literal notranslate"><span class="pre">int</span></code> in its constructor which defines how much the <code class="docutils literal notranslate"><span class="pre">Snake</span></code> should grow by when it is eaten.</p>
+<p>Include it in your list of <code class="docutils literal notranslate"><span class="pre">IEdible</span></code> objects and observe the outcome:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Snake</span><span class="w"> </span><span class="n">snake</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Snake</span><span class="p">();</span>
+
+<span class="n">List</span><span class="o">&lt;</span><span class="n">IEdible</span><span class="o">&gt;</span><span class="w"> </span><span class="n">edibles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">IEdible</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Apple</span><span class="p">(),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Apple</span><span class="p">(),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">GoldenApple</span><span class="p">(</span><span class="m">10</span><span class="p">),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Bomb</span><span class="p">(),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Apple</span><span class="p">(),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">GoldenApple</span><span class="p">(</span><span class="m">20</span><span class="p">)</span>
+<span class="p">};</span>
+
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">IEdible</span><span class="w"> </span><span class="n">edible</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">edibles</span><span class="p">)</span>
+<span class="w">    </span><span class="n">snake</span><span class="p">.</span><span class="n">Eat</span><span class="p">(</span><span class="n">edible</span><span class="p">);</span>
+
+<span class="n">snake</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Snake: 13 (Dead)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="admonition-reflection admonition">
 <p class="admonition-title">🤔 Reflection</p>
-<p>In the transition from a static method to an instance method, consider how the context of <code class="docutils literal notranslate"><span class="pre">Describe</span></code> has changed. Why does the instance method <code class="docutils literal notranslate"><span class="pre">Describe</span></code> not need any parameters? How does this relate to encapsulation?</p>
+<p>Reflect on the process of adding the <code class="docutils literal notranslate"><span class="pre">GoldenApple</span></code> to the system. How did the use of polymorphism make this addition easier and more seamless?</p>
 </div>
 </section>
 </section>
 <section id="challenge">
 <h2>Challenge<a class="headerlink" href="#challenge" title="Permalink to this heading">#</a></h2>
-<p>Add an instance method called <code class="docutils literal notranslate"><span class="pre">ReadPage</span></code> to the <code class="docutils literal notranslate"><span class="pre">Book</span></code> class that simulates reading a page by incrementing a field called <code class="docutils literal notranslate"><span class="pre">CurrentPage</span></code> and printing a message that a page has been read.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">ReadPage</span></code> method should:</p>
-<ol class="arabic simple">
-<li><p>Increase <code class="docutils literal notranslate"><span class="pre">CurrentPage</span></code> by one each time it is called.</p></li>
-<li><p>Not allow <code class="docutils literal notranslate"><span class="pre">CurrentPage</span></code> to exceed the <code class="docutils literal notranslate"><span class="pre">PageCount</span></code>.</p></li>
-<li><p>Print a message each time a page is read, and a different message if there are no more pages to read.</p></li>
-</ol>
-<p>After adding the <code class="docutils literal notranslate"><span class="pre">ReadPage</span></code> method to the <code class="docutils literal notranslate"><span class="pre">Book</span></code> class, create two instances of <code class="docutils literal notranslate"><span class="pre">Book</span></code> in the <code class="docutils literal notranslate"><span class="pre">Main</span></code> method and try reading a few pages of them instance.</p>
+<p>Add a class called <code class="docutils literal notranslate"><span class="pre">MetalApple</span></code> that implements <code class="docutils literal notranslate"><span class="pre">IEdible</span></code>. This apple should take two <code class="docutils literal notranslate"><span class="pre">int</span></code> arguments in its constructor. The first defines how many times the apple has to be eaten before its effect is applied to the <code class="docutils literal notranslate"><span class="pre">Snake</span></code>. The second defines how much the <code class="docutils literal notranslate"><span class="pre">Snake</span></code> should grow by when the effect is finally applied. The <code class="docutils literal notranslate"><span class="pre">Snake</span></code> that eats the <code class="docutils literal notranslate"><span class="pre">MetalApple</span></code> the last time is the one that the effect is applied to.</p>
+<p>It should behave like this:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Book</span><span class="w"> </span><span class="n">b1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Book</span><span class="p">();</span>
-<span class="n">Book</span><span class="w"> </span><span class="n">b2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Book</span><span class="p">();</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">Snake</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Snake</span><span class="p">();</span>
+<span class="n">Snake</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Snake</span><span class="p">();</span>
 
-<span class="c1">// Set attributes of b1.</span>
-<span class="n">b1</span><span class="p">.</span><span class="n">Title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Built to sell&quot;</span><span class="p">;</span>
-<span class="n">b1</span><span class="p">.</span><span class="n">Author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;John Warrillow&quot;</span><span class="p">;</span>
-<span class="n">b1</span><span class="p">.</span><span class="n">PageCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">;</span>
+<span class="n">MetalApple</span><span class="w"> </span><span class="n">metalApple</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MetalApple</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">100</span><span class="p">);</span>
 
-<span class="c1">// Set attributes of b2.</span>
-<span class="c1">// ...</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">IEdible</span><span class="o">&gt;</span><span class="w"> </span><span class="n">edibles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">IEdible</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Apple</span><span class="p">(),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Apple</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">metalApple</span><span class="p">,</span>
+<span class="w">    </span><span class="n">metalApple</span><span class="p">,</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">GoldenApple</span><span class="p">(</span><span class="m">10</span><span class="p">),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Bomb</span><span class="p">(),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">Apple</span><span class="p">(),</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="nf">GoldenApple</span><span class="p">(</span><span class="m">20</span><span class="p">)</span>
+<span class="p">};</span>
 
-<span class="c1">// Read pages of b1.</span>
-<span class="n">b1</span><span class="p">.</span><span class="n">ReadPage</span><span class="p">();</span>
-<span class="n">b1</span><span class="p">.</span><span class="n">ReadPage</span><span class="p">();</span>
-<span class="n">b1</span><span class="p">.</span><span class="n">ReadPage</span><span class="p">();</span>
-<span class="n">b1</span><span class="p">.</span><span class="n">ReadPage</span><span class="p">();</span>
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="n">IEdible</span><span class="w"> </span><span class="n">edible</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">edibles</span><span class="p">)</span>
+<span class="w">    </span><span class="n">p1</span><span class="p">.</span><span class="n">Eat</span><span class="p">(</span><span class="n">edible</span><span class="p">);</span>
 
-<span class="c1">// Read pages of b2.</span>
-<span class="c1">// ...</span>
+<span class="n">p2</span><span class="p">.</span><span class="n">Eat</span><span class="p">(</span><span class="n">metalApple</span><span class="p">);</span>
+
+<span class="n">p1</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
+<span class="n">p2</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reading page 1 of &#39;Built to sell&#39;. 2 remaining.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Snake: 13 (Dead)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reading page 2 of &#39;Built to sell&#39;. 1 remaining.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reading page 3 of &#39;Built to sell&#39;. 0 remaining.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You have finished reading &#39;Built to sell&#39;!
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Snake: 101 (Alive)
 </pre></div>
 </div>
 </div>
-</div>
-<div class="admonition-reflection admonition">
-<p class="admonition-title">🤔 Reflection</p>
-<p>Does reading pages in <code class="docutils literal notranslate"><span class="pre">b1</span></code> affect anything in <code class="docutils literal notranslate"><span class="pre">b2</span></code>?</p>
-</div>
-<div class="admonition-reflection admonition">
-<p class="admonition-title">🤔 Reflection</p>
-<p>Reflect on the implementation of the <code class="docutils literal notranslate"><span class="pre">ReadPage</span></code> method. How does managing state within an instance affect the way we think about the data and behavior of objects in object oriented programming?</p>
 </div>
 </section>
 <section id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
-<div class="admonition-reflection admonition">
-<p class="admonition-title">🤔 Reflection</p>
-<p>Since all fields in <code class="docutils literal notranslate"><span class="pre">Book</span></code> are <code class="docutils literal notranslate"><span class="pre">public</span></code> we can access these fields on any <code class="docutils literal notranslate"><span class="pre">Book</span></code> object. For example, this means that we can update the <code class="docutils literal notranslate"><span class="pre">CurrentPage</span></code> of a book instance by saying <code class="docutils literal notranslate"><span class="pre">book.CurrentPage</span> <span class="pre">=</span> <span class="pre">12</span></code> (if the variable containing a <code class="docutils literal notranslate"><span class="pre">Book</span></code> object is called <code class="docutils literal notranslate"><span class="pre">book</span></code>). Why is this problematic?</p>
-</div>
-<p>Excellent work! 🌟</p>
+<p>Through this exercise, you have gained practical experience in applying subtype polymorphism to make your object oriented programs more dynamic.</p>
+<p>High-five ✋. Good job.</p>
 </section>
 </section>
 
@@ -547,23 +715,23 @@ This will allow any <code class="docutils literal notranslate"><span class="pre"
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="encapsulation.html">
+          <a class="next-page" href="replace-conditional-with-polymorphism.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Lab: Encapsulation</div>
+                <div class="title">Lab: Replace conditional with polymorphism</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="fields.html">
+          <a class="prev-page" href="interfaces.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Lab: Fields</div>
+                <div class="title">Lab: Interfaces</div>
                 
               </div>
             </a>
@@ -597,12 +765,14 @@ This will allow any <code class="docutils literal notranslate"><span class="pre"
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Lab: Instance methods</a><ul>
+<li><a class="reference internal" href="#">Lab: Subtype polymorphism</a><ul>
 <li><a class="reference internal" href="#objective">Objective</a></li>
 <li><a class="reference internal" href="#provided-code">Provided Code</a></li>
 <li><a class="reference internal" href="#instructions">Instructions</a><ul>
-<li><a class="reference internal" href="#step-1-convert-describe-to-an-instance-method">Step 1: Convert <code class="docutils literal notranslate"><span class="pre">describe</span></code> to an Instance Method</a></li>
-<li><a class="reference internal" href="#step-2-update-method-invocation">Step 2: Update Method Invocation</a></li>
+<li><a class="reference internal" href="#step-1-define-the-interface">Step 1: Define the Interface</a></li>
+<li><a class="reference internal" href="#step-2-implement-the-interface">Step 2: Implement the Interface</a></li>
+<li><a class="reference internal" href="#step-3-refactor-the-snake-class">Step 3: Refactor the Snake Class</a></li>
+<li><a class="reference internal" href="#step-4-add-goldenapple">Step 4: Add <code class="docutils literal notranslate"><span class="pre">GoldenApple</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#challenge">Challenge</a></li>
