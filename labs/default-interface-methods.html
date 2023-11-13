@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Lab: Observer Pattern" href="observer-pattern.html" /><link rel="prev" title="Lab: Delegates" href="delegates.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Lab: Replace conditional with polymorphism" href="replace-conditional-with-polymorphism.html" /><link rel="prev" title="Lab: Overriding" href="overriding.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
-        <title>Lab: Lambdas - The Object Oriented Way</title>
+        <title>Lab: Default Interface Methods - The Object Oriented Way</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -283,7 +283,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapters/variant-generic-interfaces.html">115. Variant generic interfaces</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Labs (part 1)</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="fields.html">Lab: Fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="instance-methods.html">Lab: Instance methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="encapsulation.html">Lab: Encapsulation</a></li>
@@ -296,11 +296,11 @@
 <li class="toctree-l1"><a class="reference internal" href="interfaces.html">Lab: Interfaces</a></li>
 <li class="toctree-l1"><a class="reference internal" href="subtype-polymorphism.html">Lab: Subtype polymorphism</a></li>
 <li class="toctree-l1"><a class="reference internal" href="overriding.html">Lab: Overriding</a></li>
-<li class="toctree-l1"><a class="reference internal" href="default-interface-methods.html">Lab: Default Interface Methods</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Lab: Default Interface Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="replace-conditional-with-polymorphism.html">Lab: Replace conditional with polymorphism</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Labs (part 2)</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="generics.html">Lab: Generics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-types.html">Lab: Generic types</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generic-supertypes.html">Lab: Generic Supertypes</a></li>
@@ -308,7 +308,7 @@
 <li class="toctree-l1"><a class="reference internal" href="composition-over-inheritance.html">Lab: Composition over Inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bridge-pattern.html">Lab: Bridge Pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="delegates.html">Lab: Delegates</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Lab: Lambdas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lambdas.html">Lab: Lambdas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="observer-pattern.html">Lab: Observer Pattern</a></li>
 <li class="toctree-l1"><a class="reference internal" href="events.html">Lab: Events</a></li>
 <li class="toctree-l1"><a class="reference internal" href="iterator-pattern.html">Lab: Iterator pattern</a></li>
@@ -352,53 +352,296 @@
           </label>
         </div>
         <article role="main">
-          <section class="tex2jax_ignore mathjax_ignore" id="lab-lambdas">
-<h1>Lab: Lambdas<a class="headerlink" href="#lab-lambdas" title="Permalink to this heading">#</a></h1>
+          <section class="tex2jax_ignore mathjax_ignore" id="lab-default-interface-methods">
+<h1>Lab: Default Interface Methods<a class="headerlink" href="#lab-default-interface-methods" title="Permalink to this heading">#</a></h1>
 <section id="objective">
 <h2>Objective<a class="headerlink" href="#objective" title="Permalink to this heading">#</a></h2>
-<p>In this lab, we will practice writing lambdas in C# with a focus on utilizing the power of type inference. We aim to understand the difference in specifying types explicitly versus letting the C# compiler infer the types for us. By the end of this lab, we should be proficient in crafting concise lambdas and understand the scenarios where type inference can be a boon.</p>
+<p>In this lab, we will delve into the concept of default interface methods. Our objective is to understand how to implement and utilize these methods effectively by working on a practical example: simple ciphers. By the end of this lab, we will have created a series of cipher classes that adhere to a common interface, <code class="docutils literal notranslate"><span class="pre">ICipher</span></code>.</p>
+</section>
+<section id="provided-code">
+<h2>Provided Code<a class="headerlink" href="#provided-code" title="Permalink to this heading">#</a></h2>
+<p>Carefully review the provided code. Notice that we have an interface named <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> with a single method signature: <code class="docutils literal notranslate"><span class="pre">char</span> <span class="pre">Encode(char)</span></code>. This interface serves as a contract for any cipher class we create, ensuring they all have a basic encoding functionality.</p>
+<p>However, we can enhance its utility by adding a default method <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">Encode(string</span> <span class="pre">input)</span></code>. This method will iterate over each character in the input <code class="docutils literal notranslate"><span class="pre">string</span></code>, apply the <code class="docutils literal notranslate"><span class="pre">Encode(char)</span></code> method, and assemble the resulting characters into a new encoded <code class="docutils literal notranslate"><span class="pre">string</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ICipher</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="nf">Encode</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">character</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="nf">Encode</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">input</span><span class="p">)</span>
+<span class="w">            </span><span class="n">output</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">Encode</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div>
+    <div id='dotnet-interactive-this-cell-8361.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+        The below script needs to be able to find the current output cell; this is an easy method to get it.
+    </div>
+    <script type='text/javascript'>
+async function probeAddresses(probingAddresses) {
+    function timeout(ms, promise) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                reject(new Error('timeout'))
+            }, ms)
+            promise.then(resolve, reject)
+        })
+    }
+
+    if (Array.isArray(probingAddresses)) {
+        for (let i = 0; i < probingAddresses.length; i++) {
+
+            let rootUrl = probingAddresses[i];
+
+            if (!rootUrl.endsWith('/')) {
+                rootUrl = `${rootUrl}/`;
+            }
+
+            try {
+                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    mode: 'cors',
+                    timeout: 1000,
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: probingAddresses[i]
+                }));
+
+                if (response.status == 200) {
+                    return rootUrl;
+                }
+            }
+            catch (e) { }
+        }
+    }
+}
+
+function loadDotnetInteractiveApi() {
+    probeAddresses(["http://10.1.1.37:2048/", "http://127.0.0.1:2048/"])
+        .then((root) => {
+        // use probing to find host url and api resources
+        // load interactive helpers and language services
+        let dotnetInteractiveRequire = require.config({
+        context: '8361.Microsoft.DotNet.Interactive.Http.HttpPort',
+                paths:
+            {
+                'dotnet-interactive': `${root}resources`
+                }
+        }) || require;
+
+            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
+
+            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
+                let paths = {};
+                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
+                
+                let internalRequire = require.config({
+                    context: extensionCacheBuster,
+                    paths: paths,
+                    urlArgs: `cacheBuster=${extensionCacheBuster}`
+                    }) || require;
+
+                return internalRequire
+            };
+        
+            dotnetInteractiveRequire([
+                    'dotnet-interactive/dotnet-interactive'
+                ],
+                function (dotnet) {
+                    dotnet.init(window);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        })
+        .catch(error => {console.log(error);});
+    }
+
+// ensure `require` is available globally
+if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
+    let require_script = document.createElement('script');
+    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
+    require_script.setAttribute('type', 'text/javascript');
+    
+    
+    require_script.onload = function() {
+        loadDotnetInteractiveApi();
+    };
+
+    document.getElementsByTagName('head')[0].appendChild(require_script);
+}
+else {
+    loadDotnetInteractiveApi();
+}
+
+    </script>
+</div></div></div>
+</div>
+<div class="admonition-reflection admonition">
+<p class="admonition-title">🤔 Reflection</p>
+<p>How does implementing the <code class="docutils literal notranslate"><span class="pre">Encode(string)</span></code> method in the interface benefit all classes that implement <code class="docutils literal notranslate"><span class="pre">ICipher</span></code>? Would there be any drawbacks if each class had to implement its own version of this method?</p>
+</div>
 </section>
 <section id="instructions">
 <h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">#</a></h2>
-<section id="step-1-type-inference">
-<h3>Step 1: Type Inference<a class="headerlink" href="#step-1-type-inference" title="Permalink to this heading">#</a></h3>
-<p>Use the built-in delegate types (<code class="docutils literal notranslate"><span class="pre">Func</span></code>, <code class="docutils literal notranslate"><span class="pre">Predicate</span></code>, and <code class="docutils literal notranslate"><span class="pre">Action</span></code>) explicitly and allow the rest of your lambda to be inferred. Write the following lambdas:</p>
-<ol class="arabic simple">
-<li><p>A lambda that takes two integers and returns their sum. Use the <code class="docutils literal notranslate"><span class="pre">Func&lt;int,</span> <span class="pre">int,</span> <span class="pre">int&gt;</span></code> delegate and assign it to a variable called <code class="docutils literal notranslate"><span class="pre">add</span></code>.</p></li>
-<li><p>A lambda that checks if an integer is even. Use the <code class="docutils literal notranslate"><span class="pre">Predicate&lt;int&gt;</span></code> delegate and name the lambda <code class="docutils literal notranslate"><span class="pre">isEven</span></code>.</p></li>
-<li><p>A lambda that takes a string and prints it. Use the <code class="docutils literal notranslate"><span class="pre">Action&lt;string&gt;</span></code> delegate and name it <code class="docutils literal notranslate"><span class="pre">printString</span></code>.</p></li>
-</ol>
+<p>Your task is to implement three different cipher classes that conform to the <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> interface.</p>
+<section id="step-1-implement-caesarcipher">
+<h3>Step 1: Implement <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code><a class="headerlink" href="#step-1-implement-caesarcipher" title="Permalink to this heading">#</a></h3>
+<p>Create a class <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code> that implements <code class="docutils literal notranslate"><span class="pre">ICipher</span></code>.
+The constructor should accept an integer for the step length of the cipher.
+Implement the <code class="docutils literal notranslate"><span class="pre">Encode(char)</span></code> method to shift the character by the specified step length.</p>
+<p>When you’re done, you should be able to run the following code:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ICipher</span><span class="w"> </span><span class="n">cipher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CaesarCipher</span><span class="p">(</span><span class="m">2</span><span class="p">);</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;ABC xyz 123&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CDE zab 123
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ICipher</span><span class="w"> </span><span class="n">cipher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CaesarCipher</span><span class="p">(</span><span class="o">-</span><span class="m">1</span><span class="p">);</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;ABC xyz 123&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ZAB wxy 123
+</pre></div>
+</div>
+</div>
+</div>
 </section>
-<section id="step-2-inferring-return-type">
-<h3>Step 2: Inferring return type<a class="headerlink" href="#step-2-inferring-return-type" title="Permalink to this heading">#</a></h3>
-<p>In this exercise, you will define only the input parameter types, letting the compiler infer the return type. Remember to use <code class="docutils literal notranslate"><span class="pre">var</span></code>. Write the following lambdas:</p>
-<ol class="arabic simple">
-<li><p>A lambda that takes a <code class="docutils literal notranslate"><span class="pre">double</span></code> and returns its square. Name it <code class="docutils literal notranslate"><span class="pre">square</span></code>.</p></li>
-<li><p>A lambda that takes two <code class="docutils literal notranslate"><span class="pre">strings</span></code> and concatenates them. Name it <code class="docutils literal notranslate"><span class="pre">concatenate</span></code>.</p></li>
-<li><p>A lambda that returns an <code class="docutils literal notranslate"><span class="pre">int</span></code> and calculates the product of two numbers. Name it <code class="docutils literal notranslate"><span class="pre">multiply</span></code>.</p></li>
-<li><p>A lambda returning a <code class="docutils literal notranslate"><span class="pre">bool</span></code> that checks if a given string starts with an uppercase letter. Name it <code class="docutils literal notranslate"><span class="pre">startsWithUppercase</span></code>.</p></li>
-</ol>
+<section id="step-2-implement-leetcipher">
+<h3>Step 2: Implement <code class="docutils literal notranslate"><span class="pre">LeetCipher</span></code><a class="headerlink" href="#step-2-implement-leetcipher" title="Permalink to this heading">#</a></h3>
+<p>Create a class <code class="docutils literal notranslate"><span class="pre">LeetCipher</span></code> that also implements <code class="docutils literal notranslate"><span class="pre">ICipher</span></code>.
+In <code class="docutils literal notranslate"><span class="pre">Encode(char)</span></code>, replace specific characters (like <code class="docutils literal notranslate"><span class="pre">E</span></code>, <code class="docutils literal notranslate"><span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">T</span></code>) with numerals (like <code class="docutils literal notranslate"><span class="pre">3</span></code>, <code class="docutils literal notranslate"><span class="pre">4</span></code>, <code class="docutils literal notranslate"><span class="pre">7</span></code>).</p>
+<p>When you’re done, you should be able to run the following code:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ICipher</span><span class="w"> </span><span class="n">cipher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LeetCipher</span><span class="p">();</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;Leet encode&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1337 3ncod3
+</pre></div>
+</div>
+</div>
+</div>
 </section>
-<section id="step-4-custom-delegate-inference">
-<h3>Step 4: Custom Delegate Inference<a class="headerlink" href="#step-4-custom-delegate-inference" title="Permalink to this heading">#</a></h3>
-<p>Define your own delegate, declare a variable of that delegate type, and assign a lambda to that variable. Let both parameters and return type of the lambda be inferred.
-The variable should be called <code class="docutils literal notranslate"><span class="pre">toggleCase</span></code> and should toggle the case of a string so that all uppercase characters are turned lowercase and vice versa.</p>
-<div class="admonition-reflection admonition">
-<p class="admonition-title">🤔 Reflection</p>
-<p>How do you feel about type inference? Can you think of situations where it might be helpful? When might it be less useful or potentially confusing?</p>
+<section id="step-3-implement-flipflopcipher">
+<h3>Step 3: Implement FlipFlopCipher<a class="headerlink" href="#step-3-implement-flipflopcipher" title="Permalink to this heading">#</a></h3>
+<p>This cipher alternates between two different ciphers for each character encoded.
+Create a class <code class="docutils literal notranslate"><span class="pre">FlipFlopCipher</span></code> with a constructor that takes two <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> instances.
+Implement <code class="docutils literal notranslate"><span class="pre">Encode(char)</span></code> to alternate between these two ciphers.</p>
+<p>When you’re done, you should be able to run the following code:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">ICipher</span><span class="w"> </span><span class="n">cipher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FlipFlopCipher</span><span class="p">(</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nf">CaesarCipher</span><span class="p">(</span><span class="m">1</span><span class="p">),</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nf">CaesarCipher</span><span class="p">(</span><span class="o">-</span><span class="m">1</span><span class="p">));</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;AABBCCDD&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BZCADBEC
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-reflect-on-the-limitations-of-default-interface-methods">
+<h3>Step 4: Reflect on the limitations of default interface methods<a class="headerlink" href="#step-4-reflect-on-the-limitations-of-default-interface-methods" title="Permalink to this heading">#</a></h3>
+<p>Why does the following code fail to compile?</p>
+<p>How can this limitation of default interface methods affect our design decisions?</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">CaesarCipher</span><span class="w"> </span><span class="n">cipher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CaesarCipher</span><span class="p">(</span><span class="m">2</span><span class="p">);</span>
+<span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;Hello world&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2,15): error CS1503: Argument 1: cannot convert from &#39;string&#39; to &#39;char&#39;
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
 <section id="challenge">
 <h2>Challenge<a class="headerlink" href="#challenge" title="Permalink to this heading">#</a></h2>
-<p>Write the following lambdas:</p>
-<ol class="arabic simple">
-<li><p>A lambda that adds two numbers and assign it to a variable called <code class="docutils literal notranslate"><span class="pre">sum</span></code>.</p></li>
-<li><p>A lambda that checks if a given number is positive. Name it <code class="docutils literal notranslate"><span class="pre">isPositive</span></code>.</p></li>
-<li><p>A lambda that prints a line. Name this lambda <code class="docutils literal notranslate"><span class="pre">printLine</span></code>.</p></li>
-<li><p>A lambda that greets a given name. For instance, for the name <code class="docutils literal notranslate"><span class="pre">&quot;Chris&quot;</span></code>, it should print <code class="docutils literal notranslate"><span class="pre">&quot;Hello,</span> <span class="pre">Chris!&quot;</span></code>. Name this lambda <code class="docutils literal notranslate"><span class="pre">greet</span></code>.</p></li>
-<li><p>A lambda that checks the equality of two strings without considering their case. Name it <code class="docutils literal notranslate"><span class="pre">areSimilar</span></code>.</p></li>
-</ol>
+<p>Now that we’ve refactored our code, let’s tackle one more problem: <code class="docutils literal notranslate"><span class="pre">CycleCipher</span></code>. This cipher should take a list of <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> instances and use each one in turn to encode characters in a string.</p>
+<p>Implement <code class="docutils literal notranslate"><span class="pre">CycleCipher</span></code> that takes a list of ciphers in the constructor.
+The <code class="docutils literal notranslate"><span class="pre">Encode(char)</span></code> method should cycle through each cipher in the list for successive characters.</p>
+<p>When you’re done you should be able to run the following code:</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">ICipher</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ciphers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ICipher</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nf">CaesarCipher</span><span class="p">(</span><span class="m">1</span><span class="p">),</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nf">FlipFlopCipher</span><span class="p">(</span>
+<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="nf">CaesarCipher</span><span class="p">(</span><span class="m">1</span><span class="p">),</span>
+<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="nf">CaesarCipher</span><span class="p">(</span><span class="o">-</span><span class="m">1</span><span class="p">)),</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nf">LeetCipher</span><span class="p">(),</span>
+<span class="p">};</span>
+<span class="n">ICipher</span><span class="w"> </span><span class="n">cipher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CycleCipher</span><span class="p">(</span><span class="n">ciphers</span><span class="p">);</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;AAAAAA&quot;</span><span class="p">));</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">cipher</span><span class="p">.</span><span class="n">Encode</span><span class="p">(</span><span class="s">&quot;Leet&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BB4BZ4
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mf3u
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="bonus-challenge">
+<h2>Bonus Challenge<a class="headerlink" href="#bonus-challenge" title="Permalink to this heading">#</a></h2>
+<p>If you’re feeling on a roll, here’s a more difficult challenge for you 😎.
+Add the signature <code class="docutils literal notranslate"><span class="pre">char</span> <span class="pre">Decode(char</span> <span class="pre">input)</span></code> to the interface <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> and implement it in all classes that implement the interface.
+Then add a default method to the interface <code class="docutils literal notranslate"><span class="pre">ICipher</span></code> with the signature <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">Decode(string</span> <span class="pre">decode)</span></code>.</p>
+<p>Trust yourself. You’ve got this! 👊🌟</p>
 </section>
 </section>
 
@@ -426,23 +669,23 @@ The variable should be called <code class="docutils literal notranslate"><span c
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="observer-pattern.html">
+          <a class="next-page" href="replace-conditional-with-polymorphism.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Lab: Observer Pattern</div>
+                <div class="title">Lab: Replace conditional with polymorphism</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="delegates.html">
+          <a class="prev-page" href="overriding.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Lab: Delegates</div>
+                <div class="title">Lab: Overriding</div>
                 
               </div>
             </a>
@@ -476,15 +719,18 @@ The variable should be called <code class="docutils literal notranslate"><span c
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Lab: Lambdas</a><ul>
+<li><a class="reference internal" href="#">Lab: Default Interface Methods</a><ul>
 <li><a class="reference internal" href="#objective">Objective</a></li>
+<li><a class="reference internal" href="#provided-code">Provided Code</a></li>
 <li><a class="reference internal" href="#instructions">Instructions</a><ul>
-<li><a class="reference internal" href="#step-1-type-inference">Step 1: Type Inference</a></li>
-<li><a class="reference internal" href="#step-2-inferring-return-type">Step 2: Inferring return type</a></li>
-<li><a class="reference internal" href="#step-4-custom-delegate-inference">Step 4: Custom Delegate Inference</a></li>
+<li><a class="reference internal" href="#step-1-implement-caesarcipher">Step 1: Implement <code class="docutils literal notranslate"><span class="pre">CaesarCipher</span></code></a></li>
+<li><a class="reference internal" href="#step-2-implement-leetcipher">Step 2: Implement <code class="docutils literal notranslate"><span class="pre">LeetCipher</span></code></a></li>
+<li><a class="reference internal" href="#step-3-implement-flipflopcipher">Step 3: Implement FlipFlopCipher</a></li>
+<li><a class="reference internal" href="#step-4-reflect-on-the-limitations-of-default-interface-methods">Step 4: Reflect on the limitations of default interface methods</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#challenge">Challenge</a></li>
+<li><a class="reference internal" href="#bonus-challenge">Bonus Challenge</a></li>
 </ul>
 </li>
 </ul>
