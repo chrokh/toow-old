@@ -1,7 +1,18 @@
 # The new todo list
 
+- Fragile base class problem must be part of the book.
+- The order should be: classes
+    - fields
+    - instance methods
+    - access modifiers
+    - the `this` keyword
+    - constructors (because we can set initial state)
+    - encapsulation (because now we can talk about it properly).
+- Some of the early labs use static methods but should use local functions.
 - **A MUCH BETTER EXAMPLE FOR THE FIRST GENERICS CHAPTER IS THE ONE I USED IN THE LECTURE. Board and card games: Pair of Cards and DiceRolls. Backgammon, Hold em, and Craps.**
+- It's possible to create infinite loop with Computed Properties. See old Properties chapter. Add this.
 - Is this true?: Variance in delegates is only applicable to reference types. Value types like structs do not exhibit variance.
+- I'm pretty sure UML class diagram stuff is better introduced piece by piece in their respective chapters. But then we would need a single chapter that gives a brief introduction to the concept I suppose?
 - Generic supertypes chapter should also discuss interface inheritance. We should also follow the much more logical structure of the OOP2 slides on the chapter. It simplifies the flow.
 - Event conventions should mention that On-prefix is NOT EVEN USED that old way in RxNET. Instead it is used the way it is used in e.g. JavaScript.
 - Encapsulation should come after properties. First show what we can do, then explain WHY. Makes it simpler to explain encapsulation because we can use public get private set. NOT OBVIOUS. I am using the term encapsulation in the auto properties chapter.
