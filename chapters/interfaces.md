@@ -32,8 +32,8 @@ It usually defines the *what*, not the *how*.
 %Interfaces are contracts. They define *what* a class can do, not *how* to do it.
 ```
 
-```{note}
-An interface can define, so called, [default implementations](interface-default-implementations) of its members but we'll talk about that in a separate chapter. In this chapter we'll only discuss interfaces where the members have no implementation.
+```{important}
+In modern versions of C#, an interface can define, so called, [default interface methods](default-interface-methods). These methods can actually have implementations, but we'll talk about that in a separate chapter. In this chapter we'll only discuss interfaces where the members have no implementation.
 ```
 
 Let's explain this concept with an example. Imagine you're building a drawing application and you have different shapes, such as rectangles and ellipses. Every shape has a width and a height, but the calculation of the area is different for each shape. How can you define a common blueprint for all shapes while still allowing for their individual differences?
