@@ -390,7 +390,7 @@ This design allows <code class="docutils literal notranslate"><span class="pre">
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-9315.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-9475.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -435,12 +435,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.1.37:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.15:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '9315.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '9475.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -640,6 +640,11 @@ When you’re done you should be able to run the following code:</p>
 </div>
 </div>
 </section>
+<section id="step-4-contrast-to-hiding">
+<h3>Step 4: Contrast to hiding<a class="headerlink" href="#step-4-contrast-to-hiding" title="Permalink to this heading">#</a></h3>
+<p>Reflect over the differences between hiding and overriding by replacing the keyword <code class="docutils literal notranslate"><span class="pre">override</span></code> with the keyword <code class="docutils literal notranslate"><span class="pre">new</span></code> in all subclasses.</p>
+<p>What does this change? How does this change the behavior of the code?</p>
+</section>
 </section>
 <section id="challenge">
 <h2>Challenge<a class="headerlink" href="#challenge" title="Permalink to this heading">#</a></h2>
@@ -779,6 +784,7 @@ When you’re done you should be able to run the following code:</p>
 <li><a class="reference internal" href="#step-1-even-numbers">Step 1: Even numbers</a></li>
 <li><a class="reference internal" href="#step-2-triangular-numbers">Step 2: Triangular numbers</a></li>
 <li><a class="reference internal" href="#step-3-fibonacci-numbers">Step 3: Fibonacci numbers</a></li>
+<li><a class="reference internal" href="#step-4-contrast-to-hiding">Step 4: Contrast to hiding</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#challenge">Challenge</a></li>
