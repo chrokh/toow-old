@@ -158,6 +158,12 @@ Sequence fibonacci = new FibonacciSequence();
 Console.WriteLine(String.Join(", ", fibonacci.Take(12)));
 ```
 
+### Step 4: Contrast to hiding
+
+Reflect over the differences between hiding and overriding by replacing the keyword `override` with the keyword `new` in all subclasses.
+
+What does this change? How does this change the behavior of the code?
+
 
 ## Challenge
 
