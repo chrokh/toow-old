@@ -229,7 +229,7 @@
 <li class="toctree-l1"><a class="reference internal" href="run-time-type-vs-compile-time-type.html">61. Run-time type vs compile-time type</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dynamic-dispatch.html">62. Dynamic dispatch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multiple-interfaces.html">63. Multiple interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interface-default-implementations.html">64. Interface default implementations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="default-interface-methods.html">64. Default interface methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">65. Inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="overriding.html">66. Overriding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hiding.html">67. Hiding</a></li>
@@ -371,9 +371,9 @@ It often only defines what members a class that implements it should have. Just 
 <p>An interface usually defines <em>what</em> methods and properties a class must have, not <em>how</em> these should be implemented.
 It usually defines the <em>what</em>, not the <em>how</em>.</p>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>An interface can define, so called, <a class="reference internal" href="interface-default-implementations.html"><span class="doc std std-doc">default implementations</span></a> of its members but we’ll talk about that in a separate chapter. In this chapter we’ll only discuss interfaces where the members have no implementation.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>In modern versions of C#, an interface can define, so called, <a class="reference internal" href="default-interface-methods.html"><span class="doc std std-doc">default interface methods</span></a>. These methods can actually have implementations, but we’ll talk about that in a separate chapter. In this chapter we’ll only discuss interfaces where the members have no implementation.</p>
 </div>
 <p>Let’s explain this concept with an example. Imagine you’re building a drawing application and you have different shapes, such as rectangles and ellipses. Every shape has a width and a height, but the calculation of the area is different for each shape. How can you define a common blueprint for all shapes while still allowing for their individual differences?</p>
 <p>This is where interfaces come in handy. We could create an <code class="docutils literal notranslate"><span class="pre">IShape</span></code> interface with <code class="docutils literal notranslate"><span class="pre">Width</span></code>, <code class="docutils literal notranslate"><span class="pre">Height</span></code>, and <code class="docutils literal notranslate"><span class="pre">Area</span></code> properties. The <code class="docutils literal notranslate"><span class="pre">Area</span></code> property is defined differently based on the type of the shape, but every shape, regardless of its specific type, will have an <code class="docutils literal notranslate"><span class="pre">Area</span></code> property. Here’s how we might define this interface:</p>
@@ -391,7 +391,7 @@ It usually defines the <em>what</em>, not the <em>how</em>.</p>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-5175.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-5196.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -436,12 +436,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.15:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.13:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '5175.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '5196.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`

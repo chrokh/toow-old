@@ -229,7 +229,7 @@
 <li class="toctree-l1"><a class="reference internal" href="run-time-type-vs-compile-time-type.html">61. Run-time type vs compile-time type</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dynamic-dispatch.html">62. Dynamic dispatch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="multiple-interfaces.html">63. Multiple interfaces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interface-default-implementations.html">64. Interface default implementations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="default-interface-methods.html">64. Default interface methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">65. Inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="overriding.html">66. Overriding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hiding.html">67. Hiding</a></li>
@@ -372,7 +372,7 @@ What unifies these different types is the idea of being able to ask for the next
 <h2>Implementing generic interfaces<a class="headerlink" href="#implementing-generic-interfaces" title="Permalink to this heading">#</a></h2>
 <p>We’ll start by creating a generic interface called <code class="docutils literal notranslate"><span class="pre">ISequence&lt;T&gt;</span></code>.
 Any class implementing the interface must define a method <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">Next()</span></code> which simply provides the next element of type <code class="docutils literal notranslate"><span class="pre">T</span></code> in the sequence.
-Let’s also add a <a class="reference internal" href="interface-default-implementations.html"><span class="doc std std-doc">default method</span></a> <code class="docutils literal notranslate"><span class="pre">T[]</span> <span class="pre">Take(int</span> <span class="pre">n)</span></code> that calls <code class="docutils literal notranslate"><span class="pre">Next</span></code> <code class="docutils literal notranslate"><span class="pre">n</span></code> number of times and returns the result as an array of elements of type <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p>
+Let’s also add a <span class="xref myst">default method</span> <code class="docutils literal notranslate"><span class="pre">T[]</span> <span class="pre">Take(int</span> <span class="pre">n)</span></code> that calls <code class="docutils literal notranslate"><span class="pre">Next</span></code> <code class="docutils literal notranslate"><span class="pre">n</span></code> number of times and returns the result as an array of elements of type <code class="docutils literal notranslate"><span class="pre">T</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">interface</span><span class="w"> </span><span class="n">ISequence</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
@@ -395,7 +395,7 @@ Let’s also add a <a class="reference internal" href="interface-default-impleme
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-4609.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-4629.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -440,12 +440,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.15:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.13:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '4609.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '4629.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
