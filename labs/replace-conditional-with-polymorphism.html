@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Lab: Generics" href="generics.html" /><link rel="prev" title="Lab: Constructor Chaining" href="constructor-chaining.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Lab: Generics" href="generics.html" /><link rel="prev" title="Lab: protected access modifier" href="protected.html" />
 
     <!-- Generated with Sphinx 5.0.2 and Furo 2023.03.27 -->
         <title>Lab: Replace conditional with polymorphism - The Object Oriented Way</title>
@@ -299,6 +299,7 @@
 <li class="toctree-l1"><a class="reference internal" href="default-interface-methods.html">Lab: Default Interface Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="the-base-keyword.html">Lab: The <code class="docutils literal notranslate"><span class="pre">base</span></code> keyword</a></li>
 <li class="toctree-l1"><a class="reference internal" href="constructor-chaining.html">Lab: Constructor Chaining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="protected.html">Lab: <code class="docutils literal notranslate"><span class="pre">protected</span></code> access modifier</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Lab: Replace conditional with polymorphism</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Labs (part 2)</span></p>
@@ -372,7 +373,7 @@
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-9786.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-9562.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -417,12 +418,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.136:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.128:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '9786.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '9562.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -663,7 +664,7 @@ Let’s eliminate that duplication using inheritance.</p>
 </div>
 </div>
 </div>
-<p>should provide a <span class="xref myst">protected</span> method with the signature <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">Draw(string[][]</span> <span class="pre">symbols</span></code>. This allows us to remove the duplicated code in the three shape classes.</p>
+<p>should provide a <a class="reference internal" href="protected.html"><span class="doc std std-doc">protected</span></a> method with the signature <code class="docutils literal notranslate"><span class="pre">string</span> <span class="pre">Draw(string[][]</span> <span class="pre">symbols</span></code>. This allows us to remove the duplicated code in the three shape classes.</p>
 <div class="admonition-reflection admonition">
 <p class="admonition-title">🤔 Reflection</p>
 <p>How does creating specific classes for each shape, adhering to the same interface, make the code more organized and maintainable?</p>
@@ -713,14 +714,14 @@ Let’s eliminate that duplication using inheritance.</p>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="constructor-chaining.html">
+          <a class="prev-page" href="protected.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Lab: Constructor Chaining</div>
+                <div class="title">Lab: <code class="docutils literal notranslate"><span class="pre">protected</span></code> access modifier</div>
                 
               </div>
             </a>
