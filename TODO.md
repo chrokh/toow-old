@@ -1,5 +1,6 @@
 # The new todo list
 
+- Replace example in base keyword chapter with example from base keyword lab.
 - Fragile base class problem must be part of the book.
 - The order should be: classes
     - fields
