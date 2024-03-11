@@ -10,6 +10,7 @@ kernelspec:
   name: .net-csharp
 ---
 
+
 # Data types
 
 As you dive deeper into the world of coding, you'll find that the values you've learned to store in variables can be quite different from one another. Just as jars can contain marbles, an apple, water or sand, variables in C# can hold various types of data. Each of these types has unique properties, and each has its own name. In programming, we call these different types of data 'data types'.
@@ -33,7 +34,7 @@ Understanding data types in programming is like understanding different categori
 If you want me to give you a bolt but I give you a nut then I've misunderstood the type of thing that you need. A data type captures the idea that things can be of different types.
 ```
 
-You declare [variables](variable) with specific data types like this:
+You declare [variables](variables) with specific data types like this:
 
 ```{code-cell}
 int numberOfMarbles;
@@ -66,12 +67,13 @@ numberOfMarbles = 5.5;
 Similarly, we cannot store a `string` in a variable of type `int` or `char`.
 
 ```{code-cell}
+:tags: [raises-exception]
 firstLetterOfLabel = "Fruit";
 ```
 
 We've mentioned the concept of `null` and how it's a value that represents the absence of a value.
 For some types, like `string`, `null` is a valid value, and for some, like `int`, it is not.
-We will discuss this [later](value-and-reference-semantics) but the difference between these two categories of types in C# is that the former is a 'reference type' and the latter a 'value type'.
+We will discuss this [later](reference-types) but the difference between these two categories of types in C# is that the former is a 'reference type' and the latter a 'value type'.
 
 This means you can assign `null` to a variable of type `string` like this:
 
@@ -82,11 +84,12 @@ string name = null;
 But you cannot assign `null` to a variable of type `int`:
 
 ```{code-cell}
+:tags: [raises-exception]
 int age = null;
 ```
 
-%We will discuss this in further detail later, but for now you should now that `null` is a valid value for some types (known as [reference types](value-and-reference-semantics) like `string`.
-%%It should be mentioned that this representation of the absence of a value is, in C#, a valid value for all [reference types](value-and-reference-semantics).
+%We will discuss this in further detail later, but for now you should now that `null` is a valid value for some types (known as [reference types](reference-types) like `string`.
+%%It should be mentioned that this representation of the absence of a value is, in C#, a valid value for all [reference types](reference-types).
 %%Null is a special value that represents the absence of a value or a reference to a value. In C#, null is a valid value for any data type that is a reference type. That means you can assign null to a string variable like this:
 
 There are many more data types in C#, and as you progress, you'll encounter and learn to use them. The data type you choose will depend on the kind of data you're dealing with in your code. For now, understanding these basic data types will equip you with the tools to start writing more complex and interactive programs!
