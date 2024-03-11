@@ -144,7 +144,7 @@ Console.WriteLine(pair);
 
 The power of generic types is that you can use them to create highly reusable code. As long as the generic type definition `Pair<T>` compiles, we can be sure that it works when used with any type.
 
-```{remember}
+```{admonition} Remember
 You cannot make any assumptions about what the interface of a type parameter is.
 The only assumption we can make about a type parameter in C# is that it will be possible to treat it as an [object](everything-is-an-object).
 ```

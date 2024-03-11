@@ -105,6 +105,7 @@ No, with generics, type-related issues are caught at compile-time, ensuring that
 If it doesn't compile, we can't run it.
 
 ```{code-cell}
+:tags: [raises-exception]
 Pair<int, string> genericPair = new Pair<int, string>()
 {
     Item1 = 10,
