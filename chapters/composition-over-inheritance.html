@@ -416,7 +416,7 @@ That book, by the way, is an excellent book to keep on your shelf as a reference
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2900.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2660.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -461,12 +461,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.94:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.169:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2900.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2660.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -522,7 +522,7 @@ else {
     </script>
 </div></div></div>
 </div>
-<p>At first glance this might seem like a sensible solution. As we inherit from our <code class="docutils literal notranslate"><span class="pre">Duck</span></code> class, all we have to do is to <a class="reference internal" href="../old/inheritance.html#overriding"><span class="std std-ref">override</span></a> these methods and implement whatever behavior is specific to that duck. Simple, right? Unfortunately, it’s almost never that simple.
+<p>At first glance this might seem like a sensible solution. As we inherit from our <code class="docutils literal notranslate"><span class="pre">Duck</span></code> class, all we have to do is to <a class="reference internal" href="overriding.html"><span class="doc std std-doc">override</span></a> these methods and implement whatever behavior is specific to that duck. Simple, right? Unfortunately, it’s almost never that simple.
 Let’s start writing subclasses.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -543,7 +543,7 @@ Let’s start writing subclasses.</p>
 It might seem like we’re doing something right when we observe that the swimming and quacking behavior is reused across both <code class="docutils literal notranslate"><span class="pre">MallardDuck</span></code> and <code class="docutils literal notranslate"><span class="pre">RedheadDuck</span></code>.
 But what’s the price we pay for this reuse?
 As we expand our pond, we find that not all ducks fall neatly into our taxonomy. For instance, rubber ducks don’t actually quack – they squeak. And what if we introduce decoy ducks? They can neither quack nor squeak.</p>
-<p>Having learned about <a class="reference internal" href="../old/subtype-polymorphism.html#replace-conditional-with-polymorphism"><span class="std std-ref">replacing conditionals with polymorphism</span></a> we know that we should resist the urge to introduce convoluted conditional checks.
+<p>Having learned about <a class="reference internal" href="replace-conditional-with-polymorphism.html"><span class="doc std std-doc">replacing conditionals with polymorphism</span></a> we know that we should resist the urge to introduce convoluted conditional checks.
 But is it even possible to incorporate these new changes into our current inheritance hierarchy?
 Have a look at the code below:</p>
 <div class="cell docutils container">
@@ -814,8 +814,8 @@ This pivot to composition significantly reduces duplication and significantly im
 <ul class="simple">
 <li><p><strong>Flexibility</strong>: By breaking down behaviors into composable units, we can mix and match behaviors as needed, making it easier to meet changing requirements.</p></li>
 <li><p><strong>Duplication</strong>: Composition reduces the chances of duplicate code, thus minimizing the ripple effect of changes.</p></li>
-<li><p><strong>Extensibility</strong>: Introducing new behaviors or types of ducks doesn’t require modifying existing classes or creating intricate inheritance hierarchies. This is in line with the <a class="reference internal" href="open-closed-principle.html"><span class="doc std std-doc">open/closed principle</span></a>.</p></li>
-<li><p><strong>Single Responsibility</strong>: Each behavior class or module does one thing, leading to a cleaner, more understandable codebase. This is in line with the <a class="reference internal" href="single-responsibility-principle.html"><span class="doc std std-doc">singe responsibility principle</span></a>.</p></li>
+<li><p><strong>Extensibility</strong>: Introducing new behaviors or types of ducks doesn’t require modifying existing classes or creating intricate inheritance hierarchies. This is in line with the <span class="xref myst">open/closed principle</span>.</p></li>
+<li><p><strong>Single Responsibility</strong>: Each behavior class or module does one thing, leading to a cleaner, more understandable codebase. This is in line with the <span class="xref myst">singe responsibility principle</span>.</p></li>
 <li><p><strong>Run-time changes</strong>: While inheritance dictates behavior at compile-time, composition allows for behavior changes at run-time, resulting in a more adaptable system.</p></li>
 </ul>
 </section>
@@ -929,8 +929,8 @@ This pivot to composition significantly reduces duplication and significantly im
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
     <script src="https://www.googletagmanager.com/gtag/js?id=G-V69WNXD095"></script>
-    <script src="../_static/custom.js"></script>
     <script src="../_static/analytics.js"></script>
+    <script src="../_static/custom.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script src="../_static/scripts/furo.js"></script>

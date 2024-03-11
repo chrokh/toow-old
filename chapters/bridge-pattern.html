@@ -452,7 +452,7 @@ Luckily, we know that we can use the Bridge pattern so let’s do that instead.<
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-2619.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-2378.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -497,12 +497,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.94:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.169:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '2619.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '2378.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -709,7 +709,7 @@ So, the interface <code class="docutils literal notranslate"><span class="pre">I
 <li><p>Can’t we solve the same problem using <span class="xref myst">method overloading</span>? Can’t we just have a bunch of methods with signatures like <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">Draw(RedColor</span> <span class="pre">red,</span> <span class="pre">Circle</span> <span class="pre">circle)</span></code>?
 Of course, but then we cannot call the method if we have objects of type <code class="docutils literal notranslate"><span class="pre">IColor</span></code> and <code class="docutils literal notranslate"><span class="pre">IShape</span></code>, which defats the purpose of using <a class="reference internal" href="subtype-polymorphism.html"><span class="doc std std-doc">subtype polymorphism</span></a> in the first place.
 Then we can’t pass around shapes without having to always worry about which particular subtype we have.
-As soon as we <a class="reference internal" href="upcasting.html"><span class="doc std std-doc">upcast</span></a> a specific shape to its supertype we’ve lost type information and can’t get back the specific subtype without using <a class="reference internal" href="downcasting.html"><span class="doc std std-doc">downcasting</span></a>, <a class="reference internal" href="pattern-matching.html"><span class="doc std std-doc">pattern matching</span></a>, or <a class="reference internal" href="visitor-pattern.html"><span class="doc std std-doc">Visitor pattern</span></a>.</p></li>
+As soon as we <a class="reference internal" href="upcasting.html"><span class="doc std std-doc">upcast</span></a> a specific shape to its supertype we’ve lost type information and can’t get back the specific subtype without using <a class="reference internal" href="downcasting.html"><span class="doc std std-doc">downcasting</span></a>, <span class="xref myst">pattern matching</span>, or <span class="xref myst">Visitor pattern</span>.</p></li>
 <li><p>Ok, can’t we then just have a single method with the signature <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">Draw(IColor</span> <span class="pre">color,</span> <span class="pre">IShape</span> <span class="pre">shape)</span></code> then?
 Well yes, but then the implementation of that method can only access what’s in the public interface of <code class="docutils literal notranslate"><span class="pre">IColor</span></code> and <code class="docutils literal notranslate"><span class="pre">IShape</span></code>. The implementation cannot be specific to any of the subtypes of <code class="docutils literal notranslate"><span class="pre">IColor</span></code> and <code class="docutils literal notranslate"><span class="pre">IShape</span></code>.
 Have a look at the code example and notice how the implementation of the <code class="docutils literal notranslate"><span class="pre">Draw</span></code> method in the two shapes are different.
@@ -721,7 +721,7 @@ When writing that implementation, we know which subtype of <code class="docutils
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>If your implementation needs to be specific to subtypes from <em>both</em> hierarchies then you either need the <a class="reference internal" href="visitor-pattern.html"><span class="doc std std-doc">Visitor pattern</span></a> or <a class="reference internal" href="pattern-matching.html"><span class="doc std std-doc">pattern matching</span></a>. Both of which we’ll talk about later.</p>
+<p>If your implementation needs to be specific to subtypes from <em>both</em> hierarchies then you either need the <span class="xref myst">Visitor pattern</span> or <span class="xref myst">pattern matching</span>. Both of which we’ll talk about later.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -840,8 +840,8 @@ When writing that implementation, we know which subtype of <code class="docutils
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
     <script src="https://www.googletagmanager.com/gtag/js?id=G-V69WNXD095"></script>
-    <script src="../_static/custom.js"></script>
     <script src="../_static/analytics.js"></script>
+    <script src="../_static/custom.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script src="../_static/scripts/furo.js"></script>

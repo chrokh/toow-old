@@ -377,7 +377,7 @@ It also means that within a generic class, a method can introduce its own distin
 </figcaption>
 </figure>
 <p>Imagine that you want a method that duplicates every element in a list. Do we have to create separate methods for lists of <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">string</span></code>, <code class="docutils literal notranslate"><span class="pre">double</span></code>, and so on? No, because this is a prime example of when the of thing that the method deals with doesn’t matter. As long as we get passed a list it doesn’t matter what the list contains. We can utilize generics to write a single solution that works for all types.
-For the sake of simplicity, let’s write it as a <a class="reference internal" href="methods-old.html#local-functions"><span class="std std-ref">local function</span></a>.</p>
+For the sake of simplicity, let’s write it as a <a class="reference internal" href="local-functions.html"><span class="doc std std-doc">local function</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">duplicateEachItem</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="p">)</span>
@@ -396,7 +396,7 @@ For the sake of simplicity, let’s write it as a <a class="reference internal" 
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-4546.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-4133.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -441,12 +441,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.94:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.169:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '4546.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '4133.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -614,7 +614,7 @@ Let’s implement it as a generic method using local functions.</p>
 </div>
 </div>
 <p>In the above example, when we explicitly use type inference by providing <int>, the generic method is invoked. Without it, the compiler sees the specialized overload for int as a better match and selects it. This demonstrates the necessity of being clear and explicit in both definition and invocation to avoid confusion.</p>
-<p>Lastly, <a class="reference internal" href="extension-methods.html#extension-methods"><span class="std std-ref">extension methods</span></a>, which we’ve covered in another chapter, can also be generic. This approach has been employed extensively in .NET, especially for defining useful methods on collections.
+<p>Lastly, <span class="xref myst">extension methods</span>, which we’ve covered in another chapter, can also be generic. This approach has been employed extensively in .NET, especially for defining useful methods on collections.
 By using generic extension methods, you can add new functionalities to existing types without actually modifying them. For example, you might want to add the <code class="docutils literal notranslate"><span class="pre">duplicateEachItem</span></code> method directly to the <code class="docutils literal notranslate"><span class="pre">List&lt;T&gt;</span></code> type to allow for a more intuitive method call:</p>
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="nn">System.Collections.Generic</span><span class="p">;</span>
 
@@ -730,8 +730,8 @@ By using generic extension methods, you can add new functionalities to existing 
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
     <script src="https://www.googletagmanager.com/gtag/js?id=G-V69WNXD095"></script>
-    <script src="../_static/custom.js"></script>
     <script src="../_static/analytics.js"></script>
+    <script src="../_static/custom.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script src="../_static/scripts/furo.js"></script>

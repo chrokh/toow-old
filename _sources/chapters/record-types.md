@@ -1,2 +1,0 @@
-(record-types)=
-# Record types

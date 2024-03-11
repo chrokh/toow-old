@@ -1,2 +1,0 @@
-(nested-types)=
-# Nested types
