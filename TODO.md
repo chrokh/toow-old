@@ -1,5 +1,42 @@
 # The new todo list
 
+- Simple: Default interface methods chapter: should not start from -1.
+- Interface default methods. **I have not covered how default methods can be overridden in subclasses.** Code example:
+    ```csharp
+    ISequence seq = new NaturalNumbers();
+    seq.Take(3);
+    seq.Take(3);
+    Console.WriteLine(seq.Next());
+
+    interface ISequence
+    {
+        int Next();
+
+        int[] Take(int n)
+        {
+            int[] result = new int[n];
+            for (int i = 0; i < n; i++)
+                result[i] = Next();
+            return result;
+        }
+    }
+
+    class NaturalNumbers : ISequence
+    {
+        private int n = 0;
+
+        public int Next() => n++;
+
+        public int[] Take(int n)
+        {
+            int x = -1;
+            int[] result = new int[n];
+            for (int i = 0; i < n; i++)
+                result[i] = x++;
+            return result;
+        }
+    }
+    ```
 - Replace example in base keyword chapter with example from base keyword lab.
 - Fragile base class problem must be part of the book.
 - The order should be: classes
