@@ -23,7 +23,7 @@ A bag of apples is still a bag of fruit.
 Anything you had intended to do with the fruits, you can do to the apples.
 This illustrates the concept of covariance.
 
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1152485304486338560/chrokh_a_bag_of_apples_illustration_0917d0b8-86ee-45f7-a934-2ca4edd561fe.png
+```{figure} ../images/cover-covariance.jpg
 Just like a bag of apples is a bag of fruit, covariance follows the natural hierarchy of types.
 ```
 

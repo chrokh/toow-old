@@ -27,7 +27,7 @@ If we run that program, here's what we get:
 Console.WriteLine("Hello, World!");
 ```
 
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1148542428651991051/chrokh_illustration_of_a_rocket_launching_efce4cd4-15b5-48f7-a529-f41d0af4b2ab.png
+```{figure} ../images/cover-hello-world.jpg
 Like a rocket ready to launch, 'Hello World' is the program that propels you into the wonderfully powerful world of coding.
 Life will never be the same again.
 ```

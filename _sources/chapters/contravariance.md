@@ -22,7 +22,7 @@ Imagine that you were expecting a machine that produces juice from apples but ge
 If you were to feed only apples into this machine, it would function as well as an apple-specific juicer.
 This illustrates the concept of contravariance.
 
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1152121720791105598/chrokh_orange_juice_machine_illustration_a1c13a5a-219b-4d2a-8ff9-b831751bb20d.png
+```{figure} ../images/cover-contravariance.jpg
 Just like a fruit juicer can substitute an orange juicer, contravariance inverts the natural hierarchy of types.
 ```
 

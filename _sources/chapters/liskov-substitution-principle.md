@@ -17,7 +17,7 @@ In mathematics, a square is a special type of rectangle so it might seem reasona
 However, in object oriented programming, this might lead to very unexpected behavior.
 This is the famous 'Circle-ellipse problem', also known as the 'Square-rectangle problem'.
 
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1153972347695542342/chrokh_squares_simple_math_poster_simple_illustration_scientifi_8969a5a1-f281-47fe-84e5-55d203ec085a.png
+```{figure} ../images/cover-lsp.jpg
 
 While a square is a rectangle in mathematics, translating this relationship directly into object oriented programming can lead to unexpected behavior. This is known as the 'Circle-ellipse problem' or 'Square-rectangle problem'.
 ```

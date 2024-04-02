@@ -19,7 +19,7 @@ It allows us to select the behavior of an object at run-time, without bloating t
 These strategies, or behaviors, can be modified, added, or removed without affecting the clients that use them.
 
 % https://cdn.discordapp.com/attachments/1118630713084870736/1142023757117005864/chrokh_wall_socket_in_brick_wall_fab5e7ec-59b0-492d-b7e9-355c94beef1d.png
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1142016297459257405/chrokh_wall_socket_simple_flat_illustration_e644dd14-e4e6-48ad-b531-5917f28d1ce3.png
+```{figure} ../images/cover-strategy-pattern.jpg
 
 Just like you can plug any electrical device into a wall socket as long as they follow the same standard, you can plug any strategy into a client as long as the strategy implements the appropriate interface.
 ```

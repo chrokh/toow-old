@@ -28,7 +28,7 @@ A generic collection is a data structure that allows you to store and manage mul
 % https://cdn.discordapp.com/attachments/1118630713084870736/1149608803587862568/chrokh_huge_library_by_Tove_Jansson_1abcaa2f-cb6a-45e0-af55-8de27c471225.png
 % https://cdn.discordapp.com/attachments/1118630713084870736/1149610801548763136/chrokh_huge_library_by_Tove_Jansson_79b61826-5dd2-4226-819b-c2145046300a.png
 % https://cdn.discordapp.com/attachments/1118630713084870736/1149610801548763136/chrokh_huge_library_by_Tove_Jansson_79b61826-5dd2-4226-819b-c2145046300a.png
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1149611278583726101/chrokh_huge_library_by_Tove_Jansson_b18fc4f9-7955-4076-9f34-ef60f34c6a0d.png
+```{figure} ../images/cover-collections.jpg
 In a library, all books get a place on the shelf. In programming, generic collections allow you to organize your objects while maintaining their types.
 ```
 

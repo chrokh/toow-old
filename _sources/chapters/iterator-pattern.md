@@ -17,7 +17,7 @@ An iterable object is often also called an 'aggregate object' because it 'aggreg
 
 The Iterator pattern decouples the client code from the iterable object's internal structure, allowing items to be navigated and accessed without providing direct access to the underlying representation.
 
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1143511292011876372/chrokh_simple_conveyor_belt_simple_illustration_12521e3d-8d7a-4bfe-bd26-e40b7ad07aca.png
+```{figure} ../images/cover-iterator-pattern.jpg
 
 Just like how items on a conveyor belt are presented one by one without need to know about the machine that feeds the belt, the Iterator pattern allows for sequential access without exposing the structure of the underlying collection.
 ```

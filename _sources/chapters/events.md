@@ -45,7 +45,7 @@ Events are like observables and delegates are like observers.
 %Just like a radio tower sends signals to multiple receivers, an event notifies multiple subscribers.
 %``
 
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1147524013703307345/chrokh_serene_illustration_of_fire_watch_tower_030a13f5-90ad-4e5f-8a73-5ff913174d54.png
+```{figure} ../images/cover-events.jpg
 Like a fire watch tower sending out smoke alerts, weather updates, or lightning strikes, events can send different kinds of data to subscribers when the event occurs.
 ```
 

@@ -21,7 +21,7 @@ Collection initializers provide a shorthand for populating collections like `Lis
 Collection initializers work like [object initializers](object-initializers), but instead of setting properties on a single object, they allow you to add multiple elements to a collection.
 You've actually already seen collection initializers in action in the chapter on [arrays](arrays).
 
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1150400143410086018/chrokh_crate_with_books_illustration_408211c6-b863-43f0-b71b-9cc3e2a6b475.png
+```{figure} ../images/cover-collection-initializers.jpg
 Much like dumping a bunch of books in a crate in one go, collection initializers allow you to populate collections, like lists and dictionaries, with multiple elements in a single line of code.
 ```
 

@@ -19,7 +19,7 @@ Sometimes we need quick and compact ways to represent small chunks of behavior w
 - Lambdas in C# allow for type inference, enabling you to omit explicit type declarations for parameters and return type.
 ```
 
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1149272044853264384/chrokh_mountain_and_paper_plane_by_Tove_Jansson_5b964551-24a0-4425-812a-6c66ae8db281.png
+```{figure} ../images/cover-lambdas.jpg
 Lambdas are like a featherlight version of local functions.
 ```
 

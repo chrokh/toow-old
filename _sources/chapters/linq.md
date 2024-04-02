@@ -18,7 +18,7 @@ Do you find it cumbersome to query and manipulate data in collections with repet
 LINQ provides a type-safe and consistent way to perform queries on different data sources, making data manipulation in C# easier and less error-prone.
 ```
 
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1151415927439638598/chrokh_assortment_of_tools_childrens_book_illustration_2510f322-8837-45bb-8b2b-0cae2db64eb5.png
+```{figure} ../images/cover-linq.jpg
 LINQ is like an organized tool wall for all your data manipulation needs.
 ```
 

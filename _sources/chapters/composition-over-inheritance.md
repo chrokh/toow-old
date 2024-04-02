@@ -26,7 +26,7 @@ The three types do not form a hierarchy. They don't follow a clear parent-child 
 % https://cdn.discordapp.com/attachments/1118630713084870736/1142001067442327593/chrokh_art_nouveau_mermaid_jumping_01c1da7a-839b-4e11-8000-f4b755f7998c.png
 % https://cdn.discordapp.com/attachments/1118630713084870736/1142000077947293746/chrokh_art_nouveau_mermaid_jumping_363bbc19-8772-4356-94fd-6657a571d113.png
 % https://cdn.discordapp.com/attachments/1118630713084870736/1142000505703387166/chrokh_art_nouveau_mermaid_with_fin_9d0bc483-bbb7-4c66-be55-6c21ab6c7e8f.png
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1142001080054579283/chrokh_art_nouveau_mermaid_jumping_88812b6f-5189-4bea-a61a-66db4e00de75.png
+```{figure} ../images/cover-composition-over-inheritance-1.jpg
 
 Just like mermaids are part human and part fish, we can't always form a type hierarchy betewen complex types.
 %This is the key to understanding why we should favor composition over inheritance.
