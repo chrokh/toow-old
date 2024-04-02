@@ -15,7 +15,7 @@ kernelspec:
 When we discussed [enumerables](enumerables) in a previous chapter, we talked about how they embody the [Iterator pattern](iterator-pattern) and enable sequential traversal of collections without revealing their underlying structure. The `yield` statement offers a simpler way to implement custom enumerators, making your code easier to [maintain](maintainability).
 
 % https://cdn.discordapp.com/attachments/1118630713084870736/1151016940920377374/chrokh_funny_illustration_of_a_lazy_cat_1c999a83-438c-4994-af72-ab9c2e11c9ea.png
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1151017010239635517/chrokh_funny_illustration_of_a_lazy_cat_f8167ce6-0a30-4b18-ace9-8856ea022b22.png
+```{figure} ../images/cover-yield.jpg
 The `yield` keyword offers a simple way to create enumerators that lazily provide one element at a time.
 ```
 

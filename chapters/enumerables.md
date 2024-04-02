@@ -21,7 +21,7 @@ Enumerables offer a way to access elements in a collection sequentially, without
 ```
 
 % https://cdn.discordapp.com/attachments/1118630713084870736/1150644905669042206/chrokh_indiana_jones_in_cave_with_flashlight_illustrated_cartoo_91a1802b-5c71-4d01-9629-486eb110328e.png
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1150645441990508646/chrokh_indiana_jones_in_cave_with_flashlight_illustrated_cartoo_76c3921c-2479-4331-89d4-121ef19dba4a.png
+```{figure} ../images/cover-enumerables.jpg
 Imagine walking through a cave like maze with a flashlight, seeing only one step ahead, yet confident you can explore the entire maze. This is what enumerables are like in programming. They allow you to traverse through collections, one element at a time, without needing to understand its underlying structure.
 ```
 
