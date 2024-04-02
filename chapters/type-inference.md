@@ -28,7 +28,8 @@ Once the code is compiled, `numberOfMarbles` becomes an `int`, `label` is unders
 
 %https://media.discordapp.net/attachments/1118630713084870736/1123165648953032824/chrokh_an_illustration_of_a_native_american_a_crystal_ball_and__8b16fb50-9dca-4c63-b7ae-500de7985c3a.png?width=2700&height=1180
 %https://media.discordapp.net/attachments/1118630713084870736/1123171212596613120/chrokh_a_flat_illustration_of_a_native_american_summoning_and_a_ae949676-cd5d-4609-8100-27c4bc5a9799.png?width=2700&height=1180
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1123175050258952283/chrokh_a_flat_illustration_of_a_native_american_chief_looking_i_ff5ca62e-ada5-4aec-adad-e0361447aa3f.png?width=2700&height=1180
+```{figure} ../images/cover-type-inference.jpg
+
 
 By using the `var` keyword we instruct the compiler to infer the type of the variable from the expression on the right-hand side of the initialization statement.
 ```

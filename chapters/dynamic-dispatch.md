@@ -54,7 +54,7 @@ Dynamic dispatch is the process by which a call to an interface method (or overr
 %There is a tremendous power within our grasp, a way to write flexible, robust, and maintainable code. It's called dynamic dispatch, and it's the secret ingredient that makes subtype polymorphism so practical and powerful.
 
 %https://cdn.discordapp.com/attachments/1118630713084870736/1131076447415587006/chrokh_colorful_oil_painting_of_turntable_97a7b4e9-491b-4c95-8ede-81192586d71d.png
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1131085303873019904/chrokh_oil_painting_of_turntable_and_bookshelf_of_vinyl_records_bae86b3b-9bab-46eb-8b12-b62a96036141.png
+```{figure} ../images/cover-dynamic-dispatch.jpg
 
 Like a turntable changing tunes with different records, dynamic dispatch shifts behavior based on the type of the object it's interacting with during run-time.
 ```

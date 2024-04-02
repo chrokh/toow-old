@@ -26,7 +26,7 @@ Let's start with the most common operators that you're already familiar with - a
 
 The addition (`+`), subtraction (`-`), multiplication (`*`), and division (`/`) operators behave just as you would expect them to. They add, subtract, multiply, and divide numbers, respectively.
 
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1122794787536392283/chrokh_a_simple_flat_illustration_of_an_abacus_5d407f01-b63b-443b-8a9e-2cc1bc3df46d.png?width=2700&height=1180
+```{figure} ../images/cover-arithmetic-operators.jpg
 
 Arithmetic operators are used in arithmetic expressions.
 ```

@@ -60,7 +60,7 @@ This video lecture is on [Strategy pattern](strategy-pattern) which is an embodi
 To exemplify these key issues with inheritance, let's dive into a problem inspired by the well-known 'Duck problem' popularized by the iconic book [Head First: Design Patterns](https://geni.us/nlbA6).
 That book, by the way, is an excellent book to keep on your shelf as a reference.
 
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1141602874699296818/chrokh_illustration_of_a_mallard_duck_aca85583-bb64-4677-b431-197fd8d31cd8.png
+```{figure} ../images/cover-composition-over-inheritance-2.jpg
 
 While we might label it a 'Mallard', it's the distinct set of behaviors and characteristics it exhibits that truly defines it. Composition over inheritance urges us to focus on capabilities over classifications.
 ```

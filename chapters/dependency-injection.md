@@ -30,7 +30,7 @@ Dependency injection separates object *construction* from object *use*. By 'inje
 
 Think of dependency injection like using a universal remote control. A universal remote is designed to work with various televisions, sound systems, and more. The key is that each device follows the same communication interface, enabling the remote to send standard commands like 'volume up,' 'play,' or 'pause.'
 
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1140960943988293662/chrokh_apple_TV_remote_control_illustration_simple_flat_f1e5566d-0641-4f28-aab9-f759eac75b09.png
+```{figure} ../images/cover-dependency-injection.jpg
 
 When using dependency injection, objects are designed to accept any dependency conforming to an expected interface. This is reminiscent of how a universal remote can be paired with any device that follows the expected protocol.
 ```

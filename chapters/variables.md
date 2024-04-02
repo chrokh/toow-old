@@ -6,7 +6,7 @@ Imagine that you've got a kitchen cabinet full of glass or porcelain jars and lo
 %https://media.discordapp.net/attachments/1118630713084870736/1121472410584092702/chrokh_a_simple_flat_illustration_of_shelves_of_porcelain_jars__f303109d-6ee7-41bf-9180-5d9218673600.png?width=1268&height=634
 %https://media.discordapp.net/attachments/1118630713084870736/1121470779016622120/chrokh_a_simple_and_flat_illustration_of_shelves_of_labeled_and_8428a6d2-39bb-4e29-9a7b-b965b132ec19.png?width=1268&height=634
 %https://media.discordapp.net/attachments/1118630713084870736/1121472404103897118/chrokh_a_simple_flat_illustration_of_shelves_of_porcelain_jars__e97554fc-8fa0-40cc-91d8-0d0d21e25e78.png?width=1268&height=634
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1121470779016622120/chrokh_a_simple_and_flat_illustration_of_shelves_of_labeled_and_8428a6d2-39bb-4e29-9a7b-b965b132ec19.png?width=1268&height=634
+```{figure} ../images/cover-variables.jpg
 A variable is like a jar, a variable name like a label, and a value its content.
 ```
 

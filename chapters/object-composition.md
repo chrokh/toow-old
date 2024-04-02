@@ -14,7 +14,7 @@ kernelspec:
 
 Object composition is a way of combining simple objects or data types into more complex ones. It is a fundamental concept in object-oriented programming and a powerful tool for code organization and reuse. By designing our classes to contain instances of other classes, we create more sophisticated behavior with simpler, understandable parts.
 
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1129981617667047434/chrokh_LEGO_4x4_f9ab0320-ef6f-4429-82f6-2f5cf0309ef7.png
+```{figure} ../images/cover-object-composition.jpg
 
 Just as a complex LEGO structure is composed of many smaller blocks, a complex object can be composed of many smaller objects. Each smaller object, like each LEGO block, has its own specific role and functionality. This is the essence of object composition.
 ```

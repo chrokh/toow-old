@@ -28,7 +28,7 @@ Run-time type is what it *actually* is, and compile-time type is what we *say* t
 %The compile-time type of a variable is the type the compiler sees.
 %The run-time type is the type that the underlying object actually has.
 
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1132998420001468488/chrokh_tip_of_the_iceberg_c6300c74-9d94-4a05-952f-2b9968cb096f.png
+```{figure} ../images/cover-run-time-type-vs-compile-time-type.jpg
 
 The tip of the iceberg, above the water's surface, is like the compile-time type of an object -- what the compiler can 'see' and verify based on the declared type of a variable. However, beneath the surface lies the vast majority of the iceberg, unseen until run-time. This is like the run-time type of the object behind the variable - the actual type of the object in memory when the program is executed. While the compile-time type provides a limited view of the object, the run-time type reveals its full identity, much like the hidden depth of the iceberg beneath the water's surface.
 ```

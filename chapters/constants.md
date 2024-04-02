@@ -14,7 +14,7 @@ kernelspec:
 
 When we introduced variables we emphasized how flexible they are. They can be assigned a value, then reassigned a different value at any time. This ability to change, or mutability, is part of what makes variables so powerful. But sometimes, this flexibility isn't what we want. In some situations, we want to set a value once and ensure that it never changes. This is where constants come in.
 
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1121469118856577024/chrokh_a_simple_and_flat_illustration_of_a_glass_jar_with_a_pad_a71fd77f-c504-4d4a-8c1b-03aaf88bcfd0.png?width=1268&height=634
+```{figure} ../images/cover-constants.jpg
 A constant is a variable whose value cannot be reassigned, like a jar whose content cannot be replaced.
 ```
 

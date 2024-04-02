@@ -22,7 +22,7 @@ Instance methods are at the heart of object-oriented programming, providing the 
 Instance methods are to methods what fields are to variables - they provide a way for each instance of a class to have behaviors that operate on its *individual* state, just as fields allow each instance to have its own *individual* data.
 Instance methods are methods that are called on an instance of a class, which means they can access the data stored in that instance.
 
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1125036527420977182/chrokh_a_simple_flat_illustration_of_a_game_controller_vibrant_d1fee2be-a2de-49c9-ae36-e923214aa6e3.png?width=2168&height=948
+```{figure} ../images/cover-instance-methods.jpg
 
 If objects are like robots, then instance methods are like the buttons on our remote control.
 ```

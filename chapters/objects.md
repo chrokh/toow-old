@@ -14,7 +14,7 @@ kernelspec:
 
 At the heart of object oriented programming are objects. In the real world an object can be anything like a book, a car, a person, a document, an agreement, anything. In an object oriented language an object is a bundle of *state* and *behavior*. This is called 'encapsulation'. It represents an entity in the code that holds some data and methods to manipulate that data.
 
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1124005679406006402/chrokh_a_pixel_art_illustration_of_a_simulated_city_1fb4c929-801c-4726-b80f-d41586aeceef.png?width=1440&height=629
+```{figure} ../images/cover-objects-1.jpg
 
 Imagine a computer simulation composed of objects (people, vehicles, households, buildings, etc) that all hold some data and can do different things.
 ```
@@ -39,7 +39,7 @@ It is important to understand that objects might be, what we call, 'mutable'.
 When we, for example, call the instance method 'RotateLeft' on a robot object then the state of that object, the data inside the object, actually changes.
 
 %https://media.discordapp.net/attachments/1118630713084870736/1124047885634392074/chrokh_a_simple_flat_illustration_of_a_robot_vacuum_7904121d-d4ae-43d2-9608-55e2a5351156.png?width=1440&height=629
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1124021918706708550/chrokh_an_illustration_of_a_robot_vacuum_7678e374-6079-44d7-bf3a-c8e2543fa21a.png?width=1440&height=629
+```{figure} ../images/cover-objects-2.jpg
 :figclass: margin
 
 Imagine an instance of a RobotVacuum class, able to navigate a two-dimensional space and manage its own battery life.

@@ -14,7 +14,7 @@ kernelspec:
 
 In previous chapters, we explored integral types like int which can only hold whole numbers. But what if you need to represent a number with a fraction, like `3.14` or `0.99`? That's where floating-point types come into play.
 
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1123218846254370867/chrokh_a_simple_flat_illustration_of_a_ruler_78310718-214a-49af-8bb2-28a2513d0b8a.png?width=2700&height=1180
+```{figure} ../images/cover-floating-point-types.jpg
 
 ```
 

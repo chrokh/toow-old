@@ -38,7 +38,7 @@ This means a regular class, without any generic type parameters of its own, can 
 It also means that within a generic class, a method can introduce its own distinct type parameters, separate from those of the class.
 ```
 
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1139460159010263100/chrokh_illustration_of_gift_wrapping_station_with_identical_pac_0365ffc2-d3a5-4294-8ed4-242d1530cd72.png
+```{figure} ../images/cover-generic-methods.jpg
 
 Just like how a wrapping station can encase any, regardless of the specifics of the gift, inside a standard box, generic methods wrap around any type, without needing to know its specifics.
 ```
