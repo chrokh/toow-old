@@ -17,7 +17,7 @@ Why is it that one screwdriver can be used to fasten so many different types of 
 The same principle applies to interfaces in object oriented programming. They help us write code that can operate on a wide range of objects, as long as they adhere to the same 'interface'.
 This separation between interface and implementation has immense benefits. In the real world it means that we don't have to buy a new screwdriver every time we buy a new type of screw. In programming, it means improved reusability and flexibility.
 
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1130091386419552266/chrokh_flat_illustration_of_a_screwdriver_30eea63f-9bb4-4926-81ff-12333ba9abe5.png
+```{figure} ../images/cover-interfaces.jpg
 
 The same screwdriver can be used for completely different types of screws, so long as the drive style and size is the same. In programming terms, we would say that any given screw type is an implementation of a screw interface.
 ```

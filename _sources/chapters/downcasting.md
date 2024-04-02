@@ -34,7 +34,7 @@ Now, if we blindly reach into the basket and pick up a fruit, can we always be s
 Downcasting can lead to run-time errors if the actual type of the object doesn't match the type you're trying to cast to. It's not always safe, unlike upcasting, and needs to be done explicitly.
 ```
 
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1131063698887282788/chrokh_oil_painting_of_bowl_of_different_fruits_d402de4e-b020-49df-89eb-f80b0769460b.png
+```{figure} ../images/cover-downcasting.jpg
 
 Imagine a bowl of fruits. If I give you an apple from the bowl, then we can be sure that's it's a fruit. But if I blindly reach in and give you a fruit, then we can't be sure that it's an apple. Sometimes it will, and sometimes it won't.
 %There are certain actions we can apply to all of them, such as eating. Think of this as the capabilities of the compile-time type. However, each specific fruit type allows for unique interactions, like peeling an apple or squeezing a lemon, which can be thought of as the hidden capabilities of the run-time type.

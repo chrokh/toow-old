@@ -15,7 +15,7 @@ kernelspec:
 Recursion is a fundamental concept in computer programming that involves a method or function calling itself in order to solve a problem. In simpler terms, recursion is when a function performs a task that involves invoking itself.
 
 %https://media.discordapp.net/attachments/1118630713084870736/1123948082602717294/chrokh_an_illustration_of_an_endless_mirror_in_a_mirror_ab3cae9f-232f-4ab9-a959-f130bb32ebe7.png?width=1076&height=470
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1123918072089157683/chrokh_a_simple_flat_illustration_of_an_endless_corridor_of_mir_0c5837ab-799f-4881-b99b-212ec2f2182b.png?width=2700&height=1180
+```{figure} ../images/cover-recursion.jpg
 
 A recursive function is a function that calls itself, like a mirror reflecting into a mirror.
 ```

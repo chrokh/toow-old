@@ -38,7 +38,7 @@ Here, `5 + 3` is an expression. The computer evaluates the expression, adds up t
 Console.WriteLine(totalMarbles);
 ```
 
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1122877227554578487/chrokh_a_simple_flat_illustration_of_two_piles_of_stones_e7781358-73ae-4b03-8b0a-437972dd1ed1.png?width=1440&height=629
+```{figure} ../images/cover-expressions.jpg
 
 Just like we can sum the number of rocks in two piles we can sum the contents of two variables through an expression using the addition operator.
 ```

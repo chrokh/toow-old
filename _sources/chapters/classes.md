@@ -21,7 +21,7 @@ This new data type defines the shape of its objects, in terms of the data they c
 This two things are known as the 'members' of the class.
 
 %https://media.discordapp.net/attachments/1118630713084870736/1120651120440787065/chrokh_An_explision_diagram_of_a_red_SUV_8d14d91a-269f-4555-9900-f4249e5263c3.png?width=868&height=868
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1124016439276347514/chrokh_a_blueprint_of_a_Land_Rover_Defender_0baad270-43ca-49d7-b3fc-8d92bd6e89ab.png?width=1440&height=629
+```{figure} ../images/cover-classes.jpg
 :figclass: margin
 
 A class is like a 'blueprint' for the shape of its objects, in terms of the data they can hold (their state), and the actions they can perform (their behaviors).

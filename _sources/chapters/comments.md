@@ -5,7 +5,7 @@ As you embark on your coding journey, you'll quickly realize that writing code i
 
 Comments are like notes to yourself and to others reading your code. They're written in plain English (or whatever human language you prefer) and are ignored by the compiler. That is, they don't affect how your program runs. In programming parlance, we say that the compiler "ignores" or "skips" comments. They're purely there for human benefit.
 
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1121421780649791488/chrokh_A_simple_and_flat_illustration_of_a_confused_person_scra_002b3059-844e-4e6b-8054-bb046a5b22e5.png?width=2700&height=1350
+```{figure} ../images/cover-comments.jpg
 
 Understanding code that you (let alone someone else) wrote a week ago is not trivial.
 ```

@@ -15,7 +15,7 @@ The less than or equal to `<= `and greater than or equal to `>=` operators are s
 
 Just like with equality operators, the result of a relational operation is a boolean value - `true` or `false`.
 
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1122819280992477254/chrokh_a_simple_flat_illustration_of_a_stacking_toy_7cd7f547-c3bf-4806-8ded-b2d0d7dfa88f.png?width=2700&height=1350
+```{figure} ../images/cover-relational-operators.jpg
 
 Relational operators are used to compare the relational order between two values.
 ```

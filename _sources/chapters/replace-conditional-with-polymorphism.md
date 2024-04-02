@@ -21,7 +21,7 @@ Using polymorphism can eliminate the need for explicit conditionals in your code
 
 To metaphorically visualize this chapter's concept, think of polymorphism as a symphony orchestra. Instead of one musician trying to play every instrument based on a list of conditions, each musician specializes in one instrument. When a sequence of notes is given to a violinist the piece is played on a violin. But if the same sequence of notes is given to the pianist it is played on a piano. In the same vein, polymorphism ensures the right code executes without the explicit need for conditions.
 
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1140917738378891264/chrokh_illustration_of_an_orchestra_db3193b5-f403-40e4-85dc-86d45c6e8ba8.png
+```{figure} ../images/cover-replace-conditional-with-polymorphism.jpg
 
 Replacing conditionals with polymorphism is like moving from a single person playing every instrument to an orchestra where each person specializes in one instrument.
 ```

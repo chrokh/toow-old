@@ -21,7 +21,7 @@ This is where enums, short for enumerations or enumeration types, come into play
 
 An enumeration is a distinct type that consists of a set of named constants. It provides a way to define a type that can have one of a few distinct values, and those values can have names that are meaningful to your code.
 
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1123518082258829362/chrokh_a_simple_flat_illustration_of_a_highway_intersection_4b97cc26-a9e4-401c-a8ff-cd9b9317cd75.png?width=2700&height=1180
+```{figure} ../images/cover-enumeration-types.jpg
 
 A traffic light whose states we can enumerate (red, yellow, green) is a splendid example of when enumeration types are useful.
 ```

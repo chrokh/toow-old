@@ -10,7 +10,7 @@ C# has a specific order of precedence for its operators.
 The complete list can be found in the [C# documentation](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/#operator-precedence).
 
 %https://media.discordapp.net/attachments/1118630713084870736/1122893983106998322/chrokh_a_simple_flat_illustration_of_4_round_league_bades_with__360f5ec2-1c35-474a-9fd9-c608315ce51a.png?width=1440&height=449
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1122894686944776313/chrokh_a_simple_flat_illustation_of_3_cute_round_league_badges__ebed913a-6e71-445c-b0fb-de4e409abd29.png?width=1440&height=449
+```{figure} ../images/cover-precedence.jpg
 
 Not all operators are equal, so when mixing operators you must keep precedence in mind, since some are executed before others.
 ```

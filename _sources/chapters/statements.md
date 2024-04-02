@@ -11,7 +11,7 @@ Just like our previous jar metaphor, think of a statement as a step-by-step inst
 
 For instance, when you write `Console.WriteLine("Hello, World!");` you are creating a statement – one that instructs the program to output the string `"Hello, World!"` to the console.
 
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1122846176950100099/chrokh_a_simple_flat_illustration_of_a_factory_assembly_line_811ce040-7c43-4de6-a39c-d259bb1c6104.png?width=2700&height=1180
+```{figure} ../images/cover-statements.jpg
 
 A sequence of statements is executed like the steps on a factory assembly line, or crossed off one by one like the items on a todo list.
 ```

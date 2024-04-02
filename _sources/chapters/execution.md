@@ -6,7 +6,7 @@ Think back to when you clicked "Start Debugging" in Visual Studio. Your code was
 
 The term "runtime" refers to the period when your program is running, or executing. It's the stage where your program starts performing the actions you've coded. It's like the play time for a theater production – all the rehearsals (coding and compilation) have been done, and now it's time for the performance.
 
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1121374408406216764/chrokh_A_theatrical_play_on_a_beautiful_stage_with_a_large_audi_3f466beb-977d-47b9-986a-ba035a43ec2a.png
+```{figure} ../images/cover-execution.jpg
 
 Runtime is like play time for a theater production.
 ```

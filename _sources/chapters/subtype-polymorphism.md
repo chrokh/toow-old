@@ -20,7 +20,7 @@ Subtype polymorphism is one of the most important ideas in object oriented progr
 
 This concept of generalization - grouping different things based on shared characteristics - is also prevalent in programming. In the world of object-oriented programming, this concept is known as 'subtype polymorphism.'
 
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1130127467898753055/chrokh_illustration_of_different_sitting_dogs_of_different_bree_f975939d-c0fc-4a6a-9e1e-c083c9918603.png
+```{figure} ../images/cover-subtype-polymorphism-1.jpg
 
 Just like different breeds of dogs all share the common type 'Dog', objects of different subtypes can  share a common supertype in subtype polymorphism.
 ```
@@ -33,7 +33,7 @@ This principle is not just natural; it's also extremely practical. Consider, for
 
 In fact, the action of dropping the ball can be defined without any knowledge about which particular ball we are dropping. That's because they are all balls – they share certain behaviors and characteristics. Whether we call this shared characteristic being a ball, bounciness, or droppable doesn't matter. Unifying types with different behavior but a identical interface is what enables subtype polymorphism.
 
-```{figure} https://cdn.discordapp.com/attachments/1118630713084870736/1130136877236768888/chrokh_flat_illustration_of_bouncing_soccerballs_and_basketball_34289fcb-5c59-4218-ac8b-63eebe676762.png
+```{figure} ../images/cover-subtype-polymorphism-2.jpg
 
 Just like different types of balls share the common characteristic of 'bounciness', objects of different subtypes can share a common behavior in subtype polymorphism.
 ```

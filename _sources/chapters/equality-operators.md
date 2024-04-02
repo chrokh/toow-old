@@ -14,7 +14,7 @@ kernelspec:
 
 Equality operators are an essential part of decision-making in programming. They are used to compare two values for equality or inequality, providing a fundamental way of assessing whether certain conditions in your code are met.
 
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1122818008998481930/chrokh_a_simple_flat_illustration_of_two_identical_cats_looking_9d29bd16-8162-4c5b-ac1b-62544b6c375a.png?width=2700&height=1350
+```{figure} ../images/cover-equality-operators.jpg
 
 Equality operators are used to determine whether two values are equal or not.
 ```

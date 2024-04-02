@@ -10,7 +10,7 @@ The compiler is like a translator, but instead of translating between human lang
 The compiler also plays the role of a proofreader. It checks your code for errors before translating it. These are called compile-time errors, or compilation errors.
 It takes the code you write, checks it for errors, translates it into machine code, and finally, outputs an executable file.
 
-```{figure} https://media.discordapp.net/attachments/1118630713084870736/1121356672770772992/chrokh_two_people_with_speech_bubbles_and_symbols_from_differen_e9d77d1c-2bcb-4f44-9634-3cda19786939.png?width=2700&height=1350
+```{figure} ../images/cover-compilation.jpg
 
 A compiler translates between languages and checks for errors.
 ```
