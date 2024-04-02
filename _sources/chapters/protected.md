@@ -60,6 +60,7 @@ dog.Bark();
 However, if we were to try to access `name` from a class that is not derived from `Animal`, we would get a compiler error.
 
 ```{code-cell}
+:tags: [raises-exception]
 Animal animal = new Animal();
 Console.WriteLine(animal.name);
 ```

@@ -377,7 +377,7 @@ You declare a variable with a specific data type like this:</p></li>
 <p><span class="caption-number">Fig. 9.1 </span><span class="caption-text">If you want me to give you a bolt but I give you a nut then I’ve misunderstood the type of thing that you need. A data type captures the idea that things can be of different types.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>You declare <span class="xref myst">variables</span> with specific data types like this:</p>
+<p>You declare <a class="reference internal" href="variables.html"><span class="doc std std-doc">variables</span></a> with specific data types like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">numberOfMarbles</span><span class="p">;</span>
@@ -390,7 +390,7 @@ You declare a variable with a specific data type like this:</p></li>
 <div class="cell_output docutils container">
 <div class="output text_html">
 <div>
-    <div id='dotnet-interactive-this-cell-3113.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
+    <div id='dotnet-interactive-this-cell-3077.Microsoft.DotNet.Interactive.Http.HttpPort' style='display: none'>
         The below script needs to be able to find the current output cell; this is an easy method to get it.
     </div>
     <script type='text/javascript'>
@@ -435,12 +435,12 @@ async function probeAddresses(probingAddresses) {
 }
 
 function loadDotnetInteractiveApi() {
-    probeAddresses(["http://10.1.0.169:2048/", "http://127.0.0.1:2048/"])
+    probeAddresses(["http://10.1.0.43:2048/", "http://127.0.0.1:2048/"])
         .then((root) => {
         // use probing to find host url and api resources
         // load interactive helpers and language services
         let dotnetInteractiveRequire = require.config({
-        context: '3113.Microsoft.DotNet.Interactive.Http.HttpPort',
+        context: '3077.Microsoft.DotNet.Interactive.Http.HttpPort',
                 paths:
             {
                 'dotnet-interactive': `${root}resources`
@@ -526,7 +526,7 @@ A data type defines a set of values that are members of that type, or a ‘value
 </div>
 </div>
 <p>Similarly, we cannot store a <code class="docutils literal notranslate"><span class="pre">string</span></code> in a variable of type <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">char</span></code>.</p>
-<div class="cell docutils container">
+<div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="n">firstLetterOfLabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Fruit&quot;</span><span class="p">;</span>
 </pre></div>
@@ -543,7 +543,7 @@ A data type defines a set of values that are members of that type, or a ‘value
 </div>
 <p>We’ve mentioned the concept of <code class="docutils literal notranslate"><span class="pre">null</span></code> and how it’s a value that represents the absence of a value.
 For some types, like <code class="docutils literal notranslate"><span class="pre">string</span></code>, <code class="docutils literal notranslate"><span class="pre">null</span></code> is a valid value, and for some, like <code class="docutils literal notranslate"><span class="pre">int</span></code>, it is not.
-We will discuss this <span class="xref myst">later</span> but the difference between these two categories of types in C# is that the former is a ‘reference type’ and the latter a ‘value type’.</p>
+We will discuss this <a class="reference internal" href="reference-types.html"><span class="doc std std-doc">later</span></a> but the difference between these two categories of types in C# is that the former is a ‘reference type’ and the latter a ‘value type’.</p>
 <p>This means you can assign <code class="docutils literal notranslate"><span class="pre">null</span></code> to a variable of type <code class="docutils literal notranslate"><span class="pre">string</span></code> like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -553,9 +553,17 @@ We will discuss this <span class="xref myst">later</span> but the difference bet
 </div>
 </div>
 <p>But you cannot assign <code class="docutils literal notranslate"><span class="pre">null</span></code> to a variable of type <code class="docutils literal notranslate"><span class="pre">int</span></code>:</p>
-<div class="cell docutils container">
+<div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1,11): error CS0037: Cannot convert null to &#39;int&#39; because it is a non-nullable value type
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -645,8 +653,8 @@ We will discuss this <span class="xref myst">later</span> but the difference bet
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
     <script src="https://www.googletagmanager.com/gtag/js?id=G-V69WNXD095"></script>
-    <script src="../_static/analytics.js"></script>
     <script src="../_static/custom.js"></script>
+    <script src="../_static/analytics.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script src="../_static/scripts/furo.js"></script>

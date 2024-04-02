@@ -10,7 +10,7 @@ kernelspec:
   name: .net-csharp
 ---
 
-## Generic delegates
+# Generic delegates
 
 Just like generics have opened up the realm of type-agnostic classes and methods, generic delegates allow us to declare and use delegates that can use various types without needing to know these types in advance.
 

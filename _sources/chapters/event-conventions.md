@@ -12,6 +12,7 @@ kernelspec:
 
 # Event conventions
 
+
 The [.NET design guidelines](https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/event) and community has quite a few design guidelines when it comes to [events](events).
 Let's discuss the key conventions in detail.
 
@@ -78,8 +79,7 @@ void MyEventHandler(object sender, MyEventArgs e)
 }
 ```
 
-```{code-cell}
-:tags: [raises-exception]
+```csharp
 // Create publisher.
 MyEventPublisher publisher = new MyEventPublisher();
 
@@ -97,6 +97,7 @@ System.InvalidCastException: Unable to cast object of type 'MyEventPublisher' to
 Notice how our code compiles but throws an exception at run-time.
 
 To avoid downcasting, include the sender or whatever data you actually want to send in your event arguments instead.
+When raising such an event we simply have to include the sender in the event arguments as well.
 
 ```{code-cell}
 class MyEventArgs
@@ -110,6 +111,16 @@ class MyEventArgs
         Message = message;
     }
 }
+
+class MyEventPublisher
+{
+    public delegate void MyEventHandler (object sender, MyEventArgs e);
+
+    public event MyEventHandler MyEvent;
+
+    public void RaiseEvent()
+        => MyEvent?.Invoke(this, new MyEventArgs(this, "Event triggered!"));
+}
 ```
 
 As we can see in the code below, extracting the sender from the event arguments object in such an event handler does *not* require downcasting.
@@ -119,20 +130,6 @@ Furthermore, if we would try to convert the sender object to an incompatible typ
 void MyEventHandler(object sender, MyEventArgs e)
 {
     MyEventPublisher publisher = e.Sender;
-}
-```
-
-When raising such an event we simply have to include the sender in the event arguments as well.
-
-```{code-cell}
-class MyEventPublisher
-{
-    public delegate void MyEventHandler (object sender, MyEventArgs e);
-
-    public event MyEventHandler MyEvent;
-
-    public void RaiseEvent()
-        => MyEvent?.Invoke(this, new MyEventArgs(this, "Event triggered!"));
 }
 ```
 
@@ -150,7 +147,19 @@ class MyEventPublisher
     public event EventHandler<MyEventArgs> MyEvent;
 
     public void RaiseEvent()
-        => MyEvent?.Invoke(this, new MyEventArgs { Message = "Event triggered!" });
+        => MyEvent?.Invoke(this, new MyEventArgs(this, "Event triggered!"));
+}
+
+class MyEventArgs
+{
+    public MyEventPublisher Sender { get; private set; }
+    public string Message { get; init; } = "";
+
+    public MyEventArgs (MyEventPublisher sender, string message)
+    {
+        Sender = sender;
+        Message = message;
+    }
 }
 ```
 
